@@ -1,18 +1,18 @@
 {
-  "name": "express-typescript-eslint-prettier-template",
+  "name": "autovista-api",
   "version": "1.0.0",
-  "description": "An Express.js template with TypeScript, ESLint and Prettier",
+  "description": "McCollister's Autovista API",
   "type": "module",
   "scripts": {
-    "dev": "tsx --watch src/index.ts",
-    "start": "node dist/index.js",
+    "dev": "NODE_ENV=development tsx --watch src/index.ts",
+    "start": "NODE_ENV=production node dist/index.js",
     "build": "tsc",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test"
   },
   "keywords": [],
   "author": "Gabriel Drouin",
