@@ -37,7 +37,7 @@ export interface IPortal extends Document {
     companyCity?: string;
     companyState?: USState;
     companyZip?: string;
-    companyLogo: string;
+    logo?: string;
     options: IOptions;
     rules: Types.Array<Types.ObjectId>;
     parentPortalId?: Types.ObjectId | null;
@@ -54,7 +54,7 @@ const portalSchema = new Schema<IPortal>(
       companyCity: { type: String },
       companyState: { type: String, enum: Object.values(USState) },
       companyZip: { type: String },
-      companyLogo: { type: String, required: true },
+      logo: { type: String },
       options: {
         overrideLogo: { type: Boolean, default: false },
         enableCustomRates: { type: Boolean, default: false },

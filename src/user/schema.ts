@@ -40,6 +40,14 @@ const userSchemaFields: Record<keyof Omit<IUser, keyof Document | "comparePasswo
 
 const userSchema = new Schema<IUser>(userSchemaFields, { timestamps: true });
 
+userSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
+userSchema.set("toJSON", {
+  virtuals: true,
+});
+
 // Hash password before saving user
 userSchema.pre<IUser>("save", async function (next) {
   if (!this.isModified("password")) return next();

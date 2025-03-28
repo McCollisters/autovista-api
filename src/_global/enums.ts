@@ -1,7 +1,9 @@
 export enum Status {
     Active = "active",
+    Complete = "complete",
     Disabled = "disabled",
     Archived = "archived",
+    Expired = "expired"
 }
   
 export enum USState {
@@ -53,5 +55,19 @@ export enum USState {
     WestVirginia = "WV",
     Wisconsin = "WI",
     Wyoming = "WY",
+}
+
+export enum TransportType {
+    Open = "open",
+    Enclosed = "enclosed",
+    WhiteGlove = "white_glove"
+}
+  
+
+export enum ServiceLevelOption {
+    OneDay = "1",
+    ThreeDay = "3",
+    FiveDay = "5",
+    SevenDay = "7"
 }
   
