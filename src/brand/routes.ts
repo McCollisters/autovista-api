@@ -1,8 +1,8 @@
 import express from "express";
-import { helloWorld } from "./controller";
+import { createBrand } from "./controller";
 
 const router = express.Router();
 
-router.get("/", helloWorld);
+router.post("/", createBrand);
 
 export default router;
