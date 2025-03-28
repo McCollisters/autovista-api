@@ -1,12 +1,11 @@
 import express from "express";
-const app = express();
-const port = "3000";
+import brandRoutes from "./brand/routes";
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-  console.log("Response sent");
-});
+const app = express();
+const port = "3050";
+
+app.use("/", brandRoutes);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Listening on PORT ${port}`);
 });
