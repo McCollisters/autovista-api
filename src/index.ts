@@ -10,11 +10,13 @@ const port: number = parseInt(process.env.PORT || "3050", 10);
 
 const startServer = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_PROD_URI as string, {
+    await mongoose.connect(process.env.MONGODB_DEV_URI as string, {
       useNewUrlParser: true
     } as mongoose.ConnectOptions);
 
-    console.log(`Connected to MongoDB ${process.env.NODE_ENV} DB`);
+    console.log(`Connected to MongoDB`);
+
+    app.use(express.json()); 
 
     app.use("/portal", portalRoutes);
 

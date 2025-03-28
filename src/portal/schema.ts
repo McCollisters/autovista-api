@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document, Model, Types } from 'mongoose';
+import { Contact, Address } from '../_global/interfaces';
 import { Status, USState } from "../_global/enums"; 
 
 export interface OrderForm {
@@ -30,13 +31,8 @@ export interface IOptions {
 export interface IPortal extends Document {
     status: Status;
     companyName: string;
-    companyPhone?: string;
-    contactName?: string;
-    contactPhone?: string;
-    companyAddress?: string;
-    companyCity?: string;
-    companyState?: USState;
-    companyZip?: string;
+    contact?: Contact;
+    address?: Address;
     logo?: string;
     options: IOptions;
     rules: Types.Array<Types.ObjectId>;
@@ -47,13 +43,20 @@ const portalSchema = new Schema<IPortal>(
     {
       status: { type: String, enum: Object.values(Status), required: true },
       companyName: { type: String, required: true },
-      companyPhone: { type: String },
-      contactName: { type: String },
-      contactPhone: { type: String },
-      companyAddress: { type: String },
-      companyCity: { type: String },
-      companyState: { type: String, enum: Object.values(USState) },
-      companyZip: { type: String },
+      contact: {
+          name: { type: String }, 
+          email: { type: String }, 
+          phone: { type: String },
+          phoneMobile: { type: String },
+          notes: { type: String }
+      },
+      address: {
+        address: { type: String }, 
+        addressLine2: { type: String }, 
+        city: { type: String }, 
+        state: { type: String, enum: Object.values(USState) }, 
+        zip: { type: String }
+      },
       logo: { type: String },
       options: {
         overrideLogo: { type: Boolean, default: false },
@@ -78,7 +81,7 @@ const portalSchema = new Schema<IPortal>(
       parentPortalId: { type: Schema.Types.ObjectId, ref: 'Portal', default: null }
     },
     { timestamps: true }
-  );
+);
   
 const Portal: Model<IPortal> = mongoose.model<IPortal>("Portal", portalSchema);
 export { Portal };
