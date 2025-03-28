@@ -61,4 +61,4 @@ userSchema.methods.generatePasswordReset = function () {
 };
 
 const User: Model<IUser> = mongoose.model<IUser>("User", userSchema);
-export { User, userSchema };
+export { User };
