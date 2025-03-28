@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import express from "express";
-import brandRoutes from "./brand/routes";
+import portalRoutes from "./portal/routes";
 
 dotenv.config(); 
 
@@ -16,7 +16,7 @@ const startServer = async () => {
 
     console.log(`Connected to MongoDB ${process.env.NODE_ENV} DB`);
 
-    app.use("/", brandRoutes);
+    app.use("/portal", portalRoutes);
 
     app.listen(port, () => {
       console.log(`Listening on ${port}`);

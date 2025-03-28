@@ -2,11 +2,19 @@ import mongoose, { Schema, Document, Model, Types } from "mongoose";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 
+export enum Role {
+  PlatformAdmin = "platform_admin",
+  PlatformUser = "platform_user",
+  PortalAdmin = "portal_admin",
+  PortalUser = "portal_user",
+  PublicUser = "public_user"
+}
+
 export interface IUser extends Document {
   portalId: Types.ObjectId;
   email: string;
   password: string;
-  role: string;
+  role: Role;
   status: string;
   firstName?: string;
   lastName?: string;
@@ -48,7 +56,6 @@ userSchema.set("toJSON", {
   virtuals: true,
 });
 
-// Hash password before saving user
 userSchema.pre<IUser>("save", async function (next) {
   if (!this.isModified("password")) return next();
   try {
