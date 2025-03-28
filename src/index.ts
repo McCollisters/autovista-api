@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import express from "express";
 import portalRoutes from "./portal/routes";
+import userRoutes from "./user/routes";
 
 dotenv.config(); 
 
@@ -19,6 +20,7 @@ const startServer = async () => {
     app.use(express.json()); 
 
     app.use("/portal", portalRoutes);
+    app.use("/user", userRoutes);
 
     app.listen(port, () => {
       console.log(`Listening on ${port}`);
