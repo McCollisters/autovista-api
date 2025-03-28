@@ -1,9 +1,9 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Document, Model, Types } from "mongoose";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 
 export interface IUser extends Document {
-  portal: mongoose.Types.ObjectId;
+  portalId: Types.ObjectId;
   email: string;
   password: string;
   role: string;
@@ -22,7 +22,7 @@ export interface IUser extends Document {
 }
 
 const userSchemaFields: Record<keyof Omit<IUser, keyof Document | "comparePassword" | "generatePasswordReset">, any> = {
-    portal: { type: Schema.Types.ObjectId, ref: "Portal", required: true },
+    portalId: { type: Schema.Types.ObjectId, ref: "Portal", required: true },
     email: { type: String, trim: true, required: true },
     password: { type: String, required: true },
     role: { type: String, required: true },

@@ -1,11 +1,12 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
-import { Status } from "../_global/enums"; 
+import mongoose, { Schema, Document, Model, Types } from 'mongoose';
+import { Status, USState } from "../_global/enums"; 
 
 export enum RuleType {
     Markup = "markup",
     Discount = "discount",
     LocationModifier = "location_modifier",
-    Minimum = "minimum"
+    Minimum = "minimum",
+    Override = "override"
 }
 
 export enum ValueType {
@@ -14,17 +15,20 @@ export enum ValueType {
 }
 
 export interface IRule extends Document {
+    ruleName: string;
     description: string;
     ruleStatus: Status,
     ruleType: RuleType;
     valueType: ValueType;
     value: number; 
-    origin?: string;
-    destination?: string;
+    origin?: USState;
+    destination?: USState;
+    portalId?: Types.ObjectId;
 }
 
 const ruleSchema = new Schema<IRule>(
     {
+        ruleName: { type: String, required: true, trim: true },
         description: { type: String, required: true, trim: true },
         ruleStatus: { type: String, required: true, enum: Object.values(Status) },
         ruleType: { 
@@ -41,8 +45,9 @@ const ruleSchema = new Schema<IRule>(
             type: Number,
             required: true,
         },
-        origin: { type: String, trim: true },
-        destination: { type: String, trim: true },
+        origin: { type: String, trim: true, enum: Object.values(USState) },
+        destination: { type: String, trim: true, enum: Object.values(USState) },
+        portalId: { type: Schema.Types.ObjectId, ref: 'Portal' }
     },
     { timestamps: true }
 );
