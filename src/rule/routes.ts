@@ -1,8 +1,18 @@
-import express from "express";
-import { createRule } from "./controller";
+import { Router } from "express";
+import { 
+  createRule,
+  getRule,
+  updateRule,
+  deleteRule, 
+  getRules
+} from "./controller";
 
-const router = express.Router();
+const router = Router(); 
 
+router.get("/", getRules); 
 router.post("/", createRule);
+router.get("/:ruleId", getRule); 
+router.put("/:ruleId", updateRule); 
+router.delete("/:ruleId",deleteRule); 
 
-export default router;
+export default router; 
