@@ -5,7 +5,7 @@ import { getCoordinates } from "./services/getCoordinates";
 import { getMiles } from "./services/getMiles";
 import { updateVehiclesWithPricing } from "./services/updateVehiclesWithPricing";
 import { calculateTotalPricing } from "./services/calculateTotalPricing";
-import { validateLocation } from "./utils/validateLocation";
+import { validateLocation } from "./services/validateLocation";
 
 export const createQuote = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
     try {
@@ -33,7 +33,7 @@ export const createQuote = async (req: express.Request, res: express.Response, n
           return next({statusCode: 500, message: "error getting mileage"});
         }
 
-        const vehicleQuotes = await updateVehiclesWithPricing(vehicles, originValidated.location, destinationValidated.location);
+        const vehicleQuotes = await updateVehiclesWithPricing(portalId, vehicles, originValidated.location, destinationValidated.location);
         const totalPricing = await calculateTotalPricing(vehicleQuotes);
 
         const formattedQuote =  {

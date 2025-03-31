@@ -81,13 +81,15 @@ const quoteSchema = new Schema<IQuote>(
                 class: { type: String, enum: Object.values(VehicleClass), required: true, default: "sedan" },
                 pricing: {
                     base: { type: Number, required: true, default: 0 },
-                    globalMarkups: {
+                    globalModifiers: {
                         inoperable: { type: Number, required: true, default: 0  },
                         oversize: { type: Number, required: true, default: 0  },
+                        discount: { type: Number, default: 0  }
                     },
-                    portalMarkups: {
+                    portalModifiers: {
                         commission: { type: Number, required: true, default: 0 },
                         companyTariff: { type: Number, required: true, default: 0  },
+                        discount: { type: Number, default: 0  }
                     },
                 },
             },

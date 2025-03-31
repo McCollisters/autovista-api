@@ -1,4 +1,4 @@
-import { isCanadianPostcode } from "./isCanadianPostcode";
+import { isCanadianPostcode } from "../utils/isCanadianPostcode";
 import { getCityStateFromZip } from "../../_global/utils/zip";
 
 export const validateLocation = async (location: string): Promise<{location: string, error: string | null}> => {
