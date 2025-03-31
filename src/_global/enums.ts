@@ -71,3 +71,10 @@ export enum ServiceLevelOption {
     SevenDay = "7"
 }
   
+export enum VehicleClass {
+    Sedan = "sedan",
+    SUV = "suv",
+    Van = "van",
+    PickUp4Door = "pickup_4_doors",
+    PickUp2Door = "pickup_2_doors"
+}

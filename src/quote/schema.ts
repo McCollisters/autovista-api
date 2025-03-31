@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Model, Types } from 'mongoose';
 import mongooseSequence from "mongoose-sequence";
-import { Status, USState, TransportType, ServiceLevelOption } from "../_global/enums"; 
+import { Status, USState, TransportType, ServiceLevelOption, VehicleClass } from "../_global/enums"; 
 import { IPricing, IVehicle, IHistoryItem } from "../_global/interfaces"; 
 
 const AutoIncrement = (mongooseSequence as any)(mongoose);
@@ -17,12 +17,20 @@ export interface IQuote extends Document {
     status: Status;
     portalId: Types.ObjectId;
     userId: Types.ObjectId;
-    origin: string;
-    originValidated?: string;
-    originState?: USState;
-    destination: string;
-    destinationState?: USState;
-    destinationValidated?: string;
+    origin: {
+        userInput: string;
+        validated: string;
+        state?: USState;
+        long: string;
+        lat: string;
+    };
+    destination: {
+        userInput: string;
+        validated: string;
+        state?: USState;
+        long: string;
+        lat: string;
+    };
     miles?: number;
     transportType?: TransportType;
     customerName?: string; 
@@ -49,10 +57,20 @@ const quoteSchema = new Schema<IQuote>(
             phone: { type: String },
             trackingCode: { type: String }
         },
-        origin: { type: String, required: true },
-        originValidated: { type: String },
-        destination: { type: String, required: true },
-        destinationValidated: { type: String },
+        origin: { 
+            userInput: { type: String },
+            validated: { type: String },
+            state: { type: String },
+            long: { type: String },
+            lat: { type: String }
+        },
+        destination: { 
+            userInput: { type: String },
+            validated: { type: String },
+            state: { type: String },
+            long: { type: String },
+            lat: { type: String }
+        },
         miles: { type: Number },
         transportType: { type: String, enum: Object.values(TransportType) },
         vehicles: [
@@ -60,6 +78,7 @@ const quoteSchema = new Schema<IQuote>(
                 make: { type: String, required: true },
                 model: { type: String, required: true },
                 isOperable: { type: Boolean, required: true },
+                class: { type: String, enum: Object.values(VehicleClass), required: true, default: "sedan" },
                 pricing: {
                     base: { type: Number, required: true, default: 0 },
                     globalMarkups: {

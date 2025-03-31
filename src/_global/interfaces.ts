@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import { USState, ServiceLevelOption } from "./enums";
+import { USState, ServiceLevelOption, VehicleClass } from "./enums";
 
 export interface IServiceLevelMarkup {
     serviceLevelOption: ServiceLevelOption;
@@ -37,6 +37,7 @@ export interface IVehicle {
     model: string;
     isOperable: boolean;  
     pricing?: IPricing; 
+    class: VehicleClass;
     vin?: string;
     year?: string;
 }
@@ -47,6 +48,11 @@ export interface IContact {
     phone?: string;
     phoneMobile?: string;
     notes?: string;
+}
+
+export interface ICoordinates {
+    longitude: string;
+    latitude: string;
 }
 
 export interface IAddress {

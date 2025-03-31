@@ -23,8 +23,7 @@
     "express": "^4.21.2",
     "mongoose": "^8.13.0",
     "mongoose-sequence": "^6.0.1",
-    "nanoid": "^5.1.5",
-    "zod": "^3.24.2"
+    "nanoid": "^5.1.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",

@@ -1,9 +1,11 @@
+import express, { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import express from "express";
 import portalRoutes from "./portal/routes";
 import userRoutes from "./user/routes";
 import quoteRoutes from "./quote/routes";
+import { ErrorHandler } from "./_global/errorHandler";
+import { Quote } from "./quote/schema";
 
 dotenv.config(); 
 
@@ -16,13 +18,16 @@ const startServer = async () => {
       useNewUrlParser: true
     } as mongoose.ConnectOptions);
 
-    console.log(`Connected to MongoDB`);
 
+    // await Quote.deleteMany({})
+
+  
     app.use(express.json()); 
-
     app.use("/portal", portalRoutes);
     app.use("/user", userRoutes);
     app.use("/quote", quoteRoutes);
+
+    app.use(ErrorHandler);
 
     app.listen(port, () => {
       console.log(`Listening on ${port}`);
