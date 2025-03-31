@@ -1,39 +1,60 @@
 import mongoose, { Schema, Document, Model, Types } from 'mongoose';
-import { Status, USState, TransportType } from "../_global/enums"; 
-import { Pricing, Vehicle } from "../_global/interfaces"; 
+import mongooseSequence from "mongoose-sequence";
+import { Status, USState, TransportType, ServiceLevelOption } from "../_global/enums"; 
+import { IPricing, IVehicle, IHistoryItem } from "../_global/interfaces"; 
+
+const AutoIncrement = (mongooseSequence as any)(mongoose);
+
+export interface ICustomer extends Document {
+    name?: string;
+    email?: string;
+    phone?: string;
+    trackingCode?: string;
+}
 
 export interface IQuote extends Document {
-    refId: string;
+    refId?: number;
     status: Status;
     portalId: Types.ObjectId;
     userId: Types.ObjectId;
     origin: string;
     originValidated?: string;
-    originState: USState;
+    originState?: USState;
     destination: string;
-    destinationState: USState;
+    destinationState?: USState;
     destinationValidated?: string;
-    miles: number;
-    transportType: TransportType;
+    miles?: number;
+    transportType?: TransportType;
     customerName?: string; 
-    vehicles: Array<Vehicle>;
-    totalPricing: Pricing;
+    vehicles: Array<IVehicle>;
+    totalPricing?: IPricing;
     archivedAt?: Date; 
+    customer?: ICustomer; 
+    history: Array<IHistoryItem>;
 }
+
+const generateTrackingCode = (): string => {
+    return Math.random().toString(36).substring(2, 7).toUpperCase();
+};
 
 const quoteSchema = new Schema<IQuote>(
     {
-        refId: { type: String, required: true },
+        refId: { type: Number },
         status: { type: String, enum: Object.values(Status), required: true },
         portalId: { type: Schema.Types.ObjectId, ref: 'Portal', required: true },
         userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+        customer: {
+            name: { type: String },
+            email: { type: String },
+            phone: { type: String },
+            trackingCode: { type: String }
+        },
         origin: { type: String, required: true },
         originValidated: { type: String },
         destination: { type: String, required: true },
         destinationValidated: { type: String },
-        miles: { type: Number, required: true },
-        transportType: { type: String, enum: Object.values(TransportType), required: true },
-        customerName: { type: String },
+        miles: { type: Number },
+        transportType: { type: String, enum: Object.values(TransportType) },
         vehicles: [
             {
                 make: { type: String, required: true },
@@ -52,14 +73,89 @@ const quoteSchema = new Schema<IQuote>(
                 },
             },
         ],
-        archivedAt: { type: Date }
+        totalPricing: {
+            base: { type: Number, required: true },
+            globalMarkups: {
+                total: { type: Number, required: true, default: 0 },
+                inoperable: { type: Number, required: true, default: 0 },
+                oversize: { type: Number, required: true, default: 0 },
+                serviceLevels: [{
+                    serviceLevelOption: { type: String, enum: Object.values(ServiceLevelOption) },
+                    value: { type: Number, required: true },
+                }],
+            },
+            portalMarkups: {
+                total: { type: Number, required: true, default: 0 },
+                commission: { type: Number, required: true, default: 0 },
+                companyTariff: { type: Number, required: true, default: 0 },
+            },
+            totalsByServiceLevel: [{
+                serviceLevelOption: { type: String, enum: Object.values(ServiceLevelOption) },
+                total: { type: Number, required: true },
+            }],
+            total: { type: Number, required: true },
+        },
+        archivedAt: { type: Date },
+        history: [
+            {
+                modifiedAt: { type: Date, default: Date.now },
+                modifiedBy: { type: Schema.Types.ObjectId, ref: 'User' },
+                changes: { 
+                    field: { type: String },
+                    oldValue: { type: Schema.Types.Mixed },
+                    newValue: { type: Schema.Types.Mixed }
+                 } 
+            }
+        ]
     },
     { timestamps: true }
   );
-  
+
+
+quoteSchema.virtual("vehicleCount").get(function (this: IQuote) {
+    return this.vehicles.length;
+});
+
 quoteSchema.set("toJSON", {
     virtuals: true,
 });
-  
+
+quoteSchema.set("toObject", {
+    virtuals: true,
+});
+
+quoteSchema.pre<IQuote>("save", function (next) {
+    if (this.customer && !this.customer.trackingCode) {
+        this.customer.trackingCode = generateTrackingCode();
+    }
+    next();
+});
+
+quoteSchema.pre<IQuote>("save", function (next) {
+    if (this.isModified()) {
+        const changes: { field: string; oldValue: any; newValue: any }[] = [];
+        this.modifiedPaths().forEach((path) => {
+            const oldValue = this.get(path, null, { getters: false, virtuals: false });
+            const newValue = this.get(path);
+
+            if (oldValue !== newValue) {
+                changes.push({ field: path, oldValue, newValue });
+            }
+        });
+        if (changes.length > 0) {
+            this.history.push({
+                modifiedAt: new Date(),
+                modifiedBy: this.userId, 
+                changes
+            });
+        }
+    }
+    next();
+});
+
+quoteSchema.index({ "$**": "text" });
+
+quoteSchema.plugin(AutoIncrement, { inc_field: "refId", start_seq: 50000 });
+
 const Quote: Model<IQuote> = mongoose.model<IQuote>("Quote", quoteSchema);
 export { Quote };

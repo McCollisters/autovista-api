@@ -1,46 +1,47 @@
+import { Types } from 'mongoose';
 import { USState, ServiceLevelOption } from "./enums";
 
-export interface ServiceLevelMarkups {
+export interface IServiceLevelMarkup {
     serviceLevelOption: ServiceLevelOption;
     value: number; 
 }
 
-export interface GlobalMarkups {
+export interface IGlobalMarkups {
     total: number;
     inoperable: number;
     oversize: number;
-    serviceLevels: ServiceLevelMarkups;
+    serviceLevels: Array<IServiceLevelMarkup>;
 }
 
-export interface PortalMarkups {
+export interface IPortalMarkups {
     total: number;
     commission: number;
     companyTariff: number;
 }0
 
-export interface TotalByServiceLevel {
+export interface ITotalByServiceLevel {
     serviceLevelOption: ServiceLevelOption;
     total: number;
 }
 
-export interface Pricing {
+export interface IPricing {
     base: number;
-    globalMarkups: GlobalMarkups;
-    portalMarkups: PortalMarkups;
+    globalMarkups: IGlobalMarkups;
+    portalMarkups: IPortalMarkups;
     total: number;
-    totalsByServiceLevel: Array<TotalByServiceLevel>;
+    totalsByServiceLevel: Array<ITotalByServiceLevel>;
 }
 
-export interface Vehicle {
+export interface IVehicle {
     make: string;
     model: string;
     isOperable: boolean;  
-    pricing?: Pricing; 
+    pricing?: IPricing; 
     vin?: string;
     year?: string;
 }
 
-export interface Contact {
+export interface IContact {
     name?: string;
     email?: string; 
     phone?: string;
@@ -48,7 +49,7 @@ export interface Contact {
     notes?: string;
 }
 
-export interface Address {
+export interface IAddress {
     address?: string;
     addressLine2?: string;
     city?: string; 
@@ -59,11 +60,21 @@ export interface Address {
     latittude?: string;
 }
 
-export interface Schedule {
+export interface ISchedule {
     serviceLevel: ServiceLevelOption;
     pickupSelected: Date; 
     deliveryEstimated: Date;
     pickupCompleted: Date;
     deliveryCompleted: Date; 
     notes: string;
+}
+
+export interface IHistoryItem {
+    modifiedAt: Date;
+    modifiedBy?: Types.ObjectId; 
+    changes: {
+        field: string;
+        oldValue: any;
+        newValue: any;
+    }[];
 }

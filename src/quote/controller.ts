@@ -1,11 +1,36 @@
 import express from "express";
 import { Quote } from "./schema";
 import { Status } from '../_global/enums'
+import { calculateMiles } from "./services/calculateMiles";
+import { calculateVehiclePricing } from "./services/calculateVehiclePricing";
+import { calculateTotalPricing } from "./services/calculateTotalPricing";
+import { validateLocation } from "./util";
 
 export const createQuote = async (req: express.Request, res: express.Response): Promise<void> => {
     try {
-        const quote = { ...req.body, status: Status.Active }
-        const createdQuote = await new Quote(quote).save()
+        const { portalId, userId, customer, origin, destination, transportType, vehicles } = req.body;
+        const originValidated = validateLocation(origin);
+        const destinationValidated = validateLocation(destination);
+        const miles = calculateMiles(originValidated, destinationValidated);
+        const vehicleQuotes = await calculateVehiclePricing(vehicles);
+        const totalPricing = await calculateTotalPricing(vehicleQuotes);
+
+        const formattedQuote =  {
+          status: Status.Active,
+          portalId,
+          userId,
+          customer,
+          origin,
+          originValidated: validateLocation(origin),
+          destination,
+          destinationValidated: validateLocation(destination),
+          miles,
+          transportType,
+          vehicles: vehicleQuotes, 
+          totalPricing
+        }
+
+        const createdQuote = await new Quote(formattedQuote).save()
         res.status(200).send(createdQuote);
     } catch (error) {
         console.error("Error creating quote:", error);
@@ -78,15 +103,11 @@ export const deleteQuote = async (req: express.Request, res: express.Response): 
 export const getQuotes = async (req: express.Request, res: express.Response): Promise<void> => {
     try {
 
-        const { portalId, role } = req.query;
+        const { portalId } = req.query;
         let filter: any = { status: Status.Active};
 
         if (portalId) {
             filter.portalId = portalId;
-        }
-
-        if (role) {
-            filter.role = role;
         }
    
         const quotes = await Quote.find(filter);

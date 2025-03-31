@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import portalRoutes from "./portal/routes";
 import userRoutes from "./user/routes";
+import quoteRoutes from "./quote/routes";
 
 dotenv.config(); 
 
@@ -21,6 +22,7 @@ const startServer = async () => {
 
     app.use("/portal", portalRoutes);
     app.use("/user", userRoutes);
+    app.use("/quote", quoteRoutes);
 
     app.listen(port, () => {
       console.log(`Listening on ${port}`);
