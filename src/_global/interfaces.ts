@@ -9,7 +9,6 @@ export interface IServiceLevelMarkup {
 export interface IGlobalModifiers {
     total: number;
     inoperable: number;
-    oversize: number;
     serviceLevels: Array<IServiceLevelMarkup>;
     discount: number;
 }
@@ -37,7 +36,7 @@ export interface IPricing {
 export interface IVehicle {
     make: string;
     model: string;
-    isOperable: boolean;  
+    isInoperable: boolean;  
     pricing?: IPricing; 
     class: VehicleClass;
     vin?: string;

@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document, Model, Types } from 'mongoose';
-import { Status, USState } from "../_global/enums"; 
 
 export enum ModifierSetType {
     Markup = "markup",
@@ -11,13 +10,12 @@ export enum ModifierSetType {
 
 export enum ValueType {
     Percentage = "percentage",
-    Fixed = "fixed",
+    Flat = "flat",
 }
 
 export interface IModifier extends Document {
-    value: Number,
-    valueType: String,
-    modifierType: String 
+    value: number,
+    valueType: string
 }
 
 export interface IRouteModifier extends IModifier {
@@ -26,12 +24,22 @@ export interface IRouteModifier extends IModifier {
   }
 
 export interface IModifierSet extends Document {
-    portalId: Types.ObjectId;
-    isGlobal: Boolean,
+    portalId?: Types.ObjectId;
+    isGlobal: boolean,
     inoperable?: IModifier, 
-    oversize?: IModifier,
+    fuel?: IModifier,
+    irr?: IModifier,
+    discount?: IModifier,
+    oversize?: {
+        default: number,
+        suv: number, 
+        van: number,
+        pickup_2_door: number,
+        pickup_4_door: number
+    },
+    companyTariff?: IModifier,
+    fixedCommission?: IModifier,
     routes?: Array<IRouteModifier>
-    companyTariff?: IModifier
 }
 
 const modifierSetSchema = new Schema<IModifierSet>(
@@ -41,25 +49,36 @@ const modifierSetSchema = new Schema<IModifierSet>(
         inoperable: {
             value: Number, 
             valueType: { type: String, default: "flat"},
-            modifierType: { type: String, default: "markup"}
         }, 
         oversize: {
+            default: Number, 
+            suv: Number,
+            van: Number,
+            pickup_2_door: Number,
+            pickup_4_door: Number,
+        }, 
+        fuel: {
             value: Number, 
             valueType: { type: String, default: "flat"},
-            modifierType: { type: String, default: "markup"}
-        }, 
+        },
+        irr: {
+            value: Number, 
+            valueType: { type: String, default: "flat"},
+        },
+        companyTariff: {
+            value: Number, 
+            valueType: { type: String, default: "flat"},
+        },
+        fixedCommission: {
+            value: Number, 
+            valueType: { type: String, default: "flat"},
+        },
         routes: [{  
             value: Number,
             valueType: String,
-            modifierType: String,
             origin: String,
             destination: String 
         }]
-
-        
-
-
-        
     },
     { timestamps: true }
 );

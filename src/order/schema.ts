@@ -1,10 +1,10 @@
 import mongoose, { Schema, Document, Model, Types } from 'mongoose';
 import { Status, TransportType, USState, ServiceLevelOption } from "../_global/enums"; 
-import { Pricing, Vehicle, Contact, Address, Schedule } from "../_global/interfaces"; 
+import { IPricing, IVehicle, IContact, IAddress, ISchedule } from "../_global/interfaces"; 
 
 export interface Location {
-    contact: Contact,
-    address: Address
+    contact: IContact,
+    address: IAddress
 }
 
 export interface TMS {
@@ -24,11 +24,11 @@ export interface IOrder extends Document {
     transportType: TransportType;
     origin: Location;
     destination: Location;
-    customer: Contact;
+    customer: IContact;
     tms: TMS; 
-    vehicles: Array<Vehicle>;
-    totalPricing: Pricing;
-    schedule: Schedule;
+    vehicles: Array<IVehicle>;
+    totalPricing: IPricing;
+    schedule: ISchedule;
 }
 
 const orderSchema = new Schema<IOrder>(
@@ -95,7 +95,7 @@ const orderSchema = new Schema<IOrder>(
             {
                 make: { type: String, required: true },
                 model: { type: String, required: true },
-                isOperable: { type: Boolean, required: true },
+                isInoperable: { type: Boolean, required: true, default: false },
                 pricing: {
                     base: { type: Number, required: true, default: 0 },
                     globalMarkups: {

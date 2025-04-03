@@ -21,15 +21,15 @@ export interface IQuote extends Document {
         userInput: string;
         validated: string;
         state?: USState;
-        long: string;
-        lat: string;
+        long?: string;
+        lat?: string;
     };
     destination: {
         userInput: string;
         validated: string;
         state?: USState;
-        long: string;
-        lat: string;
+        long?: string;
+        lat?: string;
     };
     miles?: number;
     transportType?: TransportType;
@@ -77,18 +77,19 @@ const quoteSchema = new Schema<IQuote>(
             {
                 make: { type: String, required: true },
                 model: { type: String, required: true },
-                isOperable: { type: Boolean, required: true },
+                isInoperable: { type: Boolean, required: true, default: false },
                 class: { type: String, enum: Object.values(VehicleClass), required: true, default: "sedan" },
                 pricing: {
                     base: { type: Number, required: true, default: 0 },
                     globalModifiers: {
                         inoperable: { type: Number, required: true, default: 0  },
-                        oversize: { type: Number, required: true, default: 0  },
-                        discount: { type: Number, default: 0  }
+                        discount: { type: Number, default: 0  },
+                        routes: { type: Number, default: 0  },
                     },
                     portalModifiers: {
                         commission: { type: Number, required: true, default: 0 },
                         companyTariff: { type: Number, required: true, default: 0  },
+                        oversize: { type: Number, required: true, default: 0  },
                         discount: { type: Number, default: 0  }
                     },
                 },

@@ -1,7 +1,7 @@
 import express from "express";
 import { Quote } from "./schema";
 import { Status } from '../_global/enums'
-import { getCoordinates } from "./services/getCoordinates";
+import { getCoordinates } from "../_global/utils/location";
 import { getMiles } from "./services/getMiles";
 import { updateVehiclesWithPricing } from "./services/updateVehiclesWithPricing";
 import { calculateTotalPricing } from "./services/calculateTotalPricing";
@@ -9,20 +9,32 @@ import { validateLocation } from "./services/validateLocation";
 
 export const createQuote = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
     try {
-        const { portalId, userId, customer, origin, destination, transportType, vehicles } = req.body;
+        const { portalId, userId, customer, origin, destination, transportType, vehicles, commission } = req.body;
+
+        let originState : string | null; 
+        let originLocation : string;
+        let destinationState : string | null; 
+        let destinationLocation : string;
 
         const originValidated = await validateLocation(origin);
         if (originValidated.error) {
           return next({statusCode: 500, message: originValidated.error});
         }
 
+        originState = originValidated.state;
+        originLocation = originValidated.location || origin;
+
         const destinationValidated = await validateLocation(destination);
         if (destinationValidated.error) {
           return next({statusCode: 500, message: destinationValidated.error});
         }
 
-        const originCoords = await getCoordinates(originValidated.location);
-        const destinationCoords = await getCoordinates(destinationValidated.location);
+        destinationState = destinationValidated.state;
+        destinationLocation = destinationValidated.location || destination;
+
+        const originCoords = await getCoordinates(originLocation);
+        const destinationCoords = await getCoordinates(destinationLocation);
+
         if (!originCoords || !destinationCoords) {
           return next({statusCode: 500, message: "Error getting location coordinates"});
         }
@@ -30,10 +42,11 @@ export const createQuote = async (req: express.Request, res: express.Response, n
         const miles = await getMiles(originCoords, destinationCoords);
 
         if (!miles) {
-          return next({statusCode: 500, message: "error getting mileage"});
+          return next({statusCode: 500, message: "Error getting miles"});
         }
 
-        const vehicleQuotes = await updateVehiclesWithPricing(portalId, vehicles, originValidated.location, destinationValidated.location);
+        const vehicleQuotes = await updateVehiclesWithPricing({ portalId, vehicles, originLocation, originState, destinationLocation, destinationState, commission});
+
         const totalPricing = await calculateTotalPricing(vehicleQuotes);
 
         const formattedQuote =  {
@@ -43,15 +56,17 @@ export const createQuote = async (req: express.Request, res: express.Response, n
           customer,
           origin: {
             userInput: origin,
-            validated: originValidated.location,
+            validated: originLocation,
             long: originCoords[0],
-            lat: originCoords[1]
+            lat: originCoords[1],
+            state: originState
           },
           destination: {
             userInput: destination,
-            validated: destinationValidated.location,
+            validated: destinationLocation,
             long: destinationCoords[0],
-            lat: destinationCoords[1]
+            lat: destinationCoords[1],
+            state: destinationState
           },
           miles,
           transportType,

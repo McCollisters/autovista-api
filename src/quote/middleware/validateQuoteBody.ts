@@ -31,7 +31,7 @@ export const validateQuoteBody = (req: Request, res: Response, next: NextFunctio
         if (!vehicle.model || typeof vehicle.model !== "string") {
             errors[`vehicles[${index}].model`] = "Vehicle model is required.";
         }
-        if (typeof vehicle.isOperable !== "boolean") {
+        if (typeof vehicle.isInoperable !== "boolean") {
             errors[`vehicles[${index}].isOperable`] = "Vehicle operable status must be boolean.";
         }
         });

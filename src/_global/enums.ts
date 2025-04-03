@@ -75,6 +75,6 @@ export enum VehicleClass {
     Sedan = "sedan",
     SUV = "suv",
     Van = "van",
-    PickUp4Door = "pickup_4_doors",
-    PickUp2Door = "pickup_2_doors"
+    Pickup4Door = "pickup_4_doors",
+    Pickup2Door = "pickup_2_doors"
 }

@@ -1,9 +1,11 @@
 import { isCanadianPostcode } from "../utils/isCanadianPostcode";
-import { getCityStateFromZip } from "../../_global/utils/zip";
+import { getCityStateFromZip, getStateAbbreviation } from "../../_global/utils/location";
 
-export const validateLocation = async (location: string): Promise<{location: string, error: string | null}> => {
+export const validateLocation = async (location: string): Promise<{state: string | null, location: string | null, error: string | null}> => {
 
     let error: string | null = null;
+    let state: string | null = null;
+    let locationString:  string | null = null;
 
     if (isCanadianPostcode(location)) {
         error = "Please contact us for quotes with pick up or delivery to Canada.";
@@ -18,9 +20,13 @@ export const validateLocation = async (location: string): Promise<{location: str
         if (location.toString().length !== 5) {
             error = "Invalid zip code";
         } else {
-            location = await getCityStateFromZip(location) || "Missing";
+            const result = await getCityStateFromZip(location);
+            locationString = result.location || null;
+            state = result.state || null;
         }
+    } else {
+        state = getStateAbbreviation(location);
     }
 
-    return { location, error };
+    return { location: locationString, error, state };
 };
