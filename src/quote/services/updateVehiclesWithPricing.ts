@@ -75,7 +75,6 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     }
 
     if (globalModifiers.routes) {
-
         if (Array.isArray(globalModifiers.routes)) {
             const matchingRoutes = globalModifiers.routes.filter((route) => 
                 (route.origin === originState && !route.destination) ||
