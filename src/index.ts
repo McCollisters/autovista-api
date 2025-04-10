@@ -10,20 +10,22 @@ import { ErrorHandler } from "./_global/errorHandler";
 import { ModifierSet } from "./modifierSet/schema";
 import { Quote } from "./quote/schema";
 
-dotenv.config(); 
+dotenv.config();
 
 const app = express();
 const port: number = parseInt(process.env.PORT || "3050", 10);
 
 const startServer = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_DEV_URI as string, {
-      useNewUrlParser: true
-    } as mongoose.ConnectOptions);
-
+    await mongoose.connect(
+      process.env.MONGODB_DEV_URI as string,
+      {
+        useNewUrlParser: true,
+      } as mongoose.ConnectOptions,
+    );
 
     // await ModifierSet.deleteMany({});
-    await Quote.deleteMany({})
+    //  await Quote.deleteMany({})
 
     // const modifierSet = new ModifierSet({
     //     isGlobal: true,
@@ -44,7 +46,6 @@ const startServer = async () => {
     // });
 
     // await modifierSet.save();
-    
 
     // const portalModifierSet = new ModifierSet({
     //   isGlobal: false,
@@ -87,16 +88,11 @@ const startServer = async () => {
     // });
 
     // await portalModifierSet.save()
-      
 
-
-
-  
-    app.use(express.json()); 
+    app.use(express.json());
     app.use("/portal", portalRoutes);
     app.use("/user", userRoutes);
     app.use("/quote", quoteRoutes);
-
 
     app.use(ErrorHandler);
 
@@ -105,7 +101,7 @@ const startServer = async () => {
     });
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
-    process.exit(1); 
+    process.exit(1);
   }
 };
 
