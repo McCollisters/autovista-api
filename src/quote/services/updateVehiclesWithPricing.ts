@@ -46,7 +46,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   }
 
   const base = portal.options?.enableCustomRates
-    ? await getCustomBaseRate(miles, portal)
+    ? getCustomBaseRate(miles, portal)
     : await getTMSBaseRate(vehicle, origin, destination);
 
   let calculatedGlobalDiscount: number = 0;
