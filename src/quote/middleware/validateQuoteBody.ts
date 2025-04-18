@@ -1,45 +1,33 @@
-import { Request, Response, NextFunction } from 'express';
-import { IQuote } from "../schema"; 
+import { Request, Response, NextFunction } from "express";
 
-export const validateQuoteBody = (req: Request, res: Response, next: NextFunction) => {
-    const data: Partial<IQuote> = req.body;
-    const errors: Record<string, string> = {};
+export const validateQuoteBody = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const { origin, destination, vehicles, portalId } = req.body;
 
-    if (!data.portalId) {
-        errors.portalId = "portalId is required.";
+  if (!origin || typeof origin !== "string") {
+    return next(new Error("Origin is required and must be a string"));
+  }
+
+  if (!destination || typeof destination !== "string") {
+    return next(new Error("Destination is required and must be a string"));
+  }
+
+  if (!portalId || typeof portalId !== "string") {
+    return next(new Error("portalId is required and must be a string"));
+  }
+
+  if (!Array.isArray(vehicles) || vehicles.length === 0) {
+    return next(new Error("Vehicles must be a non-empty array"));
+  }
+
+  for (const [i, v] of vehicles.entries()) {
+    if (!v.make || !v.model) {
+      return next(new Error(`Vehicle at index ${i} must have make and model`));
     }
+  }
 
-    if (!data.userId) {
-        errors.userId = "userId is required.";
-    }
-
-    if (!data.origin) {
-        errors.origin = "Origin is required.";
-    }
-
-    if (!data.destination) {
-        errors.destination = "Destination is required.";
-    }
-
-    if (!data.vehicles || !Array.isArray(data.vehicles) || data.vehicles.length === 0) {
-        errors.vehicles = "At least one vehicle is required.";
-    } else {
-        data.vehicles.forEach((vehicle, index) => {
-        if (!vehicle.make || typeof vehicle.make !== "string") {
-            errors[`vehicles[${index}].make`] = "Vehicle make is required.";
-        }
-        if (!vehicle.model || typeof vehicle.model !== "string") {
-            errors[`vehicles[${index}].model`] = "Vehicle model is required.";
-        }
-        if (typeof vehicle.isInoperable !== "boolean") {
-            errors[`vehicles[${index}].isOperable`] = "Vehicle operable status must be boolean.";
-        }
-        });
-    }
-
-    if (Object.keys(errors).length > 0) {
-        return res.status(400).json({ errors });
-    }
-
-    next();
-}
+  next();
+};

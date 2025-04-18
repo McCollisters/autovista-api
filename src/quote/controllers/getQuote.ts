@@ -16,7 +16,6 @@ export const getQuote = async (
 
     res.status(200).send(quote);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
+    next(error);
   }
 };

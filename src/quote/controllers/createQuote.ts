@@ -47,7 +47,7 @@ export const createQuote = async (
     const portal = await Portal.findById(portalId);
 
     if (!portal) {
-      return next({ statusCode: 500, message: "Portal not found." });
+      return next({ statusCode: 404, message: "Portal not found." });
     }
 
     const originValidated = await validateLocation(origin);
@@ -70,16 +70,13 @@ export const createQuote = async (
     const destinationCoords = await getCoordinates(destinationLocation);
 
     if (!originCoords || !destinationCoords) {
-      return next({
-        statusCode: 500,
-        message: "Error getting location coordinates",
-      });
+      return next(new Error("Error getting location coordinates."));
     }
 
     const miles = await getMiles(originCoords, destinationCoords);
 
     if (!miles) {
-      return next({ statusCode: 500, message: "Error getting miles" });
+      return next(new Error("Error calculating distance."));
     }
 
     const vehicleQuotes = await updateVehiclesWithPricing({
@@ -122,7 +119,6 @@ export const createQuote = async (
     const createdQuote = await new Quote(formattedQuote).save();
     res.status(200).send(createdQuote);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
+    next(error);
   }
 };
