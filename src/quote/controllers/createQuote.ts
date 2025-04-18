@@ -7,6 +7,7 @@ import { getMiles } from "../services/getMiles";
 import { updateVehiclesWithPricing } from "../services/updateVehiclesWithPricing";
 import { calculateTotalPricing } from "../services/calculateTotalPricing";
 import { validateLocation } from "../services/validateLocation";
+import { matchesExistingQuote } from "../services/matchesExistingQuote";
 
 export const createQuote = async (
   req: express.Request,
@@ -24,6 +25,19 @@ export const createQuote = async (
       vehicles,
       commission,
     } = req.body;
+
+    const existingQuote = await matchesExistingQuote(
+      origin,
+      destination,
+      portalId,
+      vehicles,
+      commission,
+    );
+
+    if (existingQuote) {
+      res.status(200).send(existingQuote);
+      return;
+    }
 
     let originState: string;
     let originLocation: string;
