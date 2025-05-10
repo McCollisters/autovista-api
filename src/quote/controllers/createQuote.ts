@@ -35,7 +35,7 @@ export const createQuote = async (
     );
 
     if (existingQuote) {
-      res.status(200).send(existingQuote);
+      res.status(200).json(existingQuote);
       return;
     }
 
@@ -117,7 +117,7 @@ export const createQuote = async (
     };
 
     const createdQuote = await new Quote(formattedQuote).save();
-    res.status(200).send(createdQuote);
+    res.status(200).json(createdQuote);
   } catch (error) {
     next(error);
   }

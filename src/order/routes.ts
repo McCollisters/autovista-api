@@ -1,18 +1,15 @@
 import { Router } from "express";
-import { 
-  createOrder,
-  getOrder,
-  updateOrder,
-  deleteOrder, 
-  getOrders
-} from "./controller";
+import { createOrder } from "./controllers/createOrder";
+import { getOrder } from "./controllers/getOrder";
+import { getOrders } from "./controllers/getOrders";
+import { updateOrder } from "./controllers/updateOrder";
 
-const router = Router(); 
+const router = Router();
 
-router.get("/", getOrders); 
+router.get("/", getOrders);
 router.post("/", createOrder);
-router.get("/:orderId", getOrder); 
-router.put("/:orderId", updateOrder); 
-router.delete("/:orderId",deleteOrder); 
+router.get("/:orderId", getOrder);
+router.put("/:orderId", updateOrder);
+// router.delete("/:orderId",deleteOrder);
 
-export default router; 
+export default router;

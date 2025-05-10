@@ -14,7 +14,7 @@ export const getQuote = async (
       return next({ statusCode: 404, message: "Quote not found." });
     }
 
-    res.status(200).send(quote);
+    res.status(200).json(quote);
   } catch (error) {
     next(error);
   }

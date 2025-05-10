@@ -15,7 +15,7 @@ export const updateQuote = async (
       ...(customer !== undefined && { customer }),
     });
 
-    res.status(200).send(updatedQuote);
+    res.status(200).json(updatedQuote);
   } catch (error) {
     next(error);
   }

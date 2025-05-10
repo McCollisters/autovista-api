@@ -1,13 +1,13 @@
 import express from "express";
-import { Quote } from "../schema";
+import { Order } from "../schema";
 
-export const getQuotes = async (
+export const getOrders = async (
   req: express.Request,
   res: express.Response,
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    res.status(200).json(await Quote.find({}));
+    res.status(200).json(await Order.find({}));
   } catch (error) {
     next(error);
   }

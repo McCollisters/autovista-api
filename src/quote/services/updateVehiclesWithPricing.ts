@@ -134,6 +134,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       routes: calculatedRoutes,
     },
     portalModifiers: {
+      enclosed: portalModifiers.enclosed,
       commission,
       companyTariff: calculatedTariff,
       discount: calculatedPortalDiscount,

@@ -7,7 +7,7 @@ export enum Role {
   PlatformUser = "platform_user",
   PortalAdmin = "portal_admin",
   PortalUser = "portal_user",
-  PublicUser = "public_user"
+  PublicUser = "public_user",
 }
 
 export interface IUser extends Document {
@@ -29,21 +29,27 @@ export interface IUser extends Document {
   generatePasswordReset(): void;
 }
 
-const userSchemaFields: Record<keyof Omit<IUser, keyof Document | "comparePassword" | "generatePasswordReset">, any> = {
-    portalId: { type: Schema.Types.ObjectId, ref: "Portal", required: true },
-    email: { type: String, trim: true, required: true },
-    password: { type: String, required: true },
-    role: { type: String, required: true },
-    status: { type: String, required: true },
-    firstName: { type: String, trim: true },
-    lastName: { type: String, trim: true },
-    phone: String,
-    mobilePhone: String,
-    resetPasswordToken: String,
-    resetPasswordExpires: Date,
-    verificationCode: String,
-    verificationCodeSent: Date,
-    verificationCodeExpires: Date,
+const userSchemaFields: Record<
+  keyof Omit<
+    IUser,
+    keyof Document | "comparePassword" | "generatePasswordReset"
+  >,
+  any
+> = {
+  portalId: { type: Schema.Types.ObjectId, ref: "Portal", required: true },
+  email: { type: String, trim: true, required: true },
+  password: { type: String, required: true },
+  role: { type: String, required: true },
+  status: { type: String, required: true },
+  firstName: { type: String, trim: true },
+  lastName: { type: String, trim: true },
+  phone: String,
+  mobilePhone: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
+  verificationCode: String,
+  verificationCodeSent: Date,
+  verificationCodeExpires: Date,
 };
 
 const userSchema = new Schema<IUser>(userSchemaFields, { timestamps: true });
@@ -66,7 +72,9 @@ userSchema.pre<IUser>("save", async function (next) {
   }
 });
 
-userSchema.methods.comparePassword = function (plaintext: string): Promise<boolean> {
+userSchema.methods.comparePassword = function (
+  plaintext: string,
+): Promise<boolean> {
   return bcrypt.compare(plaintext, this.password);
 };
 
