@@ -1,0 +1,4 @@
+- Customer, mini-portal, McCollister's, admin flows
+- Notifications 
+- White glove flow - request WG quote separately 
+- Expire after 30 days (adjustable)
