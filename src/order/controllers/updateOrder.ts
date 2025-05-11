@@ -8,8 +8,9 @@ export const updateOrder = async (
 ): Promise<void> => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
-      req.body.refId,
+      req.params.orderId,
       req.body,
+      { new: true },
     );
     res.status(200).json(updatedOrder);
   } catch (error) {

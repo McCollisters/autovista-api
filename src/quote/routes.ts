@@ -10,7 +10,7 @@ const router = Router();
 router.get("/", getQuotes);
 router.post("/", validateQuoteBody, createQuote);
 router.get("/:quoteId", getQuote);
-router.put("/:quoteId", updateQuote);
+router.patch("/:quoteId", updateQuote);
 // router.delete("/:quoteId",deleteQuote);
 
 export default router;

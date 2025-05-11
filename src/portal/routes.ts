@@ -1,16 +1,16 @@
 import { Router } from "express";
-import { 
+import {
   createPortal,
   getPortal,
   updatePortal,
-  deletePortal
+  deletePortal,
 } from "./controller";
 
-const router = Router(); 
+const router = Router();
 
 router.post("/", createPortal);
-router.get("/:portalId", getPortal); 
-router.put("/:portalId", updatePortal); 
-router.delete("/:portalId",deletePortal); 
+router.get("/:portalId", getPortal);
+router.patch("/:portalId", updatePortal);
+router.delete("/:portalId", deletePortal);
 
-export default router; 
+export default router;
