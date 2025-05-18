@@ -7,13 +7,13 @@ export const updateQuote = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    const { status, refId, userId, customer } = req.body;
-
-    const updatedQuote = await Quote.findByIdAndUpdate(refId, {
-      ...(status !== undefined && { status }),
-      ...(userId !== undefined && { userId }),
-      ...(customer !== undefined && { customer }),
-    });
+    const updatedQuote = await Quote.findByIdAndUpdate(
+      req.params.quoteId,
+      req.body,
+      {
+        new: true,
+      },
+    );
 
     res.status(200).json(updatedQuote);
   } catch (error) {
