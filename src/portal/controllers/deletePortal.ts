@@ -1,6 +1,5 @@
 import express from "express";
-import { Portal } from "../../portal/schema";
-import { Status } from "../../_global/enums";
+import { Portal } from "../schema";
 
 export const deletePortal = async (
   req: express.Request,
@@ -8,22 +7,14 @@ export const deletePortal = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    const { portalId } = req.params;
+    const deletedPortal = await Portal.findByIdAndDelete(req.params.quoteId);
 
-    const updatedPortal = await Portal.findByIdAndUpdate(
-      portalId,
-      { status: Status.Archived },
-      { new: true, runValidators: true },
-    );
-
-    if (!updatedPortal) {
-      res.status(404).json({ message: "Portal not found" });
-      return;
+    if (!deletedPortal) {
+      return next({ statusCode: 404, message: "Portal not found." });
     }
 
-    res.status(200).json(updatedPortal);
+    res.status(200).json({ quoteId: deletedPortal._id });
   } catch (error) {
-    console.error("Error deleting portal:", error);
-    res.status(500).json({ message: "Server error" });
+    next(error);
   }
 };
