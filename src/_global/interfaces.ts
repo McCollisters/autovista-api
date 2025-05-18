@@ -72,9 +72,9 @@ export interface ISchedule {
   serviceLevel: ServiceLevelOption;
   pickupSelected: Date;
   deliveryEstimated: Date;
-  pickupCompleted: Date;
-  deliveryCompleted: Date;
-  notes: string;
+  pickupCompleted?: Date;
+  deliveryCompleted?: Date;
+  notes?: string;
 }
 
 export interface IHistoryItem {

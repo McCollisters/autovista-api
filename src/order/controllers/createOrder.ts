@@ -3,6 +3,7 @@ import { Order } from "../schema";
 import { Quote } from "../../quote/schema";
 import { Status } from "../../_global/enums";
 import { updateVehiclesWithQuote } from "../services/updateVehiclesWithQuote";
+import { sendOrderToTms } from "../services/sendOrderToTms";
 
 export const createOrder = async (
   req: express.Request,
@@ -22,6 +23,7 @@ export const createOrder = async (
 
   try {
     const quote = await Quote.findById(quoteId);
+
     if (!quote) {
       return next({ statusCode: 404, message: "Quote not found." });
     }
@@ -57,6 +59,9 @@ export const createOrder = async (
     };
 
     const createdOrder = await new Order(formattedOrder).save();
+
+    await sendOrderToTms(createdOrder);
+
     res.status(200).send(createdOrder);
   } catch (error) {
     next(error);
