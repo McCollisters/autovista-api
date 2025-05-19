@@ -7,10 +7,11 @@ export interface IServiceLevelMarkup {
 }
 
 export interface IGlobalModifiers {
+  oversize?: number;
   total: number;
   inoperable: number;
   serviceLevels: Array<IServiceLevelMarkup>;
-  discount: number;
+  discount?: number;
 }
 
 export interface IPortalModifiers {

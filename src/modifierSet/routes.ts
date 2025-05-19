@@ -1,18 +1,18 @@
 import { Router } from "express";
-import { 
-  createRule,
-  getRule,
-  updateRule,
-  deleteRule, 
-  getRules
+import {
+  createModifierSet,
+  getModifierSet,
+  updateModifierSet,
+  deleteModifierSet,
+  getModifierSets,
 } from "./controller";
 
-const router = Router(); 
+const router = Router();
 
-router.get("/", getRules); 
-router.post("/", createRule);
-router.get("/:ruleId", getRule); 
-router.put("/:ruleId", updateRule); 
-router.delete("/:ruleId",deleteRule); 
+router.get("/", getModifierSets);
+router.post("/", createModifierSet);
+router.get("/:ruleId", getModifierSet);
+router.put("/:ruleId", updateModifierSet);
+router.delete("/:ruleId", deleteModifierSet);
 
-export default router; 
+export default router;
