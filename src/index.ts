@@ -10,7 +10,7 @@ import { ErrorHandler } from "./_global/errorHandler";
 dotenv.config();
 
 const app = express();
-const port: number = parseInt(process.env.PORT || "3050", 10);
+const port: number = parseInt(process.env.PORT || "8080", 10);
 
 const startServer = async () => {
   try {
