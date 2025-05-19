@@ -22,7 +22,9 @@ export const createOrder = async (
   } = req.body;
 
   try {
-    const quote = await Quote.findById(quoteId);
+    const quote = await Quote.findByIdAndUpdate(quoteId, {
+      status: Status.Booked,
+    });
 
     if (!quote) {
       return next({ statusCode: 404, message: "Quote not found." });
@@ -53,6 +55,7 @@ export const createOrder = async (
     const createdOrder = await new Order(formattedOrder).save();
 
     // If "Billing":
+    // Else COD
     const superDispatchResponse = await sendOrderToSD(createdOrder);
 
     if (superDispatchResponse.status === "success") {
