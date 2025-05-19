@@ -59,6 +59,7 @@ const orderSchema = new Schema<IOrder>(
     },
     origin: {
       contact: {
+        companyName: { type: String },
         name: { type: String },
         email: { type: String },
         phone: { type: String },
@@ -78,6 +79,7 @@ const orderSchema = new Schema<IOrder>(
     },
     destination: {
       contact: {
+        companyName: { type: String },
         name: { type: String },
         email: { type: String },
         phone: { type: String },
@@ -96,6 +98,7 @@ const orderSchema = new Schema<IOrder>(
       },
     },
     customer: {
+      companyName: { type: String },
       name: { type: String },
       email: { type: String },
       phone: { type: String },
@@ -103,10 +106,10 @@ const orderSchema = new Schema<IOrder>(
       notes: { type: String },
     },
     tms: {
-      guid: { type: String, required: true },
-      status: { type: String, required: true },
-      updatedAt: { type: Date, required: true },
-      createdAt: { type: Date, required: true },
+      guid: { type: String },
+      status: { type: String },
+      updatedAt: { type: Date },
+      createdAt: { type: Date },
     },
     vehicles: [
       {
@@ -114,6 +117,7 @@ const orderSchema = new Schema<IOrder>(
         model: { type: String, required: true },
         year: { type: String },
         vin: { type: String },
+        class: { type: String },
         isInoperable: { type: Boolean, required: true, default: false },
         pricing: {
           base: { type: Number, required: true, default: 0 },

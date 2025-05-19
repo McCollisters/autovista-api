@@ -45,6 +45,7 @@ export interface IVehicle {
 }
 
 export interface IContact {
+  companyName?: string;
   name?: string;
   email?: string;
   phone?: string;

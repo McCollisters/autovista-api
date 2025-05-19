@@ -1,16 +1,14 @@
 import { authenticateSuperDispatch } from "../../_global/integrations/authenticateSuperDispatch";
 import { IOrder } from "../schema";
-import { formatOrderForTms } from "./formatOrderForTms";
+import { formatOrderForSD } from "./formatOrderForSD";
 
-export const sendOrderToTms = async (order: IOrder) => {
+export const sendOrderToSD = async (order: IOrder) => {
   try {
     const superDispatchToken = await authenticateSuperDispatch();
 
-    console.log(superDispatchToken);
-
     const url = "https://api.shipper.superdispatch.com/v1/public/orders";
 
-    const formattedBody = await formatOrderForTms(order);
+    const formattedBody = await formatOrderForSD(order);
 
     const response = await fetch(url, {
       method: "POST",
@@ -22,14 +20,17 @@ export const sendOrderToTms = async (order: IOrder) => {
     });
 
     if (!response.ok) {
-      const errorBody = await response.text(); // or
-      console.error(`HTTP error ${response.status}: ${response.statusText}`);
-      console.error(`Response body: ${errorBody}`);
+      const errorBody = await response.text();
+
+      const error = new Error(
+        `HTTP error ${response.status}: ${response.statusText} - ${errorBody}`,
+      );
+      (error as any).status = response.status;
+      throw error;
     } else {
-      const data = await response.json();
-      console.log("Success:", data);
+      return await response.json();
     }
   } catch (err) {
-    console.error("Fetch failed:", err.message);
+    throw err;
   }
 };

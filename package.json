@@ -24,6 +24,7 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "luxon": "^3.6.1",
     "mongoose": "^8.13.0",
     "mongoose-sequence": "^6.0.1",
     "nanoid": "^5.1.5"
@@ -33,6 +34,7 @@
     "@tsconfig/node22": "^22.0.1",
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.1",
+    "@types/luxon": "^3.6.2",
     "@types/mongoose-sequence": "^3.0.11",
     "@types/node": "^22.13.14",
     "i": "^0.3.7",

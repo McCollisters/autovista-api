@@ -3,7 +3,7 @@ import { Order } from "../schema";
 import { Quote } from "../../quote/schema";
 import { Status } from "../../_global/enums";
 import { updateVehiclesWithQuote } from "../services/updateVehiclesWithQuote";
-import { sendOrderToTms } from "../services/sendOrderToTms";
+import { sendOrderToSD } from "../services/sendOrderToSD";
 
 export const createOrder = async (
   req: express.Request,
@@ -33,13 +33,6 @@ export const createOrder = async (
       quote,
     });
 
-    const tmsMock = {
-      guid: "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-      status: "new",
-      updatedAt: "2025-04-19T00:00:00.000Z",
-      createdAt: "2025-04-19T00:00:00.000Z",
-    };
-
     const formattedOrder = {
       refId: quote.refId,
       reg,
@@ -55,14 +48,31 @@ export const createOrder = async (
       vehicles: orderVehicles,
       totalPricing: quote.totalPricing,
       schedule,
-      tms: tmsMock,
     };
 
     const createdOrder = await new Order(formattedOrder).save();
 
-    await sendOrderToTms(createdOrder);
+    // If "Billing":
+    const superDispatchResponse = await sendOrderToSD(createdOrder);
 
-    res.status(200).send(createdOrder);
+    if (superDispatchResponse.status === "success") {
+      const orderWithSuperDispatch = await Order.findByIdAndUpdate(
+        createdOrder._id,
+        {
+          tms: {
+            guid: superDispatchResponse.data.object.guid,
+            status: superDispatchResponse.data.object.status,
+            createdAt: superDispatchResponse.data.object.created_at,
+            updatedAt: superDispatchResponse.data.object.changed_at,
+          },
+        },
+        { new: true },
+      );
+
+      res.status(201).json(orderWithSuperDispatch);
+    } else {
+      res.status(201).json(createdOrder);
+    }
   } catch (error) {
     next(error);
   }
