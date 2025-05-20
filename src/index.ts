@@ -1,11 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import portalRoutes from "./portal/routes";
-import userRoutes from "./user/routes";
-import quoteRoutes from "./quote/routes";
-import orderRoutes from "./order/routes";
-import { ErrorHandler } from "./_global/errorHandler";
+import portalRoutes from "./portal/routes.js";
+import userRoutes from "./user/routes.js";
+import quoteRoutes from "./quote/routes.js";
+import orderRoutes from "./order/routes.js";
+import { ErrorHandler } from "./_global/errorHandler.js";
 
 dotenv.config();
 
