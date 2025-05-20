@@ -1,5 +1,7 @@
 import mongoose, { Schema, Document, Model, Types } from "mongoose";
 
+import { IServiceLevelMarkup } from "../_global/interfaces";
+
 export enum ModifierSetType {
   Markup = "markup",
   Discount = "discount",
@@ -41,6 +43,7 @@ export interface IModifierSet extends Document {
   companyTariff?: IModifier;
   fixedCommission?: IModifier;
   routes?: Array<IRouteModifier>;
+  serviceLevels?: Array<IServiceLevelMarkup>;
 }
 
 const modifierSetSchema = new Schema<IModifierSet>(
@@ -48,48 +51,48 @@ const modifierSetSchema = new Schema<IModifierSet>(
     portalId: { type: Schema.Types.ObjectId, ref: "Portal" },
     isGlobal: { type: Boolean, default: false },
     inoperable: {
-      value: Number,
+      value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
     },
     fuel: {
-      value: Number,
+      value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
     },
     irr: {
-      value: Number,
+      value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
     },
     oversize: {
-      default: Number,
-      suv: Number,
-      van: Number,
-      pickup_2_door: Number,
-      pickup_4_door: Number,
+      suv: { type: Number, default: 0 },
+      van: { type: Number, default: 0 },
+      pickup_2_door: { type: Number, default: 0 },
+      pickup_4_door: { type: Number, default: 0 },
     },
     enclosed: {
-      value: Number,
+      value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
     },
     discount: {
-      value: Number,
+      value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
     },
     companyTariff: {
-      value: Number,
+      value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
     },
     fixedCommission: {
-      value: Number,
+      value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
     },
     routes: [
       {
-        value: Number,
+        value: { type: Number, default: 0 },
         valueType: String,
         origin: String,
         destination: String,
       },
     ],
+    serviceLevels: Array<IServiceLevelMarkup>,
   },
   { timestamps: true },
 );

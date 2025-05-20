@@ -1,9 +1,25 @@
 Quotes:
 
+- Handle white glove calculator
+- Public customer 
+- API customer 
+- Mini-site customer 
 
 
-COD vs. Billing
+Portals: 
 
+
+Orders: 
+
+- COD vs. Billing path 
+
+
+Notifications: 
+
+- MMI Specific 
+
+
+Integrations: 
 
 MMI / other portal-specific 
 
@@ -16,5 +32,3 @@ Changes to super dispatch (webhooks)
 
 Quote / order expiration 
 
-
-White glove 

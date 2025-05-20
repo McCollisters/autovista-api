@@ -21,23 +21,22 @@ export const createQuote = async (
       customer,
       origin,
       destination,
-      transportType,
       vehicles,
       commission,
     } = req.body;
 
-    const existingQuote = await matchesExistingQuote(
-      origin,
-      destination,
-      portalId,
-      vehicles,
-      commission,
-    );
+    // const existingQuote = await matchesExistingQuote(
+    //   origin,
+    //   destination,
+    //   portalId,
+    //   vehicles,
+    //   commission,
+    // );
 
-    if (existingQuote) {
-      res.status(200).json(existingQuote);
-      return;
-    }
+    // if (existingQuote) {
+    //   res.status(200).json(existingQuote);
+    //   return;
+    // }
 
     let originState: string;
     let originLocation: string;
@@ -89,6 +88,7 @@ export const createQuote = async (
       destinationState,
       commission,
     });
+
     const totalPricing = await calculateTotalPricing(vehicleQuotes);
 
     const formattedQuote = {
@@ -111,7 +111,6 @@ export const createQuote = async (
         state: destinationState,
       },
       miles,
-      transportType,
       vehicles: vehicleQuotes,
       totalPricing,
     };

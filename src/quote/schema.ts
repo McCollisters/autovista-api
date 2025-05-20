@@ -77,7 +77,6 @@ const quoteSchema = new Schema<IQuote>(
       lat: { type: String },
     },
     miles: { type: Number },
-    transportType: { type: String, enum: Object.values(TransportType) },
     vehicles: [
       {
         make: { type: String, required: true },
@@ -102,6 +101,18 @@ const quoteSchema = new Schema<IQuote>(
             oversize: { type: Number, required: true, default: 0 },
             discount: { type: Number, default: 0 },
           },
+          totalsByServiceLevel: [
+            {
+              serviceLevelOption: {
+                type: String,
+                enum: Object.values(ServiceLevelOption),
+              },
+              total: { type: Number, required: true },
+              totalEnclosed: { type: Number },
+            },
+          ],
+          total: { type: Number, required: true },
+          totalEnclosed: { type: Number },
         },
       },
     ],
@@ -133,9 +144,11 @@ const quoteSchema = new Schema<IQuote>(
             enum: Object.values(ServiceLevelOption),
           },
           total: { type: Number, required: true },
+          totalEnclosed: { type: Number },
         },
       ],
       total: { type: Number, required: true },
+      totalEnclosed: { type: Number },
     },
     archivedAt: { type: Date },
     history: [

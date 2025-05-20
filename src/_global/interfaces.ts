@@ -32,6 +32,7 @@ export interface IPricing {
   globalModifiers: IGlobalModifiers;
   portalModifiers: IPortalModifiers;
   total: number;
+  totalEnclosed: number;
   totalsByServiceLevel: Array<ITotalByServiceLevel>;
 }
 

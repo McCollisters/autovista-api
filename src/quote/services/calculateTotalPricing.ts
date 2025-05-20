@@ -38,6 +38,10 @@ export const calculateTotalPricing = async (
     total: 1000,
     totalsByServiceLevel: [
       {
+        serviceLevelOption: ServiceLevelOption.WhiteGlove,
+        total: 1000,
+      },
+      {
         serviceLevelOption: ServiceLevelOption.OneDay,
         total: 1000,
       },

@@ -4,6 +4,7 @@ import { getTMSBaseRate } from "../integrations/getTMSBaseRate";
 import { getCustomBaseRate } from "../integrations/getCustomBaseRate";
 import { VehicleClass } from "../../_global/enums";
 import { IPortal } from "../../portal/schema";
+import { ServiceLevelOption } from "../../_global/enums";
 
 interface VehiclePriceParams {
   portal: IPortal;
@@ -38,23 +39,31 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     commission,
   } = params;
 
+  // Get Autovista-wide modifiers
   const globalModifiers = await ModifierSet.findOne({ isGlobal: true });
+
+  // Get portal-specific modifiers
   const portalModifiers = await ModifierSet.findOne({ portalId: portal._id });
 
   if (!globalModifiers || !portalModifiers) {
     return null;
   }
 
+  // Get vehicle base rate from Super Dispatch or portal's custom rates
   const base = portal.options?.enableCustomRates
     ? getCustomBaseRate(miles, portal)
     : await getTMSBaseRate(vehicle, origin, destination);
 
+  // Calculate all modifiers
   let calculatedGlobalDiscount: number = 0;
   let calculatedTariff: number = 0;
   let calculatedPortalDiscount: number = 0;
   let calculatedInoperable: number = 0;
   let calculatedPortalOversize: number = 0;
   let calculatedRoutes: number = 0;
+  let calculatedEnclosed: number = 0;
+
+  let calculatedServiceLevels: number[] = [0, 0, 0, 0];
 
   if (globalModifiers.discount) {
     calculatedGlobalDiscount = calculateModifier(
@@ -109,6 +118,10 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     calculatedInoperable = calculateModifier(globalModifiers.inoperable, base);
   }
 
+  if (globalModifiers.enclosed) {
+    calculatedEnclosed = calculateModifier(globalModifiers.enclosed, base);
+  }
+
   if (globalModifiers.routes) {
     if (Array.isArray(globalModifiers.routes)) {
       const matchingRoutes = globalModifiers.routes.filter(
@@ -126,12 +139,31 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     }
   }
 
+  if (globalModifiers.serviceLevels) {
+    calculatedServiceLevels = globalModifiers.serviceLevels.map((modifier) => {
+      return modifier.value;
+    });
+  }
+
+  const calculatedTotal =
+    base +
+    calculatedInoperable +
+    calculatedGlobalDiscount +
+    calculatedRoutes +
+    commission +
+    calculatedTariff +
+    calculatedPortalDiscount +
+    calculatedPortalOversize;
+
+  const calculatedTotalEnclosed = calculatedTotal + calculatedEnclosed;
+
   return {
     base,
     globalModifiers: {
       inoperable: calculatedInoperable,
       discount: calculatedGlobalDiscount,
       routes: calculatedRoutes,
+      calculatedEnclosed: calculatedEnclosed,
     },
     portalModifiers: {
       enclosed: portalModifiers.enclosed,
@@ -140,6 +172,36 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       discount: calculatedPortalDiscount,
       oversize: calculatedPortalOversize,
     },
+    // total = base rate + applied modifiers
+    total: calculatedTotal,
+    totalEnclosed: calculatedTotalEnclosed,
+    // totalsByServiceLevel = total + service level charge
+    totalsByServiceLevel: [
+      {
+        serviceLevelOption: ServiceLevelOption.WhiteGlove,
+        total: calculatedTotal * 2, // white glove modifier of 2
+      },
+      {
+        serviceLevelOption: ServiceLevelOption.OneDay,
+        total: calculatedTotal + calculatedServiceLevels[0],
+        totalEnclosed: calculatedTotalEnclosed + calculatedServiceLevels[0],
+      },
+      {
+        serviceLevelOption: ServiceLevelOption.ThreeDay,
+        total: calculatedTotal + calculatedServiceLevels[1],
+        totalEnclosed: calculatedTotalEnclosed + calculatedServiceLevels[1],
+      },
+      {
+        serviceLevelOption: ServiceLevelOption.FiveDay,
+        total: calculatedTotal + calculatedServiceLevels[2],
+        totalEnclosed: calculatedTotalEnclosed + calculatedServiceLevels[2],
+      },
+      {
+        serviceLevelOption: ServiceLevelOption.SevenDay,
+        total: calculatedTotal + calculatedServiceLevels[3],
+        totalEnclosed: calculatedTotalEnclosed + calculatedServiceLevels[3],
+      },
+    ],
   };
 };
 
