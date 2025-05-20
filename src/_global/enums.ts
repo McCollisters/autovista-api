@@ -69,6 +69,7 @@ export enum ServiceLevelOption {
   ThreeDay = "3",
   FiveDay = "5",
   SevenDay = "7",
+  WhiteGlove = "white_glove",
 }
 
 export enum VehicleClass {
