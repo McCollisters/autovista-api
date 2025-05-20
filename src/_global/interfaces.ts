@@ -8,14 +8,12 @@ export interface IServiceLevelMarkup {
 
 export interface IGlobalModifiers {
   oversize?: number;
-  total: number;
   inoperable: number;
-  serviceLevels: Array<IServiceLevelMarkup>;
   discount?: number;
+  routes?: number;
 }
 
 export interface IPortalModifiers {
-  total: number;
   commission: number;
   companyTariff: number;
   discount: number;
@@ -25,6 +23,7 @@ export interface IPortalModifiers {
 export interface ITotalByServiceLevel {
   serviceLevelOption: ServiceLevelOption;
   total: number;
+  totalEnclosed?: number;
 }
 
 export interface IPricing {

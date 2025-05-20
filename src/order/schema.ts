@@ -121,11 +121,11 @@ const orderSchema = new Schema<IOrder>(
         isInoperable: { type: Boolean, required: true, default: false },
         pricing: {
           base: { type: Number, required: true, default: 0 },
-          globalMarkups: {
+          globalModifiers: {
             inoperable: { type: Number, required: true, default: 0 },
             oversize: { type: Number, required: true, default: 0 },
           },
-          portalMarkups: {
+          portalModifiers: {
             commission: { type: Number, required: true, default: 0 },
             companyTariff: { type: Number, required: true, default: 0 },
           },
@@ -134,7 +134,7 @@ const orderSchema = new Schema<IOrder>(
     ],
     totalPricing: {
       base: { type: Number, required: true },
-      globalMarkups: {
+      globalModifiers: {
         total: { type: Number, required: true, default: 0 },
         inoperable: { type: Number, required: true, default: 0 },
         oversize: { type: Number, required: true, default: 0 },
@@ -148,7 +148,7 @@ const orderSchema = new Schema<IOrder>(
           },
         ],
       },
-      portalMarkups: {
+      portalModifiers: {
         total: { type: Number, required: true, default: 0 },
         commission: { type: Number, required: true, default: 0 },
         companyTariff: { type: Number, required: true, default: 0 },

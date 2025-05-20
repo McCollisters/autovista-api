@@ -4,71 +4,97 @@ import { IVehicle, IPricing } from "../../_global/interfaces";
 export const calculateTotalPricing = async (
   vehicles: IVehicle[],
 ): Promise<IPricing> => {
+  let base = 0;
+  let total = 0;
+  let totalEnclosed = 0;
+  let globalInop = 0;
+  let globalDiscount = 0;
+  let globalRoutes = 0;
+  let globalOversize = 0;
+  let portalCommission = 0;
+  let portalCompanyTariff = 0;
+  let portalDiscount = 0;
+  let serviceLevelWhiteGlove = 0;
+  let serviceLevel1 = 0;
+  let serviceLevel3 = 0;
+  let serviceLevel5 = 0;
+  let serviceLevel7 = 0;
+  let serviceLevel1Enclosed = 0;
+  let serviceLevel3Enclosed = 0;
+  let serviceLevel5Enclosed = 0;
+  let serviceLevel7Enclosed = 0;
+
+  for (const vehicle of vehicles) {
+    console.log(vehicle.pricing);
+
+    const { pricing } = vehicle;
+
+    base += pricing?.base || 0;
+    total += pricing?.total || 0;
+    totalEnclosed += pricing?.totalEnclosed || 0;
+    globalInop += pricing?.globalModifiers?.inoperable || 0;
+    globalDiscount += pricing?.globalModifiers?.discount || 0;
+    globalRoutes += pricing?.globalModifiers?.routes || 0;
+    globalOversize += pricing?.globalModifiers?.oversize || 0;
+    portalCommission += pricing?.portalModifiers?.commission || 0;
+    portalCompanyTariff += pricing?.portalModifiers?.companyTariff || 0;
+    portalDiscount += pricing?.portalModifiers?.discount || 0;
+
+    serviceLevelWhiteGlove += pricing?.totalsByServiceLevel[0].total || 0;
+    serviceLevel1 += pricing?.totalsByServiceLevel[1].total || 0;
+    serviceLevel3 += pricing?.totalsByServiceLevel[2].total || 0;
+    serviceLevel5 += pricing?.totalsByServiceLevel[3].total || 0;
+    serviceLevel7 += pricing?.totalsByServiceLevel[4].total || 0;
+
+    serviceLevel1Enclosed +=
+      pricing?.totalsByServiceLevel[1].totalEnclosed || 0;
+    serviceLevel3 += pricing?.totalsByServiceLevel[2].totalEnclosed || 0;
+    serviceLevel5 += pricing?.totalsByServiceLevel[3].totalEnclosed || 0;
+    serviceLevel7 += pricing?.totalsByServiceLevel[4].totalEnclosed || 0;
+  }
+
   let totalPricing: IPricing = {
-    base: 0,
+    base,
     globalModifiers: {
-      total: 100,
-      inoperable: 50,
-      oversize: 0,
-      serviceLevels: [
-        {
-          serviceLevelOption: ServiceLevelOption.OneDay,
-          value: 150,
-        },
-        {
-          serviceLevelOption: ServiceLevelOption.ThreeDay,
-          value: 125,
-        },
-        {
-          serviceLevelOption: ServiceLevelOption.ThreeDay,
-          value: 100,
-        },
-        {
-          serviceLevelOption: ServiceLevelOption.ThreeDay,
-          value: 75,
-        },
-      ],
+      inoperable: globalInop,
+      oversize: globalOversize,
+      discount: globalDiscount,
+      routes: globalRoutes,
     },
     portalModifiers: {
-      discount: 0,
-      total: 100,
-      commission: 50,
-      companyTariff: 50,
+      discount: portalDiscount,
+      commission: portalCommission,
+      companyTariff: portalCompanyTariff,
     },
-    total: 1000,
+    total,
+    totalEnclosed,
     totalsByServiceLevel: [
       {
         serviceLevelOption: ServiceLevelOption.WhiteGlove,
-        total: 1000,
+        total: serviceLevelWhiteGlove,
       },
       {
         serviceLevelOption: ServiceLevelOption.OneDay,
-        total: 1000,
+        total: serviceLevel1,
+        totalEnclosed: serviceLevel1Enclosed,
       },
       {
         serviceLevelOption: ServiceLevelOption.ThreeDay,
-        total: 1000,
+        total: serviceLevel3,
+        totalEnclosed: serviceLevel3Enclosed,
       },
       {
-        serviceLevelOption: ServiceLevelOption.FiveDay,
-        total: 1000,
+        serviceLevelOption: ServiceLevelOption.ThreeDay,
+        total: serviceLevel5,
+        totalEnclosed: serviceLevel5Enclosed,
       },
       {
-        serviceLevelOption: ServiceLevelOption.SevenDay,
-        total: 1000,
+        serviceLevelOption: ServiceLevelOption.ThreeDay,
+        total: serviceLevel7,
+        totalEnclosed: serviceLevel7Enclosed,
       },
     ],
   };
-
-  // for (const vehicle of vehicles) {
-  //     const pricing = await getVehiclePricing(vehicle);
-
-  //     totalPricing.base += pricing.base;
-  //     totalPricing.globalMarkups.inoperable += pricing.globalMarkups.inoperable;
-  //     totalPricing.globalMarkups.oversize += pricing.globalMarkups.oversize;
-  //     totalPricing.portalMarkups.commission += pricing.portalMarkups.commission;
-  //     totalPricing.portalMarkups.companyTariff += pricing.portalMarkups.companyTariff;
-  // }
 
   return totalPricing;
 };

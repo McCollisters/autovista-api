@@ -59,7 +59,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   let calculatedTariff: number = 0;
   let calculatedPortalDiscount: number = 0;
   let calculatedInoperable: number = 0;
-  let calculatedPortalOversize: number = 0;
+  let calculatedGlobalOversize: number = 0;
   let calculatedRoutes: number = 0;
   let calculatedEnclosed: number = 0;
 
@@ -83,29 +83,29 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     );
   }
 
-  if (portalModifiers.oversize) {
+  if (globalModifiers.oversize) {
     switch (vehicle.class) {
       case VehicleClass.SUV:
-        calculatedPortalOversize = calculateModifier(
-          { value: portalModifiers.oversize.suv, valueType: "flat" },
+        calculatedGlobalOversize = calculateModifier(
+          { value: globalModifiers.oversize.suv, valueType: "flat" },
           base,
         );
         break;
       case VehicleClass.Van:
-        calculatedPortalOversize = calculateModifier(
-          { value: portalModifiers.oversize.van, valueType: "flat" },
+        calculatedGlobalOversize = calculateModifier(
+          { value: globalModifiers.oversize.van, valueType: "flat" },
           base,
         );
         break;
       case VehicleClass.Pickup2Door:
-        calculatedPortalOversize = calculateModifier(
-          { value: portalModifiers.oversize.pickup_2_door, valueType: "flat" },
+        calculatedGlobalOversize = calculateModifier(
+          { value: globalModifiers.oversize.pickup_2_door, valueType: "flat" },
           base,
         );
         break;
       case VehicleClass.Pickup4Door:
-        calculatedPortalOversize = calculateModifier(
-          { value: portalModifiers.oversize.pickup_4_door, valueType: "flat" },
+        calculatedGlobalOversize = calculateModifier(
+          { value: globalModifiers.oversize.pickup_4_door, valueType: "flat" },
           base,
         );
         break;
@@ -153,7 +153,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     commission +
     calculatedTariff +
     calculatedPortalDiscount +
-    calculatedPortalOversize;
+    calculatedGlobalOversize;
 
   const calculatedTotalEnclosed = calculatedTotal + calculatedEnclosed;
 
@@ -163,14 +163,12 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       inoperable: calculatedInoperable,
       discount: calculatedGlobalDiscount,
       routes: calculatedRoutes,
-      calculatedEnclosed: calculatedEnclosed,
+      oversize: calculatedGlobalOversize,
     },
     portalModifiers: {
-      enclosed: portalModifiers.enclosed,
       commission,
       companyTariff: calculatedTariff,
       discount: calculatedPortalDiscount,
-      oversize: calculatedPortalOversize,
     },
     // total = base rate + applied modifiers
     total: calculatedTotal,

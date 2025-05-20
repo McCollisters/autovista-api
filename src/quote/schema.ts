@@ -98,11 +98,11 @@ const quoteSchema = new Schema<IQuote>(
           portalModifiers: {
             commission: { type: Number, required: true, default: 0 },
             companyTariff: { type: Number, required: true, default: 0 },
-            oversize: { type: Number, required: true, default: 0 },
             discount: { type: Number, default: 0 },
           },
           totalsByServiceLevel: [
             {
+              _id: false,
               serviceLevelOption: {
                 type: String,
                 enum: Object.values(ServiceLevelOption),
@@ -118,27 +118,17 @@ const quoteSchema = new Schema<IQuote>(
     ],
     totalPricing: {
       base: { type: Number, required: true },
-      globalMarkups: {
-        total: { type: Number, required: true, default: 0 },
+      globalModifiers: {
         inoperable: { type: Number, required: true, default: 0 },
         oversize: { type: Number, required: true, default: 0 },
-        serviceLevels: [
-          {
-            serviceLevelOption: {
-              type: String,
-              enum: Object.values(ServiceLevelOption),
-            },
-            value: { type: Number, required: true },
-          },
-        ],
       },
-      portalMarkups: {
-        total: { type: Number, required: true, default: 0 },
+      portalModifiers: {
         commission: { type: Number, required: true, default: 0 },
         companyTariff: { type: Number, required: true, default: 0 },
       },
       totalsByServiceLevel: [
         {
+          _id: false,
           serviceLevelOption: {
             type: String,
             enum: Object.values(ServiceLevelOption),
