@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 import { USState, ServiceLevelOption, VehicleClass } from "./enums";
 
-export interface IServiceLevelMarkup {
+export interface IServiceLevelModifier {
   serviceLevelOption: ServiceLevelOption;
   value: number;
 }
@@ -18,21 +18,26 @@ export interface IPortalModifiers {
   companyTariff: number;
   discount: number;
 }
-0;
+
+export interface IConditionalModifiers {
+  enclosed: number;
+  serviceLevels: ITotalByServiceLevel[];
+}
 
 export interface ITotalByServiceLevel {
   serviceLevelOption: ServiceLevelOption;
-  total: number;
-  totalEnclosed?: number;
+  value: number;
 }
 
 export interface IPricing {
   base: number;
+  baseWhiteGlove: number;
   globalModifiers: IGlobalModifiers;
   portalModifiers: IPortalModifiers;
+  conditionalModifiers: IConditionalModifiers;
+  totalModifiers: number;
   total: number;
-  totalEnclosed: number;
-  totalsByServiceLevel: Array<ITotalByServiceLevel>;
+  totalWhiteGlove: number;
 }
 
 export interface IVehicle {

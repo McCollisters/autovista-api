@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Model, Types } from "mongoose";
 
-import { IServiceLevelMarkup } from "../_global/interfaces";
+import { IServiceLevelModifier } from "../_global/interfaces";
 
 export enum ModifierSetType {
   Markup = "markup",
@@ -31,6 +31,10 @@ export interface IModifierSet extends Document {
   inoperable?: IModifier;
   fuel?: IModifier;
   irr?: IModifier;
+  whiteGlove?: {
+    multiplier: number;
+    minimum: number;
+  };
   oversize?: {
     default: number;
     suv: number;
@@ -43,7 +47,7 @@ export interface IModifierSet extends Document {
   companyTariff?: IModifier;
   fixedCommission?: IModifier;
   routes?: Array<IRouteModifier>;
-  serviceLevels?: Array<IServiceLevelMarkup>;
+  serviceLevels?: Array<IServiceLevelModifier>;
 }
 
 const modifierSetSchema = new Schema<IModifierSet>(
@@ -61,6 +65,10 @@ const modifierSetSchema = new Schema<IModifierSet>(
     irr: {
       value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
+    },
+    whiteGlove: {
+      multiplier: { type: Number, default: 2 },
+      minimum: { type: Number, default: 1200 },
     },
     oversize: {
       suv: { type: Number, default: 0 },
@@ -92,7 +100,7 @@ const modifierSetSchema = new Schema<IModifierSet>(
         destination: String,
       },
     ],
-    serviceLevels: Array<IServiceLevelMarkup>,
+    serviceLevels: Array<IServiceLevelModifier>,
   },
   { timestamps: true },
 );

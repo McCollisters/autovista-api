@@ -4,7 +4,7 @@ import { getTMSBaseRate } from "../integrations/getTMSBaseRate";
 import { getCustomBaseRate } from "../integrations/getCustomBaseRate";
 import { VehicleClass } from "../../_global/enums";
 import { IPortal } from "../../portal/schema";
-import { ServiceLevelOption } from "../../_global/enums";
+import { roundCurrency } from "../../_global/utils/roundCurrency";
 
 interface VehiclePriceParams {
   portal: IPortal;
@@ -54,7 +54,6 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     ? getCustomBaseRate(miles, portal)
     : await getTMSBaseRate(vehicle, origin, destination);
 
-  // Calculate all modifiers
   let calculatedGlobalDiscount: number = 0;
   let calculatedTariff: number = 0;
   let calculatedPortalDiscount: number = 0;
@@ -62,14 +61,21 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   let calculatedGlobalOversize: number = 0;
   let calculatedRoutes: number = 0;
   let calculatedEnclosed: number = 0;
-
-  let calculatedServiceLevels: number[] = [0, 0, 0, 0];
+  let baseWhiteGlove: number = 0;
 
   if (globalModifiers.discount) {
     calculatedGlobalDiscount = calculateModifier(
       globalModifiers.discount,
       base,
     );
+  }
+
+  const whiteGloveMultiplier = portalModifiers.whiteGlove
+    ? portalModifiers.whiteGlove.multiplier
+    : globalModifiers.whiteGlove?.multiplier || 2;
+
+  if (whiteGloveMultiplier) {
+    baseWhiteGlove = miles * whiteGloveMultiplier;
   }
 
   if (portalModifiers.companyTariff) {
@@ -139,14 +145,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     }
   }
 
-  if (globalModifiers.serviceLevels) {
-    calculatedServiceLevels = globalModifiers.serviceLevels.map((modifier) => {
-      return modifier.value;
-    });
-  }
-
-  const calculatedTotal =
-    base +
+  const calculatedModifiers =
     calculatedInoperable +
     calculatedGlobalDiscount +
     calculatedRoutes +
@@ -155,10 +154,13 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     calculatedPortalDiscount +
     calculatedGlobalOversize;
 
-  const calculatedTotalEnclosed = calculatedTotal + calculatedEnclosed;
+  const calculatedTotal = base + calculatedModifiers;
+
+  const calculatedWhiteGloveTotal = baseWhiteGlove + calculatedModifiers;
 
   return {
     base,
+    baseWhiteGlove: roundCurrency(baseWhiteGlove),
     globalModifiers: {
       inoperable: calculatedInoperable,
       discount: calculatedGlobalDiscount,
@@ -170,36 +172,15 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       companyTariff: calculatedTariff,
       discount: calculatedPortalDiscount,
     },
-    // total = base rate + applied modifiers
-    total: calculatedTotal,
-    totalEnclosed: calculatedTotalEnclosed,
-    // totalsByServiceLevel = total + service level charge
-    totalsByServiceLevel: [
-      {
-        serviceLevelOption: ServiceLevelOption.WhiteGlove,
-        total: calculatedTotal * 2, // white glove modifier of 2
-      },
-      {
-        serviceLevelOption: ServiceLevelOption.OneDay,
-        total: calculatedTotal + calculatedServiceLevels[0],
-        totalEnclosed: calculatedTotalEnclosed + calculatedServiceLevels[0],
-      },
-      {
-        serviceLevelOption: ServiceLevelOption.ThreeDay,
-        total: calculatedTotal + calculatedServiceLevels[1],
-        totalEnclosed: calculatedTotalEnclosed + calculatedServiceLevels[1],
-      },
-      {
-        serviceLevelOption: ServiceLevelOption.FiveDay,
-        total: calculatedTotal + calculatedServiceLevels[2],
-        totalEnclosed: calculatedTotalEnclosed + calculatedServiceLevels[2],
-      },
-      {
-        serviceLevelOption: ServiceLevelOption.SevenDay,
-        total: calculatedTotal + calculatedServiceLevels[3],
-        totalEnclosed: calculatedTotalEnclosed + calculatedServiceLevels[3],
-      },
-    ],
+    conditionalModifiers: {
+      enclosed: calculatedEnclosed,
+      serviceLevels: globalModifiers.serviceLevels,
+    },
+    totalModifiers: roundCurrency(calculatedModifiers),
+    // total = base rate + modifiers (excl. conditional)
+    total: roundCurrency(calculatedTotal),
+    // total = white glove base rate + modifiers (excl. conditional)
+    totalWhiteGlove: roundCurrency(calculatedWhiteGloveTotal),
   };
 };
 
