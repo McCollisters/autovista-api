@@ -25,18 +25,18 @@ export const createQuote = async (
       commission,
     } = req.body;
 
-    // const existingQuote = await matchesExistingQuote(
-    //   origin,
-    //   destination,
-    //   portalId,
-    //   vehicles,
-    //   commission,
-    // );
+    const existingQuote = await matchesExistingQuote(
+      origin,
+      destination,
+      portalId,
+      vehicles,
+      commission,
+    );
 
-    // if (existingQuote) {
-    //   res.status(200).json(existingQuote);
-    //   return;
-    // }
+    if (existingQuote) {
+      res.status(200).json(existingQuote);
+      return;
+    }
 
     let originState: string;
     let originLocation: string;
