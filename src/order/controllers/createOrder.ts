@@ -88,6 +88,8 @@ export const createOrder = async (
     } else {
       res.status(201).json(createdOrder);
     }
+
+    // Send relevant notifications
   } catch (error) {
     next(error);
   }

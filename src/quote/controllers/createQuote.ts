@@ -117,6 +117,8 @@ export const createQuote = async (
 
     const createdQuote = await new Quote(formattedQuote).save();
     res.status(200).json(createdQuote);
+
+    // Send relevant notifications
   } catch (error) {
     next(error);
   }
