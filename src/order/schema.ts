@@ -4,7 +4,9 @@ import {
   TransportType,
   USState,
   ServiceLevelOption,
+  PaymentType,
 } from "../_global/enums";
+
 import {
   IPricing,
   IVehicle,
@@ -34,6 +36,7 @@ export interface IOrder extends Document {
   quoteId: Types.ObjectId;
   miles: number;
   transportType: TransportType;
+  paymentType: PaymentType;
   origin: Location;
   destination: Location;
   customer: IContact;
@@ -52,6 +55,7 @@ const orderSchema = new Schema<IOrder>(
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     quoteId: { type: Schema.Types.ObjectId, ref: "Quote", required: true },
     miles: { type: Number },
+    paymentType: { type: String },
     transportType: {
       type: String,
       enum: Object.values(TransportType),
@@ -113,6 +117,7 @@ const orderSchema = new Schema<IOrder>(
     },
     vehicles: [
       {
+        _id: false,
         make: { type: String, required: true },
         model: { type: String, required: true },
         year: { type: String },

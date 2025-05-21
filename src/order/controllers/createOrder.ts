@@ -19,15 +19,20 @@ export const createOrder = async (
     customer,
     schedule,
     reg,
+    paymentType,
   } = req.body;
 
   try {
-    const quote = await Quote.findByIdAndUpdate(quoteId, {
-      status: Status.Booked,
-    });
+    const quote = await Quote.findById(quoteId);
 
     if (!quote) {
       return next({ statusCode: 404, message: "Quote not found." });
+    }
+
+    const orderExists = await Order.find({ refId: quote.refId });
+
+    if (orderExists) {
+      return next({ statusCode: 409, message: "Order already exists." });
     }
 
     const orderVehicles = await updateVehiclesWithQuote({
@@ -50,29 +55,36 @@ export const createOrder = async (
       vehicles: orderVehicles,
       totalPricing: quote.totalPricing,
       schedule,
+      paymentType,
     };
 
     const createdOrder = await new Order(formattedOrder).save();
 
-    // If "Billing":
-    // Else COD
-    const superDispatchResponse = await sendOrderToSD(createdOrder);
+    if (!createdOrder) {
+      return next({ statusCode: 500, message: "Error creating order." });
+    }
 
-    if (superDispatchResponse.status === "success") {
-      const orderWithSuperDispatch = await Order.findByIdAndUpdate(
-        createdOrder._id,
-        {
-          tms: {
-            guid: superDispatchResponse.data.object.guid,
-            status: superDispatchResponse.data.object.status,
-            createdAt: superDispatchResponse.data.object.created_at,
-            updatedAt: superDispatchResponse.data.object.changed_at,
+    await Quote.findByIdAndUpdate(quoteId, { status: Status.Booked });
+
+    if (paymentType.toLowerCase() === "billing") {
+      const superDispatchResponse = await sendOrderToSD(createdOrder);
+
+      if (superDispatchResponse.status === "success") {
+        const orderWithSuperDispatch = await Order.findByIdAndUpdate(
+          createdOrder._id,
+          {
+            tms: {
+              guid: superDispatchResponse.data.object.guid,
+              status: superDispatchResponse.data.object.status,
+              createdAt: superDispatchResponse.data.object.created_at,
+              updatedAt: superDispatchResponse.data.object.changed_at,
+            },
           },
-        },
-        { new: true },
-      );
+          { new: true },
+        );
 
-      res.status(201).json(orderWithSuperDispatch);
+        res.status(201).json(orderWithSuperDispatch);
+      }
     } else {
       res.status(201).json(createdOrder);
     }

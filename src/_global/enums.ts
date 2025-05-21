@@ -64,6 +64,11 @@ export enum TransportType {
   WhiteGlove = "white_glove",
 }
 
+export enum PaymentType {
+  Billing = "billing",
+  Cod = "cod",
+}
+
 export enum ServiceLevelOption {
   OneDay = "1",
   ThreeDay = "3",
