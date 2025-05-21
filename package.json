@@ -7,7 +7,8 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "NODE_ENV=development tsx --watch src/index.ts",
+    "generate": "prisma generate",
+    "dev": "npm run generate && NODE_ENV=development tsx --watch src/index.ts",
     "start": "NODE_ENV=production node dist/index.js",
     "build": "tsc",
     "postbuild": "node fix-imports.cjs",
@@ -22,13 +23,16 @@
   "author": "Gabriel Drouin",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^6.8.2",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "luxon": "^3.6.1",
     "mongoose": "^8.13.0",
     "mongoose-sequence": "^6.0.1",
-    "nanoid": "^5.1.5"
+    "nanoid": "^5.1.5",
+    "pg": "^8.16.0",
+    "prisma": "^6.8.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
@@ -38,6 +42,7 @@
     "@types/luxon": "^3.6.2",
     "@types/mongoose-sequence": "^3.0.11",
     "@types/node": "^22.13.14",
+    "@types/pg": "^8.15.2",
     "esbuild": "^0.25.4",
     "i": "^0.3.7",
     "prettier": "^3.5.3",
