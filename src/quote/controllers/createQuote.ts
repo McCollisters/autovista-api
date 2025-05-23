@@ -25,18 +25,18 @@ export const createQuote = async (
       commission,
     } = req.body;
 
-    const existingQuote = await matchesExistingQuote(
-      origin,
-      destination,
-      portalId,
-      vehicles,
-      commission,
-    );
+    // const existingQuote = await matchesExistingQuote(
+    //   origin,
+    //   destination,
+    //   portalId,
+    //   vehicles,
+    //   commission,
+    // );
 
-    if (existingQuote) {
-      res.status(200).json(existingQuote);
-      return;
-    }
+    // if (existingQuote) {
+    //   res.status(200).json(existingQuote);
+    //   return;
+    // }
 
     let originState: string;
     let originLocation: string;
@@ -99,16 +99,20 @@ export const createQuote = async (
       origin: {
         userInput: origin,
         validated: originLocation,
-        long: originCoords[0],
-        lat: originCoords[1],
         state: originState,
+        coordinates: {
+          long: originCoords[0],
+          lat: originCoords[1],
+        },
       },
       destination: {
         userInput: destination,
         validated: destinationLocation,
-        long: destinationCoords[0],
-        lat: destinationCoords[1],
         state: destinationState,
+        coordinates: {
+          long: destinationCoords[0],
+          lat: destinationCoords[1],
+        },
       },
       miles,
       vehicles: vehicleQuotes,

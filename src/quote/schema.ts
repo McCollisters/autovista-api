@@ -7,7 +7,12 @@ import {
   ServiceLevelOption,
   VehicleClass,
 } from "../_global/enums";
-import { IPricing, IVehicle, IHistoryItem } from "../_global/interfaces";
+import {
+  IPricingQuote,
+  IVehicle,
+  IHistoryItem,
+  ICoordinates,
+} from "../_global/interfaces";
 
 const AutoIncrement = (mongooseSequence as any)(mongoose);
 
@@ -27,20 +32,18 @@ export interface IQuote extends Document {
     userInput: string;
     validated: string;
     state?: USState;
-    long?: string;
-    lat?: string;
+    coordinates?: ICoordinates;
   };
   destination: {
     userInput: string;
     validated: string;
     state?: USState;
-    long?: string;
-    lat?: string;
+    oordinates?: ICoordinates;
   };
   miles?: number;
   transportType?: TransportType;
   vehicles: Array<IVehicle>;
-  totalPricing?: IPricing;
+  totalPricing?: IPricingQuote;
   archivedAt?: Date;
   customer?: ICustomer;
   history: Array<IHistoryItem>;
@@ -66,15 +69,19 @@ const quoteSchema = new Schema<IQuote>(
       userInput: { type: String },
       validated: { type: String },
       state: { type: String },
-      long: { type: String },
-      lat: { type: String },
+      coordinates: {
+        long: { type: String },
+        lat: { type: String },
+      },
     },
     destination: {
       userInput: { type: String },
       validated: { type: String },
       state: { type: String },
-      long: { type: String },
-      lat: { type: String },
+      coordinates: {
+        long: { type: String },
+        lat: { type: String },
+      },
     },
     miles: { type: Number },
     vehicles: [
@@ -90,20 +97,41 @@ const quoteSchema = new Schema<IQuote>(
           default: "sedan",
         },
         pricing: {
-          base: { type: Number, required: true, default: 0 },
-          globalModifiers: {
-            inoperable: { type: Number, required: true, default: 0 },
-            discount: { type: Number, required: true, default: 0 },
-            routes: { type: Number, required: true, default: 0 },
-            oversize: { type: Number, required: true, default: 0 },
+          base: {
+            tms: { type: Number },
+            whiteGlove: { type: Number },
+            custom: { type: Number },
           },
-          portalModifiers: {
-            commission: { type: Number, required: true, default: 0 },
-            companyTariff: { type: Number, required: true, default: 0 },
-            discount: { type: Number, required: true, default: 0 },
+          modifiers: {
+            global: {
+              inoperable: { type: Number, required: true, default: 0 },
+              discount: { type: Number, required: true, default: 0 },
+              routes: { type: Number, required: true, default: 0 },
+              oversize: { type: Number, required: true, default: 0 },
+            },
+            portal: {
+              commission: { type: Number, required: true, default: 0 },
+              companyTariff: { type: Number, required: true, default: 0 },
+              discount: { type: Number, required: true, default: 0 },
+            },
+            conditional: {
+              enclosed: { type: Number, required: true, default: 0 },
+              serviceLevels: [
+                {
+                  _id: false,
+                  serviceLevelOption: {
+                    type: String,
+                    enum: Object.values(ServiceLevelOption),
+                  },
+                  value: { type: Number },
+                },
+              ],
+            },
           },
-          conditionalModifiers: {
-            enclosed: { type: Number, required: true, default: 0 },
+          totalModifiers: { type: Number, required: true, default: 0 },
+          total: {
+            // totals include base and modifiers
+            withoutServiceLevel: { type: Number, required: true },
             serviceLevels: [
               {
                 _id: false,
@@ -111,25 +139,48 @@ const quoteSchema = new Schema<IQuote>(
                   type: String,
                   enum: Object.values(ServiceLevelOption),
                 },
-                value: { type: Number },
+                enclosed: { type: Number, required: true },
+                open: { type: Number, required: true },
               },
             ],
           },
-          total: { type: Number, required: true },
-          totalModifiers: { type: Number, required: true },
-          totalWhiteGlove: { type: Number, required: true },
         },
       },
     ],
     totalPricing: {
-      base: { type: Number, required: true },
-      globalModifiers: {
-        inoperable: { type: Number, required: true, default: 0 },
-        discount: { type: Number, required: true, default: 0 },
-        oversize: { type: Number, required: true, default: 0 },
+      base: {
+        tms: { type: Number },
+        whiteGlove: { type: Number },
+        custom: { type: Number },
       },
-      conditionalModifiers: {
-        enclosed: { type: Number, required: true, default: 0 },
+      modifiers: {
+        global: {
+          inoperable: { type: Number, required: true, default: 0 },
+          discount: { type: Number, required: true, default: 0 },
+          oversize: { type: Number, required: true, default: 0 },
+        },
+        portal: {
+          commission: { type: Number, required: true, default: 0 },
+          companyTariff: { type: Number, required: true, default: 0 },
+        },
+        conditional: {
+          enclosed: { type: Number, required: true, default: 0 },
+          serviceLevels: [
+            {
+              _id: false,
+              serviceLevelOption: {
+                type: String,
+                enum: Object.values(ServiceLevelOption),
+              },
+              value: { type: Number },
+            },
+          ],
+        },
+      },
+      totalModifiers: { type: Number, required: true, default: 0 },
+      total: {
+        // totals include base + modifiers
+        withoutServiceLevel: { type: Number, required: true },
         serviceLevels: [
           {
             _id: false,
@@ -137,17 +188,11 @@ const quoteSchema = new Schema<IQuote>(
               type: String,
               enum: Object.values(ServiceLevelOption),
             },
-            value: { type: Number },
+            enclosed: { type: Number },
+            open: { type: Number },
           },
         ],
       },
-      portalModifiers: {
-        commission: { type: Number, required: true, default: 0 },
-        companyTariff: { type: Number, required: true, default: 0 },
-      },
-      totalModifiers: { type: Number, required: true, default: 0 },
-      total: { type: Number, required: true },
-      totalWhiteGlove: { type: Number },
     },
     archivedAt: { type: Date },
     history: [

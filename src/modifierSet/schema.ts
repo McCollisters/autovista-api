@@ -31,7 +31,7 @@ export interface IModifierSet extends Document {
   inoperable?: IModifier;
   fuel?: IModifier;
   irr?: IModifier;
-  whiteGlove?: {
+  whiteGlove: {
     multiplier: number;
     minimum: number;
   };
@@ -47,7 +47,7 @@ export interface IModifierSet extends Document {
   companyTariff?: IModifier;
   fixedCommission?: IModifier;
   routes?: Array<IRouteModifier>;
-  serviceLevels?: Array<IServiceLevelModifier>;
+  serviceLevels: Array<IServiceLevelModifier>;
 }
 
 const modifierSetSchema = new Schema<IModifierSet>(

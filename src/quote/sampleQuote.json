@@ -1,0 +1,248 @@
+{
+  "status": "active",
+  "portalId": "67e6e8d9b42f71574a8be063",
+  "userId": "67e9a36701548e50439bcab0",
+  "customer": {
+    "trackingCode": "CO5KK"
+  },
+  "origin": {
+    "userInput": "Phoenix, AZ",
+    "validated": "Phoenix, AZ",
+    "state": "AZ",
+    "coordinates": {
+      "long": "-112.075098",
+      "lat": "33.44823"
+    }
+  },
+  "destination": {
+    "userInput": "Los Angeles, CA",
+    "validated": "Los Angeles, CA",
+    "state": "CA",
+    "coordinates": {
+      "long": "-118.254187",
+      "lat": "34.048051"
+    }
+  },
+  "miles": 374,
+  "vehicles": [
+    {
+      "make": "Hyundai",
+      "model": "Accent",
+      "isInoperable": true,
+      "class": "sedan",
+      "pricing": {
+        "base": {
+          "tms": 238,
+          "whiteGlove": 1250,
+          "custom": 525
+        },
+        "modifiers": {
+          "global": {
+            "inoperable": 150,
+            "discount": 0,
+            "routes": -15,
+            "oversize": 0
+          },
+          "portal": {
+            "commission": 100,
+            "companyTariff": 29,
+            "discount": 0
+          },
+          "conditional": {
+            "enclosed": 225,
+            "serviceLevels": [
+              {
+                "serviceLevelOption": "1",
+                "value": 100
+              },
+              {
+                "serviceLevelOption": "3",
+                "value": 150
+              },
+              {
+                "serviceLevelOption": "5",
+                "value": 200
+              },
+              {
+                "serviceLevelOption": "7",
+                "value": 250
+              }
+            ]
+          }
+        },
+        "totalModifiers": 264,
+        "total": {
+          "withoutServiceLevel": 502,
+          "serviceLevels": [
+            {
+              "serviceLevelOption": "1",
+              "enclosed": 827,
+              "open": 602
+            },
+            {
+              "serviceLevelOption": "3",
+              "enclosed": 877,
+              "open": 652
+            },
+            {
+              "serviceLevelOption": "5",
+              "enclosed": 927,
+              "open": 702
+            },
+            {
+              "serviceLevelOption": "7",
+              "enclosed": 977,
+              "open": 752
+            }
+          ]
+        }
+      }
+    },
+    {
+      "make": "Subaru",
+      "model": "Outback",
+      "isInoperable": false,
+      "class": "suv",
+      "pricing": {
+        "base": {
+          "tms": 247,
+          "whiteGlove": 1250,
+          "custom": 525
+        },
+        "modifiers": {
+          "global": {
+            "inoperable": 0,
+            "discount": 0,
+            "routes": -15,
+            "oversize": 0
+          },
+          "portal": {
+            "commission": 100,
+            "companyTariff": 30,
+            "discount": 0
+          },
+          "conditional": {
+            "enclosed": 225,
+            "serviceLevels": [
+              {
+                "serviceLevelOption": "1",
+                "value": 100
+              },
+              {
+                "serviceLevelOption": "3",
+                "value": 150
+              },
+              {
+                "serviceLevelOption": "5",
+                "value": 200
+              },
+              {
+                "serviceLevelOption": "7",
+                "value": 250
+              }
+            ]
+          }
+        },
+        "totalModifiers": 115,
+        "total": {
+          "withoutServiceLevel": 362,
+          "serviceLevels": [
+            {
+              "serviceLevelOption": "1",
+              "enclosed": 687,
+              "open": 462
+            },
+            {
+              "serviceLevelOption": "3",
+              "enclosed": 737,
+              "open": 512
+            },
+            {
+              "serviceLevelOption": "5",
+              "enclosed": 787,
+              "open": 562
+            },
+            {
+              "serviceLevelOption": "7",
+              "enclosed": 837,
+              "open": 612
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "totalPricing": {
+    "base": {
+      "tms": 485,
+      "whiteGlove": 2500,
+      "custom": 1050
+    },
+    "modifiers": {
+      "global": {
+        "inoperable": 150,
+        "discount": 0,
+        "oversize": 0
+      },
+      "portal": {
+        "commission": 200,
+        "companyTariff": 59
+      },
+      "conditional": {
+        "enclosed": 450,
+        "serviceLevels": [
+          {
+            "serviceLevelOption": "1",
+            "value": 200
+          },
+          {
+            "serviceLevelOption": "3",
+            "value": 300
+          },
+          {
+            "serviceLevelOption": "5",
+            "value": 400
+          },
+          {
+            "serviceLevelOption": "7",
+            "value": 500
+          }
+        ]
+      }
+    },
+    "totalModifiers": 379,
+    "total": {
+      "withoutServiceLevel": 864,
+      "serviceLevels": [
+        {
+          "serviceLevelOption": "1",
+          "enclosed": 1514,
+          "open": 1064
+        },
+        {
+          "serviceLevelOption": "3",
+          "enclosed": 1614,
+          "open": 1164
+        },
+        {
+          "serviceLevelOption": "5",
+          "enclosed": 1714,
+          "open": 1264
+        },
+        {
+          "serviceLevelOption": "7",
+          "enclosed": 1814,
+          "open": 1364
+        }
+      ]
+    }
+  },
+  "_id": "6830d1517df9bc54d347cf9c",
+  "history": [],
+  "createdAt": "2025-05-23T19:49:37.858Z",
+  "updatedAt": "2025-05-23T19:49:37.858Z",
+  "refId": 50132,
+  "__v": 0,
+  "vehicleCount": 2,
+  "id": "6830d1517df9bc54d347cf9c"
+}

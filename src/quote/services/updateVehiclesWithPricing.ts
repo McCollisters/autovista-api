@@ -2,7 +2,7 @@ import { IVehicle } from "../../_global/interfaces";
 import { ModifierSet } from "../../modifierSet/schema";
 import { getTMSBaseRate } from "../integrations/getTMSBaseRate";
 import { getCustomBaseRate } from "../integrations/getCustomBaseRate";
-import { VehicleClass } from "../../_global/enums";
+import { ServiceLevelOption, VehicleClass } from "../../_global/enums";
 import { IPortal } from "../../portal/schema";
 import { roundCurrency } from "../../_global/utils/roundCurrency";
 
@@ -50,10 +50,21 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   }
 
   // Get vehicle base rate from Super Dispatch or portal's custom rates
-  const base = portal.options?.enableCustomRates
-    ? getCustomBaseRate(miles, portal)
-    : await getTMSBaseRate(vehicle, origin, destination);
 
+  const baseTms = await getTMSBaseRate(vehicle, origin, destination);
+  const baseCustom = getCustomBaseRate(miles, portal);
+
+  const whiteGloveMultiplier = portalModifiers.whiteGlove
+    ? portalModifiers.whiteGlove.multiplier
+    : globalModifiers.whiteGlove?.multiplier || 2;
+
+  let baseWhiteGlove = miles * whiteGloveMultiplier;
+
+  if (baseWhiteGlove < globalModifiers.whiteGlove.minimum) {
+    baseWhiteGlove = globalModifiers.whiteGlove.minimum;
+  }
+
+  let calculatedCommission = commission;
   let calculatedGlobalDiscount: number = 0;
   let calculatedTariff: number = 0;
   let calculatedPortalDiscount: number = 0;
@@ -61,31 +72,36 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   let calculatedGlobalOversize: number = 0;
   let calculatedRoutes: number = 0;
   let calculatedEnclosed: number = 0;
-  let baseWhiteGlove: number = 0;
+
+  const baseForModifiers = portal.options?.enableCustomRates
+    ? baseCustom
+    : baseTms;
 
   if (globalModifiers.discount) {
     calculatedGlobalDiscount = calculateModifier(
       globalModifiers.discount,
-      base,
+      baseForModifiers,
     );
   }
 
-  const whiteGloveMultiplier = portalModifiers.whiteGlove
-    ? portalModifiers.whiteGlove.multiplier
-    : globalModifiers.whiteGlove?.multiplier || 2;
-
-  if (whiteGloveMultiplier) {
-    baseWhiteGlove = miles * whiteGloveMultiplier;
+  if (portalModifiers.fixedCommission) {
+    calculatedCommission = calculateModifier(
+      portalModifiers.fixedCommission,
+      baseForModifiers,
+    );
   }
 
   if (portalModifiers.companyTariff) {
-    calculatedTariff = calculateModifier(portalModifiers.companyTariff, base);
+    calculatedTariff = calculateModifier(
+      portalModifiers.companyTariff,
+      baseForModifiers,
+    );
   }
 
   if (portalModifiers.discount) {
     calculatedPortalDiscount = calculateModifier(
       portalModifiers.discount,
-      base,
+      baseForModifiers,
     );
   }
 
@@ -94,25 +110,25 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       case VehicleClass.SUV:
         calculatedGlobalOversize = calculateModifier(
           { value: globalModifiers.oversize.suv, valueType: "flat" },
-          base,
+          baseForModifiers,
         );
         break;
       case VehicleClass.Van:
         calculatedGlobalOversize = calculateModifier(
           { value: globalModifiers.oversize.van, valueType: "flat" },
-          base,
+          baseForModifiers,
         );
         break;
       case VehicleClass.Pickup2Door:
         calculatedGlobalOversize = calculateModifier(
           { value: globalModifiers.oversize.pickup_2_door, valueType: "flat" },
-          base,
+          baseForModifiers,
         );
         break;
       case VehicleClass.Pickup4Door:
         calculatedGlobalOversize = calculateModifier(
           { value: globalModifiers.oversize.pickup_4_door, valueType: "flat" },
-          base,
+          baseForModifiers,
         );
         break;
       default:
@@ -121,11 +137,17 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   }
 
   if (vehicle.isInoperable && globalModifiers.inoperable) {
-    calculatedInoperable = calculateModifier(globalModifiers.inoperable, base);
+    calculatedInoperable = calculateModifier(
+      globalModifiers.inoperable,
+      baseForModifiers,
+    );
   }
 
   if (globalModifiers.enclosed) {
-    calculatedEnclosed = calculateModifier(globalModifiers.enclosed, base);
+    calculatedEnclosed = calculateModifier(
+      globalModifiers.enclosed,
+      baseForModifiers,
+    );
   }
 
   if (globalModifiers.routes) {
@@ -139,7 +161,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       );
 
       matchingRoutes.forEach((route) => {
-        let calculatedValue = calculateModifier(route, base);
+        let calculatedValue = calculateModifier(route, baseForModifiers);
         calculatedRoutes += calculatedValue;
       });
     }
@@ -149,38 +171,74 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     calculatedInoperable +
     calculatedGlobalDiscount +
     calculatedRoutes +
-    commission +
+    calculatedCommission +
     calculatedTariff +
     calculatedPortalDiscount +
     calculatedGlobalOversize;
 
-  const calculatedTotal = base + calculatedModifiers;
-
-  const calculatedWhiteGloveTotal = baseWhiteGlove + calculatedModifiers;
+  const calculatedTotal = baseForModifiers + calculatedModifiers;
 
   return {
-    base,
-    baseWhiteGlove: roundCurrency(baseWhiteGlove),
-    globalModifiers: {
-      inoperable: calculatedInoperable,
-      discount: calculatedGlobalDiscount,
-      routes: calculatedRoutes,
-      oversize: calculatedGlobalOversize,
+    base: {
+      tms: baseTms,
+      whiteGlove: roundCurrency(baseWhiteGlove),
+      custom: baseCustom,
     },
-    portalModifiers: {
-      commission,
-      companyTariff: calculatedTariff,
-      discount: calculatedPortalDiscount,
-    },
-    conditionalModifiers: {
-      enclosed: calculatedEnclosed,
-      serviceLevels: globalModifiers.serviceLevels,
+    modifiers: {
+      global: {
+        inoperable: calculatedInoperable,
+        discount: calculatedGlobalDiscount,
+        routes: calculatedRoutes,
+        oversize: calculatedGlobalOversize,
+      },
+      portal: {
+        commission: calculatedCommission,
+        companyTariff: calculatedTariff,
+        discount: calculatedPortalDiscount,
+      },
+      conditional: {
+        enclosed: calculatedEnclosed,
+        serviceLevels: globalModifiers.serviceLevels,
+      },
     },
     totalModifiers: roundCurrency(calculatedModifiers),
-    // total = base rate + modifiers (excl. conditional)
-    total: roundCurrency(calculatedTotal),
-    // total = white glove base rate + modifiers (excl. conditional)
-    totalWhiteGlove: roundCurrency(calculatedWhiteGloveTotal),
+    total: {
+      withoutServiceLevel: roundCurrency(calculatedTotal),
+      serviceLevels: [
+        {
+          serviceLevelOption: ServiceLevelOption.OneDay,
+          enclosed:
+            calculatedTotal +
+            globalModifiers.serviceLevels[0].value +
+            calculatedEnclosed,
+          open: calculatedTotal + globalModifiers.serviceLevels[0].value,
+        },
+        {
+          serviceLevelOption: ServiceLevelOption.ThreeDay,
+          enclosed:
+            calculatedTotal +
+            globalModifiers.serviceLevels[1].value +
+            calculatedEnclosed,
+          open: calculatedTotal + globalModifiers.serviceLevels[1].value,
+        },
+        {
+          serviceLevelOption: ServiceLevelOption.FiveDay,
+          enclosed:
+            calculatedTotal +
+            globalModifiers.serviceLevels[2].value +
+            calculatedEnclosed,
+          open: calculatedTotal + globalModifiers.serviceLevels[2].value,
+        },
+        {
+          serviceLevelOption: ServiceLevelOption.SevenDay,
+          enclosed:
+            calculatedTotal +
+            globalModifiers.serviceLevels[3].value +
+            calculatedEnclosed,
+          open: calculatedTotal + globalModifiers.serviceLevels[3].value,
+        },
+      ],
+    },
   };
 };
 

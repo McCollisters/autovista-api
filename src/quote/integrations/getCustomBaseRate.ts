@@ -12,7 +12,7 @@ export const getCustomBaseRate = (miles: number, portal: IPortal) => {
     );
 
     if (!matchingRate) {
-      throw new Error(`Rate not found`);
+      return 0;
     }
 
     return matchingRate.value;

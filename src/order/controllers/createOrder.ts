@@ -4,6 +4,7 @@ import { Quote } from "../../quote/schema";
 import { Status } from "../../_global/enums";
 import { updateVehiclesWithQuote } from "../services/updateVehiclesWithQuote";
 import { sendOrderToSD } from "../services/sendOrderToSD";
+import { formatOrderTotalPricing } from "../services/formatOrderTotalPricing";
 
 export const createOrder = async (
   req: express.Request,
@@ -29,7 +30,7 @@ export const createOrder = async (
       return next({ statusCode: 404, message: "Quote not found." });
     }
 
-    const orderExists = await Order.find({ refId: quote.refId });
+    const orderExists = await Order.findOne({ refId: quote.refId });
 
     if (orderExists) {
       return next({ statusCode: 409, message: "Order already exists." });
@@ -38,6 +39,12 @@ export const createOrder = async (
     const orderVehicles = await updateVehiclesWithQuote({
       vehicles,
       quote,
+      transportType,
+    });
+
+    const orderTotalPricing = await formatOrderTotalPricing({
+      quote,
+      transportType,
     });
 
     const formattedOrder = {
@@ -53,7 +60,7 @@ export const createOrder = async (
       miles: quote.miles,
       customer,
       vehicles: orderVehicles,
-      totalPricing: quote.totalPricing,
+      totalPricing: orderTotalPricing,
       schedule,
       paymentType,
     };

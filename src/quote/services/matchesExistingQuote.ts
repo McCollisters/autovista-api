@@ -40,8 +40,8 @@ export const matchesExistingQuote = async (
       }
 
       if (
-        existing.pricing?.portalModifiers?.commission &&
-        existing.pricing?.portalModifiers?.commission !== commission
+        existing.pricing?.modifiers.portal?.commission &&
+        existing.pricing?.modifiers.portal?.commission !== commission
       ) {
         return null;
       }

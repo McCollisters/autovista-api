@@ -8,12 +8,14 @@ import {
 } from "../_global/enums";
 
 import {
-  IPricing,
+  IPricingOrder,
   IVehicle,
   IContact,
   IAddress,
   ISchedule,
 } from "../_global/interfaces";
+import { formatOrderTotalPricing } from "./services/formatOrderTotalPricing";
+import { createPortal } from "portal/controllers/createPortal";
 
 export interface Location {
   contact: IContact;
@@ -42,7 +44,7 @@ export interface IOrder extends Document {
   customer: IContact;
   tms: TMS;
   vehicles: Array<IVehicle>;
-  totalPricing: IPricing;
+  totalPricing: IPricingOrder;
   schedule: ISchedule;
 }
 
@@ -126,47 +128,62 @@ const orderSchema = new Schema<IOrder>(
         isInoperable: { type: Boolean, required: true, default: false },
         pricing: {
           base: { type: Number, required: true, default: 0 },
-          globalModifiers: {
-            inoperable: { type: Number, required: true, default: 0 },
-            oversize: { type: Number, required: true, default: 0 },
+          modifiers: {
+            global: {
+              inoperable: { type: Number, required: true, default: 0 },
+              oversize: { type: Number, required: true, default: 0 },
+              routes: { type: Number, required: true, default: 0 },
+            },
+            conditional: {
+              enclosed: { type: Number, required: true, default: 0 },
+              serviceLevels: [
+                {
+                  _id: false,
+                  serviceLevelOption: {
+                    type: String,
+                    enum: Object.values(ServiceLevelOption),
+                  },
+                  value: { type: Number },
+                },
+              ],
+            },
+            createPortal: {
+              commission: { type: Number, required: true, default: 0 },
+              companyTariff: { type: Number, required: true, default: 0 },
+            },
           },
-          portalModifiers: {
-            commission: { type: Number, required: true, default: 0 },
-            companyTariff: { type: Number, required: true, default: 0 },
-          },
+          totalModifiers: { type: Number, required: true },
+          total: { type: Number, required: true },
         },
       },
     ],
     totalPricing: {
-      base: { type: Number, required: true },
-      globalModifiers: {
-        total: { type: Number, required: true, default: 0 },
-        inoperable: { type: Number, required: true, default: 0 },
-        oversize: { type: Number, required: true, default: 0 },
-        serviceLevels: [
-          {
-            serviceLevelOption: {
-              type: String,
-              enum: Object.values(ServiceLevelOption),
-            },
-            value: { type: Number, required: true },
-          },
-        ],
-      },
-      portalModifiers: {
-        total: { type: Number, required: true, default: 0 },
-        commission: { type: Number, required: true, default: 0 },
-        companyTariff: { type: Number, required: true, default: 0 },
-      },
-      totalsByServiceLevel: [
-        {
-          serviceLevelOption: {
-            type: String,
-            enum: Object.values(ServiceLevelOption),
-          },
-          total: { type: Number, required: true },
+      base: { type: Number, required: true, default: 0 },
+      modifiers: {
+        global: {
+          inoperable: { type: Number, required: true, default: 0 },
+          oversize: { type: Number, required: true, default: 0 },
+          routes: { type: Number, required: true, default: 0 },
         },
-      ],
+        conditional: {
+          enclosed: { type: Number, required: true, default: 0 },
+          serviceLevels: [
+            {
+              _id: false,
+              serviceLevelOption: {
+                type: String,
+                enum: Object.values(ServiceLevelOption),
+              },
+              value: { type: Number },
+            },
+          ],
+        },
+        portal: {
+          commission: { type: Number, required: true, default: 0 },
+          companyTariff: { type: Number, required: true, default: 0 },
+        },
+      },
+      totalModifiers: { type: Number, required: true },
       total: { type: Number, required: true },
     },
     schedule: {

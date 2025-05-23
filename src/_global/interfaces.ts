@@ -1,11 +1,6 @@
 import { Types } from "mongoose";
 import { USState, ServiceLevelOption, VehicleClass } from "./enums";
 
-export interface IServiceLevelModifier {
-  serviceLevelOption: ServiceLevelOption;
-  value: number;
-}
-
 export interface IGlobalModifiers {
   oversize?: number;
   inoperable: number;
@@ -14,37 +9,67 @@ export interface IGlobalModifiers {
 }
 
 export interface IPortalModifiers {
-  commission: number;
-  companyTariff: number;
-  discount: number;
+  commission?: number;
+  companyTariff?: number;
+  discount?: number;
 }
 
 export interface IConditionalModifiers {
   enclosed: number;
-  serviceLevels: ITotalByServiceLevel[];
+  serviceLevels: IModifierByServiceLevel[];
 }
 
-export interface ITotalByServiceLevel {
+export interface IModifiers {
+  global: IGlobalModifiers;
+  portal: IPortalModifiers;
+  conditional: IConditionalModifiers;
+}
+
+export interface IServiceLevelModifier {
   serviceLevelOption: ServiceLevelOption;
   value: number;
 }
 
+export interface IModifierByServiceLevel {
+  serviceLevelOption: ServiceLevelOption;
+  value: number;
+}
+
+export interface IQuoteBase {
+  tms: number;
+  whiteGlove: number;
+  custom?: number;
+}
+
+export interface IServiceLevelPricing {
+  serviceLevelOption: ServiceLevelOption;
+  enclosed: number;
+  open: number;
+}
+
 export interface IPricing {
-  base: number;
-  baseWhiteGlove: number;
-  globalModifiers: IGlobalModifiers;
-  portalModifiers: IPortalModifiers;
-  conditionalModifiers: IConditionalModifiers;
+  modifiers: IModifiers;
   totalModifiers: number;
+}
+
+export interface IPricingQuote extends IPricing {
+  base: IQuoteBase;
+  total: {
+    withoutServiceLevel: number;
+    serviceLevels: IServiceLevelPricing[];
+  };
+}
+
+export interface IPricingOrder extends IPricing {
+  base: number;
   total: number;
-  totalWhiteGlove: number;
 }
 
 export interface IVehicle {
   make: string;
   model: string;
   isInoperable: boolean;
-  pricing?: IPricing;
+  pricing?: IPricingQuote;
   class: VehicleClass;
   vin?: string;
   year?: string;
@@ -71,14 +96,13 @@ export interface IAddress {
   state?: USState;
   zip?: string;
   notes?: string;
-  longitude?: string;
-  latittude?: string;
+  coordinates: ICoordinates;
 }
 
 export interface ISchedule {
   serviceLevel: ServiceLevelOption;
   pickupSelected: Date;
-  deliveryEstimated: Date;
+  deliveryEstimated: [Date, Date];
   pickupCompleted?: Date;
   deliveryCompleted?: Date;
   notes?: string;
