@@ -4,9 +4,14 @@ import { IServiceLevelModifier } from "../../_global/interfaces";
 export function getServiceLevelValue(
   serviceLevels: IServiceLevelModifier[],
   targetServiceLevel: string,
-): number | undefined {
+): number {
   const match = serviceLevels.find(
-    (level) => level.serviceLevelOption === targetServiceLevel,
+    (level) => level.serviceLevelOption === targetServiceLevel.toString(),
   );
-  return match?.value;
+
+  if (!match) {
+    return 0;
+  }
+
+  return match.value;
 }

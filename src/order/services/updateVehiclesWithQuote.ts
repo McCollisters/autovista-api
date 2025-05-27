@@ -1,15 +1,18 @@
 import { IVehicle } from "../../_global/interfaces";
 import { IQuote } from "../../quote/schema";
 import { getServiceLevelValue } from "./getServiceLevelValue";
+import { TransportType } from "../../_global/enums";
 
 export const updateVehiclesWithQuote = async ({
   vehicles,
   quote,
   transportType,
+  serviceLevel,
 }: {
   vehicles: IVehicle[];
   quote: IQuote;
   transportType: string;
+  serviceLevel: string;
 }): Promise<any[]> => {
   return quote.vehicles.map((quoteVehicle: IVehicle) => {
     const match = vehicles.find(
@@ -19,52 +22,64 @@ export const updateVehiclesWithQuote = async ({
     );
 
     if (match) {
-      const serviceLevelFee = quoteVehicle.pricing
-        ? getServiceLevelValue(
-            quoteVehicle.pricing?.modifiers?.conditional?.serviceLevels,
-            "1",
-          )
-        : 0;
+      if (!quoteVehicle.pricing) {
+        throw new Error();
+      }
+
+      const serviceLevelFee = getServiceLevelValue(
+        quoteVehicle.pricing.modifiers.conditional.serviceLevels,
+        serviceLevel,
+      );
+
+      const enclosedFee =
+        transportType === "enclosed"
+          ? quoteVehicle.pricing.modifiers.conditional.enclosed
+          : 0;
+
+      const base =
+        transportType === TransportType.WhiteGlove
+          ? quoteVehicle.pricing.base.whiteGlove
+          : quoteVehicle.pricing.base.tms > 0
+            ? quoteVehicle.pricing.base.tms
+            : quoteVehicle.pricing.base.custom || 0;
+
+      const globalMod = quoteVehicle.pricing.modifiers.global;
+      const portalMod = quoteVehicle.pricing.modifiers.portal;
+
+      const modifiers =
+        globalMod.inoperable +
+        globalMod.oversize +
+        globalMod.routes +
+        globalMod.discount +
+        portalMod.commission +
+        portalMod.companyTariff +
+        portalMod.discount +
+        enclosedFee +
+        serviceLevelFee;
 
       return {
         ...quoteVehicle,
         pricing: {
-          base: {
-            tms: 2,
-            whiteGlove: 3,
-            custom: 4,
+          base,
+          modifiers: {
+            global: {
+              inoperable: globalMod.inoperable,
+              discount: globalMod.discount,
+              routes: globalMod.routes,
+              oversize: globalMod.oversize,
+            },
+            portal: {
+              commission: portalMod.commission,
+              companyTariff: portalMod.companyTariff,
+              discount: portalMod.discount,
+            },
+            conditional: {
+              enclosed: quoteVehicle.pricing.modifiers.conditional.enclosed,
+              serviceLevel: serviceLevelFee,
+            },
           },
-          globalModifiers: {
-            inoperable: 2,
-            discount: -5,
-            routes: 15,
-            oversize: 10,
-          },
-          portalModifiers: {
-            commission: 10,
-            companyTariff: 15,
-            discount: -15,
-          },
-          conditionalModifiers: {
-            enclosed: 15,
-            serviceLevels: [
-              { serviceLevelOption: "1", value: 150 },
-              { serviceLevelOption: "3", value: 200 },
-              { serviceLevelOption: "5", value: 250 },
-              { serviceLevelOption: "7", value: 300 },
-            ],
-          },
-          modifiersTotal: 200,
-          total: {
-            beforeServiceLevel: 2000,
-            serviceLevels: [
-              {
-                serviceLevelOption: "1",
-                enclosed: 2000,
-                open: 1500,
-              },
-            ],
-          },
+          totalModifiers: modifiers,
+          total: base + modifiers,
         },
         year: match.year ?? quoteVehicle.year,
         vin: match.vin ?? quoteVehicle.vin,

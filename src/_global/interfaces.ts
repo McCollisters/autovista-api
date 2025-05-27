@@ -2,16 +2,16 @@ import { Types } from "mongoose";
 import { USState, ServiceLevelOption, VehicleClass } from "./enums";
 
 export interface IGlobalModifiers {
-  oversize?: number;
+  oversize: number;
   inoperable: number;
-  discount?: number;
-  routes?: number;
+  discount: number;
+  routes: number;
 }
 
 export interface IPortalModifiers {
-  commission?: number;
-  companyTariff?: number;
-  discount?: number;
+  commission: number;
+  companyTariff: number;
+  discount: number;
 }
 
 export interface IConditionalModifiers {

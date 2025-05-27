@@ -14,8 +14,6 @@ import {
   IAddress,
   ISchedule,
 } from "../_global/interfaces";
-import { formatOrderTotalPricing } from "./services/formatOrderTotalPricing";
-import { createPortal } from "portal/controllers/createPortal";
 
 export interface Location {
   contact: IContact;
@@ -131,25 +129,18 @@ const orderSchema = new Schema<IOrder>(
           modifiers: {
             global: {
               inoperable: { type: Number, required: true, default: 0 },
-              oversize: { type: Number, required: true, default: 0 },
+              discount: { type: Number, required: true, default: 0 },
               routes: { type: Number, required: true, default: 0 },
+              oversize: { type: Number, required: true, default: 0 },
             },
             conditional: {
               enclosed: { type: Number, required: true, default: 0 },
-              serviceLevels: [
-                {
-                  _id: false,
-                  serviceLevelOption: {
-                    type: String,
-                    enum: Object.values(ServiceLevelOption),
-                  },
-                  value: { type: Number },
-                },
-              ],
+              serviceLevel: { type: Number, required: true, default: 0 },
             },
-            createPortal: {
+            portal: {
               commission: { type: Number, required: true, default: 0 },
               companyTariff: { type: Number, required: true, default: 0 },
+              discount: { type: Number, required: true, default: 0 },
             },
           },
           totalModifiers: { type: Number, required: true },
@@ -162,25 +153,18 @@ const orderSchema = new Schema<IOrder>(
       modifiers: {
         global: {
           inoperable: { type: Number, required: true, default: 0 },
-          oversize: { type: Number, required: true, default: 0 },
+          discount: { type: Number, required: true, default: 0 },
           routes: { type: Number, required: true, default: 0 },
+          oversize: { type: Number, required: true, default: 0 },
         },
         conditional: {
           enclosed: { type: Number, required: true, default: 0 },
-          serviceLevels: [
-            {
-              _id: false,
-              serviceLevelOption: {
-                type: String,
-                enum: Object.values(ServiceLevelOption),
-              },
-              value: { type: Number },
-            },
-          ],
+          serviceLevel: { type: Number, required: true, default: 0 },
         },
         portal: {
           commission: { type: Number, required: true, default: 0 },
           companyTariff: { type: Number, required: true, default: 0 },
+          discount: { type: Number, required: true, default: 0 },
         },
       },
       totalModifiers: { type: Number, required: true },
@@ -193,7 +177,7 @@ const orderSchema = new Schema<IOrder>(
         required: true,
       },
       pickupSelected: { type: Date, required: true },
-      deliveryEstimated: { type: Date, required: true },
+      deliveryEstimated: { type: Date },
       pickupCompleted: { type: Date },
       deliveryCompleted: { type: Date },
       notes: { type: String },

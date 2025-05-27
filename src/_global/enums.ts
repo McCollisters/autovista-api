@@ -61,7 +61,7 @@ export enum USState {
 export enum TransportType {
   Open = "open",
   Enclosed = "enclosed",
-  WhiteGlove = "white_glove",
+  WhiteGlove = "whiteGlove",
 }
 
 export enum PaymentType {
@@ -74,7 +74,7 @@ export enum ServiceLevelOption {
   ThreeDay = "3",
   FiveDay = "5",
   SevenDay = "7",
-  WhiteGlove = "white_glove",
+  WhiteGlove = "whiteGlove",
 }
 
 export enum VehicleClass {

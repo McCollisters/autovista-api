@@ -40,11 +40,13 @@ export const createOrder = async (
       vehicles,
       quote,
       transportType,
+      serviceLevel: schedule.serviceLevel,
     });
 
     const orderTotalPricing = await formatOrderTotalPricing({
       quote,
       transportType,
+      serviceLevel: schedule.serviceLevel,
     });
 
     const formattedOrder = {

@@ -1,12 +1,15 @@
 import { IQuote } from "../../quote/schema";
 import { getServiceLevelValue } from "./getServiceLevelValue";
+import { TransportType } from "../../_global/enums";
 
 export const formatOrderTotalPricing = async ({
   quote,
   transportType,
+  serviceLevel,
 }: {
   quote: IQuote;
   transportType: string;
+  serviceLevel: string;
 }) => {
   try {
     const { totalPricing } = quote;
@@ -20,33 +23,54 @@ export const formatOrderTotalPricing = async ({
         ? totalPricing.modifiers.conditional.enclosed
         : 0;
 
-    const serviceLevelFee = getServiceLevelValue(
-      totalPricing?.modifiers.conditional.serviceLevels,
-      "1",
-    );
+    const serviceLevelFee =
+      getServiceLevelValue(
+        totalPricing?.modifiers.conditional.serviceLevels,
+        serviceLevel,
+      ) || 0;
 
-    const modifiersTotal = 0;
-    const orderTotal = 0;
+    const base =
+      quote.transportType === TransportType.WhiteGlove
+        ? totalPricing.base.whiteGlove
+        : quote.totalPricing.base.tms > 0
+          ? totalPricing.base.tms
+          : totalPricing.base.custom || 0;
+
+    const globalMod = totalPricing.modifiers.global;
+    const portalMod = totalPricing.modifiers.portal;
+
+    const modifiers =
+      globalMod.inoperable +
+      globalMod.oversize +
+      globalMod.routes +
+      globalMod.discount +
+      portalMod.commission +
+      portalMod.companyTariff +
+      portalMod.discount +
+      enclosedFee +
+      serviceLevelFee;
 
     return {
-      base: 500,
+      base,
       modifiers: {
         global: {
-          inoperable: 20,
-          oversize: 54,
-          routes: 10,
+          inoperable: globalMod.inoperable,
+          oversize: globalMod.oversize,
+          routes: globalMod.routes,
+          discount: globalMod.discount,
         },
         portal: {
-          commission: 20,
-          companyTariff: 50,
+          commission: totalPricing.modifiers.portal.commission,
+          companyTariff: totalPricing.modifiers.portal.companyTariff,
+          discount: totalPricing.modifiers.portal.discount,
         },
         conditional: {
-          enclosed: 20,
-          serviceLevel: 500,
+          enclosed: enclosedFee,
+          serviceLevel: serviceLevelFee,
         },
       },
-      totalModifiers: 500,
-      total: 1500,
+      totalModifiers: modifiers,
+      total: base + modifiers,
     };
   } catch (err) {
     throw err;

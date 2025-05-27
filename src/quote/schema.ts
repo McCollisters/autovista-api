@@ -38,12 +38,12 @@ export interface IQuote extends Document {
     userInput: string;
     validated: string;
     state?: USState;
-    oordinates?: ICoordinates;
+    coordinates?: ICoordinates;
   };
   miles?: number;
   transportType?: TransportType;
   vehicles: Array<IVehicle>;
-  totalPricing?: IPricingQuote;
+  totalPricing: IPricingQuote;
   archivedAt?: Date;
   customer?: ICustomer;
   history: Array<IHistoryItem>;
@@ -158,9 +158,11 @@ const quoteSchema = new Schema<IQuote>(
           inoperable: { type: Number, required: true, default: 0 },
           discount: { type: Number, required: true, default: 0 },
           oversize: { type: Number, required: true, default: 0 },
+          routes: { type: Number, required: true, default: 0 },
         },
         portal: {
           commission: { type: Number, required: true, default: 0 },
+          discount: { type: Number, required: true, default: 0 },
           companyTariff: { type: Number, required: true, default: 0 },
         },
         conditional: {
