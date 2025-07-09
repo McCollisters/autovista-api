@@ -9,9 +9,32 @@ import { ErrorHandler } from "./_global/errorHandler.js";
 import { Order } from "./order/schema.js";
 import { Quote } from "./quote/schema.js";
 
+import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
+const sqs = new SQSClient({ region: "us-east-1" });
 dotenv.config();
 const app = express();
 const port: number = parseInt(process.env.PORT || "8080", 10);
+
+const sendMessage = async () => {
+  const params = {
+    QueueUrl:
+      "https://sqs.us-east-1.amazonaws.com/016551391727/notifications-immediate.fifo",
+    MessageBody: JSON.stringify({
+      type: "user_signup",
+      userId: "abc123",
+      delivery: "immediate",
+    }),
+    MessageGroupId: "user-notifications",
+    MessageDeduplicationId: Date.now().toString(),
+  };
+
+  try {
+    const data = await sqs.send(new SendMessageCommand(params));
+    console.log("Message sent:", data.MessageId);
+  } catch (err) {
+    console.error("Error sending message:", err);
+  }
+};
 
 const startServer = async () => {
   try {
@@ -22,8 +45,10 @@ const startServer = async () => {
       } as mongoose.ConnectOptions,
     );
 
+    //  sendMessage();
+
     await Order.deleteMany({});
-    // await Quote.deleteMany({});
+    await Quote.deleteMany({});
 
     app.use(express.json());
     app.use("/portal", portalRoutes);

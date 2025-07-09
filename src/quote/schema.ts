@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document, Model, Types } from "mongoose";
 import mongooseSequence from "mongoose-sequence";
+
 import {
   Status,
   USState,
@@ -10,8 +11,7 @@ import {
 import {
   IPricingQuote,
   IVehicle,
-  IHistoryItem,
-  ICoordinates,
+  IHistoryItem
 } from "../_global/interfaces";
 
 const AutoIncrement = (mongooseSequence as any)(mongoose);
@@ -32,16 +32,19 @@ export interface IQuote extends Document {
     userInput: string;
     validated: string;
     state?: USState;
-    coordinates?: ICoordinates;
+    longitude?: string;
+    latitude?: string;
   };
   destination: {
     userInput: string;
     validated: string;
     state?: USState;
-    coordinates?: ICoordinates;
+    longitude?: string;
+    latitude?: string;
   };
   miles?: number;
   transportType?: TransportType;
+  transitTime?: [number, number];
   vehicles: Array<IVehicle>;
   totalPricing: IPricingQuote;
   archivedAt?: Date;
@@ -84,13 +87,14 @@ const quoteSchema = new Schema<IQuote>(
       },
     },
     miles: { type: Number },
+    transitTime: [{ type: Number }, { type: Number }],
     vehicles: [
       {
         _id: false,
         make: { type: String, required: true },
         model: { type: String, required: true },
         isInoperable: { type: Boolean, required: true, default: false },
-        class: {
+        pricingClass: {
           type: String,
           enum: Object.values(VehicleClass),
           required: true,
@@ -105,17 +109,25 @@ const quoteSchema = new Schema<IQuote>(
           modifiers: {
             global: {
               inoperable: { type: Number, required: true, default: 0 },
-              discount: { type: Number, required: true, default: 0 },
               routes: { type: Number, required: true, default: 0 },
               oversize: { type: Number, required: true, default: 0 },
+              vehicles: { type: Number, required: true, default: 0 },
             },
             portal: {
               commission: { type: Number, required: true, default: 0 },
               companyTariff: { type: Number, required: true, default: 0 },
               discount: { type: Number, required: true, default: 0 },
+              irr: { type: Number, required: true, default: 0 },
+              fuel: { type: Number, required: true, default: 0 },
             },
             conditional: {
-              enclosed: { type: Number, required: true, default: 0 },
+              enclosedFlat: { type: Number, required: true, default: 0 },
+              enclosedPercent: { type: Number, required: true, default: 0 },
+              enclosedExtraCompanyTariff: {
+                type: Number,
+                required: true,
+                default: 0,
+              },
               serviceLevels: [
                 {
                   _id: false,
@@ -128,21 +140,18 @@ const quoteSchema = new Schema<IQuote>(
               ],
             },
           },
-          totalModifiers: { type: Number, required: true, default: 0 },
           total: {
+            whiteGlove: {
+              enclosed: { type: Number },
+              enclosedTms: { type: Number },
+            },
             // totals include base and modifiers
-            withoutServiceLevel: { type: Number, required: true },
-            serviceLevels: [
-              {
-                _id: false,
-                serviceLevelOption: {
-                  type: String,
-                  enum: Object.values(ServiceLevelOption),
-                },
-                enclosed: { type: Number, required: true },
-                open: { type: Number, required: true },
-              },
-            ],
+            withoutServiceLevel: {
+              open: { type: Number },
+              openTms: { type: Number },
+              enclosed: { type: Number },
+              enclosedTms: { type: Number },
+            },
           },
         },
       },
@@ -156,9 +165,9 @@ const quoteSchema = new Schema<IQuote>(
       modifiers: {
         global: {
           inoperable: { type: Number, required: true, default: 0 },
-          discount: { type: Number, required: true, default: 0 },
           oversize: { type: Number, required: true, default: 0 },
           routes: { type: Number, required: true, default: 0 },
+          vehicles: { type: Number, required: true, default: 0 },
         },
         portal: {
           commission: { type: Number, required: true, default: 0 },
@@ -166,7 +175,13 @@ const quoteSchema = new Schema<IQuote>(
           companyTariff: { type: Number, required: true, default: 0 },
         },
         conditional: {
-          enclosed: { type: Number, required: true, default: 0 },
+          enclosedFlat: { type: Number, required: true, default: 0 },
+          enclosedPercent: { type: Number, required: true, default: 0 },
+          enclosedExtraCompanyTariff: {
+            type: Number,
+            required: true,
+            default: 0,
+          },
           serviceLevels: [
             {
               _id: false,
@@ -179,21 +194,22 @@ const quoteSchema = new Schema<IQuote>(
           ],
         },
       },
-      totalModifiers: { type: Number, required: true, default: 0 },
       total: {
-        // totals include base + modifiers
-        withoutServiceLevel: { type: Number, required: true },
-        serviceLevels: [
-          {
-            _id: false,
-            serviceLevelOption: {
-              type: String,
-              enum: Object.values(ServiceLevelOption),
-            },
-            enclosed: { type: Number },
-            open: { type: Number },
-          },
-        ],
+        whiteGlove: {
+          enclosed: { type: Number },
+          enclosedTms: { type: Number },
+        },
+        // base + modifiers
+        withoutServiceLevel: {
+          // base + globalMod + portalMod
+          open: { type: Number },
+          // base + globalMod,
+          openTms: { type: Number },
+          // base + globalMod + portalMod + enclosedConditional,
+          enclosed: { type: Number },
+          // base + globalMod + enclosedConditional,
+          enclosedTms: { type: Number },
+        },
       },
     },
     archivedAt: { type: Date },
@@ -258,7 +274,7 @@ quoteSchema.pre<IQuote>("save", function (next) {
 
 quoteSchema.index({ "$**": "text" });
 
-quoteSchema.plugin(AutoIncrement, { inc_field: "refId", start_seq: 50000 });
+quoteSchema.plugin(AutoIncrement, { inc_field: "refId", start_seq: 101000 });
 
 const Quote: Model<IQuote> = mongoose.model<IQuote>("Quote", quoteSchema);
 export { Quote };

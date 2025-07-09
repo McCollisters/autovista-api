@@ -7,6 +7,12 @@ export enum Status {
   Booked = "booked",
 }
 
+export enum NotificationStatus { 
+  Pending = "pending",
+  Sent = "sent",
+  Failed = "failed",
+}
+
 export enum USState {
   Alabama = "AL",
   Arizona = "AZ",
@@ -61,7 +67,7 @@ export enum USState {
 export enum TransportType {
   Open = "open",
   Enclosed = "enclosed",
-  WhiteGlove = "whiteGlove",
+  WhiteGlove = "whiteglove",
 }
 
 export enum PaymentType {

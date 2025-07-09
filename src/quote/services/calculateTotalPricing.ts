@@ -1,9 +1,11 @@
 import { ServiceLevelOption } from "../../_global/enums";
 import { IVehicle, IPricingQuote } from "../../_global/interfaces";
+import { IPortal } from "../../portal/schema";
 import { roundCurrency } from "../../_global/utils/roundCurrency";
 
 export const calculateTotalPricing = async (
   vehicles: IVehicle[],
+  portal: IPortal,
 ): Promise<IPricingQuote> => {
   let baseTms = 0;
   let baseWhiteGlove = 0;
@@ -11,10 +13,14 @@ export const calculateTotalPricing = async (
 
   let conditionalEnclosed = 0;
   let totalModifiers = 0;
-  let withoutServiceLevel = 0;
+  let withoutServiceLevel = {
+    open: 0,
+    enclosed: 0,
+  };
   let globalInop = 0;
   let globalDiscount = 0;
   let globalRoutes = 0;
+  let globalVehicles = 0;
   let globalOversize = 0;
   let portalCommission = 0;
   let portalCompanyTariff = 0;
@@ -36,15 +42,17 @@ export const calculateTotalPricing = async (
     baseTms += pricing.base.tms || 0;
     baseWhiteGlove += pricing.base.whiteGlove || 0;
     baseCustom += pricing.base.custom || 0;
-
     conditionalEnclosed += pricing.modifiers.conditional.enclosed || 0;
 
     totalModifiers += pricing.totalModifiers || 0;
-    withoutServiceLevel += pricing.total.withoutServiceLevel || 0;
+    withoutServiceLevel.open += pricing.total.withoutServiceLevel.open || 0;
+    withoutServiceLevel.enclosed +=
+      pricing.total.withoutServiceLevel.enclosed || 0;
 
     globalInop += pricing.modifiers.global.inoperable || 0;
     globalDiscount += pricing.modifiers.global.discount || 0;
     globalRoutes += pricing.modifiers.global.routes || 0;
+    globalVehicles += pricing.modifiers.global.vehicles || 0;
     globalOversize += pricing.modifiers.global.oversize || 0;
     portalCommission += pricing.modifiers.portal.commission || 0;
     portalCompanyTariff += pricing.modifiers.portal.companyTariff || 0;
@@ -58,9 +66,9 @@ export const calculateTotalPricing = async (
     };
   });
 
-  console.log(conditionalServiceLevels);
-  console.log(vehicles.length);
-  console.log(conditionalEnclosed);
+  const baseForModifiers = portal.options?.enableCustomRates
+    ? baseCustom
+    : baseTms;
 
   let totalPricing: IPricingQuote = {
     base: {
@@ -74,6 +82,7 @@ export const calculateTotalPricing = async (
         oversize: globalOversize,
         discount: globalDiscount,
         routes: globalRoutes,
+        vehicles: globalVehicles,
       },
       portal: {
         discount: portalDiscount,
@@ -85,43 +94,58 @@ export const calculateTotalPricing = async (
         serviceLevels: conditionalServiceLevels,
       },
     },
-    totalModifiers,
     total: {
-      withoutServiceLevel,
-      serviceLevels: [
-        {
-          serviceLevelOption: ServiceLevelOption.OneDay,
-          enclosed:
-            withoutServiceLevel +
-            conditionalServiceLevels[0].value +
+      whiteGlove: {
+        enclosedTms: roundCurrency(baseWhiteGlove),
+        enclosed: roundCurrency(
+          baseWhiteGlove + portalCommission + portalCompanyTariff,
+        ),
+      },
+      withoutServiceLevel: {
+        open: roundCurrency(
+          baseForModifiers +
+            globalInop +
+            globalDiscount +
+            globalRoutes +
+            globalVehicles +
+            portalCommission +
+            portalCompanyTariff +
+            portalDiscount +
+            globalOversize,
+        ),
+        openTms: roundCurrency(
+          baseForModifiers +
+            globalInop +
+            globalDiscount +
+            globalRoutes +
+            globalVehicles +
+            portalDiscount +
+            globalOversize,
+        ),
+        enclosed: roundCurrency(
+          baseForModifiers +
+            globalInop +
+            globalDiscount +
+            globalRoutes +
+            globalVehicles +
+            portalCommission +
+            portalCompanyTariff +
+            portalDiscount +
+            globalOversize +
+            conditionalEnclosed +
             conditionalEnclosed,
-          open: withoutServiceLevel + conditionalServiceLevels[0].value,
-        },
-        {
-          serviceLevelOption: ServiceLevelOption.ThreeDay,
-          enclosed:
-            withoutServiceLevel +
-            conditionalServiceLevels[1].value +
+        ),
+        enclosedTms: roundCurrency(
+          baseForModifiers +
+            globalInop +
+            globalDiscount +
+            globalRoutes +
+            globalVehicles +
+            portalDiscount +
+            globalOversize +
             conditionalEnclosed,
-          open: withoutServiceLevel + conditionalServiceLevels[1].value,
-        },
-        {
-          serviceLevelOption: ServiceLevelOption.FiveDay,
-          enclosed:
-            withoutServiceLevel +
-            conditionalServiceLevels[2].value +
-            conditionalEnclosed,
-          open: withoutServiceLevel + conditionalServiceLevels[2].value,
-        },
-        {
-          serviceLevelOption: ServiceLevelOption.SevenDay,
-          enclosed:
-            withoutServiceLevel +
-            conditionalServiceLevels[3].value +
-            conditionalEnclosed,
-          open: withoutServiceLevel + conditionalServiceLevels[3].value,
-        },
-      ],
+        ),
+      },
     },
   };
 

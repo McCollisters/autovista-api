@@ -50,6 +50,7 @@ export const updateVehiclesWithQuote = async ({
         globalMod.inoperable +
         globalMod.oversize +
         globalMod.routes +
+        globalMod.vehicles +
         globalMod.discount +
         portalMod.commission +
         portalMod.companyTariff +
@@ -66,6 +67,7 @@ export const updateVehiclesWithQuote = async ({
               inoperable: globalMod.inoperable,
               discount: globalMod.discount,
               routes: globalMod.routes,
+              vehicles: globalMod.vehicles,
               oversize: globalMod.oversize,
             },
             portal: {
@@ -80,6 +82,8 @@ export const updateVehiclesWithQuote = async ({
           },
           totalModifiers: modifiers,
           total: base + modifiers,
+          totalTms:
+            base + modifiers - portalMod.companyTariff - portalMod.commission,
         },
         year: match.year ?? quoteVehicle.year,
         vin: match.vin ?? quoteVehicle.vin,

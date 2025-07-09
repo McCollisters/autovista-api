@@ -70,6 +70,11 @@ export const formatOrderTotalPricing = async ({
         },
       },
       totalModifiers: modifiers,
+      totalTms:
+        base +
+        modifiers -
+        totalPricing.modifiers.portal.commission -
+        totalPricing.modifiers.portal.companyTariff,
       total: base + modifiers,
     };
   } catch (err) {

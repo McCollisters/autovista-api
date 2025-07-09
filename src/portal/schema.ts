@@ -36,15 +36,46 @@ export interface ICustomRate {
 }
 
 export interface IPortal extends Document {
-  status: Status;
+  status: string;
   companyName: string;
-  contact?: IContact;
-  address?: IAddress;
+  contact?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    phoneMobile?: string;
+    notes?: string;
+  };
+  address?: {
+    address?: string;
+    addressLine2?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+  };
   logo?: string;
-  options: IOptions;
-  rules: Types.Array<Types.ObjectId>;
-  parentPortalId?: Types.ObjectId | null;
+  options: {
+    overrideLogo: boolean;
+    enableCustomRates: boolean;
+    enableVariableCompanyTariff: boolean;
+    enableWhiteGloveOverride: boolean;
+    enableOrderTrackingByCustomer: boolean;
+    enableSurvey: boolean;
+    orderForm: {
+      enableAgent: boolean;
+      requireLocationType: boolean;
+    };
+    quoteForm: {
+      enableTariff: boolean;
+      enableCommission: boolean;
+    };
+    orderPDF: {
+      enablePriceBreakdown: boolean;
+    };
+    customRates: Array<ICustomRate>;
+    parentPortalId: string | null;
+  };
   customRates: Array<ICustomRate>;
+  parentPortalId: string | null;
 }
 
 const portalSchema = new Schema<IPortal>(

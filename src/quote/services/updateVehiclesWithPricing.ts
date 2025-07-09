@@ -1,19 +1,18 @@
 import { IVehicle } from "../../_global/interfaces";
-import { ModifierSet } from "../../modifierSet/schema";
+import { IVehicleModifier, ModifierSet } from "../../modifierSet/schema";
 import { getTMSBaseRate } from "../integrations/getTMSBaseRate";
 import { getCustomBaseRate } from "../integrations/getCustomBaseRate";
 import { ServiceLevelOption, VehicleClass } from "../../_global/enums";
 import { IPortal } from "../../portal/schema";
 import { roundCurrency } from "../../_global/utils/roundCurrency";
+import { Types } from "mongoose";
 
 interface VehiclePriceParams {
   portal: IPortal;
   vehicle: Partial<IVehicle>;
   miles: number;
   origin: string;
-  originState: string;
   destination: string;
-  destinationState: string;
   commission: number;
 }
 
@@ -32,33 +31,40 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     vehicle,
     miles,
     origin,
-    originState,
     destination,
-    destinationState,
     portal,
-    commission,
+    commission = 0,
   } = params;
 
   // Get Autovista-wide modifiers
   const globalModifiers = await ModifierSet.findOne({ isGlobal: true });
 
   // Get portal-specific modifiers
-  const portalModifiers = await ModifierSet.findOne({ portalId: portal._id });
+  const portalModifiers = await ModifierSet.findOne({
+    portalId: portal._id,
+  });
 
-  if (!globalModifiers || !portalModifiers) {
+  if (!globalModifiers) {
+    console.log("no global modifiers");
     return null;
   }
 
   // Get vehicle base rate from Super Dispatch or portal's custom rates
-
-  const baseTms = await getTMSBaseRate(vehicle, origin, destination);
+  const baseTms = (await getTMSBaseRate(vehicle, origin, destination))?.quote;
   const baseCustom = getCustomBaseRate(miles, portal);
 
-  const whiteGloveMultiplier = portalModifiers.whiteGlove
+  const whiteGloveMultiplier = portalModifiers?.whiteGlove
     ? portalModifiers.whiteGlove.multiplier
     : globalModifiers.whiteGlove?.multiplier || 2;
 
   let baseWhiteGlove = miles * whiteGloveMultiplier;
+
+  console.log("baseWhiteGlove", baseWhiteGlove);
+  console.log("whiteGloveMultiplier", whiteGloveMultiplier);
+  console.log(
+    "globalModifiers.whiteGlove.minimum",
+    globalModifiers.whiteGlove.minimum,
+  );
 
   if (baseWhiteGlove < globalModifiers.whiteGlove.minimum) {
     baseWhiteGlove = globalModifiers.whiteGlove.minimum;
@@ -72,6 +78,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   let calculatedGlobalOversize: number = 0;
   let calculatedRoutes: number = 0;
   let calculatedEnclosed: number = 0;
+  let calculatedVehicles: number = 0;
 
   const baseForModifiers = portal.options?.enableCustomRates
     ? baseCustom
@@ -84,21 +91,21 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     );
   }
 
-  if (portalModifiers.fixedCommission) {
+  if (portalModifiers?.fixedCommission) {
     calculatedCommission = calculateModifier(
       portalModifiers.fixedCommission,
       baseForModifiers,
     );
   }
 
-  if (portalModifiers.companyTariff) {
+  if (portalModifiers?.companyTariff) {
     calculatedTariff = calculateModifier(
       portalModifiers.companyTariff,
       baseForModifiers,
     );
   }
 
-  if (portalModifiers.discount) {
+  if (portalModifiers?.discount) {
     calculatedPortalDiscount = calculateModifier(
       portalModifiers.discount,
       baseForModifiers,
@@ -106,7 +113,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   }
 
   if (globalModifiers.oversize) {
-    switch (vehicle.class) {
+    switch (vehicle.pricingClass) {
       case VehicleClass.SUV:
         calculatedGlobalOversize = calculateModifier(
           { value: globalModifiers.oversize.suv, valueType: "flat" },
@@ -121,13 +128,13 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
         break;
       case VehicleClass.Pickup2Door:
         calculatedGlobalOversize = calculateModifier(
-          { value: globalModifiers.oversize.pickup_2_door, valueType: "flat" },
+          { value: globalModifiers.oversize.pickup_2_doors, valueType: "flat" },
           baseForModifiers,
         );
         break;
       case VehicleClass.Pickup4Door:
         calculatedGlobalOversize = calculateModifier(
-          { value: globalModifiers.oversize.pickup_4_door, valueType: "flat" },
+          { value: globalModifiers.oversize.pickup_4_doors, valueType: "flat" },
           baseForModifiers,
         );
         break;
@@ -151,6 +158,9 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   }
 
   if (globalModifiers.routes) {
+    const originState = origin.split(",")[1];
+    const destinationState = destination.split(",")[1];
+
     if (Array.isArray(globalModifiers.routes)) {
       const matchingRoutes = globalModifiers.routes.filter(
         (route) =>
@@ -167,16 +177,32 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     }
   }
 
-  const calculatedModifiers =
-    calculatedInoperable +
-    calculatedGlobalDiscount +
-    calculatedRoutes +
-    calculatedCommission +
-    calculatedTariff +
-    calculatedPortalDiscount +
-    calculatedGlobalOversize;
+  if (globalModifiers.vehicles) {
+    if (Array.isArray(globalModifiers.vehicles)) {
+      const matchingVehicles = globalModifiers.vehicles.filter(
+        (v: IVehicleModifier) =>
+          v.makeModel[0] === vehicle.make && v.makeModel[1] === vehicle.model,
+      );
 
-  const calculatedTotal = baseForModifiers + calculatedModifiers;
+      matchingVehicles.forEach((v) => {
+        let calculatedValue = calculateModifier(v, baseForModifiers);
+        calculatedVehicles += calculatedValue;
+      });
+    }
+  }
+
+  console.log(baseTms);
+  console.log(calculatedInoperable);
+  console.log(calculatedGlobalDiscount);
+  console.log(calculatedRoutes);
+  console.log(calculatedVehicles);
+  console.log("baseWhiteGlove", baseWhiteGlove);
+  console.log("calculatedCommission", calculatedCommission);
+  console.log("calculatedTariff", calculatedTariff);
+  console.log("calculatedPortalDiscount", calculatedPortalDiscount);
+  console.log("calculatedGlobalOversize", calculatedGlobalOversize);
+  console.log("calculatedEnclosed", calculatedEnclosed);
+  console.log("calculatedVehicles", calculatedVehicles);
 
   return {
     base: {
@@ -190,6 +216,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
         discount: calculatedGlobalDiscount,
         routes: calculatedRoutes,
         oversize: calculatedGlobalOversize,
+        vehicles: calculatedVehicles,
       },
       portal: {
         commission: calculatedCommission,
@@ -201,43 +228,58 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
         serviceLevels: globalModifiers.serviceLevels,
       },
     },
-    totalModifiers: roundCurrency(calculatedModifiers),
     total: {
-      withoutServiceLevel: roundCurrency(calculatedTotal),
-      serviceLevels: [
-        {
-          serviceLevelOption: ServiceLevelOption.OneDay,
-          enclosed:
-            calculatedTotal +
-            globalModifiers.serviceLevels[0].value +
+      whiteGlove: {
+        enclosedTms: roundCurrency(baseWhiteGlove),
+        enclosed: roundCurrency(
+          baseWhiteGlove + calculatedCommission + calculatedTariff,
+        ),
+      },
+      withoutServiceLevel: {
+        open: roundCurrency(
+          baseForModifiers +
+            calculatedInoperable +
+            calculatedGlobalDiscount +
+            calculatedRoutes +
+            calculatedVehicles +
+            calculatedCommission +
+            calculatedTariff +
+            calculatedPortalDiscount +
+            calculatedGlobalOversize,
+        ),
+        openTms: roundCurrency(
+          baseForModifiers +
+            calculatedInoperable +
+            calculatedGlobalDiscount +
+            calculatedRoutes +
+            calculatedVehicles +
+            calculatedPortalDiscount +
+            calculatedGlobalOversize,
+        ),
+        enclosed: roundCurrency(
+          baseForModifiers +
+            calculatedInoperable +
+            calculatedGlobalDiscount +
+            calculatedRoutes +
+            calculatedVehicles +
+            calculatedCommission +
+            calculatedTariff +
+            calculatedPortalDiscount +
+            calculatedGlobalOversize +
+            calculatedEnclosed +
             calculatedEnclosed,
-          open: calculatedTotal + globalModifiers.serviceLevels[0].value,
-        },
-        {
-          serviceLevelOption: ServiceLevelOption.ThreeDay,
-          enclosed:
-            calculatedTotal +
-            globalModifiers.serviceLevels[1].value +
+        ),
+        enclosedTms: roundCurrency(
+          baseForModifiers +
+            calculatedInoperable +
+            calculatedGlobalDiscount +
+            calculatedRoutes +
+            calculatedVehicles +
+            calculatedPortalDiscount +
+            calculatedGlobalOversize +
             calculatedEnclosed,
-          open: calculatedTotal + globalModifiers.serviceLevels[1].value,
-        },
-        {
-          serviceLevelOption: ServiceLevelOption.FiveDay,
-          enclosed:
-            calculatedTotal +
-            globalModifiers.serviceLevels[2].value +
-            calculatedEnclosed,
-          open: calculatedTotal + globalModifiers.serviceLevels[2].value,
-        },
-        {
-          serviceLevelOption: ServiceLevelOption.SevenDay,
-          enclosed:
-            calculatedTotal +
-            globalModifiers.serviceLevels[3].value +
-            calculatedEnclosed,
-          open: calculatedTotal + globalModifiers.serviceLevels[3].value,
-        },
-      ],
+        ),
+      },
     },
   };
 };
@@ -247,18 +289,14 @@ export const updateVehiclesWithPricing = async ({
   vehicles,
   miles,
   origin,
-  originState,
   destination,
-  destinationState,
   commission,
 }: {
   portal: IPortal;
   vehicles: Array<Partial<IVehicle>>;
   miles: number;
   origin: string;
-  originState: string;
   destination: string;
-  destinationState: string;
   commission: number;
 }): Promise<IVehicle[]> => {
   const updatedVehicles: IVehicle[] = [];
@@ -268,9 +306,7 @@ export const updateVehiclesWithPricing = async ({
       vehicle,
       miles,
       origin,
-      originState,
       destination,
-      destinationState,
       portal,
       commission,
     });

@@ -25,6 +25,14 @@ export interface IRouteModifier extends IModifier {
   destination: string;
 }
 
+export interface IZipModifier extends IModifier {
+  zip: string;
+}
+
+export interface IVehicleModifier extends IModifier {
+  makeModel: [string, string];
+}
+
 export interface IModifierSet extends Document {
   portalId?: Types.ObjectId;
   isGlobal: boolean;
@@ -39,14 +47,16 @@ export interface IModifierSet extends Document {
     default: number;
     suv: number;
     van: number;
-    pickup_2_door: number;
-    pickup_4_door: number;
+    pickup_2_doors: number;
+    pickup_4_doors: number;
   };
   enclosed?: IModifier;
   discount?: IModifier;
   companyTariff?: IModifier;
   fixedCommission?: IModifier;
   routes?: Array<IRouteModifier>;
+  zips?: Array<IZipModifier>;
+  vehicles?: Array<IVehicleModifier>;
   serviceLevels: Array<IServiceLevelModifier>;
 }
 
@@ -73,8 +83,8 @@ const modifierSetSchema = new Schema<IModifierSet>(
     oversize: {
       suv: { type: Number, default: 0 },
       van: { type: Number, default: 0 },
-      pickup_2_door: { type: Number, default: 0 },
-      pickup_4_door: { type: Number, default: 0 },
+      pickup_2_doors: { type: Number, default: 0 },
+      pickup_4_doors: { type: Number, default: 0 },
     },
     enclosed: {
       value: { type: Number, default: 0 },
@@ -98,6 +108,20 @@ const modifierSetSchema = new Schema<IModifierSet>(
         valueType: String,
         origin: String,
         destination: String,
+      },
+    ],
+    zips: [
+      {
+        value: { type: Number, default: 0 },
+        valueType: String,
+        zip: String,
+      },
+    ],
+    vehicles: [
+      {
+        value: { type: Number, default: 0 },
+        valueType: String,
+        makeModel: [],
       },
     ],
     serviceLevels: Array<IServiceLevelModifier>,

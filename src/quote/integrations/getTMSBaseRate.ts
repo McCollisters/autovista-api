@@ -1,5 +1,4 @@
 import { IVehicle } from "../../_global/interfaces";
-import { authenticateSuperDispatch } from "../../_global/integrations/authenticateSuperDispatch";
 
 export const getTMSBaseRate = async (
   vehicle: Partial<IVehicle>,
@@ -15,31 +14,60 @@ export const getTMSBaseRate = async (
     destination = "Freeland, MI";
   }
 
-  const superDispatchToken = await authenticateSuperDispatch();
+  const originCity = origin.split(",")[0];
+  const destinationCity = destination.split(",")[0];
+  const originState = origin.split(",")[1];
+  const destinationState = destination.split(",")[1];
+
   const url = new URL(
-    `https://api.shipper.superdispatch.com/v1/public/prices/price_prediction/${vehicle.class}`,
-  );
-  url.searchParams.append("pickup_address", origin.replace(/\d+/g, "").trim());
-  url.searchParams.append(
-    "delivery_address",
-    destination.replace(/\d+/g, "").trim(),
+    `https://pricing-insights.superdispatch.com/api/v1/recommended-price`,
   );
 
   try {
-    const response = await fetch(url.toString(), {
-      method: "GET",
+    let vehicleDetails = {};
+
+    const vehiclesFormatted = [
+      {
+        type: vehicle.pricingClass || "sedan",
+        is_inoperable: vehicle.isInoperable,
+        make: vehicle.make,
+        model: vehicle.model,
+      },
+    ];
+
+    const response = await fetch(url, {
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${superDispatchToken}`,
+        "X-API-KEY": process.env.SD_PRICING_API_KEY!,
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        pickup: {
+          city: originCity,
+          state: originState,
+        },
+        delivery: {
+          city: destinationCity,
+          state: destinationState,
+        },
+        trailer_type: "open",
+        vehicles: vehiclesFormatted,
+      }),
     });
 
     if (!response.ok) {
-      throw new Error(`Error: ${response.status} ${response.statusText}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const json = await response.json();
-    return json.data?.object;
+    const body = await response.json();
+
+    if (body && body.data?.price) {
+      return { quote: body.data.price, vehicleDetails };
+    } else {
+      throw new Error(
+        "There was an error with the price prediction. Please contact us for assistance.",
+      );
+    }
   } catch (error) {
     console.error(
       "Error fetching price prediction from Super Dispatch:",

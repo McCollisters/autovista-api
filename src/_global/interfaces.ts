@@ -6,6 +6,7 @@ export interface IGlobalModifiers {
   inoperable: number;
   discount: number;
   routes: number;
+  vehicles: number;
 }
 
 export interface IPortalModifiers {
@@ -49,20 +50,29 @@ export interface IServiceLevelPricing {
 
 export interface IPricing {
   modifiers: IModifiers;
-  totalModifiers: number;
+  totalModifiers?: number;
 }
 
 export interface IPricingQuote extends IPricing {
   base: IQuoteBase;
   total: {
-    withoutServiceLevel: number;
-    serviceLevels: IServiceLevelPricing[];
+    whiteGlove: {
+      enclosed: number;
+      enclosedTms: number;
+    };
+    withoutServiceLevel: {
+      open: number;
+      openTms: number;
+      enclosed: number;
+      enclosedTms: number;
+    };
   };
 }
 
 export interface IPricingOrder extends IPricing {
   base: number;
   total: number;
+  totalTms: number;
 }
 
 export interface IVehicle {
@@ -70,7 +80,7 @@ export interface IVehicle {
   model: string;
   isInoperable: boolean;
   pricing?: IPricingQuote;
-  class: VehicleClass;
+  pricingClass: VehicleClass;
   vin?: string;
   year?: string;
 }
@@ -100,11 +110,14 @@ export interface IAddress {
 }
 
 export interface ISchedule {
+  bookedAt: Date;
   serviceLevel: ServiceLevelOption;
+  ontimePickup: boolean | null;
+  ontimeDelivery: boolean | null;
   pickupSelected: Date;
   deliveryEstimated: [Date, Date];
-  pickupCompleted?: Date;
-  deliveryCompleted?: Date;
+  pickupCompleted: Date | null;
+  deliveryCompleted: Date | null;
   notes?: string;
 }
 
