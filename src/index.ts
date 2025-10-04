@@ -1,24 +1,48 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+
+// Import configuration and utilities
+import { config } from "./config/index.js";
+import { logger } from "./core/logger.js";
+import { ErrorHandler } from "./_global/errorHandler.js";
+
+// Import security middleware
+import {
+  helmetConfig,
+  corsConfig,
+  generalRateLimit,
+  requestLogger,
+  securityHeaders,
+  securityErrorHandler,
+} from "./core/middleware/security.js";
+
+// Import routes
 import portalRoutes from "./portal/routes.js";
 import userRoutes from "./user/routes.js";
 import quoteRoutes from "./quote/routes.js";
 import orderRoutes from "./order/routes.js";
-import { ErrorHandler } from "./_global/errorHandler.js";
+import healthRoutes from "./presentation/routes/health.js";
+
+// Import models
 import { Order } from "./order/schema.js";
 import { Quote } from "./quote/schema.js";
 
+// Import AWS SQS
 import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
-const sqs = new SQSClient({ region: "us-east-1" });
+
+// Initialize dotenv
 dotenv.config();
+
+// Initialize Express app
 const app = express();
-const port: number = parseInt(process.env.PORT || "8080", 10);
+
+// Initialize SQS client
+const sqs = new SQSClient({ region: config.aws.region });
 
 const sendMessage = async () => {
   const params = {
-    QueueUrl:
-      "https://sqs.us-east-1.amazonaws.com/016551391727/notifications-immediate.fifo",
+    QueueUrl: config.aws.sqs.queueUrl,
     MessageBody: JSON.stringify({
       type: "user_signup",
       userId: "abc123",
@@ -30,39 +54,68 @@ const sendMessage = async () => {
 
   try {
     const data = await sqs.send(new SendMessageCommand(params));
-    console.log("Message sent:", data.MessageId);
+    logger.info("SQS message sent successfully", { messageId: data.MessageId });
   } catch (err) {
-    console.error("Error sending message:", err);
+    logger.error("Error sending SQS message", {
+      error: err instanceof Error ? err.message : err,
+    });
   }
 };
 
 const startServer = async () => {
   try {
-    await mongoose.connect(
-      process.env.MONGODB_DEV_URI as string,
-      {
-        useNewUrlParser: true,
-      } as mongoose.ConnectOptions,
-    );
+    // Connect to MongoDB
+    await mongoose.connect(config.database.uri, config.database.options);
+    logger.info("Connected to MongoDB successfully");
 
     //  sendMessage();
 
-    await Order.deleteMany({});
-    await Quote.deleteMany({});
+    // Clear existing data (development only)
+    if (config.nodeEnv === "development") {
+      await Order.deleteMany({});
+      await Quote.deleteMany({});
+      logger.info("Cleared existing orders and quotes for development");
+    }
 
-    app.use(express.json());
-    app.use("/portal", portalRoutes);
-    app.use("/user", userRoutes);
-    app.use("/quote", quoteRoutes);
-    app.use("/order", orderRoutes);
+    // Apply security middleware
+    app.use(helmetConfig);
+    app.use(corsConfig);
+    app.use(securityHeaders);
+    app.use(requestLogger);
+    app.use(generalRateLimit);
 
+    // Body parsing middleware
+    app.use(express.json({ limit: "10mb" }));
+    app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+    // Health check routes (before other routes)
+    app.use("/", healthRoutes);
+
+    // API routes
+    app.use("/api/v1/portal", portalRoutes);
+    app.use("/api/v1/user", userRoutes);
+    app.use("/api/v1/quote", quoteRoutes);
+    app.use("/api/v1/order", orderRoutes);
+
+    // Security error handler
+    app.use(securityErrorHandler);
+
+    // Global error handler
     app.use(ErrorHandler);
 
-    app.listen(port, () => {
-      console.log(`Listening on ${port}`);
+    // Start server
+    app.listen(config.port, () => {
+      logger.info(`Server started successfully`, {
+        port: config.port,
+        environment: config.nodeEnv,
+        nodeVersion: process.version,
+      });
     });
   } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
+    logger.error("Failed to start server", {
+      error: error instanceof Error ? error.message : error,
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     process.exit(1);
   }
 };
