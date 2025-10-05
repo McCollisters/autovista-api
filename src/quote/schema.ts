@@ -8,11 +8,7 @@ import {
   ServiceLevelOption,
   VehicleClass,
 } from "../_global/enums";
-import {
-  IPricingQuote,
-  IVehicle,
-  IHistoryItem
-} from "../_global/interfaces";
+import { IPricingQuote, IVehicle, IHistoryItem } from "../_global/interfaces";
 
 const AutoIncrement = (mongooseSequence as any)(mongoose);
 
@@ -140,12 +136,12 @@ const quoteSchema = new Schema<IQuote>(
               ],
             },
           },
+          // totals include base price + modifiers
           total: {
             whiteGlove: {
               enclosed: { type: Number },
               enclosedTms: { type: Number },
             },
-            // totals include base and modifiers
             withoutServiceLevel: {
               open: { type: Number },
               openTms: { type: Number },

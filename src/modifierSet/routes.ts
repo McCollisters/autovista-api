@@ -11,8 +11,8 @@ const router = Router();
 
 router.get("/", getModifierSets);
 router.post("/", createModifierSet);
-router.get("/:ruleId", getModifierSet);
-router.put("/:ruleId", updateModifierSet);
-router.delete("/:ruleId", deleteModifierSet);
+router.get("/:modifierId", getModifierSet);
+router.put("/:modifierId", updateModifierSet);
+router.delete("/:modifierId", deleteModifierSet);
 
 export default router;

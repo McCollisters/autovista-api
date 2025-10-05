@@ -1,3 +1,7 @@
+// Initialize dotenv at the very top of the config module
+import dotenv from "dotenv";
+dotenv.config();
+
 export interface DatabaseConfig {
   uri: string;
   options: {

@@ -7,11 +7,11 @@ export const createModifierSet = async (
   res: express.Response,
 ): Promise<void> => {
   try {
-    const rule = { ...req.body, status: Status.Active };
-    const createdModifierSet = await new ModifierSet(rule).save();
+    const modifierSet = { ...req.body, status: Status.Active };
+    const createdModifierSet = await new ModifierSet(modifierSet).save();
     res.status(200).send(createdModifierSet);
   } catch (error) {
-    console.error("Error creating rule:", error);
+    console.error("Error creating modifierSet:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -21,13 +21,13 @@ export const updateModifierSet = async (
   res: express.Response,
 ): Promise<void> => {
   try {
-    const { ruleId } = req.params;
+    const { modifierId } = req.params;
 
     const updatedModifierSet = await ModifierSet.findByIdAndUpdate(
-      ruleId,
+      modifierId,
       req.body,
       { new: true, runValidators: true },
-    );
+    ).lean();
 
     if (!updatedModifierSet) {
       res.status(404).json({ message: "ModifierSet not found" });
@@ -36,7 +36,7 @@ export const updateModifierSet = async (
 
     res.status(200).json(updatedModifierSet);
   } catch (error) {
-    console.error("Error updating rule:", error);
+    console.error("Error updating modifier set:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -46,18 +46,18 @@ export const getModifierSet = async (
   res: express.Response,
 ): Promise<void> => {
   try {
-    const { ruleId } = req.params;
+    const { modifierId } = req.params;
 
-    const rule = await ModifierSet.findById(ruleId);
+    const modifierSet = (await ModifierSet.findById(modifierId).lean()) as any;
 
-    if (!rule) {
+    if (!modifierSet) {
       res.status(404).json({ message: "ModifierSet not found" });
       return;
     }
 
-    res.status(200).json(rule);
+    res.status(200).json(modifierSet);
   } catch (error) {
-    console.error("Error fetching rule:", error);
+    console.error("Error fetching modifier set:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -67,13 +67,13 @@ export const deleteModifierSet = async (
   res: express.Response,
 ): Promise<void> => {
   try {
-    const { ruleId } = req.params;
+    const { modifierId } = req.params;
 
     const updatedModifierSet = await ModifierSet.findByIdAndUpdate(
-      ruleId,
+      modifierId,
       { status: Status.Archived },
       { new: true, runValidators: true },
-    );
+    ).lean();
 
     if (!updatedModifierSet) {
       res.status(404).json({ message: "ModifierSet not found" });
@@ -82,7 +82,7 @@ export const deleteModifierSet = async (
 
     res.status(200).json(updatedModifierSet);
   } catch (error) {
-    console.error("Error deleting rule:", error);
+    console.error("Error deleting modifier set:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -103,11 +103,12 @@ export const getModifierSets = async (
       filter.role = role;
     }
 
-    const rules = await ModifierSet.find(filter);
+    // @ts-ignore
+    const modifierSets = await ModifierSet.find(filter).lean();
 
-    res.status(200).json(rules);
+    res.status(200).json(modifierSets);
   } catch (error) {
-    console.error("Error fetching rules:", error);
+    console.error("Error fetching modifier sets:", error);
     res.status(500).json({ message: "Server error" });
   }
 };

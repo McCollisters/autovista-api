@@ -75,7 +75,9 @@ export interface IPortal extends Document {
     parentPortalId: string | null;
   };
   customRates: Array<ICustomRate>;
+  customWhiteGloveRates: Array<ICustomRate>;
   parentPortalId: string | null;
+  isWhiteGloveOnly: boolean;
 }
 
 const portalSchema = new Schema<IPortal>(
@@ -124,11 +126,20 @@ const portalSchema = new Schema<IPortal>(
         value: { type: Number },
       },
     ],
+    customWhiteGloveRates: [
+      {
+        label: { type: String },
+        min: { type: Number },
+        max: { type: Number },
+        value: { type: Number },
+      },
+    ],
     parentPortalId: {
       type: Schema.Types.ObjectId,
       ref: "Portal",
       default: null,
     },
+    isWhiteGloveOnly: { type: Boolean, default: false },
   },
   { timestamps: true },
 );
