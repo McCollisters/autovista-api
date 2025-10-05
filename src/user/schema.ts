@@ -11,7 +11,8 @@ export enum Role {
 }
 
 export interface IUser extends Document {
-  portalId: Types.ObjectId;
+  portalId: Types.ObjectId; // primary portal
+  portalIds: Types.ObjectId[]; // all portals the user has access to
   email: string;
   password: string;
   role: Role;
@@ -37,6 +38,7 @@ const userSchemaFields: Record<
   any
 > = {
   portalId: { type: Schema.Types.ObjectId, ref: "Portal", required: true },
+  portalIds: { type: [Schema.Types.ObjectId], ref: "Portal", required: true },
   email: { type: String, trim: true, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true },

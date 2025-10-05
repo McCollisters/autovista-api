@@ -71,6 +71,12 @@ export interface IOrder extends Document {
   userId: Types.ObjectId;
   quoteId: Types.ObjectId;
   miles: number;
+  payment: {
+    type: PaymentType;
+    billRate: number;
+    paid: boolean;
+    paidAt: Date;
+  };
   transportType: TransportType;
   paymentType: PaymentType;
   origin: ILocation;
@@ -84,6 +90,14 @@ export interface IOrder extends Document {
   driver: IDriver;
   notifications: INotifications;
   agents: IAgent[];
+  signature: {
+    status: string;
+    requestId: string;
+    requestAt: Date;
+    responseId: string;
+    responseAt: Date;
+    reminderAt: Date;
+  };
 }
 
 const orderSchema = new Schema<IOrder>(
@@ -97,6 +111,12 @@ const orderSchema = new Schema<IOrder>(
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     quoteId: { type: Schema.Types.ObjectId, ref: "Quote", required: true },
     miles: { type: Number },
+    payment: {
+      type: { type: String, enum: Object.values(PaymentType) },
+      billRate: { type: Number },
+      paid: { type: Boolean },
+      paidAt: { type: Date },
+    },
     paymentType: { type: String },
     transportType: {
       type: String,
@@ -186,7 +206,11 @@ const orderSchema = new Schema<IOrder>(
                 required: true,
                 default: 0,
               },
-              serviceLevelSelected: { type: Number, required: true, default: 0 },
+              serviceLevelSelected: {
+                type: Number,
+                required: true,
+                default: 0,
+              },
             },
             portal: {
               commission: { type: Number, required: true, default: 0 },
@@ -265,51 +289,59 @@ const orderSchema = new Schema<IOrder>(
     ],
     hasClaim: { type: Boolean, default: false },
     notifications: {
-      survey: { 
+      survey: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-      surveyReminder: { 
+      },
+      surveyReminder: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       pickupReminder: { 
+      },
+      pickupReminder: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       agentsPickupConfirmation: { 
+      },
+      agentsPickupConfirmation: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       agentsDeliveryConfirmation: { 
-        status: { type: String, enum: Object.values(NotificationStatus) },
-        sentAt: { type: Date }, 
-        failedAt: { type: Date },
-       },
-       customerPickupConfirmation: { 
+      },
+      agentsDeliveryConfirmation: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },       
-       customerDeliveryConfirmation: { 
+      },
+      customerPickupConfirmation: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       portalAdminPickupConfirmation: { 
+      },
+      customerDeliveryConfirmation: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       portalAdminDeliveryConfirmation: { 
-        status: { type: String, enum: Object.values(NotificationStatus) },  
+      },
+      portalAdminPickupConfirmation: {
+        status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
+      },
+      portalAdminDeliveryConfirmation: {
+        status: { type: String, enum: Object.values(NotificationStatus) },
+        sentAt: { type: Date },
+        failedAt: { type: Date },
+      },
+    },
+    signature: {
+      status: { type: String, enum: Object.values(NotificationStatus) },
+      requestId: { type: String },
+      requestAt: { type: Date },
+      responseId: { type: String },
+      responseAt: { type: Date },
+      reminderAt: { type: Date },
     },
   },
   { timestamps: true },
