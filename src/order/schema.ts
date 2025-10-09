@@ -64,6 +64,7 @@ export interface INotifications {
 export interface IOrder extends Document {
   createdAt: Date;
   bookedAt: Date;
+  isDirect: boolean;
   refId: string;
   reg: string;
   status: Status;
@@ -90,6 +91,7 @@ const orderSchema = new Schema<IOrder>(
   {
     createdAt: { type: Date, default: Date.now },
     bookedAt: { type: Date },
+    isDirect: { type: Boolean, default: false },
     refId: { type: String, required: true },
     reg: { type: String },
     status: { type: String, enum: Object.values(Status), required: true },
@@ -175,6 +177,7 @@ const orderSchema = new Schema<IOrder>(
               inoperable: { type: Number, required: true, default: 0 },
               discount: { type: Number, required: true, default: 0 },
               routes: { type: Number, required: true, default: 0 },
+              states: { type: Number, required: true, default: 0 },
               oversize: { type: Number, required: true, default: 0 },
               vehicles: { type: Number, required: true, default: 0 },
             },
@@ -186,7 +189,11 @@ const orderSchema = new Schema<IOrder>(
                 required: true,
                 default: 0,
               },
-              serviceLevelSelected: { type: Number, required: true, default: 0 },
+              serviceLevelSelected: {
+                type: Number,
+                required: true,
+                default: 0,
+              },
             },
             portal: {
               commission: { type: Number, required: true, default: 0 },
@@ -209,6 +216,7 @@ const orderSchema = new Schema<IOrder>(
           inoperable: { type: Number, required: true, default: 0 },
           discount: { type: Number, required: true, default: 0 },
           routes: { type: Number, required: true, default: 0 },
+          states: { type: Number, required: true, default: 0 },
           oversize: { type: Number, required: true, default: 0 },
           vehicles: { type: Number, required: true, default: 0 },
         },
@@ -265,51 +273,51 @@ const orderSchema = new Schema<IOrder>(
     ],
     hasClaim: { type: Boolean, default: false },
     notifications: {
-      survey: { 
+      survey: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-      surveyReminder: { 
+      },
+      surveyReminder: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       pickupReminder: { 
+      },
+      pickupReminder: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       agentsPickupConfirmation: { 
+      },
+      agentsPickupConfirmation: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       agentsDeliveryConfirmation: { 
-        status: { type: String, enum: Object.values(NotificationStatus) },
-        sentAt: { type: Date }, 
-        failedAt: { type: Date },
-       },
-       customerPickupConfirmation: { 
+      },
+      agentsDeliveryConfirmation: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },       
-       customerDeliveryConfirmation: { 
+      },
+      customerPickupConfirmation: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       portalAdminPickupConfirmation: { 
+      },
+      customerDeliveryConfirmation: {
         status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
-       portalAdminDeliveryConfirmation: { 
-        status: { type: String, enum: Object.values(NotificationStatus) },  
+      },
+      portalAdminPickupConfirmation: {
+        status: { type: String, enum: Object.values(NotificationStatus) },
         sentAt: { type: Date },
         failedAt: { type: Date },
-       },
+      },
+      portalAdminDeliveryConfirmation: {
+        status: { type: String, enum: Object.values(NotificationStatus) },
+        sentAt: { type: Date },
+        failedAt: { type: Date },
+      },
     },
   },
   { timestamps: true },

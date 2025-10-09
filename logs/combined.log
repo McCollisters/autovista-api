@@ -1,0 +1,2876 @@
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:02:09'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:02:10'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-06 19:02:10'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:02:32'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:02:32'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-06 19:02:32'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-06 19:02:35'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/quote',
+  statusCode: 404,
+  duration: '14ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-06 19:02:35'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-06 19:02:52'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/quote',
+  statusCode: 404,
+  duration: '2ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-06 19:02:52'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:03:26'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:03:26'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:03:27'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-06 19:03:27'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:03:27'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-06 19:03:27'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:03:29'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:03:29'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:03:30'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-06 19:03:30'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-06 19:03:30'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-06 19:03:30'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-06 19:04:22'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '5295ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-06 19:04:28'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 16:45:51'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 16:45:52'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 16:45:52'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-07 16:46:45'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 16:48:03'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 16:48:03'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 16:48:03'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-07 16:48:08'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '4833ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-07 16:48:13'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-07 16:52:55'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '2698ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-07 16:52:58'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 16:56:38'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 16:56:38'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 16:56:38'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-07 17:01:58'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1313ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-07 17:02:00'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-07 17:09:03'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '64ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-07 17:09:03'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-07 17:11:18'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1112ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-07 17:11:19'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:13:15'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:13:16'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:13:16'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:13:19'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:13:19'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:13:19'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:17:29'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:17:30'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:17:30'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:27:50'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:27:50'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:27:50'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:27:55'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:27:55'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:27:55'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:28:05'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:28:06'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:28:06'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:28:08'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:28:08'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:28:08'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:29:29'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:29:30'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:29:30'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:29:34'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:29:35'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:29:35'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:29:44'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:29:45'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:29:45'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:30:20'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:30:21'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:30:21'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:30:25'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:30:25'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:30:25'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:30:29'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:30:29'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:30:29'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:30:31'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:30:31'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:30:31'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:35:05'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:35:06'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:35:06'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:35:51'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:35:52'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:35:52'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:35:57'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:35:57'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:35:57'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:36:08'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:36:08'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:36:08'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:37:09'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 17:37:10'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 17:37:10'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:28:21'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:28:22'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 22:28:22'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:28:31'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:28:32'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 22:28:32'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:28:43'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:28:44'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 22:28:44'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '364',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-07 22:29:00'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '4669ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-07 22:29:04'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:34:12'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:34:12'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 22:34:12'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:34:50'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-07 22:34:50'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-07 22:34:50'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '378',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-07 22:36:03'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1309ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-07 22:36:04'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:15:55'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:15:56'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:15:56'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '378',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:15:56'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '4755ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:16:01'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:17:10'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:17:10'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:17:10'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:18:52'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:18:52'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:18:52'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:19:10'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:19:11'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:19:11'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:19:42'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:19:43'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:19:43'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:19:55'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:19:55'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:19:55'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:23'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:24'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:21:24'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:30'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:31'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:21:31'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:37'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:38'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:21:38'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:47'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:48'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:21:48'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:53'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:54'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:21:54'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:59'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:21:59'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:21:59'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:22:07'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:22:08'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:22:08'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:22:11'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:22:12'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:22:12'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '378',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:22:41'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1449ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:22:42'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:23:21'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:23:21'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:23:21'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:23:30'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:23:30'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:23:30'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '378',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:23:41'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1294ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:23:42'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:24:21'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:24:21'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:24:21'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:24:42'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:24:43'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:24:43'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:24:49'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:24:49'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:24:49'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:25:13'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:25:13'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:25:13'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '378',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:25:15'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1223ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:25:16'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:26:21'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:26:23'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:26:24'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:26:24'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:26:27'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:26:28'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:26:28'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:27:05'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:27:06'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:27:06'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:27:09'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:27:10'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:27:10'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '378',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:27:12'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1283ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:27:13'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:27:30'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:27:31'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:27:31'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '379',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:27:41'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1186ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:27:42'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '379',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:28:14'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1100ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:28:15'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:29:03'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:29:03'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:29:03'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '379',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:29:12'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '4796ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:29:17'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:30:05'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:30:06'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:30:06'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:30:16'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:30:16'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:30:16'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:30:25'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:30:26'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:30:27'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:30:27'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '379',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:30:35'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1262ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:30:36'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:31:05'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:31:06'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:31:06'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:31:11'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:31:12'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:31:12'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:31:25'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:31:26'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:31:26'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:31:30'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:31:31'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:31:31'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '379',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:31:34'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1223ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:31:35'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:32:18'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:32:18'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:32:18'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:32:21'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:32:21'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:32:21'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:32:30'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:32:31'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:32:31'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:34:56'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:34:57'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:34:57'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '379',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:34:59'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '2897ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:35:02'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:37:46'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:37:46'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:37:46'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '378',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:38:00'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1334ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:38:01'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:39:36'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:39:36'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:39:36'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:10'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:11'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:41:11'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:18'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:18'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:41:18'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:39'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:39'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:41:39'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:45'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:45'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:41:45'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:47'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:41:47'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:41:47'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:05'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:06'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:42:06'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:14'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:15'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:16'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:42:16'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:21'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:22'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:42:22'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:27'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:28'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:29'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:42:29'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:36'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:37'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:42:37'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:40'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:41'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:42:41'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:46'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:47'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:42:47'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:57'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:42:58'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:42:58'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:43:08'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:43:09'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:43:09'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '378',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:43:22'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1283ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:43:24'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:44:57'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:44:58'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:44:58'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '378',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:45:07'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '2978ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:45:10'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:45:35'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:45:36'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:45:36'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '369',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:46:10'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '2924ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:46:12'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:48:30'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:48:31'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:48:31'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:48:39'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:48:39'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:48:39'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:48:46'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:48:46'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:48:46'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:48:56'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:48:57'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:48:57'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:49:04'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:49:04'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:49:04'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:04'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:04'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:04'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:06'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:07'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:07'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:09'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:10'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:10'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:13'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:13'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:13'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:15'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:16'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:16'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:20'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:21'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:21'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:26'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:27'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:27'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:32'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:32'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:32'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:40'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:40'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:40'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:46'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:50:46'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:50:46'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:51:37'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:51:37'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:51:37'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:52:08'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:52:09'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:52:09'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:52:10'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:52:11'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:52:11'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:52:12'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-10-08 20:52:13'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2025-10-08 20:52:13'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '369',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 20:52:33'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1372ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 20:52:35'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '269',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2025-10-08 21:00:13'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1007ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2025-10-08 21:00:14'
+}

@@ -6,6 +6,7 @@ export interface IGlobalModifiers {
   inoperable: number;
   discount: number;
   routes: number;
+  states: number;
   vehicles: number;
 }
 
@@ -16,7 +17,8 @@ export interface IPortalModifiers {
 }
 
 export interface IConditionalModifiers {
-  enclosed: number;
+  enclosedFlat: number;
+  enclosedPercent: number;
   serviceLevels: IModifierByServiceLevel[];
 }
 
@@ -81,6 +83,7 @@ export interface IVehicle {
   isInoperable: boolean;
   pricing?: IPricingQuote;
   pricingClass: VehicleClass;
+  class?: string;
   vin?: string;
   year?: string;
 }

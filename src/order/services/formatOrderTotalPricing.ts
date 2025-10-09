@@ -20,7 +20,8 @@ export const formatOrderTotalPricing = async ({
 
     const enclosedFee =
       transportType === "enclosed"
-        ? totalPricing.modifiers.conditional.enclosed
+        ? totalPricing.modifiers.conditional.enclosedFlat +
+          totalPricing.modifiers.conditional.enclosedPercent
         : 0;
 
     const serviceLevelFee =
@@ -43,6 +44,7 @@ export const formatOrderTotalPricing = async ({
       globalMod.inoperable +
       globalMod.oversize +
       globalMod.routes +
+      globalMod.states +
       globalMod.discount +
       portalMod.commission +
       portalMod.companyTariff +
@@ -57,6 +59,7 @@ export const formatOrderTotalPricing = async ({
           inoperable: globalMod.inoperable,
           oversize: globalMod.oversize,
           routes: globalMod.routes,
+          states: globalMod.states,
           discount: globalMod.discount,
         },
         portal: {

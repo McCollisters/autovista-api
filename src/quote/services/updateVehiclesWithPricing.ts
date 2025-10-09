@@ -45,7 +45,6 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   });
 
   if (!globalModifiers) {
-    console.log("no global modifiers");
     return null;
   }
 
@@ -59,13 +58,6 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
 
   let baseWhiteGlove = miles * whiteGloveMultiplier;
 
-  console.log("baseWhiteGlove", baseWhiteGlove);
-  console.log("whiteGloveMultiplier", whiteGloveMultiplier);
-  console.log(
-    "globalModifiers.whiteGlove.minimum",
-    globalModifiers.whiteGlove.minimum,
-  );
-
   if (baseWhiteGlove < globalModifiers.whiteGlove.minimum) {
     baseWhiteGlove = globalModifiers.whiteGlove.minimum;
   }
@@ -77,7 +69,9 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   let calculatedInoperable: number = 0;
   let calculatedGlobalOversize: number = 0;
   let calculatedRoutes: number = 0;
-  let calculatedEnclosed: number = 0;
+  let calculatedStates: number = 0;
+  let calculatedEnclosedFlat: number = 0;
+  let calculatedEnclosedPercent: number = 0;
   let calculatedVehicles: number = 0;
 
   const baseForModifiers = portal.options?.enableCustomRates
@@ -150,30 +144,61 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     );
   }
 
-  if (globalModifiers.enclosed) {
-    calculatedEnclosed = calculateModifier(
-      globalModifiers.enclosed,
+  if (globalModifiers.enclosedFlat) {
+    calculatedEnclosedFlat = calculateModifier(
+      globalModifiers.enclosedFlat,
       baseForModifiers,
     );
   }
 
-  if (globalModifiers.routes) {
-    const originState = origin.split(",")[1];
-    const destinationState = destination.split(",")[1];
+  if (globalModifiers.enclosedPercent) {
+    calculatedEnclosedPercent = calculateModifier(
+      globalModifiers.enclosedPercent,
+      baseForModifiers,
+    );
+  }
 
+  const originState = origin.split(",")[1]?.trim();
+  const destinationState = destination.split(",")[1]?.trim();
+
+  if (globalModifiers.routes) {
     if (Array.isArray(globalModifiers.routes)) {
       const matchingRoutes = globalModifiers.routes.filter(
         (route) =>
-          (route.origin === originState && !route.destination) ||
-          (!route.origin && route.destination === destinationState) ||
-          (route.origin === originState &&
-            route.destination === destinationState),
+          route.origin === originState &&
+          route.destination === destinationState,
       );
 
       matchingRoutes.forEach((route) => {
         let calculatedValue = calculateModifier(route, baseForModifiers);
         calculatedRoutes += calculatedValue;
       });
+    }
+  }
+
+  if (globalModifiers.states) {
+    // Check origin state for outbound or both directions
+    const originModifier = globalModifiers.states.get(originState);
+    if (
+      originModifier &&
+      (originModifier.direction === "outbound" ||
+        originModifier.direction === "both")
+    ) {
+      calculatedStates += calculateModifier(originModifier, baseForModifiers);
+    }
+
+    // Check destination state for inbound or both directions (avoid double-counting if same state)
+    const destinationModifier = globalModifiers.states.get(destinationState);
+    if (
+      destinationModifier &&
+      (destinationModifier.direction === "inbound" ||
+        (destinationModifier.direction === "both" &&
+          destinationState !== originState))
+    ) {
+      calculatedStates += calculateModifier(
+        destinationModifier,
+        baseForModifiers,
+      );
     }
   }
 
@@ -191,19 +216,6 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     }
   }
 
-  console.log(baseTms);
-  console.log(calculatedInoperable);
-  console.log(calculatedGlobalDiscount);
-  console.log(calculatedRoutes);
-  console.log(calculatedVehicles);
-  console.log("baseWhiteGlove", baseWhiteGlove);
-  console.log("calculatedCommission", calculatedCommission);
-  console.log("calculatedTariff", calculatedTariff);
-  console.log("calculatedPortalDiscount", calculatedPortalDiscount);
-  console.log("calculatedGlobalOversize", calculatedGlobalOversize);
-  console.log("calculatedEnclosed", calculatedEnclosed);
-  console.log("calculatedVehicles", calculatedVehicles);
-
   return {
     base: {
       tms: baseTms,
@@ -215,6 +227,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
         inoperable: calculatedInoperable,
         discount: calculatedGlobalDiscount,
         routes: calculatedRoutes,
+        states: calculatedStates,
         oversize: calculatedGlobalOversize,
         vehicles: calculatedVehicles,
       },
@@ -224,7 +237,8 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
         discount: calculatedPortalDiscount,
       },
       conditional: {
-        enclosed: calculatedEnclosed,
+        enclosedFlat: calculatedEnclosedFlat,
+        enclosedPercent: calculatedEnclosedPercent,
         serviceLevels: globalModifiers.serviceLevels,
       },
     },
@@ -241,6 +255,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
             calculatedInoperable +
             calculatedGlobalDiscount +
             calculatedRoutes +
+            calculatedStates +
             calculatedVehicles +
             calculatedCommission +
             calculatedTariff +
@@ -252,6 +267,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
             calculatedInoperable +
             calculatedGlobalDiscount +
             calculatedRoutes +
+            calculatedStates +
             calculatedVehicles +
             calculatedPortalDiscount +
             calculatedGlobalOversize,
@@ -261,23 +277,26 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
             calculatedInoperable +
             calculatedGlobalDiscount +
             calculatedRoutes +
+            calculatedStates +
             calculatedVehicles +
             calculatedCommission +
             calculatedTariff +
             calculatedPortalDiscount +
             calculatedGlobalOversize +
-            calculatedEnclosed +
-            calculatedEnclosed,
+            calculatedEnclosedFlat +
+            calculatedEnclosedPercent,
         ),
         enclosedTms: roundCurrency(
           baseForModifiers +
             calculatedInoperable +
             calculatedGlobalDiscount +
             calculatedRoutes +
+            calculatedStates +
             calculatedVehicles +
             calculatedPortalDiscount +
             calculatedGlobalOversize +
-            calculatedEnclosed,
+            calculatedEnclosedFlat +
+            calculatedEnclosedPercent,
         ),
       },
     },

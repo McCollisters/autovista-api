@@ -119,6 +119,8 @@ export const createQuote = async (
 
     const createdQuote = await new Quote(formattedQuote).save();
 
+    console.log("createdQuote", createdQuote);
+
     res.status(200).json(createdQuote);
 
     // Send relevant notifications

@@ -41,7 +41,7 @@ export const formatOrderForSD = async (order: IOrder) => {
         model: vehicle.model,
         is_inoperable: vehicle.isInoperable,
         tariff: vehicle.pricing?.base,
-        class: vehicle.class,
+        pricingClass: vehicle.pricingClass,
       };
     });
 

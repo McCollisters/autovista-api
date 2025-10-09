@@ -11,7 +11,8 @@ export const calculateTotalPricing = async (
   let baseWhiteGlove = 0;
   let baseCustom = 0;
 
-  let conditionalEnclosed = 0;
+  let conditionalEnclosedFlat = 0;
+  let conditionalEnclosedPercent = 0;
   let totalModifiers = 0;
   let withoutServiceLevel = {
     open: 0,
@@ -20,6 +21,7 @@ export const calculateTotalPricing = async (
   let globalInop = 0;
   let globalDiscount = 0;
   let globalRoutes = 0;
+  let globalStates = 0;
   let globalVehicles = 0;
   let globalOversize = 0;
   let portalCommission = 0;
@@ -42,7 +44,9 @@ export const calculateTotalPricing = async (
     baseTms += pricing.base.tms || 0;
     baseWhiteGlove += pricing.base.whiteGlove || 0;
     baseCustom += pricing.base.custom || 0;
-    conditionalEnclosed += pricing.modifiers.conditional.enclosed || 0;
+    conditionalEnclosedFlat += pricing.modifiers.conditional.enclosedFlat || 0;
+    conditionalEnclosedPercent +=
+      pricing.modifiers.conditional.enclosedPercent || 0;
 
     totalModifiers += pricing.totalModifiers || 0;
     withoutServiceLevel.open += pricing.total.withoutServiceLevel.open || 0;
@@ -52,6 +56,7 @@ export const calculateTotalPricing = async (
     globalInop += pricing.modifiers.global.inoperable || 0;
     globalDiscount += pricing.modifiers.global.discount || 0;
     globalRoutes += pricing.modifiers.global.routes || 0;
+    globalStates += pricing.modifiers.global.states || 0;
     globalVehicles += pricing.modifiers.global.vehicles || 0;
     globalOversize += pricing.modifiers.global.oversize || 0;
     portalCommission += pricing.modifiers.portal.commission || 0;
@@ -82,6 +87,7 @@ export const calculateTotalPricing = async (
         oversize: globalOversize,
         discount: globalDiscount,
         routes: globalRoutes,
+        states: globalStates,
         vehicles: globalVehicles,
       },
       portal: {
@@ -90,7 +96,8 @@ export const calculateTotalPricing = async (
         companyTariff: portalCompanyTariff,
       },
       conditional: {
-        enclosed: conditionalEnclosed,
+        enclosedFlat: conditionalEnclosedFlat,
+        enclosedPercent: conditionalEnclosedPercent,
         serviceLevels: conditionalServiceLevels,
       },
     },
@@ -107,6 +114,7 @@ export const calculateTotalPricing = async (
             globalInop +
             globalDiscount +
             globalRoutes +
+            globalStates +
             globalVehicles +
             portalCommission +
             portalCompanyTariff +
@@ -118,6 +126,7 @@ export const calculateTotalPricing = async (
             globalInop +
             globalDiscount +
             globalRoutes +
+            globalStates +
             globalVehicles +
             portalDiscount +
             globalOversize,
@@ -127,23 +136,26 @@ export const calculateTotalPricing = async (
             globalInop +
             globalDiscount +
             globalRoutes +
+            globalStates +
             globalVehicles +
             portalCommission +
             portalCompanyTariff +
             portalDiscount +
             globalOversize +
-            conditionalEnclosed +
-            conditionalEnclosed,
+            conditionalEnclosedFlat +
+            conditionalEnclosedPercent,
         ),
         enclosedTms: roundCurrency(
           baseForModifiers +
             globalInop +
             globalDiscount +
             globalRoutes +
+            globalStates +
             globalVehicles +
             portalDiscount +
             globalOversize +
-            conditionalEnclosed,
+            conditionalEnclosedFlat +
+            conditionalEnclosedPercent,
         ),
       },
     },

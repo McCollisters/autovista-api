@@ -1,6 +1,8 @@
+// Initialize dotenv FIRST (side-effect import runs immediately)
+import "dotenv/config";
+
 import express from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 
 // Import configuration and utilities
 import { config } from "./config/index.js";
@@ -30,9 +32,6 @@ import { Quote } from "./quote/schema.js";
 
 // Import AWS SQS
 import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
-
-// Initialize dotenv
-dotenv.config();
 
 // Initialize Express app
 const app = express();

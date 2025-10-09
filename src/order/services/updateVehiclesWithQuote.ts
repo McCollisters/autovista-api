@@ -33,7 +33,8 @@ export const updateVehiclesWithQuote = async ({
 
       const enclosedFee =
         transportType === "enclosed"
-          ? quoteVehicle.pricing.modifiers.conditional.enclosed
+          ? quoteVehicle.pricing.modifiers.conditional.enclosedFlat +
+            quoteVehicle.pricing.modifiers.conditional.enclosedPercent
           : 0;
 
       const base =
@@ -50,6 +51,7 @@ export const updateVehiclesWithQuote = async ({
         globalMod.inoperable +
         globalMod.oversize +
         globalMod.routes +
+        globalMod.states +
         globalMod.vehicles +
         globalMod.discount +
         portalMod.commission +
@@ -67,6 +69,7 @@ export const updateVehiclesWithQuote = async ({
               inoperable: globalMod.inoperable,
               discount: globalMod.discount,
               routes: globalMod.routes,
+              states: globalMod.states,
               vehicles: globalMod.vehicles,
               oversize: globalMod.oversize,
             },
@@ -76,7 +79,10 @@ export const updateVehiclesWithQuote = async ({
               discount: portalMod.discount,
             },
             conditional: {
-              enclosed: quoteVehicle.pricing.modifiers.conditional.enclosed,
+              enclosedFlat:
+                quoteVehicle.pricing.modifiers.conditional.enclosedFlat,
+              enclosedPercent:
+                quoteVehicle.pricing.modifiers.conditional.enclosedPercent,
               serviceLevel: serviceLevelFee,
             },
           },

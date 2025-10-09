@@ -10,6 +10,12 @@ export enum ModifierSetType {
   Override = "override",
 }
 
+export enum Direction {
+  Inbound = "inbound",
+  Outbound = "outbound",
+  Both = "both",
+}
+
 export enum ValueType {
   Percentage = "percentage",
   Flat = "flat",
@@ -17,7 +23,7 @@ export enum ValueType {
 
 export interface IModifier extends Document {
   value: number;
-  valueType: string;
+  valueType: ValueType;
 }
 
 export interface IRouteModifier extends IModifier {
@@ -50,10 +56,20 @@ export interface IModifierSet extends Document {
     pickup_2_doors: number;
     pickup_4_doors: number;
   };
-  enclosed?: IModifier;
+  enclosedFlat?: IModifier;
+  enclosedPercent?: IModifier;
   discount?: IModifier;
   companyTariff?: IModifier;
+  companyTariffDiscount?: IModifier; // set by portal admins
   fixedCommission?: IModifier;
+  states?: Map<
+    string,
+    {
+      direction: Direction;
+      value: number;
+      valueType: ValueType;
+    }
+  >;
   routes?: Array<IRouteModifier>;
   zips?: Array<IZipModifier>;
   vehicles?: Array<IVehicleModifier>;
@@ -86,7 +102,11 @@ const modifierSetSchema = new Schema<IModifierSet>(
       pickup_2_doors: { type: Number, default: 0 },
       pickup_4_doors: { type: Number, default: 0 },
     },
-    enclosed: {
+    enclosedFlat: {
+      value: { type: Number, default: 0 },
+      valueType: { type: String, default: "flat" },
+    },
+    enclosedPercent: {
       value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
     },
@@ -98,9 +118,25 @@ const modifierSetSchema = new Schema<IModifierSet>(
       value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
     },
+    companyTariffDiscount: {
+      value: { type: Number, default: 0 },
+      valueType: { type: String, default: "flat" },
+    },
     fixedCommission: {
       value: { type: Number, default: 0 },
       valueType: { type: String, default: "flat" },
+    },
+    states: {
+      type: Map,
+      of: {
+        direction: { type: String, enum: Object.values(Direction) },
+        value: { type: Number, required: true },
+        valueType: {
+          type: String,
+          enum: Object.values(ValueType),
+          required: true,
+        },
+      },
     },
     routes: [
       {

@@ -8,11 +8,7 @@ import {
   ServiceLevelOption,
   VehicleClass,
 } from "../_global/enums";
-import {
-  IPricingQuote,
-  IVehicle,
-  IHistoryItem
-} from "../_global/interfaces";
+import { IPricingQuote, IVehicle, IHistoryItem } from "../_global/interfaces";
 
 const AutoIncrement = (mongooseSequence as any)(mongoose);
 
@@ -25,6 +21,7 @@ export interface ICustomer extends Document {
 
 export interface IQuote extends Document {
   refId?: number;
+  isDirect: boolean;
   status: Status;
   portalId: Types.ObjectId;
   userId: Types.ObjectId;
@@ -59,6 +56,7 @@ const generateTrackingCode = (): string => {
 const quoteSchema = new Schema<IQuote>(
   {
     refId: { type: Number },
+    isDirect: { type: Boolean, default: false },
     status: { type: String, enum: Object.values(Status), required: true },
     portalId: { type: Schema.Types.ObjectId, ref: "Portal", required: true },
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
@@ -110,6 +108,7 @@ const quoteSchema = new Schema<IQuote>(
             global: {
               inoperable: { type: Number, required: true, default: 0 },
               routes: { type: Number, required: true, default: 0 },
+              states: { type: Number, required: true, default: 0 },
               oversize: { type: Number, required: true, default: 0 },
               vehicles: { type: Number, required: true, default: 0 },
             },
@@ -121,7 +120,9 @@ const quoteSchema = new Schema<IQuote>(
               fuel: { type: Number, required: true, default: 0 },
             },
             conditional: {
+              // previously enclosed
               enclosedFlat: { type: Number, required: true, default: 0 },
+              // previously enclosedModifier
               enclosedPercent: { type: Number, required: true, default: 0 },
               enclosedExtraCompanyTariff: {
                 type: Number,
@@ -167,12 +168,15 @@ const quoteSchema = new Schema<IQuote>(
           inoperable: { type: Number, required: true, default: 0 },
           oversize: { type: Number, required: true, default: 0 },
           routes: { type: Number, required: true, default: 0 },
+          states: { type: Number, required: true, default: 0 },
           vehicles: { type: Number, required: true, default: 0 },
         },
         portal: {
           commission: { type: Number, required: true, default: 0 },
           discount: { type: Number, required: true, default: 0 },
           companyTariff: { type: Number, required: true, default: 0 },
+          irr: { type: Number, required: true, default: 0 },
+          fuel: { type: Number, required: true, default: 0 },
         },
         conditional: {
           enclosedFlat: { type: Number, required: true, default: 0 },
