@@ -1,7 +1,7 @@
-import { IOrder } from "../schema";
+import { IOrder } from "@/_global/models";
 import { IAddress } from "../../_global/interfaces";
 import { getDeliveryRanges } from "./getDeliveryRanges";
-import { Portal } from "../../portal/schema";
+import { Portal } from "@/_global/models";
 
 function formatAddress({ address, addressLine2 }: IAddress): string {
   return addressLine2 ? `${address} ${addressLine2}` : address || "";
@@ -45,8 +45,8 @@ export const formatOrderForSD = async (order: IOrder) => {
       };
     });
 
-    const pickupAddress = formatAddress(origin.address);
-    const deliveryAddress = formatAddress(destination.address);
+    const pickupAddress = formatAddress(origin.address || {});
+    const deliveryAddress = formatAddress(destination.address || {});
 
     return {
       number: refId,
@@ -59,9 +59,9 @@ export const formatOrderForSD = async (order: IOrder) => {
         date_type: "estimated",
         venue: {
           address: pickupAddress,
-          city: origin.address.city,
-          state: origin.address.state,
-          zip: origin.address.zip,
+          city: origin.address?.city,
+          state: origin.address?.state,
+          zip: origin.address?.zip,
           name: origin.contact?.companyName,
           contact_name: origin.contact?.name,
           contact_email: origin.contact?.email,
@@ -76,9 +76,9 @@ export const formatOrderForSD = async (order: IOrder) => {
         date_type: "estimated",
         venue: {
           address: deliveryAddress,
-          city: destination.address.city,
-          state: destination.address.state,
-          zip: destination.address.zip,
+          city: destination.address?.city,
+          state: destination.address?.state,
+          zip: destination.address?.zip,
           name: destination.contact?.companyName,
           contact_name: destination.contact?.name,
           contact_email: destination.contact?.email,

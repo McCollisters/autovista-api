@@ -1,5 +1,5 @@
 import winston from "winston";
-import { config } from "../config/index.js";
+import { config } from "@/config/index";
 
 // Create logs directory if it doesn't exist
 import { mkdirSync } from "fs";

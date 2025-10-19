@@ -1,9 +1,10 @@
 {
+  "isDirect": false,
   "status": "active",
-  "portalId": "67e6e8d9b42f71574a8be063",
-  "userId": "67e9a36701548e50439bcab0",
+  "portalId": "5ea35039c972530f3a029ffa",
+  "userId": "5f9b2a63a6be2500170b0e90",
   "customer": {
-    "trackingCode": "CDSB7"
+    "trackingCode": "KTVL0"
   },
   "origin": {
     "userInput": "Boston, MA",
@@ -24,227 +25,197 @@
     }
   },
   "miles": 2987,
+  "transitTime": [],
   "vehicles": [
     {
-      "make": "Hyundai",
-      "model": "Accent",
+      "make": "Acura",
+      "model": "2.2CL",
       "isInoperable": true,
-      "class": "sedan",
+      "pricingClass": "sedan",
       "pricing": {
-        "base": {
-          "tms": 1160,
-          "whiteGlove": 6571,
-          "custom": 1750
-        },
+        "base": 1382,
         "modifiers": {
-          "global": {
-            "inoperable": 150,
-            "discount": 0,
-            "routes": 0,
-            "oversize": 0
-          },
-          "portal": {
-            "commission": 100,
-            "companyTariff": 140,
-            "discount": 0
-          },
-          "conditional": {
-            "enclosed": 225,
-            "serviceLevels": [
-              {
-                "serviceLevelOption": "1",
-                "value": 100
-              },
-              {
-                "serviceLevelOption": "3",
-                "value": 150
-              },
-              {
-                "serviceLevelOption": "5",
-                "value": 200
-              },
-              {
-                "serviceLevelOption": "7",
-                "value": 250
-              }
-            ]
-          }
-        },
-        "totalModifiers": 390,
-        "total": {
-          "withoutServiceLevel": 1550,
+          "inoperable": 350,
+          "routes": 0,
+          "states": 350,
+          "oversize": 0,
+          "vehicles": 0,
+          "globalDiscount": 70,
+          "portalDiscount": 100,
+          "irr": 0,
+          "fuel": 0,
+          "enclosedFlat": 250,
+          "enclosedPercent": 761,
+          "commission": 50,
           "serviceLevels": [
             {
               "serviceLevelOption": "1",
-              "enclosed": 1875,
-              "open": 1650
+              "value": 225
             },
             {
               "serviceLevelOption": "3",
-              "enclosed": 1925,
-              "open": 1700
+              "value": 175
             },
             {
               "serviceLevelOption": "5",
-              "enclosed": 1975,
-              "open": 1750
+              "value": 140
             },
             {
               "serviceLevelOption": "7",
-              "enclosed": 2025,
-              "open": 1800
+              "value": 100
             }
-          ]
-        }
-      }
-    },
-    {
-      "make": "Ford",
-      "model": "F150",
-      "isInoperable": false,
-      "class": "pickup_2_doors",
-      "pricing": {
-        "base": {
-          "tms": 1549,
-          "whiteGlove": 6571,
-          "custom": 1750
-        },
-        "modifiers": {
-          "global": {
-            "inoperable": 0,
-            "discount": 0,
-            "routes": 0,
-            "oversize": 0
-          },
-          "portal": {
-            "commission": 100,
-            "companyTariff": 186,
-            "discount": 0
-          },
-          "conditional": {
-            "enclosed": 225,
-            "serviceLevels": [
-              {
-                "serviceLevelOption": "1",
-                "value": 100
-              },
-              {
-                "serviceLevelOption": "3",
-                "value": 150
-              },
-              {
-                "serviceLevelOption": "5",
-                "value": 200
-              },
-              {
-                "serviceLevelOption": "7",
-                "value": 250
-              }
-            ]
-          }
-        },
-        "totalModifiers": 286,
-        "total": {
-          "withoutServiceLevel": 1835,
-          "serviceLevels": [
+          ],
+          "companyTariffs": [
             {
               "serviceLevelOption": "1",
-              "enclosed": 2160,
-              "open": 1935
+              "value": 372
             },
             {
               "serviceLevelOption": "3",
-              "enclosed": 2210,
-              "open": 1985
+              "value": 365
             },
             {
               "serviceLevelOption": "5",
-              "enclosed": 2260,
-              "open": 2035
+              "value": 359
             },
             {
               "serviceLevelOption": "7",
-              "enclosed": 2310,
-              "open": 2085
+              "value": 353
             }
           ]
+        },
+        "totals": {
+          "whiteGlove": 5974,
+          "one": {
+            "open": {
+              "total": 2477,
+              "companyTariff": 372,
+              "commission": 50,
+              "totalWithCompanyTariffAndCommission": 2899
+            },
+            "enclosed": {
+              "total": 3488,
+              "companyTariff": 524,
+              "commission": 50,
+              "totalWithCompanyTariffAndCommission": 4062
+            }
+          },
+          "three": {
+            "total": 2427,
+            "companyTariff": 365,
+            "commission": 50,
+            "totalWithCompanyTariffAndCommission": 2842
+          },
+          "five": {
+            "total": 2392,
+            "companyTariff": 359,
+            "commission": 50,
+            "totalWithCompanyTariffAndCommission": 2801
+          },
+          "seven": {
+            "total": 2352,
+            "companyTariff": 353,
+            "commission": 50,
+            "totalWithCompanyTariffAndCommission": 2755
+          }
         }
       }
     }
   ],
   "totalPricing": {
-    "base": {
-      "tms": 2709,
-      "whiteGlove": 13142,
-      "custom": 3500
-    },
+    "base": 1382,
     "modifiers": {
-      "global": {
-        "inoperable": 150,
-        "discount": 0,
-        "oversize": 0,
-        "routes": 0
-      },
-      "portal": {
-        "commission": 200,
-        "discount": 0,
-        "companyTariff": 326
-      },
-      "conditional": {
-        "enclosed": 450,
-        "serviceLevels": [
-          {
-            "serviceLevelOption": "1",
-            "value": 200
-          },
-          {
-            "serviceLevelOption": "3",
-            "value": 300
-          },
-          {
-            "serviceLevelOption": "5",
-            "value": 400
-          },
-          {
-            "serviceLevelOption": "7",
-            "value": 500
-          }
-        ]
-      }
-    },
-    "totalModifiers": 676,
-    "total": {
-      "withoutServiceLevel": 3385,
+      "inoperable": 350,
+      "routes": 0,
+      "states": 350,
+      "oversize": 0,
+      "vehicles": 0,
+      "globalDiscount": 70,
+      "portalDiscount": 100,
+      "irr": 0,
+      "fuel": 0,
+      "enclosedFlat": 250,
+      "enclosedPercent": 761,
+      "commission": 50,
       "serviceLevels": [
         {
           "serviceLevelOption": "1",
-          "enclosed": 4035,
-          "open": 3585
+          "value": 225
         },
         {
           "serviceLevelOption": "3",
-          "enclosed": 4135,
-          "open": 3685
+          "value": 175
         },
         {
           "serviceLevelOption": "5",
-          "enclosed": 4235,
-          "open": 3785
+          "value": 140
         },
         {
           "serviceLevelOption": "7",
-          "enclosed": 4335,
-          "open": 3885
+          "value": 100
+        }
+      ],
+      "companyTariffs": [
+        {
+          "serviceLevelOption": "1",
+          "value": 372
+        },
+        {
+          "serviceLevelOption": "3",
+          "value": 365
+        },
+        {
+          "serviceLevelOption": "5",
+          "value": 359
+        },
+        {
+          "serviceLevelOption": "7",
+          "value": 353
         }
       ]
+    },
+    "totals": {
+      "whiteGlove": 5974,
+      "one": {
+        "open": {
+          "total": 2477,
+          "companyTariff": 372,
+          "commission": 50,
+          "totalWithCompanyTariffAndCommission": 2899
+        },
+        "enclosed": {
+          "total": 3488,
+          "companyTariff": 524,
+          "commission": 50,
+          "totalWithCompanyTariffAndCommission": 4062
+        }
+      },
+      "three": {
+        "total": 2427,
+        "companyTariff": 365,
+        "commission": 50,
+        "totalWithCompanyTariffAndCommission": 2842
+      },
+      "five": {
+        "total": 2392,
+        "companyTariff": 359,
+        "commission": 50,
+        "totalWithCompanyTariffAndCommission": 2801
+      },
+      "seven": {
+        "total": 2352,
+        "companyTariff": 353,
+        "commission": 50,
+        "totalWithCompanyTariffAndCommission": 2755
+      }
     }
   },
-  "_id": "683524b791b56281d6a6cb1a",
+  "_id": "68f3f95733933492065b6755",
   "history": [],
-  "createdAt": "2025-05-27T02:34:31.712Z",
-  "updatedAt": "2025-05-27T02:34:31.712Z",
-  "refId": 50136,
+  "createdAt": "2025-10-18T20:32:23.174Z",
+  "updatedAt": "2025-10-18T20:32:23.174Z",
+  "refId": 50189,
   "__v": 0,
-  "vehicleCount": 2,
-  "id": "683524b791b56281d6a6cb1a"
+  "vehicleCount": 1,
+  "id": "68f3f95733933492065b6755"
 }

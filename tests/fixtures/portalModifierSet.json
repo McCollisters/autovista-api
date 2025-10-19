@@ -1,0 +1,136 @@
+{
+  "_id": "507f1f77bcf86cd799439013",
+  "name": "Portal Test Modifier Set",
+  "isGlobal": false,
+  "portalId": "507f1f77bcf86cd799439011",
+  "inoperable": {
+    "value": 200,
+    "valueType": "flat"
+  },
+  "fuel": {
+    "value": 75,
+    "valueType": "flat"
+  },
+  "irr": {
+    "value": 35,
+    "valueType": "flat"
+  },
+  "whiteGlove": {
+    "multiplier": 3.0,
+    "minimum": 1500
+  },
+  "oversize": {
+    "suv": 100,
+    "van": 125,
+    "pickup_2_doors": 75,
+    "pickup_4_doors": 85
+  },
+  "enclosed": {
+    "value": 250,
+    "valueType": "flat"
+  },
+  "discount": {
+    "value": 8,
+    "valueType": "percentage"
+  },
+  "companyTariff": {
+    "value": 150,
+    "valueType": "flat"
+  },
+  "fixedCommission": {
+    "value": 12,
+    "valueType": "percentage"
+  },
+  "routes": [
+    {
+      "value": 75,
+      "valueType": "flat",
+      "origin": "CA",
+      "destination": "NY"
+    },
+    {
+      "value": 100,
+      "valueType": "flat",
+      "origin": "NY",
+      "destination": "FL"
+    },
+    {
+      "value": 50,
+      "valueType": "flat",
+      "origin": "TX",
+      "destination": ""
+    },
+    {
+      "value": 60,
+      "valueType": "flat",
+      "origin": "",
+      "destination": "CA"
+    }
+  ],
+  "zips": [
+    {
+      "value": 150,
+      "valueType": "flat",
+      "zip": "90210"
+    },
+    {
+      "value": 125,
+      "valueType": "flat",
+      "zip": "10001"
+    }
+  ],
+  "states": {
+    "CA": { "direction": "both", "valueType": "flat", "value": 25 },
+    "NY": { "direction": "both", "valueType": "flat", "value": 30 },
+    "TX": { "direction": "both", "valueType": "flat", "value": 20 },
+    "FL": { "direction": "both", "valueType": "flat", "value": 35 }
+  },
+  "vehicles": [
+    {
+      "value": 150,
+      "valueType": "flat",
+      "makeModel": ["BMW", "X5"]
+    },
+    {
+      "value": 125,
+      "valueType": "flat",
+      "makeModel": ["Mercedes", "G-Class"]
+    },
+    {
+      "value": 100,
+      "valueType": "flat",
+      "makeModel": ["Audi", "Q7"]
+    },
+    {
+      "value": 75,
+      "valueType": "flat",
+      "makeModel": ["Hyundai", "Accent"]
+    },
+    {
+      "value": 90,
+      "valueType": "flat",
+      "makeModel": ["Ford", "F150"]
+    }
+  ],
+  "serviceLevels": [
+    {
+      "serviceLevelOption": "1",
+      "value": 400
+    },
+    {
+      "serviceLevelOption": "3",
+      "value": 200
+    },
+    {
+      "serviceLevelOption": "5",
+      "value": 100
+    },
+    {
+      "serviceLevelOption": "7",
+      "value": 25
+    }
+  ],
+  "createdAt": "2024-01-15T10:30:00.000Z",
+  "updatedAt": "2024-01-15T10:30:00.000Z",
+  "__v": 0
+}

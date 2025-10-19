@@ -5,9 +5,9 @@ import express from "express";
 import mongoose from "mongoose";
 
 // Import configuration and utilities
-import { config } from "./config/index.js";
-import { logger } from "./core/logger.js";
-import { ErrorHandler } from "./_global/errorHandler.js";
+import { config } from "@/config/index";
+import { logger } from "@/core/logger";
+import { ErrorHandler } from "@/_global/errorHandler";
 
 // Import security middleware
 import {
@@ -17,18 +17,17 @@ import {
   requestLogger,
   securityHeaders,
   securityErrorHandler,
-} from "./core/middleware/security.js";
+} from "@/core/middleware/security";
 
 // Import routes
-import portalRoutes from "./portal/routes.js";
-import userRoutes from "./user/routes.js";
-import quoteRoutes from "./quote/routes.js";
-import orderRoutes from "./order/routes.js";
-import healthRoutes from "./presentation/routes/health.js";
+import portalRoutes from "@/portal/routes";
+import userRoutes from "@/user/routes";
+import quoteRoutes from "@/quote/routes";
+import orderRoutes from "@/order/routes";
+import healthRoutes from "@/presentation/routes/health";
 
 // Import models
-import { Order } from "./order/schema.js";
-import { Quote } from "./quote/schema.js";
+import { Order, Quote } from "@/_global/models";
 
 // Import AWS SQS
 import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
@@ -120,3 +119,5 @@ const startServer = async () => {
 };
 
 startServer();
+
+export { app };

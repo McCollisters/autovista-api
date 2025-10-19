@@ -1,5 +1,5 @@
 import express from "express";
-import { Quote } from "../schema";
+import { Quote } from "@/_global/models";
 
 export const updateQuote = async (
   req: express.Request,

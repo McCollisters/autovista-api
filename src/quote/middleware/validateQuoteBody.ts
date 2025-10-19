@@ -5,27 +5,49 @@ export const validateQuoteBody = (
   res: Response,
   next: NextFunction,
 ) => {
-  const { origin, destination, vehicles, portalId } = req.body;
+  const { origin, destination, vehicles, portalId, userId } = req.body;
 
   if (!origin || typeof origin !== "string") {
-    return next(new Error("Origin is required and must be a string"));
+    return next({
+      statusCode: 400,
+      message: "Origin is required and must be a string",
+    });
   }
 
   if (!destination || typeof destination !== "string") {
-    return next(new Error("Destination is required and must be a string"));
+    return next({
+      statusCode: 400,
+      message: "Destination is required and must be a string",
+    });
   }
 
   if (!portalId || typeof portalId !== "string") {
-    return next(new Error("portalId is required and must be a string"));
+    return next({
+      statusCode: 400,
+      message: "portalId is required and must be a string",
+    });
+  }
+
+  if (!userId || typeof userId !== "string") {
+    return next({
+      statusCode: 400,
+      message: "userId is required and must be a string",
+    });
   }
 
   if (!Array.isArray(vehicles) || vehicles.length === 0) {
-    return next(new Error("Vehicles must be a non-empty array"));
+    return next({
+      statusCode: 400,
+      message: "Vehicles must be a non-empty array",
+    });
   }
 
   for (const [i, v] of vehicles.entries()) {
     if (!v.make || !v.model) {
-      return next(new Error(`Vehicle at index ${i} must have make and model`));
+      return next({
+        statusCode: 400,
+        message: `Vehicle at index ${i} must have make and model`,
+      });
     }
   }
 

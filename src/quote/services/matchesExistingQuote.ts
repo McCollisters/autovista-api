@@ -1,5 +1,6 @@
 import { IVehicle } from "../../_global/interfaces";
-import { IQuote, Quote } from "../../quote/schema";
+import { IQuote } from "@/_global/models";
+import { Quote } from "@/_global/models";
 
 export const matchesExistingQuote = async (
   origin: string,
@@ -40,8 +41,8 @@ export const matchesExistingQuote = async (
       }
 
       if (
-        existing.pricing?.modifiers.portal?.commission &&
-        existing.pricing?.modifiers.portal?.commission !== commission
+        existing.pricing?.modifiers.commission &&
+        existing.pricing?.modifiers.commission !== commission
       ) {
         return null;
       }
@@ -49,7 +50,6 @@ export const matchesExistingQuote = async (
 
     return existingQuote;
   } catch (error) {
-    console.error("Error checking for existing quote:", error);
     return null;
   }
 };

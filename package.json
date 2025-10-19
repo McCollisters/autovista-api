@@ -16,7 +16,10 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "NODE_ENV=test"
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch",
+    "test:coverage": "NODE_ENV=test jest --coverage",
+    "test:ci": "NODE_ENV=test jest --ci --coverage --watchAll=false"
   },
   "keywords": [],
   "license": "MIT",
@@ -36,17 +39,24 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
+    "@jest/globals": "^30.2.0",
     "@tsconfig/node22": "^22.0.2",
     "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
     "@types/luxon": "^3.7.1",
     "@types/mongoose-sequence": "^3.0.11",
     "@types/node": "^24.6.2",
+    "@types/supertest": "^6.0.3",
     "@types/winston": "^2.4.4",
     "esbuild": "^0.25.10",
     "i": "^0.3.7",
+    "jest": "^30.2.0",
+    "mongodb-memory-server": "^10.2.3",
     "prettier": "^3.6.2",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }

@@ -1,0 +1,91 @@
+{
+  "_id": "507f1f77bcf86cd799439011",
+  "status": "active",
+  "companyName": "Test Auto Transport Co",
+  "contact": {
+    "companyName": "Test Auto Transport Co",
+    "name": "John Smith",
+    "email": "john@testautotransport.com",
+    "phone": "555-123-4567",
+    "phoneMobile": "555-987-6543",
+    "notes": "Test portal for development",
+    "termsAccepted": true
+  },
+  "address": {
+    "address": "123 Main Street",
+    "addressLine2": "Suite 100",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zip": "90210",
+    "notes": "Main office location",
+    "coordinates": {
+      "longitude": "-118.2437",
+      "latitude": "34.0522"
+    }
+  },
+  "logo": "https://example.com/logo.png",
+  "options": {
+    "overrideLogo": false,
+    "enableCustomRates": true,
+    "enableVariableCompanyTariff": true,
+    "enableWhiteGloveOverride": false,
+    "enableOrderTrackingByCustomer": true,
+    "enableSurvey": true,
+    "orderForm": {
+      "enableAgent": true,
+      "requireLocationType": true
+    },
+    "quoteForm": {
+      "enableTariff": true,
+      "enableCommission": true
+    },
+    "orderPDF": {
+      "enablePriceBreakdown": true
+    },
+    "customRates": [
+      {
+        "label": "Short Distance (0-100 miles)",
+        "min": 0,
+        "max": 100,
+        "value": 200
+      },
+      {
+        "label": "Medium Distance (101-500 miles)",
+        "min": 101,
+        "max": 500,
+        "value": 500
+      },
+      {
+        "label": "Long Distance (501+ miles)",
+        "min": 501,
+        "max": 9999,
+        "value": 800
+      }
+    ],
+    "parentPortalId": null
+  },
+  "customRates": [
+    {
+      "label": "Short Distance (0-100 miles)",
+      "min": 0,
+      "max": 100,
+      "value": 200
+    },
+    {
+      "label": "Medium Distance (101-500 miles)",
+      "min": 101,
+      "max": 500,
+      "value": 500
+    },
+    {
+      "label": "Long Distance (501+ miles)",
+      "min": 501,
+      "max": 9999,
+      "value": 800
+    }
+  ],
+  "parentPortalId": null,
+  "createdAt": "2024-01-15T10:30:00.000Z",
+  "updatedAt": "2024-01-15T10:30:00.000Z",
+  "__v": 0
+}

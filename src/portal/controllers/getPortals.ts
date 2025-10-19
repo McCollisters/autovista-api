@@ -1,5 +1,5 @@
 import express from "express";
-import { Portal } from "../schema";
+import { Portal } from "@/_global/models";
 
 export const getPortals = async (
   req: express.Request,

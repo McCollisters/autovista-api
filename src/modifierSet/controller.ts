@@ -1,5 +1,5 @@
 import express from "express";
-import { ModifierSet } from "./schema";
+import { ModifierSet } from "@/_global/models";
 import { Status } from "../_global/enums";
 
 export const createModifierSet = async (

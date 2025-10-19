@@ -1,5 +1,5 @@
 import express from "express";
-import { Order } from "../schema";
+import { Order } from "@/_global/models";
 
 export const updateOrder = async (
   req: express.Request,

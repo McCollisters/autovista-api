@@ -69,10 +69,6 @@ export const getTMSBaseRate = async (
       );
     }
   } catch (error) {
-    console.error(
-      "Error fetching price prediction from Super Dispatch:",
-      error,
-    );
     throw error;
   }
 };

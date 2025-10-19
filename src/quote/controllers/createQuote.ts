@@ -1,6 +1,5 @@
 import express from "express";
-import { Quote } from "../schema";
-import { Portal } from "../../portal/schema";
+import { Quote, Portal } from "@/_global/models";
 import { Status } from "../../_global/enums";
 import { getCoordinates } from "../../_global/utils/location";
 import { getMiles } from "../services/getMiles";

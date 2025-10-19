@@ -1,6 +1,12 @@
-import mongoose, { Schema, Document, Model, Types } from "mongoose";
+import mongoose, { Document, Types } from "mongoose";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import {
+  createSchema,
+  createReferenceField,
+  createStatusField,
+} from "../_global/schemas/factory";
+import { Status } from "../_global/enums";
 
 export enum Role {
   PlatformAdmin = "platform_admin",
@@ -29,18 +35,12 @@ export interface IUser extends Document {
   generatePasswordReset(): void;
 }
 
-const userSchemaFields: Record<
-  keyof Omit<
-    IUser,
-    keyof Document | "comparePassword" | "generatePasswordReset"
-  >,
-  any
-> = {
-  portalId: { type: Schema.Types.ObjectId, ref: "Portal", required: true },
+const userSchema = createSchema<IUser>({
+  portalId: createReferenceField("Portal", true),
   email: { type: String, trim: true, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true },
-  status: { type: String, required: true },
+  status: createStatusField(Status, true),
   firstName: { type: String, trim: true },
   lastName: { type: String, trim: true },
   phone: String,
@@ -50,11 +50,9 @@ const userSchemaFields: Record<
   verificationCode: String,
   verificationCodeSent: Date,
   verificationCodeExpires: Date,
-};
+});
 
-const userSchema = new Schema<IUser>(userSchemaFields, { timestamps: true });
-
-userSchema.virtual("fullName").get(function () {
+userSchema.virtual("fullName").get(function (this: any) {
   return `${this.firstName} ${this.lastName}`;
 });
 
@@ -62,15 +60,18 @@ userSchema.set("toJSON", {
   virtuals: true,
 });
 
-userSchema.pre<IUser>("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  try {
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-  } catch (error) {
-    next(error as any);
-  }
-});
+userSchema.pre(
+  "save",
+  async function (this: IUser, next: (error?: any) => void) {
+    if (!this.isModified("password")) return next();
+    try {
+      this.password = await bcrypt.hash(this.password, 10);
+      next();
+    } catch (error) {
+      next(error as any);
+    }
+  },
+);
 
 userSchema.methods.comparePassword = function (
   plaintext: string,
@@ -83,5 +84,5 @@ userSchema.methods.generatePasswordReset = function () {
   this.resetPasswordExpires = new Date(Date.now() + 3600000); // Expires in 1 hour
 };
 
-const User: Model<IUser> = mongoose.model<IUser>("User", userSchema);
-export { User };
+// Model is exported from model.ts file
+export { userSchema };

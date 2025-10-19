@@ -1,29 +1,27 @@
-import mongoose, { Schema, Document, Types } from "mongoose";
+import mongoose, { Document, Types, Schema } from "mongoose";
+import { createSchema, createReferenceField } from "../_global/schemas/factory";
 
 export interface IResponse {
-    questionId: Types.ObjectId; 
-    answer: string | number; 
+  questionId: Types.ObjectId;
+  answer: string | number;
 }
-  
-export interface ISurveyResponse extends Document {
-    userId: Types.ObjectId;
-    surveyId: Types.ObjectId;
-    responses: IResponse[];
-}
-  
-const questionResponseSchema = new Schema<IResponse>({
-    questionId: { type: Schema.Types.ObjectId, required: true },
-    answer: { type: Schema.Types.Mixed, required: true }, 
-});
-  
-const surveyResponseSchema = new Schema<ISurveyResponse>(
-    {
-        userId: { type: Schema.Types.ObjectId, required: true, ref: "User" },
-        surveyId: { type: Schema.Types.ObjectId, required: true, ref: "Survey" },
-        responses: [questionResponseSchema],
-    },
-    { timestamps: true }
-);
 
-export const SurveyResponse = mongoose.model<ISurveyResponse>("SurveyResponse", surveyResponseSchema);
-  
+export interface ISurveyResponse extends Document {
+  userId: Types.ObjectId;
+  surveyId: Types.ObjectId;
+  responses: IResponse[];
+}
+
+const questionResponseSchema = createSchema<IResponse>({
+  questionId: { type: Types.ObjectId, required: true },
+  answer: { type: Schema.Types.Mixed, required: true },
+});
+
+const surveyResponseSchema = createSchema<ISurveyResponse>({
+  userId: createReferenceField("User", true),
+  surveyId: createReferenceField("Survey", true),
+  responses: [questionResponseSchema],
+});
+
+// Model is exported from model.ts file
+export { surveyResponseSchema };

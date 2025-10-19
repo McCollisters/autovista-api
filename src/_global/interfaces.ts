@@ -23,9 +23,23 @@ export interface IConditionalModifiers {
 }
 
 export interface IModifiers {
-  global: IGlobalModifiers;
-  portal: IPortalModifiers;
-  conditional: IConditionalModifiers;
+  inoperable?: number;
+  routes?: number;
+  states?: number;
+  oversize?: number;
+  vehicles?: number;
+  globalDiscount?: number;
+  portalDiscount?: number;
+  irr?: number;
+  fuel?: number;
+  enclosedFlat?: number;
+  enclosedPercent?: number;
+  commission?: number;
+  serviceLevels?: IServiceLevelModifier[];
+  companyTariffs?: IServiceLevelModifier[];
+  global?: IGlobalModifiers;
+  portal?: IPortalModifiers;
+  conditional?: IConditionalModifiers;
 }
 
 export interface IServiceLevelModifier {
@@ -57,16 +71,39 @@ export interface IPricing {
 
 export interface IPricingQuote extends IPricing {
   base: IQuoteBase;
-  total: {
-    whiteGlove: {
-      enclosed: number;
-      enclosedTms: number;
+  totals: {
+    whiteGlove: number;
+    one: {
+      open: {
+        total: number;
+        companyTariff: number;
+        commission: number;
+        totalWithCompanyTariffAndCommission: number;
+      };
+      enclosed: {
+        total: number;
+        companyTariff: number;
+        commission: number;
+        totalWithCompanyTariffAndCommission: number;
+      };
     };
-    withoutServiceLevel: {
-      open: number;
-      openTms: number;
-      enclosed: number;
-      enclosedTms: number;
+    three: {
+      total: number;
+      companyTariff: number;
+      commission: number;
+      totalWithCompanyTariffAndCommission: number;
+    };
+    five: {
+      total: number;
+      companyTariff: number;
+      commission: number;
+      totalWithCompanyTariffAndCommission: number;
+    };
+    seven: {
+      total: number;
+      companyTariff: number;
+      commission: number;
+      totalWithCompanyTariffAndCommission: number;
     };
   };
 }
@@ -81,11 +118,13 @@ export interface IVehicle {
   make: string;
   model: string;
   isInoperable: boolean;
+  isOversize?: boolean;
   pricing?: IPricingQuote;
   pricingClass: VehicleClass;
   class?: string;
   vin?: string;
   year?: string;
+  transportType?: string;
 }
 
 export interface IContact {
@@ -109,7 +148,7 @@ export interface IAddress {
   state?: USState;
   zip?: string;
   notes?: string;
-  coordinates: ICoordinates;
+  coordinates?: ICoordinates;
 }
 
 export interface ISchedule {

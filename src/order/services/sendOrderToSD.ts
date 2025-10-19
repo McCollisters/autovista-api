@@ -1,5 +1,5 @@
 import { authenticateSuperDispatch } from "../../_global/integrations/authenticateSuperDispatch";
-import { IOrder } from "../schema";
+import { IOrder } from "@/_global/models";
 import { formatOrderForSD } from "./formatOrderForSD";
 
 export const sendOrderToSD = async (order: IOrder) => {

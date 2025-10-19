@@ -1,6 +1,5 @@
 import express from "express";
-import { Order } from "../schema";
-import { Quote } from "../../quote/schema";
+import { Order, Quote } from "@/_global/models";
 import { Status } from "../../_global/enums";
 import { updateVehiclesWithQuote } from "../services/updateVehiclesWithQuote";
 import { sendOrderToSD } from "../services/sendOrderToSD";
@@ -93,6 +92,8 @@ export const createOrder = async (
         );
 
         res.status(201).json(orderWithSuperDispatch);
+      } else {
+        res.status(201).json(createdOrder);
       }
     } else {
       res.status(201).json(createdOrder);

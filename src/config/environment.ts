@@ -60,6 +60,13 @@ export const config: AppConfig = {
   ],
 } as const;
 
+// Test-specific environment variables
+export const testConfig = {
+  testDbUri: process.env.MONGODB_TEST_URI,
+  mapboxApiKey: process.env.MAPBOX_API_KEY,
+  superDispatchApiKey: process.env.SD_PRICING_API_KEY,
+} as const;
+
 // Validate required environment variables
 const requiredEnvVars = ["MONGODB_DEV_URI"];
 const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);

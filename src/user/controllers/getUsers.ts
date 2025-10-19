@@ -1,5 +1,5 @@
 import express from "express";
-import { User } from "../schema";
+import { User } from "@/_global/models";
 import { Status } from "../../_global/enums";
 
 export const getUsers = async (

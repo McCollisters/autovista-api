@@ -308,3 +308,557 @@
   service: 'autovista-api',
   timestamp: '2025-10-07 17:36:56'
 }
+{
+  error: ReferenceError: VehicleClass is not defined
+      at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:175:31)
+      at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5),
+  level: 'error',
+  message: 'uncaughtException: VehicleClass is not defined\n' +
+    'ReferenceError: VehicleClass is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:175:31)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  stack: 'ReferenceError: VehicleClass is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:175:31)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  exception: true,
+  date: 'Sat Oct 18 2025 16:07:06 GMT-0600 (Mountain Daylight Time)',
+  process: {
+    pid: 62594,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/src/index.ts'
+    ],
+    memoryUsage: {
+      rss: 145899520,
+      heapTotal: 59752448,
+      heapUsed: 35649832,
+      external: 23118912,
+      arrayBuffers: 18270936
+    }
+  },
+  os: { loadavg: [ 2.0185546875, 2.3740234375, 2.5546875 ], uptime: 89482 },
+  trace: [
+    {
+      column: 31,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts',
+      function: '<anonymous>',
+      line: 175,
+      method: null,
+      native: false
+    },
+    {
+      column: 25,
+      file: 'node:internal/modules/esm/module_job',
+      function: 'ModuleJob.run',
+      line: 271,
+      method: 'run',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:internal/modules/esm/loader',
+      function: 'async onImport.tracePromise.__proto__',
+      line: 578,
+      method: '__proto__',
+      native: false
+    },
+    {
+      column: 5,
+      file: 'node:internal/modules/run_main',
+      function: 'async asyncRunEntryPointWithESMLoader',
+      line: 116,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2025-10-18 16:07:06'
+}
+{
+  error: ReferenceError: VehicleClass is not defined
+      at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:175:31)
+      at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5),
+  level: 'error',
+  message: 'uncaughtException: VehicleClass is not defined\n' +
+    'ReferenceError: VehicleClass is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:175:31)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  stack: 'ReferenceError: VehicleClass is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:175:31)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  exception: true,
+  date: 'Sat Oct 18 2025 16:07:22 GMT-0600 (Mountain Daylight Time)',
+  process: {
+    pid: 63199,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/src/index.ts'
+    ],
+    memoryUsage: {
+      rss: 145178624,
+      heapTotal: 59752448,
+      heapUsed: 35670056,
+      external: 23118912,
+      arrayBuffers: 18270936
+    }
+  },
+  os: {
+    loadavg: [ 2.08056640625, 2.36474609375, 2.546875 ],
+    uptime: 89498
+  },
+  trace: [
+    {
+      column: 31,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts',
+      function: '<anonymous>',
+      line: 175,
+      method: null,
+      native: false
+    },
+    {
+      column: 25,
+      file: 'node:internal/modules/esm/module_job',
+      function: 'ModuleJob.run',
+      line: 271,
+      method: 'run',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:internal/modules/esm/loader',
+      function: 'async onImport.tracePromise.__proto__',
+      line: 578,
+      method: '__proto__',
+      native: false
+    },
+    {
+      column: 5,
+      file: 'node:internal/modules/run_main',
+      function: 'async asyncRunEntryPointWithESMLoader',
+      line: 116,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2025-10-18 16:07:22'
+}
+{
+  error: ReferenceError: Schema is not defined
+      at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/portal/schema.ts:31:22)
+      at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5),
+  level: 'error',
+  message: 'uncaughtException: Schema is not defined\n' +
+    'ReferenceError: Schema is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/portal/schema.ts:31:22)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  stack: 'ReferenceError: Schema is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/portal/schema.ts:31:22)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  exception: true,
+  date: 'Sat Oct 18 2025 21:22:33 GMT-0600 (Mountain Daylight Time)',
+  process: {
+    pid: 14436,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/src/index.ts'
+    ],
+    memoryUsage: {
+      rss: 144998400,
+      heapTotal: 59490304,
+      heapUsed: 35071264,
+      external: 23127104,
+      arrayBuffers: 18279128
+    }
+  },
+  os: {
+    loadavg: [ 3.1376953125, 2.88134765625, 2.5927734375 ],
+    uptime: 108409
+  },
+  trace: [
+    {
+      column: 22,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/portal/schema.ts',
+      function: '<anonymous>',
+      line: 31,
+      method: null,
+      native: false
+    },
+    {
+      column: 25,
+      file: 'node:internal/modules/esm/module_job',
+      function: 'ModuleJob.run',
+      line: 271,
+      method: 'run',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:internal/modules/esm/loader',
+      function: 'async onImport.tracePromise.__proto__',
+      line: 578,
+      method: '__proto__',
+      native: false
+    },
+    {
+      column: 5,
+      file: 'node:internal/modules/run_main',
+      function: 'async asyncRunEntryPointWithESMLoader',
+      line: 116,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2025-10-18 21:22:33'
+}
+{
+  error: ReferenceError: Schema is not defined
+      at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:57:21)
+      at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5),
+  level: 'error',
+  message: 'uncaughtException: Schema is not defined\n' +
+    'ReferenceError: Schema is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:57:21)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  stack: 'ReferenceError: Schema is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:57:21)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  exception: true,
+  date: 'Sat Oct 18 2025 21:22:55 GMT-0600 (Mountain Daylight Time)',
+  process: {
+    pid: 14943,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/src/index.ts'
+    ],
+    memoryUsage: {
+      rss: 141901824,
+      heapTotal: 59490304,
+      heapUsed: 33719528,
+      external: 23127104,
+      arrayBuffers: 18279128
+    }
+  },
+  os: { loadavg: [ 2.98974609375, 2.859375, 2.591796875 ], uptime: 108431 },
+  trace: [
+    {
+      column: 21,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts',
+      function: '<anonymous>',
+      line: 57,
+      method: null,
+      native: false
+    },
+    {
+      column: 25,
+      file: 'node:internal/modules/esm/module_job',
+      function: 'ModuleJob.run',
+      line: 271,
+      method: 'run',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:internal/modules/esm/loader',
+      function: 'async onImport.tracePromise.__proto__',
+      line: 578,
+      method: '__proto__',
+      native: false
+    },
+    {
+      column: 5,
+      file: 'node:internal/modules/run_main',
+      function: 'async asyncRunEntryPointWithESMLoader',
+      line: 116,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2025-10-18 21:22:55'
+}
+{
+  error: ReferenceError: Schema is not defined
+      at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:65:23)
+      at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5),
+  level: 'error',
+  message: 'uncaughtException: Schema is not defined\n' +
+    'ReferenceError: Schema is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:65:23)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  stack: 'ReferenceError: Schema is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:65:23)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  exception: true,
+  date: 'Sat Oct 18 2025 21:23:06 GMT-0600 (Mountain Daylight Time)',
+  process: {
+    pid: 15215,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/src/index.ts'
+    ],
+    memoryUsage: {
+      rss: 141869056,
+      heapTotal: 59490304,
+      heapUsed: 33847096,
+      external: 23118912,
+      arrayBuffers: 18270936
+    }
+  },
+  os: {
+    loadavg: [ 4.89306640625, 3.287109375, 2.7470703125 ],
+    uptime: 108442
+  },
+  trace: [
+    {
+      column: 23,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts',
+      function: '<anonymous>',
+      line: 65,
+      method: null,
+      native: false
+    },
+    {
+      column: 25,
+      file: 'node:internal/modules/esm/module_job',
+      function: 'ModuleJob.run',
+      line: 271,
+      method: 'run',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:internal/modules/esm/loader',
+      function: 'async onImport.tracePromise.__proto__',
+      line: 578,
+      method: '__proto__',
+      native: false
+    },
+    {
+      column: 5,
+      file: 'node:internal/modules/run_main',
+      function: 'async asyncRunEntryPointWithESMLoader',
+      line: 116,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2025-10-18 21:23:06'
+}
+{
+  error: ReferenceError: USState is not defined
+      at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:89:52)
+      at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5),
+  level: 'error',
+  message: 'uncaughtException: USState is not defined\n' +
+    'ReferenceError: USState is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:89:52)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  stack: 'ReferenceError: USState is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:89:52)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  exception: true,
+  date: 'Sat Oct 18 2025 21:23:09 GMT-0600 (Mountain Daylight Time)',
+  process: {
+    pid: 15302,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/src/index.ts'
+    ],
+    memoryUsage: {
+      rss: 145915904,
+      heapTotal: 59490304,
+      heapUsed: 33884816,
+      external: 23118912,
+      arrayBuffers: 18270936
+    }
+  },
+  os: {
+    loadavg: [ 4.89306640625, 3.287109375, 2.7470703125 ],
+    uptime: 108445
+  },
+  trace: [
+    {
+      column: 52,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts',
+      function: '<anonymous>',
+      line: 89,
+      method: null,
+      native: false
+    },
+    {
+      column: 25,
+      file: 'node:internal/modules/esm/module_job',
+      function: 'ModuleJob.run',
+      line: 271,
+      method: 'run',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:internal/modules/esm/loader',
+      function: 'async onImport.tracePromise.__proto__',
+      line: 578,
+      method: '__proto__',
+      native: false
+    },
+    {
+      column: 5,
+      file: 'node:internal/modules/run_main',
+      function: 'async asyncRunEntryPointWithESMLoader',
+      line: 116,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2025-10-18 21:23:09'
+}
+{
+  error: ReferenceError: USState is not defined
+      at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:95:52)
+      at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5),
+  level: 'error',
+  message: 'uncaughtException: USState is not defined\n' +
+    'ReferenceError: USState is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:95:52)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  stack: 'ReferenceError: USState is not defined\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts:95:52)\n' +
+    '    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)\n' +
+    '    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\n' +
+    '    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)',
+  exception: true,
+  date: 'Sat Oct 18 2025 21:23:18 GMT-0600 (Mountain Daylight Time)',
+  process: {
+    pid: 15494,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/src/index.ts'
+    ],
+    memoryUsage: {
+      rss: 145539072,
+      heapTotal: 60014592,
+      heapUsed: 32915264,
+      external: 23118912,
+      arrayBuffers: 18270936
+    }
+  },
+  os: {
+    loadavg: [ 4.2138671875, 3.19482421875, 2.720703125 ],
+    uptime: 108454
+  },
+  trace: [
+    {
+      column: 52,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/schema.ts',
+      function: '<anonymous>',
+      line: 95,
+      method: null,
+      native: false
+    },
+    {
+      column: 25,
+      file: 'node:internal/modules/esm/module_job',
+      function: 'ModuleJob.run',
+      line: 271,
+      method: 'run',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:internal/modules/esm/loader',
+      function: 'async onImport.tracePromise.__proto__',
+      line: 578,
+      method: '__proto__',
+      native: false
+    },
+    {
+      column: 5,
+      file: 'node:internal/modules/run_main',
+      function: 'async asyncRunEntryPointWithESMLoader',
+      line: 116,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2025-10-18 21:23:18'
+}

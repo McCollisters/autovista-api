@@ -1,33 +1,22 @@
-import mongoose, { Schema, Document, Model, Types } from "mongoose";
-import { IContact, IAddress } from "../_global/interfaces";
+import mongoose, { Document, Types } from "mongoose";
+import {
+  createSchema,
+  createReferenceField,
+  createStatusField,
+  createContactSchema,
+  createAddressSchema,
+} from "../_global/schemas/factory";
 import { Status, USState } from "../_global/enums";
+import {
+  IContact,
+  IAddress,
+  IOrderForm,
+  IQuoteForm,
+  IOrderPDF,
+  IOptions,
+} from "../_global/schemas/types";
 
-export interface IOrderForm {
-  enableAgent: boolean;
-  requireLocationType: boolean;
-}
-
-export interface IQuoteForm {
-  enableTariff: boolean;
-  enableCommission: boolean;
-}
-
-export interface IOrderPDF {
-  enablePriceBreakdown: boolean;
-}
-
-export interface IOptions {
-  orderForm: IOrderForm;
-  quoteForm: IQuoteForm;
-  orderPDF: IOrderPDF;
-  overrideLogo: boolean;
-  enableCustomRates: boolean;
-  enableVariableCompanyTariff: boolean;
-  enableWhiteGloveOverride: boolean;
-  enableOrderTrackingByCustomer: boolean;
-  enableSurvey: boolean;
-}
-
+// Define ICustomRate interface locally since it's only used in portal context
 export interface ICustomRate {
   value: number;
   label: string;
@@ -38,83 +27,37 @@ export interface ICustomRate {
 export interface IPortal extends Document {
   status: string;
   companyName: string;
-  contact?: {
-    name?: string;
-    email?: string;
-    phone?: string;
-    phoneMobile?: string;
-    notes?: string;
-  };
-  address?: {
-    address?: string;
-    addressLine2?: string;
-    city?: string;
-    state?: string;
-    zip?: string;
-  };
+  contact?: IContact;
+  address?: IAddress;
   logo?: string;
-  options: {
-    overrideLogo: boolean;
-    enableCustomRates: boolean;
-    enableVariableCompanyTariff: boolean;
-    enableWhiteGloveOverride: boolean;
-    enableOrderTrackingByCustomer: boolean;
-    enableSurvey: boolean;
-    orderForm: {
-      enableAgent: boolean;
-      requireLocationType: boolean;
-    };
-    quoteForm: {
-      enableTariff: boolean;
-      enableCommission: boolean;
-    };
-    orderPDF: {
-      enablePriceBreakdown: boolean;
-    };
-    customRates: Array<ICustomRate>;
-    parentPortalId: string | null;
-  };
+  options: IOptions;
   customRates: Array<ICustomRate>;
-  parentPortalId: string | null;
+  parentPortalId: Types.ObjectId | null;
 }
 
-const portalSchema = new Schema<IPortal>(
-  {
-    status: { type: String, enum: Object.values(Status), required: true },
-    companyName: { type: String, required: true },
-    contact: {
-      name: { type: String },
-      email: { type: String },
-      phone: { type: String },
-      phoneMobile: { type: String },
-      notes: { type: String },
+const portalSchema = createSchema<IPortal>({
+  status: createStatusField(Status, true),
+  companyName: { type: String, required: true },
+  contact: createContactSchema(),
+  address: createAddressSchema(),
+  logo: { type: String },
+  options: {
+    overrideLogo: { type: Boolean, default: false },
+    enableCustomRates: { type: Boolean, default: false },
+    enableVariableCompanyTariff: { type: Boolean, default: false },
+    enableWhiteGloveOverride: { type: Boolean, default: false },
+    enableOrderTrackingByCustomer: { type: Boolean, default: false },
+    enableSurvey: { type: Boolean, default: true },
+    orderForm: {
+      enableAgent: { type: Boolean, default: true },
+      requireLocationType: { type: Boolean, default: true },
     },
-    address: {
-      address: { type: String },
-      addressLine2: { type: String },
-      city: { type: String },
-      state: { type: String, enum: Object.values(USState) },
-      zip: { type: String },
+    quoteForm: {
+      enableTariff: { type: Boolean, default: true },
+      enableCommission: { type: Boolean, default: true },
     },
-    logo: { type: String },
-    options: {
-      overrideLogo: { type: Boolean, default: false },
-      enableCustomRates: { type: Boolean, default: false },
-      enableVariableCompanyTariff: { type: Boolean, default: false },
-      enableWhiteGloveOverride: { type: Boolean, default: false },
-      enableOrderTrackingByCustomer: { type: Boolean, default: false },
-      enableSurvey: { type: Boolean, default: true },
-      orderForm: {
-        enableAgent: { type: Boolean, default: true },
-        requireLocationType: { type: Boolean, default: true },
-      },
-      quoteForm: {
-        enableTariff: { type: Boolean, default: true },
-        enableCommission: { type: Boolean, default: true },
-      },
-      orderPDF: {
-        enablePriceBreakdown: { type: Boolean, default: true },
-      },
+    orderPDF: {
+      enablePriceBreakdown: { type: Boolean, default: true },
     },
     customRates: [
       {
@@ -124,14 +67,18 @@ const portalSchema = new Schema<IPortal>(
         value: { type: Number },
       },
     ],
-    parentPortalId: {
-      type: Schema.Types.ObjectId,
-      ref: "Portal",
-      default: null,
-    },
+    parentPortalId: { type: String, default: null },
   },
-  { timestamps: true },
-);
+  customRates: [
+    {
+      label: { type: String },
+      min: { type: Number },
+      max: { type: Number },
+      value: { type: Number },
+    },
+  ],
+  parentPortalId: createReferenceField("Portal", false),
+});
 
-const Portal: Model<IPortal> = mongoose.model<IPortal>("Portal", portalSchema);
-export { Portal };
+// Model is exported from model.ts file
+export { portalSchema };

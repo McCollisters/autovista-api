@@ -1,22 +1,24 @@
 {
   "compilerOptions": {
-    "target": "ESNext",                        // Target modern JavaScript
-    "module": "ESNext",                        // Use ES modules (stable)
-    "moduleResolution": "node",                // Node module resolution
-    "esModuleInterop": true,                   // Allow default imports from CommonJS
-    "allowSyntheticDefaultImports": true,      // Allow default imports from non-ES modules
-    "strict": true,                            // Enable strict mode
-    "skipLibCheck": true,                      // Skip library check
-    "forceConsistentCasingInFileNames": true,  // Consistent file name casing
-    "baseUrl": "./src",                        // Base directory for module resolution
-    "outDir": "./dist",                        // Output directory for JS files
-    "rootDir": "./src",                        // Input directory for TS files
-    "resolveJsonModule": true,                 // Allow importing JSON files
+    "target": "ESNext", // Target modern JavaScript
+    "module": "ESNext", // Use ES modules (stable)
+    "moduleResolution": "node", // Node module resolution
+    "esModuleInterop": true, // Allow default imports from CommonJS
+    "allowSyntheticDefaultImports": true, // Allow default imports from non-ES modules
+    "strict": true, // Enable strict mode
+    "skipLibCheck": true, // Skip library check
+    "forceConsistentCasingInFileNames": true, // Consistent file name casing
+    "baseUrl": ".", // Base directory for module resolution
+    "outDir": "./dist", // Output directory for JS files
+    "rootDir": "./src", // Input directory for TS files
+    "resolveJsonModule": true, // Allow importing JSON files
     "paths": {
-      "*": ["node_modules/*", "src/*"]         // Resolve modules from 'node_modules' and 'src'
+      "@/*": ["src/*"], // Path alias for src directory
+      "@tests/*": ["tests/*"], // Path alias for tests directory
+      "*": ["node_modules/*", "src/*"] // Resolve modules from 'node_modules' and 'src'
     },
-    "types": ["node", "express"]               // Include types for Node and Express
+    "types": ["node", "express"] // Include types for Node and Express
   },
-  "include": ["src/**/*"],                     // Include all files in the 'src' directory
-  "exclude": ["node_modules"]                  // Exclude 'node_modules' from compilation
+  "include": ["src/**/*"], // Include all files in the 'src' directory
+  "exclude": ["node_modules"] // Exclude 'node_modules' from compilation
 }

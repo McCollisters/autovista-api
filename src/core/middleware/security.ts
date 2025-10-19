@@ -2,8 +2,8 @@ import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import { Request, Response, NextFunction } from "express";
-import { config } from "../../config/index.js";
-import { logger } from "../logger.js";
+import { config } from "@/config/index";
+import { logger } from "@/core/logger";
 
 // Helmet configuration for security headers
 export const helmetConfig = helmet({
@@ -108,7 +108,7 @@ export const requestLogger = (
 
   // Override res.end to log response
   const originalEnd = res.end;
-  res.end = function (chunk?: any, encoding?: any) {
+  res.end = function (chunk?: any, encoding?: any): any {
     const duration = Date.now() - startTime;
 
     logger.info("Request completed", {

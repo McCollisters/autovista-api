@@ -1,4 +1,5 @@
-import { IPortal, ICustomRate } from "../../portal/schema";
+import { IPortal } from "@/_global/models";
+import { ICustomRate } from "../../portal/schema";
 
 export const getCustomBaseRate = (miles: number, portal: IPortal) => {
   try {

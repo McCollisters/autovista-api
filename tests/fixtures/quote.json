@@ -1,0 +1,237 @@
+{
+  "_id": "507f1f77bcf86cd799439014",
+  "isDirect": false,
+  "status": "active",
+  "portalId": "507f1f77bcf86cd799439011",
+  "userId": "507f1f77bcf86cd799439015",
+  "customer": {
+    "name": "Test Customer",
+    "email": "customer@example.com",
+    "phone": "555-123-4567",
+    "trackingCode": "TEST123"
+  },
+  "origin": {
+    "locationType": "residential",
+    "userInput": "Boston, MA",
+    "validated": "Boston, MA",
+    "state": "MA",
+    "coordinates": {
+      "longitude": "-71.056804",
+      "latitude": "42.35888"
+    },
+    "notes": "Residential pickup location"
+  },
+  "destination": {
+    "locationType": "commercial",
+    "userInput": "Los Angeles, CA",
+    "validated": "Los Angeles, CA",
+    "state": "CA",
+    "coordinates": {
+      "longitude": "-118.254187",
+      "latitude": "34.048051"
+    },
+    "notes": "Commercial delivery location"
+  },
+  "miles": 2987,
+  "transitTime": [],
+  "vehicles": [
+    {
+      "make": "Toyota",
+      "model": "Camry",
+      "year": "2020",
+      "vin": "1HGBH41JXMN109186",
+      "isInoperable": false,
+      "isOversize": false,
+      "transportType": "open",
+      "pricingClass": "sedan",
+      "pricing": {
+        "base": {
+          "tms": 1000,
+          "whiteGlove": 500,
+          "custom": 0
+        },
+        "modifiers": {
+          "inoperable": 0,
+          "routes": 0,
+          "states": 0,
+          "oversize": 0,
+          "vehicles": 0,
+          "globalDiscount": 50,
+          "portalDiscount": 75,
+          "irr": 25,
+          "fuel": 50,
+          "enclosedFlat": 0,
+          "enclosedPercent": 0,
+          "commission": 100,
+          "serviceLevels": [
+            {
+              "serviceLevelOption": "1",
+              "value": 300
+            },
+            {
+              "serviceLevelOption": "3",
+              "value": 150
+            },
+            {
+              "serviceLevelOption": "5",
+              "value": 75
+            },
+            {
+              "serviceLevelOption": "7",
+              "value": 0
+            }
+          ],
+          "companyTariffs": [
+            {
+              "serviceLevelOption": "1",
+              "value": 200
+            },
+            {
+              "serviceLevelOption": "3",
+              "value": 150
+            },
+            {
+              "serviceLevelOption": "5",
+              "value": 100
+            },
+            {
+              "serviceLevelOption": "7",
+              "value": 50
+            }
+          ]
+        },
+        "totalModifiers": 300,
+        "totals": {
+          "whiteGlove": 2000,
+          "one": {
+            "open": {
+              "total": 1500,
+              "companyTariff": 200,
+              "commission": 100,
+              "totalWithCompanyTariffAndCommission": 1800
+            },
+            "enclosed": {
+              "total": 1800,
+              "companyTariff": 250,
+              "commission": 100,
+              "totalWithCompanyTariffAndCommission": 2150
+            }
+          },
+          "three": {
+            "total": 1350,
+            "companyTariff": 150,
+            "commission": 100,
+            "totalWithCompanyTariffAndCommission": 1600
+          },
+          "five": {
+            "total": 1275,
+            "companyTariff": 100,
+            "commission": 100,
+            "totalWithCompanyTariffAndCommission": 1475
+          },
+          "seven": {
+            "total": 1200,
+            "companyTariff": 50,
+            "commission": 100,
+            "totalWithCompanyTariffAndCommission": 1350
+          }
+        }
+      }
+    }
+  ],
+  "totalPricing": {
+    "base": 1000,
+    "modifiers": {
+      "inoperable": 0,
+      "routes": 0,
+      "states": 0,
+      "oversize": 0,
+      "vehicles": 0,
+      "globalDiscount": 50,
+      "portalDiscount": 75,
+      "irr": 25,
+      "fuel": 50,
+      "enclosedFlat": 0,
+      "enclosedPercent": 0,
+      "commission": 100,
+      "serviceLevels": [
+        {
+          "serviceLevelOption": "1",
+          "value": 300
+        },
+        {
+          "serviceLevelOption": "3",
+          "value": 150
+        },
+        {
+          "serviceLevelOption": "5",
+          "value": 75
+        },
+        {
+          "serviceLevelOption": "7",
+          "value": 0
+        }
+      ],
+      "companyTariffs": [
+        {
+          "serviceLevelOption": "1",
+          "value": 200
+        },
+        {
+          "serviceLevelOption": "3",
+          "value": 150
+        },
+        {
+          "serviceLevelOption": "5",
+          "value": 100
+        },
+        {
+          "serviceLevelOption": "7",
+          "value": 50
+        }
+      ]
+    },
+    "totalModifiers": 300,
+    "totals": {
+      "whiteGlove": 2000,
+      "one": {
+        "open": {
+          "total": 1500,
+          "companyTariff": 200,
+          "commission": 100,
+          "totalWithCompanyTariffAndCommission": 1800
+        },
+        "enclosed": {
+          "total": 1800,
+          "companyTariff": 250,
+          "commission": 100,
+          "totalWithCompanyTariffAndCommission": 2150
+        }
+      },
+      "three": {
+        "total": 1350,
+        "companyTariff": 150,
+        "commission": 100,
+        "totalWithCompanyTariffAndCommission": 1600
+      },
+      "five": {
+        "total": 1275,
+        "companyTariff": 100,
+        "commission": 100,
+        "totalWithCompanyTariffAndCommission": 1475
+      },
+      "seven": {
+        "total": 1200,
+        "companyTariff": 50,
+        "commission": 100,
+        "totalWithCompanyTariffAndCommission": 1350
+      }
+    }
+  },
+  "history": [],
+  "createdAt": "2024-01-15T10:30:00.000Z",
+  "updatedAt": "2024-01-15T10:30:00.000Z",
+  "refId": 12345,
+  "__v": 0,
+  "vehicleCount": 1
+}

@@ -1,6 +1,6 @@
-import mongoose, { Schema, Document, Model, Types } from "mongoose";
-
-import { IServiceLevelModifier } from "../_global/interfaces";
+import mongoose, { Document, Types } from "mongoose";
+import { createSchema, createReferenceField } from "../_global/schemas/factory";
+import { IServiceLevelModifier } from "../_global/schemas/types";
 
 export enum ModifierSetType {
   Markup = "markup",
@@ -60,7 +60,8 @@ export interface IModifierSet extends Document {
   enclosedPercent?: IModifier;
   discount?: IModifier;
   companyTariff?: IModifier;
-  companyTariffDiscount?: IModifier; // set by portal admins
+  companyTariffDiscount?: IModifier; // set by portal admins, the discount is subtracted from the company tariff
+  companyTariffEnclosedFee?: IModifier; // for variable company tariffs, this is the additional fee for enclosed transport, it is added to the company tariff
   fixedCommission?: IModifier;
   states?: Map<
     string,
@@ -76,97 +77,104 @@ export interface IModifierSet extends Document {
   serviceLevels: Array<IServiceLevelModifier>;
 }
 
-const modifierSetSchema = new Schema<IModifierSet>(
-  {
-    portalId: { type: Schema.Types.ObjectId, ref: "Portal" },
-    isGlobal: { type: Boolean, default: false },
-    inoperable: {
-      value: { type: Number, default: 0 },
-      valueType: { type: String, default: "flat" },
-    },
-    fuel: {
-      value: { type: Number, default: 0 },
-      valueType: { type: String, default: "flat" },
-    },
-    irr: {
-      value: { type: Number, default: 0 },
-      valueType: { type: String, default: "flat" },
-    },
-    whiteGlove: {
-      multiplier: { type: Number, default: 2 },
-      minimum: { type: Number, default: 1200 },
-    },
-    oversize: {
-      suv: { type: Number, default: 0 },
-      van: { type: Number, default: 0 },
-      pickup_2_doors: { type: Number, default: 0 },
-      pickup_4_doors: { type: Number, default: 0 },
-    },
-    enclosedFlat: {
-      value: { type: Number, default: 0 },
-      valueType: { type: String, default: "flat" },
-    },
-    enclosedPercent: {
-      value: { type: Number, default: 0 },
-      valueType: { type: String, default: "flat" },
-    },
-    discount: {
-      value: { type: Number, default: 0 },
-      valueType: { type: String, default: "flat" },
-    },
-    companyTariff: {
-      value: { type: Number, default: 0 },
-      valueType: { type: String, default: "flat" },
-    },
-    companyTariffDiscount: {
-      value: { type: Number, default: 0 },
-      valueType: { type: String, default: "flat" },
-    },
-    fixedCommission: {
-      value: { type: Number, default: 0 },
-      valueType: { type: String, default: "flat" },
-    },
-    states: {
-      type: Map,
-      of: {
-        direction: { type: String, enum: Object.values(Direction) },
-        value: { type: Number, required: true },
-        valueType: {
-          type: String,
-          enum: Object.values(ValueType),
-          required: true,
-        },
-      },
-    },
-    routes: [
-      {
-        value: { type: Number, default: 0 },
-        valueType: String,
-        origin: String,
-        destination: String,
-      },
-    ],
-    zips: [
-      {
-        value: { type: Number, default: 0 },
-        valueType: String,
-        zip: String,
-      },
-    ],
-    vehicles: [
-      {
-        value: { type: Number, default: 0 },
-        valueType: String,
-        makeModel: [],
-      },
-    ],
-    serviceLevels: Array<IServiceLevelModifier>,
+const modifierSetSchemaDefinition = {
+  portalId: createReferenceField("Portal", false),
+  isGlobal: { type: Boolean, default: false },
+  inoperable: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
   },
-  { timestamps: true },
+  fuel: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
+  },
+  irr: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
+  },
+  whiteGlove: {
+    multiplier: { type: Number, default: 2 },
+    minimum: { type: Number, default: 1200 },
+  },
+  oversize: {
+    suv: { type: Number, default: 0 },
+    van: { type: Number, default: 0 },
+    pickup_2_doors: { type: Number, default: 0 },
+    pickup_4_doors: { type: Number, default: 0 },
+  },
+  enclosedFlat: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
+  },
+  enclosedPercent: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
+  },
+  discount: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
+  },
+  companyTariff: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
+  },
+  companyTariffDiscount: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
+  },
+  companyTariffEnclosedFee: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
+  },
+  fixedCommission: {
+    value: { type: Number, default: 0 },
+    valueType: { type: String, default: "flat" },
+  },
+  states: {
+    type: Map,
+    of: {
+      direction: { type: String, enum: Object.values(Direction) },
+      value: { type: Number, required: true },
+      valueType: {
+        type: String,
+        enum: Object.values(ValueType),
+        required: true,
+      },
+    },
+  },
+  routes: [
+    {
+      value: { type: Number, default: 0 },
+      valueType: String,
+      origin: String,
+      destination: String,
+    },
+  ],
+  zips: [
+    {
+      value: { type: Number, default: 0 },
+      valueType: String,
+      zip: String,
+    },
+  ],
+  vehicles: [
+    {
+      value: { type: Number, default: 0 },
+      valueType: String,
+      makeModel: [],
+    },
+  ],
+  serviceLevels: [
+    {
+      serviceLevelOption: { type: String, required: true },
+      value: { type: Number, required: true },
+    },
+  ],
+};
+
+const modifierSetSchema = createSchema<IModifierSet>(
+  modifierSetSchemaDefinition,
 );
 
-const ModifierSet: Model<IModifierSet> = mongoose.model<IModifierSet>(
-  "ModifierSet",
-  modifierSetSchema,
-);
-export { ModifierSet };
+// Model is exported from model.ts file
+export { modifierSetSchema };
