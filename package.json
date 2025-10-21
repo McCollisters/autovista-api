@@ -19,7 +19,17 @@
     "test": "NODE_ENV=test jest",
     "test:watch": "NODE_ENV=test jest --watch",
     "test:coverage": "NODE_ENV=test jest --coverage",
-    "test:ci": "NODE_ENV=test jest --ci --coverage --watchAll=false"
+    "test:ci": "NODE_ENV=test jest --ci --coverage --watchAll=false",
+    "migration:run": "tsx migrations/run-migration.ts",
+    "migration:list": "tsx migrations/run-migration.ts list",
+    "migration:up": "tsx migrations/run-migration.ts",
+    "migration:down": "tsx migrations/run-migration.ts up down",
+    "migrate:quotes": "tsx -r dotenv/config migrations/scripts/migrate-quotes.ts",
+    "migrate:quotes:down": "tsx -r dotenv/config migrations/scripts/migrate-quotes.ts down",
+    "migrate:orders": "tsx -r dotenv/config migrations/scripts/migrate-orders.ts",
+    "migrate:orders:down": "tsx -r dotenv/config migrations/scripts/migrate-orders.ts down",
+    "migrate:notification-logs": "tsx -r dotenv/config migrations/scripts/migrate-notification-logs.ts",
+    "migrate:notification-logs:down": "tsx -r dotenv/config migrations/scripts/migrate-notification-logs.ts down"
   },
   "keywords": [],
   "license": "MIT",

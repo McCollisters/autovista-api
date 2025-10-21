@@ -28,29 +28,107 @@ import {
   INotifications,
 } from "../_global/schemas/types";
 
+// Helper function to create notification schema
+const createNotificationSchema = () => ({
+  status: { type: String, enum: Object.values(NotificationStatus) },
+  sentAt: { type: Date },
+  failedAt: { type: Date },
+  recipientEmail: { type: String },
+});
+
 export interface IOrder extends Document {
   createdAt: Date;
   bookedAt: Date;
   isDirect: boolean;
-  refId: string;
-  reg: string;
+  refId: number;
+  reg: number;
   status: Status;
   portalId: Types.ObjectId;
   userId: Types.ObjectId;
   quoteId: Types.ObjectId;
   miles: number;
+  transitTime: number[];
   transportType: TransportType;
   paymentType: PaymentType;
-  origin: ILocation;
-  destination: ILocation;
+  hasAcceptedTerms: boolean;
+  hasPaid: boolean;
+  billRate: number;
+  origin: ILocation & {
+    longitude: string;
+    latitude: string;
+  };
+  destination: ILocation & {
+    longitude: string;
+    latitude: string;
+  };
   customer: IContact;
   tms: ITMS;
-  vehicles: Array<IVehicle>;
-  totalPricing: IPricingOrder;
+  vehicles: Array<
+    IVehicle & {
+      pricing: {
+        base: number;
+        modifiers: {
+          inoperable: number;
+          routes: number;
+          states: number;
+          oversize: number;
+          vehicles: number;
+          globalDiscount: number;
+          portalDiscount: number;
+          irr: number;
+          fuel: number;
+          enclosedFlat: number;
+          enclosedPercent: number;
+          commission: number;
+          serviceLevels: number;
+          companyTariff: number;
+        };
+        total: number;
+        totalWithCompanyTariffAndCommission: number;
+      };
+    }
+  >;
+  totalPricing: {
+    base: number;
+    modifiers: {
+      inoperable: number;
+      routes: number;
+      states: number;
+      oversize: number;
+      vehicles: number;
+      globalDiscount: number;
+      portalDiscount: number;
+      irr: number;
+      fuel: number;
+      enclosedFlat: number;
+      enclosedPercent: number;
+      commission: number;
+      serviceLevel: number;
+      companyTariff: number;
+    };
+    total: number;
+    totalWithCompanyTariffAndCommission: number;
+  };
   schedule: ISchedule;
   hasClaim: boolean;
   driver: IDriver;
-  notifications: INotifications;
+  notifications: {
+    paymentRequest: INotification;
+    paymentReminder: INotification;
+    signatureRequest: INotification;
+    signatureRequestReminder: INotification;
+    survey: INotification;
+    surveyReminder: INotification;
+    pickupReminder: INotification;
+    agentsConfirmation: INotification;
+    agentsPickupConfirmation: INotification;
+    agentsDeliveryConfirmation: INotification;
+    customerConfirmation: INotification;
+    customerPickupConfirmation: INotification;
+    customerDeliveryConfirmation: INotification;
+    portalAdminPickupConfirmation: INotification;
+    portalAdminDeliveryConfirmation: INotification;
+  };
   agents: IAgent[];
 }
 
@@ -58,14 +136,18 @@ const orderSchemaDefinition = {
   createdAt: { type: Date, default: Date.now },
   bookedAt: { type: Date },
   isDirect: { type: Boolean, default: false },
-  refId: { type: String, required: true },
-  reg: { type: String },
+  refId: { type: Number, required: true },
+  reg: { type: Number },
   status: createStatusField(Status, true),
   portalId: createReferenceField("Portal", true),
   userId: createReferenceField("User", true),
   quoteId: createReferenceField("Quote", true),
   miles: { type: Number },
   paymentType: { type: String },
+  hasAcceptedTerms: { type: Boolean, default: false },
+  hasPaid: { type: Boolean, default: false },
+  billRate: { type: Number, default: null },
+  transitTime: [{ type: Number }, { type: Number }],
   transportType: {
     type: String,
     enum: Object.values(TransportType),
@@ -76,12 +158,16 @@ const orderSchemaDefinition = {
     locationType: { type: String },
     contact: createContactSchema(),
     address: createAddressSchema(),
+    longitude: { type: String },
+    latitude: { type: String },
   },
   destination: {
     notes: { type: String },
     locationType: { type: String },
     contact: createContactSchema(),
     address: createAddressSchema(),
+    longitude: { type: String },
+    latitude: { type: String },
   },
   customer: createContactSchema(),
   tms: {
@@ -120,82 +206,11 @@ const orderSchemaDefinition = {
           enclosedFlat: { type: Number, required: true, default: 0 },
           enclosedPercent: { type: Number, required: true, default: 0 },
           commission: { type: Number, required: true, default: 0 },
-          serviceLevels: [
-            {
-              _id: false,
-              serviceLevelOption: {
-                type: String,
-                enum: Object.values(ServiceLevelOption),
-              },
-              value: { type: Number },
-            },
-          ],
-          companyTariffs: [
-            {
-              _id: false,
-              serviceLevelOption: {
-                type: String,
-                enum: Object.values(ServiceLevelOption),
-              },
-              value: { type: Number },
-            },
-          ],
+          serviceLevel: { type: Number },
+          companyTariff: { type: Number },
         },
-        totals: {
-          whiteGlove: { type: Number, required: true, default: 0 },
-          one: {
-            open: {
-              total: { type: Number, required: true, default: 0 },
-              companyTariff: { type: Number, required: true, default: 0 },
-              commission: { type: Number, required: true, default: 0 },
-              totalWithCompanyTariffAndCommission: {
-                type: Number,
-                required: true,
-                default: 0,
-              },
-            },
-            enclosed: {
-              total: { type: Number, required: true, default: 0 },
-              companyTariff: { type: Number, required: true, default: 0 },
-              commission: { type: Number, required: true, default: 0 },
-              totalWithCompanyTariffAndCommission: {
-                type: Number,
-                required: true,
-                default: 0,
-              },
-            },
-          },
-          three: {
-            total: { type: Number, required: true, default: 0 },
-            companyTariff: { type: Number, required: true, default: 0 },
-            commission: { type: Number, required: true, default: 0 },
-            totalWithCompanyTariffAndCommission: {
-              type: Number,
-              required: true,
-              default: 0,
-            },
-          },
-          five: {
-            total: { type: Number, required: true, default: 0 },
-            companyTariff: { type: Number, required: true, default: 0 },
-            commission: { type: Number, required: true, default: 0 },
-            totalWithCompanyTariffAndCommission: {
-              type: Number,
-              required: true,
-              default: 0,
-            },
-          },
-          seven: {
-            total: { type: Number, required: true, default: 0 },
-            companyTariff: { type: Number, required: true, default: 0 },
-            commission: { type: Number, required: true, default: 0 },
-            totalWithCompanyTariffAndCommission: {
-              type: Number,
-              required: true,
-              default: 0,
-            },
-          },
-        },
+        total: { type: Number },
+        totalWithCompanyTariffAndCommission: { type: Number },
       },
     },
   ],
@@ -214,81 +229,14 @@ const orderSchemaDefinition = {
       enclosedFlat: { type: Number, required: true, default: 0 },
       enclosedPercent: { type: Number, required: true, default: 0 },
       commission: { type: Number, required: true, default: 0 },
-      serviceLevels: [
-        {
-          _id: false,
-          serviceLevelOption: {
-            type: String,
-            enum: Object.values(ServiceLevelOption),
-          },
-          value: { type: Number },
-        },
-      ],
-      companyTariffs: [
-        {
-          _id: false,
-          serviceLevelOption: {
-            type: String,
-            enum: Object.values(ServiceLevelOption),
-          },
-          value: { type: Number },
-        },
-      ],
+      serviceLevel: { type: Number },
+      companyTariff: { type: Number },
     },
-    totals: {
-      whiteGlove: { type: Number, required: true, default: 0 },
-      one: {
-        open: {
-          total: { type: Number, required: true, default: 0 },
-          companyTariff: { type: Number, required: true, default: 0 },
-          commission: { type: Number, required: true, default: 0 },
-          totalWithCompanyTariffAndCommission: {
-            type: Number,
-            required: true,
-            default: 0,
-          },
-        },
-        enclosed: {
-          total: { type: Number, required: true, default: 0 },
-          companyTariff: { type: Number, required: true, default: 0 },
-          commission: { type: Number, required: true, default: 0 },
-          totalWithCompanyTariffAndCommission: {
-            type: Number,
-            required: true,
-            default: 0,
-          },
-        },
-      },
-      three: {
-        total: { type: Number, required: true, default: 0 },
-        companyTariff: { type: Number, required: true, default: 0 },
-        commission: { type: Number, required: true, default: 0 },
-        totalWithCompanyTariffAndCommission: {
-          type: Number,
-          required: true,
-          default: 0,
-        },
-      },
-      five: {
-        total: { type: Number, required: true, default: 0 },
-        companyTariff: { type: Number, required: true, default: 0 },
-        commission: { type: Number, required: true, default: 0 },
-        totalWithCompanyTariffAndCommission: {
-          type: Number,
-          required: true,
-          default: 0,
-        },
-      },
-      seven: {
-        total: { type: Number, required: true, default: 0 },
-        companyTariff: { type: Number, required: true, default: 0 },
-        commission: { type: Number, required: true, default: 0 },
-        totalWithCompanyTariffAndCommission: {
-          type: Number,
-          required: true,
-          default: 0,
-        },
-      },
+    total: { type: Number, required: true },
+    totalWithCompanyTariffAndCommission: {
+      type: Number,
+      required: true,
+      default: 0,
     },
   },
   schedule: {
@@ -300,6 +248,7 @@ const orderSchemaDefinition = {
     ontimePickup: { type: Boolean, default: null },
     ontimeDelivery: { type: Boolean, default: null },
     pickupSelected: { type: Date, required: true },
+    pickupEstimated: [{ type: Date }],
     deliveryEstimated: [{ type: Date }],
     pickupCompleted: { type: Date, default: null },
     deliveryCompleted: { type: Date, default: null },
@@ -322,51 +271,21 @@ const orderSchemaDefinition = {
   ],
   hasClaim: { type: Boolean, default: false },
   notifications: {
-    survey: {
-      status: { type: String, enum: Object.values(NotificationStatus) },
-      sentAt: { type: Date },
-      failedAt: { type: Date },
-    },
-    surveyReminder: {
-      status: { type: String, enum: Object.values(NotificationStatus) },
-      sentAt: { type: Date },
-      failedAt: { type: Date },
-    },
-    pickupReminder: {
-      status: { type: String, enum: Object.values(NotificationStatus) },
-      sentAt: { type: Date },
-      failedAt: { type: Date },
-    },
-    agentsPickupConfirmation: {
-      status: { type: String, enum: Object.values(NotificationStatus) },
-      sentAt: { type: Date },
-      failedAt: { type: Date },
-    },
-    agentsDeliveryConfirmation: {
-      status: { type: String, enum: Object.values(NotificationStatus) },
-      sentAt: { type: Date },
-      failedAt: { type: Date },
-    },
-    customerPickupConfirmation: {
-      status: { type: String, enum: Object.values(NotificationStatus) },
-      sentAt: { type: Date },
-      failedAt: { type: Date },
-    },
-    customerDeliveryConfirmation: {
-      status: { type: String, enum: Object.values(NotificationStatus) },
-      sentAt: { type: Date },
-      failedAt: { type: Date },
-    },
-    portalAdminPickupConfirmation: {
-      status: { type: String, enum: Object.values(NotificationStatus) },
-      sentAt: { type: Date },
-      failedAt: { type: Date },
-    },
-    portalAdminDeliveryConfirmation: {
-      status: { type: String, enum: Object.values(NotificationStatus) },
-      sentAt: { type: Date },
-      failedAt: { type: Date },
-    },
+    paymentRequest: createNotificationSchema(),
+    paymentReminder: createNotificationSchema(),
+    signatureRequest: createNotificationSchema(),
+    signatureRequestReminder: createNotificationSchema(),
+    survey: createNotificationSchema(),
+    surveyReminder: createNotificationSchema(),
+    pickupReminder: createNotificationSchema(),
+    agentsConfirmation: createNotificationSchema(),
+    agentsPickupConfirmation: createNotificationSchema(),
+    agentsDeliveryConfirmation: createNotificationSchema(),
+    customerConfirmation: createNotificationSchema(),
+    customerPickupConfirmation: createNotificationSchema(),
+    customerDeliveryConfirmation: createNotificationSchema(),
+    portalAdminPickupConfirmation: createNotificationSchema(),
+    portalAdminDeliveryConfirmation: createNotificationSchema(),
   },
 };
 

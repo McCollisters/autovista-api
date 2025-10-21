@@ -1,0 +1,272 @@
+/**
+ * Paste one or more documents here
+ */
+{
+  "refId": 219089,
+  "status": "saved",
+  "portalId": "64ece35abfc3deb98e9d180f",
+  "userId": null,
+  "customer": {
+    "name": "Genevie Longenecker",
+    "trackingCode": "2FE5A0A585",
+    "email": "glongenecker3@gmail.com"
+  },
+  "origin": {
+    "userInput": "Silver Creek, NY",
+    "validated": "Silver Creek, NY",
+    "state": "NY"
+  },
+  "destination": {
+    "userInput": "Hackensack, NJ",
+    "validated": "Hackensack, NJ",
+    "state": "NJ"
+  },
+  "miles": 398,
+  "transitTime": [1, 8],
+  "transportType": "enclosed",
+  "history": [],
+  "createdAt": {
+    "$date": "2025-10-19T18:17:40.494Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-19T18:17:40.494Z"
+  },
+  "__v": 0,
+  "isDirect": false,
+  "archivedAt": null,
+  "migrationVersion": "quote-migration-v2",
+  "vehicles": [
+    {
+      "make": "AUDI",
+      "model": "S6",
+      "year": null,
+      "isInoperable": true,
+      "isOversize": false,
+      "pricingClass": "sedan",
+      "pricing": {
+        "base": 852,
+        "modifiers": {
+          "inoperable": 350,
+          "routes": 0,
+          "states": 0,
+          "oversize": 0,
+          "vehicles": 0,
+          "globalDiscount": 0,
+          "portalDiscount": 0,
+          "irr": 0,
+          "fuel": 0,
+          "enclosedFlat": 250,
+          "enclosedPercent": 469,
+          "commission": 0,
+          "serviceLevels": [
+            {
+              "serviceLevelOption": "1",
+              "value": 225
+            },
+            {
+              "serviceLevelOption": "3",
+              "value": 175
+            },
+            {
+              "serviceLevelOption": "5",
+              "value": 140
+            },
+            {
+              "serviceLevelOption": "7",
+              "value": 100
+            }
+          ],
+          "companyTariffs": [
+            {
+              "serviceLevelOption": "1",
+              "value": 0
+            },
+            {
+              "serviceLevelOption": "3",
+              "value": 0
+            },
+            {
+              "serviceLevelOption": "5",
+              "value": 0
+            },
+            {
+              "serviceLevelOption": "7",
+              "value": 0
+            }
+          ]
+        },
+        "totals": {
+          "whiteGlove": 0,
+          "one": {
+            "open": {
+              "total": 1427,
+              "companyTariff": 0,
+              "commission": 0,
+              "totalWithCompanyTariffAndCommission": 1427
+            },
+            "enclosed": {
+              "total": 2146,
+              "companyTariff": 0,
+              "commission": 0,
+              "totalWithCompanyTariffAndCommission": 2146
+            }
+          },
+          "three": {
+            "open": {
+              "total": 1377,
+              "companyTariff": 0,
+              "commission": 0,
+              "totalWithCompanyTariffAndCommission": 1377
+            },
+            "enclosed": {
+              "total": 2096,
+              "companyTariff": 0,
+              "commission": 0,
+              "totalWithCompanyTariffAndCommission": 2096
+            }
+          },
+          "five": {
+            "open": {
+              "total": 1342,
+              "companyTariff": 0,
+              "commission": 0,
+              "totalWithCompanyTariffAndCommission": 1342
+            },
+            "enclosed": {
+              "total": 2061,
+              "companyTariff": 0,
+              "commission": 0,
+              "totalWithCompanyTariffAndCommission": 2061
+            }
+          },
+          "seven": {
+            "open": {
+              "total": 1302,
+              "companyTariff": 0,
+              "commission": 0,
+              "totalWithCompanyTariffAndCommission": 1302
+            },
+            "enclosed": {
+              "total": 2021,
+              "companyTariff": 0,
+              "commission": 0,
+              "totalWithCompanyTariffAndCommission": 2021
+            }
+          }
+        }
+      }
+    }
+  ],
+  "totalPricing": {
+    "base": 852,
+    "modifiers": {
+      "inoperable": 350,
+      "routes": 0,
+      "states": 0,
+      "oversize": 0,
+      "vehicles": 0,
+      "globalDiscount": 0,
+      "portalDiscount": 0,
+      "irr": 0,
+      "fuel": 0,
+      "enclosedFlat": 250,
+      "enclosedPercent": 469,
+      "commission": 0,
+      "serviceLevels": [
+        {
+          "serviceLevelOption": "1",
+          "value": 225
+        },
+        {
+          "serviceLevelOption": "3",
+          "value": 175
+        },
+        {
+          "serviceLevelOption": "5",
+          "value": 140
+        },
+        {
+          "serviceLevelOption": "7",
+          "value": 100
+        }
+      ],
+      "companyTariffs": [
+        {
+          "serviceLevelOption": "1",
+          "value": 0
+        },
+        {
+          "serviceLevelOption": "3",
+          "value": 0
+        },
+        {
+          "serviceLevelOption": "5",
+          "value": 0
+        },
+        {
+          "serviceLevelOption": "7",
+          "value": 0
+        }
+      ]
+    },
+    "totals": {
+      "whiteGlove": 0,
+      "one": {
+        "open": {
+          "total": 1427,
+          "companyTariff": 0,
+          "commission": 0,
+          "totalWithCompanyTariffAndCommission": 1427
+        },
+        "enclosed": {
+          "total": 2146,
+          "companyTariff": 0,
+          "commission": 0,
+          "totalWithCompanyTariffAndCommission": 2146
+        }
+      },
+      "three": {
+        "open": {
+          "total": 1377,
+          "companyTariff": 0,
+          "commission": 0,
+          "totalWithCompanyTariffAndCommission": 1377
+        },
+        "enclosed": {
+          "total": 2096,
+          "companyTariff": 0,
+          "commission": 0,
+          "totalWithCompanyTariffAndCommission": 2096
+        }
+      },
+      "five": {
+        "open": {
+          "total": 1342,
+          "companyTariff": 0,
+          "commission": 0,
+          "totalWithCompanyTariffAndCommission": 1342
+        },
+        "enclosed": {
+          "total": 2061,
+          "companyTariff": 0,
+          "commission": 0,
+          "totalWithCompanyTariffAndCommission": 2061
+        }
+      },
+      "seven": {
+        "open": {
+          "total": 1302,
+          "companyTariff": 0,
+          "commission": 0,
+          "totalWithCompanyTariffAndCommission": 1302
+        },
+        "enclosed": {
+          "total": 2021,
+          "companyTariff": 0,
+          "commission": 0,
+          "totalWithCompanyTariffAndCommission": 2021
+        }
+      }
+    }
+  }
+}

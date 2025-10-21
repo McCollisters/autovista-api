@@ -187,6 +187,7 @@ export interface ISchedule {
   ontimePickup?: boolean | null;
   ontimeDelivery?: boolean | null;
   pickupSelected: Date;
+  pickupEstimated: Date[];
   deliveryEstimated: Date[];
   pickupCompleted?: Date | null;
   deliveryCompleted?: Date | null;
@@ -197,6 +198,7 @@ export interface INotification {
   status: NotificationStatus;
   sentAt?: Date;
   failedAt?: Date;
+  recipientEmail?: string;
 }
 
 export interface INotifications {
