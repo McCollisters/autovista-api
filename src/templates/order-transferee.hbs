@@ -1,0 +1,348 @@
+{{!-- unused right now --}}
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Order Confirmation</title>
+</head>
+
+<body style="font-size: 14px; margin: 0 auto; width: 600px; padding: 0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
+    <table class="table" cellpadding="0" cellspacing="0" style="empty-cells: hide; margin: 0 auto; padding: 15px; width: 600px">
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">Hello
+                    {{recipientName}},</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">{{{
+                    intro }}}</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">For
+                    your reference, your vehicle relocation order number is <span style="font-weight: bold;">#{{
+                        uniqueId }}.</span></p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">Your
+                    scheduled transport dates are as follows:</p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="margin-bottom: 15px;">
+                    <table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; width: 200px;">Pick
+                                up dates:</td>
+
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0;">{{
+                                pickupDates }}</td>
+                        </tr>
+                        <tr>
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; width: 200px;">Estimated
+                                delivery dates:</td>
+
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4">{{
+                                deliveryDates }}</td>
+                        </tr>
+                    </table>
+                </p>
+            </td>
+        </tr>
+
+        {{{ smallText }}}
+
+        <tr>
+            <td valign="top" style="width: 600px; padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">If
+                    any issues arise in any communication with the assigned driver, please reach out to us ASAP
+                    at <strong><a href='tel:8888190594'>(888) 819-0594</a> (press option 1) or email us at
+                        autologistics@mccollisters.com. We are here to help!</strong></p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Pick
+                        Up Address:</strong><br />{{
+                    pickupAddress }}<br />{{ pickupCity}},{{pickupState}} {{pickupZip}}</p>
+
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "><strong>Pick
+                        Up Contact:</strong><br />{{
+                    pickupContactName }}<br />{{pickupPhone}}<br />{{pickupMobilePhone}}</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Delivery
+                        Address:</strong><br />{{
+                    deliveryAddress }}<br />{{ deliveryCity}},{{deliveryState}} {{deliveryZip}}</p>
+
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "><strong>Delivery
+                        Contact:</strong><br />{{
+                    deliveryContactName }}<br />{{deliveryPhone}}<br />{{deliveryMobilePhone}}</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; "><strong>Vehicle
+                        Information:</strong><br />
+                    {{{ vehicles }}}
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; "><strong>Transportation
+                        Type:</strong> {{ transportType }} Carrier </p>
+            </td>
+        </tr>
+
+
+        {{{ tracking }}}
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">REQUIREMENTS:</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0;">I
+                    acknowledge that:</p>
+                <ol>
+                    <li>my vehicle is operable (runs)</li>
+                    <li>my vehicle does NOT have modifications that affect the size</li>
+                    <li>my vehicle is NOT a convertible</li>
+                    <li>my vehicle is NOT equipped with an ignition interlock device or breath alcohol ignition
+                        interlock device)</li>
+                </ol>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; font-size: 12px; font-style: italic;">**If
+                    any of these conditions DO apply, please notify us immediately by email at
+                    autologistics@mccollisters.com**</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">YOUR
+                    RESPONSIBILITIES REGARDING VEHICLE INSPECTIONS</p>
+                <ul>
+                    <li>You, or your delegate, must perform a careful inspection of your vehicle with the driver at
+                        origin. Make sure to note any damages on the Bill of Lading. Both you, and the driver, need to
+                        sign the Bill of Lading. You must note the vehicle odometer reading on the Bill of Lading.
+                        Retain a copy for your personal records.</li>
+                    <li>Post-Shipment Inspection: Perform a careful inspection of your delivered vehicle with the
+                        driver. Any transit related damage MUST be noted on the Bill of Lading by you, or your
+                        designated representative, at the time of delivery. Both you and the driver need to sign the
+                        Bill of Lading. You must note the vehicle odometer reading at the time of delivery on the Bill
+                        of Lading. Retain a copy for your personal records.</li>
+                    <li>If you have noted transit related damage on the Bill of Lading at the time of delivery, you
+                        MUST notify us within 48 hours of receiving your vehicle in writing at:
+                        autologistics@mccollisters.com.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">INSTRUCTIONS
+                    FOR ORIGIN AND DESTINATION
+                </p>
+                <ul>
+                    <li>Provide valid, working phone numbers and email where you can be contacted throughout the
+                        transportation process. Please verify the information above. We need a good phone number and
+                        email address of the person who will be present at the time of loading and delivery of your
+                        vehicle. This person must be an adult and able to present a valid driver's license for
+                        identification purposes.
+                    </li>
+                    <li>Unless we have notified you in writing that your vehicle has been approved for enclosed carrier
+                        transportation, your vehicle will be transported via open car carrier, similar to the way new
+                        cars are delivered to the dealership. You can expect the vehicle may be dirty upon arrival.
+                    </li>
+                    <li>We will make every effort to load the vehicle directly onto the car carrier. In the event a car
+                        carrier is not available during your requested shipment date(s), we will load the vehicle via
+                        flatbed. The vehicle will be stored outdoors at our secure facility until the car carrier
+                        arrives to load.
+                    </li>
+                    <li>We will make every effort to provide you door-to-door service. However, because of the size of
+                        the car carrier that is used to transport your vehicle, we may not be able to get to your door.
+                        If we cannot get to your door, for the safety of your vehicle, we ask that you meet the car
+                        carrier at a nearby parking lot. If you are unable to meet the carrier please notify us
+                        immediately for alternative options.</li>
+                    <li>You, or your designated representative, must be present at origin and destination to sign the
+                        condition report in accordance with the guidelines above.</li>
+                    <li>Provide 1 (one) complete set of keys (must include keys for any locked compartments not limited
+                        to: ignition trunk and glove box) or key fob/entrance code. Please remove any personal key
+                        rings or accessories.
+                    </li>
+                    <li>Gas level is preferred to be between 1/8 to 1/4 tank.
+                    </li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">PREPARING
+                    YOUR VEHICLE FOR TRANSPORT</p>
+                <ul>
+                    <li>It is a good idea to check antifreeze, battery and other fluid levels to prepare your car for a
+                        change in weather when shipping to a warmer or colder climate. Vehicles shipping to Alaska must
+                        have antifreeze protection to -40 degrees F.
+                    </li>
+                    <li>Check your battery to ensure it is fully charged to avoid delays or unexpected charges for jump
+                        starting a dead battery.
+                    </li>
+                    <li>Check tire pressure to avoid shipment delays or charges due to a flat tire.
+                    </li>
+                    <li>It is your responsibility to remove the following items prior to shipment: spare tire covers,
+                        grill covers, tonneau covers, bedliners or any other car cover. If any of these items become
+                        detached or damaged during transportation, we cannot be held liable.</li>
+                    <li>Emergency brake must be in working order. It is strongly recommended that the emergency brake
+                        is engaged regularly prior to transport.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">MINIMUM
+                    REQUIREMENTS</p>
+                <ul>
+                    <li>Your vehicle must be free of ALL personal items/contents. We are not responsible for any items
+                        left inside of the vehicle and we reserve the right to refuse shipment of your vehicle if it
+                        contains personal or household items.
+                    </li>
+                    <li>If your vehicle is not operable, we must be notified prior to shipment.</li>
+                    <li>Provide any special instructions for starting the vehicle, in writing prior to the move, as
+                        well as in writing left in the vehicle in a visible location.</li>
+                    <li>The tires, brakes and engine must be in good working order.</li>
+                    <li> Vehicle must be free of any fluid leaks.</li>
+                    <li>Driver side door and window must work properly.</li>
+                    <li>If your vehicle is equipped with an IID and BAIID (ignition interlock device or breath alcohol
+                        ignition interlock device) you must provide a minimum of 5 sealed mouthpieces left inside the
+                        vehicle along with written operating instructions provided on the passenger seat. You must
+                        notify us prior to shipment if your vehicle is equipped with such a device.</li>
+                    <li>Your vehicle must have a working emergency brake.</li>
+                    <li>Your battery must be secure in the mounting bracket.</li>
+                    <li>For US domestic shipments only: a copy of your vehicle registration or insurance card must be
+                        left in the glove box in case of D.O.T. or State Police inspections. Please do not leave any
+                        original documentation in the vehicle.</li>
+                    <li>For Canadian / cross border or international shipments, please review documentation
+                        requirements with your move coordinator.
+                    </li>
+                    <li>Remove any toll reading devices (e.g. "EZPass, Fast Pass, Sun Pass") from the vehicle. We are
+                        not responsible for any toll charges that you may incur as the result of leaving these devices
+                        in your vehicle during transit.
+                    </li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">PROTECT
+                    AGAINST LOSS OR DAMAGE
+                </p>
+                <ul>
+                    <li>Lower or remove the antenna.</li>
+                    <li>With all alarm systems, you must provide one (1) set of working key(s)/key fob or deactivate
+                        the alarm.
+                    </li>
+                    <li>Fold in any mirrors where applicable.
+                    </li>
+                    <li>Remove all portable interior components including but not limited to: radar detectors, GPS
+                        systems, stereo face plates, charging cables, and anything of personal value.
+                    </li>
+                    <li>Vehicle must be clean for inspection.
+                    </li>
+                    <li>If your vehicle is a soft top / convertible, we must be notified prior to shipment. Damage to a
+                        soft top as a result of exposure to wind is not covered.
+                    </li>
+                    <li>We are not responsible for plates that come loose or detached during transit. Should you
+                        choose, you may remove your license plates.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">SAFETY
+                    FIRST</p>
+                <ul>
+                    <li>Notify us of any vehicle modifications (e.g. vehicle lowered, vehicle lift kits, camper
+                        shells). Your vehicle may not exceed 7' in height and there must be a minimum of 4 inches of
+                        ground clearance for safe loading and unloading of your vehicle.</li>
+                    <li>Remove any specialty items such as spoilers/ground effects, wide mirrors, low-hanging fog
+                        lights, bike racks, luggage racks or running boards that may affect clearances during loading
+                        and unloading and have potential to come loose during transit. Additionally, we need to be
+                        aware of anything that alters or changes the manufacturer standard specifications or dimensions
+                        of your vehicle.</li>
+                    <li>Remove any pick-up truck shells/bed liners that are not permanently affixed to the vehicle.
+                    </li>
+                    <li>We are not responsible for any aftermarket accessories.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="font-size: 12px; width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">A
+                    WORD ABOUT LIABILITY
+                </p>
+                <p>While we are insured against in-transit damage caused by carrier negligence or carrier equipment
+                    failure, your vehicle(s) must remain on your insurance policy. The following items are NOT COVERED
+                    under cargo insurance policy:
+                </p>
+                <ul>
+                    <li>Windshield or other vehicle glass compromised by stones or road debris</li>
+                    <li>Any damage caused by a vehicle leaking fluids on another vehicle (we cannot guarantee your
+                        vehicle will be on top)</li>
+                    <li>Chips to paint surfaces</li>
+                    <li>Mechanical, exhaust assembly, or items under-the-hood</li>
+                    <li>Emergency brakes</li>
+                    <li>Acts of God or damages caused by nature</li>
+                    <li>Vehicle interior or undercarriage (they are not part of the inspection process)</li>
+                    <li>Any/and all items contained under the section "Protect Against Loss or Damage"</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p>Thank you,</p>
+                <p>The team at McCollister's Auto Logistics</p>
+                <img src="https://mcc-portal-assets.s3.amazonaws.com/mccollisters-auto-logistics" style="width: 200px;
+                height: auto;" />
+                <p><a href="tel:8888190594">(888) 819-0594</a><br />autologistics@mccollisters.com</p>
+            </td>
+        </tr>
+    </table>
+</body>
+
+
+</html>
+

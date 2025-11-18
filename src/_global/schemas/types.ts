@@ -268,14 +268,23 @@ export interface IAgent {
 // PORTAL INTERFACES
 // ============================================================================
 
+export interface IPortalAdmin {
+  enableDiscount: boolean;
+}
+
+export interface IQuoteDetail {
+  displayCompanyTariff: boolean;
+  displayCommission: boolean;
+}
+
 export interface IOrderForm {
   enableAgent: boolean;
+  defaultPaymentType: string | null;
   requireLocationType: boolean;
 }
 
 export interface IQuoteForm {
-  enableTariff: boolean;
-  enableCommission: boolean;
+  enableCommissionPerVehicle: boolean;
 }
 
 export interface IOrderPDF {
@@ -286,19 +295,15 @@ export interface IOptions {
   orderForm: IOrderForm;
   quoteForm: IQuoteForm;
   orderPDF: IOrderPDF;
+  portalAdmin: IPortalAdmin;
+  quoteDetail: IQuoteDetail;
   overrideLogo: boolean;
   enableCustomRates: boolean;
   enableVariableCompanyTariff: boolean;
   enableWhiteGloveOverride: boolean;
   enableOrderTrackingByCustomer: boolean;
   enableSurvey: boolean;
-  customRates: Array<{
-    value: number;
-    label: string;
-    min: number;
-    max: number;
-  }>;
-  parentPortalId: string | null;
+  quoteExpiryDays: number;
 }
 
 // ============================================================================

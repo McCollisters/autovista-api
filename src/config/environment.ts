@@ -15,12 +15,28 @@ export interface AWSConfig {
   };
 }
 
+export interface NotificationConfig {
+  email: {
+    provider: "sendgrid";
+    enabled: boolean;
+    fromAddress?: string;
+    fromName?: string;
+    replyTo?: string;
+  };
+  sms: {
+    provider: "aws-sns" | "twilio";
+    enabled: boolean;
+    fromNumber?: string;
+  };
+}
+
 export interface AppConfig {
   port: number;
   nodeEnv: string;
   database: DatabaseConfig;
   aws: AWSConfig;
   allowedOrigins: string[];
+  notifications?: NotificationConfig;
 }
 
 const getDatabaseConfig = (): DatabaseConfig["options"] => {

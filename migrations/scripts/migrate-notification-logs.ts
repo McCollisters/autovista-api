@@ -6,7 +6,7 @@ import {
 } from "../utils/migration-base";
 
 // Configuration constants
-const MAX_LOGS_TO_PROCESS = 1000; // Set to null or undefined to process all logs
+const MAX_LOGS_TO_PROCESS = 500; // Set to null or undefined to process all logs
 const TEST_LOG_ID = "68cdea765c3394575ba5e7dc"; // Set to test a specific log ID
 
 /**

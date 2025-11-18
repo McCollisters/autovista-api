@@ -1,0 +1,124 @@
+{{!-- unused right now --}}
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Order Confirmation</title>
+</head>
+
+<body style="font-size: 14px; margin: 0 auto; width: 600px; padding: 0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
+    <table class="table" cellpadding="0" cellspacing="0" style="empty-cells: hide; margin: 0 auto; padding: 15px; width: 600px">
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">Hello
+                    {{recipientName}},</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">This
+                    is confirmation that your ORDER ID# {{
+                    uniqueId }} / REG# {{ reg }} has been booked.
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">Below
+                    are the order details:</p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="margin-bottom: 15px;">
+                    <table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; width: 200px;">Pick
+                                up dates:</td>
+
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0;">{{
+                                pickupDates }}</td>
+                        </tr>
+                        <tr>
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; width: 200px;">Estimated
+                                delivery dates:</td>
+
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4">{{
+                                deliveryDates }}</td>
+                        </tr>
+                    </table>
+                </p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Pick
+                        Up Address:</strong><br />{{
+                    pickupAddress }}<br />{{ pickupCity}},{{pickupState}} {{pickupZip}}</p>
+
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "><strong>Pick
+                        Up Contact:</strong><br />{{
+                    pickupContactName }}<br />{{pickupPhone}}<br />{{pickupMobilePhone}}</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Delivery
+                        Address:</strong><br />{{
+                    deliveryAddress }}<br />{{ deliveryCity}},{{deliveryState}} {{deliveryZip}}</p>
+
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "><strong>Delivery
+                        Contact:</strong><br />{{
+                    deliveryContactName }}<br />{{deliveryPhone}}<br />{{deliveryMobilePhone}}</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; "><strong>Vehicle
+                        Information:</strong><br />
+                    {{{ vehicles }}}
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; "><strong>Transportation
+                        Type:</strong> {{ transportType }} Carrier </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; "><strong>McCollister's
+                        Bill Rate:</strong> ${{ billRate }}</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p>Thank you for your continued business,</p>
+                <p>The team at McCollister's Auto Logistics</p>
+                <img src="https://mcc-portal-assets.s3.amazonaws.com/mccollisters-auto-logistics" style="width: 200px;
+                height: auto;" />
+                <p><a href="tel:8888190594">(888) 819-0594</a><br />autologistics@mccollisters.com</p>
+            </td>
+        </tr>
+
+
+    </table>
+</body>
+
+
+</html>
+

@@ -5,7 +5,7 @@ import {
 } from "../utils/migration-base";
 
 // Configuration constants
-const MAX_QUOTES_TO_PROCESS = 5000; // Set to null or undefined to process all quotes
+const MAX_QUOTES_TO_PROCESS = 500; // Set to null or undefined to process all quotes
 
 /**
  * Quote Migration Script

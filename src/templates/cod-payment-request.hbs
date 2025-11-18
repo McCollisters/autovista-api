@@ -1,0 +1,190 @@
+<html>
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Payment Request</title>
+  </head>
+
+  <body
+    style="font-size: 14px; margin: 0 auto; width: 600px; padding: 0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;"
+  >
+    <table
+      class="table"
+      cellpadding="0"
+      cellspacing="0"
+      style="empty-cells: hide; margin: 0 auto; padding: 15px; width: 600px"
+    >
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px; "
+          >Hello {{recipientName}},</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px; "
+          >We are McCollister's Auto Logistics and we have been assigned
+            transportation of your vehicle(s). Your order has been booked with
+            us as a COD move. As such we require payment in full prior to
+            servicing your vehicle.
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px; "
+          >Below are instructions on how to pay for your transport of your
+            {{vehiclesString}}.
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px; "
+          >PLEASE NOTE: Your order will not be officially scheduled for pick-up
+            until payment is received in full via credit card. We do not allow
+            customers to pay drivers directly. Payment in full must be received
+            at least three (3) business days before your scheduled pick-up date
+            of
+            {{pickupDates}}. Also note that effective 3/1/2025, a 3% surcharge
+            will be applied to all Credit Card transactions (the rate is 1% plus
+            .25 per transaction on Debit Cards). This fee is intended to cover
+            the cost of credit card processing and does not apply to payments
+            made via debit cards, prepaid cards, or other payment methods. The
+            surcharge will be displayed on your receipt as a separate line item.
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "
+          >Any payment received less than three (3) business days before pick-up
+            will likely result in the need to re-schedule a new pick-up date or
+            pick-up range. Your vehicle will not be picked up unless payment in
+            full is received.
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "
+          >Upon receipt of your payment, your order will be processed, and you
+            will receive an ORDER CONFIRMATION email from us.
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "
+          >Please see the simple instructions below to make payment:
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; "
+          >
+            <a
+              href="https://www.convergepay.com/hosted-payments?ssl_txn_auth_token=YtH5YU2ER7alJZ%2FD73aAegAAAZW6CTk1"
+            >Click this link. </a>
+          </p>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px; "
+          >This will take you to the "order section" page. On this screen, enter
+            the agreed dollar amount of ${{totalPrice}}.00 and click "make a
+            payment". This will take you to the credit card submission form.
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px; "
+          >On the form, every field that is marked with an asterisk must be
+            filled in prior to submitting the document or you will not be
+            allowed to submit the form.
+          </p>
+          <p>Please list
+            {{uniqueId}}
+            in the Order # field. If submitting separate payments for each,
+            please just list the invoice the individual payment is covering.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px; "
+          >
+            Once the form has been completed, click on "submit payment" ONE TIME
+            in the lower bottom part of the form. PLEASE NOTE THAT A BOX WILL
+            APPEAR AT THE BOTTOM OF THE SCREEN THAT YOU WILL NEED TO CLICK TO
+            ACCEPT THE PAYMENT TERMS. This will take you to another screen that
+            will indicate that the form has successfully been submitted. If the
+            card has been processed successfully, an automated email will be
+            sent to the email address YOU entered in the online form as well as
+            myself under the subject of "Order Confirmation (this will show the
+            invoice# entered) ". The email will show the approval code as well
+            as the other information submitted on the form. The email document
+            can be used as proof that payment has been submitted. Again, this is
+            automated.
+          </p>
+          <p>After clicking "submit payment", if you remain on the form page OR
+            if you get to the "submitted successfully" screen BUT do not get the
+            subsequent email, this means one of two things: 1) either the one or
+            more of the fields were filled out incorrectly OR 2) the card has
+            been declined. Please do not attempt to re-submit the payment, and
+            contact us at the number below for assistance.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td
+          valign="top"
+          style="width: 600px;padding-bottom: 15px;margin: 0 auto;"
+        >
+          <p
+            style="font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4;"
+          >Thank you,</p>
+          <p
+            style="font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4;"
+          >The team at McCollister's Auto Logistics</p>
+          <img
+            src="https://mcc-portal-assets.s3.amazonaws.com/mccollisters-auto-logistics"
+            style="width: 200px;
+                height: auto;"
+          />
+          <p><a href="tel:8888190594">(888) 819-0594</a><br
+            />autologistics@mccollisters.com</p>
+        </td>
+      </tr>
+
+    </table>
+  </body>
+
+</html>

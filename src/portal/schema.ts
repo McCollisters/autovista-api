@@ -6,7 +6,7 @@ import {
   createContactSchema,
   createAddressSchema,
 } from "../_global/schemas/factory";
-import { Status, USState } from "../_global/enums";
+import { Status, PaymentType } from "../_global/enums";
 import {
   IContact,
   IAddress,
@@ -30,6 +30,8 @@ export interface IPortal extends Document {
   contact?: IContact;
   address?: IAddress;
   logo?: string;
+  isDealership: boolean;
+  disableAgentNotifications: boolean;
   options: IOptions;
   customRates: Array<ICustomRate>;
   parentPortalId: Types.ObjectId | null;
@@ -41,33 +43,38 @@ const portalSchema = createSchema<IPortal>({
   contact: createContactSchema(),
   address: createAddressSchema(),
   logo: { type: String },
+  isDealership: { type: Boolean, default: false },
+  disableAgentNotifications: { type: Boolean, default: false },
   options: {
+    quoteExpiryDays: { type: Number, default: 30 },
     overrideLogo: { type: Boolean, default: false },
     enableCustomRates: { type: Boolean, default: false },
     enableVariableCompanyTariff: { type: Boolean, default: false },
     enableWhiteGloveOverride: { type: Boolean, default: false },
     enableOrderTrackingByCustomer: { type: Boolean, default: false },
     enableSurvey: { type: Boolean, default: true },
+    portalAdmin: {
+      enableDiscount: { type: Boolean, default: true },
+    },
+    quoteDetail: {
+      displayCompanyTariff: { type: Boolean, default: true },
+      displayCommission: { type: Boolean, default: true },
+    },
     orderForm: {
       enableAgent: { type: Boolean, default: true },
+      defaultPaymentType: {
+        type: String,
+        enum: Object.values(PaymentType),
+        default: null,
+      },
       requireLocationType: { type: Boolean, default: true },
     },
     quoteForm: {
-      enableTariff: { type: Boolean, default: true },
-      enableCommission: { type: Boolean, default: true },
+      enableCommissionPerVehicle: { type: Boolean, default: true },
     },
     orderPDF: {
       enablePriceBreakdown: { type: Boolean, default: true },
     },
-    customRates: [
-      {
-        label: { type: String },
-        min: { type: Number },
-        max: { type: Number },
-        value: { type: Number },
-      },
-    ],
-    parentPortalId: { type: String, default: null },
   },
   customRates: [
     {

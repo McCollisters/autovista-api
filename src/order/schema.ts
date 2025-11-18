@@ -112,6 +112,9 @@ export interface IOrder extends Document {
   schedule: ISchedule;
   hasClaim: boolean;
   driver: IDriver;
+  signatureRequestSent?: boolean;
+  signatureReceived?: boolean;
+  signatureRequestId?: string;
   notifications: {
     paymentRequest: INotification;
     paymentReminder: INotification;
@@ -130,6 +133,11 @@ export interface IOrder extends Document {
     portalAdminDeliveryConfirmation: INotification;
   };
   agents: IAgent[];
+  files?: Array<{
+    name: string;
+    url: string;
+    key: string;
+  }>;
 }
 
 const orderSchemaDefinition = {
@@ -269,7 +277,17 @@ const orderSchemaDefinition = {
       enableDeliveryNotifications: { type: Boolean, default: true },
     },
   ],
+  files: [
+    {
+      name: { type: String, required: true },
+      url: { type: String, required: true },
+      key: { type: String, required: true },
+    },
+  ],
   hasClaim: { type: Boolean, default: false },
+  signatureRequestSent: { type: Boolean, default: false },
+  signatureReceived: { type: Boolean, default: false },
+  signatureRequestId: { type: String },
   notifications: {
     paymentRequest: createNotificationSchema(),
     paymentReminder: createNotificationSchema(),

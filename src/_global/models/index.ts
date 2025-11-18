@@ -15,12 +15,13 @@ import { userSchema, IUser } from "../../user/schema";
 import { portalSchema, IPortal } from "../../portal/schema";
 import { modifierSetSchema, IModifierSet } from "../../modifierSet/schema";
 import { brandSchema, IBrand } from "../../brand/schema";
-import { reportSchema, IReport } from "../../report/schema";
 import { surveySchema, ISurvey } from "../../survey/schema";
 import {
   surveyResponseSchema,
   ISurveyResponse,
 } from "../../surveyResponse/schema";
+import { carrierSchema, ICarrier } from "../../carrier/schema";
+import { settingsSchema, ISettings } from "../../settings/schema";
 
 // Model registry interface
 interface ModelRegistry {
@@ -29,10 +30,11 @@ interface ModelRegistry {
   User: Model<IUser>;
   Portal: Model<IPortal>;
   ModifierSet: Model<IModifierSet>;
-  Brand: Model<IBrand>;
-  Report: Model<IReport>;
+  Brand: Model<IBrand>; // Also known as "Make" in legacy API
   Survey: Model<ISurvey>;
   SurveyResponse: Model<ISurveyResponse>;
+  Carrier: Model<ICarrier>;
+  Settings: Model<ISettings>;
 }
 
 // Create models with consistent pattern
@@ -52,12 +54,13 @@ export const models: ModelRegistry = {
   Portal: createModel<IPortal>("Portal", portalSchema),
   ModifierSet: createModel<IModifierSet>("ModifierSet", modifierSetSchema),
   Brand: createModel<IBrand>("Brand", brandSchema),
-  Report: createModel<IReport>("Report", reportSchema),
   Survey: createModel<ISurvey>("Survey", surveySchema),
   SurveyResponse: createModel<ISurveyResponse>(
     "SurveyResponse",
     surveyResponseSchema,
   ),
+  Carrier: createModel<ICarrier>("Carrier", carrierSchema),
+  Settings: createModel<ISettings>("Settings", settingsSchema),
 };
 
 // Individual model exports for convenience
@@ -68,9 +71,10 @@ export const {
   Portal,
   ModifierSet,
   Brand,
-  Report,
   Survey,
   SurveyResponse,
+  Carrier,
+  Settings,
 } = models;
 
 // Export types for convenience
@@ -80,6 +84,7 @@ export type { IUser } from "../../user/schema";
 export type { IPortal } from "../../portal/schema";
 export type { IModifierSet } from "../../modifierSet/schema";
 export type { IBrand } from "../../brand/schema";
-export type { IReport } from "../../report/schema";
 export type { ISurvey } from "../../survey/schema";
 export type { ISurveyResponse } from "../../surveyResponse/schema";
+export type { ICarrier } from "../../carrier/schema";
+export type { ISettings } from "../../settings/schema";

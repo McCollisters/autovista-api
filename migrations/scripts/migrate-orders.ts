@@ -5,7 +5,7 @@ import {
 } from "../utils/migration-base";
 
 // Configuration constants
-const MAX_ORDERS_TO_PROCESS = 500; // Set to null or undefined to process all orders
+const MAX_ORDERS_TO_PROCESS = 250; // Set to null or undefined to process all orders
 
 /**
  * Order Migration Script

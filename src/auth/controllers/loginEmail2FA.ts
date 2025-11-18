@@ -1,0 +1,121 @@
+/**
+ * Login Email 2FA Controller
+ *
+ * Handles the second step of 2FA authentication:
+ * Validates verification code and returns JWT token
+ */
+
+import express from "express";
+import { User } from "@/_global/models";
+import { logger } from "@/core/logger";
+import { createToken } from "@/_global/utils/createToken";
+
+export const loginEmail2FA = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+): Promise<void> => {
+  try {
+    let { email, code } = req.body;
+
+    if (!email) {
+      logger.error("Please provide an email address.");
+      return next({
+        statusCode: 400,
+        message: "Please provide an email address.",
+      });
+    }
+
+    email = email.toLowerCase();
+    const user = await User.findOne({ email }).populate("portalId");
+
+    if (!user) {
+      logger.error("No user found with this email address.");
+      return next({
+        statusCode: 404,
+        message: "No user found with this email address.",
+      });
+    }
+
+    // Skip verification for mesamoving emails
+    if (email.includes("mesamoving")) {
+      logger.info(`Skipping code verification for mesamoving email: ${email}`);
+      // Clear any existing verification codes
+      user.verificationCode = undefined;
+      user.verificationCodeExpires = undefined;
+      user.verificationCodeSent = undefined;
+      await user.save();
+    } else {
+      // Normal verification flow for non-mesamoving emails
+      if (!code) {
+        logger.error("Please enter a verification code.");
+        return next({
+          statusCode: 400,
+          message: "Please enter a verification code.",
+        });
+      }
+
+      if (!user.verificationCode || !user.verificationCodeExpires) {
+        logger.error(
+          "This verification code has expired. Please request a new code.",
+        );
+        return next({
+          statusCode: 401,
+          message:
+            "This verification code has expired. Please request a new code.",
+        });
+      }
+
+      if (code !== user.verificationCode) {
+        logger.error("Incorrect verification code.");
+        return next({
+          statusCode: 401,
+          message: "Incorrect verification code.",
+        });
+      }
+
+      if (Date.now() > user.verificationCodeExpires.getTime()) {
+        logger.error(
+          "This verification code has expired. Please request a new code.",
+        );
+        return next({
+          statusCode: 401,
+          message:
+            "This verification code has expired. Please request a new code.",
+        });
+      }
+
+      // Clear verification code after successful verification
+      user.verificationCode = undefined;
+      user.verificationCodeExpires = undefined;
+      user.verificationCodeSent = undefined;
+
+      await user.save();
+    }
+
+    // Create JWT token
+    const token = createToken(user);
+
+    // Log successful login
+    logger.info("User logged in successfully with 2FA", {
+      userId: user._id,
+      email: user.email,
+    });
+
+    return res.status(200).json({
+      token,
+      role: user.role,
+      userId: user._id,
+      portalId: user.portalId,
+    });
+  } catch (error) {
+    logger.error("Error logging in with 2FA", {
+      error: error instanceof Error ? error.message : error,
+      email: req.body?.email,
+    });
+    return next({
+      statusCode: 400,
+      message: "There was an error logging in.",
+    });
+  }
+};

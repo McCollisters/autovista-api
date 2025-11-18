@@ -122,6 +122,7 @@ const modifierSetSchemaDefinition = {
     value: { type: Number, default: 0 },
     valueType: { type: String, default: "flat" },
   },
+  // companyTariff + companyTariffEnclosedFee = the enclosed company tariff
   companyTariffEnclosedFee: {
     value: { type: Number, default: 0 },
     valueType: { type: String, default: "flat" },

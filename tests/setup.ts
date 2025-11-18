@@ -32,7 +32,6 @@ beforeEach(async () => {
     "quotes",
     "orders",
     "users",
-    "reports",
     "surveys",
     "surveyresponses",
   ];

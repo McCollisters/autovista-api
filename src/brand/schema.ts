@@ -4,23 +4,26 @@ import { VehicleClass } from "../_global/enums";
 
 export interface IModel {
   model: string;
-  class: VehicleClass;
+  pricingClass: string; // Vehicle pricing class (e.g., "sedan", "suv", "van", etc.)
 }
 
 export interface IBrand extends Document {
-  brand: string;
+  make: string; // Vehicle make (e.g., "Ford", "Toyota")
   models: IModel[];
 }
 
 const modelSchema = createSchema<IModel>({
   model: { type: String, required: true },
-  class: { type: String, required: true, enum: Object.values(VehicleClass) },
+  pricingClass: { type: String, required: true }, // String to match mc_portal_api structure
 });
 
 const brandSchema = createSchema<IBrand>({
-  brand: { type: String, required: true },
+  make: { type: String, required: true },
   models: [modelSchema],
 });
+
+// Add index for faster lookups
+brandSchema.index({ make: 1 });
 
 // Model is exported from model.ts file
 export { brandSchema };

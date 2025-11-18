@@ -1,0 +1,217 @@
+/**
+ * Send Order Delivery Confirmation Email Notification
+ *
+ * This service sends a delivery confirmation email notification.
+ * Can be manually triggered or called from other controllers.
+ */
+
+import { logger } from "@/core/logger";
+import { IOrder } from "@/_global/models";
+import { sendOrderNotification } from "@/notification/orderNotifications";
+import { join } from "path";
+import { readFile } from "fs/promises";
+import Handlebars from "handlebars";
+import { format } from "date-fns";
+import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
+
+// Using fileURLToPath and dirname for __dirname equivalent in ES modules
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+interface SendOrderDeliveryConfirmationParams {
+  order: IOrder;
+  recipients: Array<{
+    email: string;
+    name?: string;
+  }>;
+  userId?: string; // Optional, for logging purposes
+  deliveryAdjustedDate?: Date; // Optional: actual delivery date
+  deliveryAdjustedDateString?: string; // Optional: formatted delivery date string
+}
+
+/**
+ * Default email configuration
+ * In the old API, this came from an Email model with templateName "Delivery Confirmation"
+ */
+const DEFAULT_EMAIL_CONFIG = {
+  senderEmail: "autologistics@mccollisters.com",
+  senderName: "McCollister's AutoLogistics",
+  emailIntro: "We are confirming that your vehicle has been delivered.",
+};
+
+/**
+ * Send order delivery confirmation email
+ * Sends to multiple recipients
+ */
+export async function sendOrderDeliveryConfirmation({
+  order,
+  recipients,
+  userId,
+  deliveryAdjustedDate,
+  deliveryAdjustedDateString,
+}: SendOrderDeliveryConfirmationParams): Promise<
+  Array<{ recipient: string; success: boolean; error?: string }>
+> {
+  try {
+    if (!order) {
+      return [
+        {
+          recipient: "unknown",
+          success: false,
+          error: "Order is required.",
+        },
+      ];
+    }
+
+    if (!recipients || recipients.length === 0) {
+      return [
+        {
+          recipient: "unknown",
+          success: false,
+          error: "At least one recipient is required.",
+        },
+      ];
+    }
+
+    const { senderEmail, senderName, emailIntro } = DEFAULT_EMAIL_CONFIG;
+
+    // Format order ID for subject
+    const orderReg = order.reg ? `${order.reg} / ` : "";
+    const orderId = order.reg ? `(${order.refId})` : order.refId;
+
+    const subject = `Vehicle Delivery Confirmation - REG #${orderReg}${orderId}`;
+
+    // Extract delivery information
+    const deliveryContactName =
+      order.destination?.contact?.name ||
+      order.destination?.contact?.companyName ||
+      "";
+    const deliveryPhone = order.destination?.contact?.phone || "";
+    const deliveryMobilePhone = order.destination?.contact?.phoneMobile || "";
+    const deliveryAddress =
+      order.destination?.address?.address ||
+      order.destination?.address?.addressLine1 ||
+      "";
+    const deliveryCity = order.destination?.address?.city || "";
+    const deliveryState = order.destination?.address?.state || "";
+    const deliveryZip = order.destination?.address?.zip || "";
+
+    // Format delivery date
+    let formattedDeliveryDate = "";
+    if (deliveryAdjustedDateString) {
+      formattedDeliveryDate = ` on ${deliveryAdjustedDateString}`;
+    } else if (deliveryAdjustedDate) {
+      formattedDeliveryDate = ` on ${format(
+        new Date(deliveryAdjustedDate),
+        "MM/dd/yy",
+      )}`;
+    } else {
+      // Use current date as fallback
+      formattedDeliveryDate = ` on ${format(new Date(), "MM/dd/yy")}`;
+    }
+
+    // Get delivery scheduled end date if available
+    const deliveryScheduledEndsAt = order.schedule?.deliveryEstimated
+      ? order.schedule.deliveryEstimated[
+          order.schedule.deliveryEstimated.length - 1
+        ]
+      : null;
+
+    const transportType = order.transportType;
+    const uniqueId = order.refId;
+    const reg = order.reg;
+    const vehicles = formatVehiclesHTML(order.vehicles, false);
+
+    // Load and compile Handlebars template
+    const templatePath = join(
+      __dirname,
+      "../../../templates/order-delivery.hbs",
+    );
+    const templateSource = await readFile(templatePath, "utf-8");
+    const template = Handlebars.compile(templateSource);
+
+    // Send email to each recipient
+    const results = await Promise.allSettled(
+      recipients.map(async (recipient) => {
+        const htmlContent = template({
+          deliveryAdjustedDate: formattedDeliveryDate,
+          deliveryScheduledEndsAt: deliveryScheduledEndsAt
+            ? format(new Date(deliveryScheduledEndsAt), "MM/dd/yyyy")
+            : null,
+          deliveryContactName,
+          deliveryPhone,
+          deliveryMobilePhone,
+          deliveryAddress,
+          deliveryCity,
+          deliveryState,
+          deliveryZip,
+          transportType,
+          vehicles,
+          intro: emailIntro,
+          reg,
+          uniqueId,
+          recipientName: recipient.name ? ` ${recipient.name}` : "",
+        });
+
+        const result = await sendOrderNotification({
+          orderId: String(order._id),
+          type: "agentsDeliveryConfirmation", // Using appropriate notification type
+          email: {
+            to: recipient.email,
+            subject,
+            html: htmlContent,
+            from: senderEmail,
+            fromName: senderName,
+            replyTo: senderEmail,
+          },
+          recipientEmail: recipient.email,
+        });
+
+        return {
+          recipient: recipient.email,
+          success: result.success,
+          error: result.success
+            ? undefined
+            : "Failed to send delivery confirmation",
+        };
+      }),
+    );
+
+    const finalResults = results.map((result) =>
+      result.status === "fulfilled"
+        ? result.value
+        : {
+            recipient: "unknown",
+            success: false,
+            error: String(result.reason),
+          },
+    );
+
+    const successCount = finalResults.filter((r) => r.success).length;
+
+    logger.info("Order delivery confirmation emails sent", {
+      orderId: order._id,
+      uniqueId: order.refId,
+      recipientCount: recipients.length,
+      successCount,
+    });
+
+    return finalResults;
+  } catch (error) {
+    logger.error(
+      `Error sending order delivery confirmation for order ${order._id}:`,
+      {
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      },
+    );
+    return recipients.map((r) => ({
+      recipient: r.email,
+      success: false,
+      error: "Failed to send delivery confirmation.",
+    }));
+  }
+}

@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Order Confirmation</title>
+</head>
+
+<body style="font-size: 14px; margin: 0 auto; width: 600px; padding: 0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
+    <table class="table" cellpadding="0" cellspacing="0" style="empty-cells: hide; margin: 0 auto; padding: 15px; width: 600px">
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">Hello
+                    {{recipientName}},</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">We are McCollister's Auto Logistics, and we have been assigned the transportation of your vehicle by Allied Van Lines (or by North American Van Lines).</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; ">We have received your order and our team excited to assist you with your auto transportation needs! <p><a href="{{termsUrl}}">Please click here to review and accept the terms of your agreement.</a></p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">Here is the important information (dates, shipping requirements) for your reference.
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "><span style="font-weight: bold;">Vehicle Relocation Order Number:</span> #{{uniqueId}}
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "><span style="font-weight: bold;">Transportation Type:</span> {{ transportType }} Carrier
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; "><strong>Vehicle
+                        Information:</strong><br />
+                    {{{ vehicles }}}
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Pick Up Address:</strong><br />{{
+                    pickupAddress }}<br />{{ pickupCity}},{{pickupState}} {{pickupZip}}</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Scheduled Dates:</strong><br />{{ pickupDates }}</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Delivery
+                        Address:</strong><br />{{
+                    deliveryAddress }}<br />{{ deliveryCity}},{{deliveryState}} {{deliveryZip}}</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Scheduled Dates:</strong><br />{{ deliveryDates }}</p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">Our customer service team stands ready to assist with any changes, updates or questions!
+            </td>
+        </tr>
+
+ 
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+               <p>Reach out to:<br/><a href="tel:8888190594">(888) 819-0594</a><br />autologistics@mccollisters.com</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                <img src={{ logo }} style="width: 200px;
+                height: auto;" />
+                <img src={{ mclogo }} style="width: 200px;
+                height: auto;" />
+            </td>
+        </tr>
+
+    </table>
+</body>
+
+
+</html>

@@ -1,0 +1,161 @@
+/**
+ * Send MMI Order Notification
+ *
+ * Sends MMI-specific order notification to designated recipient
+ */
+
+import { readFile } from "fs/promises";
+import { join } from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import Handlebars from "handlebars";
+import { logger } from "@/core/logger";
+import { IOrder } from "@/_global/models";
+import { getNotificationManager } from "@/notification";
+import { getPickupDatesString } from "./utils/getPickupDatesString";
+import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+interface SendMMIOrderNotificationParams {
+  order: IOrder;
+  recipientEmail: string;
+}
+
+/**
+ * Send MMI order notification
+ */
+export async function sendMMIOrderNotification({
+  recipientEmail,
+  order,
+}: SendMMIOrderNotificationParams): Promise<{
+  success: boolean;
+  error?: string;
+}> {
+  try {
+    const senderEmail = "autologistics@mccollisters.com";
+    const senderName = "McCollister's AutoLogistics";
+
+    let subject = `New Order #${order.refId}`;
+
+    if (order.reg) {
+      subject += ` / REG# ${order.reg}`;
+    }
+
+    // Extract pickup information
+    const pickupAddress =
+      order.origin?.address?.address ||
+      order.origin?.address?.addressLine1 ||
+      "";
+    const pickupCity = order.origin?.address?.city || "";
+    const pickupState = order.origin?.address?.state || "";
+    const pickupZip = order.origin?.address?.zip || "";
+
+    // Extract customer information
+    let customerFullName = order.customer?.name || "Not provided";
+    let customerPhone = order.customer?.phone || "Not provided";
+    let customerEmail = order.customer?.email || "Not provided";
+
+    // Extract delivery information
+    const deliveryAddress =
+      order.destination?.address?.address ||
+      order.destination?.address?.addressLine1 ||
+      "";
+    const deliveryCity = order.destination?.address?.city || "";
+    const deliveryState = order.destination?.address?.state || "";
+    const deliveryZip = order.destination?.address?.zip || "";
+
+    // Get date strings
+    const pickupDates = getPickupDatesString(order);
+    const deliveryDates = getDeliveryDatesString(order);
+
+    // Format transport type
+    const transportType =
+      order.transportType?.charAt(0).toUpperCase() +
+        order.transportType?.slice(1) || "Open";
+
+    // Format vehicles
+    let vehicles = "";
+    if (order.vehicles && order.vehicles.length > 0) {
+      order.vehicles.forEach((vehicle) => {
+        const operableStatus =
+          vehicle.isInoperable === false ? "Inoperable" : "Operable";
+        const vehiclePrice = vehicle.pricing?.totalPortal || 0;
+        vehicles += `<p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">${vehicle.year || ""} ${vehicle.make || ""} ${vehicle.model || ""} (${operableStatus}): $${vehiclePrice.toFixed(2)}</p>`;
+      });
+    }
+
+    // Get pricing totals
+    const billRate = order.totalPricing?.totalSD || 0;
+    const totalPricing = order.totalPricing?.totalPortal || 0;
+
+    // Load and compile template
+    const templatePath = join(
+      __dirname,
+      "../../../templates/mmi-order-notification.hbs",
+    );
+    const templateSource = await readFile(templatePath, "utf-8");
+    const template = Handlebars.compile(templateSource);
+
+    // Prepare template data
+    const html = template({
+      customerFullName,
+      customerPhone,
+      customerEmail,
+      pickupDates,
+      pickupAddress,
+      pickupCity,
+      pickupState,
+      pickupZip,
+      deliveryDates,
+      deliveryAddress,
+      deliveryCity,
+      deliveryState,
+      deliveryZip,
+      transportType,
+      vehicles,
+      uniqueId: order.refId,
+      reg: order.reg || "",
+      totalPricing: totalPricing.toFixed(2),
+      billRate: billRate.toFixed(2),
+      logo: "https://res.cloudinary.com/dq27r8cov/image/upload/v1616097775/McCollister%27s/mccollisters-auto-logistics.png",
+    });
+
+    // Send email using notification manager
+    const notificationManager = getNotificationManager();
+    const result = await notificationManager.sendEmail({
+      to: recipientEmail,
+      from: senderEmail,
+      subject,
+      html,
+      replyTo: senderEmail,
+    });
+
+    if (result.success) {
+      logger.info("MMI order notification sent successfully", {
+        orderId: order._id,
+        uniqueId: order.refId,
+        recipientEmail,
+      });
+    } else {
+      logger.error("Failed to send MMI order notification", {
+        orderId: order._id,
+        uniqueId: order.refId,
+        recipientEmail,
+        error: result.error,
+      });
+    }
+
+    return {
+      success: result.success ?? false,
+      error: result.error,
+    };
+  } catch (error) {
+    logger.error("Error in sendMMIOrderNotification:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
+}

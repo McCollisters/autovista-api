@@ -24,7 +24,20 @@ import portalRoutes from "@/portal/routes";
 import userRoutes from "@/user/routes";
 import quoteRoutes from "@/quote/routes";
 import orderRoutes from "@/order/routes";
+import notificationRoutes from "@/notification/routes";
+import authRoutes from "@/auth/routes";
+import integrationRoutes from "@/integration/routes";
+import settingsRoutes from "@/settings/routes";
+import surveyRoutes from "@/survey/routes";
 import healthRoutes from "@/presentation/routes/health";
+
+// Import webhook system
+import webhookRouter from "@/_global/integrations/webhooks/registry";
+import callbackRouter from "@/_global/integrations/webhooks/callbacks";
+import {
+  initializeWebhooks,
+  validateWebhookConfig,
+} from "@/_global/integrations/webhooks";
 
 // Import models
 import { Order, Quote } from "@/_global/models";
@@ -66,6 +79,10 @@ const startServer = async () => {
     await mongoose.connect(config.database.uri, config.database.options);
     logger.info("Connected to MongoDB successfully");
 
+    // Initialize webhook system
+    validateWebhookConfig();
+    initializeWebhooks();
+
     //  sendMessage();
 
     // Clear existing data (development only)
@@ -94,6 +111,23 @@ const startServer = async () => {
     app.use("/api/v1/user", userRoutes);
     app.use("/api/v1/quote", quoteRoutes);
     app.use("/api/v1/order", orderRoutes);
+    app.use("/api/v1/notifications", notificationRoutes);
+    app.use("/api/v1/auth", authRoutes);
+    app.use("/api/v1/integration", integrationRoutes);
+    app.use("/api/v1/settings", settingsRoutes);
+    app.use("/api/v1/surveys", surveyRoutes);
+
+    // Integration routes (legacy paths for backward compatibility)
+    import { signS3, getFile, captivatedCallback } from "@/integration/routes";
+    app.post("/sign_s3", signS3);
+    app.get("/get_file/:fileKey", getFile);
+    app.post("/captivated/callback", captivatedCallback);
+
+    // Webhook routes
+    app.use("/api/v1/webhooks", webhookRouter);
+
+    // Super Dispatch callback routes (for backward compatibility)
+    app.use("/callback", callbackRouter);
 
     // Security error handler
     app.use(securityErrorHandler);
