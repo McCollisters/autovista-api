@@ -37,8 +37,9 @@ interface SendOrderDeliveryConfirmationParams {
  * In the old API, this came from an Email model with templateName "Delivery Confirmation"
  */
 const DEFAULT_EMAIL_CONFIG = {
-  senderEmail: "autologistics@mccollisters.com",
-  senderName: "McCollister's AutoLogistics",
+  // Will be loaded from email template in the function
+  senderEmail: "",
+  senderName: "",
   emailIntro: "We are confirming that your vehicle has been delivered.",
 };
 
@@ -76,7 +77,13 @@ export async function sendOrderDeliveryConfirmation({
       ];
     }
 
-    const { senderEmail, senderName, emailIntro } = DEFAULT_EMAIL_CONFIG;
+    // Get email template values
+    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const emailTemplate = await getEmailTemplate("Delivery Confirmation");
+    
+    const senderEmail = emailTemplate.senderEmail || DEFAULT_EMAIL_CONFIG.senderEmail;
+    const senderName = emailTemplate.senderName || DEFAULT_EMAIL_CONFIG.senderName;
+    const emailIntro = emailTemplate.emailIntro || DEFAULT_EMAIL_CONFIG.emailIntro;
 
     // Format order ID for subject
     const orderReg = order.reg ? `${order.reg} / ` : "";

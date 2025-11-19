@@ -292,6 +292,7 @@ export interface IOrderPDF {
 }
 
 export interface IOptions {
+  enableJKRateCalculation?: boolean;
   orderForm: IOrderForm;
   quoteForm: IQuoteForm;
   orderPDF: IOrderPDF;

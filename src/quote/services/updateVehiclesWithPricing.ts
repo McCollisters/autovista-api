@@ -2,6 +2,7 @@ import { IVehicle } from "../../_global/interfaces";
 import { ModifierSet, IPortal } from "@/_global/models";
 import { getTMSBaseRate } from "../integrations/getTMSBaseRate";
 import { getCustomBaseRate } from "../integrations/getCustomBaseRate";
+import { getJKBaseRate } from "../integrations/getJKBaseRate";
 import { ServiceLevelOption, VehicleClass } from "../../_global/enums";
 import { IVehicleModifier, IModifierSet } from "../../modifierSet/schema";
 import { roundCurrency } from "../../_global/utils/roundCurrency";
@@ -37,9 +38,15 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   } = params;
 
   // Get Autovista-wide modifiers
-  const globalModifiers = (await ModifierSet.findOne({
+  const globalModifiersDoc = await ModifierSet.findOne({
     isGlobal: true,
-  }).lean()) as any;
+  });
+
+  if (!globalModifiersDoc) {
+    return null;
+  }
+
+  const globalModifiers = globalModifiersDoc.toObject() as any;
 
   // Get portal-specific modifiers
   const portalModifiers = (await ModifierSet.findOne({
@@ -48,6 +55,18 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
 
   if (!globalModifiers) {
     return null;
+  }
+
+  // Check if JK rate calculation is enabled
+  if (portal.options?.enableJKRateCalculation) {
+    return getJKVehiclePrice({
+      vehicle,
+      miles,
+      portal,
+      commission,
+      globalModifiers,
+      portalModifiers,
+    });
   }
 
   // Get vehicle base rate from Super Dispatch or portal's custom rates
@@ -180,7 +199,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
         break;
       case VehicleClass.Sedan:
         // Use sedan value if available, otherwise use a default value
-        const sedanValue = globalModifiers.oversize.sedan || 1000;
+        const sedanValue = (globalModifiers.oversize as any).sedan || 1000;
         calculatedGlobalOversize = calculateModifier(
           { value: sedanValue, valueType: "flat" },
           base,
@@ -240,10 +259,12 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   if (globalModifiers.states) {
     // Handle both Map and plain object cases (lean() converts Map to plain object)
     const getStateModifier = (state: string) => {
-      if (globalModifiers.states instanceof Map) {
-        return globalModifiers.states.get(state);
+      const states = globalModifiers.states;
+      if (!states) return undefined;
+      if (states instanceof Map) {
+        return states.get(state);
       } else {
-        return globalModifiers.states[state];
+        return states[state];
       }
     };
 
@@ -432,4 +453,191 @@ export const updateVehiclesWithPricing = async ({
   }
 
   return updatedVehicles;
+};
+
+/**
+ * JK Moving Rate Calculation
+ *
+ * Implements the JK-specific 70/30 split calculation:
+ * - MC base = 70% of original base
+ * - Company tariff = 30% of original base
+ * - No state modifiers
+ * - No service level markup (all service levels have same price)
+ */
+const getJKVehiclePrice = async ({
+  vehicle,
+  miles,
+  portal,
+  commission,
+  globalModifiers,
+  portalModifiers,
+}: {
+  vehicle: Partial<IVehicle>;
+  miles: number;
+  portal: IPortal;
+  commission: number;
+  globalModifiers: any;
+  portalModifiers: any;
+}): Promise<any> => {
+  const portalAny = portal as any;
+  const customRates = portalAny.customRates || {};
+  const discount = 0; // Discount would come from quote, but for now default to 0
+
+  // Get base quote from JK mileage structure
+  let baseQuote = getJKBaseRate(miles, portal);
+
+  if (baseQuote === 0) {
+    return null;
+  }
+
+  // Apply discount if any
+  baseQuote -= discount;
+
+  // Company tariff percent defaults to 0.3 (30%) for JK Moving
+  const companyTariffPercent = portalAny.companyTariff
+    ? portalAny.companyTariff / 100
+    : 0.3;
+
+  // Calculate company tariff (30% of original base)
+  let companyTariff = Math.floor(baseQuote * companyTariffPercent);
+
+  // MC base is 70% of original base (original - company tariff)
+  let mcBase = baseQuote - companyTariff;
+
+  // Determine transport type
+  const isEnclosed =
+    vehicle.transportType === "enclosed" ||
+    vehicle.transportType === "WHITEGLOVE";
+
+  // Apply enclosed modifier if applicable
+  if (isEnclosed && globalModifiers.enclosedModifier) {
+    const enclosedModifierAmt = Math.ceil(
+      mcBase * (globalModifiers.enclosedModifier / 100),
+    );
+    // Note: JK doesn't add this to base, it's just calculated
+  }
+
+  // Apply enclosed surcharge
+  let enclosedMarkup = 0;
+  if (isEnclosed) {
+    if (miles > 1500 && customRates.enclosedSurchargeOver1500) {
+      enclosedMarkup = customRates.enclosedSurchargeOver1500;
+    } else if (customRates.enclosedSurcharge) {
+      enclosedMarkup = customRates.enclosedSurcharge;
+    }
+  }
+
+  // Apply vehicle class surcharges
+  const pricingClass = vehicle.pricingClass?.toLowerCase() || "";
+
+  if (pricingClass === "suv" && customRates.suvClassSurcharge) {
+    mcBase += customRates.suvClassSurcharge;
+  }
+
+  if (pricingClass === "van" && customRates.vanClassSurcharge) {
+    mcBase += customRates.vanClassSurcharge;
+  }
+
+  if (
+    pricingClass === "pick up 4 doors" &&
+    customRates.pickUp4DoorClassSurcharge
+  ) {
+    mcBase += customRates.pickUp4DoorClassSurcharge;
+  }
+
+  // Apply inoperable markup
+  let inoperableMarkup = 0;
+  if (vehicle.isInoperable && globalModifiers.inoperable) {
+    inoperableMarkup = calculateModifier(globalModifiers.inoperable, mcBase);
+  }
+
+  // Apply portal admin discount to company tariff if applicable
+  const portalAdminDiscount = portalAny.portalAdminDiscount || 0;
+  if (portalAdminDiscount > 0 && companyTariff > portalAdminDiscount) {
+    companyTariff = companyTariff - portalAdminDiscount;
+  }
+
+  // JK: No service level markup - all service levels have same price
+  const serviceLevelMarkup = 0;
+
+  // Calculate totals (same for all service levels in JK)
+  const totalSD =
+    mcBase + enclosedMarkup + serviceLevelMarkup + inoperableMarkup;
+  const totalPortal =
+    mcBase +
+    enclosedMarkup +
+    serviceLevelMarkup +
+    inoperableMarkup +
+    commission +
+    companyTariff;
+
+  // Return pricing structure matching the standard format
+  return {
+    base: roundCurrency(mcBase),
+    modifiers: {
+      inoperable: inoperableMarkup,
+      routes: 0, // JK: No state modifiers
+      states: 0, // JK: No state modifiers
+      oversize: 0,
+      vehicles: 0,
+      globalDiscount: 0,
+      portalDiscount: 0,
+      irr: 0,
+      fuel: 0,
+      enclosedFlat: enclosedMarkup,
+      enclosedPercent: 0,
+      commission: commission,
+      serviceLevels: [], // JK: No service level variations
+      companyTariffs: [
+        { serviceLevelOption: ServiceLevelOption.OneDay, value: companyTariff },
+        {
+          serviceLevelOption: ServiceLevelOption.ThreeDay,
+          value: companyTariff,
+        },
+        {
+          serviceLevelOption: ServiceLevelOption.FiveDay,
+          value: companyTariff,
+        },
+        {
+          serviceLevelOption: ServiceLevelOption.SevenDay,
+          value: companyTariff,
+        },
+      ],
+    },
+    totals: {
+      whiteGlove: roundCurrency(totalSD), // Same as other service levels
+      one: {
+        open: {
+          total: roundCurrency(totalSD),
+          companyTariff: companyTariff,
+          commission: commission,
+          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+        },
+        enclosed: {
+          total: roundCurrency(totalSD),
+          companyTariff: companyTariff,
+          commission: commission,
+          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+        },
+      },
+      three: {
+        total: roundCurrency(totalSD),
+        companyTariff: companyTariff,
+        commission: commission,
+        totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+      },
+      five: {
+        total: roundCurrency(totalSD),
+        companyTariff: companyTariff,
+        commission: commission,
+        totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+      },
+      seven: {
+        total: roundCurrency(totalSD),
+        companyTariff: companyTariff,
+        commission: commission,
+        totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+      },
+    },
+  };
 };

@@ -28,6 +28,7 @@ interface SendOrderAgentParams {
 /**
  * Default email configuration
  * In the old API, this came from an Email model with templateName "Order Agent"
+ * Now loaded from EmailTemplate model
  */
 const DEFAULT_EMAIL_CONFIG = {
   senderEmail: "autologistics@mccollisters.com",
@@ -129,6 +130,14 @@ export async function sendOrderAgentEmail({
     const deliveryState = order.destination?.address?.state || "";
     const deliveryZip = order.destination?.address?.zip || "";
 
+    // Get email template values
+    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const emailTemplate = await getEmailTemplate("Order Agent");
+    
+    const senderEmail = emailTemplate.senderEmail || DEFAULT_EMAIL_CONFIG.senderEmail;
+    const senderName = emailTemplate.senderName || DEFAULT_EMAIL_CONFIG.senderName;
+    const emailIntro = emailTemplate.emailIntro || DEFAULT_EMAIL_CONFIG.emailIntro;
+
     // Format transport type for display
     const transportType =
       order.transportType?.charAt(0).toUpperCase() +
@@ -138,7 +147,7 @@ export async function sendOrderAgentEmail({
     const emailPromises = recipients.map(async (recipient) => {
       const html = template({
         recipientName: recipient.name || "Agent",
-        intro: DEFAULT_EMAIL_CONFIG.emailIntro,
+        intro: emailIntro,
         uniqueId: order.refId,
         reg: order.reg || "",
         transferee,
@@ -169,8 +178,8 @@ export async function sendOrderAgentEmail({
           to: recipient.email!,
           subject,
           html,
-          from: DEFAULT_EMAIL_CONFIG.senderEmail,
-          replyTo: DEFAULT_EMAIL_CONFIG.senderEmail,
+          from: senderEmail,
+          replyTo: senderEmail,
         },
         recipientEmail: recipient.email!,
       });

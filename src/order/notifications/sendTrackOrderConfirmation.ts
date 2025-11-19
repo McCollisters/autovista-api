@@ -39,9 +39,13 @@ export async function sendTrackOrderConfirmation({
   }
 
   try {
-    const senderEmail = "autologistics@mccollisters.com";
-    const senderName = "McCollister's AutoLogistics";
-    const subject = `Tracking Request for Order #${order.refId}`;
+    // Get email template values
+    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const emailTemplate = await getEmailTemplate("Track Order Confirmation");
+    
+    const senderEmail = emailTemplate.senderEmail;
+    const senderName = emailTemplate.senderName;
+    const subject = emailTemplate.subject || `Tracking Request for Order #${order.refId}`;
     const toEmail =
       recipientEmail || order.customer?.email || "anna@periscopeatlantic.com"; // Fallback email from old API
 

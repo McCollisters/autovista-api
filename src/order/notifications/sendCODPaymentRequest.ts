@@ -30,8 +30,12 @@ export async function sendCODPaymentRequest(
   }
 
   try {
-    const senderEmail = "autologistics@mccollisters.com";
-    const senderName = "McCollister's AutoLogistics";
+    // Get email template values
+    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const emailTemplate = await getEmailTemplate("Payment Request");
+    
+    const senderEmail = emailTemplate.senderEmail;
+    const senderName = emailTemplate.senderName;
     const recipientEmail = order.customer?.email;
 
     if (!recipientEmail) {
@@ -45,7 +49,7 @@ export async function sendCODPaymentRequest(
     }
 
     const pickupDates = getPickupDatesString(order);
-    const subject = "Payment for your Auto Transport";
+    const subject = emailTemplate.subject || "Payment for your Auto Transport";
 
     // Format vehicles string
     let vehiclesString = "";

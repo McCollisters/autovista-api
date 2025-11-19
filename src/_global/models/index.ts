@@ -22,6 +22,7 @@ import {
 } from "../../surveyResponse/schema";
 import { carrierSchema, ICarrier } from "../../carrier/schema";
 import { settingsSchema, ISettings } from "../../settings/schema";
+import { emailTemplateSchema, IEmailTemplate } from "../../email/schema";
 
 // Model registry interface
 interface ModelRegistry {
@@ -35,6 +36,7 @@ interface ModelRegistry {
   SurveyResponse: Model<ISurveyResponse>;
   Carrier: Model<ICarrier>;
   Settings: Model<ISettings>;
+  EmailTemplate: Model<IEmailTemplate>;
 }
 
 // Create models with consistent pattern
@@ -61,6 +63,7 @@ export const models: ModelRegistry = {
   ),
   Carrier: createModel<ICarrier>("Carrier", carrierSchema),
   Settings: createModel<ISettings>("Settings", settingsSchema),
+  EmailTemplate: createModel<IEmailTemplate>("EmailTemplate", emailTemplateSchema),
 };
 
 // Individual model exports for convenience
@@ -75,6 +78,7 @@ export const {
   SurveyResponse,
   Carrier,
   Settings,
+  EmailTemplate,
 } = models;
 
 // Export types for convenience
@@ -88,3 +92,4 @@ export type { ISurvey } from "../../survey/schema";
 export type { ISurveyResponse } from "../../surveyResponse/schema";
 export type { ICarrier } from "../../carrier/schema";
 export type { ISettings } from "../../settings/schema";
+export type { IEmailTemplate } from "../../email/schema";

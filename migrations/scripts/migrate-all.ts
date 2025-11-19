@@ -28,7 +28,7 @@ import { NotificationLogMigration } from "./migrate-notification-logs.js";
  * npm run migrate:all
  */
 
-async function runAllMigrations() {
+export async function runAllMigrations() {
   console.log("🚀 Starting MASTER MIGRATION - All Collections");
   console.log("=".repeat(80));
   console.log("");
@@ -138,9 +138,31 @@ async function runAllMigrations() {
 
   console.log("=".repeat(80));
 
-  // Exit with error code if any migrations failed
-  process.exit(failed > 0 ? 1 : 0);
+  // Return results instead of exiting when called programmatically
+  return {
+    success: failed === 0,
+    failed,
+    successful,
+    totalRecords,
+    duration,
+    results,
+  };
 }
 
-// Run the master migration
-runAllMigrations();
+// Run the master migration if this file is executed directly
+// Check if this module is the main module being executed
+const isMainModule =
+  import.meta.url === `file://${process.argv[1]}` ||
+  process.argv[1]?.endsWith("migrate-all.ts") ||
+  process.argv[1]?.endsWith("migrate-all.js");
+
+if (isMainModule) {
+  runAllMigrations()
+    .then((result) => {
+      process.exit(result.success ? 0 : 1);
+    })
+    .catch((error) => {
+      console.error("Migration failed:", error);
+      process.exit(1);
+    });
+}

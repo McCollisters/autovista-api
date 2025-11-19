@@ -10,6 +10,11 @@ import { exportOrders } from "./controllers/exportOrders";
 import { getOrdersAnalytics } from "./controllers/getOrdersAnalytics";
 import { addOrderFiles } from "./controllers/addOrderFiles";
 import { removeOrderFile } from "./controllers/removeOrderFile";
+import { getOrderActivities } from "./controllers/getOrderActivities";
+import { acceptOrderTerms } from "./controllers/acceptOrderTerms";
+import { getOrderStatus } from "./controllers/getOrderStatus";
+import { requestDriverLocation } from "./controllers/requestDriverLocation";
+import { createOrderCustomer } from "./controllers/createOrderCustomer";
 
 const router = Router();
 
@@ -17,6 +22,8 @@ const router = Router();
 router.post("/export", exportOrders);
 router.get("/analytics", getOrdersAnalytics);
 router.post("/reports/commission", getCommissionReports);
+router.post("/terms", acceptOrderTerms);
+router.post("/customer", createOrderCustomer);
 
 // General routes
 router.get("/", getOrders);
@@ -24,9 +31,12 @@ router.post("/", createOrder);
 
 // Parameterized routes
 router.get("/:orderId", getOrder);
+router.get("/:orderId/activities", getOrderActivities);
 router.patch("/:orderId", updateOrder);
 router.delete("/:orderId", deleteOrder);
 router.post("/:orderId/track", requestTrackOrder);
+router.post("/:orderId/status", getOrderStatus);
+router.post("/:orderId/location", requestDriverLocation);
 router.put("/:orderId/files", addOrderFiles);
 router.put("/mcadmin/:orderId/file", removeOrderFile);
 

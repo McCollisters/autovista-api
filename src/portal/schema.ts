@@ -49,6 +49,7 @@ const portalSchema = createSchema<IPortal>({
     quoteExpiryDays: { type: Number, default: 30 },
     overrideLogo: { type: Boolean, default: false },
     enableCustomRates: { type: Boolean, default: false },
+    enableJKRateCalculation: { type: Boolean, default: false },
     enableVariableCompanyTariff: { type: Boolean, default: false },
     enableWhiteGloveOverride: { type: Boolean, default: false },
     enableOrderTrackingByCustomer: { type: Boolean, default: false },

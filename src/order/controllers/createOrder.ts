@@ -5,7 +5,7 @@ import { logger } from "@/core/logger";
 import { geocode } from "../../_global/utils/geocode";
 import { formatPhoneNumber } from "../../_global/utils/formatPhoneNumber";
 import { getDateRanges } from "../../_global/utils/getDateRanges";
-import { sendOrderToSuper } from "../integrations/sendOrderToSuper";
+import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper";
 import { sendWhiteGloveNotification } from "../notifications/sendWhiteGloveNotification";
 import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotification";
 import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
@@ -428,38 +428,25 @@ export const createOrder = async (
     }
 
     // SuperDispatch integration with improved error handling
+    // Send partial order initially (withheld addresses) - full details will be sent when carrier accepts
     if (payment !== "COD" && transportType !== "WHITEGLOVE") {
       try {
-        logger.info(`Sending order ${uniqueId} to SuperDispatch`);
-        superResponse = await sendOrderToSuper({
+        logger.info(
+          `Sending partial order ${uniqueId} to SuperDispatch (addresses withheld)`,
+        );
+        superResponse = await sendPartialOrderToSuper({
           quotes,
           uniqueId,
           reg,
           portal,
           dateRanges,
-          pickupCoords,
-          deliveryCoords,
-          pickupNotes,
-          deliveryNotes,
           transportType,
-          pickupAddress,
           pickupCity,
           pickupState,
           pickupZip,
-          pickupBusinessName,
-          pickupContactName,
-          pickupEmail,
-          pickupPhone,
-          pickupMobile,
-          deliveryAddress,
           deliveryCity,
           deliveryState,
           deliveryZip,
-          deliveryBusinessName,
-          deliveryContactName,
-          deliveryEmail,
-          deliveryPhone,
-          deliveryMobile,
           serviceLevel,
         });
 
@@ -480,7 +467,9 @@ export const createOrder = async (
           });
         }
 
-        logger.info(`Successfully sent order ${uniqueId} to SuperDispatch`);
+        logger.info(
+          `Successfully sent partial order ${uniqueId} to SuperDispatch. Full details will be revealed when carrier accepts.`,
+        );
       } catch (superError) {
         logger.error("SuperDispatch API call failed:", superError);
         return next({
@@ -765,6 +754,68 @@ export const createOrder = async (
       paymentType: payment,
     };
 
+    // Create original order data backup before SuperDispatch updates
+    const originalOrderData = {
+      refId: uniqueId,
+      reg,
+      status: payment === "COD" ? "Pending" : "Booked",
+      portalId: portal._id.toString(),
+      userId: orderUserId.toString(),
+      quoteId: quote._id.toString(),
+      miles: quote.miles,
+      transportType,
+      customer: {
+        name: customerFullName,
+        firstName: customerFirstName,
+        lastName: customerLastName,
+        phone: customerPhone,
+        phoneMobile: customerMobile,
+        email: customerEmail,
+      },
+      origin: {
+        contact: {
+          name: pickupContactName,
+          phone: pickupPhone,
+          phoneMobile: pickupMobile,
+        },
+        address: {
+          address: pickupAddress,
+          city: pickupCity,
+          state: pickupState,
+          zip: pickupZip,
+        },
+        notes: pickupNotes,
+        longitude: pickupCoords.longitude,
+        latitude: pickupCoords.latitude,
+      },
+      destination: {
+        contact: {
+          name: deliveryContactName,
+          phone: deliveryPhone,
+          phoneMobile: deliveryMobile,
+        },
+        address: {
+          address: deliveryAddress,
+          city: deliveryCity,
+          state: deliveryState,
+          zip: deliveryZip,
+        },
+        notes: deliveryNotes,
+        longitude: deliveryCoords.longitude,
+        latitude: deliveryCoords.latitude,
+      },
+      vehicles: dbVehicleData,
+      totalPricing: pricing,
+      paymentType: payment,
+      schedule: {
+        serviceLevel,
+        pickupSelected: new Date(dateRanges[0]),
+        pickupEstimated: [new Date(dateRanges[0]), new Date(dateRanges[1])],
+        deliveryEstimated: [new Date(dateRanges[2]), new Date(dateRanges[3])],
+      },
+      agents,
+    };
+
     let orderDetailsForDb = {
       orderTableCustomer: customerFullName ? customerFullName.trim() : null,
       orderTableStatus: payment === "COD" ? "Pending" : "New",
@@ -839,10 +890,20 @@ export const createOrder = async (
       vehicles: dbVehicleData,
       totalPricing: pricing,
       paymentType: payment,
-      sdCreated: superResponse?.created_at,
-      sdGuid: superResponse?.guid,
-      sdUpdated: superResponse?.changed_at,
-      sdStatus: superResponse?.status,
+      tms: {
+        guid: superResponse?.guid || null,
+        status: superResponse?.status || null,
+        createdAt: superResponse?.created_at
+          ? new Date(superResponse.created_at)
+          : null,
+        updatedAt: superResponse?.changed_at
+          ? new Date(superResponse.changed_at)
+          : null,
+      },
+      tmsPartialOrder:
+        payment !== "COD" && transportType !== "WHITEGLOVE" && superResponse
+          ? true
+          : false,
       originalOrderData: JSON.stringify(originalOrderData),
     };
 

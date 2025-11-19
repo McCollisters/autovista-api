@@ -115,6 +115,8 @@ export interface IOrder extends Document {
   signatureRequestSent?: boolean;
   signatureReceived?: boolean;
   signatureRequestId?: string;
+  tmsPartialOrder?: boolean;
+  originalOrderData?: string; // JSON stringified backup of original order before SuperDispatch updates
   notifications: {
     paymentRequest: INotification;
     paymentReminder: INotification;
@@ -288,6 +290,8 @@ const orderSchemaDefinition = {
   signatureRequestSent: { type: Boolean, default: false },
   signatureReceived: { type: Boolean, default: false },
   signatureRequestId: { type: String },
+  tmsPartialOrder: { type: Boolean, default: false },
+  originalOrderData: { type: String }, // JSON stringified backup of original order before SuperDispatch updates
   notifications: {
     paymentRequest: createNotificationSchema(),
     paymentReminder: createNotificationSchema(),

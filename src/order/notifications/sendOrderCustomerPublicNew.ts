@@ -41,8 +41,12 @@ export async function sendOrderCustomerPublicNew(
   }
 
   try {
-    const senderEmail = "autologistics@mccollisters.com";
-    const senderName = "McCollister's AutoLogistics";
+    // Get email template values
+    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const emailTemplate = await getEmailTemplate("Customer Order");
+    
+    const senderEmail = emailTemplate.senderEmail;
+    const senderName = emailTemplate.senderName;
 
     let logo: string | undefined;
     let companyName = "";
@@ -79,7 +83,7 @@ export async function sendOrderCustomerPublicNew(
     }
 
     const recipientName = order.customer?.name || "Customer";
-    const subject = `Your Vehicle Transport Confirmation - Order #${order.refId}`;
+    const subject = emailTemplate.subject || `Your Vehicle Transport Confirmation - Order #${order.refId}`;
 
     // Extract address information
     const pickupAddress =

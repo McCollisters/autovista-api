@@ -57,8 +57,12 @@ export async function sendOrderCustomerSignatureRequest({
     }
 
     // Step 1: Send email notification
-    const senderEmail = "autologistics@mccollisters.com";
-    const senderName = "McCollister's AutoLogistics";
+    // Get email template values
+    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const emailTemplate = await getEmailTemplate("Signature Request");
+    
+    const senderEmail = emailTemplate.senderEmail;
+    const senderName = emailTemplate.senderName;
 
     // Determine if this is a Sirva portal
     const portalId = String(order.portalId);
@@ -72,7 +76,7 @@ export async function sendOrderCustomerSignatureRequest({
         )
       : join(__dirname, "../../../templates/customer-signature-request.hbs");
 
-    const subject = `Signature Request Required - Order #${order.refId}`;
+    const subject = emailTemplate.subject || `Signature Request Required - Order #${order.refId}`;
 
     // Load and compile Handlebars template
     const templateSource = await readFile(templatePath, "utf-8");

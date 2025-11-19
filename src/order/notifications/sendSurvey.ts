@@ -51,8 +51,12 @@ export async function sendSurvey({
       surveyUrl ||
       `https://autovista.mccollisters.com/customer-survey/${orderId}`;
 
-    const senderEmail = "autologistics@mccollisters.com";
-    const senderName = "McCollister's AutoLogistics";
+    // Get email template values
+    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const emailTemplate = await getEmailTemplate("Survey");
+    
+    const senderEmail = emailTemplate.senderEmail;
+    const senderName = emailTemplate.senderName;
     const subject = "We're Listening. How did we do?";
 
     // Load and compile Handlebars template

@@ -463,6 +463,40 @@ export const handleCarrierAccepted = async (
         logger.info(
           `Order ${payload.order_guid} accepted by carrier ${payload.carrier_guid}`,
         );
+
+        // If this was a partial order, release full details and mark as complete
+        if (order.tmsPartialOrder === true) {
+          logger.info(
+            `Order ${order.refId} (${payload.order_guid}) was a partial order. Releasing full details to SuperDispatch.`,
+          );
+
+          try {
+            // Import and call update function
+            const { updateSuperWithCompleteOrder } = await import(
+              "@/order/integrations/updateSuperWithCompleteOrder"
+            );
+
+            // Release full order details to SuperDispatch
+            await updateSuperWithCompleteOrder(order);
+
+            // Update order to mark as no longer partial
+            order.tmsPartialOrder = false;
+            await order.save();
+
+            logger.info(
+              `Successfully released full details for order ${order.refId} and set tmsPartialOrder to false`,
+            );
+          } catch (error) {
+            logger.error(
+              `Failed to release full details for order ${order.refId}:`,
+              {
+                error: error instanceof Error ? error.message : String(error),
+                stack: error instanceof Error ? error.stack : undefined,
+              },
+            );
+            // Don't throw - we still want to log the carrier acceptance even if this fails
+          }
+        }
       }
     }
 
@@ -673,14 +707,38 @@ export const handleCarrierAcceptedByShipper = async (
           `Processing order ${order.refId} (${payload.order_guid}) after shipper accepted carrier`,
         );
 
-        // If this was a partial order, release full details
-        // Note: This would require the updateSuperWithCompleteOrder service
-        // For now, we'll just log it
-        if ((order as any).tmsPartialOrder === true) {
+        // If this was a partial order, release full details and mark as complete
+        if (order.tmsPartialOrder === true) {
           logger.info(
-            `Order ${order.refId} (${payload.order_guid}) was a partial order. Full details should be released to SuperDispatch.`,
+            `Order ${order.refId} (${payload.order_guid}) was a partial order. Releasing full details to SuperDispatch.`,
           );
-          // TODO: Implement updateSuperWithCompleteOrder if needed
+
+          try {
+            // Import and call update function
+            const { updateSuperWithCompleteOrder } = await import(
+              "@/order/integrations/updateSuperWithCompleteOrder"
+            );
+
+            // Release full order details to SuperDispatch
+            await updateSuperWithCompleteOrder(order);
+
+            // Update order to mark as no longer partial
+            order.tmsPartialOrder = false;
+            await order.save();
+
+            logger.info(
+              `Successfully released full details for order ${order.refId} and set tmsPartialOrder to false`,
+            );
+          } catch (error) {
+            logger.error(
+              `Failed to release full details for order ${order.refId}:`,
+              {
+                error: error instanceof Error ? error.message : String(error),
+                stack: error instanceof Error ? error.stack : undefined,
+              },
+            );
+            // Don't throw - we still want to log the carrier acceptance even if this fails
+          }
         }
       } else {
         logger.warn(`Order not found for tms.guid: ${payload.order_guid}`);
