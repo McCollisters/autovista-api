@@ -497,7 +497,9 @@ export const createOrder = async (
             calculatedQuotes instanceof String
           ) {
             try {
-              calculatedQuotes = JSON.parse(calculatedQuotes);
+              calculatedQuotes = JSON.parse(
+                String(calculatedQuotes),
+              ) as typeof calculatedQuotes;
             } catch (parseError) {
               logger.error(
                 `Vehicle ${index}: Failed to parse calculated quotes JSON:`,
@@ -676,83 +678,6 @@ export const createOrder = async (
       pricing.totalPortal =
         quote.totalPricing[serviceLevel].totalEnclosedTransportPortal;
     }
-
-    // Create original order data backup before SuperDispatch updates
-    const originalOrderData = {
-      orderTableCustomer: customerFullName ? customerFullName.trim() : null,
-      orderTableStatus: payment === "COD" ? "Pending" : "New",
-      orderTablePickupEst: new Date(dateRanges[0]),
-      orderTableDeliveryEst: new Date(dateRanges[2]),
-      userId: orderUserId,
-      userName: userName,
-      agentId: orderUserId,
-      sirvaNonDomestic,
-      portalId: portal._id,
-      portal: portal._id,
-      isCustomerPortal,
-      uniqueId,
-      uniqueIdNum,
-      quote,
-      serviceLevel,
-      reg,
-      status: payment === "COD" ? "Pending" : "Booked",
-      miles: quote.miles,
-      transportType,
-      openTransport,
-      transitTime,
-      companyName,
-      companyLogo,
-      moveType,
-      customer: {
-        customerFullName,
-        customerFirstName,
-        customerLastName,
-        customerPhone,
-        customerMobilePhone: customerMobile,
-        customerAltPhone: customerAltPhone ? customerAltPhone : null,
-        customerEmail,
-      },
-      agents,
-      pickupLocationType,
-      deliveryLocationType,
-      pickup: {
-        pickupBusinessName,
-        pickupContactName,
-        pickupPhone,
-        pickupAltPhone: pickupAltPhone ? pickupAltPhone : null,
-        pickupMobilePhone: pickupMobile,
-        pickupAddress,
-        pickupCity,
-        pickupState,
-        pickupZip,
-        pickupNotes,
-        pickupLongitude: pickupCoords.longitude,
-        pickupLatitude: pickupCoords.latitude,
-        pickupScheduledAt: new Date(dateRanges[0]),
-        pickupScheduledEndsAt: new Date(dateRanges[1]), // auto
-        pickupDateType: "Estimated",
-      },
-      delivery: {
-        deliveryBusinessName,
-        deliveryContactName,
-        deliveryPhone,
-        deliveryMobilePhone: deliveryMobile,
-        deliveryAltPhone: deliveryAltPhone ? deliveryAltPhone : null,
-        deliveryAddress,
-        deliveryCity,
-        deliveryState,
-        deliveryZip,
-        deliveryNotes,
-        deliveryLongitude: deliveryCoords.longitude,
-        deliveryLatitude: deliveryCoords.latitude,
-        deliveryScheduledAt: new Date(dateRanges[2]),
-        deliveryScheduledEndsAt: new Date(dateRanges[3]),
-        deliveryDateType: "Estimated",
-      },
-      vehicles: dbVehicleData,
-      totalPricing: pricing,
-      paymentType: payment,
-    };
 
     // Create original order data backup before SuperDispatch updates
     const originalOrderData = {
@@ -950,7 +875,7 @@ export const createOrder = async (
 
     // Send MMI order notification if portal is MMI
     const portalIdString = String(portal._id);
-    if (MMI_PORTALS.includes(portalIdString)) {
+    if (MMI_PORTALS.includes(portalIdString as typeof MMI_PORTALS[number])) {
       try {
         await sendMMIOrderNotification({
           order: newOrder,

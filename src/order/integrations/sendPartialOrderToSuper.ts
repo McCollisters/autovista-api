@@ -6,12 +6,17 @@
  */
 
 import { logger } from "@/core/logger";
-import { IPortal, IQuoteVehicle } from "@/_global/models";
-import { format } from "date-fns";
+import { IPortal } from "@/_global/models";
+import { IVehicle } from "@/_global/schemas/types";
+import { DateTime } from "luxon";
 import { authenticateSuperDispatch } from "@/_global/integrations/authenticateSuperDispatch";
 
+interface VehicleWithCalculatedQuotes extends IVehicle {
+  calculatedQuotes?: any[] | string;
+}
+
 interface SendPartialOrderToSuperParams {
-  quotes: IQuoteVehicle[];
+  quotes: VehicleWithCalculatedQuotes[];
   uniqueId: string;
   reg?: number;
   portal: IPortal;
@@ -70,7 +75,7 @@ export const sendPartialOrderToSuper = async (
         typeof calculatedQuotes === "string" ||
         calculatedQuotes instanceof String
       ) {
-        calculatedQuotes = JSON.parse(calculatedQuotes);
+        calculatedQuotes = JSON.parse(String(calculatedQuotes));
       }
 
       // Find quote for the specified service level
@@ -127,17 +132,17 @@ export const sendPartialOrderToSuper = async (
     });
 
     // Format dates (Super Dispatch expects YYYY-MM-DD format)
-    const pickupStartDate = format(new Date(dateRanges[0]), "yyyy-MM-dd");
-    const pickupEndDate = format(new Date(dateRanges[1]), "yyyy-MM-dd");
-    const deliveryStartDate = format(new Date(dateRanges[2]), "yyyy-MM-dd");
-    const deliveryEndDate = format(new Date(dateRanges[3]), "yyyy-MM-dd");
+    const pickupStartDate = DateTime.fromJSDate(new Date(dateRanges[0])).toFormat("yyyy-MM-dd");
+    const pickupEndDate = DateTime.fromJSDate(new Date(dateRanges[1])).toFormat("yyyy-MM-dd");
+    const deliveryStartDate = DateTime.fromJSDate(new Date(dateRanges[2])).toFormat("yyyy-MM-dd");
+    const deliveryEndDate = DateTime.fromJSDate(new Date(dateRanges[3])).toFormat("yyyy-MM-dd");
 
     // Build partial order payload
     const orderDetails = {
       number: uniqueId,
       purchase_order_number: reg || null,
       portalNotificationEmail:
-        portal.notificationEmail || portal.contact?.email,
+        portal.contact?.email || null,
       instructions:
         "Full order details will be released upon carrier approval by our office within 1 business day",
       payment: {
@@ -147,8 +152,8 @@ export const sendPartialOrderToSuper = async (
       customer: {
         name: null,
         address: null,
-        city: portal.address?.city || portal.companyCity || null,
-        state: portal.address?.state || portal.companyState || null,
+        city: portal.address?.city || null,
+        state: portal.address?.state || null,
       },
       pickup: {
         date_type: "estimated",

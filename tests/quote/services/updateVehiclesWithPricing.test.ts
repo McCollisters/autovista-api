@@ -58,16 +58,23 @@ describe("updateVehiclesWithPricing", () => {
       getCustomBaseRate,
     } = require("../../../src/quote/integrations/getCustomBaseRate");
 
-    (ModifierSet.findOne as any).mockImplementation((query: any) => ({
-      lean: () => {
-        if (query.isGlobal) {
-          return Promise.resolve(mockModifierSet);
-        } else if (query.portalId) {
-          return Promise.resolve(mockPortalModifierSet);
-        }
-        return Promise.resolve(null);
-      },
-    }));
+    (ModifierSet.findOne as any).mockImplementation((query: any) => {
+      if (query.isGlobal) {
+        // Return an object with toObject() method for global modifiers
+        const globalModifierDoc = {
+          ...mockModifierSet,
+          toObject: jest.fn().mockReturnValue(mockModifierSet),
+        };
+        return Promise.resolve(globalModifierDoc);
+      } else if (query.portalId) {
+        // Return lean() chainable for portal modifiers
+        const leanMock = jest.fn().mockResolvedValue(mockPortalModifierSet) as any;
+        return {
+          lean: leanMock,
+        } as any;
+      }
+      return Promise.resolve(null);
+    });
     Portal.findById.mockResolvedValue(mockPortal);
 
     // Mock integration functions
