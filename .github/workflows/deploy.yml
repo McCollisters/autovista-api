@@ -60,17 +60,6 @@ jobs:
           echo "Checking Elastic Beanstalk permissions..."
           aws elasticbeanstalk describe-applications --region us-east-1 || echo "EB permissions not available"
 
-      - name: Set Elastic Beanstalk environment variables
-        run: |
-          aws elasticbeanstalk update-environment \
-            --environment-name autovista-api-new-env \
-            --option-settings \
-            Namespace=aws:elasticbeanstalk:application:environment,OptionName=MONGODB_DEV_URI,Value="${{ secrets.MONGODB_DEV_URI }}" \
-            Namespace=aws:elasticbeanstalk:application:environment,OptionName=NODE_ENV,Value="${{ secrets.NODE_ENV }}" \
-            Namespace=aws:elasticbeanstalk:application:environment,OptionName=AWS_REGION,Value="us-east-1" \
-            Namespace=aws:elasticbeanstalk:application:environment,OptionName=PORT,Value="${{ secrets.PORT || '8080' }}"
-        continue-on-error: true
-
       - name: Check environment status and version
         run: |
           echo "Checking environment status..."
