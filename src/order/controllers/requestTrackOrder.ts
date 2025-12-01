@@ -26,7 +26,7 @@ export const requestTrackOrder = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    const { orderId } = req.params as RequestTrackOrderParams;
+    const { orderId } = req.params as unknown as RequestTrackOrderParams;
 
     const order = await Order.findById(orderId);
 
@@ -72,7 +72,6 @@ export const requestTrackOrder = async (
     // Get delivery address
     const deliveryAddress =
       order.destination?.address?.address ||
-      order.destination?.address?.addressLine1 ||
       "";
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";

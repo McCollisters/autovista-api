@@ -19,7 +19,7 @@ export const updateQuoteAlternative = async (
   req: express.Request,
   res: express.Response,
   next: express.NextFunction,
-): Promise<void> => {
+): Promise<express.Response | void> => {
   try {
     const {
       customerFullName,
@@ -160,7 +160,6 @@ export const updateQuoteAlternative = async (
       origin: originValidated.location || finalPickup,
       destination: destinationValidated.location || finalDelivery,
       commission: finalCommission,
-      transportType: finalTransportType as TransportType,
     });
 
     // Calculate total pricing
@@ -170,20 +169,20 @@ export const updateQuoteAlternative = async (
     originalQuote.origin = {
       userInput: finalPickup,
       validated: originValidated.location || finalPickup,
-      state: originValidated.state || "",
+      state: originValidated.state as any,
       coordinates: {
-        long: originCoords[0],
-        lat: originCoords[1],
+        long: originCoords[0].toString(),
+        lat: originCoords[1].toString(),
       },
     };
 
     originalQuote.destination = {
       userInput: finalDelivery,
       validated: destinationValidated.location || finalDelivery,
-      state: destinationValidated.state || "",
+      state: destinationValidated.state as any,
       coordinates: {
-        long: destinationCoords[0],
-        lat: destinationCoords[1],
+        long: destinationCoords[0].toString(),
+        lat: destinationCoords[1].toString(),
       },
     };
 

@@ -12,12 +12,7 @@ import { join } from "path";
 import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
 
-// Using fileURLToPath and dirname for __dirname equivalent in ES modules
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// __dirname and __filename are available in CommonJS modules
 
 interface SendTrackOrderNotificationParams {
   order: IOrder;
@@ -68,7 +63,6 @@ export async function sendTrackOrderNotification({
       subject,
       html,
       from: senderEmail,
-      fromName: senderName,
     });
 
     if (result.success) {

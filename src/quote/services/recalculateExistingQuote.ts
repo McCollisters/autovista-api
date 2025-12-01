@@ -30,10 +30,8 @@ export const recalculateExistingQuote = async (
     // Recalculate miles if needed
     if (quote.origin?.coordinates && quote.destination?.coordinates) {
       const miles = await getMiles(
-        quote.origin.coordinates.lat,
-        quote.origin.coordinates.long,
-        quote.destination.coordinates.lat,
-        quote.destination.coordinates.long,
+        [parseFloat(quote.origin.coordinates.lat), parseFloat(quote.origin.coordinates.long)],
+        [parseFloat(quote.destination.coordinates.lat), parseFloat(quote.destination.coordinates.long)],
       );
       quote.miles = miles;
     }
@@ -42,11 +40,10 @@ export const recalculateExistingQuote = async (
     const vehiclesWithPricing = await updateVehiclesWithPricing({
       vehicles: quote.vehicles,
       miles: quote.miles || 0,
-      origin: quote.origin,
-      destination: quote.destination,
+      origin: quote.origin?.validated || '',
+      destination: quote.destination?.validated || '',
       portal,
       commission: (quote as any).commission || 0,
-      transportType,
     });
 
     quote.vehicles = vehiclesWithPricing;

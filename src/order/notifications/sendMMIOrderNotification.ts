@@ -5,9 +5,7 @@
  */
 
 import { readFile } from "fs/promises";
-import { join } from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+import path from "path";
 import Handlebars from "handlebars";
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
@@ -15,8 +13,7 @@ import { getNotificationManager } from "@/notification";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// __dirname and __filename are available in CommonJS modules
 
 interface SendMMIOrderNotificationParams {
   order: IOrder;
@@ -46,7 +43,6 @@ export async function sendMMIOrderNotification({
     // Extract pickup information
     const pickupAddress =
       order.origin?.address?.address ||
-      order.origin?.address?.addressLine1 ||
       "";
     const pickupCity = order.origin?.address?.city || "";
     const pickupState = order.origin?.address?.state || "";
@@ -60,7 +56,6 @@ export async function sendMMIOrderNotification({
     // Extract delivery information
     const deliveryAddress =
       order.destination?.address?.address ||
-      order.destination?.address?.addressLine1 ||
       "";
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
@@ -81,17 +76,17 @@ export async function sendMMIOrderNotification({
       order.vehicles.forEach((vehicle) => {
         const operableStatus =
           vehicle.isInoperable === false ? "Inoperable" : "Operable";
-        const vehiclePrice = vehicle.pricing?.totalPortal || 0;
+        const vehiclePrice = vehicle.pricing?.total || 0;
         vehicles += `<p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">${vehicle.year || ""} ${vehicle.make || ""} ${vehicle.model || ""} (${operableStatus}): $${vehiclePrice.toFixed(2)}</p>`;
       });
     }
 
     // Get pricing totals
-    const billRate = order.totalPricing?.totalSD || 0;
-    const totalPricing = order.totalPricing?.totalPortal || 0;
+    const billRate = order.totalPricing?.total || 0;
+    const totalPricing = order.totalPricing?.total || 0;
 
     // Load and compile template
-    const templatePath = join(
+    const templatePath = path.join(
       __dirname,
       "../../../templates/mmi-order-notification.hbs",
     );

@@ -18,6 +18,9 @@ export default {
     "^@/(.*)$": "<rootDir>/src/$1",
     "^@tests/(.*)$": "<rootDir>/tests/$1",
   },
+  transformIgnorePatterns: [
+    "node_modules/(?!(nanoid)/)"
+  ],
   setupFiles: ["<rootDir>/tests/env-setup.js"],
   setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
   collectCoverageFrom: [

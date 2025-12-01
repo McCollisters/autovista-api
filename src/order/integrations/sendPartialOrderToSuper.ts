@@ -79,9 +79,9 @@ export const sendPartialOrderToSuper = async (
       }
 
       // Find quote for the specified service level
-      const calculatedQuote = calculatedQuotes.find((q: any) => {
+      const calculatedQuote = Array.isArray(calculatedQuotes) ? calculatedQuotes.find((q: any) => {
         return parseInt(q.days) === serviceLevel;
-      });
+      }) : null;
 
       if (!calculatedQuote) {
         logger.error(
@@ -102,12 +102,7 @@ export const sendPartialOrderToSuper = async (
 
       // Determine if vehicle is inoperable
       let inoperable = false;
-      if (
-        quote.operableBool === false ||
-        quote.operable === false ||
-        quote.operable === "false" ||
-        quote.operable === "No"
-      ) {
+      if (quote.isInoperable) {
         inoperable = true;
       }
 

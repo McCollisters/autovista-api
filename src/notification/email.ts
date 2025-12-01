@@ -32,7 +32,8 @@ export class SendGridEmailProvider implements EmailProvider {
   async sendEmail(options: EmailOptions): Promise<NotificationResult> {
     try {
       // Import SendGrid SDK dynamically
-      const sgMail = await import("@sendgrid/mail");
+      const sgMailModule = await import("@sendgrid/mail");
+      const sgMail = sgMailModule.default;
 
       sgMail.setApiKey(this.apiKey);
 

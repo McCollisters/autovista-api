@@ -12,6 +12,7 @@ import { Status, ServiceLevelOption, PaymentType } from "@/_global/enums";
 jest.mock("../../../src/order/services/updateVehiclesWithQuote");
 jest.mock("../../../src/order/services/sendOrderToSD");
 jest.mock("../../../src/order/services/formatOrderTotalPricing");
+jest.mock("../../../src/order/integrations/sendPartialOrderToSuper");
 
 // Mock the models
 jest.mock("@/_global/models", () => ({
@@ -23,12 +24,22 @@ jest.mock("@/_global/models", () => ({
     findById: jest.fn(),
     findByIdAndUpdate: jest.fn(),
   },
+  Portal: {
+    findById: jest.fn(),
+  },
+  User: {
+    findById: jest.fn(),
+  },
+  Settings: {
+    findOne: jest.fn(),
+  },
 }));
 
 // Add static methods to Order mock
 const { Order } = require("@/_global/models");
 Order.findOne = jest.fn();
 Order.findByIdAndUpdate = jest.fn();
+Order.find = jest.fn();
 
 describe("createOrder Controller", () => {
   let req: Request;
@@ -91,6 +102,31 @@ describe("createOrder Controller", () => {
         },
         reg: "ABC123",
         paymentType: PaymentType.Billing,
+        pickupStartDate: "2024-01-15",
+        portalId: "test-portal-id",
+        // Address fields
+        pickupAddress: "123 Main St",
+        pickupCity: "New York",
+        pickupState: "NY",
+        pickupZip: "10001",
+        deliveryAddress: "456 Oak Ave",
+        deliveryCity: "Los Angeles",
+        deliveryState: "CA",
+        deliveryZip: "90210",
+        // Add quotes array to match the vehicleQuotes
+        quotes: [
+          {
+            ...createMockVehicle(),
+            calculatedQuotes: JSON.stringify([
+              {
+                days: 1, // Service level 1 (OneDay)
+                total: 1200,
+                totalSD: 1100,
+                totalPortal: 1200,
+              },
+            ]),
+          },
+        ],
       },
     });
 
@@ -108,6 +144,23 @@ describe("createOrder Controller", () => {
         userId: "test-user-id",
         miles: 1000,
         vehicles: [createMockVehicle()],
+        transitTime: 5, // Add transit time
+        uniqueId: "12345",
+        isCustomerPortal: false,
+        vehicleQuotes: [
+          {
+            ...createMockVehicle(),
+            calculatedQuotes: JSON.stringify([
+              {
+                days: 1, // Service level 1 (OneDay)
+                total: 1200,
+                totalSD: 1100,
+                totalPortal: 1200,
+              },
+            ]),
+          },
+        ], // Add at least one vehicle quote with calculated pricing
+        transportType: "open",
       });
 
       const mockOrder = {
@@ -181,6 +234,9 @@ describe("createOrder Controller", () => {
       const {
         sendOrderToSD,
       } = require("../../../src/order/services/sendOrderToSD");
+      const {
+        sendPartialOrderToSuper,
+      } = require("../../../src/order/integrations/sendPartialOrderToSuper");
 
       updateVehiclesWithQuote.mockResolvedValue([
         {
@@ -189,14 +245,33 @@ describe("createOrder Controller", () => {
         },
       ]);
       formatOrderTotalPricing.mockResolvedValue(mockPricingData);
+      sendPartialOrderToSuper.mockResolvedValue({ success: true });
 
       // Mock the models
-      const { Quote } = require("@/_global/models");
+      const { Quote, Portal, Settings } = require("@/_global/models");
       const { Order } = require("@/_global/models");
 
+      const mockPortal = {
+        _id: "test-portal-id",
+        companyName: "Test Company",
+        logo: "https://example.com/logo.png",
+      };
+
+      const mockSettings = {
+        holidayDates: ["2024-12-25", "2024-01-01"], // Mock holiday dates
+      };
+
+      Portal.findById.mockResolvedValue(mockPortal);
+      Settings.findOne.mockResolvedValue(mockSettings);
+      
+      // Add save method to the mock quote
+      // @ts-ignore
+      mockQuote.save = jest.fn().mockResolvedValue(mockQuote);
       Quote.findById.mockResolvedValue(mockQuote);
       // @ts-ignore
       Order.findOne = jest.fn().mockResolvedValue(null);
+      // @ts-ignore
+      Order.find = jest.fn().mockResolvedValue([]); // No existing orders
       Order.findByIdAndUpdate = jest.fn();
 
       // Mock Order constructor and save
@@ -504,6 +579,7 @@ describe("createOrder Controller", () => {
       // Create request with missing fields
       req.body = {
         quoteId: "test-quote-id",
+        pickupStartDate: "2024-01-15", // Add required field to reach Quote.findById
         // Missing other required fields
       };
 
@@ -545,7 +621,14 @@ describe("createOrder Controller", () => {
       for (const serviceLevel of serviceLevels) {
         jest.clearAllMocks();
 
-        req.body.schedule.serviceLevel = serviceLevel;
+        // Set up complete request body with required fields
+        req.body = {
+          ...req.body,
+          serviceLevel: serviceLevel,
+          pickupStartDate: "2024-01-15",
+          quoteId: "test-quote-id",
+          portalId: "test-portal-id"
+        };
 
         Quote.findById.mockResolvedValue(mockQuote);
         Order.findOne.mockResolvedValue(null);

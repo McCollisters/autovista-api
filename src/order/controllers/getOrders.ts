@@ -7,7 +7,8 @@ export const getOrders = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    res.status(200).json(await Order.find({}));
+    const orders = await Order.find({});
+    res.status(200).json(orders);
   } catch (error) {
     next(error);
   }

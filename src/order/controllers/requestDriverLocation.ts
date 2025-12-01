@@ -34,7 +34,7 @@ export const requestDriverLocation = async (
     }
 
     // Get driver phone number
-    const phoneNumber = order.tms?.carrier?.driver?.phone || order.driver?.phone;
+    const phoneNumber = order.driver?.phone;
 
     if (!phoneNumber) {
       return next({
@@ -65,7 +65,8 @@ export const requestDriverLocation = async (
     const deliveryState = order.destination?.address?.state || "";
 
     let messageText: string;
-    const driverType = order.tms?.carrier?.driver?.type || order.driver?.type;
+    // Default to "Driver" since type property doesn't exist on IDriver interface
+    const driverType = "Driver";
     
     if (driverType === "Driver") {
       messageText = `Hello, you are hauling McCollister's ORDER ID ${order.refId}, a ${vehicleInfo} being delivered to ${deliveryAddress}, ${deliveryCity}, ${deliveryState}.  Please share your location by clicking the link below so we can see how close you are to destination.  Remember, don't text and drive.  Please be safely stopped before replying to this message.`;

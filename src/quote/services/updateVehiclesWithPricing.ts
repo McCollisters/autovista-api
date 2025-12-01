@@ -43,10 +43,10 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   });
 
   if (!globalModifiersDoc) {
-    return null;
+    throw new Error("Global modifier set not found");
   }
 
-  const globalModifiers = globalModifiersDoc.toObject() as any;
+  const globalModifiers = (globalModifiersDoc.toObject ? globalModifiersDoc.toObject() : globalModifiersDoc) as any;
 
   // Get portal-specific modifiers
   const portalModifiers = (await ModifierSet.findOne({
@@ -80,7 +80,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
 
   let baseWhiteGlove = miles * whiteGloveMultiplier;
 
-  if (baseWhiteGlove < globalModifiers.whiteGlove.minimum) {
+  if (globalModifiers.whiteGlove?.minimum && baseWhiteGlove < globalModifiers.whiteGlove.minimum) {
     baseWhiteGlove = globalModifiers.whiteGlove.minimum;
   }
 

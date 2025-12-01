@@ -59,10 +59,23 @@ describe("Quote Flow Integration Tests", () => {
     // Mock Portal.findById to return our fixture
     (Portal.findById as jest.MockedFunction<any>).mockResolvedValue(testPortal);
 
-    // Mock ModifierSet.findOne().lean() chain to return our global modifier set
-    (ModifierSet.findOne as jest.MockedFunction<any>).mockReturnValue({
-      lean: jest.fn().mockResolvedValue(testModifierSet),
-    } as any);
+    // Mock ModifierSet.findOne to handle both global and portal modifier sets
+    (ModifierSet.findOne as jest.MockedFunction<any>).mockImplementation((query: any) => {
+      if (query.isGlobal) {
+        // Return global modifier set with toObject method
+        const globalModifierDoc = {
+          ...testModifierSet,
+          toObject: jest.fn().mockReturnValue(testModifierSet),
+        };
+        return Promise.resolve(globalModifierDoc);
+      } else if (query.portalId) {
+        // Return lean() chainable for portal modifiers
+        return {
+          lean: jest.fn().mockResolvedValue(testModifierSet),
+        } as any;
+      }
+      return Promise.resolve(null);
+    });
   });
 
   afterAll(async () => {
@@ -76,9 +89,22 @@ describe("Quote Flow Integration Tests", () => {
 
     // Re-setup the mocks to return our fixtures
     (Portal.findById as jest.MockedFunction<any>).mockResolvedValue(testPortal);
-    (ModifierSet.findOne as jest.MockedFunction<any>).mockReturnValue({
-      lean: jest.fn().mockResolvedValue(testModifierSet),
-    } as any);
+    (ModifierSet.findOne as jest.MockedFunction<any>).mockImplementation((query: any) => {
+      if (query.isGlobal) {
+        // Return global modifier set with toObject method
+        const globalModifierDoc = {
+          ...testModifierSet,
+          toObject: jest.fn().mockReturnValue(testModifierSet),
+        };
+        return Promise.resolve(globalModifierDoc);
+      } else if (query.portalId) {
+        // Return lean() chainable for portal modifiers
+        return {
+          lean: jest.fn().mockResolvedValue(testModifierSet),
+        } as any;
+      }
+      return Promise.resolve(null);
+    });
   });
 
   describe("End-to-End Quote Creation", () => {

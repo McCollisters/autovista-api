@@ -5,9 +5,7 @@
  */
 
 import { readFile } from "fs/promises";
-import { join } from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+import path from "path";
 import Handlebars from "handlebars";
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
@@ -15,8 +13,7 @@ import { getNotificationManager } from "@/notification";
 import { sendOrderNotification } from "@/notification/orderNotifications";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// __dirname and __filename are available in CommonJS modules
 
 /**
  * Send COD payment request notification
@@ -66,7 +63,7 @@ export async function sendCODPaymentRequest(
     }
 
     // Load and compile template
-    const templatePath = join(
+    const templatePath = path.join(
       __dirname,
       "../../../templates/cod-payment-request.hbs",
     );
@@ -77,7 +74,7 @@ export async function sendCODPaymentRequest(
     const html = template({
       pickupDates,
       vehiclesString,
-      totalPrice: (order.totalPricing?.totalPortal || 0).toFixed(2),
+      totalPrice: (order.totalPricing?.total || 0).toFixed(2),
       uniqueId: order.refId,
       recipientName: order.customer?.name || "Customer",
     });
@@ -107,13 +104,11 @@ export async function sendCODPaymentRequest(
         orderId: order._id,
         uniqueId: order.refId,
         recipientEmail,
-        error: result.error,
       });
     }
 
     return {
       success: result.success,
-      error: result.error,
     };
   } catch (error) {
     logger.error("Error in sendCODPaymentRequest:", error);

@@ -22,7 +22,8 @@
     "suv": 75,
     "van": 100,
     "pickup_2_doors": 50,
-    "pickup_4_doors": 60
+    "pickup_4_doors": 60,
+    "sedan": 85
   },
   "enclosedFlat": {
     "value": 200,

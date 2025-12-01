@@ -5,19 +5,16 @@
  */
 
 import { readFile } from "fs/promises";
-import { join } from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+import path from "path";
 import Handlebars from "handlebars";
 import { logger } from "@/core/logger";
-import { IOrder } from "@/_global/models";
+import { IOrder, Portal } from "@/_global/models";
 import { sendOrderNotification } from "@/notification/orderNotifications";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// __dirname and __filename are available in CommonJS modules
 
 /**
  * Sirva portal IDs
@@ -41,6 +38,13 @@ export async function sendOrderCustomerPublicNew(
   }
 
   try {
+    // Get portal information
+    const portal = await Portal.findById(order.portalId);
+    if (!portal) {
+      logger.warn(`Portal not found for order: ${order._id}`);
+      return { success: false, error: "Portal not found" };
+    }
+
     // Get email template values
     const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
     const emailTemplate = await getEmailTemplate("Customer Order");
@@ -56,18 +60,18 @@ export async function sendOrderCustomerPublicNew(
 
     // Determine template path
     const templatePath = isSirva
-      ? join(__dirname, "../../../templates/customer-order-sirva.hbs")
-      : join(__dirname, "../../../templates/customer-order-new.hbs");
+      ? path.join(__dirname, "../../../templates/customer-order-sirva.hbs")
+      : path.join(__dirname, "../../../templates/customer-order-new.hbs");
 
     const mclogo =
       "https://res.cloudinary.com/dq27r8cov/image/upload/v1616097775/McCollister%27s/mccollisters-auto-logistics.png";
 
     // Handle special company logos
-    if (order.companyName === "Move Easy") {
+    if (portal.companyName === "Move Easy") {
       companyName = "MoveEasy and";
       logo =
         "https://res.cloudinary.com/dq27r8cov/image/upload/v1616098696/McCollister%27s/moveeasy-logo.png";
-    } else if (order.companyName === "AutoTrader.com") {
+    } else if (portal.companyName === "AutoTrader.com") {
       companyName = "AutoTrader.com and";
       logo =
         "https://res.cloudinary.com/dq27r8cov/image/upload/v1631829206/McCollister%27s/autotrader-logo.png";
@@ -88,7 +92,6 @@ export async function sendOrderCustomerPublicNew(
     // Extract address information
     const pickupAddress =
       order.origin?.address?.address ||
-      order.origin?.address?.addressLine1 ||
       "";
     const pickupCity = order.origin?.address?.city || "";
     const pickupState = order.origin?.address?.state || "";
@@ -96,7 +99,6 @@ export async function sendOrderCustomerPublicNew(
 
     const deliveryAddress =
       order.destination?.address?.address ||
-      order.destination?.address?.addressLine1 ||
       "";
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
@@ -170,13 +172,11 @@ export async function sendOrderCustomerPublicNew(
         orderId: order._id,
         uniqueId: order.refId,
         recipientEmail,
-        error: result.error,
       });
     }
 
     return {
       success: result.success,
-      error: result.error,
     };
   } catch (error) {
     logger.error("Error in sendOrderCustomerPublicNew:", error);

@@ -6,15 +6,10 @@
 
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
 import Handlebars from "handlebars";
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
 import { getNotificationManager } from "@/notification";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 interface SendWhiteGloveNotificationParams {
   order: IOrder;

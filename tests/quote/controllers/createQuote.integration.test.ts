@@ -8,6 +8,35 @@ import {
   beforeEach,
   jest,
 } from "@jest/globals";
+
+// Mock nanoid before any imports that use it
+jest.mock("nanoid", () => ({
+  customAlphabet: jest.fn(() => jest.fn(() => "test123456")),
+}));
+
+// Mock getMiles to return a consistent value for testing
+jest.mock("@/quote/services/getMiles", () => ({
+  getMiles: jest.fn().mockResolvedValue(1000), // Mock 1000 miles for consistent testing
+}));
+
+// Mock location utilities
+jest.mock("@/_global/utils/location", () => ({
+  getCoordinates: jest.fn().mockResolvedValue([-74.006, 40.7128]), // Mock NYC coordinates
+}));
+
+// Mock location validation
+jest.mock("@/quote/services/validateLocation", () => ({
+  validateLocation: jest.fn().mockResolvedValue({
+    location: "New York, NY",
+    state: "NY",
+    error: null,
+  }),
+}));
+
+// Mock TMS base rate to avoid external API calls
+jest.mock("@/quote/integrations/getTMSBaseRate", () => ({
+  getTMSBaseRate: jest.fn().mockResolvedValue({ quote: 800 }), // Mock base rate
+}));
 import request from "supertest";
 import express from "express";
 import mongoose from "mongoose";
@@ -86,8 +115,13 @@ describe("createQuote API Integration Tests", () => {
         res: express.Response,
         next: express.NextFunction,
       ) => {
-        console.error("Test app error:", err);
         const statusCode = err.statusCode || 500;
+        
+        // Only log unexpected server errors (5xx), not expected validation errors (4xx)
+        if (statusCode >= 500) {
+          console.error("Test app error:", err);
+        }
+        
         res
           .status(statusCode)
           .json({ error: err.message || "Internal Server Error" });
@@ -102,9 +136,20 @@ describe("createQuote API Integration Tests", () => {
     (Portal.findById as jest.MockedFunction<any>).mockResolvedValue(testPortal);
 
     // Mock ModifierSet.findOne().lean() chain to return our global modifier set
-    (ModifierSet.findOne as jest.MockedFunction<any>).mockReturnValue({
-      lean: jest.fn().mockResolvedValue(globalModifierSet),
-    } as any);
+    (ModifierSet.findOne as jest.MockedFunction<any>).mockImplementation((query: any) => {
+      if (query.isGlobal) {
+        // Return a mock document with toObject method for global modifiers
+        return Promise.resolve({
+          ...globalModifierSet,
+          toObject: () => globalModifierSet,
+        });
+      } else {
+        // Return lean() chainable for portal modifiers
+        return {
+          lean: jest.fn().mockResolvedValue(null),
+        };
+      }
+    });
   });
 
   afterAll(async () => {
@@ -118,9 +163,21 @@ describe("createQuote API Integration Tests", () => {
 
     // Re-setup the mocks to return our fixtures
     (Portal.findById as jest.MockedFunction<any>).mockResolvedValue(testPortal);
-    (ModifierSet.findOne as jest.MockedFunction<any>).mockReturnValue({
-      lean: jest.fn().mockResolvedValue(getGlobalModifierSetFixture()),
-    } as any);
+    (ModifierSet.findOne as jest.MockedFunction<any>).mockImplementation((query: any) => {
+      if (query.isGlobal) {
+        // Return a mock document with toObject method for global modifiers
+        const globalModifierSet = getGlobalModifierSetFixture();
+        return Promise.resolve({
+          ...globalModifierSet,
+          toObject: () => globalModifierSet,
+        });
+      } else {
+        // Return lean() chainable for portal modifiers
+        return {
+          lean: jest.fn().mockResolvedValue(null),
+        };
+      }
+    });
   });
 
   describe("POST /api/v1/quote", () => {

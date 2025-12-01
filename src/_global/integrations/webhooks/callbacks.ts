@@ -293,4 +293,28 @@ router.post("/offer-sent", async (req: Request, res: Response) => {
   await processAsync(req, res, handleOfferSent, payload);
 });
 
+// Acertus load webhook endpoint
+router.post("/vehicle-haul", async (req: Request, res: Response) => {
+  try {
+    logger.info("Received acertus load webhook:", {
+      body: req.body,
+      timestamp: new Date().toISOString(),
+      userAgent: req.get("User-Agent"),
+    });
+
+    res.status(200).json({ received: true });
+  } catch (error) {
+    logger.error("Unexpected error in acertus load webhook handler:", {
+      error: error instanceof Error ? error.message : error,
+      stack: error instanceof Error ? error.stack : undefined,
+      body: req.body,
+      timestamp: new Date().toISOString(),
+    });
+
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Webhook error" });
+    }
+  }
+});
+
 export default router;

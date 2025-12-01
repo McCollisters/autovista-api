@@ -68,10 +68,9 @@ describe("updateVehiclesWithPricing", () => {
         return Promise.resolve(globalModifierDoc);
       } else if (query.portalId) {
         // Return lean() chainable for portal modifiers
-        const leanMock = jest.fn().mockResolvedValue(mockPortalModifierSet) as any;
         return {
-          lean: leanMock,
-        } as any;
+          lean: () => Promise.resolve(mockPortalModifierSet),
+        };
       }
       return Promise.resolve(null);
     });

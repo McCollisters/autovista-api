@@ -173,7 +173,6 @@ export const createQuoteCustomer = async (
       origin: originLocation,
       destination: destinationLocation,
       commission: 0, // Customer quotes typically don't have commission
-      transportType: transportType as TransportType,
     });
 
     // Calculate total pricing
