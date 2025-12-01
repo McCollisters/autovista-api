@@ -71,27 +71,31 @@ jobs:
             Namespace=aws:elasticbeanstalk:application:environment,OptionName=PORT,Value="${{ secrets.PORT || '8080' }}"
         continue-on-error: true
 
-      - name: Check for aborted deployments
+      - name: Check environment status and version
         run: |
-          echo "Checking for aborted deployments..."
-          HEALTH=$(aws elasticbeanstalk describe-environments \
+          echo "Checking environment status..."
+          ENV_INFO=$(aws elasticbeanstalk describe-environments \
             --environment-names autovista-api-new-env \
-            --query 'Environments[0].Health' \
-            --output text)
-          
-          STATUS=$(aws elasticbeanstalk describe-environments \
-            --environment-names autovista-api-new-env \
-            --query 'Environments[0].Status' \
-            --output text)
-          
+            --query 'Environments[0].{Status:Status,Health:Health,VersionLabel:VersionLabel}' \
+            --output json)
+
+          echo "Environment info: $ENV_INFO"
+
+          STATUS=$(echo $ENV_INFO | jq -r '.Status')
+          HEALTH=$(echo $ENV_INFO | jq -r '.Health')
+          VERSION=$(echo $ENV_INFO | jq -r '.VersionLabel')
+
           echo "Current environment status: $STATUS"
           echo "Current environment health: $HEALTH"
-          
-          # If environment is in a bad state, try to recover
-          if [ "$STATUS" = "Updating" ] || [ "$STATUS" = "Launching" ]; then
+          echo "Current version: $VERSION"
+
+          # If environment has Sample version and is degraded, we'll deploy to fix it
+          if [ "$VERSION" = "Sample" ] && [ "$HEALTH" = "Degraded" ]; then
+            echo "Environment has Sample version and is degraded. Deployment will replace it."
+          elif [ "$STATUS" = "Updating" ] || [ "$STATUS" = "Launching" ]; then
             echo "Environment is currently updating. Waiting for it to complete..."
           elif [ "$HEALTH" = "Red" ] || [ "$HEALTH" = "Degraded" ]; then
-            echo "Warning: Environment health is $HEALTH. Proceeding with caution..."
+            echo "Warning: Environment health is $HEALTH. Proceeding with deployment to recover..."
           fi
 
       - name: Wait for environment to be ready
@@ -149,11 +153,12 @@ jobs:
           application_name: autovista-api
           environment_name: autovista-api-new-env
           region: us-east-1
-          version_label: "v${{ github.run_number }}"
+          version_label: "autovista-api-v${{ github.run_number }}-${{ github.sha }}"
           deployment_package: autovista-api.zip
           wait_for_deployment: true
           use_existing_version_if_available: false
           wait_for_environment_recovery: 0
+          ignore_application_stop_failures: true
         continue-on-error: true
 
       - name: Fetch application logs
@@ -202,7 +207,7 @@ jobs:
             --max-items 5 \
             --query 'Events[?contains(Message, `aborted`) || contains(Message, `Aborted`)].{Time:EventDate,Message:Message}' \
             --output text)
-          
+
           if [ -n "$EVENTS" ]; then
             echo "Found aborted deployment events:"
             echo "$EVENTS"
@@ -220,4 +225,3 @@ jobs:
 
           # Exit with error to fail the workflow
           exit 1
-
