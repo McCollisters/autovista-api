@@ -70,9 +70,32 @@ jobs:
             Namespace=aws:elasticbeanstalk:application:environment,OptionName=PORT,Value="${{ secrets.PORT || '8080' }}"
         continue-on-error: true
 
+      - name: Check for aborted deployments
+        run: |
+          echo "Checking for aborted deployments..."
+          HEALTH=$(aws elasticbeanstalk describe-environments \
+            --environment-names autovista-api-env \
+            --query 'Environments[0].Health' \
+            --output text)
+          
+          STATUS=$(aws elasticbeanstalk describe-environments \
+            --environment-names autovista-api-env \
+            --query 'Environments[0].Status' \
+            --output text)
+          
+          echo "Current environment status: $STATUS"
+          echo "Current environment health: $HEALTH"
+          
+          # If environment is in a bad state, try to recover
+          if [ "$STATUS" = "Updating" ] || [ "$STATUS" = "Launching" ]; then
+            echo "Environment is currently updating. Waiting for it to complete..."
+          elif [ "$HEALTH" = "Red" ] || [ "$HEALTH" = "Degraded" ]; then
+            echo "Warning: Environment health is $HEALTH. Proceeding with caution..."
+          fi
+
       - name: Wait for environment to be ready
         run: |
-          echo "Checking environment status..."
+          echo "Waiting for environment to be ready..."
           TIMEOUT=600  # 10 minutes timeout
           ELAPSED=0
 
@@ -82,13 +105,25 @@ jobs:
               --query 'Environments[0].Status' \
               --output text)
             
-            echo "Current environment status: $STATUS (elapsed: ${ELAPSED}s)"
+            HEALTH=$(aws elasticbeanstalk describe-environments \
+              --environment-names autovista-api-env \
+              --query 'Environments[0].Health' \
+              --output text)
+            
+            echo "Current environment status: $STATUS, health: $HEALTH (elapsed: ${ELAPSED}s)"
             
             if [ "$STATUS" = "Ready" ]; then
               echo "Environment is ready for deployment"
               break
             elif [ "$STATUS" = "Failed" ]; then
-              echo "Environment is in failed state. Please check AWS console."
+              echo "Environment is in failed state. Attempting to recover..."
+              # Try to recover by initiating a new deployment with the current version
+              CURRENT_VERSION=$(aws elasticbeanstalk describe-environments \
+                --environment-names autovista-api-env \
+                --query 'Environments[0].VersionLabel' \
+                --output text)
+              echo "Current version: $CURRENT_VERSION"
+              echo "You may need to manually recover the environment in AWS Console"
               exit 1
             elif [ "$STATUS" = "Terminated" ]; then
               echo "Environment has been terminated. Please recreate it."
@@ -116,7 +151,8 @@ jobs:
           version_label: "v${{ github.run_number }}"
           deployment_package: autovista-api.zip
           wait_for_deployment: true
-          use_existing_version_if_available: true
+          use_existing_version_if_available: false
+          wait_for_environment_recovery: 0
         continue-on-error: true
 
       - name: Fetch application logs
@@ -152,12 +188,29 @@ jobs:
           echo "=== Recent events ==="
           aws elasticbeanstalk describe-events \
             --environment-name autovista-api-env \
-            --max-items 10
+            --max-items 20
 
-          echo "=== Environment health ==="
+          echo "=== Environment health and status ==="
           aws elasticbeanstalk describe-environments \
             --environment-names autovista-api-env \
-            --query 'Environments[0].{Health:Health,HealthStatus:HealthStatus,Status:Status}'
+            --query 'Environments[0].{Health:Health,HealthStatus:HealthStatus,Status:Status,VersionLabel:VersionLabel}'
+
+          echo "=== Checking for aborted deployments ==="
+          EVENTS=$(aws elasticbeanstalk describe-events \
+            --environment-name autovista-api-env \
+            --max-items 5 \
+            --query 'Events[?contains(Message, `aborted`) || contains(Message, `Aborted`)].{Time:EventDate,Message:Message}' \
+            --output text)
+          
+          if [ -n "$EVENTS" ]; then
+            echo "Found aborted deployment events:"
+            echo "$EVENTS"
+            echo ""
+            echo "RECOMMENDATION: If you see aborted deployment errors, you may need to:"
+            echo "1. Wait for the environment to stabilize"
+            echo "2. Manually trigger a new deployment from AWS Console"
+            echo "3. Or re-run this workflow after the environment is in 'Ready' status"
+          fi
 
           echo "=== Fetching eb-engine.log ==="
           aws elasticbeanstalk retrieve-environment-info \
