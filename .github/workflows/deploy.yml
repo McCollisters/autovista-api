@@ -156,9 +156,8 @@ jobs:
           version_label: "autovista-api-v${{ github.run_number }}-${{ github.sha }}"
           deployment_package: autovista-api.zip
           wait_for_deployment: true
-          use_existing_version_if_available: false
+          use_existing_version_if_available: true
           wait_for_environment_recovery: 0
-          ignore_application_stop_failures: true
         continue-on-error: true
 
       - name: Fetch application logs
