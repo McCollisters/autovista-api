@@ -28,7 +28,6 @@ jobs:
           zip -r autovista-api.zip . \
             -x "node_modules/*" \
             -x ".git/*" \
-            -x "dist/*" \
             -x "*.log" \
             -x ".DS_Store" \
             -x ".github/*" \
@@ -39,7 +38,9 @@ jobs:
             -x "*.spec.js" \
             -x "coverage/*" \
             -x ".vscode/*" \
-            -x ".idea/*"
+            -x ".idea/*" \
+            -x "*.md" \
+            -x "logs/*"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
