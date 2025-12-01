@@ -1,0 +1,161 @@
+name: Deploy to Elastic Beanstalk
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Allow manual triggers
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create deployment package
+        run: |
+          zip -r autovista-api.zip . \
+            -x "node_modules/*" \
+            -x ".git/*" \
+            -x "dist/*" \
+            -x "*.log" \
+            -x ".DS_Store" \
+            -x ".github/*" \
+            -x "tests/*" \
+            -x "*.test.ts" \
+            -x "*.test.js" \
+            -x "*.spec.ts" \
+            -x "*.spec.js" \
+            -x "coverage/*" \
+            -x ".vscode/*" \
+            -x ".idea/*"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Check IAM permissions
+        run: |
+          echo "Checking current IAM user permissions..."
+          aws sts get-caller-identity
+
+          echo "Checking if SNS permissions are available..."
+          aws sns list-topics --region us-east-1 || echo "SNS permissions not available"
+
+          echo "Checking Elastic Beanstalk permissions..."
+          aws elasticbeanstalk describe-applications --region us-east-1 || echo "EB permissions not available"
+
+      - name: Set Elastic Beanstalk environment variables
+        run: |
+          aws elasticbeanstalk update-environment \
+            --environment-name autovista-api-env \
+            --option-settings \
+            Namespace=aws:elasticbeanstalk:application:environment,OptionName=MONGODB_DEV_URI,Value="${{ secrets.MONGODB_DEV_URI }}" \
+            Namespace=aws:elasticbeanstalk:application:environment,OptionName=NODE_ENV,Value="${{ secrets.NODE_ENV }}" \
+            Namespace=aws:elasticbeanstalk:application:environment,OptionName=AWS_REGION,Value="us-east-1" \
+            Namespace=aws:elasticbeanstalk:application:environment,OptionName=PORT,Value="${{ secrets.PORT || '8080' }}"
+        continue-on-error: true
+
+      - name: Wait for environment to be ready
+        run: |
+          echo "Checking environment status..."
+          TIMEOUT=600  # 10 minutes timeout
+          ELAPSED=0
+
+          while [ $ELAPSED -lt $TIMEOUT ]; do
+            STATUS=$(aws elasticbeanstalk describe-environments \
+              --environment-names autovista-api-env \
+              --query 'Environments[0].Status' \
+              --output text)
+            
+            echo "Current environment status: $STATUS (elapsed: ${ELAPSED}s)"
+            
+            if [ "$STATUS" = "Ready" ]; then
+              echo "Environment is ready for deployment"
+              break
+            elif [ "$STATUS" = "Failed" ]; then
+              echo "Environment is in failed state. Please check AWS console."
+              exit 1
+            elif [ "$STATUS" = "Terminated" ]; then
+              echo "Environment has been terminated. Please recreate it."
+              exit 1
+            else
+              echo "Environment is not ready yet. Waiting 30 seconds..."
+              sleep 30
+              ELAPSED=$((ELAPSED + 30))
+            fi
+          done
+
+          if [ $ELAPSED -ge $TIMEOUT ]; then
+            echo "Timeout waiting for environment to be ready"
+            exit 1
+          fi
+
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: autovista-api
+          environment_name: autovista-api-env
+          region: us-east-1
+          version_label: "v${{ github.run_number }}"
+          deployment_package: autovista-api.zip
+          wait_for_deployment: true
+          use_existing_version_if_available: true
+        continue-on-error: true
+
+      - name: Fetch application logs
+        run: |
+          echo "=== Fetching application logs ==="
+          aws elasticbeanstalk retrieve-environment-info \
+            --environment-name autovista-api-env \
+            --info-type tail
+
+          echo "=== Recent application events ==="
+          aws elasticbeanstalk describe-events \
+            --environment-name autovista-api-env \
+            --max-items 5
+
+      - name: Fetch logs on deployment failure
+        if: failure()
+        run: |
+          echo "=== Deployment failed, fetching logs ==="
+
+          # Get the latest log files
+          aws elasticbeanstalk retrieve-environment-info \
+            --environment-name autovista-api-env \
+            --info-type tail
+
+          echo "=== Recent events ==="
+          aws elasticbeanstalk describe-events \
+            --environment-name autovista-api-env \
+            --max-items 10
+
+          echo "=== Environment health ==="
+          aws elasticbeanstalk describe-environments \
+            --environment-names autovista-api-env \
+            --query 'Environments[0].{Health:Health,HealthStatus:HealthStatus,Status:Status}'
+
+          echo "=== Fetching eb-engine.log ==="
+          aws elasticbeanstalk retrieve-environment-info \
+            --environment-name autovista-api-env \
+            --info-type bundle
+
+          # Exit with error to fail the workflow
+          exit 1
+
