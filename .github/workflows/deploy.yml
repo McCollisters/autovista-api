@@ -92,8 +92,10 @@ jobs:
           echo "Waiting for environment to be ready..."
           TIMEOUT=600  # 10 minutes timeout
           ELAPSED=0
+          MAX_WAIT_ITERATIONS=20  # Maximum 20 iterations (10 minutes)
+          ITERATION=0
 
-          while [ $ELAPSED -lt $TIMEOUT ]; do
+          while [ $ELAPSED -lt $TIMEOUT ] && [ $ITERATION -lt $MAX_WAIT_ITERATIONS ]; do
             STATUS=$(aws elasticbeanstalk describe-environments \
               --environment-names autovista-api-new-env \
               --query 'Environments[0].Status' \
@@ -104,20 +106,24 @@ jobs:
               --query 'Environments[0].Health' \
               --output text)
             
-            echo "Current environment status: $STATUS, health: $HEALTH (elapsed: ${ELAPSED}s)"
+            echo "Current environment status: $STATUS, health: $HEALTH (elapsed: ${ELAPSED}s, iteration: $ITERATION)"
             
             if [ "$STATUS" = "Ready" ]; then
               echo "Environment is ready for deployment"
               break
+            elif [ "$STATUS" = "Updating" ] || [ "$STATUS" = "Launching" ]; then
+              ITERATION=$((ITERATION + 1))
+              if [ $ITERATION -ge $MAX_WAIT_ITERATIONS ]; then
+                echo "ERROR: Environment has been updating for too long. It may be stuck in a loop."
+                echo "Please check the AWS Console and stop any ongoing updates before deploying again."
+                exit 1
+              fi
+              echo "Environment is still updating. Waiting 30 seconds... (iteration $ITERATION/$MAX_WAIT_ITERATIONS)"
+              sleep 30
+              ELAPSED=$((ELAPSED + 30))
             elif [ "$STATUS" = "Failed" ]; then
-              echo "Environment is in failed state. Attempting to recover..."
-              # Try to recover by initiating a new deployment with the current version
-              CURRENT_VERSION=$(aws elasticbeanstalk describe-environments \
-                --environment-names autovista-api-new-env \
-                --query 'Environments[0].VersionLabel' \
-                --output text)
-              echo "Current version: $CURRENT_VERSION"
-              echo "You may need to manually recover the environment in AWS Console"
+              echo "Environment is in failed state. Stopping deployment to prevent loop."
+              echo "Please fix the environment in AWS Console before deploying again."
               exit 1
             elif [ "$STATUS" = "Terminated" ]; then
               echo "Environment has been terminated. Please recreate it."
@@ -129,8 +135,9 @@ jobs:
             fi
           done
 
-          if [ $ELAPSED -ge $TIMEOUT ]; then
+          if [ $ELAPSED -ge $TIMEOUT ] || [ $ITERATION -ge $MAX_WAIT_ITERATIONS ]; then
             echo "Timeout waiting for environment to be ready"
+            echo "Environment may be stuck. Please check AWS Console before retrying."
             exit 1
           fi
 
