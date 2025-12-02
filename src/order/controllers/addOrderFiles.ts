@@ -48,10 +48,13 @@ export const addOrderFiles = async (
     }
 
     // Add new files
+    if (!order.files) {
+      order.files = [];
+    }
     files.forEach((file: { name: string; url: string; key: string }) => {
       const { name, url, key } = file;
       if (name && url && key) {
-        order.files.push({ name, url, key });
+        order.files!.push({ name, url, key });
       }
     });
 

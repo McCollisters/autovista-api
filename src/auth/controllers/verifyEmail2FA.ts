@@ -69,10 +69,11 @@ export const verifyEmail2FA = async (
     // Skip verification for mesamoving emails
     if (email.includes("mesamoving")) {
       logger.info(`Skipping verification for mesamoving email: ${email}`);
-      return res.status(200).json({
+      res.status(200).json({
         email: user.email,
         skipVerification: true,
       });
+      return;
     }
 
     // Send verification code
@@ -88,15 +89,16 @@ export const verifyEmail2FA = async (
 
     // In test environment, return the code for testing
     if (process.env.NODE_ENV === "test") {
-      return res.status(200).json({
+      res.status(200).json({
         email: user.email,
         code: result.code,
         codeExpires: result.codeExpires,
       });
+      return;
     }
 
     // In production, don't return the code
-    return res.status(200).json({
+    res.status(200).json({
       email: user.email,
       codeExpires: result.codeExpires,
     });

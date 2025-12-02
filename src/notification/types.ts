@@ -12,6 +12,7 @@ export interface EmailOptions {
   html?: string;
   text?: string;
   from?: string;
+  fromName?: string;
   replyTo?: string;
   attachments?: EmailAttachment[];
 }

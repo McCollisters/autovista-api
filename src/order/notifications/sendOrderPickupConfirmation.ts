@@ -86,8 +86,7 @@ export async function sendOrderPickupConfirmation({
       order.origin?.contact?.name || order.origin?.contact?.companyName || "";
     const pickupPhone = order.origin?.contact?.phone || "";
     const pickupMobilePhone = order.origin?.contact?.phoneMobile || "";
-    const pickupAddress =
-      order.origin?.address?.address || order.origin?.address?.addressLine1 || "";
+    const pickupAddress = order.origin?.address?.address || "";
     const pickupCity = order.origin?.address?.city || "";
     const pickupState = order.origin?.address?.state || "";
     const pickupZip = order.origin?.address?.zip || "";

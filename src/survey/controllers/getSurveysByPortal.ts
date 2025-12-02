@@ -36,7 +36,8 @@ export const getSurveysByPortal = async (
     const userIds = portalUsers.map((user) => user._id);
 
     if (userIds.length === 0) {
-      return res.status(200).json([]);
+      res.status(200).json([]);
+      return;
     }
 
     // Get all surveys

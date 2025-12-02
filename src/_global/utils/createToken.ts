@@ -7,6 +7,7 @@
 import jwt from "jsonwebtoken";
 import { logger } from "@/core/logger";
 import { IUser } from "@/user/schema";
+import { Types } from "mongoose";
 
 const JWT_SECRET = process.env.JWT_SECRET || process.env.JWT_SECRET_KEY || "";
 
@@ -28,8 +29,11 @@ export const createToken = (user: IUser): string => {
     }
 
     const timestamp = new Date().getTime();
+    const userId = user._id instanceof Types.ObjectId 
+      ? user._id.toString() 
+      : String(user._id);
     const payload = {
-      userId: user._id.toString(),
+      userId,
       portalId: user.portalId?.toString(),
       iat: timestamp,
       role: user.role,
@@ -38,9 +42,12 @@ export const createToken = (user: IUser): string => {
 
     return jwt.sign(payload, JWT_SECRET);
   } catch (error) {
+    const userId = user._id instanceof Types.ObjectId 
+      ? user._id.toString() 
+      : String(user._id);
     logger.error("Error creating JWT token", {
       error: error instanceof Error ? error.message : error,
-      userId: user._id,
+      userId,
     });
     throw error;
   }

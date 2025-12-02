@@ -35,7 +35,7 @@ const emailTemplateSchema = createSchema<IEmailTemplate>(
 );
 
 // Update lastUpdated on save
-emailTemplateSchema.pre("save", function (next) {
+emailTemplateSchema.pre("save", function (this: IEmailTemplate, next: mongoose.CallbackWithoutResultAndOptionalError) {
   if (this.isModified() && !this.isNew) {
     this.lastUpdated = new Date();
   }

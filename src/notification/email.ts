@@ -78,7 +78,7 @@ export class SendGridEmailProvider implements EmailProvider {
         })),
       };
 
-      const response = await sgMail.send(msg);
+      const response = await sgMail.send(msg as any);
 
       logger.info("Email sent via SendGrid", {
         statusCode: response[0].statusCode,

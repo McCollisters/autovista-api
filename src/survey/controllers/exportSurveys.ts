@@ -1,5 +1,5 @@
 import express from "express";
-import { ObjectsToCsv } from "objects-to-csv";
+import ObjectsToCsv from "objects-to-csv";
 import fs from "fs";
 import path from "path";
 import { Survey, SurveyResponse, User, Order } from "@/_global/models";

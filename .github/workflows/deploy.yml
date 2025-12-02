@@ -64,7 +64,7 @@ jobs:
         run: |
           echo "Checking environment status..."
           ENV_INFO=$(aws elasticbeanstalk describe-environments \
-            --environment-names autovista-api-new-env \
+            --environment-names autovista-api-prod \
             --query 'Environments[0].{Status:Status,Health:Health,VersionLabel:VersionLabel}' \
             --output json)
 
@@ -97,12 +97,12 @@ jobs:
 
           while [ $ELAPSED -lt $TIMEOUT ] && [ $ITERATION -lt $MAX_WAIT_ITERATIONS ]; do
             STATUS=$(aws elasticbeanstalk describe-environments \
-              --environment-names autovista-api-new-env \
+              --environment-names autovista-api-prod \
               --query 'Environments[0].Status' \
               --output text)
             
             HEALTH=$(aws elasticbeanstalk describe-environments \
-              --environment-names autovista-api-new-env \
+              --environment-names autovista-api-prod \
               --query 'Environments[0].Health' \
               --output text)
             
@@ -141,13 +141,29 @@ jobs:
             exit 1
           fi
 
+      - name: Final check before deployment
+        run: |
+          echo "Final check: Ensuring environment is ready for deployment..."
+          STATUS=$(aws elasticbeanstalk describe-environments \
+            --environment-names autovista-api-prod \
+            --query 'Environments[0].Status' \
+            --output text)
+
+          if [ "$STATUS" != "Ready" ]; then
+            echo "ERROR: Environment status is '$STATUS', not 'Ready'"
+            echo "Cannot deploy while environment is updating/aborting. Please wait for it to be Ready."
+            exit 1
+          fi
+
+          echo "Environment is Ready. Proceeding with deployment..."
+
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: autovista-api
-          environment_name: autovista-api-new-env
+          environment_name: autovista-api-prod
           region: us-east-1
           version_label: "autovista-api-v${{ github.run_number }}-${{ github.sha }}"
           deployment_package: autovista-api.zip
@@ -160,12 +176,12 @@ jobs:
         run: |
           echo "=== Fetching application logs ==="
           aws elasticbeanstalk retrieve-environment-info \
-            --environment-name autovista-api-new-env \
+            --environment-name autovista-api-prod \
             --info-type tail
 
           echo "=== Recent application events ==="
           aws elasticbeanstalk describe-events \
-            --environment-name autovista-api-new-env \
+            --environment-name autovista-api-prod \
             --max-items 5
 
       - name: Configure AWS credentials for failure logs
@@ -183,22 +199,22 @@ jobs:
 
           # Get the latest log files
           aws elasticbeanstalk retrieve-environment-info \
-            --environment-name autovista-api-new-env \
+            --environment-name autovista-api-prod \
             --info-type tail
 
           echo "=== Recent events ==="
           aws elasticbeanstalk describe-events \
-            --environment-name autovista-api-new-env \
+            --environment-name autovista-api-prod \
             --max-items 20
 
           echo "=== Environment health and status ==="
           aws elasticbeanstalk describe-environments \
-            --environment-names autovista-api-new-env \
+            --environment-names autovista-api-prod \
             --query 'Environments[0].{Health:Health,HealthStatus:HealthStatus,Status:Status,VersionLabel:VersionLabel}'
 
           echo "=== Checking for aborted deployments ==="
           EVENTS=$(aws elasticbeanstalk describe-events \
-            --environment-name autovista-api-new-env \
+            --environment-name autovista-api-prod \
             --max-items 5 \
             --query 'Events[?contains(Message, `aborted`) || contains(Message, `Aborted`)].{Time:EventDate,Message:Message}' \
             --output text)
@@ -215,7 +231,7 @@ jobs:
 
           echo "=== Fetching eb-engine.log ==="
           aws elasticbeanstalk retrieve-environment-info \
-            --environment-name autovista-api-new-env \
+            --environment-name autovista-api-prod \
             --info-type bundle
 
           # Exit with error to fail the workflow

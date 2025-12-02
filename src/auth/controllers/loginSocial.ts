@@ -102,7 +102,7 @@ export const loginSocial = async (
       role: user.role,
     });
 
-    return res.status(200).json({
+    res.status(200).json({
       token: newToken,
       role: user.role,
       userId: user._id,

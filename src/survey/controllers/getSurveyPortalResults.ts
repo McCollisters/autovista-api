@@ -35,14 +35,16 @@ export const getSurveyPortalResults = async (
     const userIds = portalUsers.map((user) => user._id);
 
     if (userIds.length === 0) {
-      return res.status(200).json([]);
+      res.status(200).json([]);
+      return;
     }
 
     // Get the survey (assuming there's one main survey)
     const survey = await Survey.findOne({}).sort({ createdAt: -1 });
 
     if (!survey) {
-      return res.status(200).json([]);
+      res.status(200).json([]);
+      return;
     }
 
     // Get survey responses for users in this portal

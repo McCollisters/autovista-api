@@ -98,10 +98,7 @@ export async function sendOrderDeliveryConfirmation({
       "";
     const deliveryPhone = order.destination?.contact?.phone || "";
     const deliveryMobilePhone = order.destination?.contact?.phoneMobile || "";
-    const deliveryAddress =
-      order.destination?.address?.address ||
-      order.destination?.address?.addressLine1 ||
-      "";
+    const deliveryAddress = order.destination?.address?.address || "";
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
     const deliveryZip = order.destination?.address?.zip || "";

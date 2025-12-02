@@ -31,6 +31,7 @@ import settingsRoutes from "@/settings/routes";
 import surveyRoutes from "@/survey/routes";
 import emailRoutes from "@/email/routes";
 import healthRoutes from "@/presentation/routes/health";
+import { signS3, getFile, captivatedCallback } from "@/integration/routes";
 
 // Import webhook system
 import webhookRouter from "@/_global/integrations/webhooks/registry";
@@ -126,7 +127,6 @@ const startServer = async () => {
     app.use("/api/v1/emails", emailRoutes);
 
     // Integration routes (legacy paths for backward compatibility)
-    import { signS3, getFile, captivatedCallback } from "@/integration/routes";
     app.post("/sign_s3", signS3);
     app.get("/get_file/:fileKey", getFile);
     app.post("/captivated/callback", captivatedCallback);

@@ -53,7 +53,6 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
     const result = await notificationManager.sendEmail({
       to: recipientEmail,
       from: senderEmail,
-      fromName: senderName,
       subject,
       html,
     });

@@ -102,7 +102,7 @@ export const loginEmail2FA = async (
       email: user.email,
     });
 
-    return res.status(200).json({
+    res.status(200).json({
       token,
       role: user.role,
       userId: user._id,

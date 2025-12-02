@@ -108,10 +108,7 @@ export async function sendOrderAgentEmail({
       order.origin?.contact?.name || order.origin?.contact?.companyName || "";
     const pickupPhone = order.origin?.contact?.phone || "";
     const pickupMobilePhone = order.origin?.contact?.phoneMobile || "";
-    const pickupAddress =
-      order.origin?.address?.address ||
-      order.origin?.address?.addressLine1 ||
-      "";
+    const pickupAddress = order.origin?.address?.address || "";
     const pickupCity = order.origin?.address?.city || "";
     const pickupState = order.origin?.address?.state || "";
     const pickupZip = order.origin?.address?.zip || "";
@@ -122,10 +119,7 @@ export async function sendOrderAgentEmail({
       "";
     const deliveryPhone = order.destination?.contact?.phone || "";
     const deliveryMobilePhone = order.destination?.contact?.phoneMobile || "";
-    const deliveryAddress =
-      order.destination?.address?.address ||
-      order.destination?.address?.addressLine1 ||
-      "";
+    const deliveryAddress = order.destination?.address?.address || "";
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
     const deliveryZip = order.destination?.address?.zip || "";
