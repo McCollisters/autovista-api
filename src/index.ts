@@ -85,8 +85,8 @@ const startServer = async () => {
     logger.info("Connected to MongoDB successfully");
 
     // Initialize webhook system
-    validateWebhookConfig();
-    initializeWebhooks();
+    // validateWebhookConfig();
+    // initializeWebhooks();
 
     // Initialize cron jobs
     initializeCronJobs();

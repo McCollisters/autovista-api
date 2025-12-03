@@ -9405,3 +9405,9 @@
     '    at Object.<anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/tests/order/controllers/createOrder.test.ts:648:9)',
   timestamp: '2025-11-20 17:35:47'
 }
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2025-12-02 21:47:06'
+}
