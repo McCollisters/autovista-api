@@ -1,14 +1,20 @@
 name: Deploy to Elastic Beanstalk
 
+# DISABLED - GitHub Action temporarily disabled
+# Uncomment the 'on:' section below to re-enable
+# on:
+#   push:
+#     branches: [main]
+#   workflow_dispatch: # Allow manual triggers
 on:
-  push:
-    branches: [main]
-  workflow_dispatch: # Allow manual triggers
+  workflow_dispatch: # Only manual triggers allowed, but workflow is disabled
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
+    # Disable job execution
+    if: false
 
     steps:
       - name: Checkout code

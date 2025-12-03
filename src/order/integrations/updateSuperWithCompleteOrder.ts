@@ -41,8 +41,63 @@ export const updateSuperWithCompleteOrder = async (
       throw new Error(`Order ${order.refId} has no associated portal`);
     }
 
+    // First, fetch the existing order from Super Dispatch to preserve existing data
+    const apiUrl = "https://api.shipper.superdispatch.com/v1/public";
+    const getOrderResponse = await fetch(
+      `${apiUrl}/orders/${superDispatchGuid}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    if (!getOrderResponse.ok) {
+      const errorText = await getOrderResponse.text();
+      logger.error("Super Dispatch GET request error:", {
+        status: getOrderResponse.status,
+        statusText: getOrderResponse.statusText,
+        error: errorText,
+        orderRefId: order.refId,
+        superDispatchGuid,
+      });
+      throw new Error(
+        `Super Dispatch GET API error: ${getOrderResponse.status} ${getOrderResponse.statusText}`,
+      );
+    }
+
+    const getOrderResult = await getOrderResponse.json();
+    if (getOrderResult.data?.error_id) {
+      logger.error("Super Dispatch GET validation error:", {
+        errorId: getOrderResult.data.error_id,
+        message: getOrderResult.data.message,
+        orderRefId: order.refId,
+        superDispatchGuid,
+      });
+      throw new Error(
+        `Super Dispatch GET validation error: ${getOrderResult.data.message}`,
+      );
+    }
+
+    const existingOrder = getOrderResult.data?.object;
+    if (!existingOrder) {
+      throw new Error("Invalid response from Super Dispatch API");
+    }
+
+    const sdVehicles = existingOrder.vehicles || [];
+
+    // Helper function to create a key from make and model
+    const getMakeModelKey = (make: string, model: string) => {
+      const makeStr = (make || "").toLowerCase().trim();
+      const modelStr = (model || "").toLowerCase().trim();
+      return `${makeStr}::${modelStr}`;
+    };
+
     // Build vehicle data with complete details
-    const vehicleData = order.vehicles.map((vehicle) => {
+    // Start with existing Super Dispatch vehicle to preserve all fields (including carrier price)
+    const vehicleData = order.vehicles.map((vehicle, index) => {
       // Determine if vehicle is inoperable
       let inoperable = false;
       if (
@@ -66,24 +121,35 @@ export const updateSuperWithCompleteOrder = async (
         type = "2_door_pickup";
       }
 
-      // Get tariff from vehicle pricing
-      // Note: For Super Dispatch, we need the tariff which is typically the total with company tariff
-      // If not available, fall back to total pricing
-      const tariff =
-        vehicle.pricing?.totalWithCompanyTariffAndCommission ||
-        vehicle.pricing?.total ||
-        (vehicle as any).tariff ||
-        0;
+      // Get corresponding vehicle from Super Dispatch by index
+      const sdVehicle = sdVehicles[index] || {}; // Use empty object if no match
 
-      return {
-        tariff,
-        vin: vehicle.vin || null,
-        year: vehicle.year ? parseInt(vehicle.year) : undefined,
-        make: vehicle.make,
-        model: vehicle.model,
-        is_inoperable: inoperable,
-        type,
-      };
+      // Start with the existing Super Dispatch vehicle object to preserve all its fields
+      const vehicleObj: any = { ...sdVehicle };
+
+      // Override/set fields from the local order, preserving Super Dispatch values if local is missing
+      vehicleObj.vin =
+        vehicle.vin || sdVehicle.vin || null;
+      vehicleObj.year =
+        (vehicle.year ? parseInt(vehicle.year) : undefined) ||
+        (sdVehicle.year ? parseInt(sdVehicle.year) : undefined) ||
+        null;
+      vehicleObj.make = vehicle.make;
+      vehicleObj.model = vehicle.model;
+      vehicleObj.is_inoperable = inoperable;
+      vehicleObj.type = type;
+
+      // Always include tariff - use existing Super Dispatch value if it exists (preserves carrier price),
+      // otherwise use local value
+      vehicleObj.tariff =
+        sdVehicle.tariff !== undefined && sdVehicle.tariff !== null
+          ? sdVehicle.tariff
+          : vehicle.pricing?.totalWithCompanyTariffAndCommission ||
+            vehicle.pricing?.total ||
+            (vehicle as any).tariff ||
+            0;
+
+      return vehicleObj;
     });
 
     // Email validation function
@@ -124,12 +190,28 @@ export const updateSuperWithCompleteOrder = async (
       ? format(new Date(order.schedule.deliveryEstimated[1]), "yyyy-MM-dd")
       : deliveryStartDate;
 
+    // Check if instructions were manually updated in Super Dispatch
+    // Only remove the default partial order instruction, preserve any custom instructions
+    const defaultPartialInstruction =
+      "Full order details will be released upon carrier approval by our office within 1 business day";
+    let instructionsToUse: string | null = null;
+    if (
+      existingOrder.instructions &&
+      existingOrder.instructions !== defaultPartialInstruction
+    ) {
+      // Preserve manually updated instructions
+      instructionsToUse = existingOrder.instructions;
+    }
+    // If instructions match the default partial message or are null, set to null to remove it
+
     // Build complete order details
     const completeOrderDetails = {
       number: order.refId.toString(),
       purchase_order_number: order.reg || null,
       portalNotificationEmail:
         (portal as any).notificationEmail || portalEmail,
+      // Remove default partial order instruction, but preserve manually updated instructions
+      instructions: instructionsToUse,
       payment: {
         method: "other",
         terms: "other",
@@ -189,12 +271,12 @@ export const updateSuperWithCompleteOrder = async (
       vehicles: vehicleData,
     };
 
-    // Make PUT request to Super Dispatch
-    const apiUrl = "https://api.shipper.superdispatch.com/v1/public";
+    // Make PATCH request to Super Dispatch
+    // Super Dispatch requires application/merge-patch+json for PATCH requests
     const response = await fetch(`${apiUrl}/orders/${superDispatchGuid}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/merge-patch+json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(completeOrderDetails),
@@ -202,7 +284,7 @@ export const updateSuperWithCompleteOrder = async (
 
     if (!response.ok) {
       const errorText = await response.text();
-      logger.error("Super Dispatch PUT API error:", {
+      logger.error("Super Dispatch PATCH API error:", {
         status: response.status,
         statusText: response.statusText,
         error: errorText,
@@ -218,7 +300,7 @@ export const updateSuperWithCompleteOrder = async (
 
     // Handle Super Dispatch validation errors
     if (result.data?.error_id) {
-      logger.error("Super Dispatch PUT validation error:", {
+      logger.error("Super Dispatch PATCH validation error:", {
         errorId: result.data.error_id,
         message: result.data.message,
         orderRefId: order.refId,
@@ -239,7 +321,7 @@ export const updateSuperWithCompleteOrder = async (
     }
 
     // Fallback: return the full response if structure is different
-    logger.warn("Unexpected Super Dispatch PUT response structure", {
+    logger.warn("Unexpected Super Dispatch PATCH response structure", {
       orderRefId: order.refId,
       superDispatchGuid,
       response: result,

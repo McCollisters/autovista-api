@@ -10,11 +10,11 @@ const execAsync = promisify(exec);
  * This function sets up scheduled tasks that run automatically
  */
 export function initializeCronJobs() {
-  // Run migrations every night at 1:00 AM
+  // Run migrations every night at 12:30 AM EST
   // Cron format: minute hour day month day-of-week
-  // "0 1 * * *" means: at minute 0, hour 1, every day, every month, every day of week
-  cron.schedule("0 1 * * *", async () => {
-    logger.info("🕐 Scheduled migration job started (1:00 AM)");
+  // "30 0 * * *" means: at minute 30, hour 0 (12:30 AM), every day, every month, every day of week
+  cron.schedule("30 0 * * *", async () => {
+    logger.info("🕐 Scheduled migration job started (12:30 AM EST)");
     
     try {
       // Run the migration using npm script (same as: npm run migrate:all)
@@ -48,6 +48,6 @@ export function initializeCronJobs() {
     timezone: "America/New_York", // Adjust timezone as needed
   });
 
-  logger.info("✅ Cron jobs initialized - Migration scheduled for 1:00 AM daily");
+  logger.info("✅ Cron jobs initialized - Migration scheduled for 12:30 AM EST daily");
 }
 

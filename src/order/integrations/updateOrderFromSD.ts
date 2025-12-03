@@ -357,8 +357,20 @@ function processExistingVehicle(
 
   return {
     tariff: sdVehicle.tariff,
-    vin: sdVehicle.vin || undefined,
-    year: sdVehicle.year || undefined,
+    // Always use Super Dispatch VIN if available, otherwise preserve original
+    vin:
+      sdVehicle.vin !== undefined && sdVehicle.vin !== null
+        ? sdVehicle.vin
+        : savedVehicle.vin !== undefined && savedVehicle.vin !== null
+          ? savedVehicle.vin
+          : undefined,
+    // Always use Super Dispatch year if available, otherwise preserve original
+    year:
+      sdVehicle.year !== undefined && sdVehicle.year !== null
+        ? sdVehicle.year
+        : savedVehicle.year !== undefined && savedVehicle.year !== null
+          ? savedVehicle.year
+          : undefined,
     pricingClass: sdVehicle.type,
     make: sdVehicle.make,
     model: sdVehicle.model,
@@ -368,6 +380,7 @@ function processExistingVehicle(
       modifiers: {
         ...price.modifiers,
       },
+      // Always update pricing from Super Dispatch
       total: sdVehicle.tariff,
       totalWithCompanyTariffAndCommission:
         sdVehicle.tariff +
@@ -394,8 +407,16 @@ function processNewVehicle(
 
   return {
     tariff: sdVehicle.tariff,
-    vin: sdVehicle.vin || undefined,
-    year: sdVehicle.year || undefined,
+    // Use Super Dispatch VIN if available, otherwise undefined
+    vin:
+      sdVehicle.vin !== undefined && sdVehicle.vin !== null
+        ? sdVehicle.vin
+        : undefined,
+    // Use Super Dispatch year if available, otherwise undefined
+    year:
+      sdVehicle.year !== undefined && sdVehicle.year !== null
+        ? sdVehicle.year
+        : undefined,
     pricingClass: sdVehicle.type,
     make: sdVehicle.make,
     model: sdVehicle.model,
@@ -418,6 +439,7 @@ function processNewVehicle(
         serviceLevel: 0,
         companyTariff: cTariff,
       },
+      // Always update pricing from Super Dispatch
       total: sdVehicle.tariff,
       totalWithCompanyTariffAndCommission: sdVehicle.tariff + cTariff,
     },

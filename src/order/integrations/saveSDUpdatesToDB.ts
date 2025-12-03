@@ -53,16 +53,7 @@ export const saveSDUpdatesToDB = async (order: IOrder): Promise<void> => {
       return;
     }
 
-    // Don't update if order status is "new" (not yet accepted)
-    if (superDispatchOrder.status === "new") {
-      logger.info("Order status is 'new', skipping update", {
-        orderRefId: order.refId,
-        tmsGuid: order.tms.guid,
-      });
-      return;
-    }
-
-    // Update order from Super Dispatch data
+    // Update order from Super Dispatch data (always update, regardless of status)
     const updatedOrder = await updateOrderFromSD(superDispatchOrder, order);
 
     if (!updatedOrder) {
