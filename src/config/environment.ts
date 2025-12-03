@@ -4,7 +4,6 @@ export interface DatabaseConfig {
     maxPoolSize: number;
     serverSelectionTimeoutMS: number;
     ssl?: boolean;
-    sslValidate?: boolean;
   };
 }
 
@@ -49,7 +48,6 @@ const getDatabaseConfig = (): DatabaseConfig["options"] => {
     return {
       ...baseConfig,
       ssl: true,
-      sslValidate: true,
     };
   }
 
