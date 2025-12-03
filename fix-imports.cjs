@@ -25,21 +25,43 @@ function convertAliasToRelative(filePath, aliasPath) {
   // Target is in dist directory (same structure as src)
   const targetFullPath = path.join(dir, targetPath);
   
+  // Check if target is a directory (has index.js) or a file
+  let actualTargetPath = targetFullPath;
+  if (fs.existsSync(targetFullPath) && fs.statSync(targetFullPath).isDirectory()) {
+    // It's a directory, check for index.js
+    const indexPath = path.join(targetFullPath, "index.js");
+    if (fs.existsSync(indexPath)) {
+      actualTargetPath = indexPath;
+    } else {
+      // Directory exists but no index.js, treat as file path
+      actualTargetPath = targetFullPath + ".js";
+    }
+  } else if (!fs.existsSync(targetFullPath)) {
+    // Path doesn't exist, check if it's a directory with index.js
+    const indexPath = targetFullPath + path.sep + "index.js";
+    if (fs.existsSync(indexPath)) {
+      actualTargetPath = indexPath;
+    } else {
+      // Assume it's a file and add .js extension
+      actualTargetPath = targetFullPath + ".js";
+    }
+  } else {
+    // File exists, ensure it has .js extension if needed
+    if (!actualTargetPath.endsWith(".js") && !actualTargetPath.endsWith(".json")) {
+      actualTargetPath = actualTargetPath + ".js";
+    }
+  }
+  
   // Get the directory of the current file
   const currentDir = path.dirname(filePath);
   
   // Calculate relative path from current file to target
-  let relativePath = path.relative(currentDir, targetFullPath);
+  let relativePath = path.relative(currentDir, actualTargetPath);
   
   // Ensure path uses forward slashes and starts with ./
   relativePath = relativePath.replace(/\\/g, "/");
   if (!relativePath.startsWith(".")) {
     relativePath = "./" + relativePath;
-  }
-  
-  // Add .js extension if not present
-  if (!relativePath.match(/\.(js|json|node)$/)) {
-    relativePath += ".js";
   }
   
   return relativePath;
