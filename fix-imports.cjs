@@ -93,9 +93,9 @@ function fixFileImports(filePath) {
     },
   );
 
-  // Fix relative imports without .js extension
+  // Fix relative imports without .js extension (including export ... from)
   const relativeImportRegex =
-    /(import\s(?:.+?\sfrom\s)?|require\()\s*(['"])(\.{1,2}\/[^'"]+?)\2/g;
+    /(import\s(?:.+?\sfrom\s)?|export\s(?:.+?\sfrom\s)?|require\()\s*(['"])(\.{1,2}\/[^'"]+?)\2/g;
   content = content.replace(
     relativeImportRegex,
     (match, p1, quote, importPath) => {
