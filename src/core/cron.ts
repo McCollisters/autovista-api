@@ -10,13 +10,13 @@ const execAsync = promisify(exec);
  * This function sets up scheduled tasks that run automatically
  */
 export function initializeCronJobs() {
-  // Run migrations every 3 hours
+  // Run migrations every 6 hours
   // Cron format: minute hour day month day-of-week
-  // "30 */3 * * *" means: at minute 30, every 3 hours (12:30 AM, 3:30 AM, 6:30 AM, 9:30 AM, 12:30 PM, 3:30 PM, 6:30 PM, 9:30 PM EST)
+  // "30 */6 * * *" means: at minute 30, every 6 hours (12:30 AM, 6:30 AM, 12:30 PM, 6:30 PM EST)
   cron.schedule(
-    "30 */3 * * *",
+    "30 */6 * * *",
     async () => {
-      logger.info("🕐 Scheduled migration job started (every 3 hours)");
+      logger.info("🕐 Scheduled migration job started (every 6 hours)");
 
       try {
         // Run the migration using npm script (same as: npm run migrate:all)
@@ -25,9 +25,21 @@ export function initializeCronJobs() {
           env: process.env,
         });
 
-        // Log the output
+        // Log the output - split by lines for better readability
         if (stdout) {
-          logger.info("Migration output:", { output: stdout });
+          const lines = stdout.split("\n").filter((line) => line.trim());
+          logger.info("Migration output (all collections):");
+          lines.forEach((line) => {
+            // Log important lines (success/failure indicators)
+            if (
+              line.includes("✅") ||
+              line.includes("❌") ||
+              line.includes("Migration") ||
+              line.includes("records")
+            ) {
+              logger.info(`  ${line.trim()}`);
+            }
+          });
         }
 
         if (stderr) {
@@ -53,5 +65,5 @@ export function initializeCronJobs() {
     },
   );
 
-  logger.info("✅ Cron jobs initialized - Migration scheduled every 3 hours");
+  logger.info("✅ Cron jobs initialized - Migration scheduled every 6 hours");
 }
