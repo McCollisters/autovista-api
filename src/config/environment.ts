@@ -54,11 +54,24 @@ const getDatabaseConfig = (): DatabaseConfig["options"] => {
   return baseConfig;
 };
 
+// Get MongoDB URI based on environment
+const getMongoDbUri = (): string => {
+  const nodeEnv = process.env.NODE_ENV || "development";
+  
+  // In production, prefer MONGODB_PROD_URI, fallback to MONGODB_DEV_URI
+  if (nodeEnv === "production") {
+    return (process.env.MONGODB_PROD_URI || process.env.MONGODB_DEV_URI) as string;
+  }
+  
+  // In development/test, use MONGODB_DEV_URI
+  return process.env.MONGODB_DEV_URI as string;
+};
+
 export const config: AppConfig = {
   port: parseInt(process.env.PORT || "8080", 10),
   nodeEnv: process.env.NODE_ENV || "development",
   database: {
-    uri: process.env.MONGODB_DEV_URI as string,
+    uri: getMongoDbUri(),
     options: getDatabaseConfig(),
   },
   aws: {
@@ -82,8 +95,25 @@ export const testConfig = {
 } as const;
 
 // Validate required environment variables
-const requiredEnvVars = ["MONGODB_DEV_URI"];
-const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
+const nodeEnv = process.env.NODE_ENV || "development";
+const requiredEnvVars: string[] = [];
+
+if (nodeEnv === "production") {
+  // In production, require either MONGODB_PROD_URI or MONGODB_DEV_URI
+  if (!process.env.MONGODB_PROD_URI && !process.env.MONGODB_DEV_URI) {
+    requiredEnvVars.push("MONGODB_PROD_URI or MONGODB_DEV_URI");
+  }
+} else {
+  // In development, require MONGODB_DEV_URI
+  requiredEnvVars.push("MONGODB_DEV_URI");
+}
+
+const missingVars = requiredEnvVars.filter((varName) => {
+  if (varName === "MONGODB_PROD_URI or MONGODB_DEV_URI") {
+    return !process.env.MONGODB_PROD_URI && !process.env.MONGODB_DEV_URI;
+  }
+  return !process.env[varName];
+});
 
 if (missingVars.length > 0) {
   throw new Error(
