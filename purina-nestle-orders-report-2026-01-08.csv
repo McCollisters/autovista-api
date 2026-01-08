@@ -1,0 +1,23 @@
+PURINA NESTLE ORDERS REPORT
+Generated: 2026-01-08T04:31:48.400Z
+
+SUMMARY STATISTICS
+==================================================
+Total Orders,1
+Total Revenue,$1,758.00
+Total Vehicles,1
+Average Miles,1361.00
+
+VEHICLE BREAKDOWN
+Sedans,0
+SUVs,1
+Vans,0
+Pickups (4 Doors),0
+Pickups (2 Doors),0
+Other,0
+
+
+ORDER DETAILS
+==================================================
+Order ID,Ref ID,Customer Name,Customer Email,Customer Phone,Status,Transport Type,Miles,Vehicles Count,Vehicle Types,Vehicle Makes/Models,Origin City,Origin State,Destination City,Destination State,Revenue,Created Date,Booked Date
+68d558a761af94fb253ff131,217167,Brian Kenyon,brian.kenyon@purina.nestle.com,,complete,open,1361,1,suv,CHEVROLET TRAILBLAZER (2007),Gloucester,VA,Edmond,OK,"$1,758.00",2025-09-25T14:58:47.162Z,2025-09-25T14:58:47.162Z

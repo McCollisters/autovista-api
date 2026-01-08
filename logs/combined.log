@@ -9411,3 +9411,279 @@
   service: 'autovista-api',
   timestamp: '2025-12-02 21:47:06'
 }
+{
+  message: 'Connecting to MongoDB...',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:30'
+}
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:31'
+}
+{
+  message: 'Querying orders with @purina.nestle email addresses...',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:31'
+}
+{
+  message: 'Found 1 orders with @purina.nestle email addresses',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: 'Calculating summary statistics...',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: 'Generating CSV report...',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '✅ Report generated successfully: purina-nestle-orders-report-2026-01-08.csv',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '📊 Summary:',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '   Total Orders: 1',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '   Total Revenue: $1,758.00',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '   Total Vehicles: 1',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '   Average Miles: 1361.00',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '   Vehicle Breakdown:',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '     Sedans: 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '     SUVs: 1',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '     Vans: 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '     Pickups (4 Doors): 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '     Pickups (2 Doors): 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: '     Other: 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:29:32'
+}
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:30:56'
+}
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:11'
+}
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:32'
+}
+{
+  message: 'Database URI: autovista.nzynb.mongodb.net/dev',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:32'
+}
+{
+  message: 'Connecting to MongoDB...',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:47'
+}
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:47'
+}
+{
+  message: 'Querying orders with purina.nestle email addresses...',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:47'
+}
+{
+  message: 'Connected to database: dev',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:47'
+}
+{
+  message: 'Found 1 orders with purina.nestle in email address.',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: 'Found 1 orders with @purina.nestle email addresses',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: "⚠️  Expected 87 orders but found 1. Please verify you're connected to the correct database.",
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: 'Calculating summary statistics...',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: 'Generating CSV report...',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '✅ Report generated successfully: purina-nestle-orders-report-2026-01-08.csv',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '📊 Summary:',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '   Total Orders: 1',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '   Total Revenue: $1,758.00',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '   Total Vehicles: 1',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '   Average Miles: 1361.00',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '   Vehicle Breakdown:',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '     Sedans: 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '     SUVs: 1',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '     Vans: 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '     Pickups (4 Doors): 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '     Pickups (2 Doors): 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: '     Other: 0',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
+{
+  message: 'Disconnected from MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-07 21:31:48'
+}
