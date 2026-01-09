@@ -6,9 +6,14 @@
 
 import { logger } from "@/core/logger";
 import { getNotificationManager } from "@/notification";
-import { readFileSync } from "fs";
-import { join } from "path";
+import { readFileSync, existsSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
+
+// Get __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Generate a random 5-digit verification code
@@ -38,10 +43,20 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
     const code = generateCode();
 
     // Load and compile Handlebars template
-    const templatePath = join(
-      __dirname,
-      "../../templates/verification-code.hbs",
-    );
+    // In production, templates are in src/templates/ (not copied to dist)
+    // Use process.cwd() to get project root and look for templates there
+    const projectRoot = process.cwd();
+    const templatePath = join(projectRoot, "src/templates/verification-code.hbs");
+
+    if (!existsSync(templatePath)) {
+      logger.error("Verification code template not found", {
+        templatePath,
+        cwd: projectRoot,
+        dirname: __dirname,
+      });
+      throw new Error(`Verification code template not found at: ${templatePath}`);
+    }
+
     const source = readFileSync(templatePath, "utf8");
     const template = Handlebars.compile(source);
 
@@ -86,6 +101,8 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
     logger.error("Error sending verification email", {
       recipientEmail,
       error: error instanceof Error ? error.message : error,
+      stack: error instanceof Error ? error.stack : undefined,
+      templatePath: templatePath || "unknown",
     });
     throw error;
   }

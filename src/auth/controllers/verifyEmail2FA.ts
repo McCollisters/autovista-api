@@ -103,13 +103,27 @@ export const verifyEmail2FA = async (
       codeExpires: result.codeExpires,
     });
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
     logger.error("Error requesting verification code", {
-      error: error instanceof Error ? error.message : error,
+      error: errorMessage,
+      stack: errorStack,
       email: req.body?.email,
     });
+    
+    // Return more specific error message if available
+    const userMessage = errorMessage.includes("template") 
+      ? "Verification email template error."
+      : errorMessage.includes("SENDGRID") || errorMessage.includes("SendGrid")
+      ? "Email service configuration error. Please check SendGrid API key."
+      : errorMessage.includes("Failed to send")
+      ? "Failed to send verification email. Please try again."
+      : "Error requesting verification code.";
+    
     return next({
       statusCode: 400,
-      message: "Error requesting verification code.",
+      message: userMessage,
     });
   }
 };
