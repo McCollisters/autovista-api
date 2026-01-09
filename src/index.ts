@@ -15,6 +15,7 @@ import {
   corsConfig,
   requestLogger,
   securityHeaders,
+  noCacheHeaders,
   securityErrorHandler,
 } from "@/core/middleware/security";
 
@@ -108,6 +109,7 @@ const startServer = async () => {
     app.use(helmetConfig);
     app.use(corsConfig);
     app.use(securityHeaders);
+    app.use(noCacheHeaders); // Prevent CloudFront from caching API responses
     app.use(requestLogger);
     // Rate limiting is handled by CloudFront
 

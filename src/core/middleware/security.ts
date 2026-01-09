@@ -93,6 +93,23 @@ export const securityHeaders = (
   next();
 };
 
+// Cache control middleware - prevents CloudFront from caching API responses
+export const noCacheHeaders = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  // Only apply to API routes
+  if (req.path.startsWith("/api")) {
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+    res.setHeader("X-Cache-Control", "no-cache"); // Additional header for CloudFront
+  }
+
+  next();
+};
+
 // Error handling for security middleware
 export const securityErrorHandler = (
   err: Error,

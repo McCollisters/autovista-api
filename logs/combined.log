@@ -9994,3 +9994,114 @@
   message: 'Request completed',
   timestamp: '2026-01-08 21:03:44'
 }
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:13:10'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:13:10'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:13:11'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-08 21:13:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-08 21:13:12'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-08 21:13:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '123ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-08 21:13:12'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:14:04'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:14:05'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:14:05'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-08 21:14:05'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:14:14'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:14:14'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:14:15'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-08 21:14:15'
+}
