@@ -269,7 +269,7 @@ jobs:
         continue-on-error: true
 
       - name: Invalidate CloudFront Cache
-        if: success() && secrets.CLOUDFRONT_DISTRIBUTION_ID != ''
+        if: success()
         run: |
           echo "Invalidating CloudFront cache after deployment..."
           
