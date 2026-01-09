@@ -43,19 +43,42 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
     const code = generateCode();
 
     // Load and compile Handlebars template
-    // In production, templates are in src/templates/ (not copied to dist)
-    // Use process.cwd() to get project root and look for templates there
+    // In production on EB, working directory is /var/app/current/
+    // Templates are in src/templates/ in the deployment package
+    // Also copied to dist/templates/ during build
+    // Try multiple path strategies to find the template
     const projectRoot = process.cwd();
-    const templatePath = join(projectRoot, "src/templates/verification-code.hbs");
+    const possiblePaths = [
+      join(projectRoot, "src/templates/verification-code.hbs"), // Standard path from project root
+      join(__dirname, "../../templates/verification-code.hbs"), // From dist/auth/services (if templates copied to dist)
+      join(__dirname, "../../../templates/verification-code.hbs"), // Alternative path
+      join(__dirname, "../../../src/templates/verification-code.hbs"), // From dist/auth/services to src
+      join(projectRoot, "templates/verification-code.hbs"), // If templates at root
+    ];
 
-    if (!existsSync(templatePath)) {
+    let templatePath: string | null = null;
+    for (const path of possiblePaths) {
+      if (existsSync(path)) {
+        templatePath = path;
+        break;
+      }
+    }
+
+    if (!templatePath) {
+      // Log detailed error for debugging
       logger.error("Verification code template not found", {
-        templatePath,
+        possiblePaths,
         cwd: projectRoot,
         dirname: __dirname,
+        // Check what directories exist
+        srcExists: existsSync(join(projectRoot, "src")),
+        templatesExists: existsSync(join(projectRoot, "src/templates")),
+        distExists: existsSync(join(projectRoot, "dist")),
       });
-      throw new Error(`Verification code template not found at: ${templatePath}`);
+      throw new Error(`Verification code template not found. Checked paths: ${possiblePaths.join(", ")}. Working directory: ${projectRoot}`);
     }
+
+    logger.debug("Loading verification code template", { templatePath });
 
     const source = readFileSync(templatePath, "utf8");
     const template = Handlebars.compile(source);
