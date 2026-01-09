@@ -15,7 +15,6 @@ import {
   IWebhookResponse,
 } from "./types";
 import {
-  webhookRateLimit,
   validateWebhookPayload,
   webhookLogger,
   webhookErrorHandler,
@@ -90,7 +89,7 @@ export const createWebhookRouter = (): Router => {
 
   // Apply webhook-specific middleware
   router.use(webhookLogger);
-  router.use(webhookRateLimit);
+  // Rate limiting is handled by CloudFront
 
   // Generic webhook endpoint that routes based on payload
   router.post("/", async (req, res, next) => {

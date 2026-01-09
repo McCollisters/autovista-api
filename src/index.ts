@@ -13,7 +13,6 @@ import { ErrorHandler } from "@/_global/errorHandler";
 import {
   helmetConfig,
   corsConfig,
-  generalRateLimit,
   requestLogger,
   securityHeaders,
   securityErrorHandler,
@@ -52,6 +51,10 @@ import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
 
 // Initialize Express app
 const app = express();
+
+// Trust proxy to get real client IP from CloudFront
+// CloudFront sets X-Forwarded-For header with the original client IP
+app.set("trust proxy", true);
 
 // Initialize SQS client
 const sqs = new SQSClient({ region: config.aws.region });
@@ -105,7 +108,7 @@ const startServer = async () => {
     app.use(corsConfig);
     app.use(securityHeaders);
     app.use(requestLogger);
-    app.use(generalRateLimit);
+    // Rate limiting is handled by CloudFront
 
     // Body parsing middleware
     app.use(express.json({ limit: "10mb" }));

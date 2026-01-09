@@ -7,15 +7,10 @@
 
 import { Request, Response, NextFunction } from "express";
 import { logger } from "@/core/logger";
-import { createRateLimit } from "@/core/middleware/security";
 import { IWebhookPayload, WebhookSource } from "./types";
 
-// Webhook-specific rate limiting (more lenient than API endpoints)
-export const webhookRateLimit = createRateLimit(
-  15 * 60 * 1000, // 15 minutes
-  200, // Allow more requests for webhooks
-  "Too many webhook requests from this IP, please try again later.",
-);
+// Rate limiting is handled by CloudFront
+// Removed webhook rate limiting - using CloudFront rate limiting instead
 
 // Webhook payload validation middleware
 export const validateWebhookPayload = (source: WebhookSource) => {

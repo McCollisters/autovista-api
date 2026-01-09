@@ -1,6 +1,5 @@
 import helmet from "helmet";
 import cors from "cors";
-import rateLimit from "express-rate-limit";
 import { Request, Response, NextFunction } from "express";
 import { config } from "@/config/index";
 import { logger } from "@/core/logger";
@@ -37,57 +36,8 @@ export const corsConfig = cors({
   exposedHeaders: ["X-Total-Count", "X-Page-Count"],
 });
 
-// Rate limiting configuration
-export const createRateLimit = (
-  windowMs: number,
-  max: number,
-  message?: string,
-) => {
-  return rateLimit({
-    windowMs,
-    max,
-    message: message || {
-      error: "Too many requests from this IP, please try again later.",
-      retryAfter: Math.ceil(windowMs / 1000),
-    },
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    handler: (req: Request, res: Response) => {
-      logger.warn("Rate limit exceeded", {
-        ip: req.ip,
-        userAgent: req.get("User-Agent"),
-        url: req.url,
-        method: req.method,
-      });
-
-      res.status(429).json({
-        error: "Too many requests from this IP, please try again later.",
-        retryAfter: Math.ceil(windowMs / 1000),
-      });
-    },
-  });
-};
-
-// General API rate limiting (100 requests per 15 minutes)
-export const generalRateLimit = createRateLimit(
-  15 * 60 * 1000, // 15 minutes
-  100, // limit each IP to 100 requests per windowMs
-  "Too many requests from this IP, please try again later.",
-);
-
-// Strict rate limiting for auth endpoints (5 requests per 15 minutes)
-export const authRateLimit = createRateLimit(
-  15 * 60 * 1000, // 15 minutes
-  5, // limit each IP to 5 requests per windowMs
-  "Too many authentication attempts from this IP, please try again later.",
-);
-
-// Strict rate limiting for quote/order creation (10 requests per 15 minutes)
-export const createRateLimitStrict = createRateLimit(
-  15 * 60 * 1000, // 15 minutes
-  10, // limit each IP to 10 requests per windowMs
-  "Too many creation requests from this IP, please try again later.",
-);
+// Rate limiting is handled by CloudFront
+// Removed express-rate-limit middleware - using CloudFront rate limiting instead
 
 // Request logging middleware
 export const requestLogger = (
