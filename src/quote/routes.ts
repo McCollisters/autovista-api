@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { createQuote } from "./controllers/createQuote";
 import { getQuote } from "./controllers/getQuote";
-import { getQuotes } from "./controllers/getQuotes";
 import { updateQuote } from "./controllers/updateQuote";
 import { validateQuoteBody } from "./middleware/validateQuoteBody";
 import { deleteQuote } from "./controllers/deleteQuote";
@@ -19,7 +18,6 @@ router.post("/customer", createQuoteCustomer);
 router.put("/", updateQuoteAlternative);
 
 // General routes
-router.get("/", getQuotes);
 router.post("/", validateQuoteBody, createQuote);
 
 // Parameterized routes

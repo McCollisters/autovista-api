@@ -7,10 +7,12 @@ If your route changes work locally but not on AWS, here are all the places cachi
 **Status:** ✅ Addressed with cache invalidation and no-cache headers
 
 **Check:**
+
 - Are you testing via CloudFront URL or directly hitting Elastic Beanstalk?
 - Check response headers for `X-Cache: Hit from cloudfront` or `X-Cache: Miss from cloudfront`
 
 **Solution:**
+
 - Cache invalidation is automatic after deployments
 - No-cache headers are set for all `/api/*` routes
 - Verify CloudFront cache policy respects `Cache-Control: no-cache`
@@ -20,6 +22,7 @@ If your route changes work locally but not on AWS, here are all the places cachi
 **Possible Issue:** Nginx reverse proxy might be caching responses
 
 **Check:**
+
 ```bash
 # SSH into your EB instance and check nginx config
 sudo cat /etc/nginx/nginx.conf | grep -i cache
@@ -28,6 +31,7 @@ sudo cat /etc/nginx/nginx.conf | grep -i cache
 **Solution:** Add nginx configuration to disable caching for API routes:
 
 Create `.ebextensions/03_nginx_cache.config`:
+
 ```yaml
 files:
   "/etc/nginx/conf.d/api_no_cache.conf":
@@ -50,6 +54,7 @@ files:
 **Possible Issue:** ALB might have response caching enabled
 
 **Check:**
+
 ```bash
 # Check ALB attributes
 aws elbv2 describe-load-balancer-attributes \
@@ -58,6 +63,7 @@ aws elbv2 describe-load-balancer-attributes \
 ```
 
 **Solution:**
+
 - ALB doesn't cache by default, but check if any caching is configured
 - Go to EC2 Console → Load Balancers → Your ALB → Attributes
 
@@ -66,10 +72,12 @@ aws elbv2 describe-load-balancer-attributes \
 **Possible Issue:** Old route handlers might be cached in memory
 
 **Check:**
+
 - Restart the application after deployment
 - Check if PM2 or process manager is running old code
 
 **Solution:**
+
 - Elastic Beanstalk should restart the app on deployment
 - Verify the deployment actually restarted: Check EB logs for "Server started successfully"
 
@@ -78,6 +86,7 @@ aws elbv2 describe-load-balancer-attributes \
 **Possible Issue:** Old code might not be getting deployed
 
 **Check:**
+
 ```bash
 # Verify the deployed code
 aws elasticbeanstalk describe-environments \
@@ -89,6 +98,7 @@ aws elasticbeanstalk describe-environments \
 ```
 
 **Solution:**
+
 - Verify `dist/index.js` exists after build
 - Check that routes file is included in deployment package
 - Ensure `.ebignore` isn't excluding route files
@@ -98,11 +108,13 @@ aws elasticbeanstalk describe-environments \
 **Possible Issue:** Your browser is caching the old API response
 
 **Check:**
+
 - Open DevTools → Network tab
 - Check "Disable cache" checkbox
 - Look for `(from disk cache)` or `(from memory cache)` in network requests
 
 **Solution:**
+
 - Hard refresh: `Ctrl+Shift+R` (Windows/Linux) or `Cmd+Shift+R` (Mac)
 - Use incognito/private mode
 - Clear browser cache
@@ -113,6 +125,7 @@ aws elasticbeanstalk describe-environments \
 **Possible Issue:** Postman or other API clients might cache responses
 
 **Solution:**
+
 - Disable cache in Postman settings
 - Use a new request instead of reusing old ones
 - Add a query parameter: `?t=${Date.now()}` to bypass cache
@@ -122,6 +135,7 @@ aws elasticbeanstalk describe-environments \
 **Possible Issue:** CloudFront cache policy ignores `Cache-Control` headers
 
 **Check:**
+
 ```bash
 # Get cache policy for your distribution
 aws cloudfront get-distribution-config \
@@ -134,6 +148,7 @@ aws cloudfront get-cache-policy \
 ```
 
 **Solution:**
+
 - Create a custom cache policy that respects `Cache-Control: no-cache`
 - Or use "CachingDisabled" policy for `/api/*` paths
 - See CloudFront console → Policies → Cache policies
@@ -193,9 +208,9 @@ Add logging to verify routes are registered:
 // In src/index.ts after routes are mounted
 app._router.stack.forEach((r: any) => {
   if (r.route) {
-    logger.info('Route registered', {
+    logger.info("Route registered", {
       method: Object.keys(r.route.methods)[0],
-      path: r.route.path
+      path: r.route.path,
     });
   }
 });

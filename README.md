@@ -126,7 +126,7 @@ The Quote Service handles vehicle transportation quote creation, calculation, an
 
 #### API Endpoints
 
-- `GET /api/v1/quote` - List quotes
+- `GET /api/v1/quotes` - List quotes
 - `POST /api/v1/quote` - Create new quote
 - `GET /api/v1/quote/:quoteId` - Get single quote
 - `PATCH /api/v1/quote/:quoteId` - Update quote
@@ -215,7 +215,7 @@ The Order Service includes comprehensive notification handlers:
 
 #### API Endpoints
 
-- `GET /api/v1/order` - List orders
+- `GET /api/v1/orders` - List orders
 - `POST /api/v1/order` - Create new order
 - `GET /api/v1/order/:orderId` - Get single order
 - `PATCH /api/v1/order/:orderId` - Update order
@@ -558,7 +558,7 @@ Manages customer portals and their configurations.
 
 #### API Endpoints
 
-- `GET /api/v1/portal` - List portals
+- `GET /api/v1/portals` - List portals
 - `POST /api/v1/portal` - Create portal
 - `GET /api/v1/portal/:quoteId` - Get single portal (note: parameter name is quoteId for backward compatibility)
 - `PATCH /api/v1/portal/:quoteId` - Update portal
@@ -587,7 +587,7 @@ Manages vehicle makes and brands.
 
 #### API Endpoints
 
-- `GET /api/v1/brand` - Get vehicle makes
+- `GET /api/v1/brands` - Get vehicle makes
 - `POST /api/v1/brand` - Create brand
 
 ---
@@ -613,7 +613,7 @@ Manages pricing modifiers that affect quote calculations.
 
 #### API Endpoints
 
-- `GET /api/v1/modifierSet` - List modifier sets
+- `GET /api/v1/modifierSets` - List modifier sets
 - `POST /api/v1/modifierSet` - Create modifier set
 - `GET /api/v1/modifierSet/:ruleId` - Get single modifier set
 - `PUT /api/v1/modifierSet/:ruleId` - Update modifier set

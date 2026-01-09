@@ -21,10 +21,13 @@ import {
 
 // Import routes
 import portalRoutes from "@/portal/routes";
+import { getPortals } from "@/portal/controllers/getPortals";
 import userRoutes from "@/user/routes";
 import { getUsers } from "@/user/controllers/getUsers";
 import quoteRoutes from "@/quote/routes";
+import { getQuotes } from "@/quote/controllers/getQuotes";
 import orderRoutes from "@/order/routes";
+import { getOrders } from "@/order/controllers/getOrders";
 import notificationRoutes from "@/notification/routes";
 import authRoutes from "@/auth/routes";
 import integrationRoutes from "@/integration/routes";
@@ -33,6 +36,10 @@ import surveyRoutes from "@/survey/routes";
 import emailRoutes from "@/email/routes";
 import healthRoutes from "@/presentation/routes/health";
 import { signS3, getFile, captivatedCallback } from "@/integration/routes";
+import brandRoutes from "@/brand/routes";
+import { getMakes } from "@/brand/controllers/getMakes";
+import modifierSetRoutes from "@/modifierSet/routes";
+import { getModifierSets } from "@/modifierSet/controller";
 
 // Import webhook system
 import webhookRouter from "@/_global/integrations/webhooks/registry";
@@ -122,10 +129,14 @@ const startServer = async () => {
 
     // API routes
     app.use("/api/v1/portal", portalRoutes);
+    // Portals listing endpoint (plural)
+    app.get("/api/v1/portals", getPortals);
     app.use("/api/v1/user", userRoutes);
     // Users listing endpoint (plural)
     app.get("/api/v1/users", getUsers);
     app.use("/api/v1/quote", quoteRoutes);
+    // Quotes listing endpoint (plural)
+    app.get("/api/v1/quotes", getQuotes);
     
     // Log registered routes for debugging
     logger.info("API routes registered", {
@@ -139,12 +150,20 @@ const startServer = async () => {
       ],
     });
     app.use("/api/v1/order", orderRoutes);
+    // Orders listing endpoint (plural)
+    app.get("/api/v1/orders", getOrders);
     app.use("/api/v1/notifications", notificationRoutes);
     app.use("/api/v1/auth", authRoutes);
     app.use("/api/v1/integration", integrationRoutes);
     app.use("/api/v1/settings", settingsRoutes);
     app.use("/api/v1/surveys", surveyRoutes);
     app.use("/api/v1/emails", emailRoutes);
+    app.use("/api/v1/brand", brandRoutes);
+    // Brands listing endpoint (plural)
+    app.get("/api/v1/brands", getMakes);
+    app.use("/api/v1/modifierSet", modifierSetRoutes);
+    // ModifierSets listing endpoint (plural)
+    app.get("/api/v1/modifierSets", getModifierSets);
 
     // Integration routes (legacy paths for backward compatibility)
     app.post("/sign_s3", signS3);

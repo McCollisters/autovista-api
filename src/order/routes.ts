@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { createOrder } from "./controllers/createOrder";
 import { getOrder } from "./controllers/getOrder";
-import { getOrders } from "./controllers/getOrders";
 import { updateOrder } from "./controllers/updateOrder";
 import { deleteOrder } from "./controllers/deleteOrder";
 import { requestTrackOrder } from "./controllers/requestTrackOrder";
@@ -26,7 +25,6 @@ router.post("/terms", acceptOrderTerms);
 router.post("/customer", createOrderCustomer);
 
 // General routes
-router.get("/", getOrders);
 router.post("/", createOrder);
 
 // Parameterized routes

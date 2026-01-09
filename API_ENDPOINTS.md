@@ -45,7 +45,7 @@ This document provides a comprehensive list of all available API endpoints in th
 
 | Method   | Endpoint                  | Description      | Auth Required |
 | -------- | ------------------------- | ---------------- | ------------- |
-| `GET`    | `/api/v1/portal`          | List all portals | Yes           |
+| `GET`    | `/api/v1/portals`         | List all portals | Yes           |
 | `POST`   | `/api/v1/portal`          | Create portal    | Yes           |
 | `GET`    | `/api/v1/portal/:quoteId` | Get portal by ID | Yes           |
 | `PATCH`  | `/api/v1/portal/:quoteId` | Update portal    | Yes           |
@@ -57,7 +57,7 @@ This document provides a comprehensive list of all available API endpoints in th
 
 | Method   | Endpoint                      | Description               | Auth Required |
 | -------- | ----------------------------- | ------------------------- | ------------- |
-| `GET`    | `/api/v1/quote`               | List all quotes           | Yes           |
+| `GET`    | `/api/v1/quotes`              | List all quotes           | Yes           |
 | `POST`   | `/api/v1/quote`               | Create new quote          | Yes           |
 | `GET`    | `/api/v1/quote/:quoteId`      | Get quote by ID           | Yes           |
 | `PATCH`  | `/api/v1/quote/:quoteId`      | Update quote              | Yes           |
@@ -73,7 +73,7 @@ This document provides a comprehensive list of all available API endpoints in th
 
 | Method   | Endpoint                              | Description                 | Auth Required |
 | -------- | ------------------------------------- | --------------------------- | ------------- |
-| `GET`    | `/api/v1/order`                       | List all orders             | Yes           |
+| `GET`    | `/api/v1/orders`                      | List all orders             | Yes           |
 | `POST`   | `/api/v1/order`                       | Create new order            | Yes           |
 | `GET`    | `/api/v1/order/:orderId`              | Get order by ID             | Yes           |
 | `PATCH`  | `/api/v1/order/:orderId`              | Update order                | Yes           |
@@ -152,10 +152,10 @@ This document provides a comprehensive list of all available API endpoints in th
 
 ## Brands (`/api/v1/brand`)
 
-| Method | Endpoint        | Description          | Auth Required |
-| ------ | --------------- | -------------------- | ------------- |
-| `GET`  | `/api/v1/brand` | Get all makes/brands | Yes           |
-| `POST` | `/api/v1/brand` | Create brand         | Yes           |
+| Method | Endpoint         | Description          | Auth Required |
+| ------ | ---------------- | -------------------- | ------------- |
+| `GET`  | `/api/v1/brands` | Get all makes/brands | Yes           |
+| `POST` | `/api/v1/brand`  | Create brand         | Yes           |
 
 ---
 
@@ -163,7 +163,7 @@ This document provides a comprehensive list of all available API endpoints in th
 
 | Method   | Endpoint                      | Description            | Auth Required |
 | -------- | ----------------------------- | ---------------------- | ------------- |
-| `GET`    | `/api/v1/modifierSet`         | List all modifier sets | Yes           |
+| `GET`    | `/api/v1/modifierSets`        | List all modifier sets | Yes           |
 | `POST`   | `/api/v1/modifierSet`         | Create modifier set    | Yes           |
 | `GET`    | `/api/v1/modifierSet/:ruleId` | Get modifier set by ID | Yes           |
 | `PUT`    | `/api/v1/modifierSet/:ruleId` | Update modifier set    | Yes           |

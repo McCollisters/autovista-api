@@ -4,12 +4,10 @@ import {
   getModifierSet,
   updateModifierSet,
   deleteModifierSet,
-  getModifierSets,
 } from "./controller";
 
 const router = Router();
 
-router.get("/", getModifierSets);
 router.post("/", createModifierSet);
 router.get("/:ruleId", getModifierSet);
 router.put("/:ruleId", updateModifierSet);

@@ -181,31 +181,37 @@ Verify the route order is correct in the deployed code:
 ### Issue 1: Build Failed Silently
 
 **Check:**
+
 - GitHub Actions build logs
 - EB build logs
 - Look for TypeScript compilation errors
 
 **Fix:**
+
 - Fix build errors
 - Redeploy
 
 ### Issue 2: Routes File Not in Deployment
 
 **Check:**
+
 - `.ebignore` file
 - Deployment package contents
 
 **Fix:**
+
 - Remove routes from `.ebignore` if present
 - Ensure `src/user/routes.ts` is in the zip
 
 ### Issue 3: Application Not Restarted
 
 **Check:**
+
 - EB logs for "Server started successfully"
 - Environment status
 
 **Fix:**
+
 - Restart the environment:
   ```bash
   aws elasticbeanstalk restart-app-server \
@@ -215,20 +221,24 @@ Verify the route order is correct in the deployed code:
 ### Issue 4: Old Code Still Running
 
 **Check:**
+
 - Version label in EB
 - Compare with GitHub commit
 
 **Fix:**
+
 - Force redeploy latest version
 - Or trigger a new deployment
 
 ### Issue 5: Routes Not Registered
 
 **Check:**
+
 - Application logs for route registration
 - Verify routes file is being imported
 
 **Fix:**
+
 - Check for import errors in logs
 - Verify route file syntax
 
@@ -273,6 +283,7 @@ echo "http://${EB_URL}"
 ```
 
 Save as `check-deployment.sh`, make executable, and run:
+
 ```bash
 chmod +x check-deployment.sh
 ./check-deployment.sh
