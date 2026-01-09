@@ -10,10 +10,13 @@ import { deleteUser } from "./controllers/deleteUser";
 
 const router = Router();
 
+// IMPORTANT: Route order matters! Specific routes must come before parameterized routes
+
 // Get current authorized user (GET /api/v1/user)
+// This must come before /:userId to avoid route conflicts
 router.get("/", getAuthorizedUser);
 
-// Get users by portal
+// Get users by portal (specific route before parameterized)
 router.get("/users/portal/:portalId", getUsersByPortal);
 
 // Admin-only: Create user
@@ -21,6 +24,7 @@ router.post("/admin/user", createUserAdmin);
 
 // User CRUD operations
 router.post("/", createUser);
+// Parameterized routes must come last
 router.get("/:userId", getUser);
 router.patch("/:userId", updateUser);
 router.delete("/:userId", deleteUser);

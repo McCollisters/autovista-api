@@ -253,12 +253,12 @@ To make testing easier, set up Postman environment variables:
 
 ### Example: Get Current User
 
-**Endpoint:** `GET /api/v1/user/user`
+**Endpoint:** `GET /api/v1/user`
 
 **Postman Setup:**
 
 1. Method: `GET`
-2. URL: `{{base_url}}/api/v1/user/user`
+2. URL: `{{base_url}}/api/v1/user`
 3. Authorization: Bearer Token → `{{auth_token}}`
 4. Send request
 

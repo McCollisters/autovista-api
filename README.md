@@ -522,9 +522,9 @@ Manages user accounts and permissions.
 
 #### API Endpoints
 
-- `GET /api/v1/user` - List users
+- `GET /api/v1/user` - Get current authorized user
+- `GET /api/v1/users` - List all users
 - `POST /api/v1/user` - Create user
-- `GET /api/v1/user/user` - Get current authorized user
 - `GET /api/v1/user/:userId` - Get single user
 - `PATCH /api/v1/user/:userId` - Update user
 - `DELETE /api/v1/user/:userId` - Delete user
