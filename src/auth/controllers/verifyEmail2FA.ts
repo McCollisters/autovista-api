@@ -79,20 +79,77 @@ export const verifyEmail2FA = async (
     // Send verification code
     const result = await sendVerificationEmail(email);
 
-    if (result) {
-      user.verificationCode = result.code;
-      user.verificationCodeSent = result.codeSent;
-      user.verificationCodeExpires = result.codeExpires;
+    if (!result) {
+      logger.error("sendVerificationEmail returned no result", { email });
+      return next({
+        statusCode: 500,
+        message: "Failed to send verification email.",
+      });
+    }
 
-      // Normalize status to lowercase if needed (fixes legacy data with "Active" instead of "active")
-      if (user.status && user.status !== user.status.toLowerCase()) {
-        const normalizedStatus = user.status.toLowerCase();
-        if (Object.values(Status).includes(normalizedStatus as Status)) {
-          user.status = normalizedStatus;
-        }
+    // Set verification code fields
+    user.verificationCode = result.code;
+    user.verificationCodeSent = result.codeSent;
+    user.verificationCodeExpires = result.codeExpires;
+
+    // Normalize status to lowercase if needed (fixes legacy data with "Active" instead of "active")
+    if (user.status && user.status !== user.status.toLowerCase()) {
+      const normalizedStatus = user.status.toLowerCase();
+      if (Object.values(Status).includes(normalizedStatus as Status)) {
+        logger.info("Normalizing user status", {
+          email,
+          oldStatus: user.status,
+          newStatus: normalizedStatus,
+        });
+        user.status = normalizedStatus;
       }
+    }
 
+    // Save user with verification code
+    try {
+      // Mark fields as modified to ensure they're saved
+      user.markModified("verificationCode");
+      user.markModified("verificationCodeSent");
+      user.markModified("verificationCodeExpires");
+      
       await user.save();
+      
+      // Verify the code was actually saved by reloading from database
+      const savedUser = await User.findOne({ email });
+      if (!savedUser?.verificationCode) {
+        logger.error("Verification code was not saved to database", {
+          email,
+          codeAttempted: result.code,
+          userHasCode: !!user.verificationCode,
+          savedUserHasCode: !!savedUser?.verificationCode,
+        });
+        return next({
+          statusCode: 500,
+          message: "Failed to save verification code. Please try again.",
+        });
+      }
+      
+      logger.info("Verification code saved to database successfully", {
+        email,
+        codeSent: result.codeSent.toISOString(),
+        codeExpires: result.codeExpires.toISOString(),
+        codeLength: result.code.length,
+      });
+    } catch (saveError) {
+      logger.error("Failed to save verification code to database", {
+        email,
+        error: saveError instanceof Error ? saveError.message : saveError,
+        stack: saveError instanceof Error ? saveError.stack : undefined,
+        code: result.code,
+        codeSent: result.codeSent.toISOString(),
+        codeExpires: result.codeExpires.toISOString(),
+        userStatus: user.status,
+        userModifiedFields: user.modifiedPaths(),
+      });
+      return next({
+        statusCode: 500,
+        message: "Failed to save verification code. Please try again.",
+      });
     }
 
     // In test environment, return the code for testing

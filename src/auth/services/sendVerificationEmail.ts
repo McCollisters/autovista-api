@@ -104,14 +104,24 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
     }
 
     const codeSent = new Date();
-    const codeExpires = new Date(Date.now() + 1800000); // 30 minutes
+    const codeExpires = new Date(Date.now() + 3600000); // 60 minutes (increased from 30)
 
     // Log code in development/test environments
     if (process.env.NODE_ENV !== "production") {
       logger.info("Verification code generated", {
         recipientEmail,
         code,
+        codeSent: codeSent.toISOString(),
         codeExpires: codeExpires.toISOString(),
+        expirationMinutes: 60,
+      });
+    } else {
+      // In production, log without the code for security
+      logger.info("Verification code sent", {
+        recipientEmail,
+        codeSent: codeSent.toISOString(),
+        codeExpires: codeExpires.toISOString(),
+        expirationMinutes: 60,
       });
     }
 

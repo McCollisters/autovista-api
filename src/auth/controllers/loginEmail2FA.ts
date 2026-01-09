@@ -56,9 +56,11 @@ export const loginEmail2FA = async (
       }
 
       if (!user.verificationCode || !user.verificationCodeExpires) {
-        logger.error(
-          "This verification code has expired. Please request a new code.",
-        );
+        logger.error("Verification code not found or missing expiration", {
+          email,
+          hasCode: !!user.verificationCode,
+          hasExpiration: !!user.verificationCodeExpires,
+        });
         return next({
           statusCode: 401,
           message:
@@ -66,18 +68,44 @@ export const loginEmail2FA = async (
         });
       }
 
+      // Handle both Date objects and string dates from MongoDB
+      const expirationTime = user.verificationCodeExpires instanceof Date
+        ? user.verificationCodeExpires.getTime()
+        : new Date(user.verificationCodeExpires).getTime();
+      
+      const now = Date.now();
+      const timeRemaining = expirationTime - now;
+
+      logger.debug("Verifying code", {
+        email,
+        codeProvided: code,
+        codeStored: user.verificationCode,
+        expirationTime: new Date(expirationTime).toISOString(),
+        currentTime: new Date(now).toISOString(),
+        timeRemainingMs: timeRemaining,
+        timeRemainingMinutes: Math.floor(timeRemaining / 60000),
+        isExpired: now > expirationTime,
+      });
+
       if (code !== user.verificationCode) {
-        logger.error("Incorrect verification code.");
+        logger.error("Incorrect verification code", {
+          email,
+          codeProvided: code,
+          codeStored: user.verificationCode,
+        });
         return next({
           statusCode: 401,
           message: "Incorrect verification code.",
         });
       }
 
-      if (Date.now() > user.verificationCodeExpires.getTime()) {
-        logger.error(
-          "This verification code has expired. Please request a new code.",
-        );
+      if (now > expirationTime) {
+        logger.error("Verification code expired", {
+          email,
+          expirationTime: new Date(expirationTime).toISOString(),
+          currentTime: new Date(now).toISOString(),
+          timeRemainingMs: timeRemaining,
+        });
         return next({
           statusCode: 401,
           message:
