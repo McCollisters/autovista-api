@@ -268,6 +268,46 @@ jobs:
           wait_for_environment_recovery: 0
         continue-on-error: true
 
+      - name: Invalidate CloudFront Cache
+        if: success() && secrets.CLOUDFRONT_DISTRIBUTION_ID != ''
+        run: |
+          echo "Invalidating CloudFront cache after deployment..."
+          
+          DISTRIBUTION_ID="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
+          
+          if [ -z "$DISTRIBUTION_ID" ]; then
+            echo "Warning: CLOUDFRONT_DISTRIBUTION_ID secret not set. Skipping cache invalidation."
+            echo "To enable cache invalidation, add CLOUDFRONT_DISTRIBUTION_ID to GitHub Secrets."
+            exit 0
+          fi
+          
+          echo "Creating CloudFront invalidation for distribution: $DISTRIBUTION_ID"
+          
+          # Invalidate API paths that commonly change
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
+            --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/api/v1/user" "/api/v1/users" "/api/v1/user/*" "/api/*" \
+            --query 'Invalidation.Id' \
+            --output text \
+            --region us-east-1)
+          
+          if [ -n "$INVALIDATION_ID" ]; then
+            echo "CloudFront invalidation created: $INVALIDATION_ID"
+            echo "Cache invalidation is in progress. This may take a few minutes."
+            echo "You can check status in AWS Console or wait for it to complete."
+            
+            # Optionally wait for completion (commented out as it can take 5-15 minutes)
+            # echo "Waiting for invalidation to complete..."
+            # aws cloudfront wait invalidation-completed \
+            #   --distribution-id "$DISTRIBUTION_ID" \
+            #   --id "$INVALIDATION_ID" \
+            #   --region us-east-1
+            # echo "Cache invalidation completed!"
+          else
+            echo "Warning: Failed to create CloudFront invalidation"
+            exit 0  # Don't fail the deployment if cache invalidation fails
+          fi
+
       - name: Fetch application logs
         run: |
           echo "=== Fetching application logs ==="

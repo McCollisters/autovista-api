@@ -9687,3 +9687,310 @@
   service: 'autovista-api',
   timestamp: '2026-01-07 21:31:48'
 }
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:00:04'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:00:04'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:00:06'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-08 21:00:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-08 21:00:23'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-08 21:00:23'
+}
+{
+  service: 'autovista-api',
+  error: 'invalid signature',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-08 21:00:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  statusCode: 401,
+  duration: '12ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-08 21:00:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/user',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-08 21:01:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/user',
+  statusCode: 404,
+  duration: '6ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-08 21:01:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-08 21:01:13'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-08 21:01:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  statusCode: 401,
+  duration: '3ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-08 21:01:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/auth/verify-email-2fa',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '75',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-08 21:01:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/auth/verify-email-2fa',
+  statusCode: 404,
+  duration: '28ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-08 21:01:52'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/verify-email-2fa',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '75',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-08 21:01:57'
+}
+{
+  service: 'autovista-api',
+  templatePath: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/templates/verification-code.hbs',
+  level: 'debug',
+  message: 'Loading verification code template',
+  timestamp: '2026-01-08 21:01:57'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-01-08 21:01:57'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-01-08 21:01:57'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeatlantic.com' ],
+  subject: 'Your Autovista verification code',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-01-08 21:01:58'
+}
+{
+  service: 'autovista-api',
+  recipientEmail: 'anna@periscopeatlantic.com',
+  code: '119401',
+  codeSent: '2026-01-09T04:01:58.583Z',
+  codeExpires: '2026-01-09T05:01:58.583Z',
+  expirationMinutes: 60,
+  level: 'info',
+  message: 'Verification code generated',
+  timestamp: '2026-01-08 21:01:58'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  codeSent: '2026-01-09T04:01:58.583Z',
+  codeExpires: '2026-01-09T05:01:58.583Z',
+  codeLength: 6,
+  level: 'info',
+  message: 'Verification code saved to database successfully',
+  timestamp: '2026-01-08 21:01:58'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/verify-email-2fa',
+  statusCode: 200,
+  duration: '1119ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-08 21:01:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/auth/login-email-2fa',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '63',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-08 21:03:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/auth/login-email-2fa',
+  statusCode: 404,
+  duration: '4ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-08 21:03:10'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/login-email-2fa',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: '63',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-08 21:03:13'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  codeProvided: '119401',
+  codeStored: '119401',
+  expirationTime: '2026-01-09T05:01:58.583Z',
+  currentTime: '2026-01-09T04:03:13.310Z',
+  timeRemainingMs: 3525273,
+  timeRemainingMinutes: 58,
+  isExpired: false,
+  level: 'debug',
+  message: 'Verifying code',
+  timestamp: '2026-01-08 21:03:13'
+}
+{
+  service: 'autovista-api',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  email: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'User logged in successfully with 2FA',
+  timestamp: '2026-01-08 21:03:13'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/login-email-2fa',
+  statusCode: 200,
+  duration: '109ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-08 21:03:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'PostmanRuntime/7.29.2',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-08 21:03:44'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-08 21:03:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '166ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-08 21:03:44'
+}

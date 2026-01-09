@@ -1202,3 +1202,10 @@
     '    at Object.<anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/tests/order/controllers/createOrder.test.ts:648:9)',
   timestamp: '2025-11-20 17:35:47'
 }
+{
+  service: 'autovista-api',
+  error: 'invalid signature',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-08 21:00:23'
+}
