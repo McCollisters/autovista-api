@@ -84,6 +84,14 @@ export const verifyEmail2FA = async (
       user.verificationCodeSent = result.codeSent;
       user.verificationCodeExpires = result.codeExpires;
 
+      // Normalize status to lowercase if needed (fixes legacy data with "Active" instead of "active")
+      if (user.status && user.status !== user.status.toLowerCase()) {
+        const normalizedStatus = user.status.toLowerCase();
+        if (Object.values(Status).includes(normalizedStatus as Status)) {
+          user.status = normalizedStatus;
+        }
+      }
+
       await user.save();
     }
 
@@ -105,22 +113,22 @@ export const verifyEmail2FA = async (
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     const errorStack = error instanceof Error ? error.stack : undefined;
-    
+
     logger.error("Error requesting verification code", {
       error: errorMessage,
       stack: errorStack,
       email: req.body?.email,
     });
-    
+
     // Return more specific error message if available
-    const userMessage = errorMessage.includes("template") 
+    const userMessage = errorMessage.includes("template")
       ? "Verification email template error."
       : errorMessage.includes("SENDGRID") || errorMessage.includes("SendGrid")
-      ? "Email service configuration error. Please check SendGrid API key."
-      : errorMessage.includes("Failed to send")
-      ? "Failed to send verification email. Please try again."
-      : "Error requesting verification code.";
-    
+        ? "Email service configuration error. Please check SendGrid API key."
+        : errorMessage.includes("Failed to send")
+          ? "Failed to send verification email. Please try again."
+          : "Error requesting verification code.";
+
     return next({
       statusCode: 400,
       message: userMessage,

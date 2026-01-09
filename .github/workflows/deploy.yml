@@ -172,10 +172,10 @@ jobs:
       - name: Set environment variables from GitHub Secrets
         run: |
           echo "Setting environment variables from GitHub Secrets..."
-          
+
           # Build option settings array using jq for proper JSON escaping
           OPTIONS="[]"
-          
+
           # Required variables - prefer MONGODB_PROD_URI for production
           if [ -n "${{ secrets.MONGODB_PROD_URI }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MONGODB_PROD_URI }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MONGODB_PROD_URI","Value":$val}]')
@@ -185,52 +185,52 @@ jobs:
           else
             echo "ERROR: Neither MONGODB_PROD_URI nor MONGODB_DEV_URI secret is set!"
           fi
-          
+
           # Optional but commonly used variables
           if [ -n "${{ secrets.SD_USER }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_USER }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_USER","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.SD_PASS }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_PASS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_PASS","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.SENDGRID_API_KEY }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SENDGRID_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SENDGRID_API_KEY","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.JWT_SECRET }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.JWT_SECRET }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"JWT_SECRET","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.BASE_URL }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.BASE_URL }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"BASE_URL","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.EMAIL_FROM_ADDRESS }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.EMAIL_FROM_ADDRESS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"EMAIL_FROM_ADDRESS","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.EMAIL_FROM_NAME }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.EMAIL_FROM_NAME }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"EMAIL_FROM_NAME","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.TWILIO_ACCOUNT_SID }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_ACCOUNT_SID }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_ACCOUNT_SID","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.TWILIO_AUTH_TOKEN }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_AUTH_TOKEN }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_AUTH_TOKEN","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.TWILIO_FROM_NUMBER }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_FROM_NUMBER }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_FROM_NUMBER","Value":$val}]')
           fi
-          
+
           if [ -n "${{ secrets.ALLOWED_ORIGINS }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ALLOWED_ORIGINS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ALLOWED_ORIGINS","Value":$val}]')
           fi
-          
+
           # Update the environment with all option settings
           OPTION_COUNT=$(echo "$OPTIONS" | jq 'length')
           if [ "$OPTION_COUNT" -gt 0 ]; then
@@ -259,7 +259,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: autovista-api
-          environment_name: autovista-api-prod
+          environment_name: autovista-api
           region: us-east-1
           version_label: "autovista-api-v${{ github.run_number }}-${{ github.sha }}"
           deployment_package: autovista-api.zip

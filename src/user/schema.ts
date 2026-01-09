@@ -60,6 +60,19 @@ userSchema.set("toJSON", {
   virtuals: true,
 });
 
+// Normalize status field to lowercase enum values
+userSchema.pre("save", function (this: IUser, next: (error?: any) => void) {
+  if (this.isModified("status") && this.status) {
+    // Normalize status to lowercase to match enum values
+    const normalizedStatus = this.status.toLowerCase();
+    // Only update if it's a valid enum value
+    if (Object.values(Status).includes(normalizedStatus as Status)) {
+      this.status = normalizedStatus;
+    }
+  }
+  next();
+});
+
 userSchema.pre(
   "save",
   async function (this: IUser, next: (error?: any) => void) {
