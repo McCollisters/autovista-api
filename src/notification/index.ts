@@ -76,9 +76,15 @@ function createSMSService(config: NotificationConfig["sms"]): SMSService {
       const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID || "";
       const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN || "";
 
+      // If Twilio credentials are not provided, disable SMS service instead of throwing error
       if (!twilioAccountSid || !twilioAuthToken) {
-        throw new Error(
-          "Twilio configuration is incomplete. Please set TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN environment variables.",
+        logger.warn(
+          "SMS is enabled but Twilio credentials are missing. SMS service will be disabled.",
+        );
+        // Create a disabled SMS service with placeholder credentials
+        return new SMSService(
+          new TwilioSMSProvider("disabled", "disabled"),
+          false, // Disabled
         );
       }
 
@@ -87,6 +93,11 @@ function createSMSService(config: NotificationConfig["sms"]): SMSService {
         twilioAuthToken,
         config.fromNumber || process.env.TWILIO_FROM_NUMBER,
       );
+      break;
+
+    case "aws-sns":
+      // AWS SNS doesn't require credentials if using IAM role
+      provider = new AWSSNSProvider(config.fromNumber);
       break;
 
     default:
