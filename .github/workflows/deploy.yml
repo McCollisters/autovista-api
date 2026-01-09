@@ -53,6 +53,16 @@ jobs:
             -x ".idea/*" \
             -x "*.md" \
             -x "logs/*"
+          
+          echo "=== Verifying deployment package contents ==="
+          echo "Checking if routes files are included:"
+          unzip -l autovista-api.zip | grep -E "routes\.(ts|js)" || echo "Warning: No routes files found in package!"
+          echo "Checking if dist folder exists:"
+          unzip -l autovista-api.zip | grep "dist/index.js" || echo "Warning: dist/index.js not found in package!"
+          echo "Checking if user routes are included:"
+          unzip -l autovista-api.zip | grep "src/user/routes" || echo "Warning: src/user/routes.ts not found!"
+          echo "Package size:"
+          ls -lh autovista-api.zip
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -259,7 +269,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: autovista-api
-          environment_name: autovista-api
+          environment_name: autovista-api-prod
           region: us-east-1
           version_label: "autovista-api-v${{ github.run_number }}-${{ github.sha }}"
           deployment_package: autovista-api.zip

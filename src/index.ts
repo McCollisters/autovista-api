@@ -126,6 +126,18 @@ const startServer = async () => {
     // Users listing endpoint (plural)
     app.get("/api/v1/users", getUsers);
     app.use("/api/v1/quote", quoteRoutes);
+    
+    // Log registered routes for debugging
+    logger.info("API routes registered", {
+      routes: [
+        "GET /api/v1/user (current user)",
+        "GET /api/v1/users (list users)",
+        "GET /api/v1/user/:userId",
+        "POST /api/v1/user",
+        "PATCH /api/v1/user/:userId",
+        "DELETE /api/v1/user/:userId",
+      ],
+    });
     app.use("/api/v1/order", orderRoutes);
     app.use("/api/v1/notifications", notificationRoutes);
     app.use("/api/v1/auth", authRoutes);
