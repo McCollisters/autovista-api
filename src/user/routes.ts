@@ -10,8 +10,8 @@ import { deleteUser } from "./controllers/deleteUser";
 
 const router = Router();
 
-// Get authorized user (current user from token)
-router.get("/me", getAuthorizedUser);
+// Get current authorized user (GET /api/v1/user)
+router.get("/", getAuthorizedUser);
 
 // Get users by portal
 router.get("/users/portal/:portalId", getUsersByPortal);
@@ -19,8 +19,7 @@ router.get("/users/portal/:portalId", getUsersByPortal);
 // Admin-only: Create user
 router.post("/admin/user", createUserAdmin);
 
-// Existing routes
-router.get("/", getUsers);
+// User CRUD operations
 router.post("/", createUser);
 router.get("/:userId", getUser);
 router.patch("/:userId", updateUser);

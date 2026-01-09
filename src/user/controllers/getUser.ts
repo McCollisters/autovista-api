@@ -10,11 +10,10 @@ export const getUser = async (
     const { userId } = req.params;
 
     // Prevent "me" from being treated as a user ID
-    // The /me route should handle this, but this is a safety check
     if (userId === "me") {
       return next({
         statusCode: 404,
-        message: "Use GET /api/v1/user/me to get the current user",
+        message: "Use GET /api/v1/user to get the current user",
       });
     }
 

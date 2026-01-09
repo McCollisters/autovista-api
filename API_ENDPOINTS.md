@@ -30,10 +30,10 @@ This document provides a comprehensive list of all available API endpoints in th
 
 | Method   | Endpoint                              | Description                 | Auth Required |
 | -------- | ------------------------------------- | --------------------------- | ------------- |
-| `GET`    | `/api/v1/user/me`                     | Get current authorized user | Yes           |
+| `GET`    | `/api/v1/user`                        | Get current authorized user | Yes           |
+| `GET`    | `/api/v1/users`                       | List all users              | Yes           |
 | `GET`    | `/api/v1/user/users/portal/:portalId` | Get users by portal         | Yes           |
 | `POST`   | `/api/v1/user/admin/user`             | Create user (admin only)    | Yes (Admin)   |
-| `GET`    | `/api/v1/user`                        | List all users              | Yes           |
 | `POST`   | `/api/v1/user`                        | Create user                 | Yes           |
 | `GET`    | `/api/v1/user/:userId`                | Get user by ID              | Yes           |
 | `PATCH`  | `/api/v1/user/:userId`                | Update user                 | Yes           |

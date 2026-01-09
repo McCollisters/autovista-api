@@ -21,6 +21,7 @@ import {
 // Import routes
 import portalRoutes from "@/portal/routes";
 import userRoutes from "@/user/routes";
+import { getUsers } from "@/user/controllers/getUsers";
 import quoteRoutes from "@/quote/routes";
 import orderRoutes from "@/order/routes";
 import notificationRoutes from "@/notification/routes";
@@ -120,6 +121,8 @@ const startServer = async () => {
     // API routes
     app.use("/api/v1/portal", portalRoutes);
     app.use("/api/v1/user", userRoutes);
+    // Users listing endpoint (plural)
+    app.get("/api/v1/users", getUsers);
     app.use("/api/v1/quote", quoteRoutes);
     app.use("/api/v1/order", orderRoutes);
     app.use("/api/v1/notifications", notificationRoutes);
