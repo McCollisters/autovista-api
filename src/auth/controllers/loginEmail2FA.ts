@@ -27,7 +27,7 @@ export const loginEmail2FA = async (
     }
 
     email = email.toLowerCase();
-    const user = await User.findOne({ email }).populate("portalId");
+    const user = await User.findOne({ email });
 
     if (!user) {
       logger.error("No user found with this email address.");
@@ -133,8 +133,8 @@ export const loginEmail2FA = async (
     res.status(200).json({
       token,
       role: user.role,
-      userId: user._id,
-      portalId: user.portalId,
+      userId: user._id.toString(),
+      portalId: user.portalId?.toString() || null,
     });
   } catch (error) {
     logger.error("Error logging in with 2FA", {

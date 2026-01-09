@@ -68,7 +68,7 @@ export const loginSocial = async (
     const email = userDetails.email.toLowerCase().trim();
 
     // Find user by email
-    const user = await User.findOne({ email }).populate("portalId");
+    const user = await User.findOne({ email });
 
     if (!user) {
       logger.error("No user found with email from Google token", { email });
@@ -105,8 +105,8 @@ export const loginSocial = async (
     res.status(200).json({
       token: newToken,
       role: user.role,
-      userId: user._id,
-      portalId: user.portalId,
+      userId: user._id.toString(),
+      portalId: user.portalId?.toString() || null,
     });
   } catch (error) {
     logger.error("Error in loginSocial", {

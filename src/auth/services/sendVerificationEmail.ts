@@ -16,11 +16,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /**
- * Generate a random 5-digit verification code
+ * Generate a random 6-digit verification code
  */
 function generateCode(): string {
-  const min = 10000;
-  const max = 99999;
+  const min = 100000;
+  const max = 999999;
   const randomDecimal = Math.random();
   const randomInRange = Math.floor(randomDecimal * (max - min + 1)) + min;
   return randomInRange.toString();

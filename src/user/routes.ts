@@ -11,7 +11,7 @@ import { deleteUser } from "./controllers/deleteUser";
 const router = Router();
 
 // Get authorized user (current user from token)
-router.get("/user", getAuthorizedUser);
+router.get("/me", getAuthorizedUser);
 
 // Get users by portal
 router.get("/users/portal/:portalId", getUsersByPortal);
