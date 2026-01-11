@@ -23,6 +23,8 @@ This document provides a comprehensive list of all available API endpoints in th
 | `POST` | `/api/v1/auth/verify-email-2fa` | Request verification code (step 1 of 2FA)    | No              |
 | `POST` | `/api/v1/auth/login-email-2fa`  | Login with verification code (step 2 of 2FA) | No              |
 | `POST` | `/api/v1/auth/login-social`     | Social login using Google OAuth2             | No              |
+| `POST` | `/api/v1/auth/forgotpassword`   | Request password reset email                 | No              |
+| `POST` | `/api/v1/auth/resetpassword`    | Reset user password with token               | No (JWT token)  |
 
 ---
 
@@ -225,6 +227,8 @@ Authorization: jwt <token>
 - `/api/v1/auth/verify-email-2fa`
 - `/api/v1/auth/login-email-2fa`
 - `/api/v1/auth/login-social`
+- `/api/v1/auth/forgotpassword`
+- `/api/v1/auth/resetpassword` (uses JWT token in Authorization header)
 - `/api/v1/surveys` (POST only - for survey submission)
 - `/api/v1/integration/captivated/callback`
 - `/captivated/callback` (legacy)

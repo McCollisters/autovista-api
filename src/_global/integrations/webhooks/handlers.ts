@@ -152,6 +152,24 @@ export const handleSuperDispatchOrderDelivered = async (
       tmsGuid: payload.order_guid,
     });
 
+    // Notify Acertus of order delivery (for Autonation portal orders)
+    try {
+      const { notifyOrderDelivered } = await import(
+        "@/order/integrations/acertusClient"
+      );
+      await notifyOrderDelivered(order).catch((error) => {
+        logger.error("Failed to notify Acertus of order delivery", {
+          orderId: order._id,
+          refId: order.refId,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      });
+    } catch (importError) {
+      logger.error("Failed to import Acertus client", {
+        error: importError instanceof Error ? importError.message : String(importError),
+      });
+    }
+
     return {
       success: true,
       message: "Order delivered successfully",
@@ -330,6 +348,24 @@ export const handleSuperDispatchOrderPickedUp = async (
       refId: order.refId,
       tmsGuid: payload.order_guid,
     });
+
+    // Notify Acertus of order pickup (for Autonation portal orders)
+    try {
+      const { notifyOrderPickedUp } = await import(
+        "@/order/integrations/acertusClient"
+      );
+      await notifyOrderPickedUp(order).catch((error) => {
+        logger.error("Failed to notify Acertus of order pickup", {
+          orderId: order._id,
+          refId: order.refId,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      });
+    } catch (importError) {
+      logger.error("Failed to import Acertus client", {
+        error: importError instanceof Error ? importError.message : String(importError),
+      });
+    }
 
     return {
       success: true,

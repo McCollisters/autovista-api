@@ -117,6 +117,8 @@ export interface IOrder extends Document {
   signatureRequestId?: string;
   tmsPartialOrder?: boolean;
   originalOrderData?: string; // JSON stringified backup of original order before SuperDispatch updates
+  acertusLoadNumber?: string; // Load number from Acertus webhook
+  acertusConnectUid?: string; // Connect UID from Acertus webhook
   notifications: {
     paymentRequest: INotification;
     paymentReminder: INotification;
@@ -292,6 +294,8 @@ const orderSchemaDefinition = {
   signatureRequestId: { type: String },
   tmsPartialOrder: { type: Boolean, default: false },
   originalOrderData: { type: String }, // JSON stringified backup of original order before SuperDispatch updates
+  acertusLoadNumber: { type: String }, // Load number from Acertus webhook
+  acertusConnectUid: { type: String }, // Connect UID from Acertus webhook
   notifications: {
     paymentRequest: createNotificationSchema(),
     paymentReminder: createNotificationSchema(),

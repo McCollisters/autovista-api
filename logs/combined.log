@@ -10105,3 +10105,1307 @@
   message: 'Server started successfully',
   timestamp: '2026-01-08 21:14:15'
 }
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 10:44:54'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 10:44:54'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 10:44:55'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-11 10:44:55'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-11 10:44:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:46:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 404,
+  duration: '7ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:46:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:55:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '54ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:55:13'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/verify-email-2fa',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '62',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:55:23'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/verify-email-2fa',
+  statusCode: 404,
+  duration: '27ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:55:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:56:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '52ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:56:32'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/verify-email-2fa',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '62',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:56:42'
+}
+{
+  service: 'autovista-api',
+  templatePath: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/templates/verification-code.hbs',
+  level: 'debug',
+  message: 'Loading verification code template',
+  timestamp: '2026-01-11 10:56:42'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 10:56:42'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-01-11 10:56:42'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeatlantic.com' ],
+  subject: 'Your Autovista verification code',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-01-11 10:56:43'
+}
+{
+  service: 'autovista-api',
+  recipientEmail: 'anna@periscopeatlantic.com',
+  code: '724144',
+  codeSent: '2026-01-11T17:56:43.824Z',
+  codeExpires: '2026-01-11T18:56:43.824Z',
+  expirationMinutes: 60,
+  level: 'info',
+  message: 'Verification code generated',
+  timestamp: '2026-01-11 10:56:43'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  codeSent: '2026-01-11T17:56:43.824Z',
+  codeExpires: '2026-01-11T18:56:43.824Z',
+  codeLength: 6,
+  level: 'info',
+  message: 'Verification code saved to database successfully',
+  timestamp: '2026-01-11 10:56:43'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/verify-email-2fa',
+  statusCode: 200,
+  duration: '1171ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:56:43'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/login-email-2fa',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '54',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:58:50'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/login-email-2fa',
+  statusCode: 404,
+  duration: '7ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:58:50'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/login-email-2fa',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '54',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:59:01'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/login-email-2fa',
+  statusCode: 404,
+  duration: '3ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:59:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:59:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '56ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:59:09'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/verify-email-2fa',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '62',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:59:14'
+}
+{
+  service: 'autovista-api',
+  templatePath: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/templates/verification-code.hbs',
+  level: 'debug',
+  message: 'Loading verification code template',
+  timestamp: '2026-01-11 10:59:14'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeatlantic.com' ],
+  subject: 'Your Autovista verification code',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-01-11 10:59:14'
+}
+{
+  service: 'autovista-api',
+  recipientEmail: 'anna@periscopeatlantic.com',
+  code: '202830',
+  codeSent: '2026-01-11T17:59:14.978Z',
+  codeExpires: '2026-01-11T18:59:14.978Z',
+  expirationMinutes: 60,
+  level: 'info',
+  message: 'Verification code generated',
+  timestamp: '2026-01-11 10:59:14'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  codeSent: '2026-01-11T17:59:14.978Z',
+  codeExpires: '2026-01-11T18:59:14.978Z',
+  codeLength: 6,
+  level: 'info',
+  message: 'Verification code saved to database successfully',
+  timestamp: '2026-01-11 10:59:15'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/verify-email-2fa',
+  statusCode: 200,
+  duration: '549ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:59:15'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/login-email-2fa',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '54',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  codeProvided: '202830',
+  codeStored: '202830',
+  expirationTime: '2026-01-11T18:59:14.978Z',
+  currentTime: '2026-01-11T17:59:26.237Z',
+  timeRemainingMs: 3588741,
+  timeRemainingMinutes: 59,
+  isExpired: false,
+  level: 'debug',
+  message: 'Verifying code',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  email: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'User logged in successfully with 2FA',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/login-email-2fa',
+  statusCode: 200,
+  duration: '112ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/makes',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/makes',
+  statusCode: 404,
+  duration: '7ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '49ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  statusCode: 404,
+  duration: '3ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '42ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 10:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/makes',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/makes',
+  statusCode: 404,
+  duration: '2ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  error: 'invalid token',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  statusCode: 401,
+  duration: '1ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  statusCode: 404,
+  duration: '0ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '52ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '51ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:01:10'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/login-social',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '1345',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:01:16'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/login-social',
+  statusCode: 404,
+  duration: '2ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:01:16'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/login-social',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '1345',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:01:42'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/login-social',
+  statusCode: 404,
+  duration: '8ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:01:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:03:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '45ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:03:02'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/login-social',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '1345',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  role: 'platform_admin',
+  level: 'info',
+  message: 'Social login successful',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/login-social',
+  statusCode: 200,
+  duration: '195ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/makes',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/makes',
+  statusCode: 404,
+  duration: '1ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '50ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  statusCode: 404,
+  duration: '3ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '50ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:03:06'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/forgotpassword',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '38',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:03:37'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/forgotpassword',
+  statusCode: 404,
+  duration: '6ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:03:37'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:06:26'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:06:26'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:06:27'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-11 11:06:27'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-11 11:06:27'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:07:13'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:07:13'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:07:13'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-11 11:07:13'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-11 11:07:13'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:07:57'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:07:57'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:07:57'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-11 11:07:57'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-11 11:07:57'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:08:04'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:08:04'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:08:06'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:08:06'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:08:07'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-11 11:08:07'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-11 11:08:07'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:08:20'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:08:20'
+}
+{
+  message: 'Cleared existing orders and quotes for development',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:08:20'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-11 11:08:20'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-11 11:08:20'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/forgotpassword',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '38',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:08:23'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-01-11 11:08:23'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-01-11 11:08:23'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeatlantic.com' ],
+  subject: 'Your AutoVista Password Reset Link',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-01-11 11:08:24'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  level: 'info',
+  message: 'Password reset email sent',
+  timestamp: '2026-01-11 11:08:24'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/forgotpassword',
+  statusCode: 200,
+  duration: '675ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:08:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:09:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '66ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:09:09'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/resetpassword',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '25',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:09:18'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  level: 'info',
+  message: 'Password reset successful',
+  timestamp: '2026-01-11 11:09:18'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/resetpassword',
+  statusCode: 200,
+  duration: '205ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:09:18'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/verify-email-2fa',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '62',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:09:27'
+}
+{
+  service: 'autovista-api',
+  templatePath: '/Users/annaharrington/Clients/McCollisters/autovista-api/src/templates/verification-code.hbs',
+  level: 'debug',
+  message: 'Loading verification code template',
+  timestamp: '2026-01-11 11:09:28'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeatlantic.com' ],
+  subject: 'Your Autovista verification code',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-01-11 11:09:28'
+}
+{
+  service: 'autovista-api',
+  recipientEmail: 'anna@periscopeatlantic.com',
+  code: '349711',
+  codeSent: '2026-01-11T18:09:28.255Z',
+  codeExpires: '2026-01-11T19:09:28.255Z',
+  expirationMinutes: 60,
+  level: 'info',
+  message: 'Verification code generated',
+  timestamp: '2026-01-11 11:09:28'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  codeSent: '2026-01-11T18:09:28.255Z',
+  codeExpires: '2026-01-11T19:09:28.255Z',
+  codeLength: 6,
+  level: 'info',
+  message: 'Verification code saved to database successfully',
+  timestamp: '2026-01-11 11:09:28'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/verify-email-2fa',
+  statusCode: 200,
+  duration: '444ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:09:28'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/login-email-2fa',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '54',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  codeProvided: '349711',
+  codeStored: '349711',
+  expirationTime: '2026-01-11T19:09:28.255Z',
+  currentTime: '2026-01-11T18:09:36.455Z',
+  timeRemainingMs: 3591800,
+  timeRemainingMinutes: 59,
+  isExpired: false,
+  level: 'debug',
+  message: 'Verifying code',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  email: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'User logged in successfully with 2FA',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/login-email-2fa',
+  statusCode: 200,
+  duration: '116ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/makes',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/makes',
+  statusCode: 404,
+  duration: '4ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  statusCode: 404,
+  duration: '2ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '45ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-11 11:09:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 404,
+  duration: '43ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-11 11:09:36'
+}

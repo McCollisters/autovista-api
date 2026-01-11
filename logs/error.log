@@ -1209,3 +1209,10 @@
   message: 'Error getting user from token',
   timestamp: '2026-01-08 21:00:23'
 }
+{
+  service: 'autovista-api',
+  error: 'invalid token',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-11 11:01:10'
+}

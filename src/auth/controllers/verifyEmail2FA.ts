@@ -88,9 +88,9 @@ export const verifyEmail2FA = async (
     }
 
     // Set verification code fields
-    user.verificationCode = result.code;
-    user.verificationCodeSent = result.codeSent;
-    user.verificationCodeExpires = result.codeExpires;
+      user.verificationCode = result.code;
+      user.verificationCodeSent = result.codeSent;
+      user.verificationCodeExpires = result.codeExpires;
 
     // Normalize status to lowercase if needed (fixes legacy data with "Active" instead of "active")
     if (user.status && user.status !== user.status.toLowerCase()) {
@@ -111,7 +111,7 @@ export const verifyEmail2FA = async (
       user.markModified("verificationCode");
       user.markModified("verificationCodeSent");
       user.markModified("verificationCodeExpires");
-      
+
       await user.save();
       
       // Verify the code was actually saved by reloading from database

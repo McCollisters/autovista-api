@@ -53,6 +53,14 @@ export const saveSDUpdatesToDB = async (order: IOrder): Promise<void> => {
       return;
     }
 
+    // Store original schedule dates to detect changes
+    const originalPickupDate = order.schedule?.pickupEstimated?.[0]
+      ? new Date(order.schedule.pickupEstimated[0]).toISOString()
+      : null;
+    const originalDeliveryDate = order.schedule?.deliveryEstimated?.[0]
+      ? new Date(order.schedule.deliveryEstimated[0]).toISOString()
+      : null;
+
     // Update order from Super Dispatch data (always update, regardless of status)
     const updatedOrder = await updateOrderFromSD(superDispatchOrder, order);
 
@@ -64,15 +72,65 @@ export const saveSDUpdatesToDB = async (order: IOrder): Promise<void> => {
       return;
     }
 
+    // Detect schedule changes before updating
+    const newPickupDate = updatedOrder.schedule?.pickupEstimated?.[0]
+      ? new Date(updatedOrder.schedule.pickupEstimated[0]).toISOString()
+      : null;
+    const newDeliveryDate = updatedOrder.schedule?.deliveryEstimated?.[0]
+      ? new Date(updatedOrder.schedule.deliveryEstimated[0]).toISOString()
+      : null;
+
+    const pickupDatesChanged =
+      originalPickupDate !== newPickupDate &&
+      (originalPickupDate !== null || newPickupDate !== null);
+    const deliveryDatesChanged =
+      originalDeliveryDate !== newDeliveryDate &&
+      (originalDeliveryDate !== null || newDeliveryDate !== null);
+
     // Update the order in database
-    await Order.findByIdAndUpdate(order._id, updatedOrder, {
+    const savedOrder = await Order.findByIdAndUpdate(order._id, updatedOrder, {
       new: true,
     });
+
+    if (!savedOrder) {
+      logger.warn("Failed to save updated order", {
+        orderRefId: order.refId,
+        tmsGuid: order.tms.guid,
+      });
+      return;
+    }
 
     logger.info("Successfully updated order from Super Dispatch", {
       orderRefId: order.refId,
       tmsGuid: order.tms.guid,
+      pickupDatesChanged,
+      deliveryDatesChanged,
     });
+
+    // Notify Acertus of schedule updates (for Autonation portal orders)
+    if (pickupDatesChanged || deliveryDatesChanged) {
+      try {
+        const { notifyOrderScheduleUpdated } = await import(
+          "@/order/integrations/acertusClient"
+        );
+        await notifyOrderScheduleUpdated(savedOrder, {
+          pickupDatesChanged,
+          deliveryDatesChanged,
+        }).catch((error) => {
+          logger.error("Failed to notify Acertus of schedule update", {
+            orderId: savedOrder._id,
+            refId: savedOrder.refId,
+            error: error instanceof Error ? error.message : String(error),
+          });
+        });
+      } catch (importError) {
+        logger.error("Failed to import Acertus client", {
+          error: importError instanceof Error
+            ? importError.message
+            : String(importError),
+        });
+      }
+    }
   } catch (error) {
     logger.error("Error in saveSDUpdatesToDB:", {
       error: error instanceof Error ? error.message : String(error),

@@ -6,7 +6,9 @@
  */
 
 import { Router, Request, Response, NextFunction } from "express";
+import { Types } from "mongoose";
 import { logger } from "@/core/logger";
+import { Order } from "@/_global/models";
 import {
   handleSuperDispatchOrderCancelled,
   handleSuperDispatchOrderPickedUp,
@@ -33,6 +35,10 @@ import {
   ICarrierCanceledPayload,
   IOfferSentPayload,
 } from "./types";
+
+// Autonation portal ID for Acertus integration
+const AUTONATION_PORTAL_ID =
+  process.env.ACERTUS_AUTONATION_PORTAL_ID || "62b89733d996a00046fe815e";
 
 const router = Router();
 
@@ -296,13 +302,30 @@ router.post("/offer-sent", async (req: Request, res: Response) => {
 // Acertus load webhook endpoint
 router.post("/vehicle-haul", async (req: Request, res: Response) => {
   try {
+    // Validate request body
+    if (!req.body) {
+      logger.error("No request body received for acertus load webhook");
+      return res.status(400).json({ error: "No request body" });
+    }
+
     logger.info("Received acertus load webhook:", {
-      body: req.body,
+      loadNumber: req.body?.load?.number,
       timestamp: new Date().toISOString(),
       userAgent: req.get("User-Agent"),
     });
 
+    // Immediately respond to avoid timeout
     res.status(200).json({ received: true });
+
+    // Process asynchronously with better error handling
+    processAcertusLoad(req.body).catch((error) => {
+      logger.error("Error processing acertus load webhook:", {
+        error: error instanceof Error ? error.message : error,
+        stack: error instanceof Error ? error.stack : undefined,
+        loadNumber: req.body?.load?.number,
+        timestamp: new Date().toISOString(),
+      });
+    });
   } catch (error) {
     logger.error("Unexpected error in acertus load webhook handler:", {
       error: error instanceof Error ? error.message : error,
@@ -316,5 +339,121 @@ router.post("/vehicle-haul", async (req: Request, res: Response) => {
     }
   }
 });
+
+/**
+ * Process Acertus load webhook data asynchronously
+ * Matches the load with an order based on portalId and zip codes
+ * Updates the order with acertusLoadNumber and acertusConnectUid
+ */
+async function processAcertusLoad(data: any): Promise<void> {
+  try {
+    // Validate webhook data
+    if (!data || !data.load || !data.load.number) {
+      logger.error("Invalid webhook data received for acertus load:", data);
+      return;
+    }
+
+    const loadNumber = data.load.number;
+    const vehicles = data.load.vehicles || [];
+
+    if (vehicles.length === 0) {
+      logger.warn("No vehicles found in acertus load webhook");
+      return;
+    }
+
+    // Get connect_uid from load or fall back to first vehicle's connect_uid
+    const connectUid =
+      data.load.connect_uid || vehicles[0]?.connect_uid || null;
+
+    // Get origin and destination zip codes from first vehicle
+    const vehicle = vehicles[0];
+    const originZip = vehicle?.origin?.zip;
+    const destinationZip = vehicle?.destination?.zip;
+
+    if (!originZip || !destinationZip) {
+      logger.warn("Missing origin or destination zip in acertus load webhook:", {
+        originZip,
+        destinationZip,
+        loadNumber,
+      });
+      return;
+    }
+
+    logger.info("Processing acertus load webhook:", {
+      loadNumber,
+      connectUid,
+      originZip,
+      destinationZip,
+    });
+
+    // Find order created in the past 30 days with matching portalId and zip codes
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    const portalObjectId = new Types.ObjectId(AUTONATION_PORTAL_ID);
+
+    const order = await Order.findOne({
+      portalId: portalObjectId,
+      "origin.address.zip": originZip,
+      "destination.address.zip": destinationZip,
+      createdAt: { $gte: thirtyDaysAgo },
+    });
+
+    if (!order) {
+      logger.warn("Order not found for acertus load webhook:", {
+        loadNumber,
+        originZip,
+        destinationZip,
+        portalId: AUTONATION_PORTAL_ID,
+      });
+      return;
+    }
+
+    logger.info(`Found order ${order.refId} for acertus load ${loadNumber}`);
+
+    // Update order with acertus load number and connect uid
+    order.acertusLoadNumber = loadNumber;
+    if (connectUid !== null) {
+      order.acertusConnectUid = connectUid;
+    }
+
+    try {
+      await order.save();
+      logger.info(
+        `Successfully updated order ${order.refId} with acertus load number ${loadNumber} and connect uid ${connectUid}`,
+      );
+    } catch (saveError) {
+      logger.error(`Failed to save order ${order.refId}:`, {
+        error:
+          saveError instanceof Error ? saveError.message : String(saveError),
+        stack: saveError instanceof Error ? saveError.stack : undefined,
+      });
+
+      // Check for specific MongoDB errors
+      if (saveError instanceof Error && "name" in saveError) {
+        if (saveError.name === "ValidationError") {
+          logger.error(
+            `Validation error for order ${order.refId}:`,
+            (saveError as any).errors,
+          );
+        } else if (saveError.name === "CastError") {
+          logger.error(
+            `Cast error for order ${order.refId}:`,
+            saveError.message,
+          );
+        }
+      }
+
+      throw saveError;
+    }
+  } catch (error) {
+    logger.error("Error in processAcertusLoad:", {
+      error: error instanceof Error ? error.message : error,
+      stack: error instanceof Error ? error.stack : undefined,
+      loadNumber: data?.load?.number,
+    });
+    throw error;
+  }
+}
 
 export default router;
