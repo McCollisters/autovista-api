@@ -8,7 +8,8 @@ export const getOrder = async (
 ): Promise<void> => {
   try {
     const { orderId } = req.params;
-    const order = await Order.findById(orderId);
+    const order = await Order.findById(orderId)
+      .populate("portalId", "companyName"); // Populate portal to get companyName
 
     if (!order) {
       return next({ statusCode: 404, message: "Order not found." });

@@ -1216,3 +1216,38 @@
   message: 'Error getting user from token',
   timestamp: '2026-01-11 11:01:10'
 }
+{
+  service: 'autovista-api',
+  error: 'invalid token',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-11 11:10:05'
+}
+{
+  service: 'autovista-api',
+  error: 'invalid token',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-11 11:10:12'
+}
+{
+  service: 'autovista-api',
+  error: 'invalid token',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-11 11:10:18'
+}
+{
+  service: 'autovista-api',
+  error: 'invalid token',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-11 11:12:37'
+}
+{
+  service: 'autovista-api',
+  error: 'invalid token',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-11 11:30:22'
+}

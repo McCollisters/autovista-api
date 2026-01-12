@@ -371,11 +371,14 @@ async function processAcertusLoad(data: any): Promise<void> {
     const destinationZip = vehicle?.destination?.zip;
 
     if (!originZip || !destinationZip) {
-      logger.warn("Missing origin or destination zip in acertus load webhook:", {
-        originZip,
-        destinationZip,
-        loadNumber,
-      });
+      logger.warn(
+        "Missing origin or destination zip in acertus load webhook:",
+        {
+          originZip,
+          destinationZip,
+          loadNumber,
+        },
+      );
       return;
     }
 

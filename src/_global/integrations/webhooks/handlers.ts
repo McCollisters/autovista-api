@@ -166,7 +166,10 @@ export const handleSuperDispatchOrderDelivered = async (
       });
     } catch (importError) {
       logger.error("Failed to import Acertus client", {
-        error: importError instanceof Error ? importError.message : String(importError),
+        error:
+          importError instanceof Error
+            ? importError.message
+            : String(importError),
       });
     }
 
@@ -363,7 +366,10 @@ export const handleSuperDispatchOrderPickedUp = async (
       });
     } catch (importError) {
       logger.error("Failed to import Acertus client", {
-        error: importError instanceof Error ? importError.message : String(importError),
+        error:
+          importError instanceof Error
+            ? importError.message
+            : String(importError),
       });
     }
 

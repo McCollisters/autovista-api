@@ -8,7 +8,10 @@ export const getQuote = async (
 ): Promise<void> => {
   try {
     const { quoteId } = req.params;
-    const quote = await Quote.findById(quoteId);
+    const quote = await Quote.findById(quoteId)
+      .populate("portalId") // Populate portal to get portal info
+      .populate("userId", "firstName lastName") // Populate user to get booking agent info
+      .lean();
 
     if (!quote) {
       return next({ statusCode: 404, message: "Quote not found." });

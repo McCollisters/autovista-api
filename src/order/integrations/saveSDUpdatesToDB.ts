@@ -1,6 +1,6 @@
 /**
  * Save Super Dispatch updates to database
- * 
+ *
  * Fetches full order details from Super Dispatch API and updates the local database.
  * This ensures comprehensive syncing of order data including pricing, vehicles, and dates.
  */
@@ -17,12 +17,16 @@ import { updateOrderFromSD } from "./updateOrderFromSD";
 export const saveSDUpdatesToDB = async (order: IOrder): Promise<void> => {
   try {
     if (!order.tms?.guid) {
-      logger.warn(`Order ${order.refId} has no Super Dispatch GUID, skipping update`);
+      logger.warn(
+        `Order ${order.refId} has no Super Dispatch GUID, skipping update`,
+      );
       return;
     }
 
     const token = await authenticateSuperDispatch();
-    const apiUrl = process.env.SUPERDISPATCH_API_URL || "https://api.shipper.superdispatch.com/v1/public";
+    const apiUrl =
+      process.env.SUPERDISPATCH_API_URL ||
+      "https://api.shipper.superdispatch.com/v1/public";
 
     const response = await fetch(`${apiUrl}/orders/${order.tms.guid}`, {
       method: "GET",
@@ -125,9 +129,10 @@ export const saveSDUpdatesToDB = async (order: IOrder): Promise<void> => {
         });
       } catch (importError) {
         logger.error("Failed to import Acertus client", {
-          error: importError instanceof Error
-            ? importError.message
-            : String(importError),
+          error:
+            importError instanceof Error
+              ? importError.message
+              : String(importError),
         });
       }
     }
@@ -140,4 +145,3 @@ export const saveSDUpdatesToDB = async (order: IOrder): Promise<void> => {
     });
   }
 };
-

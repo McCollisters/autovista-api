@@ -6,8 +6,8 @@ import {
 } from "../utils/migration-base";
 
 // Configuration constants
-const MAX_LOGS_TO_PROCESS = 500; // Set to null or undefined to process all logs
-const TEST_LOG_ID = "68cdea765c3394575ba5e7dc"; // Set to test a specific log ID
+const MAX_LOGS_TO_PROCESS: number | null = null; // Set to null or undefined to process all logs, or a number to limit
+const TEST_LOG_ID: string | null = null; // Set to a specific log ID to test, or null to process all
 
 /**
  * Interface for old log structure
@@ -42,17 +42,28 @@ interface OldLog {
 
 /**
  * Notification template name mapping
+ * Maps old email template names to new notification field names
  */
 const NOTIFICATION_TEMPLATE_MAP: Record<string, string> = {
+  // Agent confirmations
   "Pickup Confirmation": "agentsPickupConfirmation",
   "Delivery Confirmation": "agentsDeliveryConfirmation",
-  OrderTransferee: "customerConfirmation",
   "Order Agent": "agentsConfirmation",
-  "Customer Survey": "survey",
-  "COD Payment Request": "paymentRequest",
-  "Customer Survey Reminder": "surveyReminder",
+  
+  // Customer confirmations
+  "Order Transferee": "customerConfirmation",
   "Order Transferee Signature": "signatureRequest",
-  // Add more mappings as needed
+  
+  // Surveys
+  "Customer Survey": "survey",
+  "Customer Survey Reminder": "surveyReminder",
+  
+  // Payment requests
+  "COD Payment Request": "paymentRequest",
+  "Payment Request": "paymentRequest",
+  
+  // Note: Some template names may not have direct mappings
+  // These will be logged as warnings but won't cause the migration to fail
 };
 
 export class NotificationLogMigration extends MigrationBase {
@@ -73,12 +84,65 @@ export class NotificationLogMigration extends MigrationBase {
         return this.createSuccessResult("No logs found to migrate");
       }
 
+      // Group logs by order and notification type to handle duplicates
+      // This ensures we keep the most recent log for each notification type per order
+      const logsByOrderAndType = new Map<string, Map<string, OldLog>>();
+      
+      for (const log of logs) {
+        const orderId = this.extractOrderId(log);
+        if (!orderId) continue;
+        
+        const notificationField = NOTIFICATION_TEMPLATE_MAP[log.templateName];
+        if (!notificationField) continue;
+        
+        const key = `${orderId}:${notificationField}`;
+        if (!logsByOrderAndType.has(orderId)) {
+          logsByOrderAndType.set(orderId, new Map());
+        }
+        
+        const orderLogs = logsByOrderAndType.get(orderId)!;
+        const existingLog = orderLogs.get(notificationField);
+        
+        // Keep the most recent log (by sent date, or createdAt if sent is not available)
+        if (!existingLog) {
+          orderLogs.set(notificationField, log);
+        } else {
+          const existingDate = existingLog.sent?.$date 
+            ? new Date(existingLog.sent.$date).getTime()
+            : existingLog.createdAt?.$date 
+            ? new Date(existingLog.createdAt.$date).getTime()
+            : 0;
+          
+          const currentDate = log.sent?.$date
+            ? new Date(log.sent.$date).getTime()
+            : log.createdAt?.$date
+            ? new Date(log.createdAt.$date).getTime()
+            : 0;
+          
+          if (currentDate > existingDate) {
+            orderLogs.set(notificationField, log);
+          }
+        }
+      }
+
+      // Flatten the grouped logs back to an array for processing
+      const logsToProcess: OldLog[] = [];
+      for (const [orderId, orderLogs] of logsByOrderAndType.entries()) {
+        for (const log of orderLogs.values()) {
+          logsToProcess.push(log);
+        }
+      }
+
+      console.log(
+        `📊 Grouped ${logs.length} logs into ${logsToProcess.length} unique order:notification pairs`,
+      );
+
       // Process logs in batches
       let ordersFound = 0;
       let ordersNotFound = 0;
 
       const result = await MigrationUtils.batchProcess(
-        logs,
+        logsToProcess,
         async (log: OldLog, index: number) => {
           try {
             const logResult = await this.processLog(log, destDb);
@@ -134,9 +198,11 @@ export class NotificationLogMigration extends MigrationBase {
       console.log(`🔍 Test mode: Looking for log with ID ${TEST_LOG_ID}`);
       query = { _id: new ObjectId(TEST_LOG_ID) };
     } else {
-      // Normal mode: get logs by template name
+      // Normal mode: get all logs with template names (we'll filter unknown ones during processing)
+      // This ensures we don't miss any logs that might have template names not yet in the map
       query = {
-        templateName: { $in: Object.keys(NOTIFICATION_TEMPLATE_MAP) },
+        templateName: { $exists: true, $ne: null },
+        order: { $exists: true, $ne: null },
       };
     }
 
@@ -146,8 +212,29 @@ export class NotificationLogMigration extends MigrationBase {
       .sort({ createdAt: -1 }) // Sort by createdAt in descending order (newest first)
       .limit(TEST_LOG_ID ? 1 : MAX_LOGS_TO_PROCESS || 0)
       .toArray();
+    
+    console.log(`📊 Found ${logs.length} logs from database query`);
 
     return logs as unknown as OldLog[];
+  }
+
+  /**
+   * Extract order ID from log
+   */
+  private extractOrderId(log: OldLog): string | null {
+    if (!log.order) {
+      return null;
+    }
+
+    if (typeof log.order === "string") {
+      return log.order;
+    } else if (log.order?.$oid) {
+      return log.order.$oid;
+    } else if (log.order?.toString) {
+      // Handle ObjectId objects
+      return log.order.toString();
+    }
+    return null;
   }
 
   /**
@@ -166,46 +253,19 @@ export class NotificationLogMigration extends MigrationBase {
       );
     }
 
-    // Check if order exists and is valid
-    if (!log.order) {
+    // Extract order ID
+    const orderId = this.extractOrderId(log);
+    if (!orderId) {
       console.log(
-        `⚠️  Log ${log._id?.$oid || log._id} has no order field. Order value:`,
+        `⚠️  Log ${log._id?.$oid || log._id} has no valid order field. Order value:`,
         JSON.stringify(log.order),
       );
       return "error";
-    }
-
-    // Extract order ID - handle ObjectId, string, and ObjectId format
-    if (TEST_LOG_ID) {
-      console.log(`🔍 Debug - log.order:`, log.order);
-      console.log(`🔍 Debug - typeof log.order:`, typeof log.order);
-      console.log(`🔍 Debug - log.order.$oid:`, log.order?.$oid);
-      console.log(`🔍 Debug - log.order.toString():`, log.order?.toString());
-    }
-
-    let orderId: string;
-    if (typeof log.order === "string") {
-      orderId = log.order;
-    } else if (log.order?.$oid) {
-      orderId = log.order.$oid;
-    } else if (log.order?.toString) {
-      // Handle ObjectId objects
-      orderId = log.order.toString();
-    } else {
-      orderId = "";
     }
 
     if (TEST_LOG_ID) {
       console.log(`🔍 Debug - extracted orderId:`, orderId);
       console.log(`🔍 Debug - orderId truthy:`, !!orderId);
-    }
-
-    if (!orderId) {
-      console.log(
-        `⚠️  Log ${log._id?.$oid || log._id} has invalid order ID. Order value:`,
-        JSON.stringify(log.order),
-      );
-      return "error";
     }
 
     // Find the corresponding order in destination database
@@ -298,7 +358,13 @@ export class NotificationLogMigration extends MigrationBase {
     // Map template name to notification field
     const notificationField = NOTIFICATION_TEMPLATE_MAP[log.templateName];
     if (!notificationField) {
-      console.log(`⚠️  Unknown template name: ${log.templateName}`);
+      // Log unknown template names but don't fail - they may be old/unused templates
+      if (TEST_LOG_ID || Math.random() < 0.1) {
+        // Log 10% of unknown templates for visibility
+        console.log(
+          `⚠️  Unknown template name "${log.templateName}" for log ${log._id?.$oid || log._id}. Skipping.`,
+        );
+      }
       return "error";
     }
 

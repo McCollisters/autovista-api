@@ -2,11 +2,8 @@ import express from "express";
 import { Order } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
-import ObjectsToCsv from "objects-to-csv";
 import { format } from "date-fns";
-import { unlinkSync } from "fs";
-import { join } from "path";
-import { tmpdir } from "os";
+import { Types } from "mongoose";
 
 /**
  * POST /orders/export
@@ -28,19 +25,146 @@ export const exportOrders = async (
       });
     }
 
-    const { orderIds } = req.body;
+    // Get filter parameters from request body (same as getOrders query params)
+    const {
+      portalId,
+      selectedPortalId,
+      searchText,
+      dateStart,
+      dateEnd,
+      orderTableStatus,
+    } = req.body;
 
-    if (!orderIds || !Array.isArray(orderIds) || orderIds.length === 0) {
-      return next({
-        statusCode: 400,
-        message: "Order IDs are required.",
-      });
+    // Build query criteria (same logic as getOrders)
+    const query: any = {};
+
+    // Role-based filtering
+    if (authUser.role === "portal_admin") {
+      query.portalId = authUser.portalId;
+    } else if (authUser.role === "portal_user") {
+      query.userId = authUser._id;
+      query.portalId = authUser.portalId;
+    }
+    // platform_admin and platform_user can see all orders (no restriction)
+
+    // Portal filtering
+    let finalPortalId = portalId || selectedPortalId;
+    if (finalPortalId && finalPortalId !== "all") {
+      if (
+        authUser.role === "platform_admin" ||
+        authUser.role === "platform_user"
+      ) {
+        try {
+          query.portalId = new Types.ObjectId(finalPortalId as string);
+        } catch (error) {
+          logger.error("Invalid portalId format", {
+            portalId: finalPortalId,
+            error: error instanceof Error ? error.message : error,
+          });
+        }
+      }
     }
 
-    // Find orders
-    const orders = await Order.find({
-      _id: { $in: orderIds },
-    })
+    // Search text handling
+    if (searchText) {
+      const searchStr = (searchText as string).toLowerCase();
+
+      if (/^\d+$/.test(searchStr)) {
+        query.refId = parseInt(searchStr, 10);
+      } else if (/^m-\d+$/i.test(searchStr) || /^u-\d+$/i.test(searchStr)) {
+        const numPart = searchStr.replace(/^[mu]-/i, "");
+        if (/^\d+$/.test(numPart)) {
+          query.refId = parseInt(numPart, 10);
+        }
+      } else {
+        const regexPattern = new RegExp(searchStr, "i");
+        query.$or = [
+          { "origin.address.address": { $regex: regexPattern } },
+          { "origin.address.city": { $regex: regexPattern } },
+          { "origin.address.state": { $regex: regexPattern } },
+          { "origin.address.zip": { $regex: regexPattern } },
+          { "destination.address.address": { $regex: regexPattern } },
+          { "destination.address.city": { $regex: regexPattern } },
+          { "destination.address.state": { $regex: regexPattern } },
+          { "destination.address.zip": { $regex: regexPattern } },
+          { "customer.name": { $regex: regexPattern } },
+          { "customer.email": { $regex: regexPattern } },
+          { "customer.companyName": { $regex: regexPattern } },
+          {
+            vehicles: {
+              $elemMatch: {
+                $or: [
+                  { make: { $regex: regexPattern } },
+                  { model: { $regex: regexPattern } },
+                ],
+              },
+            },
+          },
+        ];
+      }
+    }
+
+    // Date filtering
+    if (dateStart || dateEnd) {
+      query["schedule.pickupSelected"] = {};
+      if (dateStart) {
+        const startDate = new Date(dateStart as string);
+        startDate.setUTCHours(0, 0, 0, 0);
+        query["schedule.pickupSelected"].$gte = startDate;
+      }
+      if (dateEnd) {
+        const endDate = new Date(dateEnd as string);
+        endDate.setUTCHours(23, 59, 59, 999);
+        query["schedule.pickupSelected"].$lte = endDate;
+      }
+    }
+
+    // Status filtering (orderTableStatus)
+    if (orderTableStatus) {
+      const statusFilters = Array.isArray(orderTableStatus)
+        ? orderTableStatus
+        : [orderTableStatus];
+
+      const statusConditions: any[] = [];
+
+      statusFilters.forEach((status) => {
+        if (status === "New") {
+          statusConditions.push({
+            status: { $in: ["booked", "active"] },
+          });
+        } else if (status === "Picked Up") {
+          statusConditions.push({
+            "schedule.pickupCompleted": { $exists: true, $ne: null },
+            $or: [
+              { "schedule.deliveryCompleted": { $exists: false } },
+              { "schedule.deliveryCompleted": null },
+            ],
+          });
+        } else if (status === "Delivered") {
+          statusConditions.push({
+            status: "complete",
+            "schedule.deliveryCompleted": { $exists: true, $ne: null },
+          });
+        }
+      });
+
+      if (statusConditions.length > 0) {
+        if (statusConditions.length === 1) {
+          Object.assign(query, statusConditions[0]);
+        } else {
+          if (query.$or) {
+            const existingOr = query.$or;
+            delete query.$or;
+            query.$and = [{ $or: existingOr }, { $or: statusConditions }];
+          } else {
+            query.$or = statusConditions;
+          }
+        }
+      }
+    }
+
+    // Find all orders matching the query (no pagination)
+    const orders = await Order.find(query)
       .populate("portalId")
       .sort({ refId: 1 })
       .lean();
@@ -156,7 +280,7 @@ export const exportOrders = async (
     // Add totals row at the beginning
     const csvData = [
       {
-        id: "TOTAL",
+        id: null,
         reg: null,
         company_name: null,
         customer_name: null,
@@ -164,7 +288,7 @@ export const exportOrders = async (
         pickup_date: null,
         agents: null,
         miles: null,
-        vehicles: null,
+        vehicles: "TOTAL",
         mccollisters_rate: grandTotalMCRate - grandTotalOversize - grandTotalFuel,
         company_tariff: grandTotalCompanyTariff,
         commission: grandTotalCommission,
@@ -175,23 +299,9 @@ export const exportOrders = async (
       ...formattedOrders,
     ];
 
-    // Generate CSV
-    const csv = new ObjectsToCsv(csvData);
-    const filePath = join(tmpdir(), `orders-${Date.now()}.csv`);
-    await csv.toDisk(filePath);
-
-    // Send file and delete after download
-    res.download(filePath, "orders.csv", (err) => {
-      if (err) {
-        logger.error("Error downloading CSV file", { error: err });
-      }
-      // Clean up file
-      try {
-        unlinkSync(filePath);
-      } catch (unlinkErr) {
-        logger.error("Error deleting temporary CSV file", { error: unlinkErr });
-      }
-    });
+    // Return JSON data for frontend CSVLink component
+    // The frontend will handle the CSV generation and download
+    res.status(200).json(csvData);
 
     logger.info(`User ${authUser.email} exported ${orders.length} orders`);
   } catch (error) {

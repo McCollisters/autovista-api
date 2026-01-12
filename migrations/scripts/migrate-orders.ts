@@ -5,7 +5,7 @@ import {
 } from "../utils/migration-base";
 
 // Configuration constants
-const MAX_ORDERS_TO_PROCESS = 250; // Set to null or undefined to process all orders
+const MAX_ORDERS_TO_PROCESS: number | null = null; // Set to null or undefined to process all orders
 
 /**
  * Order Migration Script
@@ -449,7 +449,7 @@ export class OrderMigration extends MigrationBase {
 
       // Transform vehicles
       vehicles: oldOrder.vehicles.map((vehicle) =>
-        this.transformVehicle(vehicle),
+        this.transformVehicle(vehicle, oldOrder.transportType),
       ),
 
       // Transform totalPricing
@@ -463,15 +463,21 @@ export class OrderMigration extends MigrationBase {
         pickupSelected: oldOrder.pickup.pickupScheduledAt || new Date(),
         pickupEstimated: this.getPickupEstimated(oldOrder.pickup),
         deliveryEstimated: this.getDeliveryEstimated(oldOrder.delivery),
-        pickupCompleted: oldOrder.pickup.pickupAdjustedDate || null,
-        deliveryCompleted: oldOrder.delivery.deliveryAdjustedDate || null,
+        pickupCompleted:
+          oldOrder.orderTablePickupActual ||
+          oldOrder.pickup.pickupAdjustedDate ||
+          null,
+        deliveryCompleted:
+          oldOrder.orderTableDeliveryActual ||
+          oldOrder.delivery.deliveryAdjustedDate ||
+          null,
         notes: "",
       },
 
       // Add new required fields with defaults
       bookedAt: oldOrder.createdAt ? new Date(oldOrder.createdAt) : new Date(),
       isDirect: oldOrder.isCustomerPortal || false,
-      reg: oldOrder.reg || 0,
+      reg: oldOrder.reg || null, // reg should never be 0, use null if not present
       hasAcceptedTerms: oldOrder.termsAccepted || false,
       hasPaid: oldOrder.paid || false,
       tms: {
@@ -500,7 +506,7 @@ export class OrderMigration extends MigrationBase {
     return transformedOrder;
   }
 
-  private transformVehicle(oldVehicle: any): any {
+  private transformVehicle(oldVehicle: any, transportType?: string): any {
     return {
       make: oldVehicle.make,
       model: oldVehicle.model,
@@ -510,30 +516,41 @@ export class OrderMigration extends MigrationBase {
       isInoperable:
         oldVehicle.operable === "false" || oldVehicle.operableBool === false,
       pricingClass: this.normalizePricingClass(oldVehicle.pricingClass),
-      pricing: this.transformVehiclePricing(oldVehicle),
+      pricing: this.transformVehiclePricing(oldVehicle, transportType),
     };
   }
 
-  private transformVehiclePricing(oldVehicle: any): any {
+  private transformVehiclePricing(
+    oldVehicle: any,
+    transportType?: string,
+  ): any {
     const oldPricing = oldVehicle.pricing;
+    const isOpenTransport = transportType?.toLowerCase() === "open";
+
+    // Calculate oversize modifier
+    const oversizeModifier =
+      (oldPricing.vanMarkup || 0) +
+      (oldPricing.pickupMarkup || 0) +
+      (oldPricing.suvMarkup || 0);
+
+    // Base price should exclude all modifiers (including oversize)
+    // If oversize exists, subtract it from baseQuote to ensure base excludes all modifiers
+    const base = Math.max(0, (oldPricing.baseQuote || 0) - oversizeModifier);
 
     return {
-      base: oldPricing.baseQuote || 0,
+      base,
       modifiers: {
         inoperable: oldPricing.inoperableMarkup || 0,
         routes: 0, // Not available in old structure
         states: 0, // Not available in old structure
-        oversize:
-          (oldPricing.vanMarkup || 0) +
-          (oldPricing.pickupMarkup || 0) +
-          (oldPricing.suvMarkup || 0),
+        oversize: oversizeModifier,
         vehicles: 0, // Not available in old structure
         globalDiscount: oldPricing.discount || 0,
         portalDiscount: 0, // Not available in old structure
         irr: oldPricing.irrMarkup || 0,
         fuel: oldPricing.fuelMarkup || 0,
-        enclosedFlat: oldPricing.enclosedMarkup || 0,
-        enclosedPercent: oldPricing.enclosedModifier || 0,
+        enclosedFlat: isOpenTransport ? 0 : oldPricing.enclosedMarkup || 0,
+        enclosedPercent: isOpenTransport ? 0 : oldPricing.enclosedModifier || 0,
         commission: oldPricing.commission || 0,
         serviceLevel: oldPricing.serviceLevelMarkup || 0,
         companyTariff: this.getCompanyTariff(oldPricing),
@@ -545,10 +562,26 @@ export class OrderMigration extends MigrationBase {
 
   private transformTotalPricing(oldOrder: any): any {
     const oldPricing = oldOrder.totalPricing;
+    const isOpenTransport = oldOrder.transportType?.toLowerCase() === "open";
 
-    // Calculate base from vehicles
+    // Calculate oversize modifier
+    const totalOversizeModifier =
+      (oldPricing.totalVanMarkup || 0) +
+      (oldPricing.totalPickupMarkup || 0) +
+      (oldPricing.totalSuvMarkup || 0);
+
+    // Calculate base from vehicles (after subtracting oversize from each vehicle's baseQuote)
+    // Base price should exclude all modifiers (including oversize)
     const base = oldOrder.vehicles.reduce((sum: number, vehicle: any) => {
-      return sum + (vehicle.pricing.baseQuote || 0);
+      const vehicleOversize =
+        (vehicle.pricing.vanMarkup || 0) +
+        (vehicle.pricing.pickupMarkup || 0) +
+        (vehicle.pricing.suvMarkup || 0);
+      const vehicleBase = Math.max(
+        0,
+        (vehicle.pricing.baseQuote || 0) - vehicleOversize,
+      );
+      return sum + vehicleBase;
     }, 0);
 
     return {
@@ -557,17 +590,14 @@ export class OrderMigration extends MigrationBase {
         inoperable: oldPricing.totalInoperableMarkup || 0,
         routes: 0, // Not available in old structure
         states: 0, // Not available in old structure
-        oversize:
-          (oldPricing.totalVanMarkup || 0) +
-          (oldPricing.totalPickupMarkup || 0) +
-          (oldPricing.totalSuvMarkup || 0),
+        oversize: totalOversizeModifier,
         vehicles: 0, // Not available in old structure
         globalDiscount: oldPricing.totalDiscount || 0,
         portalDiscount: 0, // Not available in old structure
         irr: oldPricing.totalIrrMarkup || 0,
         fuel: oldPricing.totalFuelMarkup || 0,
-        enclosedFlat: oldPricing.totalEnclosedMarkup || 0,
-        enclosedPercent: 0, // Not available in old structure
+        enclosedFlat: isOpenTransport ? 0 : oldPricing.totalEnclosedMarkup || 0,
+        enclosedPercent: isOpenTransport ? 0 : 0, // Not available in old structure, but set to 0 for OPEN
         commission: oldPricing.totalCommission || 0,
         serviceLevel: this.getServiceLevel(oldOrder),
         companyTariff: this.getTotalCompanyTariff(oldPricing),
@@ -749,7 +779,8 @@ export class OrderMigration extends MigrationBase {
 
   private calculateOntimePickup(oldOrder: any): boolean | null {
     const pickupEndsAt = oldOrder.pickup.pickupScheduledEndsAt;
-    const pickupCompleted = oldOrder.pickup.pickupAdjustedDate;
+    const pickupCompleted =
+      oldOrder.orderTablePickupActual || oldOrder.pickup.pickupAdjustedDate;
 
     // If no pickup completed date, return null
     if (!pickupCompleted) {
@@ -771,7 +802,9 @@ export class OrderMigration extends MigrationBase {
 
   private calculateOntimeDelivery(oldOrder: any): boolean | null {
     const deliveryEndsAt = oldOrder.delivery.deliveryScheduledEndsAt;
-    const deliveryCompleted = oldOrder.delivery.deliveryAdjustedDate;
+    const deliveryCompleted =
+      oldOrder.orderTableDeliveryActual ||
+      oldOrder.delivery.deliveryAdjustedDate;
 
     // If no delivery completed date, return null
     if (!deliveryCompleted) {

@@ -28,6 +28,7 @@ import quoteRoutes from "@/quote/routes";
 import { getQuotes } from "@/quote/controllers/getQuotes";
 import orderRoutes from "@/order/routes";
 import { getOrders } from "@/order/controllers/getOrders";
+import { exportOrders } from "@/order/controllers/exportOrders";
 import notificationRoutes from "@/notification/routes";
 import authRoutes from "@/auth/routes";
 import integrationRoutes from "@/integration/routes";
@@ -106,11 +107,12 @@ const startServer = async () => {
     //  sendMessage();
 
     // Clear existing data (development only)
-    if (config.nodeEnv === "development") {
-      await Order.deleteMany({});
-      await Quote.deleteMany({});
-      logger.info("Cleared existing orders and quotes for development");
-    }
+    // DISABLED: This was wiping all orders and quotes on server restart
+    // if (config.nodeEnv === "development") {
+    //   await Order.deleteMany({});
+    //   await Quote.deleteMany({});
+    //   logger.info("Cleared existing orders and quotes for development");
+    // }
 
     // Apply security middleware
     app.use(helmetConfig);
@@ -137,7 +139,7 @@ const startServer = async () => {
     app.use("/api/v1/quote", quoteRoutes);
     // Quotes listing endpoint (plural)
     app.get("/api/v1/quotes", getQuotes);
-    
+
     // Log registered routes for debugging
     logger.info("API routes registered", {
       routes: [
@@ -152,6 +154,8 @@ const startServer = async () => {
     app.use("/api/v1/order", orderRoutes);
     // Orders listing endpoint (plural)
     app.get("/api/v1/orders", getOrders);
+    // Orders export endpoint (plural, to match frontend)
+    app.post("/api/v1/orders/export", exportOrders);
     app.use("/api/v1/notifications", notificationRoutes);
     app.use("/api/v1/auth", authRoutes);
     app.use("/api/v1/integration", integrationRoutes);

@@ -24,11 +24,13 @@ export const getUserFromToken = async (
       return null;
     }
 
-    // Support both "Bearer <token>" and "jwt <token>" formats
+    // Support "Bearer <token>", "JWT <token>", and "jwt <token>" formats
     let token: string | null = null;
 
     if (authHeader.startsWith("Bearer ")) {
       token = authHeader.slice(7);
+    } else if (authHeader.startsWith("JWT ")) {
+      token = authHeader.slice(4);
     } else if (authHeader.startsWith("jwt ")) {
       token = authHeader.slice(4);
     } else {
@@ -74,4 +76,3 @@ export const getUserFromToken = async (
     return null;
   }
 };
-
