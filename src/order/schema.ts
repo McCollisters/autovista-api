@@ -1,4 +1,4 @@
-import mongoose, { Document, Types } from "mongoose";
+import mongoose, { Document, Types, Schema as MongooseSchema } from "mongoose";
 import {
   createSchema,
   createReferenceField,
@@ -316,6 +316,32 @@ const orderSchemaDefinition = {
 };
 
 const orderSchema = createSchema<IOrder>(orderSchemaDefinition);
+
+// Add pre-save middleware to ensure portalId and userId are ObjectIds
+orderSchema.pre("save", function (this: IOrder, next: () => void) {
+  // Ensure portalId is an ObjectId
+  if (this.portalId && typeof this.portalId === "string") {
+    if (mongoose.Types.ObjectId.isValid(this.portalId)) {
+      this.portalId = new mongoose.Types.ObjectId(this.portalId) as any;
+    }
+  }
+
+  // Ensure userId is an ObjectId
+  if (this.userId && typeof this.userId === "string") {
+    if (mongoose.Types.ObjectId.isValid(this.userId)) {
+      this.userId = new mongoose.Types.ObjectId(this.userId) as any;
+    }
+  }
+
+  // Ensure quoteId is an ObjectId
+  if (this.quoteId && typeof this.quoteId === "string") {
+    if (mongoose.Types.ObjectId.isValid(this.quoteId)) {
+      this.quoteId = new mongoose.Types.ObjectId(this.quoteId) as any;
+    }
+  }
+
+  next();
+});
 
 // Model is exported from model.ts file
 export { orderSchema };

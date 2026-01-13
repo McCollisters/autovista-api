@@ -1251,3 +1251,298 @@
   message: 'Error getting user from token',
   timestamp: '2026-01-11 11:30:22'
 }
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `saved` is not a valid enum value for path `status`., userId: Path `userId` is required.',
+  quoteId: '6963224b0c994e31f61479f9',
+  transportType: 'whiteglove',
+  level: 'error',
+  message: 'Error recalculating existing quote',
+  timestamp: '2026-01-11 23:19:33'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `saved` is not a valid enum value for path `status`., userId: Path `userId` is required.',
+  quoteId: '6963224b0c994e31f61479f9',
+  transportType: 'whiteglove',
+  level: 'error',
+  message: 'Error recalculating existing quote',
+  timestamp: '2026-01-11 23:19:35'
+}
+{
+  service: 'autovista-api',
+  error: 'stdout maxBuffer length exceeded',
+  output: '\n' +
+    '> autovista-api@1.0.0 migrate:all\n' +
+    '> tsx -r dotenv/config migrations/scripts/migrate-all.ts\n' +
+    '\n' +
+    '🚀 Starting MASTER MIGRATION - All Collections\n' +
+    '================================================================================\n' +
+    '\n' +
+    '================================================================================\n' +
+    '🔄 Running Portals Migration...\n' +
+    '================================================================================\n' +
+    '\n' +
+    '🚀 Starting migration: PortalMigration\n' +
+    '📅 Started at: 2026-01-12T11:30:00.726Z\n' +
+    '✅ Connected to source MongoDB: /autovista:JbRiklNH55q67w7p@cluster0.w7vu8.mongodb.net/prod\n' +
+    '✅ Connected to destination MongoDB: /anna:K1lXzftA6NpMpwM6@autovista.nzynb.mongodb.net/prod\n' +
+    '🔄 Running portal migration UP...\n' +
+    '📦 Found 110 portals in source database\n' +
+    '📊 Processing 15 portals (limit: 15)\n' +
+    '📦 Retrieved 15 portals to migrate\n' +
+    '🔍 Portal 69610aa5d4a09b1d70b59f09 has no custom rates\n' +
+    '📊 Processed 1/15 portals\n' +
+    '🔍 Portal 693b29b84c96521585c6d35d has no custom rates\n' +
+    '📊 Processed 1/15 portals\n' +
+    '🔍 Portal 68a352efc6cb9ac0c697b9ff has no custom rates\n' +
+    '📊 Processed 1/15 portals\n' +
+    '🔍 Portal 689ccc328036672c0d18be70 has no custom rates\n' +
+    '📊 Processed 1/15 portals\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '📊 Processed 1/15 portals\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a hasCustomRates flag: true\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '📊 Processed 1/15 portals\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '📊 Processed 1/15 portals\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '📊 Processed 1/15 portals\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '📊 Processed 1/15 portals\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '📊 Processed 1/15 portals\n' +
+    'Processed batch 1/2\n' +
+    '🔍 Portal 682b7ce75d41840a4ecc6037 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7ce75d41840a4ecc6037 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7ce75d41840a4ecc6037 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: "... 977724 more characters,
+  code: 'ERR_CHILD_PROCESS_STDIO_MAXBUFFER',
+  level: 'error',
+  message: '❌ Scheduled migration job failed',
+  timestamp: '2026-01-12 05:45:40'
+}

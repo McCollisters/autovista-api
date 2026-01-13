@@ -24,39 +24,50 @@ export const recalculateExistingQuote = async (
 
     const portal = quote.portalId as any;
 
-    // Update transport type
-    quote.transportType = transportType;
+    // Get vehicles as plain objects (like createQuote does)
+    const vehicles = quote.vehicles.map((v: any) => {
+      const vehicle = v.toObject ? v.toObject() : v;
+      return vehicle;
+    });
 
     // Recalculate miles if needed
+    let miles = quote.miles || 0;
     if (quote.origin?.coordinates && quote.destination?.coordinates) {
-      const miles = await getMiles(
+      miles = await getMiles(
         [parseFloat(quote.origin.coordinates.lat), parseFloat(quote.origin.coordinates.long)],
         [parseFloat(quote.destination.coordinates.lat), parseFloat(quote.destination.coordinates.long)],
       );
-      quote.miles = miles;
     }
 
-    // Update vehicles with new pricing
+    // Update vehicles with new pricing (like createQuote does - vehicles don't need transportType set)
+    const commission = (quote.totalPricing?.modifiers?.commission) || 0;
     const vehiclesWithPricing = await updateVehiclesWithPricing({
-      vehicles: quote.vehicles,
-      miles: quote.miles || 0,
+      vehicles,
+      miles,
       origin: quote.origin?.validated || '',
       destination: quote.destination?.validated || '',
       portal,
-      commission: (quote as any).commission || 0,
+      commission,
     });
-
-    quote.vehicles = vehiclesWithPricing;
 
     // Recalculate total pricing
     const totalPricing = await calculateTotalPricing(
       vehiclesWithPricing,
       portal,
     );
-    quote.totalPricing = totalPricing;
 
-    // Save updated quote
-    await quote.save();
+    // Update quote using updateOne to avoid validation issues (like createQuote creates new quote)
+    await Quote.updateOne(
+      { _id: quoteId },
+      {
+        $set: {
+          transportType,
+          vehicles: vehiclesWithPricing,
+          totalPricing,
+          miles,
+        },
+      }
+    );
 
     logger.info("Recalculated existing quote", {
       quoteId: quote._id,
@@ -64,7 +75,13 @@ export const recalculateExistingQuote = async (
       transportType,
     });
 
-    return quote;
+    // Populate and return quote in same format as getQuote
+    const populatedQuote = await Quote.findById(quoteId)
+      .populate("portalId")
+      .populate("userId", "firstName lastName")
+      .lean();
+
+    return populatedQuote;
   } catch (error) {
     logger.error("Error recalculating existing quote", {
       error: error instanceof Error ? error.message : error,

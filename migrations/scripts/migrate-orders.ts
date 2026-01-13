@@ -3,6 +3,7 @@ import {
   MigrationResult,
   MigrationUtils,
 } from "../utils/migration-base";
+import { Types } from "mongoose";
 
 // Configuration constants
 const MAX_ORDERS_TO_PROCESS: number | null = null; // Set to null or undefined to process all orders
@@ -374,6 +375,18 @@ export class OrderMigration extends MigrationBase {
     }
   }
 
+  /**
+   * Convert a value to ObjectId if it's a string, otherwise return as-is
+   */
+  private convertToObjectId(value: any): any {
+    if (!value) return value;
+    if (value instanceof Types.ObjectId) return value;
+    if (typeof value === "string" && Types.ObjectId.isValid(value)) {
+      return new Types.ObjectId(value);
+    }
+    return value;
+  }
+
   private transformOrder(oldOrder: OldOrder): any {
     const transformedOrder: any = {
       // Preserve existing fields
@@ -384,9 +397,9 @@ export class OrderMigration extends MigrationBase {
         (oldOrder._id ? parseInt(oldOrder._id.toString()) : 0) ||
         0,
       status: this.determineOrderStatus(oldOrder),
-      portalId: oldOrder.portalId,
-      userId: oldOrder.userId,
-      quoteId: oldOrder.quote,
+      portalId: this.convertToObjectId(oldOrder.portalId),
+      userId: this.convertToObjectId(oldOrder.userId),
+      quoteId: this.convertToObjectId(oldOrder.quote),
       miles: oldOrder.miles,
       transitTime: oldOrder.transitTime || [],
       paymentType: oldOrder.paymentType?.toLowerCase() || "cod",

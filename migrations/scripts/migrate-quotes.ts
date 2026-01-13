@@ -3,6 +3,7 @@ import {
   MigrationResult,
   MigrationUtils,
 } from "../utils/migration-base";
+import { Types } from "mongoose";
 
 // Configuration constants
 const MAX_QUOTES_TO_PROCESS: number | null = null; // Set to null or undefined to process all quotes
@@ -243,6 +244,44 @@ export class QuoteMigration extends MigrationBase {
           try {
             const transformedQuote = this.transformQuote(quote);
 
+            // Check if quote already exists in destination and preserve white glove values
+            const existingQuote = await destinationQuotesCollection.findOne({
+              _id: quote._id,
+            });
+
+            // If quote exists in destination and has white glove pricing, preserve it
+            if (existingQuote) {
+              const existingWhiteGlove =
+                existingQuote.totalPricing?.totals?.whiteGlove;
+              const existingVehicleWhiteGlove = existingQuote.vehicles?.map(
+                (v: any) => v.pricing?.totals?.whiteGlove || 0,
+              );
+
+              // Preserve white glove values if they exist and are greater than 0
+              if (existingWhiteGlove && existingWhiteGlove > 0) {
+                transformedQuote.totalPricing.totals.whiteGlove =
+                  existingWhiteGlove;
+              }
+
+              // Preserve vehicle-level white glove values if they exist
+              if (
+                existingVehicleWhiteGlove &&
+                existingVehicleWhiteGlove.length > 0 &&
+                transformedQuote.vehicles &&
+                transformedQuote.vehicles.length === existingVehicleWhiteGlove.length
+              ) {
+                transformedQuote.vehicles.forEach((vehicle: any, idx: number) => {
+                  if (
+                    existingVehicleWhiteGlove[idx] &&
+                    existingVehicleWhiteGlove[idx] > 0
+                  ) {
+                    vehicle.pricing.totals.whiteGlove =
+                      existingVehicleWhiteGlove[idx];
+                  }
+                });
+              }
+            }
+
             // Replace or insert the transformed quote into destination database
             // This will overwrite existing quotes with the same _id
             const replaceResult = await destinationQuotesCollection.replaceOne(
@@ -307,14 +346,26 @@ export class QuoteMigration extends MigrationBase {
     }
   }
 
+  /**
+   * Convert a value to ObjectId if it's a string, otherwise return as-is
+   */
+  private convertToObjectId(value: any): any {
+    if (!value) return value;
+    if (value instanceof Types.ObjectId) return value;
+    if (typeof value === "string" && Types.ObjectId.isValid(value)) {
+      return new Types.ObjectId(value);
+    }
+    return value;
+  }
+
   private transformQuote(oldQuote: OldQuote): any {
     const transformedQuote: any = {
       // Preserve existing fields
       _id: oldQuote._id,
       refId: oldQuote.refId || oldQuote.uniqueId,
       status: oldQuote.status.toLowerCase(),
-      portalId: oldQuote.portalId,
-      userId: oldQuote.userId,
+      portalId: this.convertToObjectId(oldQuote.portalId),
+      userId: this.convertToObjectId(oldQuote.userId),
 
       // Transform customer information
       customer: {

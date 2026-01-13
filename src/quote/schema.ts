@@ -5,7 +5,7 @@
  * It demonstrates best practices for schema organization.
  */
 
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 import mongooseSequence from "mongoose-sequence";
 import {
   createSchema,
@@ -305,6 +305,20 @@ quoteSchema.virtual("vehicleCount").get(function (this: IQuote) {
 
 // Add pre-save middleware
 quoteSchema.pre("save", function (this: IQuote, next: () => void) {
+  // Ensure portalId is an ObjectId
+  if (this.portalId && typeof this.portalId === "string") {
+    if (Types.ObjectId.isValid(this.portalId)) {
+      this.portalId = new Types.ObjectId(this.portalId) as any;
+    }
+  }
+
+  // Ensure userId is an ObjectId
+  if (this.userId && typeof this.userId === "string") {
+    if (Types.ObjectId.isValid(this.userId)) {
+      this.userId = new Types.ObjectId(this.userId) as any;
+    }
+  }
+
   if (this.customer && !this.customer.trackingCode) {
     this.customer.trackingCode = generateTrackingCode();
   }
