@@ -1602,3 +1602,1103 @@
   message: 'Error updating quote',
   timestamp: '2026-01-13 20:41:59'
 }
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `Archived` is not a valid enum value for path `status`.',
+  quoteId: '696711ae855a45ec3e011507',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-13 20:55:04'
+}
+{
+  service: 'autovista-api',
+  error: 'stdout maxBuffer length exceeded',
+  output: '\n' +
+    '> autovista-api@1.0.0 migrate:all\n' +
+    '> tsx -r dotenv/config migrations/scripts/migrate-all.ts\n' +
+    '\n' +
+    '🚀 Starting MASTER MIGRATION - All Collections\n' +
+    '================================================================================\n' +
+    '\n' +
+    '================================================================================\n' +
+    '🔄 Running Portals Migration...\n' +
+    '================================================================================\n' +
+    '\n' +
+    '🚀 Starting migration: PortalMigration\n' +
+    '📅 Started at: 2026-01-14T05:30:00.769Z\n' +
+    '🔌 Connecting to databases...\n' +
+    '🔌 Connecting to source database...\n' +
+    '   Connection string: mongodb+srv://autovista:****@cluster0.w7vu8.mongodb.net/prod?retryWrites=true&w=majority\n' +
+    '⏳ Waiting for source connection (timeout: 30000ms)...\n' +
+    '✅ Connected to source MongoDB: /autovista:JbRiklNH55q67w7p@cluster0.w7vu8.mongodb.net/prod\n' +
+    '🔌 Connecting to destination database...\n' +
+    '   Connection string: mongodb+srv://anna:****@autovista.nzynb.mongodb.net/prod\n' +
+    '⏳ Waiting for destination connection (timeout: 30000ms)...\n' +
+    '✅ Connected to destination MongoDB: /anna:K1lXzftA6NpMpwM6@autovista.nzynb.mongodb.net/prod\n' +
+    '✅ Database connections established\n' +
+    '🔄 Running migration up...\n' +
+    '🔄 Running portal migration UP...\n' +
+    '📡 Getting source connection...\n' +
+    '📡 Getting destination connection...\n' +
+    '📋 Accessing collections...\n' +
+    '🔍 Counting portals in source database...\n' +
+    '📦 Found 111 portals in source database\n' +
+    '📊 Processing 111 portals (limit: none)\n' +
+    '📦 Retrieved 111 portals to migrate\n' +
+    '🔍 Portal 69664e5968d3227b9d6860c6 has no custom rates\n' +
+    '📊 Processed 1/111 portals (1 updated, 0 inserted)\n' +
+    '🔍 Portal 69610aa5d4a09b1d70b59f09 has no custom rates\n' +
+    '🔍 Portal 693b29b84c96521585c6d35d has no custom rates\n' +
+    '🔍 Portal 68a352efc6cb9ac0c697b9ff has no custom rates\n' +
+    '🔍 Portal 689ccc328036672c0d18be70 has no custom rates\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a hasCustomRates flag: true\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '📊 Processed 10/111 portals (1 updated, 0 inserted)\n' +
+    'Processed batch 1/12\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7ce75d41840a4ecc6037 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-15'... 978668 more characters,
+  code: 'ERR_CHILD_PROCESS_STDIO_MAXBUFFER',
+  level: 'error',
+  message: '❌ Scheduled migration job failed',
+  timestamp: '2026-01-13 23:35:25'
+}
+{
+  service: 'autovista-api',
+  error: `Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"`,
+  stack: `ValidationError: Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"\n` +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:801:18)\n' +
+    '    at Document.$__init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:707:3)\n' +
+    '    at model.syncWrapper [as $__init] (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/kareem/index.js:331:25)\n' +
+    '    at Document.init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:651:8)\n' +
+    '    at Document.$init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:667:42)\n' +
+    '    at Object.createModelAndInit (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/queryHelpers.js:119:12)\n' +
+    '    at completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:3308:11)\n' +
+    '    at Query._completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2634:7)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2712:10',
+  level: 'error',
+  message: 'Error updating settings',
+  timestamp: '2026-01-14 09:43:58'
+}
+{
+  service: 'autovista-api',
+  error: `Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"`,
+  stack: `ValidationError: Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"\n` +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:801:18)\n' +
+    '    at Document.$__init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:707:3)\n' +
+    '    at model.syncWrapper [as $__init] (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/kareem/index.js:331:25)\n' +
+    '    at Document.init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:651:8)\n' +
+    '    at Document.$init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:667:42)\n' +
+    '    at Object.createModelAndInit (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/queryHelpers.js:119:12)\n' +
+    '    at completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:3308:11)\n' +
+    '    at Query._completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2634:7)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2712:10',
+  level: 'error',
+  message: 'Error updating settings',
+  timestamp: '2026-01-14 09:45:03'
+}
+{
+  service: 'autovista-api',
+  error: `Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"`,
+  stack: `ValidationError: Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"\n` +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:801:18)\n' +
+    '    at Document.$__init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:707:3)\n' +
+    '    at model.syncWrapper [as $__init] (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/kareem/index.js:331:25)\n' +
+    '    at Document.init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:651:8)\n' +
+    '    at Document.$init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:667:42)\n' +
+    '    at Object.createModelAndInit (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/queryHelpers.js:119:12)\n' +
+    '    at completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:3308:11)\n' +
+    '    at Query._completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2634:7)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2712:10',
+  level: 'error',
+  message: 'Error updating settings',
+  timestamp: '2026-01-14 09:48:36'
+}
+{
+  service: 'autovista-api',
+  error: `Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"`,
+  stack: `ValidationError: Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"\n` +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:801:18)\n' +
+    '    at Document.$__init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:707:3)\n' +
+    '    at model.syncWrapper [as $__init] (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/kareem/index.js:331:25)\n' +
+    '    at Document.init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:651:8)\n' +
+    '    at Document.$init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:667:42)\n' +
+    '    at Object.createModelAndInit (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/queryHelpers.js:119:12)\n' +
+    '    at completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:3308:11)\n' +
+    '    at Query._completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2634:7)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2712:10',
+  level: 'error',
+  message: 'Error updating settings',
+  timestamp: '2026-01-14 09:49:12'
+}
+{
+  service: 'autovista-api',
+  error: `Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"`,
+  stack: `ValidationError: Settings validation failed: holidays.0: Cast to [date] failed for value "[\\n' +\n` +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+    "  '  },\\n' +\n" +
+    "  '  {\\n' +\n" +
+    `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+    `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+    "  '  }\\n' +\n" +
+    `  ']" (type string) at path "holidays.0" because of "CastError"\n` +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:801:18)\n' +
+    '    at Document.$__init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:707:3)\n' +
+    '    at model.syncWrapper [as $__init] (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/kareem/index.js:331:25)\n' +
+    '    at Document.init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:651:8)\n' +
+    '    at Document.$init (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:667:42)\n' +
+    '    at Object.createModelAndInit (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/queryHelpers.js:119:12)\n' +
+    '    at completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:3308:11)\n' +
+    '    at Query._completeOne (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2634:7)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/query.js:2712:10',
+  errorDetails: [
+    {
+      field: 'holidays.0',
+      message: `Cast to [date] failed for value "[\\n' +\n` +
+        "  '  {\\n' +\n" +
+        `  "    date: '2025-05-26T12:00:00.000',\\n" +\n` +
+        `  "    _id: new ObjectId('683db395602a372fadd9dab8')\\n" +\n` +
+        "  '  },\\n' +\n" +
+        "  '  {\\n' +\n" +
+        `  "    date: '2025-07-04T12:00:00.000',\\n" +\n` +
+        `  "    _id: new ObjectId('683db395602a372fadd9dab9')\\n" +\n` +
+        "  '  },\\n' +\n" +
+        "  '  {\\n' +\n" +
+        `  "    date: '2025-12-24T12:00:00.000',\\n" +\n` +
+        `  "    _id: new ObjectId('683db395602a372fadd9daba')\\n" +\n` +
+        "  '  },\\n' +\n" +
+        "  '  {\\n' +\n" +
+        `  "    date: '2025-09-01T12:00:00.000',\\n" +\n` +
+        `  "    _id: new ObjectId('683db395602a372fadd9dabb')\\n" +\n` +
+        "  '  },\\n' +\n" +
+        "  '  {\\n' +\n" +
+        `  "    date: '2025-12-25T12:00:00.000',\\n" +\n` +
+        `  "    _id: new ObjectId('683db395602a372fadd9dabc')\\n" +\n` +
+        "  '  },\\n' +\n" +
+        "  '  {\\n' +\n" +
+        `  "    date: '2025-11-27T12:00:00.000',\\n" +\n` +
+        `  "    _id: new ObjectId('683db395602a372fadd9dabd')\\n" +\n` +
+        "  '  },\\n' +\n" +
+        "  '  {\\n' +\n" +
+        `  "    date: '2025-12-31T12:00:00.000',\\n" +\n` +
+        `  "    _id: new ObjectId('683db395602a372fadd9dabe')\\n" +\n` +
+        "  '  },\\n' +\n" +
+        "  '  {\\n' +\n" +
+        `  "    date: '2025-01-01T12:00:00.000',\\n" +\n` +
+        `  "    _id: new ObjectId('683db395602a372fadd9dabf')\\n" +\n` +
+        "  '  }\\n' +\n" +
+        `  ']" (type string) at path "holidays.0" because of "CastError"`
+    }
+  ],
+  formName: 'markup',
+  level: 'error',
+  message: 'Error updating settings',
+  timestamp: '2026-01-14 09:50:25'
+}
+{
+  service: 'autovista-api',
+  error: 'ModifierSet validation failed: states.AL.valueType: Path `valueType` is required., states.AL.value: Path `value` is required., states.AL.direction: `Both Directions` is not a valid enum value for path `direction`., states.AR.valueType: Path `valueType` is required., states.AR.value: Path `value` is required., states.AR.direction: `Both Directions` is not a valid enum value for path `direction`., states.AZ.valueType: Path `valueType` is required., states.AZ.value: Path `value` is required., states.AZ.direction: `Both Directions` is not a valid enum value for path `direction`., states.CA.valueType: Path `valueType` is required., states.CA.value: Path `value` is required., states.CA.direction: `Both Directions` is not a valid enum value for path `direction`., states.CO.valueType: Path `valueType` is required., states.CO.value: Path `value` is required., states.CO.direction: `Both Directions` is not a valid enum value for path `direction`., states.CT.valueType: Path `valueType` is required., states.CT.value: Path `value` is required., states.CT.direction: `Both Directions` is not a valid enum value for path `direction`., states.DE.valueType: Path `valueType` is required., states.DE.value: Path `value` is required., states.DE.direction: `Outbound Only` is not a valid enum value for path `direction`., states.FL.valueType: Path `valueType` is required., states.FL.value: Path `value` is required., states.FL.direction: `Both Directions` is not a valid enum value for path `direction`., states.GA.valueType: Path `valueType` is required., states.GA.value: Path `value` is required., states.GA.direction: `Outbound Only` is not a valid enum value for path `direction`., states.IA.valueType: Path `valueType` is required., states.IA.value: Path `value` is required., states.IA.direction: `Both Directions` is not a valid enum value for path `direction`., states.ID.valueType: Path `valueType` is required., states.ID.value: Path `value` is required., states.ID.direction: `Both Directions` is not a valid enum value for path `direction`., states.IL.valueType: Path `valueType` is required., states.IL.value: Path `value` is required., states.IL.direction: `Both Directions` is not a valid enum value for path `direction`., states.IN.valueType: Path `valueType` is required., states.IN.value: Path `value` is required., states.IN.direction: `Outbound Only` is not a valid enum value for path `direction`., states.KS.valueType: Path `valueType` is required., states.KS.value: Path `value` is required., states.KS.direction: `Outbound Only` is not a valid enum value for path `direction`., states.KY.valueType: Path `valueType` is required., states.KY.value: Path `value` is required., states.KY.direction: `Outbound Only` is not a valid enum value for path `direction`., states.LA.valueType: Path `valueType` is required., states.LA.value: Path `value` is required., states.LA.direction: `Both Directions` is not a valid enum value for path `direction`., states.MA.valueType: Path `valueType` is required., states.MA.value: Path `value` is required., states.MA.direction: `Both Directions` is not a valid enum value for path `direction`., states.ME.valueType: Path `valueType` is required., states.ME.value: Path `value` is required., states.ME.direction: `Both Directions` is not a valid enum value for path `direction`., states.MH.valueType: Path `valueType` is required., states.MH.value: Path `value` is required., states.MH.direction: `Outbound Only` is not a valid enum value for path `direction`., states.MI.valueType: Path `valueType` is required., states.MI.value: Path `value` is required., states.MI.direction: `Both Directions` is not a valid enum value for path `direction`., states.MN.valueType: Path `valueType` is required., states.MN.value: Path `value` is required., states.MN.direction: `Outbound Only` is not a valid enum value for path `direction`., states.MO.valueType: Path `valueType` is required., states.MO.value: Path `value` is required., states.MO.direction: `Outbound Only` is not a valid enum value for path `direction`., states.MS.valueType: Path `valueType` is required., states.MS.value: Path `value` is required., states.MS.direction: `Both Directions` is not a valid enum value for path `direction`., states.MT.valueType: Path `valueType` is required., states.MT.value: Path `value` is required., states.MT.direction: `Both Directions` is not a valid enum value for path `direction`., states.NC.valueType: Path `valueType` is required., states.NC.value: Path `value` is required., states.NC.direction: `Outbound Only` is not a valid enum value for path `direction`., states.ND.valueType: Path `valueType` is required., states.ND.value: Path `value` is required., states.ND.direction: `Both Directions` is not a valid enum value for path `direction`., states.NE.valueType: Path `valueType` is required., states.NE.value: Path `value` is required., states.NE.direction: `Outbound Only` is not a valid enum value for path `direction`., states.NH.valueType: Path `valueType` is required., states.NH.value: Path `value` is required., states.NH.direction: `Outbound Only` is not a valid enum value for path `direction`., states.NJ.valueType: Path `valueType` is required., states.NJ.value: Path `value` is required., states.NJ.direction: `Both Directions` is not a valid enum value for path `direction`., states.NM.valueType: Path `valueType` is required., states.NM.value: Path `value` is required., states.NM.direction: `Both Directions` is not a valid enum value for path `direction`., states.NV.valueType: Path `valueType` is required., states.NV.value: Path `value` is required., states.NV.direction: `Outbound Only` is not a valid enum value for path `direction`., states.NY.valueType: Path `valueType` is required., states.NY.value: Path `value` is required., states.NY.direction: `Both Directions` is not a valid enum value for path `direction`., states.OK.valueType: Path `valueType` is required., states.OK.value: Path `value` is required., states.OK.direction: `Outbound Only` is not a valid enum value for path `direction`., states.OR.valueType: Path `valueType` is required., states.OR.value: Path `value` is required., states.OR.direction: `Both Directions` is not a valid enum value for path `direction`., states.PA.valueType: Path `valueType` is required., states.PA.value: Path `value` is required., states.PA.direction: `Outbound Only` is not a valid enum value for path `direction`., states.RI.valueType: Path `valueType` is required., states.RI.value: Path `value` is required., states.RI.direction: `Outbound Only` is not a valid enum value for path `direction`., states.SC.valueType: Path `valueType` is required., states.SC.value: Path `value` is required., states.SC.direction: `Outbound Only` is not a valid enum value for path `direction`., states.SD.valueType: Path `valueType` is required., states.SD.value: Path `value` is required., states.SD.direction: `Outbound Only` is not a valid enum value for path `direction`., states.TN.valueType: Path `valueType` is required., states.TN.value: Path `value` is required., states.TN.direction: `Outbound Only` is not a valid enum value for path `direction`., states.TX.valueType: Path `valueType` is required., states.TX.value: Path `value` is required., states.TX.direction: `Both Directions` is not a valid enum value for path `direction`., states.UT.valueType: Path `valueType` is required., states.UT.value: Path `value` is required., states.UT.direction: `Outbound Only` is not a valid enum value for path `direction`., states.VA.valueType: Path `valueType` is required., states.VA.value: Path `value` is required., states.VA.direction: `Outbound Only` is not a valid enum value for path `direction`., states.VT.valueType: Path `valueType` is required., states.VT.value: Path `value` is required., states.VT.direction: `Both Directions` is not a valid enum value for path `direction`., states.WA.valueType: Path `valueType` is required., states.WA.value: Path `value` is required., states.WA.direction: `Both Directions` is not a valid enum value for path `direction`., states.WI.valueType: Path `valueType` is required., states.WI.value: Path `value` is required., states.WI.direction: `Outbound Only` is not a valid enum value for path `direction`.',
+  stack: 'ValidationError: ModifierSet validation failed: states.AL.valueType: Path `valueType` is required., states.AL.value: Path `value` is required., states.AL.direction: `Both Directions` is not a valid enum value for path `direction`., states.AR.valueType: Path `valueType` is required., states.AR.value: Path `value` is required., states.AR.direction: `Both Directions` is not a valid enum value for path `direction`., states.AZ.valueType: Path `valueType` is required., states.AZ.value: Path `value` is required., states.AZ.direction: `Both Directions` is not a valid enum value for path `direction`., states.CA.valueType: Path `valueType` is required., states.CA.value: Path `value` is required., states.CA.direction: `Both Directions` is not a valid enum value for path `direction`., states.CO.valueType: Path `valueType` is required., states.CO.value: Path `value` is required., states.CO.direction: `Both Directions` is not a valid enum value for path `direction`., states.CT.valueType: Path `valueType` is required., states.CT.value: Path `value` is required., states.CT.direction: `Both Directions` is not a valid enum value for path `direction`., states.DE.valueType: Path `valueType` is required., states.DE.value: Path `value` is required., states.DE.direction: `Outbound Only` is not a valid enum value for path `direction`., states.FL.valueType: Path `valueType` is required., states.FL.value: Path `value` is required., states.FL.direction: `Both Directions` is not a valid enum value for path `direction`., states.GA.valueType: Path `valueType` is required., states.GA.value: Path `value` is required., states.GA.direction: `Outbound Only` is not a valid enum value for path `direction`., states.IA.valueType: Path `valueType` is required., states.IA.value: Path `value` is required., states.IA.direction: `Both Directions` is not a valid enum value for path `direction`., states.ID.valueType: Path `valueType` is required., states.ID.value: Path `value` is required., states.ID.direction: `Both Directions` is not a valid enum value for path `direction`., states.IL.valueType: Path `valueType` is required., states.IL.value: Path `value` is required., states.IL.direction: `Both Directions` is not a valid enum value for path `direction`., states.IN.valueType: Path `valueType` is required., states.IN.value: Path `value` is required., states.IN.direction: `Outbound Only` is not a valid enum value for path `direction`., states.KS.valueType: Path `valueType` is required., states.KS.value: Path `value` is required., states.KS.direction: `Outbound Only` is not a valid enum value for path `direction`., states.KY.valueType: Path `valueType` is required., states.KY.value: Path `value` is required., states.KY.direction: `Outbound Only` is not a valid enum value for path `direction`., states.LA.valueType: Path `valueType` is required., states.LA.value: Path `value` is required., states.LA.direction: `Both Directions` is not a valid enum value for path `direction`., states.MA.valueType: Path `valueType` is required., states.MA.value: Path `value` is required., states.MA.direction: `Both Directions` is not a valid enum value for path `direction`., states.ME.valueType: Path `valueType` is required., states.ME.value: Path `value` is required., states.ME.direction: `Both Directions` is not a valid enum value for path `direction`., states.MH.valueType: Path `valueType` is required., states.MH.value: Path `value` is required., states.MH.direction: `Outbound Only` is not a valid enum value for path `direction`., states.MI.valueType: Path `valueType` is required., states.MI.value: Path `value` is required., states.MI.direction: `Both Directions` is not a valid enum value for path `direction`., states.MN.valueType: Path `valueType` is required., states.MN.value: Path `value` is required., states.MN.direction: `Outbound Only` is not a valid enum value for path `direction`., states.MO.valueType: Path `valueType` is required., states.MO.value: Path `value` is required., states.MO.direction: `Outbound Only` is not a valid enum value for path `direction`., states.MS.valueType: Path `valueType` is required., states.MS.value: Path `value` is required., states.MS.direction: `Both Directions` is not a valid enum value for path `direction`., states.MT.valueType: Path `valueType` is required., states.MT.value: Path `value` is required., states.MT.direction: `Both Directions` is not a valid enum value for path `direction`., states.NC.valueType: Path `valueType` is required., states.NC.value: Path `value` is required., states.NC.direction: `Outbound Only` is not a valid enum value for path `direction`., states.ND.valueType: Path `valueType` is required., states.ND.value: Path `value` is required., states.ND.direction: `Both Directions` is not a valid enum value for path `direction`., states.NE.valueType: Path `valueType` is required., states.NE.value: Path `value` is required., states.NE.direction: `Outbound Only` is not a valid enum value for path `direction`., states.NH.valueType: Path `valueType` is required., states.NH.value: Path `value` is required., states.NH.direction: `Outbound Only` is not a valid enum value for path `direction`., states.NJ.valueType: Path `valueType` is required., states.NJ.value: Path `value` is required., states.NJ.direction: `Both Directions` is not a valid enum value for path `direction`., states.NM.valueType: Path `valueType` is required., states.NM.value: Path `value` is required., states.NM.direction: `Both Directions` is not a valid enum value for path `direction`., states.NV.valueType: Path `valueType` is required., states.NV.value: Path `value` is required., states.NV.direction: `Outbound Only` is not a valid enum value for path `direction`., states.NY.valueType: Path `valueType` is required., states.NY.value: Path `value` is required., states.NY.direction: `Both Directions` is not a valid enum value for path `direction`., states.OK.valueType: Path `valueType` is required., states.OK.value: Path `value` is required., states.OK.direction: `Outbound Only` is not a valid enum value for path `direction`., states.OR.valueType: Path `valueType` is required., states.OR.value: Path `value` is required., states.OR.direction: `Both Directions` is not a valid enum value for path `direction`., states.PA.valueType: Path `valueType` is required., states.PA.value: Path `value` is required., states.PA.direction: `Outbound Only` is not a valid enum value for path `direction`., states.RI.valueType: Path `valueType` is required., states.RI.value: Path `value` is required., states.RI.direction: `Outbound Only` is not a valid enum value for path `direction`., states.SC.valueType: Path `valueType` is required., states.SC.value: Path `value` is required., states.SC.direction: `Outbound Only` is not a valid enum value for path `direction`., states.SD.valueType: Path `valueType` is required., states.SD.value: Path `value` is required., states.SD.direction: `Outbound Only` is not a valid enum value for path `direction`., states.TN.valueType: Path `valueType` is required., states.TN.value: Path `value` is required., states.TN.direction: `Outbound Only` is not a valid enum value for path `direction`., states.TX.valueType: Path `valueType` is required., states.TX.value: Path `value` is required., states.TX.direction: `Both Directions` is not a valid enum value for path `direction`., states.UT.valueType: Path `valueType` is required., states.UT.value: Path `value` is required., states.UT.direction: `Outbound Only` is not a valid enum value for path `direction`., states.VA.valueType: Path `valueType` is required., states.VA.value: Path `value` is required., states.VA.direction: `Outbound Only` is not a valid enum value for path `direction`., states.VT.valueType: Path `valueType` is required., states.VT.value: Path `value` is required., states.VT.direction: `Both Directions` is not a valid enum value for path `direction`., states.WA.valueType: Path `valueType` is required., states.WA.value: Path `value` is required., states.WA.direction: `Both Directions` is not a valid enum value for path `direction`., states.WI.valueType: Path `valueType` is required., states.WI.value: Path `value` is required., states.WI.direction: `Outbound Only` is not a valid enum value for path `direction`.\n' +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at Subdocument.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/types/subdocument.js:229:12)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3123:17\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1417:9\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)',
+  errorDetails: [
+    {
+      field: 'states.AL.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.AL.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.AL.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.AR.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.AR.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.AR.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.AZ.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.AZ.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.AZ.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.CA.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.CA.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.CA.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.CO.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.CO.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.CO.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.CT.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.CT.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.CT.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.DE.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.DE.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.DE.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.FL.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.FL.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.FL.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.GA.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.GA.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.GA.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.IA.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.IA.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.IA.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.ID.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.ID.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.ID.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.IL.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.IL.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.IL.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.IN.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.IN.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.IN.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.KS.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.KS.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.KS.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.KY.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.KY.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.KY.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.LA.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.LA.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.LA.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.MA.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.MA.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.MA.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.ME.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.ME.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.ME.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.MH.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.MH.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.MH.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.MI.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.MI.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.MI.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.MN.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.MN.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.MN.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.MO.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.MO.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.MO.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.MS.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.MS.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.MS.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.MT.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.MT.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.MT.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.NC.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.NC.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.NC.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.ND.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.ND.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.ND.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.NE.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.NE.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.NE.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.NH.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.NH.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.NH.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.NJ.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.NJ.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.NJ.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.NM.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.NM.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.NM.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.NV.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.NV.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.NV.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.NY.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.NY.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.NY.direction',
+      message: '`Both Directions` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.OK.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    { field: 'states.OK.value', message: 'Path `value` is required.' },
+    {
+      field: 'states.OK.direction',
+      message: '`Outbound Only` is not a valid enum value for path `direction`.'
+    },
+    {
+      field: 'states.OR.valueType',
+      message: 'Path `valueType` is required.'
+    },
+    ... 35 more items
+  ],
+  formName: 'state',
+  level: 'error',
+  message: 'Error updating settings',
+  timestamp: '2026-01-14 13:53:40'
+}
+{
+  service: 'autovista-api',
+  error: 'Settings validation failed: serviceLevels.0.markup: Path `markup` is required., serviceLevels.0.name: Path `name` is required., serviceLevels.1.markup: Path `markup` is required., serviceLevels.1.name: Path `name` is required., serviceLevels.2.markup: Path `markup` is required., serviceLevels.2.name: Path `name` is required., serviceLevels.3.markup: Path `markup` is required., serviceLevels.3.name: Path `name` is required.',
+  stack: 'ValidationError: Settings validation failed: serviceLevels.0.markup: Path `markup` is required., serviceLevels.0.name: Path `name` is required., serviceLevels.1.markup: Path `markup` is required., serviceLevels.1.name: Path `name` is required., serviceLevels.2.markup: Path `markup` is required., serviceLevels.2.name: Path `name` is required., serviceLevels.3.markup: Path `markup` is required., serviceLevels.3.name: Path `name` is required.\n' +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at Subdocument.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/types/subdocument.js:229:12)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3123:17\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1417:9\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)',
+  errorDetails: [
+    {
+      field: 'serviceLevels.0.markup',
+      message: 'Path `markup` is required.'
+    },
+    {
+      field: 'serviceLevels.0.name',
+      message: 'Path `name` is required.'
+    },
+    {
+      field: 'serviceLevels.1.markup',
+      message: 'Path `markup` is required.'
+    },
+    {
+      field: 'serviceLevels.1.name',
+      message: 'Path `name` is required.'
+    },
+    {
+      field: 'serviceLevels.2.markup',
+      message: 'Path `markup` is required.'
+    },
+    {
+      field: 'serviceLevels.2.name',
+      message: 'Path `name` is required.'
+    },
+    {
+      field: 'serviceLevels.3.markup',
+      message: 'Path `markup` is required.'
+    },
+    {
+      field: 'serviceLevels.3.name',
+      message: 'Path `name` is required.'
+    }
+  ],
+  formName: 'servicelevels',
+  level: 'error',
+  message: 'Error updating settings',
+  timestamp: '2026-01-14 15:26:25'
+}

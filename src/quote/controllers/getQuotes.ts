@@ -3,6 +3,7 @@ import { Quote } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { Types } from "mongoose";
+import { Status } from "@/_global/enums";
 
 /**
  * GET /api/v1/quotes
@@ -154,9 +155,31 @@ export const getQuotes = async (
       query.transportType = { $in: transportTypes };
     }
 
+    // Exclude archived quotes
+    // Always exclude quotes with status "archived" or "Archived"
+    // Handle null/undefined status by including them (they're not archived)
+    const statusExclusion = {
+      $or: [
+        { status: { $exists: false } },
+        { status: null },
+        { status: { $nin: [Status.Archived, "Archived"] } },
+      ],
+    };
+
+    if (query.$or) {
+      // If $or already exists (from search), combine both $or conditions using $and
+      // MongoDB will AND the $and array with other top-level fields
+      query.$and = [{ $or: query.$or }, statusExclusion];
+      delete query.$or;
+    } else {
+      // No existing $or, add status exclusion directly
+      // MongoDB will AND this with other top-level conditions
+      query.$or = statusExclusion.$or;
+    }
+
     // Debug logging
     logger.info("Getting quotes with query", {
-      query: JSON.stringify(query),
+      query: JSON.stringify(query, null, 2),
       queryPortalId: query.portalId?.toString(),
       userRole: authUser.role,
       portalIdParam: portalId,
@@ -164,6 +187,7 @@ export const getQuotes = async (
       limit: limitNum,
       sortField,
       sortOrder,
+      hasStatusExclusion: !!(query.$or || query.$and),
     });
 
     // Get count and quotes

@@ -14,7 +14,11 @@ export interface IBrand extends Document {
 
 const modelSchema = createSchema<IModel>({
   model: { type: String, required: true },
-  pricingClass: { type: String, required: true }, // String to match mc_portal_api structure
+  pricingClass: {
+    type: String,
+    enum: Object.values(VehicleClass),
+    required: true,
+  },
 });
 
 const brandSchema = createSchema<IBrand>({

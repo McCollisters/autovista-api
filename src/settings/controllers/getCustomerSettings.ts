@@ -5,7 +5,7 @@ import { logger } from "@/core/logger";
 /**
  * GET /settings/customer
  * Get customer-facing settings (public endpoint)
- * Returns service levels, holidays, and makes (brands)
+ * Returns service levels, holidays, and brands
  */
 export const getCustomerSettings = async (
   req: express.Request,
@@ -14,7 +14,7 @@ export const getCustomerSettings = async (
 ): Promise<void> => {
   try {
     const settings = await Settings.findOne();
-    const makes = await Brand.find({}).sort({ make: 1 });
+    const brands = await Brand.find({}).sort({ make: 1 });
 
     if (!settings) {
       return next({
@@ -24,10 +24,10 @@ export const getCustomerSettings = async (
     }
 
     const customerSettings = {
-      makes: makes.map((make) => ({
-        _id: make._id,
-        make: make.make,
-        models: make.models || [],
+      brands: brands.map((brand) => ({
+        _id: brand._id,
+        make: brand.make,
+        models: brand.models || [],
       })),
       serviceLevels: settings.serviceLevels || [],
       holidays: settings.holidays || [],
