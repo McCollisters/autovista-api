@@ -1546,3 +1546,59 @@
   message: '❌ Scheduled migration job failed',
   timestamp: '2026-01-12 05:45:40'
 }
+{
+  service: 'autovista-api',
+  error: 'HTTP error! status: 400',
+  quoteId: '6966ed6bc1c651846882e19e',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-13 18:18:44'
+}
+{
+  service: 'autovista-api',
+  error: 'HTTP error! status: 400',
+  quoteId: '6966f08bc1c651846882e284',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-13 19:02:59'
+}
+{
+  service: 'autovista-api',
+  error: 'HTTP error! status: 400 - {"meta":{"status":"fail"},"data":{"message":"ValidationError","details":[{"type":"string_type","loc":["body","vehicles",0,"make"],"msg":"Input should be a valid string","input":{"label":"Acura","value":"Acura"}},{"type":"string_type","loc":["body","vehicles",0,"model"],"msg":"Input should be a valid string","input":{"label":"2.2CL","value":"2.2CL","pricingClass":"sedan"}}]}}',
+  quoteId: '696704aadbdca0310f80e07f',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-13 19:53:31'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `Archived` is not a valid enum value for path `status`.',
+  quoteId: '69670e92a1487d7bfa4606d8',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-13 20:36:54'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `Archived` is not a valid enum value for path `status`.',
+  quoteId: '69670e92a1487d7bfa4606d8',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-13 20:36:59'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `Archived` is not a valid enum value for path `status`.',
+  quoteId: '69670f6e5d7d1a230552b2bd',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-13 20:41:52'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `Archived` is not a valid enum value for path `status`.',
+  quoteId: '69670f6e5d7d1a230552b2bd',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-13 20:41:59'
+}

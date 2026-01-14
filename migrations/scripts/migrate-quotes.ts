@@ -268,17 +268,20 @@ export class QuoteMigration extends MigrationBase {
                 existingVehicleWhiteGlove &&
                 existingVehicleWhiteGlove.length > 0 &&
                 transformedQuote.vehicles &&
-                transformedQuote.vehicles.length === existingVehicleWhiteGlove.length
+                transformedQuote.vehicles.length ===
+                  existingVehicleWhiteGlove.length
               ) {
-                transformedQuote.vehicles.forEach((vehicle: any, idx: number) => {
-                  if (
-                    existingVehicleWhiteGlove[idx] &&
-                    existingVehicleWhiteGlove[idx] > 0
-                  ) {
-                    vehicle.pricing.totals.whiteGlove =
-                      existingVehicleWhiteGlove[idx];
-                  }
-                });
+                transformedQuote.vehicles.forEach(
+                  (vehicle: any, idx: number) => {
+                    if (
+                      existingVehicleWhiteGlove[idx] &&
+                      existingVehicleWhiteGlove[idx] > 0
+                    ) {
+                      vehicle.pricing.totals.whiteGlove =
+                        existingVehicleWhiteGlove[idx];
+                    }
+                  },
+                );
               }
             }
 
@@ -1156,7 +1159,17 @@ export class QuoteMigration extends MigrationBase {
 
     // Map calculated quotes to totals structure
     calculatedQuotes.forEach((quote) => {
-      const days = quote.days;
+      // Handle both string and number formats for days
+      // Try days first, then serviceLevelOption as fallback
+      const daysRaw = quote.days ?? quote.serviceLevelOption ?? null;
+      if (daysRaw === null) {
+        console.warn(`⚠️  Quote missing days/serviceLevelOption:`, quote);
+        return;
+      }
+
+      // Normalize to string for consistent comparison
+      const days = String(daysRaw).trim();
+      
       const openTotalSD = quote.openTransportSD || quote.totalSD || 0;
       const openTotalPortal =
         quote.openTransportPortal || quote.totalPortal || 0;
@@ -1168,60 +1181,77 @@ export class QuoteMigration extends MigrationBase {
       const enclosedTotalSD = quote.enclosedTransportSD || 0;
       const enclosedTotalPortal = quote.enclosedTransportPortal || 0;
 
-      switch (days) {
-        case "1":
-          totals.one.open.total = openTotalSD;
-          totals.one.open.companyTariff = companyTariffOpen;
-          totals.one.open.commission = commission;
-          totals.one.open.totalWithCompanyTariffAndCommission = openTotalPortal;
+      // Compare as string after normalization
+      if (days === "1") {
+        totals.one.open.total = openTotalSD;
+        totals.one.open.companyTariff = companyTariffOpen;
+        totals.one.open.commission = commission;
+        totals.one.open.totalWithCompanyTariffAndCommission = openTotalPortal;
 
-          totals.one.enclosed.total = enclosedTotalSD;
-          totals.one.enclosed.companyTariff = companyTariffEnclosed;
-          totals.one.enclosed.commission = commission;
-          totals.one.enclosed.totalWithCompanyTariffAndCommission =
-            enclosedTotalPortal;
-          break;
-        case "3":
-          totals.three.open.total = openTotalSD;
-          totals.three.open.companyTariff = companyTariffOpen;
-          totals.three.open.commission = commission;
-          totals.three.open.totalWithCompanyTariffAndCommission =
-            openTotalPortal;
+        totals.one.enclosed.total = enclosedTotalSD;
+        totals.one.enclosed.companyTariff = companyTariffEnclosed;
+        totals.one.enclosed.commission = commission;
+        totals.one.enclosed.totalWithCompanyTariffAndCommission =
+          enclosedTotalPortal;
+      } else if (days === "3") {
+        totals.three.open.total = openTotalSD;
+        totals.three.open.companyTariff = companyTariffOpen;
+        totals.three.open.commission = commission;
+        totals.three.open.totalWithCompanyTariffAndCommission =
+          openTotalPortal;
 
-          totals.three.enclosed.total = enclosedTotalSD;
-          totals.three.enclosed.companyTariff = companyTariffEnclosed;
-          totals.three.enclosed.commission = commission;
-          totals.three.enclosed.totalWithCompanyTariffAndCommission =
-            enclosedTotalPortal;
-          break;
-        case "5":
-          totals.five.open.total = openTotalSD;
-          totals.five.open.companyTariff = companyTariffOpen;
-          totals.five.open.commission = commission;
-          totals.five.open.totalWithCompanyTariffAndCommission =
-            openTotalPortal;
+        totals.three.enclosed.total = enclosedTotalSD;
+        totals.three.enclosed.companyTariff = companyTariffEnclosed;
+        totals.three.enclosed.commission = commission;
+        totals.three.enclosed.totalWithCompanyTariffAndCommission =
+          enclosedTotalPortal;
+      } else if (days === "5") {
+        totals.five.open.total = openTotalSD;
+        totals.five.open.companyTariff = companyTariffOpen;
+        totals.five.open.commission = commission;
+        totals.five.open.totalWithCompanyTariffAndCommission =
+          openTotalPortal;
 
-          totals.five.enclosed.total = enclosedTotalSD;
-          totals.five.enclosed.companyTariff = companyTariffEnclosed;
-          totals.five.enclosed.commission = commission;
-          totals.five.enclosed.totalWithCompanyTariffAndCommission =
-            enclosedTotalPortal;
-          break;
-        case "7":
-          totals.seven.open.total = openTotalSD;
-          totals.seven.open.companyTariff = companyTariffOpen;
-          totals.seven.open.commission = commission;
-          totals.seven.open.totalWithCompanyTariffAndCommission =
-            openTotalPortal;
+        totals.five.enclosed.total = enclosedTotalSD;
+        totals.five.enclosed.companyTariff = companyTariffEnclosed;
+        totals.five.enclosed.commission = commission;
+        totals.five.enclosed.totalWithCompanyTariffAndCommission =
+          enclosedTotalPortal;
+      } else if (days === "7") {
+        totals.seven.open.total = openTotalSD;
+        totals.seven.open.companyTariff = companyTariffOpen;
+        totals.seven.open.commission = commission;
+        totals.seven.open.totalWithCompanyTariffAndCommission =
+          openTotalPortal;
 
-          totals.seven.enclosed.total = enclosedTotalSD;
-          totals.seven.enclosed.companyTariff = companyTariffEnclosed;
-          totals.seven.enclosed.commission = commission;
-          totals.seven.enclosed.totalWithCompanyTariffAndCommission =
-            enclosedTotalPortal;
-          break;
+        totals.seven.enclosed.total = enclosedTotalSD;
+        totals.seven.enclosed.companyTariff = companyTariffEnclosed;
+        totals.seven.enclosed.commission = commission;
+        totals.seven.enclosed.totalWithCompanyTariffAndCommission =
+          enclosedTotalPortal;
+      } else {
+        // Log if we encounter an unexpected days value for debugging
+        console.warn(`⚠️  Unexpected days value in calculatedQuotes: "${days}" (raw: ${daysRaw}, type: ${typeof daysRaw})`);
+        console.warn(`   Quote data:`, JSON.stringify(quote, null, 2));
       }
     });
+
+    // Debug: Log if totals are still zero for 3/5/7-day
+    if (calculatedQuotes.length > 0) {
+      const hasThreeDay = calculatedQuotes.some(q => String(q.days).trim() === "3");
+      const hasFiveDay = calculatedQuotes.some(q => String(q.days).trim() === "5");
+      const hasSevenDay = calculatedQuotes.some(q => String(q.days).trim() === "7");
+      
+      if (hasThreeDay && totals.three.open.total === 0) {
+        console.warn(`⚠️  3-day data exists in calculatedQuotes but totals.three.open.total is still 0`);
+      }
+      if (hasFiveDay && totals.five.open.total === 0) {
+        console.warn(`⚠️  5-day data exists in calculatedQuotes but totals.five.open.total is still 0`);
+      }
+      if (hasSevenDay && totals.seven.open.total === 0) {
+        console.warn(`⚠️  7-day data exists in calculatedQuotes but totals.seven.open.total is still 0`);
+      }
+    }
 
     return totals;
   }

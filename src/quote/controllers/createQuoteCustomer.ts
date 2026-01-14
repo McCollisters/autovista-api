@@ -78,17 +78,41 @@ export const createQuoteCustomer = async (
       });
     }
 
-    // Clean up vehicles - normalize operable field
-    vehicles = vehicles.map((v: any) => ({
-      ...v,
-      isInoperable:
+    // Clean up vehicles - normalize operable field and extract make/model from objects
+    vehicles = vehicles.map((v: any) => {
+      const isOperable = !(
         v.operable === "No" ||
         v.operable === false ||
         v.operable === "false" ||
         v.operable?.value === "No"
-          ? true
-          : false,
-    }));
+      );
+      
+      // Extract make - handle both string and object formats
+      let make = v.make;
+      if (make && typeof make === 'object') {
+        make = make.value || make.label || make;
+      }
+      
+      // Extract model - handle both string and object formats
+      let model = v.model;
+      if (model && typeof model === 'object') {
+        model = model.value || model.label || model;
+      }
+      
+      // Extract pricingClass if provided in model object
+      let pricingClass = v.pricingClass;
+      if (model && typeof model === 'object' && model.pricingClass) {
+        pricingClass = model.pricingClass;
+      }
+      
+      return {
+        ...v,
+        make: typeof make === 'string' ? make : String(make),
+        model: typeof model === 'string' ? model : String(model),
+        pricingClass: pricingClass || v.pricingClass,
+        isInoperable: !isOperable,
+      };
+    });
 
     // Clean up transport type
     transportType = transportType?.value || transportType;
@@ -207,7 +231,7 @@ export const createQuoteCustomer = async (
         },
       },
       miles,
-      transportType: transportType as TransportType,
+      ...(transportType && { transportType: transportType as TransportType }),
       vehicles: vehicleQuotes,
       totalPricing,
     };

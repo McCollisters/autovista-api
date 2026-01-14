@@ -5,7 +5,7 @@ import {
 } from "../utils/migration-base";
 
 // Configuration constants
-const MAX_MODIFIER_SETS_TO_PROCESS = 50; // Set to null or undefined to process all modifier sets
+const MAX_MODIFIER_SETS_TO_PROCESS: number | null = null; // Process all modifier sets
 
 /**
  * Modifier Set Migration Script
@@ -37,6 +37,7 @@ interface OldPortal {
   discount?: number;
   portalCommission?: number;
   companyTariff?: number;
+  companyTariffIsPercent?: boolean;
   portalAdminDiscount?: number;
   hasVariableCompanyTariff?: boolean;
   customRates?: {
@@ -337,7 +338,7 @@ export class ModifierSetMigration extends MigrationBase {
 
     const companyTariff: IModifier = {
       value: portal.companyTariff || 0,
-      valueType: "flat",
+      valueType: portal.companyTariffIsPercent === true ? "percentage" : "flat",
     };
 
     const companyTariffDiscount: IModifier = {

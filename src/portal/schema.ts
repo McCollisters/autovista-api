@@ -72,6 +72,7 @@ const portalSchema = createSchema<IPortal>({
     },
     quoteForm: {
       enableCommissionPerVehicle: { type: Boolean, default: true },
+      enableCommission: { type: Boolean, default: true },
     },
     orderPDF: {
       enablePriceBreakdown: { type: Boolean, default: true },

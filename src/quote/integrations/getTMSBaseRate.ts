@@ -14,10 +14,22 @@ export const getTMSBaseRate = async (
     destination = "Freeland, MI";
   }
 
-  const originCity = origin.split(",")[0];
-  const destinationCity = destination.split(",")[0];
-  const originState = origin.split(",")[1];
-  const destinationState = destination.split(",")[1];
+  const originParts = origin.split(",").map((part) => part.trim());
+  const destinationParts = destination.split(",").map((part) => part.trim());
+  
+  const originCity = originParts[0];
+  const originState = originParts[1];
+  const destinationCity = destinationParts[0];
+  const destinationState = destinationParts[1];
+
+  // Validate that we have both city and state for both locations
+  if (!originCity || !originState) {
+    throw new Error(`Invalid origin format: "${origin}". Expected format: "City, State"`);
+  }
+  
+  if (!destinationCity || !destinationState) {
+    throw new Error(`Invalid destination format: "${destination}". Expected format: "City, State"`);
+  }
 
   const url = new URL(
     `https://pricing-insights.superdispatch.com/api/v1/recommended-price`,
@@ -29,11 +41,24 @@ export const getTMSBaseRate = async (
     const vehiclesFormatted = [
       {
         type: vehicle.pricingClass || "sedan",
-        is_inoperable: vehicle.isInoperable,
-        make: vehicle.make,
-        model: vehicle.model,
+        is_inoperable: vehicle.isInoperable || false,
+        make: vehicle.make || "",
+        model: vehicle.model || "",
       },
     ];
+
+    const requestBody = {
+      pickup: {
+        city: originCity,
+        state: originState,
+      },
+      delivery: {
+        city: destinationCity,
+        state: destinationState,
+      },
+      trailer_type: "open",
+      vehicles: vehiclesFormatted,
+    };
 
     const response = await fetch(url, {
       method: "POST",
@@ -41,22 +66,21 @@ export const getTMSBaseRate = async (
         "X-API-KEY": process.env.SD_PRICING_API_KEY!,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        pickup: {
-          city: originCity,
-          state: originState,
-        },
-        delivery: {
-          city: destinationCity,
-          state: destinationState,
-        },
-        trailer_type: "open",
-        vehicles: vehiclesFormatted,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      // Try to get error details from response body
+      let errorMessage = `HTTP error! status: ${response.status}`;
+      try {
+        const errorBody = await response.text();
+        if (errorBody) {
+          errorMessage += ` - ${errorBody}`;
+        }
+      } catch (e) {
+        // If we can't read the body, just use the status
+      }
+      throw new Error(errorMessage);
     }
 
     const body = await response.json();

@@ -27,8 +27,13 @@ export class MigrationDatabase {
 
   async connect(): Promise<void> {
     try {
+      console.log("🔌 Connecting to source database...");
+      console.log(
+        `   Connection string: ${this.maskConnectionString(this.sourceConnectionString)}`,
+      );
+
       // Connect to source database
-      this.sourceConnection = await mongoose.createConnection(
+      this.sourceConnection = mongoose.createConnection(
         this.sourceConnectionString,
         {
           serverSelectionTimeoutMS: this.timeout,
@@ -37,15 +42,39 @@ export class MigrationDatabase {
         },
       );
 
-      // Wait for source connection to be ready
-      await this.sourceConnection.asPromise();
+      // Wait for source connection to be ready using event listener
+      console.log(
+        `⏳ Waiting for source connection (timeout: ${this.timeout}ms)...`,
+      );
+      await new Promise<void>((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(
+            new Error(`Source connection timeout after ${this.timeout}ms`),
+          );
+        }, this.timeout + 1000);
+
+        this.sourceConnection!.once("connected", () => {
+          clearTimeout(timeout);
+          resolve();
+        });
+
+        this.sourceConnection!.once("error", (err) => {
+          clearTimeout(timeout);
+          reject(err);
+        });
+      });
 
       console.log(
         `✅ Connected to source MongoDB: ${this.getSourceDatabaseName()}`,
       );
 
+      console.log("🔌 Connecting to destination database...");
+      console.log(
+        `   Connection string: ${this.maskConnectionString(this.destinationConnectionString)}`,
+      );
+
       // Connect to destination database
-      this.destinationConnection = await mongoose.createConnection(
+      this.destinationConnection = mongoose.createConnection(
         this.destinationConnectionString,
         {
           serverSelectionTimeoutMS: this.timeout,
@@ -54,17 +83,45 @@ export class MigrationDatabase {
         },
       );
 
-      // Wait for destination connection to be ready
-      await this.destinationConnection.asPromise();
+      // Wait for destination connection to be ready using event listener
+      console.log(
+        `⏳ Waiting for destination connection (timeout: ${this.timeout}ms)...`,
+      );
+      await new Promise<void>((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(
+            new Error(`Destination connection timeout after ${this.timeout}ms`),
+          );
+        }, this.timeout + 1000);
+
+        this.destinationConnection!.once("connected", () => {
+          clearTimeout(timeout);
+          resolve();
+        });
+
+        this.destinationConnection!.once("error", (err) => {
+          clearTimeout(timeout);
+          reject(err);
+        });
+      });
 
       console.log(
         `✅ Connected to destination MongoDB: ${this.getDestinationDatabaseName()}`,
       );
     } catch (error) {
       console.error("❌ Failed to connect to MongoDB:", error);
+      if (error instanceof Error) {
+        console.error("   Error message:", error.message);
+        console.error("   Error stack:", error.stack);
+      }
       await this.disconnect(); // Clean up any partial connections
       throw error;
     }
+  }
+
+  private maskConnectionString(connectionString: string): string {
+    // Mask password in connection string for logging
+    return connectionString.replace(/:([^:@]+)@/, ":****@");
   }
 
   async disconnect(): Promise<void> {

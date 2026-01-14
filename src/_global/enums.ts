@@ -7,7 +7,7 @@ export enum Status {
   Booked = "booked",
 }
 
-export enum NotificationStatus { 
+export enum NotificationStatus {
   Pending = "pending",
   Sent = "sent",
   Failed = "failed",
@@ -89,4 +89,5 @@ export enum VehicleClass {
   Van = "van",
   Pickup4Door = "pickup_4_doors",
   Pickup2Door = "pickup_2_doors",
+  Other = "other",
 }

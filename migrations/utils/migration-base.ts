@@ -24,8 +24,11 @@ export abstract class MigrationBase {
       console.log(`🚀 Starting migration: ${this.constructor.name}`);
       console.log(`📅 Started at: ${this.startTime.toISOString()}`);
 
+      console.log("🔌 Connecting to databases...");
       await this.db.connect();
+      console.log("✅ Database connections established");
 
+      console.log(`🔄 Running migration ${direction}...`);
       const result = direction === "up" ? await this.up() : await this.down();
 
       const endTime = new Date();

@@ -14,7 +14,7 @@ export const getCustomerSettings = async (
 ): Promise<void> => {
   try {
     const settings = await Settings.findOne();
-    const makes = await Brand.find({}).sort({ brand: 1 });
+    const makes = await Brand.find({}).sort({ make: 1 });
 
     if (!settings) {
       return next({
@@ -26,7 +26,8 @@ export const getCustomerSettings = async (
     const customerSettings = {
       makes: makes.map((make) => ({
         _id: make._id,
-        brand: make.brand,
+        make: make.make,
+        models: make.models || [],
       })),
       serviceLevels: settings.serviceLevels || [],
       holidays: settings.holidays || [],

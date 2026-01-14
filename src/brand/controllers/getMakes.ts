@@ -18,7 +18,12 @@ export const getMakes = async (
 
     logger.info("Makes retrieved successfully", {
       count: makes.length,
+      sample: makes.length > 0 ? makes[0] : null,
     });
+
+    if (makes.length === 0) {
+      logger.warn("No makes found in database. Make sure brands have been migrated.");
+    }
 
     res.status(200).json(makes);
   } catch (error) {

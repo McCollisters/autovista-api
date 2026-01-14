@@ -1,5 +1,5 @@
 import express from "express";
-import { Quote, Portal } from "@/_global/models";
+import { Quote, Portal, ModifierSet } from "@/_global/models";
 import { TransportType } from "../../_global/enums";
 import { getCoordinates } from "../../_global/utils/location";
 import { getMiles } from "../services/getMiles";
@@ -87,10 +87,41 @@ export const updateQuoteAlternative = async (
     const portal = originalQuote.portalId as any;
 
     // Use provided values or fall back to existing quote values
-    const finalCommission =
-      commission !== undefined && commission !== null
-        ? parseInt(String(commission), 10)
-        : (originalQuote as any).commission || 0;
+    // Extract base commission from existing quote if not provided
+    // The stored commission in totalPricing.modifiers.commission is the TOTAL commission (includes fixedCommission),
+    // and it's the sum across all vehicles. We need the BASE commission per vehicle.
+    let finalCommission = 0;
+    if (commission !== undefined && commission !== null) {
+      finalCommission = parseInt(String(commission), 10);
+    } else {
+      // Try to extract base commission from existing vehicle pricing
+      // Each vehicle has pricing.modifiers.commission which is the calculated commission (base + fixedCommission)
+      // We need to reverse-engineer the base commission by subtracting fixedCommission
+      if (originalQuote.vehicles && originalQuote.vehicles.length > 0) {
+        const firstVehicle = originalQuote.vehicles[0];
+        const vehicleCommission = (firstVehicle as any).pricing?.modifiers?.commission || 0;
+        const vehicleBase = (firstVehicle as any).pricing?.base || 0;
+        
+        // Get portal modifiers to calculate fixedCommission
+        const portalModifiers = await ModifierSet.findOne({
+          portalId: portal._id,
+        }).lean() as any;
+        
+        if (portalModifiers?.fixedCommission && vehicleCommission > 0 && vehicleBase > 0) {
+          // Calculate what fixedCommission would be for this vehicle's base rate
+          const fixedCommissionValue = portalModifiers.fixedCommission.valueType === "percentage"
+            ? Math.ceil(vehicleBase * (portalModifiers.fixedCommission.value / 100))
+            : (portalModifiers.fixedCommission.value || 0);
+          
+          // Extract base commission by subtracting fixedCommission
+          finalCommission = Math.max(0, vehicleCommission - fixedCommissionValue);
+        } else if (vehicleCommission > 0) {
+          // If no fixedCommission, the vehicle commission IS the base commission
+          finalCommission = vehicleCommission;
+        }
+        // If vehicleCommission is 0, finalCommission stays 0
+      }
+    }
 
     const finalVehicles = vehicles || originalQuote.vehicles;
     const finalPickup = pickup || originalQuote.origin?.userInput;
@@ -115,6 +146,40 @@ export const updateQuoteAlternative = async (
       });
     }
 
+    // Format locations for API calls: use validated location if available, otherwise construct from user input and state
+    const formatLocationForAPI = (
+      validatedLocation: string | null,
+      userInput: string,
+      state: string | null,
+    ): string => {
+      if (validatedLocation) {
+        return validatedLocation;
+      }
+      // If we have state, try to construct "City, State" format
+      if (state) {
+        // If userInput already contains a comma, use it as-is (might already be "City, State")
+        if (userInput.includes(",")) {
+          return userInput.trim();
+        }
+        // Otherwise, try to extract city from userInput and add state
+        const city = userInput.trim();
+        return `${city}, ${state}`;
+      }
+      // Fallback to userInput if no state available
+      return userInput.trim();
+    };
+
+    const originFormatted = formatLocationForAPI(
+      originValidated.location,
+      finalPickup,
+      originValidated.state,
+    );
+    const destinationFormatted = formatLocationForAPI(
+      destinationValidated.location,
+      finalDelivery,
+      destinationValidated.state,
+    );
+
     // Normalize vehicles
     const normalizedVehicles = finalVehicles.map((v: any) => {
       const isOperable = !(
@@ -123,17 +188,37 @@ export const updateQuoteAlternative = async (
         v.operable === "false" ||
         v.operable?.value === "No"
       );
+      
+      // Extract make - handle both string and object formats
+      let make = v.make;
+      if (make && typeof make === 'object') {
+        make = make.value || make.label || make;
+      }
+      
+      // Extract model - handle both string and object formats
+      let model = v.model;
+      if (model && typeof model === 'object') {
+        model = model.value || model.label || model;
+      }
+      
+      // Extract pricingClass if provided in model object
+      let pricingClass = v.pricingClass;
+      if (model && typeof model === 'object' && model.pricingClass) {
+        pricingClass = model.pricingClass;
+      }
+      
       return {
         ...v,
+        make: typeof make === 'string' ? make : String(make),
+        model: typeof model === 'string' ? model : String(model),
+        pricingClass: pricingClass || v.pricingClass,
         isInoperable: !isOperable,
       };
     });
 
     // Get coordinates
-    const originCoords = await getCoordinates(originValidated.location || finalPickup);
-    const destinationCoords = await getCoordinates(
-      destinationValidated.location || finalDelivery,
-    );
+    const originCoords = await getCoordinates(originFormatted);
+    const destinationCoords = await getCoordinates(destinationFormatted);
 
     if (!originCoords || !destinationCoords) {
       return next({
@@ -157,8 +242,8 @@ export const updateQuoteAlternative = async (
       portal,
       vehicles: normalizedVehicles,
       miles,
-      origin: originValidated.location || finalPickup,
-      destination: destinationValidated.location || finalDelivery,
+      origin: originFormatted,
+      destination: destinationFormatted,
       commission: finalCommission,
     });
 
@@ -168,7 +253,7 @@ export const updateQuoteAlternative = async (
     // Update quote
     originalQuote.origin = {
       userInput: finalPickup,
-      validated: originValidated.location || finalPickup,
+      validated: originFormatted,
       state: originValidated.state as any,
       coordinates: {
         long: originCoords[0].toString(),
@@ -178,7 +263,7 @@ export const updateQuoteAlternative = async (
 
     originalQuote.destination = {
       userInput: finalDelivery,
-      validated: destinationValidated.location || finalDelivery,
+      validated: destinationFormatted,
       state: destinationValidated.state as any,
       coordinates: {
         long: destinationCoords[0].toString(),
@@ -187,7 +272,10 @@ export const updateQuoteAlternative = async (
     };
 
     originalQuote.miles = miles;
-    originalQuote.transportType = finalTransportType as TransportType;
+    // Only update transportType if it was provided in the request
+    if (transportType !== undefined) {
+      originalQuote.transportType = finalTransportType as TransportType;
+    }
     originalQuote.vehicles = vehicleQuotes;
     originalQuote.totalPricing = totalPricing;
 

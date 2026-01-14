@@ -1,5 +1,5 @@
 import { IVehicle } from "../../_global/interfaces";
-import { ModifierSet, IPortal } from "@/_global/models";
+import { ModifierSet, IPortal, Brand } from "@/_global/models";
 import { getTMSBaseRate } from "../integrations/getTMSBaseRate";
 import { getCustomBaseRate } from "../integrations/getCustomBaseRate";
 import { getJKBaseRate } from "../integrations/getJKBaseRate";
@@ -158,10 +158,12 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   }
 
   if (portalModifiers?.fixedCommission) {
-    calculatedCommission = calculateModifier(
+    const fixedCommissionValue = calculateModifier(
       portalModifiers.fixedCommission,
       base,
     );
+    // Add fixedCommission to the quote's commission if both exist
+    calculatedCommission = commission + fixedCommissionValue;
   }
 
   if (portalModifiers?.discount) {
@@ -172,48 +174,75 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   }
 
   if (vehicle.isOversize && globalModifiers.oversize) {
-    switch (vehicle.pricingClass) {
-      case VehicleClass.SUV:
+    // Normalize pricing class to ensure it matches enum values (case-insensitive)
+    const pricingClassNormalized = (vehicle.pricingClass || "").toLowerCase().trim();
+    
+    // Check for SUV
+    if (pricingClassNormalized === VehicleClass.SUV || pricingClassNormalized === "suv") {
+      const suvValue = globalModifiers.oversize.suv;
+      if (suvValue !== undefined && suvValue !== null) {
         calculatedGlobalOversize = calculateModifier(
-          { value: globalModifiers.oversize.suv, valueType: "flat" },
+          { value: suvValue, valueType: "flat" },
           base,
         );
-        break;
-      case VehicleClass.Van:
+      }
+    }
+    // Check for Van
+    else if (pricingClassNormalized === VehicleClass.Van || pricingClassNormalized === "van") {
+      const vanValue = globalModifiers.oversize.van;
+      if (vanValue !== undefined && vanValue !== null) {
         calculatedGlobalOversize = calculateModifier(
-          { value: globalModifiers.oversize.van, valueType: "flat" },
+          { value: vanValue, valueType: "flat" },
           base,
         );
-        break;
-      case VehicleClass.Pickup2Door:
+      }
+    }
+    // Check for Pickup 2 Door
+    else if (
+      pricingClassNormalized === VehicleClass.Pickup2Door ||
+      pricingClassNormalized === "pickup_2_doors" ||
+      pricingClassNormalized === "pickup 2 doors" ||
+      pricingClassNormalized === "pick up 2 doors"
+    ) {
+      const pickup2Value = globalModifiers.oversize.pickup_2_doors;
+      if (pickup2Value !== undefined && pickup2Value !== null) {
         calculatedGlobalOversize = calculateModifier(
-          { value: globalModifiers.oversize.pickup_2_doors, valueType: "flat" },
+          { value: pickup2Value, valueType: "flat" },
           base,
         );
-        break;
-      case VehicleClass.Pickup4Door:
+      }
+    }
+    // Check for Pickup 4 Door
+    else if (
+      pricingClassNormalized === VehicleClass.Pickup4Door ||
+      pricingClassNormalized === "pickup_4_doors" ||
+      pricingClassNormalized === "pickup 4 doors" ||
+      pricingClassNormalized === "pick up 4 doors"
+    ) {
+      const pickup4Value = globalModifiers.oversize.pickup_4_doors;
+      if (pickup4Value !== undefined && pickup4Value !== null) {
         calculatedGlobalOversize = calculateModifier(
-          { value: globalModifiers.oversize.pickup_4_doors, valueType: "flat" },
+          { value: pickup4Value, valueType: "flat" },
           base,
         );
-        break;
-      case VehicleClass.Sedan:
-        // Use sedan value if available, otherwise use a default value
-        const sedanValue = (globalModifiers.oversize as any).sedan || 1000;
+      }
+    }
+    // Check for Sedan
+    else if (pricingClassNormalized === VehicleClass.Sedan || pricingClassNormalized === "sedan") {
+      const sedanValue = (globalModifiers.oversize as any).sedan || 1000;
+      calculatedGlobalOversize = calculateModifier(
+        { value: sedanValue, valueType: "flat" },
+        base,
+      );
+    }
+    // Default case
+    else {
+      if (globalModifiers.oversize.default) {
         calculatedGlobalOversize = calculateModifier(
-          { value: sedanValue, valueType: "flat" },
+          { value: globalModifiers.oversize.default, valueType: "flat" },
           base,
         );
-        break;
-      default:
-        // For other vehicle classes, use a default oversize value if isOversize is true
-        if (globalModifiers.oversize.default) {
-          calculatedGlobalOversize = calculateModifier(
-            { value: globalModifiers.oversize.default, valueType: "flat" },
-            base,
-          );
-        }
-        break;
+      }
     }
   }
 
@@ -221,17 +250,16 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     calculatedInoperable = calculateModifier(globalModifiers.inoperable, base);
   }
 
-  // Only apply enclosed modifiers if the vehicle is using enclosed transport
-  const isEnclosedTransport = vehicle.transportType === "enclosed";
-
-  if (isEnclosedTransport && globalModifiers.enclosedFlat) {
+  // Always calculate enclosed modifiers (for display purposes, we show both open and enclosed options)
+  // These will be applied when calculating enclosed pricing, regardless of vehicle transport type
+  if (globalModifiers.enclosedFlat) {
     calculatedEnclosedFlat = calculateModifier(
       globalModifiers.enclosedFlat,
       base,
     );
   }
 
-  if (isEnclosedTransport && globalModifiers.enclosedPercent) {
+  if (globalModifiers.enclosedPercent) {
     calculatedEnclosedPercent = calculateModifier(
       globalModifiers.enclosedPercent,
       base,
@@ -317,13 +345,17 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   const serviceLevelData = {
     whiteGlove: calculateServiceLevelTotals(4, false),
     oneOpen: calculateServiceLevelTotals(0, false),
-    oneEnclosed: calculateServiceLevelTotals(0, isEnclosedTransport),
-    three: calculateServiceLevelTotals(1, false),
-    five: calculateServiceLevelTotals(2, false),
-    seven: calculateServiceLevelTotals(3, false),
+    oneEnclosed: calculateServiceLevelTotals(0, true),
+    threeOpen: calculateServiceLevelTotals(1, false),
+    threeEnclosed: calculateServiceLevelTotals(1, true),
+    fiveOpen: calculateServiceLevelTotals(2, false),
+    fiveEnclosed: calculateServiceLevelTotals(2, true),
+    sevenOpen: calculateServiceLevelTotals(3, false),
+    sevenEnclosed: calculateServiceLevelTotals(3, true),
   };
 
   // Populate company tariff array with service level data (excluding WhiteGlove)
+  // Use open pricing for company tariff array (legacy structure)
   let companyTarriffArray = [
     {
       serviceLevelOption: ServiceLevelOption.OneDay,
@@ -331,17 +363,138 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     },
     {
       serviceLevelOption: ServiceLevelOption.ThreeDay,
-      value: serviceLevelData.three.companyTariff,
+      value: serviceLevelData.threeOpen.companyTariff,
     },
     {
       serviceLevelOption: ServiceLevelOption.FiveDay,
-      value: serviceLevelData.five.companyTariff,
+      value: serviceLevelData.fiveOpen.companyTariff,
     },
     {
       serviceLevelOption: ServiceLevelOption.SevenDay,
-      value: serviceLevelData.seven.companyTariff,
+      value: serviceLevelData.sevenOpen.companyTariff,
     },
   ];
+
+  // Build totals object with open/enclosed structure for all service levels
+  const totals = {
+    whiteGlove: roundCurrency(baseWhiteGlove),
+    one: {
+      open: {
+        total: roundCurrency(serviceLevelData.oneOpen.baseWithModifiers),
+        companyTariff: serviceLevelData.oneOpen.companyTariff,
+        commission: calculatedCommission,
+        totalWithCompanyTariffAndCommission: roundCurrency(
+          serviceLevelData.oneOpen.baseWithModifiers +
+            calculatedCommission +
+            serviceLevelData.oneOpen.companyTariff,
+        ),
+      },
+      enclosed: {
+        total: roundCurrency(serviceLevelData.oneEnclosed.baseWithModifiers),
+        companyTariff: serviceLevelData.oneEnclosed.companyTariff,
+        commission: calculatedCommission,
+        totalWithCompanyTariffAndCommission: roundCurrency(
+          serviceLevelData.oneEnclosed.baseWithModifiers +
+            calculatedCommission +
+            serviceLevelData.oneEnclosed.companyTariff,
+        ),
+      },
+    },
+    three: {
+      open: {
+        total: roundCurrency(serviceLevelData.threeOpen.baseWithModifiers),
+        companyTariff: serviceLevelData.threeOpen.companyTariff,
+        commission: calculatedCommission,
+        totalWithCompanyTariffAndCommission: roundCurrency(
+          serviceLevelData.threeOpen.baseWithModifiers +
+            calculatedCommission +
+            serviceLevelData.threeOpen.companyTariff,
+        ),
+      },
+      enclosed: {
+        total: roundCurrency(serviceLevelData.threeEnclosed.baseWithModifiers),
+        companyTariff: serviceLevelData.threeEnclosed.companyTariff,
+        commission: calculatedCommission,
+        totalWithCompanyTariffAndCommission: roundCurrency(
+          serviceLevelData.threeEnclosed.baseWithModifiers +
+            calculatedCommission +
+            serviceLevelData.threeEnclosed.companyTariff,
+        ),
+      },
+      // Legacy fallback - use open pricing (include commission)
+      total: roundCurrency(serviceLevelData.threeOpen.baseWithModifiers),
+      companyTariff: serviceLevelData.threeOpen.companyTariff,
+      commission: calculatedCommission,
+      totalWithCompanyTariffAndCommission: roundCurrency(
+        serviceLevelData.threeOpen.baseWithModifiers +
+          calculatedCommission +
+          serviceLevelData.threeOpen.companyTariff,
+      ),
+    },
+    five: {
+      open: {
+        total: roundCurrency(serviceLevelData.fiveOpen.baseWithModifiers),
+        companyTariff: serviceLevelData.fiveOpen.companyTariff,
+        commission: calculatedCommission,
+        totalWithCompanyTariffAndCommission: roundCurrency(
+          serviceLevelData.fiveOpen.baseWithModifiers +
+            calculatedCommission +
+            serviceLevelData.fiveOpen.companyTariff,
+        ),
+      },
+      enclosed: {
+        total: roundCurrency(serviceLevelData.fiveEnclosed.baseWithModifiers),
+        companyTariff: serviceLevelData.fiveEnclosed.companyTariff,
+        commission: calculatedCommission,
+        totalWithCompanyTariffAndCommission: roundCurrency(
+          serviceLevelData.fiveEnclosed.baseWithModifiers +
+            calculatedCommission +
+            serviceLevelData.fiveEnclosed.companyTariff,
+        ),
+      },
+      // Legacy fallback - use open pricing (include commission)
+      total: roundCurrency(serviceLevelData.fiveOpen.baseWithModifiers),
+      companyTariff: serviceLevelData.fiveOpen.companyTariff,
+      commission: calculatedCommission,
+      totalWithCompanyTariffAndCommission: roundCurrency(
+        serviceLevelData.fiveOpen.baseWithModifiers +
+          calculatedCommission +
+          serviceLevelData.fiveOpen.companyTariff,
+      ),
+    },
+    seven: {
+      open: {
+        total: roundCurrency(serviceLevelData.sevenOpen.baseWithModifiers),
+        companyTariff: serviceLevelData.sevenOpen.companyTariff,
+        commission: calculatedCommission,
+        totalWithCompanyTariffAndCommission: roundCurrency(
+          serviceLevelData.sevenOpen.baseWithModifiers +
+            calculatedCommission +
+            serviceLevelData.sevenOpen.companyTariff,
+        ),
+      },
+      enclosed: {
+        total: roundCurrency(serviceLevelData.sevenEnclosed.baseWithModifiers),
+        companyTariff: serviceLevelData.sevenEnclosed.companyTariff,
+        commission: calculatedCommission,
+        totalWithCompanyTariffAndCommission: roundCurrency(
+          serviceLevelData.sevenEnclosed.baseWithModifiers +
+            calculatedCommission +
+            serviceLevelData.sevenEnclosed.companyTariff,
+        ),
+      },
+      // Legacy fallback - use open pricing (include commission)
+      total: roundCurrency(serviceLevelData.sevenOpen.baseWithModifiers),
+      companyTariff: serviceLevelData.sevenOpen.companyTariff,
+      commission: calculatedCommission,
+      totalWithCompanyTariffAndCommission: roundCurrency(
+        serviceLevelData.sevenOpen.baseWithModifiers +
+          calculatedCommission +
+          serviceLevelData.sevenOpen.companyTariff,
+      ),
+    },
+  };
+
 
   return {
     base,
@@ -361,61 +514,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       serviceLevels: globalModifiers.serviceLevels,
       companyTariffs: companyTarriffArray,
     },
-    totals: {
-      whiteGlove: roundCurrency(baseWhiteGlove),
-      one: {
-        open: {
-          total: roundCurrency(serviceLevelData.oneOpen.baseWithModifiers),
-          companyTariff: serviceLevelData.oneOpen.companyTariff,
-          commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(
-            serviceLevelData.oneOpen.baseWithModifiers +
-              calculatedCommission +
-              serviceLevelData.oneOpen.companyTariff,
-          ),
-        },
-        enclosed: {
-          total: roundCurrency(serviceLevelData.oneEnclosed.baseWithModifiers),
-          companyTariff: serviceLevelData.oneEnclosed.companyTariff,
-          commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(
-            serviceLevelData.oneEnclosed.baseWithModifiers +
-              calculatedCommission +
-              serviceLevelData.oneEnclosed.companyTariff,
-          ),
-        },
-      },
-      three: {
-        total: roundCurrency(serviceLevelData.three.baseWithModifiers),
-        companyTariff: serviceLevelData.three.companyTariff,
-        commission: calculatedCommission,
-        totalWithCompanyTariffAndCommission: roundCurrency(
-          serviceLevelData.three.baseWithModifiers +
-            calculatedCommission +
-            serviceLevelData.three.companyTariff,
-        ),
-      },
-      five: {
-        total: roundCurrency(serviceLevelData.five.baseWithModifiers),
-        companyTariff: serviceLevelData.five.companyTariff,
-        commission: calculatedCommission,
-        totalWithCompanyTariffAndCommission: roundCurrency(
-          serviceLevelData.five.baseWithModifiers +
-            calculatedCommission +
-            serviceLevelData.five.companyTariff,
-        ),
-      },
-      seven: {
-        total: roundCurrency(serviceLevelData.seven.baseWithModifiers),
-        companyTariff: serviceLevelData.seven.companyTariff,
-        commission: calculatedCommission,
-        totalWithCompanyTariffAndCommission: roundCurrency(
-          serviceLevelData.seven.baseWithModifiers +
-            calculatedCommission +
-            serviceLevelData.seven.companyTariff,
-        ),
-      },
-    },
+    totals,
   };
 };
 
@@ -437,8 +536,69 @@ export const updateVehiclesWithPricing = async ({
   const updatedVehicles: IVehicle[] = [];
 
   for (const vehicle of vehicles) {
+    // Look up pricing class from brand/model data if not already set or if it needs to be corrected
+    let pricingClass = vehicle.pricingClass;
+    
+    if (vehicle.make && vehicle.model) {
+      try {
+        const brand = await Brand.findOne({ 
+          make: { $regex: new RegExp(`^${vehicle.make}$`, 'i') } 
+        }).lean();
+        
+        if (brand && brand.models) {
+          const modelData = brand.models.find(
+            (m) => m.model.toLowerCase() === vehicle.model?.toLowerCase()
+          );
+          
+          if (modelData && modelData.pricingClass) {
+            // Use the pricing class from brand/model data
+            // Normalize to match VehicleClass enum values (lowercase)
+            const normalizedPricingClass = modelData.pricingClass.toLowerCase().trim();
+            
+            // Map common variations to VehicleClass enum values
+            const pricingClassMap: Record<string, string> = {
+              'suv': VehicleClass.SUV,
+              'sedan': VehicleClass.Sedan,
+              'van': VehicleClass.Van,
+              'pickup_4_doors': VehicleClass.Pickup4Door,
+              'pickup 4 doors': VehicleClass.Pickup4Door,
+              'pick up 4 doors': VehicleClass.Pickup4Door,
+              'pickup_2_doors': VehicleClass.Pickup2Door,
+              'pickup 2 doors': VehicleClass.Pickup2Door,
+              'pick up 2 doors': VehicleClass.Pickup2Door,
+              'other': VehicleClass.Other,
+            };
+            
+            // Use mapped value if available, otherwise use the original (schema validation will catch invalid values)
+            pricingClass = pricingClassMap[normalizedPricingClass] || modelData.pricingClass;
+          }
+        }
+      } catch (error) {
+        // If lookup fails, continue with existing pricingClass or default
+        console.warn(`Failed to lookup pricing class for ${vehicle.make} ${vehicle.model}:`, error);
+      }
+    }
+    
+    // Determine final pricing class
+    const finalPricingClass = pricingClass || vehicle.pricingClass || VehicleClass.Sedan;
+    
+    // Automatically set isOversize to true for SUVs, vans, and pickups if not explicitly set
+    const shouldBeOversize = 
+      finalPricingClass === VehicleClass.SUV ||
+      finalPricingClass === VehicleClass.Van ||
+      finalPricingClass === VehicleClass.Pickup2Door ||
+      finalPricingClass === VehicleClass.Pickup4Door;
+    
+    // Use the looked-up pricing class (or existing one if lookup didn't find anything)
+    const vehicleWithPricingClass = {
+      ...vehicle,
+      pricingClass: finalPricingClass,
+      // Set isOversize to true for SUVs, vans, and pickups if not explicitly set to false
+      isOversize: vehicle.isOversize !== undefined ? vehicle.isOversize : shouldBeOversize,
+    };
+
     const pricing = await getVehiclePrice({
-      vehicle,
+      vehicle: vehicleWithPricingClass,
       miles,
       origin,
       destination,
@@ -447,7 +607,7 @@ export const updateVehiclesWithPricing = async ({
     });
 
     updatedVehicles.push({
-      ...vehicle,
+      ...vehicleWithPricingClass,
       pricing,
     } as IVehicle);
   }
@@ -557,6 +717,16 @@ const getJKVehiclePrice = async ({
     companyTariff = companyTariff - portalAdminDiscount;
   }
 
+  // Calculate commission: add fixedCommission from modifier set to quote's commission if both exist
+  let calculatedCommission = commission;
+  if (portalModifiers?.fixedCommission) {
+    const fixedCommissionValue = calculateModifier(
+      portalModifiers.fixedCommission,
+      mcBase,
+    );
+    calculatedCommission = commission + fixedCommissionValue;
+  }
+
   // JK: No service level markup - all service levels have same price
   const serviceLevelMarkup = 0;
 
@@ -568,7 +738,7 @@ const getJKVehiclePrice = async ({
     enclosedMarkup +
     serviceLevelMarkup +
     inoperableMarkup +
-    commission +
+    calculatedCommission +
     companyTariff;
 
   // Return pricing structure matching the standard format
@@ -586,7 +756,7 @@ const getJKVehiclePrice = async ({
       fuel: 0,
       enclosedFlat: enclosedMarkup,
       enclosedPercent: 0,
-      commission: commission,
+      commission: calculatedCommission,
       serviceLevels: [], // JK: No service level variations
       companyTariffs: [
         { serviceLevelOption: ServiceLevelOption.OneDay, value: companyTariff },
@@ -610,32 +780,71 @@ const getJKVehiclePrice = async ({
         open: {
           total: roundCurrency(totalSD),
           companyTariff: companyTariff,
-          commission: commission,
+          commission: calculatedCommission,
           totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
         },
         enclosed: {
           total: roundCurrency(totalSD),
           companyTariff: companyTariff,
-          commission: commission,
+          commission: calculatedCommission,
           totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
         },
       },
       three: {
+        open: {
+          total: roundCurrency(totalSD),
+          companyTariff: companyTariff,
+          commission: calculatedCommission,
+          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+        },
+        enclosed: {
+          total: roundCurrency(totalSD + enclosedMarkup),
+          companyTariff: companyTariff,
+          commission: calculatedCommission,
+          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal + enclosedMarkup),
+        },
+        // Legacy fallback
         total: roundCurrency(totalSD),
         companyTariff: companyTariff,
-        commission: commission,
+        commission: calculatedCommission,
         totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
       },
       five: {
+        open: {
+          total: roundCurrency(totalSD),
+          companyTariff: companyTariff,
+          commission: calculatedCommission,
+          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+        },
+        enclosed: {
+          total: roundCurrency(totalSD + enclosedMarkup),
+          companyTariff: companyTariff,
+          commission: calculatedCommission,
+          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal + enclosedMarkup),
+        },
+        // Legacy fallback
         total: roundCurrency(totalSD),
         companyTariff: companyTariff,
-        commission: commission,
+        commission: calculatedCommission,
         totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
       },
       seven: {
+        open: {
+          total: roundCurrency(totalSD),
+          companyTariff: companyTariff,
+          commission: calculatedCommission,
+          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+        },
+        enclosed: {
+          total: roundCurrency(totalSD + enclosedMarkup),
+          companyTariff: companyTariff,
+          commission: calculatedCommission,
+          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal + enclosedMarkup),
+        },
+        // Legacy fallback
         total: roundCurrency(totalSD),
         companyTariff: companyTariff,
-        commission: commission,
+        commission: calculatedCommission,
         totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
       },
     },

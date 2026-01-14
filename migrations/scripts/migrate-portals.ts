@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import {
   MigrationBase,
   MigrationResult,
@@ -5,7 +6,9 @@ import {
 } from "../utils/migration-base";
 
 // Configuration constants
-const MAX_PORTALS_TO_PROCESS = 15; // Set to null or undefined to process all portals
+// Set to null or undefined to process all portals
+// Set to a number to limit processing (useful for testing)
+const MAX_PORTALS_TO_PROCESS: number | null = null; // Process all portals
 
 /**
  * Portal Migration Script
@@ -29,6 +32,11 @@ const MAX_PORTALS_TO_PROCESS = 15; // Set to null or undefined to process all po
  *    export MIGRATION_SOURCE_URI="mongodb://localhost:27017/source-database"
  *    export MIGRATION_DEST_URI="mongodb://localhost:27017/destination-database"
  * 2. Run: npx tsx -r dotenv/config migrations/scripts/migrate-portals.ts
+ *
+ * IMPORTANT: This migration ensures:
+ * - _id is always an ObjectId (not a string)
+ * - refId field is never included (portals don't have refId)
+ * - parentPortalId is converted to ObjectId if it's a string
  */
 
 interface OldPortal {
@@ -58,6 +66,8 @@ interface OldPortal {
   displayDiscountOption?: boolean;
   portalQuoteExpirationDays?: number;
   parentPortal?: any;
+  isDealership?: boolean;
+  disableAgentNotifications?: boolean;
   customRates?: {
     mileage?: Record<string, number>;
     largeClassSurcharge?: number;
@@ -70,6 +80,8 @@ interface OldPortal {
   };
   createdAt?: Date;
   updatedAt?: Date;
+  // Explicitly exclude refId - portals should NEVER have refId
+  refId?: never;
 }
 
 interface ICustomRate {
@@ -85,10 +97,12 @@ export class PortalMigration extends MigrationBase {
       console.log("🔄 Running portal migration UP...");
 
       // Get source connection (prod database) for reading
+      console.log("📡 Getting source connection...");
       const sourceConnection = this.getSourceConnection();
       const sourceDb = sourceConnection.db;
 
       // Get destination connection (dev database) for writing
+      console.log("📡 Getting destination connection...");
       const destinationConnection = this.getDestinationConnection();
       const destinationDb = destinationConnection.db;
 
@@ -96,10 +110,12 @@ export class PortalMigration extends MigrationBase {
         throw new Error("Database connections not available");
       }
 
+      console.log("📋 Accessing collections...");
       const sourcePortalsCollection = sourceDb.collection("portals");
       const destinationPortalsCollection = destinationDb.collection("portals");
 
       // Count existing documents in source
+      console.log("🔍 Counting portals in source database...");
       const totalPortals = await sourcePortalsCollection.countDocuments();
       console.log(`📦 Found ${totalPortals} portals in source database`);
 
@@ -142,25 +158,30 @@ export class PortalMigration extends MigrationBase {
         portals as OldPortal[],
         async (portal: OldPortal, index) => {
           try {
+            // Transform portal to new structure
             const transformedPortal = this.transformPortal(portal);
+
+            // Use the transformed portal directly - it already has the correct structure
+            // and explicitly excludes refId (refId is never in the transformPortal return)
+            const cleanPortal = transformedPortal;
 
             // Replace or insert the transformed portal into destination database
             // This will overwrite existing portals with the same _id
             const replaceResult = await destinationPortalsCollection.replaceOne(
-              { _id: portal._id },
-              transformedPortal,
+              { _id: cleanPortal._id },
+              cleanPortal,
               { upsert: true },
             );
 
             if (replaceResult.acknowledged) {
               migratedCount++;
-              if (index % 10 === 0) {
+              if (migratedCount % 10 === 0 || migratedCount === 1) {
                 console.log(
-                  `📊 Processed ${index + 1}/${portals.length} portals`,
+                  `📊 Processed ${migratedCount}/${portals.length} portals (${replaceResult.modifiedCount} updated, ${replaceResult.upsertedCount} inserted)`,
                 );
               }
             } else {
-              console.error(`❌ Failed to save portal ${portal._id}`);
+              console.error(`❌ Failed to save portal ${portal._id} - operation not acknowledged`);
               errorCount++;
             }
           } catch (error) {
@@ -362,8 +383,23 @@ export class PortalMigration extends MigrationBase {
       console.log(`🔍 Portal ${portal._id} has no custom rates`);
     }
 
+    // Ensure _id is an ObjectId, not a string
+    let portalId = portal._id;
+    if (typeof portalId === "string") {
+      // If it's a valid ObjectId string, convert it
+      if (mongoose.Types.ObjectId.isValid(portalId)) {
+        portalId = new mongoose.Types.ObjectId(portalId);
+      } else {
+        console.warn(
+          `⚠️  Portal ${portalId} has invalid _id format, using as-is`,
+        );
+      }
+    }
+
+    // Build portal object - explicitly include only allowed fields
+    // CRITICAL: refId is NEVER included - portals don't have refId
     return {
-      _id: portal._id,
+      _id: portalId,
       status: status,
       companyName: portal.companyName,
       contact: {
@@ -381,6 +417,8 @@ export class PortalMigration extends MigrationBase {
         zip: portal.companyZip || null,
       },
       logo: portal.companyLogo || null,
+      isDealership: portal.isDealership || false,
+      disableAgentNotifications: portal.disableAgentNotifications || false,
       options: {
         overrideLogo: portal.displayMCLogo === false, // Inverted logic
         enableCustomRates: portal.hasCustomRates || false,
@@ -404,16 +442,23 @@ export class PortalMigration extends MigrationBase {
         quoteForm: {
           enableCommissionPerVehicle:
             portal.displayCommissionPerVehicle !== false,
+          enableCommission: true, // Default to true
         },
         orderPDF: {
           enablePriceBreakdown: !portal.displayPDFTotalPriceOnly,
         },
         quoteExpiryDays: portal.portalQuoteExpirationDays || 30,
       },
-      parentPortalId: portal.parentPortal || null, // This will be converted to ObjectId during import
+      parentPortalId: portal.parentPortal 
+        ? (typeof portal.parentPortal === 'string' && mongoose.Types.ObjectId.isValid(portal.parentPortal)
+            ? new mongoose.Types.ObjectId(portal.parentPortal)
+            : portal.parentPortal instanceof mongoose.Types.ObjectId
+            ? portal.parentPortal
+            : null)
+        : null,
       customRates: customRates,
       createdAt: portal.createdAt || new Date(),
-      updatedAt: portal.updatedAt || new Date(),
+      updatedAt: new Date(), // Always use current time
     };
   }
 }

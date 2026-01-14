@@ -1,11 +1,12 @@
 /**
  * Generate White Glove Pricing for Recent Quotes
  *
- * This script generates white glove pricing values for quotes created in the past 100 days.
- * It recalculates vehicle pricing and total pricing to ensure white glove values are populated.
+ * This script generates white glove pricing values for quotes created between 100-200 days ago.
+ * It ONLY updates white glove pricing values - all other pricing (service levels, modifiers, etc.)
+ * is preserved exactly as it was.
  *
- * IMPORTANT: This script will recalculate ALL pricing for quotes, not just white glove.
- * It uses the same recalculation logic as the quote creation/update flow.
+ * IMPORTANT: This script only calculates and updates white glove pricing. It does NOT
+ * recalculate service level totals or any other pricing values.
  *
  * To run this script:
  * 1. Set your MongoDB connection string:
@@ -16,36 +17,37 @@
 
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { Quote } from "@/_global/models";
+import { Quote, ModifierSet } from "@/_global/models";
 import { getMiles } from "@/quote/services/getMiles";
-import { updateVehiclesWithPricing } from "@/quote/services/updateVehiclesWithPricing";
-import { calculateTotalPricing } from "@/quote/services/calculateTotalPricing";
 
 dotenv.config();
 
-const BATCH_SIZE = 50; // Smaller batch size since we're doing more processing per quote
-const DAYS_BACK = 100;
+const BATCH_SIZE = 500; // Process 500 quotes at once
+const DAYS_BACK_START = 200; // Start from 200 days ago
+const DAYS_BACK_END = 100; // End at 100 days ago
 
 /**
- * Generate white glove pricing for quotes created in the past N days
+ * Generate white glove pricing for quotes created between 100-200 days ago
  */
 async function generateWhiteGlovePricing() {
-  console.log("\n=== Generating White Glove Pricing for Recent Quotes ===");
+  console.log("\n=== Generating White Glove Pricing for Quotes (100-200 days ago) ===");
 
   let skipCount = 0;
   let updatedCount = 0;
   let skippedCount = 0;
   let errorCount = 0;
 
-  // Calculate date threshold (100 days ago)
-  const dateThreshold = new Date();
-  dateThreshold.setDate(dateThreshold.getDate() - DAYS_BACK);
+  // Calculate date range (100-200 days ago)
+  const endDate = new Date();
+  endDate.setDate(endDate.getDate() - DAYS_BACK_END);
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - DAYS_BACK_START);
 
-  console.log(`Looking for quotes created after: ${dateThreshold.toISOString()}`);
+  console.log(`Looking for quotes created between: ${startDate.toISOString()} and ${endDate.toISOString()}`);
 
   // Get total count
   const totalQuotes = await Quote.countDocuments({
-    createdAt: { $gte: dateThreshold },
+    createdAt: { $gte: startDate, $lt: endDate },
   });
   console.log(`Total quotes to process: ${totalQuotes}`);
 
@@ -54,7 +56,7 @@ async function generateWhiteGlovePricing() {
 
     // Fetch batch of quotes with portal populated
     const quotes = await Quote.find({
-      createdAt: { $gte: dateThreshold },
+      createdAt: { $gte: startDate, $lt: endDate },
     })
       .populate("portalId")
       .sort({ createdAt: 1 })
@@ -118,47 +120,86 @@ async function generateWhiteGlovePricing() {
           continue;
         }
 
-        // Get commission from existing quote
-        const commission =
-          (quote.totalPricing?.modifiers?.commission as number) || 0;
+        // Get white glove multiplier from modifiers
+        const globalModifiersDoc = await ModifierSet.findOne({
+          isGlobal: true,
+        }).lean();
 
-        // Recalculate vehicle pricing (this will include white glove)
-        const vehiclesWithPricing = await updateVehiclesWithPricing({
-          vehicles,
-          miles,
-          origin: (quote.origin?.validated as string) || "",
-          destination: (quote.destination?.validated as string) || "",
-          portal,
-          commission,
+        if (!globalModifiersDoc) {
+          console.log(
+            `Skipping quote ${quote.refId || quote._id}: global modifiers not found`,
+          );
+          skippedCount++;
+          continue;
+        }
+
+        const globalModifiers = globalModifiersDoc as any;
+        const portalModifiers = (await ModifierSet.findOne({
+          portalId: portal._id,
+        }).lean()) as any;
+
+        const whiteGloveMultiplier = portalModifiers?.whiteGlove
+          ? portalModifiers.whiteGlove.multiplier
+          : globalModifiers.whiteGlove?.multiplier || 2;
+
+        // Calculate white glove pricing per vehicle (preserve all other pricing)
+        let totalWhiteGlove = 0;
+        const updatedVehicles = quote.vehicles.map((vehicle: any) => {
+          const vehicleObj = vehicle.toObject ? vehicle.toObject() : vehicle;
+          
+          // Calculate white glove for this vehicle
+          let baseWhiteGlove = miles * whiteGloveMultiplier;
+          if (
+            globalModifiers.whiteGlove?.minimum &&
+            baseWhiteGlove < globalModifiers.whiteGlove.minimum
+          ) {
+            baseWhiteGlove = globalModifiers.whiteGlove.minimum;
+          }
+
+          // Round to nearest dollar (matching the pricing calculation)
+          const whiteGloveValue = Math.round(baseWhiteGlove);
+          totalWhiteGlove += whiteGloveValue;
+
+          // Update only the white glove value, preserve everything else
+          return {
+            ...vehicleObj,
+            pricing: {
+              ...vehicleObj.pricing,
+              totals: {
+                ...vehicleObj.pricing?.totals,
+                whiteGlove: whiteGloveValue,
+              },
+            },
+          };
         });
 
-        // Recalculate total pricing
-        const totalPricing = await calculateTotalPricing(
-          vehiclesWithPricing,
-          portal,
-        );
+        // Update only the white glove total in totalPricing, preserve everything else
+        const updatedTotalPricing = {
+          ...quote.totalPricing,
+          totals: {
+            ...quote.totalPricing?.totals,
+            whiteGlove: totalWhiteGlove,
+          },
+        };
 
-        // Update quote
+        // Update quote - only update vehicles and totalPricing white glove values
         await Quote.updateOne(
           { _id: quote._id },
           {
             $set: {
-              vehicles: vehiclesWithPricing,
-              totalPricing,
-              miles,
+              vehicles: updatedVehicles,
+              "totalPricing.totals.whiteGlove": totalWhiteGlove,
             },
           },
         );
 
         // Check if white glove was actually generated
-        const whiteGloveValue =
-          totalPricing?.totals?.whiteGlove || 0;
         const previousWhiteGlove =
           (quote.totalPricing?.totals?.whiteGlove as number) || 0;
-        
-        if (whiteGloveValue > 0) {
+
+        if (totalWhiteGlove > 0) {
           console.log(
-            `✓ Updated quote ${quote.refId || quote._id}: white glove = $${whiteGloveValue} (was $${previousWhiteGlove})`,
+            `✓ Updated quote ${quote.refId || quote._id}: white glove = $${totalWhiteGlove} (was $${previousWhiteGlove})`,
           );
         } else if (previousWhiteGlove === 0) {
           console.log(

@@ -131,6 +131,27 @@ const vehicleSchema = new Schema(
           },
         },
         three: {
+          open: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          enclosed: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          // Legacy fallback
           total: { type: Number, required: true, default: 0 },
           companyTariff: { type: Number, required: true, default: 0 },
           commission: { type: Number, required: true, default: 0 },
@@ -141,6 +162,27 @@ const vehicleSchema = new Schema(
           },
         },
         five: {
+          open: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          enclosed: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          // Legacy fallback
           total: { type: Number, required: true, default: 0 },
           companyTariff: { type: Number, required: true, default: 0 },
           commission: { type: Number, required: true, default: 0 },
@@ -151,6 +193,27 @@ const vehicleSchema = new Schema(
           },
         },
         seven: {
+          open: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          enclosed: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          // Legacy fallback
           total: { type: Number, required: true, default: 0 },
           companyTariff: { type: Number, required: true, default: 0 },
           commission: { type: Number, required: true, default: 0 },
@@ -259,36 +322,99 @@ const quoteSchemaDefinition = {
           },
         },
       },
-      three: {
-        total: { type: Number, required: true, default: 0 },
-        companyTariff: { type: Number, required: true, default: 0 },
-        commission: { type: Number, required: true, default: 0 },
-        totalWithCompanyTariffAndCommission: {
-          type: Number,
-          required: true,
-          default: 0,
+        three: {
+          open: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          enclosed: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          // Legacy fallback
+          total: { type: Number, required: true, default: 0 },
+          companyTariff: { type: Number, required: true, default: 0 },
+          commission: { type: Number, required: true, default: 0 },
+          totalWithCompanyTariffAndCommission: {
+            type: Number,
+            required: true,
+            default: 0,
+          },
         },
-      },
-      five: {
-        total: { type: Number, required: true, default: 0 },
-        companyTariff: { type: Number, required: true, default: 0 },
-        commission: { type: Number, required: true, default: 0 },
-        totalWithCompanyTariffAndCommission: {
-          type: Number,
-          required: true,
-          default: 0,
+        five: {
+          open: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          enclosed: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          // Legacy fallback
+          total: { type: Number, required: true, default: 0 },
+          companyTariff: { type: Number, required: true, default: 0 },
+          commission: { type: Number, required: true, default: 0 },
+          totalWithCompanyTariffAndCommission: {
+            type: Number,
+            required: true,
+            default: 0,
+          },
         },
-      },
-      seven: {
-        total: { type: Number, required: true, default: 0 },
-        companyTariff: { type: Number, required: true, default: 0 },
-        commission: { type: Number, required: true, default: 0 },
-        totalWithCompanyTariffAndCommission: {
-          type: Number,
-          required: true,
-          default: 0,
+        seven: {
+          open: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          enclosed: {
+            total: { type: Number, required: true, default: 0 },
+            companyTariff: { type: Number, required: true, default: 0 },
+            commission: { type: Number, required: true, default: 0 },
+            totalWithCompanyTariffAndCommission: {
+              type: Number,
+              required: true,
+              default: 0,
+            },
+          },
+          // Legacy fallback
+          total: { type: Number, required: true, default: 0 },
+          companyTariff: { type: Number, required: true, default: 0 },
+          commission: { type: Number, required: true, default: 0 },
+          totalWithCompanyTariffAndCommission: {
+            type: Number,
+            required: true,
+            default: 0,
+          },
         },
-      },
     },
   },
   archivedAt: { type: Date, default: null },
@@ -351,7 +477,12 @@ quoteSchema.pre("save", function (this: IQuote, next: () => void) {
 });
 
 // Add auto-increment plugin
-quoteSchema.plugin(AutoIncrement, { inc_field: "refId", start_seq: 101000 });
+// Explicitly set the counter ID to ensure consistency
+quoteSchema.plugin(AutoIncrement, { 
+  inc_field: "refId", 
+  start_seq: 300000,
+  id: "Quote_refId" // Explicitly set counter ID to avoid conflicts
+});
 
 export { quoteSchema };
 export type { IQuote, IQuoteCustomer, IQuoteLocation } from "./interfaces";

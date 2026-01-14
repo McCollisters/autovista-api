@@ -1,5 +1,5 @@
 import express from "express";
-import { Quote } from "@/_global/models";
+import { Quote, ModifierSet } from "@/_global/models";
 
 export const getQuote = async (
   req: express.Request,
@@ -15,6 +15,15 @@ export const getQuote = async (
 
     if (!quote) {
       return next({ statusCode: 404, message: "Quote not found." });
+    }
+
+    // If portal is populated, also fetch and attach its modifierSet
+    if (quote.portalId && typeof quote.portalId === 'object' && (quote.portalId as any)._id) {
+      const portalId = (quote.portalId as any)._id;
+      const modifierSet = await ModifierSet.findOne({ portalId }).lean();
+      if (modifierSet) {
+        (quote.portalId as any).modifierSet = modifierSet;
+      }
     }
 
     res.status(200).json(quote);
