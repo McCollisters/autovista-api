@@ -34,6 +34,7 @@ interface ModelRegistry {
   Brand: Model<IBrand>; // Also known as "Make" in legacy API
   Survey: Model<ISurvey>;
   SurveyResponse: Model<ISurveyResponse>;
+  SurveyQuestion: Model<ISurvey>;
   Carrier: Model<ICarrier>;
   Settings: Model<ISettings>;
   EmailTemplate: Model<IEmailTemplate>;
@@ -61,6 +62,7 @@ export const models: ModelRegistry = {
     "SurveyResponse",
     surveyResponseSchema,
   ),
+  SurveyQuestion: createModel<ISurvey>("SurveyQuestion", surveySchema),
   Carrier: createModel<ICarrier>("Carrier", carrierSchema),
   Settings: createModel<ISettings>("Settings", settingsSchema),
   EmailTemplate: createModel<IEmailTemplate>("EmailTemplate", emailTemplateSchema),
@@ -76,6 +78,7 @@ export const {
   Brand,
   Survey,
   SurveyResponse,
+  SurveyQuestion,
   Carrier,
   Settings,
   EmailTemplate,

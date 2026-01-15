@@ -5,7 +5,7 @@ import {
 } from "../utils/migration-base";
 
 // Configuration constants
-const MAX_SURVEY_RESPONSES_TO_PROCESS = 100; // Set to null or undefined to process all survey responses
+const MAX_SURVEY_RESPONSES_TO_PROCESS = null; // Set to null or undefined to process all survey responses
 
 /**
  * Survey Response Migration Script
@@ -72,6 +72,7 @@ export class SurveyResponseMigration extends MigrationBase {
         sourceDb.collection("surveyresponses");
       const destinationSurveyResponsesCollection =
         destinationDb.collection("surveyresponses");
+      const destinationUsersCollection = destinationDb.collection("users");
 
       // Count existing documents in source
       const totalResponses =
@@ -113,9 +114,36 @@ export class SurveyResponseMigration extends MigrationBase {
         };
       }
 
+      const destinationUsers = await destinationUsersCollection
+        .find({ email: { $exists: true, $ne: null } })
+        .project({ email: 1, portalId: 1 })
+        .toArray();
+
+      const destinationPortalsCollection =
+        destinationDb.collection("portals");
+      const destinationPortals = await destinationPortalsCollection
+        .find({})
+        .project({ companyName: 1 })
+        .toArray();
+
+      const userIndex = new Map(
+        destinationUsers.map((user) => [
+          String(user.email).toLowerCase(),
+          user,
+        ]),
+      );
+      const portalIndex = new Map(
+        destinationPortals.map((portal) => [
+          String(portal.companyName || "").toLowerCase(),
+          portal,
+        ]),
+      );
+
       // Group responses by user (email) and create new format
       const groupedResponses = this.groupResponsesByUser(
         surveyResponses as OldSurveyResponse[],
+        userIndex,
+        portalIndex,
       );
 
       // Process grouped responses in batches
@@ -234,7 +262,11 @@ export class SurveyResponseMigration extends MigrationBase {
     }
   }
 
-  private groupResponsesByUser(responses: OldSurveyResponse[]): any[] {
+  private groupResponsesByUser(
+    responses: OldSurveyResponse[],
+    userIndex: Map<string, any>,
+    portalIndex: Map<string, any>,
+  ): any[] {
     // Group responses by email (user identifier)
     const groupedByUser = new Map<string, OldSurveyResponse[]>();
 
@@ -252,6 +284,14 @@ export class SurveyResponseMigration extends MigrationBase {
     groupedByUser.forEach((userResponses, userEmail) => {
       // Get the first survey ID from the responses (assuming all responses are for the same survey)
       const surveyId = userResponses[0]?.question || null;
+      const userInfo = userIndex.get(userEmail.toLowerCase());
+      const portalSource = userResponses[0]?.portal || null;
+      const portalName = userResponses[0]?.portalName || "";
+      const portalFromName = portalName
+        ? portalIndex.get(portalName.toLowerCase())
+        : null;
+      const portalId =
+        portalSource || userInfo?.portalId || portalFromName?._id || null;
 
       // Transform individual responses
       const responses: IResponse[] = userResponses.map((response) => {
@@ -269,7 +309,8 @@ export class SurveyResponseMigration extends MigrationBase {
 
       // Create a single survey response for this user
       transformedResponses.push({
-        userId: userEmail, // Using email as userId for now - this should be mapped to actual user ID
+        userId: userInfo?._id || userEmail,
+        portalId,
         surveyId: surveyId,
         responses: responses,
         createdAt: userResponses[0]?.createdAt || new Date(),

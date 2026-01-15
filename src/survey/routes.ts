@@ -1,8 +1,9 @@
 import express from "express";
 import { createSurvey } from "./controller";
-import { getSurveys } from "./controllers/getSurveys";
 import { getSurveysByPortal } from "./controllers/getSurveysByPortal";
 import { getSurveyPortalResults } from "./controllers/getSurveyPortalResults";
+import { getSurveyRatingSummary } from "./controllers/getSurveyRatingSummary";
+import { getSurveyOrderResults } from "./controllers/getSurveyOrderResults";
 import { exportSurveys } from "./controllers/exportSurveys";
 
 const router = express.Router();
@@ -14,9 +15,11 @@ router.post("/", createSurvey);
 // Specific routes first (before parameterized routes)
 router.get("/export/:portalId", exportSurveys);
 router.get("/portal/:portalId", getSurveyPortalResults);
+router.get("/ratings/:portalId", getSurveyRatingSummary);
+router.get("/order/:orderId", getSurveyOrderResults);
 
-// General routes
-router.get("/", getSurveys);
+// General routes (legacy format)
+router.get("/", getSurveysByPortal);
 router.get("/:portalId", getSurveysByPortal);
 
 export default router;

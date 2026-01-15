@@ -1,12 +1,10 @@
 import express from "express";
-import { Survey, SurveyResponse, User } from "@/_global/models";
-import { Types } from "mongoose";
+import { Survey, SurveyResponse } from "@/_global/models";
+import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 
 /**
  * GET /api/v1/survey/portal/:portalId
- * Get portal survey results with averages
- *
- * Returns survey questions with responses and averages for a specific portal.
+ * Get portal survey results with averages (legacy format)
  */
 export const getSurveyPortalResults = async (
   req: express.Request,
@@ -15,11 +13,15 @@ export const getSurveyPortalResults = async (
 ): Promise<void> => {
   try {
     const { portalId } = req.params;
+    const authHeader = req.headers.authorization;
+    const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 
     // Check authorization
     if (
-      req.user?.role !== "MCAdmin" &&
-      req.user?.portalId?.toString() !== portalId
+      !authUser ||
+      (authUser.role !== "platform_admin" &&
+        authUser.role !== "platform_user" &&
+        authUser.portalId?.toString() !== portalId)
     ) {
       return next({
         statusCode: 403,
@@ -28,85 +30,31 @@ export const getSurveyPortalResults = async (
     }
 
     // Find all users in this portal
-    const portalUsers = await User.find({
-      portalId: new Types.ObjectId(portalId),
-    }).select("_id");
+    const surveyQuestions = await Survey.find({}).sort({ order: 1 });
 
-    const userIds = portalUsers.map((user) => user._id);
+    const getAverageRating = (items: { rating?: number }[]) => {
+      if (!items.length) {
+        return 0;
+      }
+      const sum = items.reduce((acc, item) => acc + (item.rating || 0), 0);
+      return sum / items.length;
+    };
 
-    if (userIds.length === 0) {
-      res.status(200).json([]);
-      return;
-    }
+    const questionsPromises = surveyQuestions.map(async (question) => {
+      const responses = await SurveyResponse.find({
+        question: question._id,
+        portal: portalId,
+        rating: { $ne: null },
+      }).sort({ orderId: -1 });
 
-    // Get the survey (assuming there's one main survey)
-    const survey = await Survey.findOne({}).sort({ createdAt: -1 });
+      return {
+        question,
+        responses,
+        average: getAverageRating(responses),
+      };
+    });
 
-    if (!survey) {
-      res.status(200).json([]);
-      return;
-    }
-
-    // Get survey responses for users in this portal
-    const surveyResponses = await SurveyResponse.find({
-      userId: { $in: userIds },
-      surveyId: survey._id,
-    })
-      .populate("userId", "email firstName lastName")
-      .lean();
-
-    // Process each question
-    const questions = await Promise.all(
-      survey.questions.map(async (question) => {
-        // Get responses for this question
-        const questionResponses = surveyResponses
-          .flatMap((response) =>
-            response.responses
-              .filter(
-                (r) => r.questionId?.toString() === question._id?.toString(),
-              )
-              .map((r) => ({
-                ...response,
-                answer: r.answer,
-              })),
-          )
-          .filter((r) => {
-            // Only include rating questions with numeric answers
-            if (question.type === "rating") {
-              return typeof r.answer === "number";
-            }
-            return true;
-          })
-          .sort((a, b) => {
-            // Sort by createdAt descending (most recent first)
-            const aDate = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-            const bDate = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-            return bDate - aDate;
-          });
-
-        // Calculate average for rating questions
-        let average = null;
-        if (question.type === "rating" && questionResponses.length > 0) {
-          const ratings = questionResponses
-            .map((r) => r.answer)
-            .filter((a): a is number => typeof a === "number");
-          if (ratings.length > 0) {
-            average =
-              ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
-          }
-        }
-
-        return {
-          question: {
-            _id: question._id,
-            questionText: question.questionText,
-            type: question.type,
-          },
-          responses: questionResponses,
-          average,
-        };
-      }),
-    );
+    const questions = await Promise.all(questionsPromises);
 
     res.status(200).json(questions);
   } catch (error) {

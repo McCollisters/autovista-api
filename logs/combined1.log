@@ -30634,3 +30634,6489 @@
   message: 'Request completed',
   timestamp: '2026-01-14 16:04:44'
 }
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:05:44'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:05:44'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 16:05:44'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 16:05:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:08:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:08:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/global-modifier-sets',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:08:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:08:23'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-14 16:08:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '105ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '149ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  count: 1,
+  level: 'info',
+  message: 'getGlobalModifierSets - retrieved global modifier sets',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/global-modifier-sets',
+  statusCode: 200,
+  duration: '156ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  hasGlobalModifierSet: true,
+  hasStates: true,
+  statesType: 'object',
+  statesIsMap: false,
+  statesKeys: [
+    'AL', 'AR', 'AZ', 'CA', 'CO', 'CT',
+    'DE', 'FL', 'GA', 'IA', 'ID', 'IL',
+    'IN', 'KS', 'KY', 'LA', 'MA', 'ME',
+    'MH', 'MI', 'MN', 'MO', 'MS', 'MT',
+    'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+    'NV', 'NY', 'OK', 'OR', 'PA', 'RI',
+    'SC', 'SD', 'TN', 'TX', 'UT', 'VA',
+    'VT', 'WA', 'WI'
+  ],
+  level: 'info',
+  message: 'getSettings - retrieved globalModifierSet',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  statesMapType: 'object',
+  statesMapIsMap: false,
+  level: 'info',
+  message: 'getSettings - starting state modifiers conversion',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  statesType: 'object',
+  isMap: false,
+  isObject: true,
+  statesKeys: [
+    'AL', 'AR', 'AZ', 'CA', 'CO', 'CT',
+    'DE', 'FL', 'GA', 'IA', 'ID', 'IL',
+    'IN', 'KS', 'KY', 'LA', 'MA', 'ME',
+    'MH', 'MI', 'MN', 'MO', 'MS', 'MT',
+    'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+    'NV', 'NY', 'OK', 'OR', 'PA', 'RI',
+    'SC', 'SD', 'TN', 'TX', 'UT', 'VA',
+    'VT', 'WA', 'WI'
+  ],
+  sampleKey: 'AL',
+  sampleValue: {
+    direction: 'both',
+    value: 75,
+    valueType: 'flat',
+    _id: new ObjectId('696803249b67b16ed01d98d7')
+  },
+  sampleValueString: '{"direction":"both","value":75,"valueType":"flat","_id":"696803249b67b16ed01d98d7"}',
+  sampleValueKeys: [ 'direction', 'value', 'valueType', '_id' ],
+  level: 'info',
+  message: 'getSettings - processing state modifiers',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  stateModifiersCount: 45,
+  level: 'info',
+  message: 'getSettings - converted state modifiers',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  hasServiceLevels: true,
+  serviceLevelsCount: 4,
+  hasGlobalModifierSet: true,
+  stateModifiersCount: 45,
+  stateModifiers: '[\n' +
+    '  {\n' +
+    '    "state": "AL",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "AR",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "AZ",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "CA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "CO",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 125,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "CT",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "DE",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "FL",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "GA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "IA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 125,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "ID",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "IL",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 125,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "IN",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "KS",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "KY",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "LA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "ME",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MH",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MI",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MN",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MO",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MS",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MT",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NC",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "ND",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NE",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NH",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NJ",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NM",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NV",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NY",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "OK",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "OR",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 250,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "PA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "RI",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "SC",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "SD",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "TN",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "TX",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "UT",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "VA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "VT",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "WA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 250,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "WI",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  }\n' +
+    ']',
+  sampleStateModifier: {
+    state: 'AL',
+    type: 'Increase',
+    amount: 75,
+    direction: 'Both Directions'
+  },
+  sampleStateModifierFromGlobal: {
+    state: 'AL',
+    modifier: {
+      direction: 'both',
+      value: 75,
+      valueType: 'flat',
+      _id: new ObjectId('696803249b67b16ed01d98d7')
+    }
+  },
+  level: 'info',
+  message: 'getSettings - returning settings',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '236ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:08:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:08:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:08:25'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:08:25'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:08:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '437ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:08:25'
+}
+{
+  service: 'autovista-api',
+  count: 11281,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:08:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paid=false',
+  statusCode: 200,
+  duration: '2633ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:08:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:10:48'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:10:48'
+}
+{
+  service: 'autovista-api',
+  count: 11281,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:10:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paid=false',
+  statusCode: 200,
+  duration: '3585ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:10:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=COD&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:11:07'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:11:07'
+}
+{
+  service: 'autovista-api',
+  count: 11281,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:11:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=COD&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '2442ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:11:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:12:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=COD&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:12:22'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:12:22'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:12:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '525ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:12:22'
+}
+{
+  service: 'autovista-api',
+  count: 11281,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:12:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=COD&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '2826ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:12:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:13:35'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:13:35'
+}
+{
+  service: 'autovista-api',
+  count: 11281,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:13:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '3467ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:13:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:18:09'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:18:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '469ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:18:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:18:09'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:18:10'
+}
+{
+  service: 'autovista-api',
+  count: 13623,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:18:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '2480ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:18:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:21:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:21:47'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:21:47'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:21:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '298ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:21:47'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:21:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '487ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:21:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:29:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:29:41'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:29:41'
+}
+{
+  service: 'autovista-api',
+  count: 2,
+  returned: 2,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:29:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '377ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:29:42'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:29:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '516ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:29:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:29:49'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":true}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:29:49'
+}
+{
+  service: 'autovista-api',
+  count: 13622,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:29:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  statusCode: 200,
+  duration: '2507ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:29:52'
+}
+{
+  message: '🕐 Scheduled migration job started (every 6 hours)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:30:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:30:25'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:30:25'
+}
+{
+  service: 'autovista-api',
+  count: 3,
+  returned: 3,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:30:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '367ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:30:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:30:45'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":true}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:30:45'
+}
+{
+  service: 'autovista-api',
+  count: 13621,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:30:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  statusCode: 200,
+  duration: '7716ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:30:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:31:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:31:29'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:31:29'
+}
+{
+  service: 'autovista-api',
+  count: 4,
+  returned: 4,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:31:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '413ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:31:29'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:31:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '626ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:31:29'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/order',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '65',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:31:31'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/order',
+  statusCode: 404,
+  duration: '20ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:31:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:31:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:31:39'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:31:39'
+}
+{
+  service: 'autovista-api',
+  count: 4,
+  returned: 4,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:31:40'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '384ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:31:40'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:31:40'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '537ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:31:40'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:32:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:32:09'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:32:10'
+}
+{
+  service: 'autovista-api',
+  count: 4,
+  returned: 4,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:32:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '470ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:32:10'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:32:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '610ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:32:10'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/order',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '65',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:32:19'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/order',
+  statusCode: 404,
+  duration: '8ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:32:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:32:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:32:39'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:32:39'
+}
+{
+  service: 'autovista-api',
+  count: 4,
+  returned: 4,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:32:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '414ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:32:39'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:32:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '1376ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:32:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:33:33'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:33:33'
+}
+{
+  service: 'autovista-api',
+  count: 6,
+  returned: 6,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:33:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '402ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:33:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:33:34'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:33:34'
+}
+{
+  service: 'autovista-api',
+  count: 6,
+  returned: 6,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:33:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '367ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:33:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:33:43'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:33:43'
+}
+{
+  service: 'autovista-api',
+  count: 6,
+  returned: 6,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:33:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '420ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:33:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:33:58'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:33:58'
+}
+{
+  service: 'autovista-api',
+  count: 6,
+  returned: 6,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:33:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '453ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:33:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:37:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:37:26'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:37:26'
+}
+{
+  service: 'autovista-api',
+  count: 11,
+  returned: 11,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:37:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '428ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:37:26'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:37:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '570ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:37:26'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/api/v1/order/6967aeb7bf6bc440c64269c9',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '28',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:37:29'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/6967aeb7bf6bc440c64269c9',
+  statusCode: 200,
+  duration: '132ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:37:30'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:37:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:37:35'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:37:35'
+}
+{
+  service: 'autovista-api',
+  count: 10,
+  returned: 10,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:37:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '498ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:37:35'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:37:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '669ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:37:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:37:49'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":true}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:37:49'
+}
+{
+  service: 'autovista-api',
+  count: 12869,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:37:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  statusCode: 200,
+  duration: '2536ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:37:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:38:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:38:26'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:38:27'
+}
+{
+  service: 'autovista-api',
+  count: 10,
+  returned: 10,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:38:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '423ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:38:27'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:38:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '569ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:38:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:38:32'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":true}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:38:32'
+}
+{
+  service: 'autovista-api',
+  count: 12297,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:38:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=1000&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  statusCode: 200,
+  duration: '2818ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:38:35'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/api/v1/order/6967aeb7bf6bc440c64269c9',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '30',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:38:47'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/6967aeb7bf6bc440c64269c9',
+  statusCode: 200,
+  duration: '78ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:38:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=50&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:39:49'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:39:49'
+}
+{
+  service: 'autovista-api',
+  count: 15,
+  returned: 15,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:39:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=50&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '493ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:39:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=50&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:39:53'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:39:54'
+}
+{
+  service: 'autovista-api',
+  count: 15,
+  returned: 15,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:39:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=50&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '491ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:39:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:39:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=50&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:39:59'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:39:59'
+}
+{
+  service: 'autovista-api',
+  count: 15,
+  returned: 15,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:39:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=50&cod=true&paymentType=cod&paid=false&hasPaid=false',
+  statusCode: 200,
+  duration: '459ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:39:59'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:39:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '580ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:39:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=50&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:40:02'
+}
+{
+  service: 'autovista-api',
+  query: '{"paymentType":"cod","hasPaid":true}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-14 16:40:02'
+}
+{
+  service: 'autovista-api',
+  count: 11177,
+  returned: 10000,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-14 16:40:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=uniqueId&sortorder=-1&skip=0&limit=50&cod=true&paymentType=cod&paid=true&hasPaid=true',
+  statusCode: 200,
+  duration: '3474ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:40:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:40:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:40:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '59ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:40:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '50ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:40:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:46:48'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:46:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '592ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:46:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/survey/portal/63e26995a61aff3a7efb3deb',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:46:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/survey/portal/63e26995a61aff3a7efb3deb',
+  statusCode: 404,
+  duration: '10ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:46:55'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:49:15'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:49:15'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 16:49:15'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 16:49:15'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:49:20'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:49:20'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 16:49:20'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 16:49:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/63e26995a61aff3a7efb3deb',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:49:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/63e26995a61aff3a7efb3deb',
+  statusCode: 200,
+  duration: '182ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:49:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:50:05'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:50:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '565ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:50:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:50:36'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:50:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '805ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:50:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/61567b91e7be6c0018e66139',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:51:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/61567b91e7be6c0018e66139',
+  statusCode: 200,
+  duration: '174ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:51:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/617c078c54a30800187a0617',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:51:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/617c078c54a30800187a0617',
+  statusCode: 200,
+  duration: '146ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:51:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/63e26995a61aff3a7efb3deb',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:51:21'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/63e26995a61aff3a7efb3deb',
+  statusCode: 200,
+  duration: '136ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:51:21'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/63e26995a61aff3a7efb3deb',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:51:28'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/63e26995a61aff3a7efb3deb',
+  statusCode: 200,
+  duration: '178ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:51:28'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:51:58'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:51:58'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 16:51:58'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 16:51:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:52:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/all',
+  statusCode: 200,
+  duration: '395ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:52:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:52:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/all',
+  statusCode: 200,
+  duration: '388ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:52:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:52:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:52:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/all',
+  statusCode: 200,
+  duration: '422ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:52:31'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 16:52:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '582ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:52:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/63e26995a61aff3a7efb3deb',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:52:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/63e26995a61aff3a7efb3deb',
+  statusCode: 200,
+  duration: '182ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:52:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 16:52:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/all',
+  statusCode: 200,
+  duration: '393ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 16:52:59'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:53:42'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:53:42'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 16:53:42'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 16:53:42'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:53:53'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 16:53:53'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 16:53:53'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 16:53:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 17:00:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 17:00:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  statusCode: 500,
+  duration: '442ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 17:00:32'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 17:00:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '579ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 17:00:32'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 17:00:53'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 17:00:53'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 17:00:53'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 17:00:53'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 17:00:59'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 17:00:59'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 17:00:59'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 17:00:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 17:01:30'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-14 17:01:30'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-14 17:01:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '550ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 17:01:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/all',
+  statusCode: 200,
+  duration: '799ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-14 17:01:31'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 17:03:24'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 17:03:24'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 17:03:24'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 17:03:24'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 17:03:35'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 17:03:35'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-14 17:03:35'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-14 17:03:35'
+}
+{
+  message: '🕐 Scheduled migration job started (every 6 hours)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-14 22:30:00'
+}
+{
+  service: 'autovista-api',
+  error: 'stdout maxBuffer length exceeded',
+  output: '\n' +
+    '> autovista-api@1.0.0 migrate:all\n' +
+    '> tsx -r dotenv/config migrations/scripts/migrate-all.ts\n' +
+    '\n' +
+    '🚀 Starting MASTER MIGRATION - All Collections\n' +
+    '================================================================================\n' +
+    '\n' +
+    '================================================================================\n' +
+    '🔄 Running Portals Migration...\n' +
+    '================================================================================\n' +
+    '\n' +
+    '🚀 Starting migration: PortalMigration\n' +
+    '📅 Started at: 2026-01-15T05:30:00.831Z\n' +
+    '🔌 Connecting to databases...\n' +
+    '🔌 Connecting to source database...\n' +
+    '   Connection string: mongodb+srv://autovista:****@cluster0.w7vu8.mongodb.net/prod?retryWrites=true&w=majority\n' +
+    '⏳ Waiting for source connection (timeout: 30000ms)...\n' +
+    '✅ Connected to source MongoDB: /autovista:JbRiklNH55q67w7p@cluster0.w7vu8.mongodb.net/prod\n' +
+    '🔌 Connecting to destination database...\n' +
+    '   Connection string: mongodb+srv://anna:****@autovista.nzynb.mongodb.net/prod\n' +
+    '⏳ Waiting for destination connection (timeout: 30000ms)...\n' +
+    '✅ Connected to destination MongoDB: /anna:K1lXzftA6NpMpwM6@autovista.nzynb.mongodb.net/prod\n' +
+    '✅ Database connections established\n' +
+    '🔄 Running migration up...\n' +
+    '🔄 Running portal migration UP...\n' +
+    '📡 Getting source connection...\n' +
+    '📡 Getting destination connection...\n' +
+    '📋 Accessing collections...\n' +
+    '🔍 Counting portals in source database...\n' +
+    '📦 Found 111 portals in source database\n' +
+    '📊 Processing 111 portals (limit: none)\n' +
+    '📦 Retrieved 111 portals to migrate\n' +
+    '🔍 Portal 69664e5968d3227b9d6860c6 has no custom rates\n' +
+    '📊 Processed 1/111 portals (1 updated, 0 inserted)\n' +
+    '🔍 Portal 69610aa5d4a09b1d70b59f09 has no custom rates\n' +
+    '🔍 Portal 693b29b84c96521585c6d35d has no custom rates\n' +
+    '🔍 Portal 68a352efc6cb9ac0c697b9ff has no custom rates\n' +
+    '🔍 Portal 689ccc328036672c0d18be70 has no custom rates\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a hasCustomRates flag: true\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '📊 Processed 10/111 portals (1 updated, 0 inserted)\n' +
+    'Processed batch 1/12\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7ce75d41840a4ecc6037 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-15'... 980224 more characters,
+  code: 'ERR_CHILD_PROCESS_STDIO_MAXBUFFER',
+  level: 'error',
+  message: '❌ Scheduled migration job failed',
+  timestamp: '2026-01-15 00:08:21'
+}
+{
+  message: '🕐 Scheduled migration job started (every 6 hours)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 04:30:00'
+}
+{
+  service: 'autovista-api',
+  error: 'stdout maxBuffer length exceeded',
+  output: '\n' +
+    '> autovista-api@1.0.0 migrate:all\n' +
+    '> tsx -r dotenv/config migrations/scripts/migrate-all.ts\n' +
+    '\n' +
+    '🚀 Starting MASTER MIGRATION - All Collections\n' +
+    '================================================================================\n' +
+    '\n' +
+    '================================================================================\n' +
+    '🔄 Running Portals Migration...\n' +
+    '================================================================================\n' +
+    '\n' +
+    '🚀 Starting migration: PortalMigration\n' +
+    '📅 Started at: 2026-01-15T11:30:00.727Z\n' +
+    '🔌 Connecting to databases...\n' +
+    '🔌 Connecting to source database...\n' +
+    '   Connection string: mongodb+srv://autovista:****@cluster0.w7vu8.mongodb.net/prod?retryWrites=true&w=majority\n' +
+    '⏳ Waiting for source connection (timeout: 30000ms)...\n' +
+    '✅ Connected to source MongoDB: /autovista:JbRiklNH55q67w7p@cluster0.w7vu8.mongodb.net/prod\n' +
+    '🔌 Connecting to destination database...\n' +
+    '   Connection string: mongodb+srv://anna:****@autovista.nzynb.mongodb.net/prod\n' +
+    '⏳ Waiting for destination connection (timeout: 30000ms)...\n' +
+    '✅ Connected to destination MongoDB: /anna:K1lXzftA6NpMpwM6@autovista.nzynb.mongodb.net/prod\n' +
+    '✅ Database connections established\n' +
+    '🔄 Running migration up...\n' +
+    '🔄 Running portal migration UP...\n' +
+    '📡 Getting source connection...\n' +
+    '📡 Getting destination connection...\n' +
+    '📋 Accessing collections...\n' +
+    '🔍 Counting portals in source database...\n' +
+    '📦 Found 111 portals in source database\n' +
+    '📊 Processing 111 portals (limit: none)\n' +
+    '📦 Retrieved 111 portals to migrate\n' +
+    '🔍 Portal 69664e5968d3227b9d6860c6 has no custom rates\n' +
+    '📊 Processed 1/111 portals (1 updated, 0 inserted)\n' +
+    '🔍 Portal 69610aa5d4a09b1d70b59f09 has no custom rates\n' +
+    '🔍 Portal 693b29b84c96521585c6d35d has no custom rates\n' +
+    '🔍 Portal 68a352efc6cb9ac0c697b9ff has no custom rates\n' +
+    '🔍 Portal 689ccc328036672c0d18be70 has no custom rates\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b80ca6eb2fd39c460db54 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a hasCustomRates flag: true\n' +
+    '🔍 Portal 682b804d6eb2fd39c460db3a created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7fdf5d41840a4ecc6bdf created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7f4b6eb2fd39c460d626 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7e5c6eb2fd39c460d5d2 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '📊 Processed 10/111 portals (1 updated, 0 inserted)\n' +
+    'Processed batch 1/12\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-1500": 2800,\n' +
+    '    "1501-1750": 3250,\n' +
+    '    "1751-2000": 3650,\n' +
+    '    "2001-2500": 3950,\n' +
+    '    "2501-3000": 4400,\n' +
+    '    "3001-3500": 4850\n' +
+    '  },\n' +
+    '  "suvClassSurcharge": 0,\n' +
+    '  "vanClassSurcharge": 0,\n' +
+    '  "pickUp4DoorClassSurcharge": 0,\n' +
+    '  "enclosedSurcharge": 0,\n' +
+    '  "enclosedSurchargeOver1500": 0,\n' +
+    '  "fuelSurcharge": 0\n' +
+    '}\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 hasCustomRates flag: true\n' +
+    '🔍 Portal 682b7db66eb2fd39c460d594 created 11 custom rates: [\n' +
+    "  { label: '1-250 miles', min: 1, max: 250, value: 1450 },\n" +
+    "  { label: '251-500 miles', min: 251, max: 500, value: 1450 },\n" +
+    "  { label: '501-750 miles', min: 501, max: 750, value: 1450 },\n" +
+    "  { label: '751-1000 miles', min: 751, max: 1000, value: 1950 },\n" +
+    "  { label: '1001-1250 miles', min: 1001, max: 1250, value: 2250 },\n" +
+    "  { label: '1251-1500 miles', min: 1251, max: 1500, value: 2800 },\n" +
+    "  { label: '1501-1750 miles', min: 1501, max: 1750, value: 3250 },\n" +
+    "  { label: '1751-2000 miles', min: 1751, max: 2000, value: 3650 },\n" +
+    "  { label: '2001-2500 miles', min: 2001, max: 2500, value: 3950 },\n" +
+    "  { label: '2501-3000 miles', min: 2501, max: 3000, value: 4400 },\n" +
+    "  { label: '3001-3500 miles', min: 3001, max: 3500, value: 4850 }\n" +
+    ']\n' +
+    '🔍 Portal 682b7ce75d41840a4ecc6037 has customRates: {\n' +
+    '  "mileage": {\n' +
+    '    "1-250": 1450,\n' +
+    '    "251-500": 1450,\n' +
+    '    "501-750": 1450,\n' +
+    '    "751-1000": 1950,\n' +
+    '    "1001-1250": 2250,\n' +
+    '    "1251-15'... 981114 more characters,
+  code: 'ERR_CHILD_PROCESS_STDIO_MAXBUFFER',
+  level: 'error',
+  message: '❌ Scheduled migration job failed',
+  timestamp: '2026-01-15 06:53:04'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 10:31:25'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 10:31:25'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 10:31:25'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 10:31:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 10:31:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  statusCode: 404,
+  duration: '6ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 10:31:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 10:31:51'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 10:31:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '652ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 10:31:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 10:31:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/all',
+  statusCode: 200,
+  duration: '648ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 10:31:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 10:53:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 10:53:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/all',
+  statusCode: 200,
+  duration: '507ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 10:53:02'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 10:53:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '570ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 10:53:02'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 10:56:08'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 10:56:09'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 10:56:09'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 10:56:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 10:56:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 10:56:42'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 10:56:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '622ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 10:56:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/all',
+  statusCode: 200,
+  duration: '886ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 10:56:43'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:09:42'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:09:42'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:09:42'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:09:42'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:10:05'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:10:05'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:10:05'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:10:05'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:11:05'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:11:05'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:11:05'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:11:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:14:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/ratings/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:14:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/ratings/all',
+  statusCode: 200,
+  duration: '308ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:14:53'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 11:14:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '601ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:14:53'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:15:38'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:15:38'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:15:38'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:15:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:16:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/ratings/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:16:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/ratings/all',
+  statusCode: 200,
+  duration: '319ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:16:38'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 11:16:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '617ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:16:38'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:38:52'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:38:52'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:38:52'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:38:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:38:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/ratings/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:38:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/ratings/all',
+  statusCode: 200,
+  duration: '330ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:38:55'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 11:38:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '611ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:38:56'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:39:11'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:39:11'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:39:11'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:39:11'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:46:57'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:46:57'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:46:57'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:46:57'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:48:05'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:48:06'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:48:06'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:48:06'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/login-social',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '1345',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:48:17'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  role: 'platform_admin',
+  level: 'info',
+  message: 'Social login successful',
+  timestamp: '2026-01-15 11:48:17'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/login-social',
+  statusCode: 200,
+  duration: '311ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:48:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:48:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:48:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal',
+  statusCode: 404,
+  duration: '11ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:48:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:48:17'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-01-15 11:48:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '156ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:48:18'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 11:48:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '597ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:48:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/ratings/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:48:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/ratings/all',
+  statusCode: 200,
+  duration: '322ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:48:19'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:50:53'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:50:53'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:50:53'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:50:53'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:51:33'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:51:33'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:51:33'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:51:33'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:51:39'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:51:39'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:51:39'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:51:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:53:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/ratings/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 11:53:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/ratings/all',
+  statusCode: 200,
+  duration: '404ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:53:07'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 11:53:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '669ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 11:53:07'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:59:50'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 11:59:50'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 11:59:50'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 11:59:50'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:00:15'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:00:15'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:00:15'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:00:15'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:00:32'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:00:32'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:00:32'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:00:32'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:00:37'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:00:37'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:00:37'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:00:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:00:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '432ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:00:49'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:01:19'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:01:19'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:01:19'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:01:19'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:12:09'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:12:09'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:12:09'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:12:09'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:12:18'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:12:18'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:12:18'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:12:18'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:12:21'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:12:21'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:12:21'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:12:21'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:12:53'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:12:53'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:12:53'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:12:53'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:14:01'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:14:01'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:14:01'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:14:01'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:14:25'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:14:25'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:14:25'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:14:25'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:14:31'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:14:31'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:14:31'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:14:31'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:14:35'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:14:35'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:14:35'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:14:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:19:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:19:09'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:19:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '728ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:19:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '26036ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:19:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/63e26995a61aff3a7efb3deb',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:19:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:19:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/63e26995a61aff3a7efb3deb',
+  statusCode: 200,
+  duration: '1436ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:19:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '24116ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:20:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/ratings/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:20:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/ratings/all',
+  statusCode: 200,
+  duration: '18023ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:20:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:21:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/ratings/all',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:21:16'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:21:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '698ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:21:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/ratings/all',
+  statusCode: 200,
+  duration: '20529ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:21:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:22:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '24040ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:22:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:22:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:22:54'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:22:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '641ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:22:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '23930ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:23:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/61567b91e7be6c0018e66139',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:23:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/61567b91e7be6c0018e66139',
+  statusCode: 200,
+  duration: '225ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:23:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:23:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:23:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:23:55'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:23:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '779ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:23:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '24350ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:24:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:24:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '24290ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:24:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:24:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:24:25'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:24:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '577ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:24:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '24472ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:24:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/63e26995a61aff3a7efb3deb',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:24:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/63e26995a61aff3a7efb3deb',
+  statusCode: 200,
+  duration: '224ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:24:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/61f2c95b9b51bc0035127976',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:24:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/61f2c95b9b51bc0035127976',
+  statusCode: 200,
+  duration: '239ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:24:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/6356feb5e0af090046a08380',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:24:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/6356feb5e0af090046a08380',
+  statusCode: 200,
+  duration: '206ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:24:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/5fc5350f618f7d00175dcb26',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:24:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/5fc5350f618f7d00175dcb26',
+  statusCode: 200,
+  duration: '209ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:24:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '24410ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:24:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:24:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '23415ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:25:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/63e26995a61aff3a7efb3deb',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:25:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/63e26995a61aff3a7efb3deb',
+  statusCode: 200,
+  duration: '217ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:25:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/61f2c95b9b51bc0035127976',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:25:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/61f2c95b9b51bc0035127976',
+  statusCode: 200,
+  duration: '218ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:25:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:25:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:26:14'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '24046ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:26:20'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:26:33'
+}
+{
+  message: '✅ Cron jobs initialized - Migration scheduled every 6 hours',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 12:26:33'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-15 12:26:33'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-15 12:26:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:27:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:27:39'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:27:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '648ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:27:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '24192ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:28:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:28:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:28:03'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:28:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '399ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:28:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '23455ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:28:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:29:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '23415ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:30:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:32:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:32:23'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:32:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '599ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:32:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '24470ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:32:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:33:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:33:06'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:33:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '601ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:33:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/61567b91e7be6c0018e66139',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:33:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/61567b91e7be6c0018e66139',
+  statusCode: 200,
+  duration: '202ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:33:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '23157ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:33:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:33:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:33:38'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeatlantic.com',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-15 12:33:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '585ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:33:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/682b35976eb2fd39c45f12d7',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:33:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/682b35976eb2fd39c45f12d7',
+  statusCode: 200,
+  duration: '210ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:33:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/62b5bd53cd3b03004666427d',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:33:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/62b5bd53cd3b03004666427d',
+  statusCode: 200,
+  duration: '208ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:33:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/surveys/portal/5e98963fed92842f43fadc53',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-15 12:33:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/portal/5e98963fed92842f43fadc53',
+  statusCode: 200,
+  duration: '255ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-15 12:33:45'
+}

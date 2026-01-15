@@ -2,16 +2,14 @@ import express from "express";
 import ObjectsToCsv from "objects-to-csv";
 import fs from "fs";
 import path from "path";
-import { Survey, SurveyResponse, User, Order } from "@/_global/models";
-import { Types } from "mongoose";
+import { SurveyResponse } from "@/_global/models";
 import { logger } from "@/core/logger";
 
 /**
  * GET /api/v1/surveys/export/:portalId
  * Export surveys to CSV for a specific portal
  *
- * Note: This is a simplified export. The old implementation had hardcoded question IDs.
- * This version works with the new schema structure.
+ * Note: This exports legacy survey responses in a flat format.
  */
 export const exportSurveys = async (
   req: express.Request,
@@ -21,115 +19,43 @@ export const exportSurveys = async (
   try {
     const { portalId } = req.params;
 
-    // Find all users in this portal
-    const portalUsers = await User.find({
-      portalId: new Types.ObjectId(portalId),
-    }).select("_id email");
+    const normalizedPortal = portalId?.toLowerCase();
+    const isAllPortals = normalizedPortal === "all";
 
-    const userIds = portalUsers.map((user) => user._id);
-    const userMap = new Map(
-      portalUsers.map((user) => [user._id.toString(), user.email]),
-    );
+    const surveyResponses = await SurveyResponse.find(
+      isAllPortals ? {} : { portal: portalId },
+    )
+      .populate("question")
+      .populate("portal")
+      .lean();
 
-    if (userIds.length === 0) {
-      return next({
-        statusCode: 404,
-        message: "No users found for this portal.",
-      });
-    }
+    const csvData = surveyResponses.map((response) => {
+      const portalName =
+        response.portalName ||
+        (response.portal as any)?.companyName ||
+        "Unknown";
+      const portalValue =
+        (response.portal as any)?._id?.toString?.() ||
+        response.portal?.toString?.() ||
+        null;
 
-    // Get the survey
-    const survey = await Survey.findOne({}).sort({ createdAt: -1 });
+      const questionText =
+        (response.question as any)?.question ||
+        (response.question as any)?.questionText ||
+        "";
 
-    if (!survey) {
-      return next({
-        statusCode: 404,
-        message: "No survey found.",
-      });
-    }
-
-    // Get survey responses for users in this portal
-    const surveyResponses = await SurveyResponse.find({
-      userId: { $in: userIds },
-      surveyId: survey._id,
-    }).lean();
-
-    // Group responses by user
-    const groupedByUser = new Map<string, any>();
-
-    surveyResponses.forEach((response) => {
-      const userId = response.userId.toString();
-      if (!groupedByUser.has(userId)) {
-        groupedByUser.set(userId, {
-          userId,
-          email: userMap.get(userId) || "Unknown",
-          responses: {},
-        });
-      }
-
-      const userData = groupedByUser.get(userId)!;
-      response.responses.forEach((r) => {
-        const questionId = r.questionId.toString();
-        userData.responses[questionId] = {
-          answer: r.answer,
-          questionId,
-        };
-      });
+      return {
+        portalId: portalValue,
+        portalName,
+        email: response.email || "",
+        orderId: response.orderId || null,
+        orderDelivery: response.orderDelivery || "",
+        question: questionText,
+        rating: response.rating ?? null,
+        explanation: response.explanation || "",
+        createdAt: response.createdAt || null,
+      };
     });
-
-    // Format for CSV
-    const formattedResponses = Array.from(groupedByUser.values()).map(
-      (userData) => {
-        const row: any = {
-          email: userData.email,
-          userId: userData.userId,
-        };
-
-        // Add each question as a column
-        survey.questions.forEach((question, index) => {
-          const questionId = question._id.toString();
-          const response = userData.responses[questionId];
-          row[`q${index + 1}_${question.type}`] = response?.answer || null;
-        });
-
-        return row;
-      },
-    );
-
-    // Calculate averages
-    const averages: any = {
-      email: "Average",
-      userId: null,
-    };
-
-    survey.questions.forEach((question, index) => {
-      if (question.type === "rating") {
-        const ratings = formattedResponses
-          .map((r) => r[`q${index + 1}_${question.type}`])
-          .filter((a): a is number => typeof a === "number" && a !== null);
-        if (ratings.length > 0) {
-          averages[`q${index + 1}_${question.type}`] = (
-            ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length
-          ).toFixed(2);
-        } else {
-          averages[`q${index + 1}_${question.type}`] = "N/A";
-        }
-      } else {
-        averages[`q${index + 1}_${question.type}`] = null;
-      }
-    });
-
-    // Add header row with question text
-    const headerRow: any = {
-      email: "Question",
-      userId: null,
-    };
-    survey.questions.forEach((question, index) => {
-      headerRow[`q${index + 1}_${question.type}`] = question.questionText;
-    });
-
-    // Combine: header, averages, then responses
-    const csvData = [headerRow, averages, ...formattedResponses];
 
     // Generate CSV
     const csv = new ObjectsToCsv(csvData);

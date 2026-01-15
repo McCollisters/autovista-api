@@ -1,27 +1,32 @@
-import mongoose, { Document, Types, Schema } from "mongoose";
+import { Document, Schema } from "mongoose";
 import { createSchema, createReferenceField } from "../_global/schemas/factory";
 
-export interface IResponse {
-  questionId: Types.ObjectId;
-  answer: string | number;
-}
-
 export interface ISurveyResponse extends Document {
-  userId: Types.ObjectId;
-  surveyId: Types.ObjectId;
-  responses: IResponse[];
+  email?: string;
+  portal?: Schema.Types.ObjectId;
+  portalName?: string;
+  order?: Schema.Types.ObjectId;
+  orderId?: number;
+  orderDelivery?: string;
+  rating?: number;
+  explanation?: string;
+  question?: Schema.Types.ObjectId;
 }
 
-const questionResponseSchema = createSchema<IResponse>({
-  questionId: { type: Types.ObjectId, required: true },
-  answer: { type: Schema.Types.Mixed, required: true },
-});
-
-const surveyResponseSchema = createSchema<ISurveyResponse>({
-  userId: createReferenceField("User", true),
-  surveyId: createReferenceField("Survey", true),
-  responses: [questionResponseSchema],
-});
+const surveyResponseSchema = createSchema<ISurveyResponse>(
+  {
+    email: { type: String },
+    portal: createReferenceField("Portal", false),
+    portalName: { type: String },
+    order: createReferenceField("Order", false),
+    orderId: { type: Number },
+    orderDelivery: { type: String },
+    rating: { type: Number },
+    explanation: { type: String },
+    question: createReferenceField("SurveyQuestion", false),
+  },
+  { collection: "surveyresponses" },
+);
 
 // Model is exported from model.ts file
 export { surveyResponseSchema };

@@ -1,13 +1,10 @@
 import express from "express";
-import { Survey, SurveyResponse, User } from "@/_global/models";
-import { Types } from "mongoose";
+import { Portal, Survey, SurveyResponse } from "@/_global/models";
+import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 
 /**
  * GET /api/v1/surveys/:portalId
- * Get surveys with responses filtered by portal
- *
- * Note: In the new schema, survey responses are linked to users, not directly to portals.
- * We need to find users in the portal, then get their survey responses.
+ * Get survey results grouped by question (legacy format)
  */
 export const getSurveysByPortal = async (
   req: express.Request,
@@ -16,11 +13,19 @@ export const getSurveysByPortal = async (
 ): Promise<void> => {
   try {
     const { portalId } = req.params;
+    const authHeader = req.headers.authorization;
+    const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
+    const normalizedPortalId = portalId?.toLowerCase();
+    const isAllPortals = !portalId || normalizedPortalId === "all";
 
     // Check authorization
     if (
-      req.user?.role !== "MCAdmin" &&
-      req.user?.portalId?.toString() !== portalId
+      !authUser ||
+      (isAllPortals && authUser.role !== "platform_admin") ||
+      (!isAllPortals &&
+        authUser.role !== "platform_admin" &&
+        authUser.role !== "platform_user" &&
+        authUser.portalId?.toString() !== portalId)
     ) {
       return next({
         statusCode: 403,
@@ -28,89 +33,69 @@ export const getSurveysByPortal = async (
       });
     }
 
-    // Find all users in this portal
-    const portalUsers = await User.find({
-      portalId: new Types.ObjectId(portalId),
-    }).select("_id");
+    const questions = await Survey.find({}).sort({ order: 1 });
 
-    const userIds = portalUsers.map((user) => user._id);
+    const portals = isAllPortals
+      ? await Portal.find({})
+      : await Portal.find({ _id: portalId });
 
-    if (userIds.length === 0) {
-      res.status(200).json([]);
-      return;
-    }
+    const getAverageRating = (items: { rating?: number }[]) => {
+      if (!items.length) {
+        return 0;
+      }
+      const sum = items.reduce((acc, item) => acc + (item.rating || 0), 0);
+      return sum / items.length;
+    };
 
-    // Get all surveys
-    const surveys = await Survey.find({}).sort({ createdAt: -1 });
+    const groupQuestionResponsesByPortal = async (question: any) => {
+      const responses = [];
 
-    // Get survey responses for users in this portal
-    const surveyResponses = await SurveyResponse.find({
-      userId: { $in: userIds },
-    })
-      .populate("userId", "email firstName lastName")
-      .populate("surveyId")
-      .lean();
+      const allResults = await SurveyResponse.find({
+        question,
+        rating: { $ne: null },
+      }).sort({ orderId: -1 });
 
-    // Group responses by survey and question
-    const results = surveys.map((survey) => {
-      const surveyResponsesForSurvey = surveyResponses.filter(
-        (response) => response.surveyId?.toString() === survey._id.toString(),
-      );
+      const average = getAverageRating(allResults);
 
-      // Group by question
-      const questionResults = survey.questions.map((question) => {
-        const questionResponses = surveyResponsesForSurvey
-          .flatMap((response) =>
-            response.responses
-              .filter(
-                (r) => r.questionId?.toString() === question._id?.toString(),
-              )
-              .map((r) => ({
-                ...response,
-                answer: r.answer,
-              })),
-          )
-          .filter((r) => {
-            // Only include rating questions with numeric answers
-            if (question.type === "rating") {
-              return typeof r.answer === "number";
-            }
-            return true;
+      let averagePortal;
+      if (!isAllPortals && portalId) {
+        const portalResults = await SurveyResponse.find({
+          question,
+          portal: portalId,
+          rating: { $ne: null },
+        }).sort({ orderId: -1 });
+
+        averagePortal = getAverageRating(portalResults);
+      }
+
+      for (const portal of portals) {
+        const portalResults = await SurveyResponse.find({
+          portal,
+          question,
+        }).sort({ orderId: -1 });
+
+        if (portalResults.length > 0) {
+          responses.push({
+            portalResults,
+            portal: portal._id,
+            average: getAverageRating(portalResults),
+            averagePortal,
+            companyName: portal.companyName,
           });
-
-        // Calculate average for rating questions
-        let average = null;
-        if (question.type === "rating" && questionResponses.length > 0) {
-          const ratings = questionResponses
-            .map((r) => r.answer)
-            .filter((a): a is number => typeof a === "number");
-          if (ratings.length > 0) {
-            average =
-              ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
-          }
         }
-
-        return {
-          question: {
-            _id: question._id,
-            questionText: question.questionText,
-            type: question.type,
-          },
-          responses: questionResponses,
-          average,
-        };
-      });
+      }
 
       return {
-        survey: {
-          _id: survey._id,
-          description: survey.description,
-          status: survey.status,
-          questions: survey.questions,
-        },
-        questionResults,
+        question,
+        responses,
+        average,
       };
-    });
+    };
+
+    const results = [];
+    for (const question of questions) {
+      results.push(await groupQuestionResponsesByPortal(question));
+    }
 
     res.status(200).json(results);
   } catch (error) {

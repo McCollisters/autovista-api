@@ -218,7 +218,7 @@ interface OldOrder {
   billRate?: number;
   paymentType?: string;
   termsAccepted?: boolean;
-  paid?: boolean;
+  paid?: boolean | string;
 
   // Total pricing
   totalPricing: {
@@ -280,6 +280,12 @@ export class OrderMigration extends MigrationBase {
       // Count existing documents in source
       const totalOrders = await sourceOrdersCollection.countDocuments();
       console.log(`📊 Found ${totalOrders} orders to migrate from source`);
+      const codOrdersCount = await sourceOrdersCollection.countDocuments({
+        paymentType: "COD",
+      });
+      console.log(
+        `📊 Found ${codOrdersCount} source orders with paymentType="COD"`,
+      );
 
       if (totalOrders === 0) {
         return this.createSuccessResult("No orders found to migrate");
@@ -388,6 +394,23 @@ export class OrderMigration extends MigrationBase {
   }
 
   private transformOrder(oldOrder: OldOrder): any {
+    const normalizedPaymentType =
+      typeof oldOrder.paymentType === "string"
+        ? oldOrder.paymentType.toLowerCase()
+        : oldOrder.paymentType;
+    const normalizedPaid =
+      typeof oldOrder.paid === "string"
+        ? oldOrder.paid.toLowerCase() === "true"
+        : oldOrder.paid;
+
+    if (normalizedPaid === false && normalizedPaymentType === "cod") {
+      console.log("Source order has paid=false (COD)", {
+        orderId: oldOrder._id,
+        paymentType: oldOrder.paymentType,
+        paid: oldOrder.paid,
+      });
+    }
+
     const transformedOrder: any = {
       // Preserve existing fields
       _id: oldOrder._id,
@@ -402,7 +425,12 @@ export class OrderMigration extends MigrationBase {
       quoteId: this.convertToObjectId(oldOrder.quote),
       miles: oldOrder.miles,
       transitTime: oldOrder.transitTime || [],
-      paymentType: oldOrder.paymentType?.toLowerCase() || "cod",
+      paymentType:
+        oldOrder.paymentType === "COD"
+          ? "cod"
+          : oldOrder.paymentType
+            ? oldOrder.paymentType.toLowerCase()
+            : "cod",
       transportType: oldOrder.transportType.toLowerCase(),
 
       // Transform origin from pickup information
@@ -492,7 +520,12 @@ export class OrderMigration extends MigrationBase {
       isDirect: oldOrder.isCustomerPortal || false,
       reg: oldOrder.reg || null, // reg should never be 0, use null if not present
       hasAcceptedTerms: oldOrder.termsAccepted || false,
-      hasPaid: oldOrder.paid || false,
+      hasPaid:
+        normalizedPaymentType === "cod"
+          ? normalizedPaid === false
+            ? false
+            : true
+          : null,
       tms: {
         guid: oldOrder.sdGuid || "",
         status: oldOrder.sdStatus || "",
