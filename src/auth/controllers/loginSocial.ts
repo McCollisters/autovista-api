@@ -2,6 +2,7 @@ import express from "express";
 import { OAuth2Client } from "google-auth-library";
 import { User } from "@/_global/models";
 import { createToken } from "@/_global/utils/createToken";
+import { getPortalRoles } from "@/_global/utils/portalRoles";
 import { logger } from "@/core/logger";
 import { Status } from "@/_global/enums";
 
@@ -102,11 +103,20 @@ export const loginSocial = async (
       role: user.role,
     });
 
+    const portalRoles = getPortalRoles(user).map((entry) => ({
+      portalId:
+        typeof entry.portalId === "string"
+          ? entry.portalId
+          : entry.portalId?.toString(),
+      role: entry.role,
+    }));
+
     res.status(200).json({
       token: newToken,
       role: user.role,
       userId: user._id.toString(),
       portalId: user.portalId?.toString() || null,
+      portalRoles,
     });
   } catch (error) {
     logger.error("Error in loginSocial", {

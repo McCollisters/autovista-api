@@ -2,6 +2,7 @@ import express from "express";
 import { Quote } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { getPortalRoleSets, isPlatformRole } from "@/_global/utils/portalRoles";
 import { Types } from "mongoose";
 import { Status } from "@/_global/enums";
 
@@ -62,34 +63,55 @@ export const getQuotes = async (
     // Build query criteria
     const query: any = {};
 
-    // Role-based filtering
-    if (authUser.role === "portal_admin") {
-      query.portalId = authUser.portalId;
-    } else if (authUser.role === "portal_user") {
-      query.userId = authUser._id;
-      query.portalId = authUser.portalId;
-    }
-    // platform_admin and platform_user can see all quotes (no restriction)
+    const { adminPortalIds, userPortalIds } = getPortalRoleSets(authUser);
+    const hasPlatformAccess = isPlatformRole(authUser.role);
 
-    // Portal filtering
-    if (portalId && portalId !== "all") {
-      if (
-        authUser.role === "platform_admin" ||
-        authUser.role === "platform_user"
-      ) {
-        // Mongoose can handle both string and ObjectId for ObjectId fields
-        // Convert string portalId to ObjectId for consistent query matching
-        try {
-          query.portalId = new Types.ObjectId(portalId as string);
-        } catch (error) {
-          logger.error("Invalid portalId format", {
-            portalId: portalId,
-            error: error instanceof Error ? error.message : error,
+    if (!hasPlatformAccess) {
+      if (portalId && portalId !== "all") {
+        const portalIdString = String(portalId);
+        if (adminPortalIds.includes(portalIdString)) {
+          query.portalId = portalIdString;
+        } else if (userPortalIds.includes(portalIdString)) {
+          query.portalId = portalIdString;
+          query.userId = authUser._id;
+        } else {
+          return next({
+            statusCode: 403,
+            message: "You do not have access to this portal's quotes.",
           });
-          // If portalId is invalid, skip filtering (might show wrong results, but won't crash)
+        }
+      } else {
+        const portalFilters: any[] = [];
+        if (adminPortalIds.length > 0) {
+          portalFilters.push({ portalId: { $in: adminPortalIds } });
+        }
+        if (userPortalIds.length > 0) {
+          portalFilters.push({
+            portalId: { $in: userPortalIds },
+            userId: authUser._id,
+          });
+        }
+        if (portalFilters.length === 0) {
+          return next({
+            statusCode: 403,
+            message: "You do not have access to any portals.",
+          });
+        }
+        if (portalFilters.length === 1) {
+          Object.assign(query, portalFilters[0]);
+        } else {
+          query.$or = portalFilters;
         }
       }
-      // For non-platform roles, portalId is already set above
+    } else if (portalId && portalId !== "all") {
+      try {
+        query.portalId = new Types.ObjectId(portalId as string);
+      } catch (error) {
+        logger.error("Invalid portalId format", {
+          portalId: portalId,
+          error: error instanceof Error ? error.message : error,
+        });
+      }
     }
 
     // Search text handling

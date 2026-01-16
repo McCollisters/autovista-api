@@ -1,5 +1,6 @@
 import express from "express";
 import { User, Portal } from "@/_global/models";
+import { Role } from "../schema";
 import { Status } from "../../_global/enums";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
@@ -37,6 +38,7 @@ export const createUserAdmin = async (
       phone,
       mobilePhone,
       password,
+      portalRoles,
     } = req.body;
 
     logger.info(`New user ${email} created by ${authUser.email}`);
@@ -78,15 +80,26 @@ export const createUserAdmin = async (
     }
 
     // Create user data
+    const resolvedRole = role || Role.PortalUser;
+
     const userData: any = {
       email: normalizedEmail,
       firstName,
       lastName,
-      role: role || "User",
+      role: resolvedRole,
       portalId,
       status: Status.Active,
       fullName: `${firstName} ${lastName}`,
     };
+
+    if (portalRoles) {
+      userData.portalRoles = portalRoles;
+    } else if (
+      portalId &&
+      (resolvedRole === Role.PortalAdmin || resolvedRole === Role.PortalUser)
+    ) {
+      userData.portalRoles = [{ portalId, role: resolvedRole }];
+    }
 
     if (password) {
       userData.password = password;

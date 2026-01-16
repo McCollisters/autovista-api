@@ -2,6 +2,7 @@ import express from "express";
 import { Order } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { getPortalRoleSets, isPlatformRole } from "@/_global/utils/portalRoles";
 
 /**
  * GET /orders/analytics
@@ -34,17 +35,49 @@ export const getOrdersAnalytics = async (
     // Build query
     const query: any = {};
 
-    // Portal filtering
-    if (portalId && portalId !== "all") {
-      if (authUser.role === "MCAdmin") {
-        query.portalId = portalId;
+    const { adminPortalIds, userPortalIds } = getPortalRoleSets(authUser);
+    const hasPlatformAccess = isPlatformRole(authUser.role);
+    const finalPortalId = portalId || selectedPortalId;
+
+    if (!hasPlatformAccess) {
+      if (finalPortalId && finalPortalId !== "all") {
+        const portalIdString = String(finalPortalId);
+        if (adminPortalIds.includes(portalIdString)) {
+          query.portalId = portalIdString;
+        } else if (userPortalIds.includes(portalIdString)) {
+          query.portalId = portalIdString;
+          query.userId = authUser._id;
+        } else {
+          return next({
+            statusCode: 403,
+            message: "You do not have access to this portal's orders.",
+          });
+        }
       } else {
-        // Non-MCAdmin can only see their own portal
-        query.portalId = authUser.portalId;
+        const portalFilters: any[] = [];
+        if (adminPortalIds.length > 0) {
+          portalFilters.push({ portalId: { $in: adminPortalIds } });
+        }
+        if (userPortalIds.length > 0) {
+          portalFilters.push({
+            portalId: { $in: userPortalIds },
+            userId: authUser._id,
+          });
+        }
+        if (portalFilters.length === 0) {
+          return next({
+            statusCode: 403,
+            message: "You do not have access to any portals.",
+          });
+        }
+        if (portalFilters.length === 1) {
+          Object.assign(query, portalFilters[0]);
+        } else {
+          query.$or = portalFilters;
+        }
       }
-    } else if (authUser.role !== "MCAdmin") {
-      // Non-MCAdmin must filter by their portal
-      query.portalId = authUser.portalId;
+    } else if (finalPortalId && finalPortalId !== "all") {
+      query.portalId = finalPortalId;
     }
 
     // Date filtering
@@ -67,10 +100,7 @@ export const getOrdersAnalytics = async (
       ];
     }
 
-    // Selected portal (additional filter)
-    if (selectedPortalId && selectedPortalId !== "all") {
-      query.portalId = selectedPortalId;
-    }
+    // Selected portal is already handled in role-based filtering above
 
     // Exclude COD orders for analytics
     query.paymentType = { $ne: "COD" };

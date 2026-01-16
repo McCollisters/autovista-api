@@ -3234,3 +3234,685 @@
   message: '❌ Scheduled migration job failed',
   timestamp: '2026-01-15 06:53:04'
 }
+{
+  service: 'autovista-api',
+  error: 'hasPaid is not defined',
+  stack: 'ReferenceError: hasPaid is not defined\n' +
+    '    at getOrders (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/getOrders.ts:202:48)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  level: 'error',
+  message: 'Error getting orders',
+  timestamp: '2026-01-15 12:45:55'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: userId: Path `userId` is required.',
+  portalId: '64ece35abfc3deb98e9d180f',
+  level: 'error',
+  message: 'Error creating customer quote',
+  timestamp: '2026-01-15 17:09:58'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: userId: Path `userId` is required.',
+  portalId: '64ece35abfc3deb98e9d180f',
+  level: 'error',
+  message: 'Error creating customer quote',
+  timestamp: '2026-01-15 17:10:45'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: userId: Path `userId` is required.',
+  portalId: '64ece35abfc3deb98e9d180f',
+  level: 'error',
+  message: 'Error creating customer quote',
+  timestamp: '2026-01-15 17:11:22'
+}
+{
+  service: 'autovista-api',
+  error: 'jwt malformed',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-15 17:12:04'
+}
+{
+  service: 'autovista-api',
+  error: "Cannot read properties of undefined (reading 'map')",
+  stack: "TypeError: Cannot read properties of undefined (reading 'map')\n" +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:414:29)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  data: {
+    portalId: {
+      _id: '64ece35abfc3deb98e9d180f',
+      status: 'active',
+      companyName: "McCollister's Instant Quote",
+      companyPhone: '(800) 748-3160',
+      companyFax: null,
+      contact: {
+        name: 'Barb Bailey',
+        email: 'bbailey@mccollisters.com',
+        phone: '(800) 257-9595',
+        phoneMobile: '(___) ___-____',
+        notes: null
+      },
+      address: {
+        address: '8 Terri Lane',
+        addressLine2: null,
+        city: 'Burlington',
+        state: 'NJ',
+        zip: '08016'
+      },
+      logo: null,
+      isDealership: false,
+      disableAgentNotifications: false,
+      notificationEmails: [],
+      options: {
+        overrideLogo: false,
+        enableCustomRates: false,
+        enableVariableCompanyTariff: false,
+        enableWhiteGloveOverride: true,
+        enableOrderTrackingByCustomer: true,
+        enableSurvey: true,
+        portalAdmin: { enableDiscount: false },
+        quoteDetail: { displayCompanyTariff: true, displayCommission: false },
+        orderForm: {
+          enableAgent: false,
+          defaultPaymentType: 'cod',
+          requireLocationType: false
+        },
+        quoteForm: { enableCommissionPerVehicle: false, enableCommission: false },
+        orderPDF: { enablePriceBreakdown: true },
+        quoteExpiryDays: 10
+      },
+      parentPortalId: null,
+      customRates: [],
+      createdAt: '2023-08-28T18:11:38.249Z',
+      updatedAt: '2026-01-15T23:30:06.316Z',
+      modifierSet: {
+        _id: '6969241fb7425724f8c61b99',
+        portalId: '64ece35abfc3deb98e9d180f',
+        isGlobal: false,
+        inoperable: { value: 0, valueType: 'flat' },
+        fuel: { value: 0, valueType: 'flat' },
+        irr: { value: 0, valueType: 'flat' },
+        whiteGlove: { multiplier: 2, minimum: 1200 },
+        oversize: {
+          suv: 150,
+          van: 150,
+          pickup_2_doors: 150,
+          pickup_4_doors: 150
+        },
+        enclosedFlat: { value: 400, valueType: 'flat' },
+        enclosedPercent: { value: 0, valueType: 'flat' },
+        discount: { value: 5, valueType: 'flat' },
+        companyTariff: { value: 0, valueType: 'flat' },
+        companyTariffDiscount: { value: 0, valueType: 'flat' },
+        companyTariffEnclosedFee: { value: 0, valueType: 'flat' },
+        fixedCommission: { value: 0, valueType: 'flat' },
+        states: {},
+        routes: [],
+        zips: [],
+        vehicles: [],
+        serviceLevels: [
+          { serviceLevelOption: '1', value: 175 },
+          { serviceLevelOption: '3', value: 125 },
+          { serviceLevelOption: '5', value: 100 },
+          { serviceLevelOption: '7', value: 75 }
+        ],
+        createdAt: '2023-08-28T18:11:38.249Z',
+        updatedAt: '2026-01-15T22:32:55.093Z',
+        enclosed: { value: 0, valueType: 'percentage' }
+      }
+    },
+    quoteId: '696999438f43c6231f12d595',
+    pickupStartDate: '2026-12-03T01:58:18.897Z',
+    transportType: 'OPEN',
+    paymentType: undefined
+  },
+  level: 'error',
+  message: 'Unexpected error in createOrder:',
+  timestamp: '2026-01-15 19:04:40'
+}
+{
+  message: 'No calculated quote found for service level 3',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:07:25'
+}
+{
+  service: 'autovista-api',
+  error: 'No pricing found for service level 3 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 3 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:90:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  uniqueId: undefined,
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-15 19:07:25'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: No pricing found for service level 3 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 3 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:90:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  timestamp: '2026-01-15 19:07:25'
+}
+{
+  message: 'No pricing totals found for service level 3',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:09:47'
+}
+{
+  service: 'autovista-api',
+  error: 'No pricing found for service level 3 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 3 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:95:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  uniqueId: undefined,
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-15 19:09:47'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: No pricing found for service level 3 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 3 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:95:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  timestamp: '2026-01-15 19:09:47'
+}
+{
+  message: 'No pricing totals found for service level 3',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:11:18'
+}
+{
+  service: 'autovista-api',
+  error: 'No pricing found for service level 3 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 3 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:95:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  uniqueId: undefined,
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-15 19:11:18'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: No pricing found for service level 3 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 3 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:95:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  timestamp: '2026-01-15 19:11:18'
+}
+{
+  message: 'No pricing totals found for service level 3',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:11:37'
+}
+{
+  service: 'autovista-api',
+  error: 'No pricing found for service level 3 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 3 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:95:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  uniqueId: undefined,
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-15 19:11:37'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: No pricing found for service level 3 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 3 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:95:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  timestamp: '2026-01-15 19:11:37'
+}
+{
+  message: 'No pricing totals found for service level 5',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:13:16'
+}
+{
+  service: 'autovista-api',
+  error: 'No pricing found for service level 5 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 5 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:95:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  uniqueId: undefined,
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-15 19:13:16'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: No pricing found for service level 5 for vehicle Acura 2.2CL',
+  stack: 'Error: No pricing found for service level 5 for vehicle Acura 2.2CL\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:95:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:70:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:437:25)',
+  timestamp: '2026-01-15 19:13:16'
+}
+{
+  message: 'Vehicle 0: No pricing totals found for service level 1',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:15:48'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error processing vehicle 0: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:512:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:486:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-15 19:15:48'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Vehicle data processing failed: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:512:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:486:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-15 19:15:48'
+}
+{
+  message: 'Vehicle 0: No pricing totals found for service level 1',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:18:00'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error processing vehicle 0: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:517:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:490:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-15 19:18:00'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Vehicle data processing failed: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:517:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:490:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-15 19:18:00'
+}
+{
+  message: 'Vehicle 0: No pricing totals found for service level 1',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:27:55'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error processing vehicle 0: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:544:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:517:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:27:55'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Vehicle data processing failed: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:544:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:517:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:27:55'
+}
+{
+  message: 'Vehicle 0: No pricing totals found for service level 1',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:29:37'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error processing vehicle 0: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:550:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:524:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:29:37'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Vehicle data processing failed: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:550:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:524:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:29:37'
+}
+{
+  message: 'Vehicle 0: No pricing totals found for service level 1',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:29:52'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error processing vehicle 0: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:550:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:524:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:29:52'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Vehicle data processing failed: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:550:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:524:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:29:52'
+}
+{
+  message: 'Vehicle 0: No pricing totals found for service level 1',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:32:07'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error processing vehicle 0: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:549:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:523:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:32:07'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Vehicle data processing failed: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:549:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:523:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:32:07'
+}
+{
+  message: 'Vehicle 0: No pricing totals found for service level 1',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-15 19:35:32'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error processing vehicle 0: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:552:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:526:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:35:32'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Vehicle data processing failed: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:552:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:526:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrderCustomer (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrderCustomer.ts:33:5)',
+  timestamp: '2026-01-15 19:35:32'
+}
+{
+  service: 'autovista-api',
+  errors: {
+    'schedule.pickupSelected': ValidatorError: Path `schedule.pickupSelected` is required.
+        at validate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1414:13)
+        at SchemaType.doValidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1398:7)
+        at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3115:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      properties: {
+        validator: [Function (anonymous)],
+        message: 'Path `schedule.pickupSelected` is required.',
+        type: 'required',
+        path: 'schedule.pickupSelected',
+        fullPath: undefined,
+        value: undefined
+      },
+      kind: 'required',
+      path: 'schedule.pickupSelected',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose#validatorError)]: true
+    },
+    'schedule.serviceLevel': ValidatorError: Path `schedule.serviceLevel` is required.
+        at validate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1414:13)
+        at SchemaType.doValidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1398:7)
+        at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3115:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      properties: {
+        validator: [Function (anonymous)],
+        message: 'Path `schedule.serviceLevel` is required.',
+        type: 'required',
+        path: 'schedule.serviceLevel',
+        fullPath: undefined,
+        value: undefined
+      },
+      kind: 'required',
+      path: 'schedule.serviceLevel',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose#validatorError)]: true
+    },
+    'totalPricing.total': ValidatorError: Path `totalPricing.total` is required.
+        at validate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1414:13)
+        at SchemaType.doValidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1398:7)
+        at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3115:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      properties: {
+        validator: [Function (anonymous)],
+        message: 'Path `totalPricing.total` is required.',
+        type: 'required',
+        path: 'totalPricing.total',
+        fullPath: undefined,
+        value: undefined
+      },
+      kind: 'required',
+      path: 'totalPricing.total',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose#validatorError)]: true
+    },
+    quoteId: ValidatorError: Path `quoteId` is required.
+        at validate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1414:13)
+        at SchemaType.doValidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1398:7)
+        at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3115:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      properties: {
+        validator: [Function (anonymous)],
+        message: 'Path `quoteId` is required.',
+        type: 'required',
+        path: 'quoteId',
+        fullPath: undefined,
+        value: undefined
+      },
+      kind: 'required',
+      path: 'quoteId',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose#validatorError)]: true
+    },
+    refId: ValidatorError: Path `refId` is required.
+        at validate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1414:13)
+        at SchemaType.doValidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1398:7)
+        at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3115:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      properties: {
+        validator: [Function (anonymous)],
+        message: 'Path `refId` is required.',
+        type: 'required',
+        path: 'refId',
+        fullPath: undefined,
+        value: undefined
+      },
+      kind: 'required',
+      path: 'refId',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose#validatorError)]: true
+    },
+    status: ValidatorError: `Pending` is not a valid enum value for path `status`.
+        at validate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1414:13)
+        at SchemaType.doValidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1398:7)
+        at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3115:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      properties: {
+        validator: [Function (anonymous)],
+        message: '`Pending` is not a valid enum value for path `status`.',
+        type: 'enum',
+        enumValues: [
+          'active',
+          'complete',
+          'disabled',
+          'archived',
+          'expired',
+          'booked'
+        ],
+        path: 'status',
+        fullPath: undefined,
+        value: 'Pending',
+        length: 7
+      },
+      kind: 'enum',
+      path: 'status',
+      value: 'Pending',
+      reason: undefined,
+      [Symbol(mongoose#validatorError)]: true
+    },
+    userId: ValidatorError: Path `userId` is required.
+        at validate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1414:13)
+        at SchemaType.doValidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1398:7)
+        at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3115:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      properties: {
+        validator: [Function (anonymous)],
+        message: 'Path `userId` is required.',
+        type: 'required',
+        path: 'userId',
+        fullPath: undefined,
+        value: null
+      },
+      kind: 'required',
+      path: 'userId',
+      value: null,
+      reason: undefined,
+      [Symbol(mongoose#validatorError)]: true
+    },
+    transportType: ValidatorError: `OPEN` is not a valid enum value for path `transportType`.
+        at validate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1414:13)
+        at SchemaType.doValidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1398:7)
+        at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3115:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      properties: {
+        validator: [Function (anonymous)],
+        message: '`OPEN` is not a valid enum value for path `transportType`.',
+        type: 'enum',
+        enumValues: [ 'open', 'enclosed', 'whiteglove' ],
+        path: 'transportType',
+        fullPath: undefined,
+        value: 'OPEN',
+        length: 4
+      },
+      kind: 'enum',
+      path: 'transportType',
+      value: 'OPEN',
+      reason: undefined,
+      [Symbol(mongoose#validatorError)]: true
+    }
+  },
+  _message: 'Order validation failed',
+  level: 'error',
+  message: 'Database order creation failed: Order validation failed: schedule.pickupSelected: Path `schedule.pickupSelected` is required., schedule.serviceLevel: Path `schedule.serviceLevel` is required., totalPricing.total: Path `totalPricing.total` is required., quoteId: Path `quoteId` is required., refId: Path `refId` is required., status: `Pending` is not a valid enum value for path `status`., userId: Path `userId` is required., transportType: `OPEN` is not a valid enum value for path `transportType`.',
+  stack: 'ValidationError: Order validation failed: schedule.pickupSelected: Path `schedule.pickupSelected` is required., schedule.serviceLevel: Path `schedule.serviceLevel` is required., totalPricing.total: Path `totalPricing.total` is required., quoteId: Path `quoteId` is required., refId: Path `refId` is required., status: `Pending` is not a valid enum value for path `status`., userId: Path `userId` is required., transportType: `OPEN` is not a valid enum value for path `transportType`.\n' +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3123:17\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1417:9\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)',
+  timestamp: '2026-01-15 19:37:11'
+}

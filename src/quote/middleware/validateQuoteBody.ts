@@ -28,10 +28,10 @@ export const validateQuoteBody = (
     });
   }
 
-  if (!userId || typeof userId !== "string") {
+  if (userId && typeof userId !== "string") {
     return next({
       statusCode: 400,
-      message: "userId is required and must be a string",
+      message: "userId must be a string",
     });
   }
 

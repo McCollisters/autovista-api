@@ -68,24 +68,30 @@ export const sendPartialOrderToSuper = async (
 
     // Format vehicle data for Super Dispatch
     const vehicleData: VehicleData[] = quotes.map((quote) => {
-      let calculatedQuotes = quote.calculatedQuotes;
+      const normalizedServiceLevel = Number(serviceLevel);
+      const totalsKey =
+        normalizedServiceLevel === 1
+          ? "one"
+          : normalizedServiceLevel === 3
+            ? "three"
+            : normalizedServiceLevel === 5
+              ? "five"
+              : "seven";
+      const totalsForLevel = (quote as any)?.pricing?.totals?.[totalsKey];
+      const totalOpen =
+        totalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
+        totalsForLevel?.open?.total ??
+        totalsForLevel?.totalWithCompanyTariffAndCommission ??
+        totalsForLevel?.total;
+      const totalEnclosed =
+        totalsForLevel?.enclosed?.totalWithCompanyTariffAndCommission ??
+        totalsForLevel?.enclosed?.total ??
+        totalsForLevel?.totalWithCompanyTariffAndCommission ??
+        totalsForLevel?.total;
 
-      // Parse JSON if string
-      if (
-        typeof calculatedQuotes === "string" ||
-        calculatedQuotes instanceof String
-      ) {
-        calculatedQuotes = JSON.parse(String(calculatedQuotes));
-      }
-
-      // Find quote for the specified service level
-      const calculatedQuote = Array.isArray(calculatedQuotes) ? calculatedQuotes.find((q: any) => {
-        return parseInt(q.days) === serviceLevel;
-      }) : null;
-
-      if (!calculatedQuote) {
+      if (totalOpen == null && totalEnclosed == null) {
         logger.error(
-          `No calculated quote found for service level ${serviceLevel}`,
+          `No pricing totals found for service level ${serviceLevel}`,
         );
         throw new Error(
           `No pricing found for service level ${serviceLevel} for vehicle ${quote.make} ${quote.model}`,
@@ -95,9 +101,9 @@ export const sendPartialOrderToSuper = async (
       let totalSDTariff: number;
 
       if (transportType === "OPEN") {
-        totalSDTariff = calculatedQuote.openTransportSD;
+        totalSDTariff = totalOpen ?? 0;
       } else {
-        totalSDTariff = calculatedQuote.enclosedTransportSD;
+        totalSDTariff = totalEnclosed ?? 0;
       }
 
       // Determine if vehicle is inoperable
@@ -127,17 +133,24 @@ export const sendPartialOrderToSuper = async (
     });
 
     // Format dates (Super Dispatch expects YYYY-MM-DD format)
-    const pickupStartDate = DateTime.fromJSDate(new Date(dateRanges[0])).toFormat("yyyy-MM-dd");
-    const pickupEndDate = DateTime.fromJSDate(new Date(dateRanges[1])).toFormat("yyyy-MM-dd");
-    const deliveryStartDate = DateTime.fromJSDate(new Date(dateRanges[2])).toFormat("yyyy-MM-dd");
-    const deliveryEndDate = DateTime.fromJSDate(new Date(dateRanges[3])).toFormat("yyyy-MM-dd");
+    const pickupStartDate = DateTime.fromJSDate(
+      new Date(dateRanges[0]),
+    ).toFormat("yyyy-MM-dd");
+    const pickupEndDate = DateTime.fromJSDate(new Date(dateRanges[1])).toFormat(
+      "yyyy-MM-dd",
+    );
+    const deliveryStartDate = DateTime.fromJSDate(
+      new Date(dateRanges[2]),
+    ).toFormat("yyyy-MM-dd");
+    const deliveryEndDate = DateTime.fromJSDate(
+      new Date(dateRanges[3]),
+    ).toFormat("yyyy-MM-dd");
 
     // Build partial order payload
     const orderDetails = {
       number: uniqueId,
       purchase_order_number: reg || null,
-      portalNotificationEmail:
-        portal.contact?.email || null,
+      portalNotificationEmail: portal.contact?.email || null,
       instructions:
         "Full order details will be released upon carrier approval by our office within 1 business day",
       payment: {

@@ -7,8 +7,8 @@ import { deletePortal } from "./controllers/deletePortal";
 const router = Router();
 
 router.post("/", createPortal);
-router.get("/:quoteId", getPortal);
-router.patch("/:quoteId", updatePortal);
-router.delete("/:quoteId", deletePortal);
+router.get("/:portalId", getPortal);
+router.patch("/:portalId", updatePortal);
+router.delete("/:portalId", deletePortal);
 
 export default router;

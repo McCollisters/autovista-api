@@ -1,6 +1,6 @@
 import express from "express";
 import { Order, Quote, Portal, User, Settings } from "@/_global/models";
-import { Status } from "../../_global/enums";
+import { Status, TransportType, ServiceLevelOption } from "../../_global/enums";
 import { logger } from "@/core/logger";
 import { geocode } from "../../_global/utils/geocode";
 import { formatPhoneNumber } from "../../_global/utils/formatPhoneNumber";
@@ -24,6 +24,7 @@ export const createOrder = async (
       quotes,
       quoteId,
       portalId,
+      customer,
       customerFirstName,
       customerLastName,
       customerFullName,
@@ -155,6 +156,9 @@ export const createOrder = async (
       });
     }
 
+    const quoteData = quote as any;
+    const portalData = portal as any;
+
     // Update quote status with error handling
     try {
       quote.status = Status.Booked;
@@ -167,24 +171,40 @@ export const createOrder = async (
       });
     }
 
-    let isCustomerPortal = quote.isCustomerPortal;
-    let originalQuotes = quote.vehicleQuotes;
-    let transitTime = quote.transitTime;
-    let uniqueId = quote.uniqueId;
+    let isCustomerPortal =
+      quoteData.isCustomerPortal ||
+      req.body?.isCustomerPortal === true ||
+      req.body?.isCustomerPortal === "true" ||
+      req.body?.isCustomerPortal === 1;
+    let originalQuotes = quoteData.vehicleQuotes || quoteData.vehicles || [];
+    let transitTime = quoteData.transitTime;
+    let uniqueId = quoteData.uniqueId;
     let uniqueIdNum = parseInt(uniqueId);
-    let companyName = portal.companyName;
-    let companyLogo = portal.logo ? portal.logo : "";
-    transportType = transportType || quote.transportType;
+    let companyName = portalData.companyName;
+    let companyLogo = portalData.logo ? portalData.logo : "";
+    const normalizedTransportType = String(
+      transportType || quoteData.transportType || "",
+    ).toLowerCase();
+    transportType =
+      normalizedTransportType === TransportType.Enclosed
+        ? TransportType.Enclosed
+        : normalizedTransportType === TransportType.WhiteGlove
+          ? TransportType.WhiteGlove
+          : TransportType.Open;
 
     // Check if delivery address has changed from original quote
-    const originalDeliveryAddress = quote.delivery;
+    const originalDeliveryAddress =
+      quoteData.destination?.validated ||
+      quoteData.destination?.userInput ||
+      quoteData.delivery ||
+      "";
 
     // Extract city and state from original address for comparison
     let originalCity, originalState;
     if (originalDeliveryAddress) {
       const parts = originalDeliveryAddress
         .split(",")
-        .map((part) => part.trim());
+        .map((part: string) => part.trim());
       if (parts.length >= 2) {
         originalCity = parts[0];
         originalState = parts[1];
@@ -206,11 +226,7 @@ export const createOrder = async (
       // For now, we'll use the original transit time but log the change
     }
 
-    let openTransport = false;
-
-    if (transportType === "OPEN") {
-      openTransport = true;
-    }
+    let openTransport = transportType === TransportType.Open;
 
     // Check for existing order
     let existingOrder;
@@ -235,7 +251,8 @@ export const createOrder = async (
     }
 
     // Settings lookup with error handling
-    let settings, holidayDates;
+    let settings: any;
+    let holidayDates: Date[] = [];
     try {
       settings = await Settings.findOne({});
       if (!settings) {
@@ -243,7 +260,14 @@ export const createOrder = async (
         holidayDates = [];
       } else {
         holidayDates = settings.holidays
-          ? settings.holidays.map((holiday) => new Date(holiday.date))
+          ? settings.holidays
+              .map((holiday: any) => {
+                const rawDate = holiday?.date ?? holiday;
+                const parsedDate =
+                  rawDate instanceof Date ? rawDate : new Date(rawDate);
+                return parsedDate;
+              })
+              .filter((date: Date) => !isNaN(date.getTime()))
           : [];
       }
     } catch (settingsError) {
@@ -304,7 +328,15 @@ export const createOrder = async (
       });
     }
 
-    let formattedCustomerPrimaryPhone = formatPhoneNumber(customerPrimaryPhone);
+    const normalizedCustomerName =
+      customerFullName || customer?.name || quote.customer?.name || "";
+    const normalizedCustomerEmail =
+      customerEmail || customer?.email || quote.customer?.email || "";
+    const normalizedCustomerPhone =
+      customerPrimaryPhone || customer?.phone || quote.customer?.phone || "";
+    let formattedCustomerPrimaryPhone = formatPhoneNumber(
+      normalizedCustomerPhone,
+    );
     let formattedCustomerAltPhone = formatPhoneNumber(customerAltPhone);
     let formattedPickupPrimaryPhone = formatPhoneNumber(pickupPrimaryPhone);
     let formattedPickupAltPhone = formatPhoneNumber(pickupAltPhone);
@@ -372,12 +404,21 @@ export const createOrder = async (
       }
     }
 
+    const normalizedServiceLevel = Number(serviceLevel?.value ?? serviceLevel);
+    const effectiveServiceLevel = Number.isNaN(normalizedServiceLevel)
+      ? 1
+      : normalizedServiceLevel;
+    const scheduleServiceLevel =
+      transportType === TransportType.WhiteGlove
+        ? ServiceLevelOption.WhiteGlove
+        : String(effectiveServiceLevel);
+
     // Date range calculation with error handling
     let dateRanges;
     try {
       dateRanges = getDateRanges(
         pickupStartDate,
-        serviceLevel,
+        effectiveServiceLevel,
         transitTime,
         holidayDates,
       );
@@ -411,14 +452,18 @@ export const createOrder = async (
     let superResponse;
 
     // Merge request body vehicle data with original quote data
-    quotes = originalQuotes.map((originalVehicle, index) => {
-      const requestVehicle = req.body.quotes?.[index] || {};
-      return {
-        ...originalVehicle,
-        ...requestVehicle, // This will include VIN and year from request
-        calculatedQuotes: originalVehicle.calculatedQuotes,
-      };
-    });
+    const requestQuotes = Array.isArray(req.body.quotes) ? req.body.quotes : [];
+    quotes =
+      requestQuotes.length > 0
+        ? originalQuotes.map((originalVehicle: any, index: number) => {
+            const requestVehicle = requestQuotes[index] || {};
+            return {
+              ...originalVehicle,
+              ...requestVehicle, // VIN/year override only
+              calculatedQuotes: originalVehicle.calculatedQuotes,
+            };
+          })
+        : originalQuotes;
 
     if (quotes.length === 0) {
       return next({
@@ -429,7 +474,11 @@ export const createOrder = async (
 
     // SuperDispatch integration with improved error handling
     // Send partial order initially (withheld addresses) - full details will be sent when carrier accepts
-    if (payment !== "COD" && transportType !== "WHITEGLOVE") {
+    if (
+      !isCustomerPortal &&
+      payment !== "COD" &&
+      transportType !== TransportType.WhiteGlove
+    ) {
       try {
         logger.info(
           `Sending partial order ${uniqueId} to SuperDispatch (addresses withheld)`,
@@ -483,65 +532,60 @@ export const createOrder = async (
     // Vehicle data processing with error handling
     let dbVehicleData;
     try {
-      dbVehicleData = quotes.map((quote, index) => {
+      dbVehicleData = quotes.map((quote: any, index: number) => {
         try {
-          let calculatedQuotes = quote.calculatedQuotes;
+          const totalsKey =
+            effectiveServiceLevel === 1
+              ? "one"
+              : effectiveServiceLevel === 3
+                ? "three"
+                : effectiveServiceLevel === 5
+                  ? "five"
+                  : "seven";
+          const totalsForLevel = (quote as any)?.pricing?.totals?.[totalsKey];
+          const totalOpen =
+            totalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
+            totalsForLevel?.open?.total ??
+            totalsForLevel?.totalWithCompanyTariffAndCommission ??
+            totalsForLevel?.total;
+          const totalEnclosed =
+            totalsForLevel?.enclosed?.totalWithCompanyTariffAndCommission ??
+            totalsForLevel?.enclosed?.total ??
+            totalsForLevel?.totalWithCompanyTariffAndCommission ??
+            totalsForLevel?.total;
 
-          if (!calculatedQuotes) {
-            logger.error(`Vehicle ${index}: No calculated quotes found`);
-            throw new Error(`No calculated quotes found for vehicle ${index}`);
-          }
-
-          if (
-            typeof calculatedQuotes === "string" ||
-            calculatedQuotes instanceof String
-          ) {
-            try {
-              calculatedQuotes = JSON.parse(
-                String(calculatedQuotes),
-              ) as typeof calculatedQuotes;
-            } catch (parseError) {
-              logger.error(
-                `Vehicle ${index}: Failed to parse calculated quotes JSON:`,
-                parseError,
-              );
-              throw new Error(
-                `Invalid calculated quotes format for vehicle ${index}`,
-              );
-            }
-          }
-
-          if (!Array.isArray(calculatedQuotes)) {
+          if (totalOpen == null && totalEnclosed == null) {
             logger.error(
-              `Vehicle ${index}: Calculated quotes is not an array:`,
-              typeof calculatedQuotes,
+              `Vehicle ${index}: No pricing totals found for service level ${effectiveServiceLevel}`,
             );
             throw new Error(
-              `Calculated quotes must be an array for vehicle ${index}`,
+              `No pricing found for service level ${effectiveServiceLevel} for vehicle ${index}`,
             );
           }
 
-          let calculatedQuote = calculatedQuotes.find((q) => {
-            return parseInt(q.days) === serviceLevel;
-          });
-
-          if (!calculatedQuote) {
-            logger.error(
-              `Vehicle ${index}: No calculated quote found for service level ${serviceLevel}`,
-            );
-            throw new Error(
-              `No pricing found for service level ${serviceLevel} for vehicle ${index}`,
-            );
-          }
+          let calculatedQuote: any = {
+            openTransportPortal: totalOpen ?? 0,
+            enclosedTransportPortal: totalEnclosed ?? 0,
+            openTransportSD: totalOpen ?? 0,
+            enclosedTransportSD: totalEnclosed ?? 0,
+            companyTariffOpen:
+              totalsForLevel?.open?.companyTariff ??
+              totalsForLevel?.companyTariff ??
+              0,
+            companyTariffEnclosed:
+              totalsForLevel?.enclosed?.companyTariff ??
+              totalsForLevel?.companyTariff ??
+              0,
+          };
 
           // Set companyTariff based on transport type
           if (
-            transportType === "OPEN" &&
+            transportType === TransportType.Open &&
             calculatedQuote.companyTariffOpen > 0
           ) {
             calculatedQuote.companyTariff = calculatedQuote.companyTariffOpen;
           } else if (
-            transportType === "ENCLOSED" &&
+            transportType === TransportType.Enclosed &&
             calculatedQuote.companyTariffEnclosed > 0
           ) {
             calculatedQuote.companyTariff =
@@ -551,13 +595,13 @@ export const createOrder = async (
           // Update for dual-transport quoting
           let vehicleTariff;
 
-          if (transportType === "OPEN") {
+          if (transportType === TransportType.Open) {
             vehicleTariff = calculatedQuote.openTransportPortal;
           } else {
             vehicleTariff = calculatedQuote.enclosedTransportPortal;
           }
 
-          if (transportType === "ENCLOSED") {
+          if (transportType === TransportType.Enclosed) {
             calculatedQuote.totalSD = calculatedQuote.enclosedTransportSD;
             calculatedQuote.totalPortal =
               calculatedQuote.enclosedTransportPortal;
@@ -589,7 +633,11 @@ export const createOrder = async (
             tariff: vehicleTariff,
             type: quote.pricingClass?.toLowerCase() || "other",
             pricingClass: quote.pricingClass?.toLowerCase() || "other",
-            pricing: calculatedQuote,
+            pricing: {
+              ...quote.pricing,
+              totals: quote.pricing?.totals,
+              selected: calculatedQuote,
+            },
           };
         } catch (vehicleError) {
           logger.error(`Error processing vehicle ${index}:`, vehicleError);
@@ -597,22 +645,26 @@ export const createOrder = async (
         }
       });
     } catch (vehicleProcessingError) {
+      const errorMessage =
+        vehicleProcessingError instanceof Error
+          ? vehicleProcessingError.message
+          : String(vehicleProcessingError);
       logger.error("Vehicle data processing failed:", vehicleProcessingError);
       return next({
         statusCode: 500,
-        message: `Failed to process vehicle data: ${vehicleProcessingError.message}`,
+        message: `Failed to process vehicle data: ${errorMessage}`,
       });
     }
 
-    let userName = "";
-    let orderUserId = "";
+    let userName: string = "";
+    let orderUserId: string | null = "";
 
     if (isCustomerPortal) {
       userName = "Customer Order";
       orderUserId = null;
     } else {
-      userName = quote.userName;
-      orderUserId = quote.userId;
+      userName = quoteData.userName;
+      orderUserId = quoteData.userId;
     }
 
     if (portalId === "60d364c5176cba0017cbd78f") {
@@ -670,32 +722,92 @@ export const createOrder = async (
       }
     }
 
-    let pricing = quote.totalPricing[serviceLevel];
+    const totalKey =
+      effectiveServiceLevel === 1
+        ? "one"
+        : effectiveServiceLevel === 3
+          ? "three"
+          : effectiveServiceLevel === 5
+            ? "five"
+            : "seven";
+    let pricing: any = quoteData.totalPricing?.totals?.[totalKey];
+    const pricingTotalsForLevel = pricing;
+    const selectedTotal =
+      transportType === TransportType.WhiteGlove
+        ? (quoteData.totalPricing?.totals?.whiteGlove ?? 0)
+        : transportType === TransportType.Enclosed
+          ? (pricingTotalsForLevel?.enclosed?.total ??
+            pricingTotalsForLevel?.total ??
+            0)
+          : (pricingTotalsForLevel?.open?.total ??
+            pricingTotalsForLevel?.total ??
+            0);
+    const selectedTotalWithCompanyTariffAndCommission =
+      transportType === TransportType.WhiteGlove
+        ? (quoteData.totalPricing?.totals?.whiteGlove ?? 0)
+        : transportType === TransportType.Enclosed
+          ? (pricingTotalsForLevel?.enclosed
+              ?.totalWithCompanyTariffAndCommission ?? selectedTotal)
+          : (pricingTotalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
+            selectedTotal);
+    const modifierServiceLevel =
+      quoteData.totalPricing?.modifiers?.serviceLevels?.find(
+        (item: any) =>
+          String(item.serviceLevelOption) === String(effectiveServiceLevel),
+      )?.value ?? 0;
+    const modifierCompanyTariff =
+      quoteData.totalPricing?.modifiers?.companyTariffs?.find(
+        (item: any) =>
+          String(item.serviceLevelOption) === String(effectiveServiceLevel),
+      )?.value ?? 0;
+    const totalPricingSummary = {
+      base: quoteData.totalPricing?.base ?? 0,
+      modifiers: {
+        inoperable: quoteData.totalPricing?.modifiers?.inoperable ?? 0,
+        routes: quoteData.totalPricing?.modifiers?.routes ?? 0,
+        states: quoteData.totalPricing?.modifiers?.states ?? 0,
+        oversize: quoteData.totalPricing?.modifiers?.oversize ?? 0,
+        vehicles: quoteData.totalPricing?.modifiers?.vehicles ?? 0,
+        globalDiscount: quoteData.totalPricing?.modifiers?.globalDiscount ?? 0,
+        portalDiscount: quoteData.totalPricing?.modifiers?.portalDiscount ?? 0,
+        irr: quoteData.totalPricing?.modifiers?.irr ?? 0,
+        fuel: quoteData.totalPricing?.modifiers?.fuel ?? 0,
+        enclosedFlat: quoteData.totalPricing?.modifiers?.enclosedFlat ?? 0,
+        enclosedPercent:
+          quoteData.totalPricing?.modifiers?.enclosedPercent ?? 0,
+        commission: quoteData.totalPricing?.modifiers?.commission ?? 0,
+        serviceLevel: modifierServiceLevel,
+        companyTariff: modifierCompanyTariff,
+      },
+      total: selectedTotal,
+      totalWithCompanyTariffAndCommission:
+        selectedTotalWithCompanyTariffAndCommission ?? selectedTotal,
+    };
 
-    if (transportType === "ENCLOSED") {
-      pricing.totalSD =
-        quote.totalPricing[serviceLevel].totalEnclosedTransportSD;
-      pricing.totalPortal =
-        quote.totalPricing[serviceLevel].totalEnclosedTransportPortal;
+    if (transportType === TransportType.Enclosed) {
+      pricing.totalSD = pricing?.enclosed?.totalWithCompanyTariffAndCommission;
+      pricing.totalPortal = pricing?.enclosed?.total;
     }
+
+    const orderRefId = quoteData.refId ?? uniqueIdNum;
 
     // Create original order data backup before SuperDispatch updates
     const originalOrderData = {
-      refId: uniqueId,
+      refId: orderRefId,
       reg,
-      status: payment === "COD" ? "Pending" : "Booked",
-      portalId: portal._id.toString(),
-      userId: orderUserId.toString(),
-      quoteId: quote._id.toString(),
-      miles: quote.miles,
+      status: Status.Booked,
+      portalId: String(portalData._id),
+      userId: orderUserId ? String(orderUserId) : null,
+      quoteId: String(quoteData._id),
+      miles: quoteData.miles,
       transportType,
       customer: {
-        name: customerFullName,
+        name: normalizedCustomerName,
         firstName: customerFirstName,
         lastName: customerLastName,
         phone: customerPhone,
         phoneMobile: customerMobile,
-        email: customerEmail,
+        email: normalizedCustomerEmail,
       },
       origin: {
         contact: {
@@ -730,10 +842,10 @@ export const createOrder = async (
         latitude: deliveryCoords.latitude,
       },
       vehicles: dbVehicleData,
-      totalPricing: pricing,
+      totalPricing: totalPricingSummary,
       paymentType: payment,
       schedule: {
-        serviceLevel,
+        serviceLevel: scheduleServiceLevel,
         pickupSelected: new Date(dateRanges[0]),
         pickupEstimated: [new Date(dateRanges[0]), new Date(dateRanges[1])],
         deliveryEstimated: [new Date(dateRanges[2]), new Date(dateRanges[3])],
@@ -742,7 +854,9 @@ export const createOrder = async (
     };
 
     let orderDetailsForDb = {
-      orderTableCustomer: customerFullName ? customerFullName.trim() : null,
+      orderTableCustomer: normalizedCustomerName
+        ? normalizedCustomerName.trim()
+        : null,
       orderTableStatus: payment === "COD" ? "Pending" : "New",
       orderTablePickupEst: new Date(dateRanges[0]),
       orderTableDeliveryEst: new Date(dateRanges[2]),
@@ -750,16 +864,18 @@ export const createOrder = async (
       userName: userName,
       agentId: orderUserId,
       sirvaNonDomestic,
-      portalId: portal._id,
-      portal: portal._id,
+      portalId: portalData._id,
+      portal: portalData._id,
       isCustomerPortal,
       uniqueId,
       uniqueIdNum,
-      quote,
-      serviceLevel,
+      quoteId: quoteData._id,
+      quote: quoteData,
+      refId: orderRefId,
+      serviceLevel: scheduleServiceLevel,
       reg,
-      status: payment === "COD" ? "Pending" : "Booked",
-      miles: quote.miles,
+      status: Status.Booked,
+      miles: quoteData.miles,
       transportType,
       openTransport,
       transitTime,
@@ -767,13 +883,10 @@ export const createOrder = async (
       companyLogo,
       moveType,
       customer: {
-        customerFullName,
-        customerFirstName,
-        customerLastName,
-        customerPhone,
-        customerMobilePhone: customerMobile,
-        customerAltPhone: customerAltPhone ? customerAltPhone : null,
-        customerEmail,
+        name: normalizedCustomerName,
+        email: normalizedCustomerEmail,
+        phone: customerPhone,
+        phoneMobile: customerMobile,
       },
       agents,
       pickupLocationType,
@@ -813,8 +926,14 @@ export const createOrder = async (
         deliveryDateType: "Estimated",
       },
       vehicles: dbVehicleData,
-      totalPricing: pricing,
+      totalPricing: totalPricingSummary,
       paymentType: payment,
+      schedule: {
+        serviceLevel: scheduleServiceLevel,
+        pickupSelected: new Date(dateRanges[0]),
+        pickupEstimated: [new Date(dateRanges[0]), new Date(dateRanges[1])],
+        deliveryEstimated: [new Date(dateRanges[2]), new Date(dateRanges[3])],
+      },
       tms: {
         guid: superResponse?.guid || null,
         status: superResponse?.status || null,
@@ -826,7 +945,9 @@ export const createOrder = async (
           : null,
       },
       tmsPartialOrder:
-        payment !== "COD" && transportType !== "WHITEGLOVE" && superResponse
+        payment !== "COD" &&
+        transportType !== TransportType.WhiteGlove &&
+        superResponse
           ? true
           : false,
       originalOrderData: JSON.stringify(originalOrderData),
@@ -847,22 +968,26 @@ export const createOrder = async (
       }
 
       logger.info(
-        `Successfully created order ${newOrder.uniqueId} with ID ${newOrder._id}`,
+        `Successfully created order ${(newOrder as any).uniqueId} with ID ${newOrder._id}`,
       );
     } catch (orderCreationError) {
       logger.error("Database order creation failed:", orderCreationError);
+      const errorMessage =
+        orderCreationError instanceof Error
+          ? orderCreationError.message
+          : String(orderCreationError);
       return next({
         statusCode: 500,
-        message: `Failed to create order in database: ${orderCreationError.message}`,
+        message: `Failed to create order in database: ${errorMessage}`,
       });
     }
 
     // Send white glove notification with error handling
-    if (transportType === "WHITEGLOVE") {
+    if (transportType === TransportType.WhiteGlove) {
       try {
         await sendWhiteGloveNotification({ order: newOrder });
         logger.info(
-          `White glove notification sent for order ${newOrder.uniqueId}`,
+          `White glove notification sent for order ${(newOrder as any).uniqueId}`,
         );
       } catch (notificationError) {
         logger.error(
@@ -875,14 +1000,14 @@ export const createOrder = async (
 
     // Send MMI order notification if portal is MMI
     const portalIdString = String(portal._id);
-    if (MMI_PORTALS.includes(portalIdString as typeof MMI_PORTALS[number])) {
+    if (MMI_PORTALS.includes(portalIdString as (typeof MMI_PORTALS)[number])) {
       try {
         await sendMMIOrderNotification({
           order: newOrder,
           recipientEmail: "autodesk@graebel.com",
         });
         logger.info(
-          `MMI order notification sent for order ${newOrder.uniqueId}`,
+          `MMI order notification sent for order ${(newOrder as any).uniqueId}`,
         );
       } catch (notificationError) {
         logger.error(
@@ -899,7 +1024,7 @@ export const createOrder = async (
         try {
           await sendCODPaymentRequest(newOrder);
           logger.info(
-            `COD payment request sent for order ${newOrder.uniqueId}`,
+            `COD payment request sent for order ${(newOrder as any).uniqueId}`,
           );
         } catch (notificationError) {
           logger.error(
@@ -910,7 +1035,7 @@ export const createOrder = async (
         }
       } else {
         logger.warn(
-          `Cannot send COD payment request: No customer email for order ${newOrder.uniqueId}`,
+          `Cannot send COD payment request: No customer email for order ${(newOrder as any).uniqueId}`,
         );
       }
     }
@@ -920,7 +1045,7 @@ export const createOrder = async (
       try {
         await sendOrderCustomerPublicNew(newOrder);
         logger.info(
-          `Customer order confirmation email sent for order ${newOrder.uniqueId}`,
+          `Customer order confirmation email sent for order ${(newOrder as any).uniqueId}`,
         );
       } catch (notificationError) {
         logger.error("Failed to send customer order email:", notificationError);
@@ -928,15 +1053,17 @@ export const createOrder = async (
       }
     } else {
       logger.warn(
-        `Cannot send customer order email: No customer email for order ${newOrder.uniqueId}`,
+        `Cannot send customer order email: No customer email for order ${(newOrder as any).uniqueId}`,
       );
     }
 
     res.status(201).json(newOrder);
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : undefined;
     logger.error("Unexpected error in createOrder:", {
-      error: error.message,
-      stack: error.stack,
+      error: errorMessage,
+      stack: errorStack,
       data: {
         portalId: req.body?.portalId,
         quoteId: req.body?.quoteId,

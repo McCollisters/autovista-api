@@ -84,6 +84,13 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     baseWhiteGlove = globalModifiers.whiteGlove.minimum;
   }
 
+  if (portal.isPremium && Array.isArray(portal.customRates) && portal.customRates.length > 0) {
+    const customWhiteGlove = getCustomBaseRate(miles, portal);
+    if (customWhiteGlove) {
+      baseWhiteGlove = customWhiteGlove;
+    }
+  }
+
   let calculatedCommission = commission;
   let calculatedGlobalDiscount: number = 0;
   let calculatedPortalDiscount: number = 0;
@@ -173,26 +180,36 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     );
   }
 
-  if (vehicle.isOversize && globalModifiers.oversize) {
+  if (globalModifiers.oversize) {
     // Normalize pricing class to ensure it matches enum values (case-insensitive)
-    const pricingClassNormalized = (vehicle.pricingClass || "").toLowerCase().trim();
-    
+    const pricingClassNormalized = (vehicle.pricingClass || "")
+      .toLowerCase()
+      .trim();
+    const oversizeValueType =
+      globalModifiers.oversize.valueType || "flat";
+
     // Check for SUV
-    if (pricingClassNormalized === VehicleClass.SUV || pricingClassNormalized === "suv") {
+    if (
+      pricingClassNormalized === VehicleClass.SUV ||
+      pricingClassNormalized === "suv"
+    ) {
       const suvValue = globalModifiers.oversize.suv;
       if (suvValue !== undefined && suvValue !== null) {
         calculatedGlobalOversize = calculateModifier(
-          { value: suvValue, valueType: "flat" },
+          { value: suvValue, valueType: oversizeValueType },
           base,
         );
       }
     }
     // Check for Van
-    else if (pricingClassNormalized === VehicleClass.Van || pricingClassNormalized === "van") {
+    else if (
+      pricingClassNormalized === VehicleClass.Van ||
+      pricingClassNormalized === "van"
+    ) {
       const vanValue = globalModifiers.oversize.van;
       if (vanValue !== undefined && vanValue !== null) {
         calculatedGlobalOversize = calculateModifier(
-          { value: vanValue, valueType: "flat" },
+          { value: vanValue, valueType: oversizeValueType },
           base,
         );
       }
@@ -207,7 +224,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       const pickup2Value = globalModifiers.oversize.pickup_2_doors;
       if (pickup2Value !== undefined && pickup2Value !== null) {
         calculatedGlobalOversize = calculateModifier(
-          { value: pickup2Value, valueType: "flat" },
+          { value: pickup2Value, valueType: oversizeValueType },
           base,
         );
       }
@@ -222,27 +239,30 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       const pickup4Value = globalModifiers.oversize.pickup_4_doors;
       if (pickup4Value !== undefined && pickup4Value !== null) {
         calculatedGlobalOversize = calculateModifier(
-          { value: pickup4Value, valueType: "flat" },
+          { value: pickup4Value, valueType: oversizeValueType },
           base,
         );
       }
     }
-    // Check for Sedan
-    else if (pricingClassNormalized === VehicleClass.Sedan || pricingClassNormalized === "sedan") {
-      const sedanValue = (globalModifiers.oversize as any).sedan || 1000;
-      calculatedGlobalOversize = calculateModifier(
-        { value: sedanValue, valueType: "flat" },
-        base,
-      );
+    // Optional sedan override if present in data
+    else if (
+      pricingClassNormalized === VehicleClass.Sedan ||
+      pricingClassNormalized === "sedan"
+    ) {
+      const sedanValue = (globalModifiers.oversize as any).sedan;
+      if (sedanValue !== undefined && sedanValue !== null) {
+        calculatedGlobalOversize = calculateModifier(
+          { value: sedanValue, valueType: oversizeValueType },
+          base,
+        );
+      }
     }
     // Default case
-    else {
-      if (globalModifiers.oversize.default) {
-        calculatedGlobalOversize = calculateModifier(
-          { value: globalModifiers.oversize.default, valueType: "flat" },
-          base,
-        );
-      }
+    else if (globalModifiers.oversize.default !== undefined) {
+      calculatedGlobalOversize = calculateModifier(
+        { value: globalModifiers.oversize.default, valueType: oversizeValueType },
+        base,
+      );
     }
   }
 

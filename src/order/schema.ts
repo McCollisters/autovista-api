@@ -44,7 +44,7 @@ export interface IOrder extends Document {
   reg: number;
   status: Status;
   portalId: Types.ObjectId;
-  userId: Types.ObjectId;
+  userId?: Types.ObjectId;
   quoteId: Types.ObjectId;
   miles: number;
   transitTime: number[];
@@ -152,7 +152,7 @@ const orderSchemaDefinition = {
   reg: { type: Number },
   status: createStatusField(Status, true),
   portalId: createReferenceField("Portal", true),
-  userId: createReferenceField("User", true),
+  userId: createReferenceField("User", false),
   quoteId: createReferenceField("Quote", true),
   miles: { type: Number },
   paymentType: { type: String },

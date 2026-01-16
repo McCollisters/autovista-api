@@ -2,6 +2,7 @@ import express from "express";
 import { Order, SurveyResponse } from "@/_global/models";
 import { Types } from "mongoose";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { hasPortalAccess, isPlatformRole } from "@/_global/utils/portalRoles";
 
 /**
  * GET /api/v1/surveys/order/:orderId
@@ -36,11 +37,13 @@ export const getSurveyOrderResults = async (
       });
     }
 
-    if (
-      !authUser ||
-      (authUser.role !== "platform_admin" &&
-        authUser.portalId?.toString() !== order.portalId?.toString())
-    ) {
+    const hasPlatformAccess = authUser ? isPlatformRole(authUser.role) : false;
+    const canAccessPortal =
+      !!authUser &&
+      !!order.portalId &&
+      hasPortalAccess(authUser, order.portalId.toString());
+
+    if (!authUser || (!hasPlatformAccess && !canAccessPortal)) {
       return next({
         statusCode: 403,
         message: "You do not have access to this order's results.",

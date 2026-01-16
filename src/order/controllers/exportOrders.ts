@@ -2,6 +2,7 @@ import express from "express";
 import { Order } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { getPortalRoleSets, isPlatformRole } from "@/_global/utils/portalRoles";
 import { format } from "date-fns";
 import { Types } from "mongoose";
 
@@ -38,30 +39,55 @@ export const exportOrders = async (
     // Build query criteria (same logic as getOrders)
     const query: any = {};
 
-    // Role-based filtering
-    if (authUser.role === "portal_admin") {
-      query.portalId = authUser.portalId;
-    } else if (authUser.role === "portal_user") {
-      query.userId = authUser._id;
-      query.portalId = authUser.portalId;
-    }
-    // platform_admin and platform_user can see all orders (no restriction)
+    const { adminPortalIds, userPortalIds } = getPortalRoleSets(authUser);
+    const hasPlatformAccess = isPlatformRole(authUser.role);
+    const finalPortalId = portalId || selectedPortalId;
 
-    // Portal filtering
-    let finalPortalId = portalId || selectedPortalId;
-    if (finalPortalId && finalPortalId !== "all") {
-      if (
-        authUser.role === "platform_admin" ||
-        authUser.role === "platform_user"
-      ) {
-        try {
-          query.portalId = new Types.ObjectId(finalPortalId as string);
-        } catch (error) {
-          logger.error("Invalid portalId format", {
-            portalId: finalPortalId,
-            error: error instanceof Error ? error.message : error,
+    if (!hasPlatformAccess) {
+      if (finalPortalId && finalPortalId !== "all") {
+        const portalIdString = String(finalPortalId);
+        if (adminPortalIds.includes(portalIdString)) {
+          query.portalId = portalIdString;
+        } else if (userPortalIds.includes(portalIdString)) {
+          query.portalId = portalIdString;
+          query.userId = authUser._id;
+        } else {
+          return next({
+            statusCode: 403,
+            message: "You do not have access to this portal's orders.",
           });
         }
+      } else {
+        const portalFilters: any[] = [];
+        if (adminPortalIds.length > 0) {
+          portalFilters.push({ portalId: { $in: adminPortalIds } });
+        }
+        if (userPortalIds.length > 0) {
+          portalFilters.push({
+            portalId: { $in: userPortalIds },
+            userId: authUser._id,
+          });
+        }
+        if (portalFilters.length === 0) {
+          return next({
+            statusCode: 403,
+            message: "You do not have access to any portals.",
+          });
+        }
+        if (portalFilters.length === 1) {
+          Object.assign(query, portalFilters[0]);
+        } else {
+          query.$or = portalFilters;
+        }
+      }
+    } else if (finalPortalId && finalPortalId !== "all") {
+      try {
+        query.portalId = new Types.ObjectId(finalPortalId as string);
+      } catch (error) {
+        logger.error("Invalid portalId format", {
+          portalId: finalPortalId,
+          error: error instanceof Error ? error.message : error,
+        });
       }
     }
 

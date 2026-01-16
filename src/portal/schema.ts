@@ -29,9 +29,17 @@ export interface IPortal extends Document {
   companyName: string;
   contact?: IContact;
   address?: IAddress;
+  companyPhone?: string;
+  companyFax?: string;
   logo?: string;
   isDealership: boolean;
+  isPremium?: boolean;
   disableAgentNotifications: boolean;
+  notificationEmails?: Array<{
+    email: string;
+    pickup?: boolean;
+    delivery?: boolean;
+  }>;
   options: IOptions;
   customRates: Array<ICustomRate>;
   parentPortalId: Types.ObjectId | null;
@@ -44,6 +52,7 @@ const portalSchema = createSchema<IPortal>({
   address: createAddressSchema(),
   logo: { type: String },
   isDealership: { type: Boolean, default: false },
+  isPremium: { type: Boolean, default: false },
   disableAgentNotifications: { type: Boolean, default: false },
   options: {
     quoteExpiryDays: { type: Number, default: 30 },
@@ -78,6 +87,15 @@ const portalSchema = createSchema<IPortal>({
       enablePriceBreakdown: { type: Boolean, default: true },
     },
   },
+  companyPhone: { type: String },
+  companyFax: { type: String },
+  notificationEmails: [
+    {
+      email: { type: String },
+      pickup: { type: Boolean, default: false },
+      delivery: { type: Boolean, default: false },
+    },
+  ],
   customRates: [
     {
       label: { type: String },

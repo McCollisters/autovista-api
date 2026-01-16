@@ -251,7 +251,7 @@ const quoteSchemaDefinition = {
   isDirect: { type: Boolean, default: false },
   status: createStatusField(Status, true),
   portalId: createReferenceField("Portal", true),
-  userId: createReferenceField("User", true),
+  userId: createReferenceField("User", false),
   customer: customerSchema,
   origin: locationSchema,
   destination: locationSchema,

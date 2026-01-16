@@ -30,7 +30,9 @@ export const createQuoteCustomer = async (
     let {
       customerFirstName,
       customerLastName,
+      customerFullName,
       customerEmail,
+      customer,
       pickup,
       delivery,
       vehicles,
@@ -132,10 +134,16 @@ export const createQuoteCustomer = async (
     const formattedLastName = customerLastName
       ? formatName(customerLastName)
       : "";
-    const customerFullName =
+    const formattedFullName =
       formattedFirstName && formattedLastName
         ? `${formattedFirstName} ${formattedLastName}`
+        : customer?.name
+        ? formatName(customer.name)
+        : customerFullName
+        ? formatName(customerFullName)
         : null;
+    const formattedEmail =
+      customer?.email?.toLowerCase?.() || customerEmail?.toLowerCase() || null;
 
     // Validate locations
     const originValidated = await validateLocation(pickup);
@@ -208,8 +216,9 @@ export const createQuoteCustomer = async (
       portalId,
       isCustomerPortal: true,
       customer: {
-        name: customerFullName,
-        email: customerEmail?.toLowerCase() || null,
+        name: formattedFullName,
+        email: formattedEmail,
+        phone: customer?.phone || null,
         trackingCode: userFriendlyId,
       },
       origin: {

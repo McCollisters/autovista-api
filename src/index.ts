@@ -161,6 +161,7 @@ const startServer = async () => {
     app.use("/api/v1/integration", integrationRoutes);
     app.use("/api/v1/settings", settingsRoutes);
     app.use("/api/v1/surveys", surveyRoutes);
+    app.use("/api/v1/survey", surveyRoutes);
     app.use("/api/v1/emails", emailRoutes);
     app.use("/api/v1/brand", brandRoutes);
     // Brands listing endpoint (plural)

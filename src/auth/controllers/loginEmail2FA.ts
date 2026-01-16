@@ -9,6 +9,7 @@ import express from "express";
 import { User } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { createToken } from "@/_global/utils/createToken";
+import { getPortalRoles } from "@/_global/utils/portalRoles";
 
 export const loginEmail2FA = async (
   req: express.Request,
@@ -130,11 +131,20 @@ export const loginEmail2FA = async (
       email: user.email,
     });
 
+    const portalRoles = getPortalRoles(user).map((entry) => ({
+      portalId:
+        typeof entry.portalId === "string"
+          ? entry.portalId
+          : entry.portalId?.toString(),
+      role: entry.role,
+    }));
+
     res.status(200).json({
       token,
       role: user.role,
       userId: user._id.toString(),
       portalId: user.portalId?.toString() || null,
+      portalRoles,
     });
   } catch (error) {
     logger.error("Error logging in with 2FA", {

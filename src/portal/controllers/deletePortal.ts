@@ -7,13 +7,13 @@ export const deletePortal = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    const deletedPortal = await Portal.findByIdAndDelete(req.params.quoteId);
+    const deletedPortal = await Portal.findByIdAndDelete(req.params.portalId);
 
     if (!deletedPortal) {
       return next({ statusCode: 404, message: "Portal not found." });
     }
 
-    res.status(200).json({ quoteId: deletedPortal._id });
+    res.status(200).json({ portalId: deletedPortal._id });
   } catch (error) {
     next(error);
   }

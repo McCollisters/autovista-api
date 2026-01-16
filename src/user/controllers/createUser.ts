@@ -1,5 +1,6 @@
 import express from "express";
 import { User } from "@/_global/models";
+import { Role } from "../schema";
 import { Status } from "../../_global/enums";
 
 export const createUser = async (
@@ -8,8 +9,21 @@ export const createUser = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    const portal = { ...req.body, status: Status.Active };
-    const createdUser = await new User(portal).save();
+    const { portalId, role, portalRoles } = req.body;
+    const userData: any = { ...req.body, status: Status.Active };
+
+    const resolvedRole = role || Role.PortalUser;
+    userData.role = resolvedRole;
+
+    if (
+      !portalRoles &&
+      portalId &&
+      (resolvedRole === Role.PortalAdmin || resolvedRole === Role.PortalUser)
+    ) {
+      userData.portalRoles = [{ portalId, role: resolvedRole }];
+    }
+
+    const createdUser = await new User(userData).save();
     res.status(200).send(createdUser);
   } catch (error) {
     console.error("Error creating portal:", error);

@@ -1,6 +1,7 @@
 import express from "express";
 import { Survey, SurveyResponse, Portal } from "@/_global/models";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { hasPortalAccess, isPlatformRole } from "@/_global/utils/portalRoles";
 
 /**
  * GET /api/v1/surveys/ratings/:portalId
@@ -18,13 +19,14 @@ export const getSurveyRatingSummary = async (
     const normalizedPortal = portalId?.toLowerCase();
     const isAllPortals = normalizedPortal === "all";
 
+    const hasPlatformAccess = authUser ? isPlatformRole(authUser.role) : false;
+    const canAccessPortal =
+      !!authUser && !!portalId && hasPortalAccess(authUser, portalId);
+
     if (
       !authUser ||
       (isAllPortals && authUser.role !== "platform_admin") ||
-      (!isAllPortals &&
-        authUser.role !== "platform_admin" &&
-        authUser.role !== "platform_user" &&
-        authUser.portalId?.toString() !== portalId)
+      (!isAllPortals && !hasPlatformAccess && !canAccessPortal)
     ) {
       return next({
         statusCode: 403,

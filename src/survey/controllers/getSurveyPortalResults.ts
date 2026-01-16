@@ -1,6 +1,7 @@
 import express from "express";
 import { Survey, SurveyResponse } from "@/_global/models";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { hasPortalAccess, isPlatformRole } from "@/_global/utils/portalRoles";
 
 /**
  * GET /api/v1/survey/portal/:portalId
@@ -16,13 +17,12 @@ export const getSurveyPortalResults = async (
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 
+    const hasPlatformAccess = authUser ? isPlatformRole(authUser.role) : false;
+    const canAccessPortal =
+      !!authUser && !!portalId && hasPortalAccess(authUser, portalId);
+
     // Check authorization
-    if (
-      !authUser ||
-      (authUser.role !== "platform_admin" &&
-        authUser.role !== "platform_user" &&
-        authUser.portalId?.toString() !== portalId)
-    ) {
+    if (!authUser || (!hasPlatformAccess && !canAccessPortal)) {
       return next({
         statusCode: 403,
         message: "You do not have access to this portal's results.",

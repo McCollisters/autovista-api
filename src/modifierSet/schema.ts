@@ -56,8 +56,7 @@ export interface IModifierSet extends Document {
     pickup_2_doors: number;
     pickup_4_doors: number;
   };
-  enclosedFlat?: IModifier;
-  enclosedPercent?: IModifier;
+  enclosed?: IModifier;
   discount?: IModifier;
   companyTariff?: IModifier;
   companyTariffDiscount?: IModifier; // set by portal admins, the discount is subtracted from the company tariff
@@ -101,12 +100,9 @@ const modifierSetSchemaDefinition = {
     van: { type: Number, default: 0 },
     pickup_2_doors: { type: Number, default: 0 },
     pickup_4_doors: { type: Number, default: 0 },
-  },
-  enclosedFlat: {
-    value: { type: Number, default: 0 },
     valueType: { type: String, default: "flat" },
   },
-  enclosedPercent: {
+  enclosed: {
     value: { type: Number, default: 0 },
     valueType: { type: String, default: "flat" },
   },

@@ -15,6 +15,7 @@ const router = Router();
 router.post("/transport", updateTransportOptions);
 router.post("/customer/find", findQuoteCustomer);
 router.post("/customer", createQuoteCustomer);
+router.get("/public/:quoteId/app", getQuote);
 router.put("/", updateQuoteAlternative);
 
 // General routes

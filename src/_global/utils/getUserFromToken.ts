@@ -38,12 +38,18 @@ export const getUserFromToken = async (
       token = authHeader;
     }
 
-    if (!token || !JWT_SECRET) {
+    const normalizedToken = token?.trim();
+    if (
+      !normalizedToken ||
+      normalizedToken === "null" ||
+      normalizedToken === "undefined" ||
+      !JWT_SECRET
+    ) {
       return null;
     }
 
     // Decode and verify token
-    const decoded = jwt.verify(token, JWT_SECRET) as {
+    const decoded = jwt.verify(normalizedToken, JWT_SECRET) as {
       userId: string;
       portalId?: string;
       role?: string;
@@ -61,8 +67,10 @@ export const getUserFromToken = async (
       return null;
     }
 
-    // Find user and populate portal
-    const user = await User.findById(decoded.userId).populate("portalId");
+    // Find user and populate portal data
+    const user = await User.findById(decoded.userId)
+      .populate("portalId")
+      .populate("portalRoles.portalId");
 
     if (!user) {
       return null;

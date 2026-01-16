@@ -16,8 +16,14 @@ export enum Role {
   PublicUser = "public_user",
 }
 
+export interface IPortalRole {
+  portalId: Types.ObjectId;
+  role: Role;
+}
+
 export interface IUser extends Document {
   portalId: Types.ObjectId;
+  portalRoles?: IPortalRole[];
   email: string;
   password: string;
   role: Role;
@@ -37,6 +43,12 @@ export interface IUser extends Document {
 
 const userSchema = createSchema<IUser>({
   portalId: createReferenceField("Portal", true),
+  portalRoles: [
+    {
+      portalId: createReferenceField("Portal", true),
+      role: { type: String, enum: Object.values(Role), required: true },
+    },
+  ],
   email: { type: String, trim: true, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true },

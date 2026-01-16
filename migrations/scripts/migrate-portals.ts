@@ -42,6 +42,8 @@ const MAX_PORTALS_TO_PROCESS: number | null = null; // Process all portals
 interface OldPortal {
   _id: any;
   companyName: string;
+  companyPhone?: string;
+  companyFax?: string;
   contactFullName?: string;
   contactEmail?: string;
   contactPhone?: string;
@@ -68,6 +70,11 @@ interface OldPortal {
   parentPortal?: any;
   isDealership?: boolean;
   disableAgentNotifications?: boolean;
+  emails?: Array<{
+    email?: string;
+    pickup?: boolean;
+    delivery?: boolean;
+  }>;
   customRates?: {
     mileage?: Record<string, number>;
     largeClassSurcharge?: number;
@@ -396,12 +403,22 @@ export class PortalMigration extends MigrationBase {
       }
     }
 
+    const notificationEmails = (portal.emails || [])
+      .filter((entry) => entry?.email)
+      .map((entry) => ({
+        email: entry.email,
+        pickup: !!entry.pickup,
+        delivery: !!entry.delivery,
+      }));
+
     // Build portal object - explicitly include only allowed fields
     // CRITICAL: refId is NEVER included - portals don't have refId
     return {
       _id: portalId,
       status: status,
       companyName: portal.companyName,
+      companyPhone: portal.companyPhone || null,
+      companyFax: portal.companyFax || null,
       contact: {
         name: portal.contactFullName || null,
         email: portal.contactEmail || null,
@@ -419,6 +436,7 @@ export class PortalMigration extends MigrationBase {
       logo: portal.companyLogo || null,
       isDealership: portal.isDealership || false,
       disableAgentNotifications: portal.disableAgentNotifications || false,
+      notificationEmails: notificationEmails,
       options: {
         overrideLogo: portal.displayMCLogo === false, // Inverted logic
         enableCustomRates: portal.hasCustomRates || false,

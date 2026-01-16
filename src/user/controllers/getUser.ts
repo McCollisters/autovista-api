@@ -17,7 +17,9 @@ export const getUser = async (
       });
     }
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId)
+      .populate("portalId")
+      .populate("portalRoles.portalId");
 
     if (!user) {
       res.status(404).json({ message: "User not found" });

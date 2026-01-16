@@ -3,6 +3,7 @@ import { User } from "@/_global/models";
 import { Status } from "../../_global/enums";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { hasPortalAccess, isPlatformRole } from "@/_global/utils/portalRoles";
 
 export const getUsersByPortal = async (
   req: express.Request,
@@ -21,11 +22,11 @@ export const getUsersByPortal = async (
       });
     }
 
-    // Check authorization: MCAdmin can access any portal, others can only access their own portal
-    if (
-      authUser.role !== "MCAdmin" &&
-      authUser.portalId?.toString() !== portalId
-    ) {
+    const hasPlatformAccess = isPlatformRole(authUser.role);
+    const canAccessPortal = hasPortalAccess(authUser, portalId);
+
+    // Check authorization: platform roles or portal access required
+    if (!hasPlatformAccess && authUser.role !== "MCAdmin" && !canAccessPortal) {
       return next({
         statusCode: 401,
         message: "Unauthorized",
@@ -33,9 +34,11 @@ export const getUsersByPortal = async (
     }
 
     const users = await User.find({
-      portalId,
+      $or: [{ portalId }, { "portalRoles.portalId": portalId }],
       status: { $ne: Status.Archived },
-    }).populate("portalId");
+    })
+      .populate("portalId")
+      .populate("portalRoles.portalId");
 
     res.status(200).json(users);
   } catch (error) {

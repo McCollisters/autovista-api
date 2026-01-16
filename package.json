@@ -42,7 +42,10 @@
     "migrate:surveys": "tsx -r dotenv/config migrations/scripts/migrate-surveys.ts",
     "migrate:surveys:down": "tsx -r dotenv/config migrations/scripts/migrate-surveys.ts down",
     "migrate:survey-responses": "tsx -r dotenv/config migrations/scripts/migrate-survey-responses.ts",
-    "migrate:survey-responses:down": "tsx -r dotenv/config migrations/scripts/migrate-survey-responses.ts down"
+    "migrate:survey-responses:down": "tsx -r dotenv/config migrations/scripts/migrate-survey-responses.ts down",
+    "migrate:portal-roles": "tsx -r dotenv/config scripts/migrate-portal-roles.ts",
+    "fix:modifier-sets-enclosed": "tsx -r dotenv/config migrations/scripts/fix-modifier-sets-enclosed.ts",
+    "dedupe:modifier-sets": "tsx -r dotenv/config migrations/scripts/dedupe-modifier-sets.ts"
   },
   "keywords": [],
   "license": "MIT",
