@@ -82,12 +82,17 @@ export const createQuoteCustomer = async (
 
     // Clean up vehicles - normalize operable field and extract make/model from objects
     vehicles = vehicles.map((v: any) => {
-      const isOperable = !(
-        v.operable === "No" ||
-        v.operable === false ||
-        v.operable === "false" ||
-        v.operable?.value === "No"
-      );
+      const hasExplicitInoperable =
+        typeof v.isInoperable === "boolean" ? v.isInoperable : undefined;
+      const isOperable =
+        hasExplicitInoperable !== undefined
+          ? !hasExplicitInoperable
+          : !(
+              v.operable === "No" ||
+              v.operable === false ||
+              v.operable === "false" ||
+              v.operable?.value === "No"
+            );
       
       // Extract make - handle both string and object formats
       let make = v.make;

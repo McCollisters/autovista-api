@@ -173,5 +173,11 @@ const modifierSetSchema = createSchema<IModifierSet>(
   modifierSetSchemaDefinition,
 );
 
+// Ensure only one global modifier set exists
+modifierSetSchema.index(
+  { isGlobal: 1 },
+  { unique: true, partialFilterExpression: { isGlobal: true } },
+);
+
 // Model is exported from model.ts file
 export { modifierSetSchema };

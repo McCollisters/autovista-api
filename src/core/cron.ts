@@ -10,6 +10,8 @@ const execAsync = promisify(exec);
  * This function sets up scheduled tasks that run automatically
  */
 export function initializeCronJobs() {
+  logger.info("⚠️ Cron jobs disabled");
+  return;
   // Run migrations every 6 hours
   // Cron format: minute hour day month day-of-week
   // "30 */6 * * *" means: at minute 30, every 6 hours (12:30 AM, 6:30 AM, 12:30 PM, 6:30 PM EST)

@@ -68,7 +68,6 @@ interface OldPortal {
   displayDiscountOption?: boolean;
   portalQuoteExpirationDays?: number;
   parentPortal?: any;
-  isDealership?: boolean;
   disableAgentNotifications?: boolean;
   emails?: Array<{
     email?: string;
@@ -403,6 +402,7 @@ export class PortalMigration extends MigrationBase {
       }
     }
 
+    const isFerrariPortal = !!portal.companyName?.toLowerCase().includes("ferrari");
     const notificationEmails = (portal.emails || [])
       .filter((entry) => entry?.email)
       .map((entry) => ({
@@ -410,6 +410,19 @@ export class PortalMigration extends MigrationBase {
         pickup: !!entry.pickup,
         delivery: !!entry.delivery,
       }));
+    if (isFerrariPortal) {
+      const dealerQuotesEmail = "Dealerquotes@mccollisters.com";
+      const hasDealerQuotes = notificationEmails.some(
+        (entry) => entry.email?.toLowerCase() === dealerQuotesEmail.toLowerCase(),
+      );
+      if (!hasDealerQuotes) {
+        notificationEmails.push({
+          email: dealerQuotesEmail,
+          pickup: true,
+          delivery: true,
+        });
+      }
+    }
 
     // Build portal object - explicitly include only allowed fields
     // CRITICAL: refId is NEVER included - portals don't have refId
@@ -434,7 +447,7 @@ export class PortalMigration extends MigrationBase {
         zip: portal.companyZip || null,
       },
       logo: portal.companyLogo || null,
-      isDealership: portal.isDealership || false,
+      isPremium: isFerrariPortal || false,
       disableAgentNotifications: portal.disableAgentNotifications || false,
       notificationEmails: notificationEmails,
       options: {
@@ -458,9 +471,7 @@ export class PortalMigration extends MigrationBase {
           requireLocationType: portal.locationTypeIsRequired || false,
         },
         quoteForm: {
-          enableCommissionPerVehicle:
-            portal.displayCommissionPerVehicle !== false,
-          enableCommission: true, // Default to true
+          enableCommission: portal.displayCommissionPerVehicle !== false,
         },
         orderPDF: {
           enablePriceBreakdown: !portal.displayPDFTotalPriceOnly,

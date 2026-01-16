@@ -1,11 +1,13 @@
+import mongoose from "mongoose";
 import {
   MigrationBase,
   MigrationResult,
   MigrationUtils,
 } from "../utils/migration-base";
+import { Status } from "../../src/_global/enums";
 
 // Configuration constants
-const MAX_USERS_TO_PROCESS = 50; // Set to null or undefined to process all users
+const MAX_USERS_TO_PROCESS = null; // Set to null or undefined to process all users
 
 /**
  * User Migration Script
@@ -34,6 +36,8 @@ const MAX_USERS_TO_PROCESS = 50; // Set to null or undefined to process all user
 interface OldUser {
   _id: any;
   portalId?: any;
+  portalRoles?: Array<{ portalId?: any; role?: string }>;
+  portalIds?: any[];
   email: string;
   password: string;
   role?: string;
@@ -117,21 +121,13 @@ export class UserMigration extends MigrationBase {
           try {
             const transformedUser = this.transformUser(user);
 
-            // Check if user already exists
-            const existingUser = await destinationUsersCollection.findOne({
-              _id: user._id,
-            });
+            const replaceResult = await destinationUsersCollection.replaceOne(
+              { _id: user._id },
+              transformedUser,
+              { upsert: true },
+            );
 
-            if (existingUser) {
-              console.log(`⏭️  Skipped user ${user._id} - already exists`);
-              return;
-            }
-
-            // Insert the transformed user into destination database
-            const insertResult =
-              await destinationUsersCollection.insertOne(transformedUser);
-
-            if (insertResult.acknowledged) {
+            if (replaceResult.acknowledged) {
               migratedCount++;
               if (index % 10 === 0) {
                 console.log(`📊 Processed ${index + 1}/${users.length} users`);
@@ -208,6 +204,25 @@ export class UserMigration extends MigrationBase {
   }
 
   private transformUser(user: OldUser): any {
+    const normalizePortalId = (portalId?: any) => {
+      if (!portalId) {
+        return null;
+      }
+      if (portalId instanceof mongoose.Types.ObjectId) {
+        return portalId;
+      }
+      if (typeof portalId === "string" && mongoose.Types.ObjectId.isValid(portalId)) {
+        return new mongoose.Types.ObjectId(portalId);
+      }
+      return portalId;
+    };
+    const normalizedUserId =
+      user._id instanceof mongoose.Types.ObjectId
+        ? user._id
+        : typeof user._id === "string" && mongoose.Types.ObjectId.isValid(user._id)
+        ? new mongoose.Types.ObjectId(user._id)
+        : user._id;
+
     // Map old roles to new role enum values
     const roleMapping: Record<string, string> = {
       super_admin: "platform_admin",
@@ -216,26 +231,25 @@ export class UserMigration extends MigrationBase {
       public: "public_user",
     };
 
+    const mapRole = (roleValue?: string | null) => {
+      if (!roleValue) {
+        return "portal_user";
+      }
+      return roleMapping[roleValue.toLowerCase()] || "portal_user";
+    };
+
     // Determine the new role based on old role and isSuperAdmin flag
     let newRole = "portal_user"; // default
     if (user.isSuperAdmin) {
       newRole = "platform_admin";
     } else if (user.role) {
-      newRole = roleMapping[user.role.toLowerCase()] || "portal_user";
+      newRole = mapRole(user.role);
     }
 
-    // Map old status to new enum values
-    const statusMapping: Record<string, string> = {
-      active: "active",
-      complete: "complete",
-      disabled: "disabled",
-      archived: "archived",
-      expired: "expired",
-      booked: "booked",
-    };
-
-    // Determine the new status
-    const status = statusMapping[user.status?.toLowerCase() || ""] || "active";
+    const normalizedStatus = (user.status || "").toString().toLowerCase();
+    const status = Object.values(Status).includes(normalizedStatus as Status)
+      ? normalizedStatus
+      : Status.Active;
 
     // Check if reset password token has expired
     const now = new Date();
@@ -243,9 +257,33 @@ export class UserMigration extends MigrationBase {
     const isResetTokenExpired =
       resetPasswordExpires && resetPasswordExpires < now;
 
+    const portalRolesFromSource = Array.isArray(user.portalRoles)
+      ? user.portalRoles
+          .filter((entry) => entry?.portalId)
+          .map((entry) => ({
+            portalId: normalizePortalId(entry.portalId),
+            role: mapRole(entry.role || user.role),
+          }))
+      : [];
+    const portalIdsFromSource = Array.isArray(user.portalIds)
+      ? user.portalIds.map(normalizePortalId).filter(Boolean)
+      : [];
+    const portalRoles =
+      portalRolesFromSource.length > 0
+        ? portalRolesFromSource
+        : portalIdsFromSource.length > 0
+        ? portalIdsFromSource.map((portalId) => ({
+            portalId,
+            role: newRole,
+          }))
+        : user.portalId && ["portal_admin", "portal_user"].includes(newRole)
+        ? [{ portalId: normalizePortalId(user.portalId), role: newRole }]
+        : [];
+
     return {
-      _id: user._id,
-      portalId: user.portalId || null, // This will be converted to ObjectId during import
+      _id: normalizedUserId,
+      portalId: normalizePortalId(user.portalId) || portalRoles[0]?.portalId || null,
+      portalRoles,
       email: user.email,
       password: user.password,
       role: newRole,

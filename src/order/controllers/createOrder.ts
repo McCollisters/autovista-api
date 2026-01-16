@@ -275,6 +275,60 @@ export const createOrder = async (
       holidayDates = []; // Use empty array as fallback
     }
 
+    const parseAddressParts = (addressText: string) => {
+      if (!addressText) {
+        return {};
+      }
+      const parts = addressText.split(",").map((part) => part.trim());
+      let city = "";
+      let state = "";
+      let zip = "";
+      let address = "";
+
+      if (parts.length === 1) {
+        address = parts[0];
+      } else if (parts.length >= 2) {
+        address = parts.slice(0, parts.length - 1).join(", ");
+        const lastPart = parts[parts.length - 1];
+        const stateZipMatch = lastPart.match(/([A-Z]{2})\s*(\d{5})?/i);
+        if (stateZipMatch) {
+          state = stateZipMatch[1]?.toUpperCase() || "";
+          zip = stateZipMatch[2] || "";
+        }
+        if (parts.length >= 2) {
+          city = parts[parts.length - 2];
+        }
+      }
+
+      return { address, city, state, zip };
+    };
+
+    if (!pickupAddress || !pickupCity || !pickupState || !pickupZip) {
+      const pickupFallback =
+        quoteData.origin?.validated ||
+        quoteData.origin?.userInput ||
+        quoteData.pickup ||
+        "";
+      const parsedPickup = parseAddressParts(pickupFallback);
+      pickupAddress = pickupAddress || parsedPickup.address || pickupFallback;
+      pickupCity = pickupCity || parsedPickup.city;
+      pickupState = pickupState || parsedPickup.state;
+      pickupZip = pickupZip || parsedPickup.zip;
+    }
+
+    if (!deliveryAddress || !deliveryCity || !deliveryState || !deliveryZip) {
+      const deliveryFallback =
+        quoteData.destination?.validated ||
+        quoteData.destination?.userInput ||
+        quoteData.delivery ||
+        "";
+      const parsedDelivery = parseAddressParts(deliveryFallback);
+      deliveryAddress = deliveryAddress || parsedDelivery.address || deliveryFallback;
+      deliveryCity = deliveryCity || parsedDelivery.city;
+      deliveryState = deliveryState || parsedDelivery.state;
+      deliveryZip = deliveryZip || parsedDelivery.zip;
+    }
+
     if (pickupState && pickupState.value) {
       pickupState = pickupState.value;
     }
@@ -891,6 +945,23 @@ export const createOrder = async (
       agents,
       pickupLocationType,
       deliveryLocationType,
+      origin: {
+        contact: {
+          name: pickupContactName,
+          phone: pickupPhone,
+          phoneMobile: pickupMobile,
+          email: pickupEmail,
+        },
+        address: {
+          address: pickupAddress,
+          city: pickupCity,
+          state: pickupState,
+          zip: pickupZip,
+        },
+        notes: pickupNotes,
+        longitude: pickupCoords.longitude,
+        latitude: pickupCoords.latitude,
+      },
       pickup: {
         pickupBusinessName,
         pickupContactName,
@@ -907,6 +978,23 @@ export const createOrder = async (
         pickupScheduledAt: new Date(dateRanges[0]),
         pickupScheduledEndsAt: new Date(dateRanges[1]), // auto
         pickupDateType: "Estimated",
+      },
+      destination: {
+        contact: {
+          name: deliveryContactName,
+          phone: deliveryPhone,
+          phoneMobile: deliveryMobile,
+          email: deliveryEmail,
+        },
+        address: {
+          address: deliveryAddress,
+          city: deliveryCity,
+          state: deliveryState,
+          zip: deliveryZip,
+        },
+        notes: deliveryNotes,
+        longitude: deliveryCoords.longitude,
+        latitude: deliveryCoords.latitude,
       },
       delivery: {
         deliveryBusinessName,

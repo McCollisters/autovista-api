@@ -51,7 +51,7 @@ async function setFerrariPremium(options: ScriptOptions = {}) {
     console.log(
       `\nUpdated ${result.modifiedCount || 0} portal(s) to isPremium=true.`,
     );
-    logger.info("Ferrari portals updated", {
+    logger.info("Premium portals updated", {
       matched: result.matchedCount,
       modified: result.modifiedCount,
     });

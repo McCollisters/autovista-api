@@ -32,7 +32,6 @@ export interface IPortal extends Document {
   companyPhone?: string;
   companyFax?: string;
   logo?: string;
-  isDealership: boolean;
   isPremium?: boolean;
   disableAgentNotifications: boolean;
   notificationEmails?: Array<{
@@ -51,7 +50,6 @@ const portalSchema = createSchema<IPortal>({
   contact: createContactSchema(),
   address: createAddressSchema(),
   logo: { type: String },
-  isDealership: { type: Boolean, default: false },
   isPremium: { type: Boolean, default: false },
   disableAgentNotifications: { type: Boolean, default: false },
   options: {
@@ -80,7 +78,6 @@ const portalSchema = createSchema<IPortal>({
       requireLocationType: { type: Boolean, default: true },
     },
     quoteForm: {
-      enableCommissionPerVehicle: { type: Boolean, default: true },
       enableCommission: { type: Boolean, default: true },
     },
     orderPDF: {

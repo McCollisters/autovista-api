@@ -284,7 +284,6 @@ export interface IOrderForm {
 }
 
 export interface IQuoteForm {
-  enableCommissionPerVehicle: boolean;
   enableCommission: boolean;
 }
 

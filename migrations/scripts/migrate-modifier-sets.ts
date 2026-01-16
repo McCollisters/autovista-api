@@ -160,13 +160,14 @@ export class ModifierSetMigration extends MigrationBase {
             const transformedModifierSet =
               this.transformPortalToModifierSet(portal);
 
-            // Insert the transformed modifier set into destination database
-            const insertResult =
-              await destinationModifierSetsCollection.insertOne(
+            const replaceResult =
+              await destinationModifierSetsCollection.replaceOne(
+                { portalId: transformedModifierSet.portalId, isGlobal: false },
                 transformedModifierSet,
+                { upsert: true },
               );
 
-            if (insertResult.acknowledged) {
+            if (replaceResult.acknowledged) {
               migratedCount++;
               if (index % 10 === 0) {
                 console.log(
@@ -202,12 +203,14 @@ export class ModifierSetMigration extends MigrationBase {
         try {
           const globalModifierSet =
             this.transformSettingsToGlobalModifierSet(settings);
-          const globalInsertResult =
-            await destinationModifierSetsCollection.insertOne(
+          const globalReplaceResult =
+            await destinationModifierSetsCollection.replaceOne(
+              { isGlobal: true },
               globalModifierSet,
+              { upsert: true },
             );
 
-          if (globalInsertResult.acknowledged) {
+          if (globalReplaceResult.acknowledged) {
             migratedCount++;
             console.log("✅ Global modifier set created successfully");
           } else {

@@ -77,9 +77,48 @@ export const createQuote = async (
       return next(new Error("Error calculating distance."));
     }
 
+    const normalizedVehicles = Array.isArray(vehicles)
+      ? vehicles.map((v: any) => {
+          const hasExplicitInoperable =
+            typeof v.isInoperable === "boolean" ? v.isInoperable : undefined;
+          const isOperable =
+            hasExplicitInoperable !== undefined
+              ? !hasExplicitInoperable
+              : !(
+                  v.operable === "No" ||
+                  v.operable === false ||
+                  v.operable === "false" ||
+                  v.operable?.value === "No"
+                );
+
+          let make = v.make;
+          if (make && typeof make === "object") {
+            make = make.value || make.label || make;
+          }
+
+          let model = v.model;
+          if (model && typeof model === "object") {
+            model = model.value || model.label || model;
+          }
+
+          let pricingClass = v.pricingClass;
+          if (model && typeof model === "object" && model.pricingClass) {
+            pricingClass = model.pricingClass;
+          }
+
+          return {
+            ...v,
+            make: typeof make === "string" ? make : String(make),
+            model: typeof model === "string" ? model : String(model),
+            pricingClass: pricingClass || v.pricingClass,
+            isInoperable: !isOperable,
+          };
+        })
+      : vehicles;
+
     const vehicleQuotes = await updateVehiclesWithPricing({
       portal,
-      vehicles,
+      vehicles: normalizedVehicles,
       miles,
       origin: originLocation,
       destination: destinationLocation,
