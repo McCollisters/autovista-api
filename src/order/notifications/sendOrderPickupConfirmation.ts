@@ -22,6 +22,26 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const formatTransportType = (value: unknown) => {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    return "";
+  }
+  const normalized = raw.toLowerCase();
+  if (normalized === "whiteglove") {
+    return "White Glove";
+  }
+  const spaced = raw
+    .replace(/[_-]+/g, " ")
+    .replace(/([a-z])([A-Z])/g, "$1 $2");
+  return spaced
+    .split(" ")
+    .map((word) =>
+      word ? `${word.charAt(0).toUpperCase()}${word.slice(1).toLowerCase()}` : "",
+    )
+    .join(" ");
+};
+
 interface SendOrderPickupConfirmationParams {
   order: IOrder;
   recipients: Array<{
@@ -93,13 +113,13 @@ export async function sendOrderPickupConfirmation({
 
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
-    const transportType = order.transportType;
+    const transportType = formatTransportType(order.transportType);
     const uniqueId = order.refId;
     const reg = order.reg;
     const vehicles = formatVehiclesHTML(order.vehicles, false);
 
     // Load and compile Handlebars template
-    const templatePath = join(__dirname, "../../../templates/order-pickup.hbs");
+    const templatePath = join(__dirname, "../../templates/order-pickup.hbs");
     const templateSource = await readFile(templatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 

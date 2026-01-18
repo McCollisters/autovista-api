@@ -41,7 +41,7 @@ export interface IOrder extends Document {
   bookedAt: Date;
   isDirect: boolean;
   refId: number;
-  reg: number;
+  reg: string;
   status: Status;
   portalId: Types.ObjectId;
   userId?: Types.ObjectId;
@@ -50,7 +50,6 @@ export interface IOrder extends Document {
   transitTime: number[];
   transportType: TransportType;
   paymentType: PaymentType;
-  hasAcceptedTerms: boolean;
   hasPaid: boolean;
   billRate: number;
   origin: ILocation & {
@@ -112,14 +111,18 @@ export interface IOrder extends Document {
   schedule: ISchedule;
   hasClaim: boolean;
   driver: IDriver;
-  signatureRequestSent?: boolean;
-  signatureReceived?: boolean;
-  signatureRequestId?: string;
   tmsPartialOrder?: boolean;
   originalOrderData?: string; // JSON stringified backup of original order before SuperDispatch updates
   acertusLoadNumber?: string; // Load number from Acertus webhook
   acertusConnectUid?: string; // Connect UID from Acertus webhook
   notifications: {
+    hasAcceptedTerms: boolean;
+    termsAcceptedName?: string;
+    signatureRequestSent?: boolean;
+    signatureReceived?: boolean;
+    signatureRequestId?: string;
+    awaitingPickupConfirmation?: boolean;
+    awaitingDeliveryConfirmation?: boolean;
     paymentRequest: INotification;
     paymentReminder: INotification;
     signatureRequest: INotification;
@@ -149,14 +152,13 @@ const orderSchemaDefinition = {
   bookedAt: { type: Date },
   isDirect: { type: Boolean, default: false },
   refId: { type: Number, required: true },
-  reg: { type: Number },
+  reg: { type: String },
   status: createStatusField(Status, true),
   portalId: createReferenceField("Portal", true),
   userId: createReferenceField("User", false),
   quoteId: createReferenceField("Quote", true),
   miles: { type: Number },
   paymentType: { type: String },
-  hasAcceptedTerms: { type: Boolean, default: false },
   hasPaid: { type: Boolean, default: false },
   billRate: { type: Number, default: null },
   transitTime: [{ type: Number }, { type: Number }],
@@ -223,6 +225,8 @@ const orderSchemaDefinition = {
         },
         total: { type: Number },
         totalWithCompanyTariffAndCommission: { type: Number },
+        totals: { type: MongooseSchema.Types.Mixed },
+        selected: { type: MongooseSchema.Types.Mixed },
       },
     },
   ],
@@ -289,14 +293,18 @@ const orderSchemaDefinition = {
     },
   ],
   hasClaim: { type: Boolean, default: false },
-  signatureRequestSent: { type: Boolean, default: false },
-  signatureReceived: { type: Boolean, default: false },
-  signatureRequestId: { type: String },
   tmsPartialOrder: { type: Boolean, default: false },
   originalOrderData: { type: String }, // JSON stringified backup of original order before SuperDispatch updates
   acertusLoadNumber: { type: String }, // Load number from Acertus webhook
   acertusConnectUid: { type: String }, // Connect UID from Acertus webhook
   notifications: {
+    hasAcceptedTerms: { type: Boolean, default: false },
+    termsAcceptedName: { type: String },
+    signatureRequestSent: { type: Boolean, default: false },
+    signatureReceived: { type: Boolean, default: false },
+    signatureRequestId: { type: String },
+    awaitingPickupConfirmation: { type: Boolean, default: false },
+    awaitingDeliveryConfirmation: { type: Boolean, default: false },
     paymentRequest: createNotificationSchema(),
     paymentReminder: createNotificationSchema(),
     signatureRequest: createNotificationSchema(),

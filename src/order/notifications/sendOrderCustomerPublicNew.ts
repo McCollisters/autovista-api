@@ -6,6 +6,8 @@
 
 import { readFile } from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import Handlebars from "handlebars";
 import { logger } from "@/core/logger";
 import { IOrder, Portal } from "@/_global/models";
@@ -13,8 +15,11 @@ import { sendOrderNotification } from "@/notification/orderNotifications";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
+import { DateTime } from "luxon";
+import { MMI_PORTALS } from "@/_global/constants/portalIds";
 
-// __dirname and __filename are available in CommonJS modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Sirva portal IDs
@@ -46,9 +51,11 @@ export async function sendOrderCustomerPublicNew(
     }
 
     // Get email template values
-    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const { getEmailTemplate } = await import(
+      "@/email/services/getEmailTemplate"
+    );
     const emailTemplate = await getEmailTemplate("Customer Order");
-    
+
     const senderEmail = emailTemplate.senderEmail;
     const senderName = emailTemplate.senderName;
 
@@ -57,11 +64,14 @@ export async function sendOrderCustomerPublicNew(
 
     const portalIdString = String(order.portalId);
     const isSirva = SIRVA_PORTAL_IDS.includes(portalIdString);
+    const isMMI = MMI_PORTALS.includes(
+      portalIdString as (typeof MMI_PORTALS)[number],
+    );
 
     // Determine template path
     const templatePath = isSirva
-      ? path.join(__dirname, "../../../templates/customer-order-sirva.hbs")
-      : path.join(__dirname, "../../../templates/customer-order-new.hbs");
+      ? path.join(__dirname, "../../templates/customer-order-sirva.hbs")
+      : path.join(__dirname, "../../templates/customer-order-new.hbs");
 
     const mclogo =
       "https://res.cloudinary.com/dq27r8cov/image/upload/v1616097775/McCollister%27s/mccollisters-auto-logistics.png";
@@ -87,26 +97,121 @@ export async function sendOrderCustomerPublicNew(
     }
 
     const recipientName = order.customer?.name || "Customer";
-    const subject = emailTemplate.subject || `Your Vehicle Transport Confirmation - Order #${order.refId}`;
+    const subject =
+      emailTemplate.subject ||
+      `Your Vehicle Transport Confirmation - Order #${order.refId}`;
 
     // Extract address information
-    const pickupAddress =
-      order.origin?.address?.address ||
-      "";
+    const pickupAddress = order.origin?.address?.address || "";
     const pickupCity = order.origin?.address?.city || "";
     const pickupState = order.origin?.address?.state || "";
     const pickupZip = order.origin?.address?.zip || "";
 
-    const deliveryAddress =
-      order.destination?.address?.address ||
-      "";
+    const deliveryAddress = order.destination?.address?.address || "";
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
     const deliveryZip = order.destination?.address?.zip || "";
 
-    // Get date strings
+    const formatSingleDate = (date?: Date | string | null) => {
+      if (!date) return "TBD";
+      return DateTime.fromJSDate(new Date(date))
+        .setZone("America/New_York")
+        .toLocaleString(DateTime.DATE_MED);
+    };
+    const isWhiteGlove = order.transportType === "WHITEGLOVE";
+    const isCOD = order.paymentType === "COD";
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
+    const pickupDatesLabel = isWhiteGlove
+      ? "Estimated Date:"
+      : "Scheduled Dates:";
+    const deliveryDatesLabel = isWhiteGlove
+      ? "Estimated Date:"
+      : "Scheduled Dates:";
+    const pickupDatesValue = isWhiteGlove
+      ? formatSingleDate(
+          order.schedule?.pickupEstimated?.[0] ||
+            order.schedule?.pickupSelected ||
+            null,
+        )
+      : pickupDates;
+    const deliveryDatesValue = isWhiteGlove
+      ? formatSingleDate(order.schedule?.deliveryEstimated?.[0] || null)
+      : deliveryDates;
+    const totalPrice =
+      order.totalPricing?.totalWithCompanyTariffAndCommission ||
+      order.totalPricing?.totalPortal ||
+      0;
+    const totalPriceDisplay = Math.ceil(totalPrice);
+    const paymentInstructionsHtml = isCOD
+      ? `
+        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
+          <strong>Payment Required (COD):</strong> We must receive payment in full before scheduling pickup. Please do not pay the driver directly.
+        </p>
+        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
+          Pay online here:
+          <a href="https://www.convergepay.com/hosted-payments?ssl_txn_auth_token=YtH5YU2ER7alJZ%2FD73aAegAAAZW6CTk1">https://www.convergepay.com/hosted-payments</a>
+        </p>
+        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
+          Enter the total of <strong>$${totalPriceDisplay}</strong> and use order # <strong>${order.refId}</strong>.
+        </p>
+        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
+          Payment must be received at least three (3) business days before pickup. Payments made later may require rescheduling.
+        </p>
+        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
+          A 3% credit card surcharge applies (debit cards are 1% + $0.25). The surcharge appears as a separate line item on your receipt.
+        </p>
+        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
+          If you do not receive a payment confirmation email after submitting, please do not retry. Contact us for assistance.
+        </p>
+      `
+      : "";
+    const trackingHtml = isMMI
+      ? ""
+      : `<tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0;">
+                <strong>The below link will bring you to our customer portal where you can log in and follow the progress
+                of your transport:</strong><br />
+                <a href="https://autovista.mccollisters.com/order-status">https://autovista.mccollisters.com/order-status</a>
+              </p>
+            </td>
+          </tr>`;
+    const smallTextHtml = isMMI
+      ? `<tr>
+            <td valign="top" style="width: 600px; padding-bottom: 15px;margin: 0 auto;">
+              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">**Please
+                note that you must be available during the entire spread for the dates above. If you are unable to
+                release or accept your vehicle(s) during the entire spread, you may have a delegate assigned to
+                release or accept your vehicle(s) on your behalf. Please provide us with the name and contact
+                information for your assigned delegate ASAP.</p>
+              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">If you are not available and do not have anyone to act as your delegate, then we will need to go back to the account and ask for coverage of potential terminal storage and re-delivery fees due to no one being available during the required spreads. <u>Please be aware that denial by the account may result in required terminal fees to be paid by you directly out of pocket prior to your vehicle(s) being delivered as the assigned driver cannot hold your vehicle(s) on the truck.</u></p>
+              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; font-size: 12px; font-style: italic;">You
+                or your assigned delegate will be notified a day in advance of the actual pick up and delivery date
+                and provided an ESTIMATED window of arrival for the driver. This is only an estimate and subject to
+                change as you must be prepared for the driver to arrive from 7am until before dark on the day of
+                pick up or delivery. We try our best to try to provide accurate estimates but due to uncontrollable
+                circumstances such as traffic, weather, mechanical issue, prior scheduling delays experienced by
+                the driver, etc. they are subject to change.</p>
+            </td>
+          </tr>`
+      : `<tr>
+            <td valign="top" style="width: 600px; padding-bottom: 15px;margin: 0 auto;">
+              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">**Please
+                note that you must be available during the entire spread for the dates above. If you are unable to
+                release or accept your vehicle(s) during the entire spread, you may have a delegate assigned to
+                release or accept your vehicle(s) on your behalf. Please provide us with the name and contact
+                information for your assigned delegate ASAP.</p>
+              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">If you are not available and do not have anyone to act as your delegate, then we will need to ask for coverage of potential terminal storage and re-delivery fees due to no one being available during the required spreads.</p>
+              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; font-size: 12px; font-style: italic;">You
+                or your assigned delegate will be notified a day in advance of the actual pick up and delivery date
+                and provided an ESTIMATED window of arrival for the driver. This is only an estimate and subject to
+                change as you must be prepared for the driver to arrive from 7am until before dark on the day of
+                pick up or delivery. We try our best to try to provide accurate estimates but due to uncontrollable
+                circumstances such as traffic, weather, mechanical issue, prior scheduling delays experienced by
+                the driver, etc. they are subject to change.</p>
+            </td>
+          </tr>`;
 
     // Format transport type
     const transportType =
@@ -129,18 +234,24 @@ export async function sendOrderCustomerPublicNew(
       logo: logo || mclogo,
       companyName,
       mclogo,
-      pickupDates,
+      pickupDatesLabel,
+      pickupDatesValue,
       pickupAddress,
       pickupCity,
       pickupState,
       pickupZip,
-      deliveryDates,
+      deliveryDatesLabel,
+      deliveryDatesValue,
       deliveryAddress,
       deliveryCity,
       deliveryState,
       deliveryZip,
       transportType,
       vehicles,
+      totalPrice: totalPriceDisplay,
+      paymentInstructionsHtml,
+      trackingHtml,
+      smallTextHtml,
       uniqueId: order.refId,
       termsUrl,
       recipientName,

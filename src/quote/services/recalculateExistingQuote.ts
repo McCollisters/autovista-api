@@ -4,25 +4,26 @@
  * Recalculates pricing for an existing quote when transport type changes
  */
 
-import { Quote, Portal } from "@/_global/models";
+import { Quote, Portal, Settings } from "@/_global/models";
 import { TransportType } from "../../_global/enums";
 import { getMiles } from "./getMiles";
 import { updateVehiclesWithPricing } from "./updateVehiclesWithPricing";
 import { calculateTotalPricing } from "./calculateTotalPricing";
 import { logger } from "@/core/logger";
+import { getTransitTimeFromSettings } from "./getTransitTimeFromSettings";
 
 export const recalculateExistingQuote = async (
   quoteId: string,
   transportType: TransportType,
 ): Promise<any> => {
   try {
-    const quote = await Quote.findById(quoteId).populate("portalId");
+    const quote = await Quote.findById(quoteId).populate("portal");
 
     if (!quote) {
       return null;
     }
 
-    const portal = quote.portalId as any;
+    const portal = (quote as any).portal as any;
 
     // Get vehicles as plain objects (like createQuote does)
     const vehicles = quote.vehicles.map((v: any) => {
@@ -37,6 +38,17 @@ export const recalculateExistingQuote = async (
         [parseFloat(quote.origin.coordinates.lat), parseFloat(quote.origin.coordinates.long)],
         [parseFloat(quote.destination.coordinates.lat), parseFloat(quote.destination.coordinates.long)],
       );
+    }
+
+    let transitTime: [number, number] | null = null;
+    try {
+      const settings = await Settings.findOne({}).sort({ updatedAt: -1 });
+      const transitTimes = Array.isArray(settings?.transitTimes)
+        ? settings.transitTimes
+        : [];
+      transitTime = getTransitTimeFromSettings(miles, transitTimes);
+    } catch (error) {
+      transitTime = null;
     }
 
     // Update vehicles with new pricing (like createQuote does - vehicles don't need transportType set)
@@ -65,6 +77,7 @@ export const recalculateExistingQuote = async (
           vehicles: vehiclesWithPricing,
           totalPricing,
           miles,
+          transitTime: transitTime ?? [],
         },
       }
     );
@@ -77,9 +90,16 @@ export const recalculateExistingQuote = async (
 
     // Populate and return quote in same format as getQuote
     const populatedQuote = await Quote.findById(quoteId)
-      .populate("portalId")
-      .populate("userId", "firstName lastName")
+      .populate("portal")
+      .populate("user", "firstName lastName")
       .lean();
+
+    if (populatedQuote && (populatedQuote as any).portal && !(populatedQuote as any).portalId) {
+      (populatedQuote as any).portalId = (populatedQuote as any).portal;
+    }
+    if (populatedQuote && (populatedQuote as any).user && !(populatedQuote as any).userId) {
+      (populatedQuote as any).userId = (populatedQuote as any).user;
+    }
 
     return populatedQuote;
   } catch (error) {

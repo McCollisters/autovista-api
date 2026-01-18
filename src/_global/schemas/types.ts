@@ -202,11 +202,24 @@ export interface INotification {
 }
 
 export interface INotifications {
+  hasAcceptedTerms?: boolean;
+  termsAcceptedName?: string;
+  signatureRequestSent?: boolean;
+  signatureReceived?: boolean;
+  signatureRequestId?: string;
+  awaitingPickupConfirmation?: boolean;
+  awaitingDeliveryConfirmation?: boolean;
+  paymentRequest?: INotification;
+  paymentReminder?: INotification;
+  signatureRequest?: INotification;
+  signatureRequestReminder?: INotification;
   survey?: INotification;
   surveyReminder?: INotification;
   pickupReminder?: INotification;
+  agentsConfirmation?: INotification;
   agentsPickupConfirmation?: INotification;
   agentsDeliveryConfirmation?: INotification;
+  customerConfirmation?: INotification;
   customerPickupConfirmation?: INotification;
   customerDeliveryConfirmation?: INotification;
   portalAdminPickupConfirmation?: INotification;

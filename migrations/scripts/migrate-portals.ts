@@ -9,6 +9,13 @@ import {
 // Set to null or undefined to process all portals
 // Set to a number to limit processing (useful for testing)
 const MAX_PORTALS_TO_PROCESS: number | null = null; // Process all portals
+const MIGRATION_DAYS = process.env.MIGRATION_DAYS
+  ? Number(process.env.MIGRATION_DAYS)
+  : null;
+const cutoffDate =
+  MIGRATION_DAYS && MIGRATION_DAYS > 0
+    ? new Date(Date.now() - MIGRATION_DAYS * 24 * 60 * 60 * 1000)
+    : null;
 
 /**
  * Portal Migration Script
@@ -52,7 +59,6 @@ interface OldPortal {
   companyCity?: string;
   companyState?: string;
   companyZip?: string;
-  companyLogo?: string;
   status?: string;
   displayMCLogo?: boolean;
   hasCustomRates?: boolean;
@@ -122,8 +128,12 @@ export class PortalMigration extends MigrationBase {
 
       // Count existing documents in source
       console.log("🔍 Counting portals in source database...");
-      const totalPortals = await sourcePortalsCollection.countDocuments();
+      const query = cutoffDate ? { createdAt: { $gte: cutoffDate } } : {};
+      const totalPortals = await sourcePortalsCollection.countDocuments(query);
       console.log(`📦 Found ${totalPortals} portals in source database`);
+      if (cutoffDate) {
+        console.log(`📅 Filtering portals created since ${cutoffDate.toISOString()}`);
+      }
 
       if (totalPortals === 0) {
         return {
@@ -141,7 +151,7 @@ export class PortalMigration extends MigrationBase {
 
       // Get portals from source database (sorted by createdAt descending - most recent first)
       const portals = await sourcePortalsCollection
-        .find({})
+        .find(query)
         .sort({ createdAt: -1 })
         .limit(limit)
         .toArray();
@@ -446,12 +456,14 @@ export class PortalMigration extends MigrationBase {
         state: portal.companyState || null,
         zip: portal.companyZip || null,
       },
-      logo: portal.companyLogo || null,
+      logo: portal.logo || null,
       isPremium: isFerrariPortal || false,
       disableAgentNotifications: portal.disableAgentNotifications || false,
       notificationEmails: notificationEmails,
       options: {
-        overrideLogo: portal.displayMCLogo === false, // Inverted logic
+        overrideLogo: isFerrariPortal
+          ? false
+          : portal.displayMCLogo === false, // Inverted logic
         enableCustomRates: portal.hasCustomRates || false,
         enableVariableCompanyTariff: portal.hasVariableCompanyTariff || false,
         enableWhiteGloveOverride: portal.hasWhiteGloveOverride || false,

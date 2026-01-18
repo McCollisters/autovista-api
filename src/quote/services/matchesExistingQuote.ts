@@ -20,7 +20,7 @@ export const matchesExistingQuote = async (
     const existingQuote = await Quote.findOne({
       "origin.userInput": origin,
       "destination.userInput": destination,
-      portalId,
+      portal: portalId,
       createdAt: { $gte: thirtyDaysAgo },
     });
 

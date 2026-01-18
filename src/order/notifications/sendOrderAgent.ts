@@ -82,7 +82,7 @@ export async function sendOrderAgentEmail({
     }
 
     // Load and compile Handlebars template
-    const templatePath = join(__dirname, "../../../templates/order-agent.hbs");
+    const templatePath = join(__dirname, "../../templates/order-agent.hbs");
     const templateSource = await readFile(templatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 

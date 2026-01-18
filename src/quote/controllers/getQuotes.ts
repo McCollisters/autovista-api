@@ -70,10 +70,10 @@ export const getQuotes = async (
       if (portalId && portalId !== "all") {
         const portalIdString = String(portalId);
         if (adminPortalIds.includes(portalIdString)) {
-          query.portalId = portalIdString;
+          query.portal = portalIdString;
         } else if (userPortalIds.includes(portalIdString)) {
-          query.portalId = portalIdString;
-          query.userId = authUser._id;
+          query.portal = portalIdString;
+          query.user = authUser._id;
         } else {
           return next({
             statusCode: 403,
@@ -83,12 +83,12 @@ export const getQuotes = async (
       } else {
         const portalFilters: any[] = [];
         if (adminPortalIds.length > 0) {
-          portalFilters.push({ portalId: { $in: adminPortalIds } });
+          portalFilters.push({ portal: { $in: adminPortalIds } });
         }
         if (userPortalIds.length > 0) {
           portalFilters.push({
-            portalId: { $in: userPortalIds },
-            userId: authUser._id,
+            portal: { $in: userPortalIds },
+            user: authUser._id,
           });
         }
         if (portalFilters.length === 0) {
@@ -105,7 +105,7 @@ export const getQuotes = async (
       }
     } else if (portalId && portalId !== "all") {
       try {
-        query.portalId = new Types.ObjectId(portalId as string);
+        query.portal = new Types.ObjectId(portalId as string);
       } catch (error) {
         logger.error("Invalid portalId format", {
           portalId: portalId,
@@ -202,7 +202,7 @@ export const getQuotes = async (
     // Debug logging
     logger.info("Getting quotes with query", {
       query: JSON.stringify(query, null, 2),
-      queryPortalId: query.portalId?.toString(),
+      queryPortalId: query.portal?.toString(),
       userRole: authUser.role,
       portalIdParam: portalId,
       skip: skipNum,
@@ -217,22 +217,33 @@ export const getQuotes = async (
     const sortObj: any = {};
     sortObj[sortField] = sortOrder as 1 | -1;
     const quotes = await Quote.find(query)
-      .populate("portalId", "companyName") // Populate portal to get companyName
-      .populate("userId", "firstName lastName") // Populate user to get booking agent name
+      .populate("portal", "companyName") // Populate portal to get companyName
+      .populate("user", "firstName lastName") // Populate user to get booking agent name
       .limit(limitNum)
       .skip(skipNum)
       .sort(sortObj)
       .lean();
 
+    const quotesWithPortalId = quotes.map((quote: any) => {
+      const updates: Record<string, any> = {};
+      if (quote.portal && !quote.portalId) {
+        updates.portalId = quote.portal;
+      }
+      if (quote.user && !quote.userId) {
+        updates.userId = quote.user;
+      }
+      return Object.keys(updates).length ? { ...quote, ...updates } : quote;
+    });
+
     logger.info("Quotes retrieved", {
       count,
       returned: quotes.length,
       userRole: authUser.role,
-      portalId: query.portalId,
+      portalId: query.portal,
     });
 
     res.status(200).json({
-      quotes,
+      quotes: quotesWithPortalId,
       quoteCount: count,
     });
   } catch (error) {

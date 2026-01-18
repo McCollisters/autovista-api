@@ -4205,3 +4205,712 @@
   message: '❌ Scheduled migration job failed',
   timestamp: '2026-01-16 12:01:32'
 }
+{
+  service: 'autovista-api',
+  error: 'Cast to ObjectId failed for value "undefined" (type string) at path "portalId" for model "User"',
+  portalId: 'undefined',
+  level: 'error',
+  message: 'Error fetching users by portal',
+  timestamp: '2026-01-16 14:00:41'
+}
+{
+  service: 'autovista-api',
+  error: 'deliveryState.toLowerCase is not a function',
+  stack: 'TypeError: deliveryState.toLowerCase is not a function\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:244:55)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  data: {
+    portalId: '652fd22bc96a04e290acf631',
+    quoteId: '696aaa6c290ba6ef0febc3ab',
+    pickupStartDate: '2026-01-22T16:14:53.913Z',
+    transportType: 'WHITEGLOVE',
+    paymentType: undefined
+  },
+  level: 'error',
+  message: 'Unexpected error in createOrder:',
+  timestamp: '2026-01-17 09:14:58'
+}
+{
+  message: 'Vehicle 0: No pricing totals found for service level 1',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-17 11:34:37'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error processing vehicle 0: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:659:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:633:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-17 11:34:37'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Vehicle data processing failed: No pricing found for service level 1 for vehicle 0',
+  stack: 'Error: No pricing found for service level 1 for vehicle 0\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:659:19)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:633:30)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-17 11:34:37'
+}
+{
+  message: 'Order creation failed: No pickup date provided',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-17 11:37:37'
+}
+{
+  message: 'Order creation failed: No pickup date provided',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-17 11:46:25'
+}
+{
+  message: 'Order creation failed: No pickup date provided',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-17 11:48:54'
+}
+{
+  service: 'autovista-api',
+  errors: {
+    reg: CastError: Cast to Number failed for value "TEST-1234" (type string) at path "reg"
+        at SchemaNumber.cast (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schema/number.js:381:11)
+        at SchemaType.applySetters (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1259:12)
+        at model.$set (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:1442:22)
+        at model.$set (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:1136:16)
+        at model.Document (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:178:12)
+        at model.Model (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:127:12)
+        at new model (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:4845:15)
+        at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:2775:20
+        at Array.map (<anonymous>)
+        at Function.create (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:2763:34) {
+      stringValue: '"TEST-1234"',
+      messageFormat: undefined,
+      kind: 'Number',
+      value: 'TEST-1234',
+      path: 'reg',
+      reason: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+      
+        assert.ok(!isNaN(val))
+      
+          at castNumber (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/cast/number.js:27:10)
+          at SchemaNumber.cast (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schema/number.js:379:12)
+          at SchemaType.applySetters (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1259:12)
+          at model.$set (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:1442:22)
+          at model.$set (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:1136:16)
+          at model.Document (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:178:12)
+          at model.Model (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:127:12)
+          at new model (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:4845:15)
+          at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:2775:20
+          at Array.map (<anonymous>) {
+        generatedMessage: true,
+        code: 'ERR_ASSERTION',
+        actual: false,
+        expected: true,
+        operator: '=='
+      },
+      valueType: 'string'
+    }
+  },
+  _message: 'Order validation failed',
+  level: 'error',
+  message: 'Database order creation failed: Order validation failed: reg: Cast to Number failed for value "TEST-1234" (type string) at path "reg"',
+  stack: 'ValidationError: Order validation failed: reg: Cast to Number failed for value "TEST-1234" (type string) at path "reg"\n' +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at model.$set (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:1484:12)\n' +
+    '    at model.$set (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:1136:16)\n' +
+    '    at model.Document (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:178:12)\n' +
+    '    at model.Model (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:127:12)\n' +
+    '    at new model (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:4845:15)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:2775:20\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at Function.create (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/model.js:2763:34)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1111:30)',
+  timestamp: '2026-01-17 11:49:09'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error sending white glove notification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendWhiteGloveNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendWhiteGloveNotification.ts:38:31)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1153:15)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-17 11:49:48'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendOrderCustomerPublicNew: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendOrderCustomerPublicNew (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerPublicNew.ts:64:19)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1211:9)',
+  timestamp: '2026-01-17 11:49:48'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error sending white glove notification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendWhiteGloveNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendWhiteGloveNotification.ts:38:31)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1159:15)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-17 11:55:51'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendOrderCustomerPublicNew: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendOrderCustomerPublicNew (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerPublicNew.ts:64:19)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1217:9)',
+  timestamp: '2026-01-17 11:55:51'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error sending white glove notification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendWhiteGloveNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendWhiteGloveNotification.ts:38:31)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1190:15)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-17 12:01:21'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendOrderCustomerPublicNew: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendOrderCustomerPublicNew (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerPublicNew.ts:64:19)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1248:9)',
+  timestamp: '2026-01-17 12:01:21'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error sending white glove notification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendWhiteGloveNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendWhiteGloveNotification.ts:38:31)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1198:15)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-17 12:04:22'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendOrderCustomerPublicNew: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendOrderCustomerPublicNew (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerPublicNew.ts:64:19)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1256:9)',
+  timestamp: '2026-01-17 12:04:22'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error sending white glove notification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendWhiteGloveNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendWhiteGloveNotification.ts:38:31)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1196:15)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-17 12:07:56'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendOrderCustomerPublicNew: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendOrderCustomerPublicNew (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerPublicNew.ts:64:19)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1254:9)',
+  timestamp: '2026-01-17 12:07:56'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error sending white glove notification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendWhiteGloveNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendWhiteGloveNotification.ts:38:31)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1234:15)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-17 12:20:45'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendCODPaymentRequest: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendCODPaymentRequest (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendCODPaymentRequest.ts:67:7)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1271:11)',
+  timestamp: '2026-01-17 12:20:45'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendOrderCustomerPublicNew: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendOrderCustomerPublicNew (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerPublicNew.ts:64:19)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1292:9)',
+  timestamp: '2026-01-17 12:20:46'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error sending white glove notification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendWhiteGloveNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendWhiteGloveNotification.ts:38:31)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1239:15)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-17 12:33:21'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendCODPaymentRequest: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendCODPaymentRequest (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendCODPaymentRequest.ts:67:7)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1276:11)',
+  timestamp: '2026-01-17 12:33:21'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendOrderCustomerPublicNew: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendOrderCustomerPublicNew (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerPublicNew.ts:64:19)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1297:9)',
+  timestamp: '2026-01-17 12:33:21'
+}
+{
+  service: 'autovista-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-agent.hbs',
+  level: 'error',
+  message: "Error in sendOrderAgentEmail: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-agent.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-agent.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderAgentEmail (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderAgent.ts:86:28)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1240:9)',
+  timestamp: '2026-01-17 13:18:31'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error sending white glove notification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendWhiteGloveNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendWhiteGloveNotification.ts:38:31)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1253:15)',
+  timestamp: '2026-01-17 13:18:31'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendCODPaymentRequest: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendCODPaymentRequest (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendCODPaymentRequest.ts:67:7)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1290:11)',
+  timestamp: '2026-01-17 13:18:31'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendOrderCustomerPublicNew: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendOrderCustomerPublicNew (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerPublicNew.ts:64:19)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1311:9)',
+  timestamp: '2026-01-17 13:18:31'
+}
+{
+  service: 'autovista-api',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-agent.hbs',
+  level: 'error',
+  message: "Error in sendOrderAgentEmail: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-agent.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-agent.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderAgentEmail (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderAgent.ts:86:28)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1240:9)',
+  timestamp: '2026-01-17 13:20:30'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error sending white glove notification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendWhiteGloveNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendWhiteGloveNotification.ts:38:31)\n' +
+    '    at createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1253:15)',
+  timestamp: '2026-01-17 13:20:30'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendCODPaymentRequest: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendCODPaymentRequest (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendCODPaymentRequest.ts:67:7)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1290:11)',
+  timestamp: '2026-01-17 13:20:30'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendOrderCustomerPublicNew: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendOrderCustomerPublicNew (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerPublicNew.ts:64:19)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:1311:9)',
+  timestamp: '2026-01-17 13:20:30'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 6846d0a31aac5980868feaef:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 6196cc8193af3700185700dd:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 6155e8df0c1f200018271d70:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 61549efa1c1e130018209f02:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 614a044e8f041100181ed6c6:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:180:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 61266facde2b7d0018342024:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 61082f5340f39f00177010af:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:180:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 61081c6140f39f0017701031:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60f73594e3368600173cd907:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:180:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60edddc0df7b7b0017054ece:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60d6001380ac4a00174baf60:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60d5fb4d80ac4a00174baf55:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60d32f605726f30017dc9708:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60cb49635c54bd0017d77a33:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60c9fb5e68795800174795a1:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60c7b8932c233d001729d5dc:',
+  timestamp: '2026-01-18 10:11:54'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60c7574c2c233d001729d3a6:',
+  timestamp: '2026-01-18 10:11:55'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-pickup.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderPickupConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderPickupConfirmation.ts:103:28)\n' +
+    '    at async sendPickupNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:204:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:415:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order pickup confirmation for order 60a293223114af0017382020:',
+  timestamp: '2026-01-18 10:11:55'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderDeliveryConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderDeliveryConfirmation.ts:137:28)\n' +
+    '    at async sendDeliveryNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:345:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:436:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order delivery confirmation for order 680254599d7b3f8f58c7d421:',
+  timestamp: '2026-01-18 10:11:55'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderDeliveryConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderDeliveryConfirmation.ts:137:28)\n' +
+    '    at async sendDeliveryNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:321:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:436:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order delivery confirmation for order 61ddd82e3a70a90018ac1f39:',
+  timestamp: '2026-01-18 10:11:55'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderDeliveryConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderDeliveryConfirmation.ts:137:28)\n' +
+    '    at async sendDeliveryNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:345:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:436:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order delivery confirmation for order 61ddd82e3a70a90018ac1f39:',
+  timestamp: '2026-01-18 10:11:55'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderDeliveryConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderDeliveryConfirmation.ts:137:28)\n' +
+    '    at async sendDeliveryNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:321:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:436:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order delivery confirmation for order 60edf0fbdf7b7b0017054f44:',
+  timestamp: '2026-01-18 10:11:55'
+}
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/order-delivery.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderDeliveryConfirmation (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderDeliveryConfirmation.ts:137:28)\n' +
+    '    at async sendDeliveryNotificationsForOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:345:5)\n' +
+    '    at async sendPickupDeliveryNotifications (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/tasks/sendPickupDeliveryNotifications.ts:436:7)\n' +
+    '    at async run (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-pickup-delivery-notifications.ts:27:5)',
+  level: 'error',
+  message: 'Error sending order delivery confirmation for order 60afd654a456a3001775b37f:',
+  timestamp: '2026-01-18 10:11:55'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendMMIOrderNotification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendMMIOrderNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendMMIOrderNotification.ts:90:7)\n' +
+    '    at file:///Users/annaharrington/Clients/McCollisters/autovista-api/[eval1]:1:461\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-01-18 10:21:57'
+}

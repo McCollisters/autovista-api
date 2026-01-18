@@ -36,6 +36,7 @@ export interface IPortal extends Document {
   disableAgentNotifications: boolean;
   notificationEmails?: Array<{
     email: string;
+    name?: string;
     pickup?: boolean;
     delivery?: boolean;
   }>;
@@ -88,6 +89,7 @@ const portalSchema = createSchema<IPortal>({
   companyFax: { type: String },
   notificationEmails: [
     {
+      name: { type: String },
       email: { type: String },
       pickup: { type: Boolean, default: false },
       delivery: { type: Boolean, default: false },

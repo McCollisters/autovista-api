@@ -7,6 +7,13 @@ import { Types } from "mongoose";
 
 // Configuration constants
 const MAX_QUOTES_TO_PROCESS: number | null = null; // Set to null or undefined to process all quotes
+const MIGRATION_DAYS = process.env.MIGRATION_DAYS
+  ? Number(process.env.MIGRATION_DAYS)
+  : null;
+const cutoffDate =
+  MIGRATION_DAYS && MIGRATION_DAYS > 0
+    ? new Date(Date.now() - MIGRATION_DAYS * 24 * 60 * 60 * 1000)
+    : null;
 
 /**
  * Quote Migration Script
@@ -37,8 +44,10 @@ interface OldQuote {
   uniqueId?: number;
   refId?: number;
   status: string;
-  portalId: any;
-  userId: any;
+  portalId?: any;
+  userId?: any;
+  portal?: any;
+  user?: any;
   quoteTableVehicles?: any[];
   quoteTablePricing?: any[];
   companyName?: string;
@@ -211,15 +220,19 @@ export class QuoteMigration extends MigrationBase {
       const destinationQuotesCollection = destinationDb.collection("quotes");
 
       // Count existing documents in source
-      const totalQuotes = await sourceQuotesCollection.countDocuments();
+      const query = cutoffDate ? { createdAt: { $gte: cutoffDate } } : {};
+      const totalQuotes = await sourceQuotesCollection.countDocuments(query);
       console.log(`📊 Found ${totalQuotes} quotes to migrate from source`);
+      if (cutoffDate) {
+        console.log(`📅 Filtering quotes created since ${cutoffDate.toISOString()}`);
+      }
 
       if (totalQuotes === 0) {
         return this.createSuccessResult("No quotes found to migrate");
       }
 
       // Get quotes from source (sorted by createdAt descending - most recent first)
-      let cursor = sourceQuotesCollection.find({}).sort({ createdAt: -1 });
+      let cursor = sourceQuotesCollection.find(query).sort({ createdAt: -1 });
 
       // Apply limit if specified for testing
       if (MAX_QUOTES_TO_PROCESS) {
@@ -367,8 +380,8 @@ export class QuoteMigration extends MigrationBase {
       _id: oldQuote._id,
       refId: oldQuote.refId || oldQuote.uniqueId,
       status: oldQuote.status.toLowerCase(),
-      portalId: this.convertToObjectId(oldQuote.portalId),
-      userId: this.convertToObjectId(oldQuote.userId),
+      portal: this.convertToObjectId(oldQuote.portal || oldQuote.portalId),
+      user: this.convertToObjectId(oldQuote.user || oldQuote.userId),
 
       // Transform customer information
       customer: {

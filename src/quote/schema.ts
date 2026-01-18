@@ -250,8 +250,8 @@ const quoteSchemaDefinition = {
   refId: { type: Number },
   isDirect: { type: Boolean, default: false },
   status: createStatusField(Status, true),
-  portalId: createReferenceField("Portal", true),
-  userId: createReferenceField("User", false),
+  portal: createReferenceField("Portal", true),
+  user: createReferenceField("User", false),
   customer: customerSchema,
   origin: locationSchema,
   destination: locationSchema,
@@ -428,20 +428,26 @@ const quoteSchema = createSchema<IQuote>(quoteSchemaDefinition);
 quoteSchema.virtual("vehicleCount").get(function (this: IQuote) {
   return this.vehicles.length;
 });
+quoteSchema.virtual("portalId").get(function (this: IQuote) {
+  return (this as any).portal;
+});
+quoteSchema.virtual("userId").get(function (this: IQuote) {
+  return (this as any).user;
+});
 
 // Add pre-save middleware
 quoteSchema.pre("save", function (this: IQuote, next: () => void) {
-  // Ensure portalId is an ObjectId
-  if (this.portalId && typeof this.portalId === "string") {
-    if (Types.ObjectId.isValid(this.portalId)) {
-      this.portalId = new Types.ObjectId(this.portalId) as any;
+  // Ensure portal is an ObjectId
+  if ((this as any).portal && typeof (this as any).portal === "string") {
+    if (Types.ObjectId.isValid((this as any).portal)) {
+      (this as any).portal = new Types.ObjectId((this as any).portal) as any;
     }
   }
 
-  // Ensure userId is an ObjectId
-  if (this.userId && typeof this.userId === "string") {
-    if (Types.ObjectId.isValid(this.userId)) {
-      this.userId = new Types.ObjectId(this.userId) as any;
+  // Ensure user is an ObjectId
+  if ((this as any).user && typeof (this as any).user === "string") {
+    if (Types.ObjectId.isValid((this as any).user)) {
+      (this as any).user = new Types.ObjectId((this as any).user) as any;
     }
   }
 
@@ -468,7 +474,7 @@ quoteSchema.pre("save", function (this: IQuote, next: () => void) {
     if (changes.length > 0) {
       this.history.push({
         modifiedAt: new Date(),
-        modifiedBy: this.userId,
+        modifiedBy: (this as any).user,
         changes,
       });
     }

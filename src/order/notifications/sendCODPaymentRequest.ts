@@ -6,6 +6,8 @@
 
 import { readFile } from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import Handlebars from "handlebars";
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
@@ -13,7 +15,8 @@ import { getNotificationManager } from "@/notification";
 import { sendOrderNotification } from "@/notification/orderNotifications";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 
-// __dirname and __filename are available in CommonJS modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Send COD payment request notification
@@ -65,7 +68,7 @@ export async function sendCODPaymentRequest(
     // Load and compile template
     const templatePath = path.join(
       __dirname,
-      "../../../templates/cod-payment-request.hbs",
+      "../../templates/cod-payment-request.hbs",
     );
     const templateSource = await readFile(templatePath, "utf-8");
     const template = Handlebars.compile(templateSource);

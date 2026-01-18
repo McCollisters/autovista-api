@@ -66,7 +66,9 @@ export const updateUser = async (
         new: true,
         runValidators: true,
       },
-    );
+    )
+      .populate("portalId")
+      .populate("portalRoles.portalId");
 
     res.status(200).json(updatedUser);
   } catch (error) {

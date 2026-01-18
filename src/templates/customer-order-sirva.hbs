@@ -45,6 +45,11 @@
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "><span style="font-weight: bold;">Transportation Type:</span> {{ transportType }} Carrier
             </td>
         </tr>
+        <tr>
+            <td valign="top" style="width: 600px; margin: 0 auto;">
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "><span style="font-weight: bold;">Total Price:</span> ${{ totalPrice }}</p>
+            </td>
+        </tr>
 
         <tr>
             <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
@@ -58,7 +63,7 @@
             <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Pick Up Address:</strong><br />{{
                     pickupAddress }}<br />{{ pickupCity}},{{pickupState}} {{pickupZip}}</p>
-                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Scheduled Dates:</strong><br />{{ pickupDates }}</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>{{ pickupDatesLabel }}</strong><br />{{ pickupDatesValue }}</p>
             </td>
         </tr>
 
@@ -67,9 +72,22 @@
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Delivery
                         Address:</strong><br />{{
                     deliveryAddress }}<br />{{ deliveryCity}},{{deliveryState}} {{deliveryZip}}</p>
-                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>Scheduled Dates:</strong><br />{{ deliveryDates }}</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"><strong>{{ deliveryDatesLabel }}</strong><br />{{ deliveryDatesValue }}</p>
             </td>
         </tr>
+        {{#if trackingHtml}}
+        {{{ trackingHtml }}}
+        {{/if}}
+        {{#if smallTextHtml}}
+        {{{ smallTextHtml }}}
+        {{/if}}
+        {{#if paymentInstructionsHtml}}
+        <tr>
+            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
+                {{{ paymentInstructionsHtml }}}
+            </td>
+        </tr>
+        {{/if}}
 
 
         <tr>
@@ -88,8 +106,6 @@
         <tr>
             <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
                 <img src={{ logo }} style="width: 200px;
-                height: auto;" />
-                <img src={{ mclogo }} style="width: 200px;
                 height: auto;" />
             </td>
         </tr>

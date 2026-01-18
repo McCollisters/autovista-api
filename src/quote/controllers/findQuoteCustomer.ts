@@ -31,7 +31,7 @@ export const findQuoteCustomer = async (
     // Find quote by tracking code (customerCode)
     const quote = await Quote.findOne({
       "customer.trackingCode": customerCode,
-    }).select("-portalId"); // Exclude portal from response
+    }).select("-portal"); // Exclude portal from response
 
     if (!quote) {
       res.status(404).json({

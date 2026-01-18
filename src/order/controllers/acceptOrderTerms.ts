@@ -15,7 +15,7 @@ export const acceptOrderTerms = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    const { uniqueId, orderId } = req.body;
+    const { uniqueId, orderId, termsAcceptedName } = req.body;
 
     if (!orderId) {
       return next({
@@ -28,6 +28,13 @@ export const acceptOrderTerms = async (
       return next({
         statusCode: 400,
         message: "Unique ID is required.",
+      });
+    }
+
+    if (!termsAcceptedName || !String(termsAcceptedName).trim()) {
+      return next({
+        statusCode: 400,
+        message: "Name is required to accept the terms.",
       });
     }
 
@@ -50,7 +57,11 @@ export const acceptOrderTerms = async (
     }
 
     // Accept terms
-    order.hasAcceptedTerms = true;
+    if (!order.notifications) {
+      order.notifications = {} as any;
+    }
+    order.notifications.hasAcceptedTerms = true;
+    order.notifications.termsAcceptedName = String(termsAcceptedName).trim();
     await order.save();
 
     logger.info(`Customer accepted order terms for ${order.refId}`, {

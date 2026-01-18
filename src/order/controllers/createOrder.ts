@@ -7,10 +7,40 @@ import { formatPhoneNumber } from "../../_global/utils/formatPhoneNumber";
 import { getDateRanges } from "../../_global/utils/getDateRanges";
 import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper";
 import { sendWhiteGloveNotification } from "../notifications/sendWhiteGloveNotification";
+import { sendOrderAgentEmail } from "../notifications/sendOrderAgent";
 import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotification";
 import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
 import { MMI_PORTALS } from "../../_global/constants/portalIds";
+
+const mergeNotificationEmails = (existing: any[], agents: any[]) => {
+  const byEmail = new Map<string, any>();
+
+  existing.forEach((entry) => {
+    const email = String(entry?.email || "")
+      .trim()
+      .toLowerCase();
+    if (!email) return;
+    byEmail.set(email, { ...entry });
+  });
+
+  agents.forEach((agent) => {
+    const email = String(agent?.email || "")
+      .trim()
+      .toLowerCase();
+    if (!email) return;
+    const existingEntry = byEmail.get(email) || {};
+    byEmail.set(email, {
+      ...existingEntry,
+      email: existingEntry.email || agent.email,
+      name: agent.name || existingEntry.name,
+      pickup: Boolean(existingEntry.pickup || agent.pickup),
+      delivery: Boolean(existingEntry.delivery || agent.delivery),
+    });
+  });
+
+  return Array.from(byEmail.values());
+};
 
 export const createOrder = async (
   req: express.Request,
@@ -176,12 +206,14 @@ export const createOrder = async (
       req.body?.isCustomerPortal === true ||
       req.body?.isCustomerPortal === "true" ||
       req.body?.isCustomerPortal === 1;
-    let originalQuotes = quoteData.vehicleQuotes || quoteData.vehicles || [];
+    const originalQuotes = Array.isArray(quoteData.vehicles)
+      ? quoteData.vehicles
+      : [];
     let transitTime = quoteData.transitTime;
     let uniqueId = quoteData.uniqueId;
     let uniqueIdNum = parseInt(uniqueId);
     let companyName = portalData.companyName;
-    let companyLogo = portalData.logo ? portalData.logo : "";
+    const logo = portalData.logo ? portalData.logo : "";
     const normalizedTransportType = String(
       transportType || quoteData.transportType || "",
     ).toLowerCase();
@@ -191,6 +223,10 @@ export const createOrder = async (
         : normalizedTransportType === TransportType.WhiteGlove
           ? TransportType.WhiteGlove
           : TransportType.Open;
+
+    if (transportType === TransportType.WhiteGlove) {
+      payment = "COD";
+    }
 
     // Check if delivery address has changed from original quote
     const originalDeliveryAddress =
@@ -211,16 +247,28 @@ export const createOrder = async (
       }
     }
 
+    const normalizeLocationValue = (value: any) => {
+      if (!value) return "";
+      if (typeof value === "string") return value;
+      if (typeof value === "object") {
+        return value.value || value.label || value.state || value.city || "";
+      }
+      return String(value);
+    };
+
+    const normalizedDeliveryCity = normalizeLocationValue(deliveryCity);
+    const normalizedDeliveryState = normalizeLocationValue(deliveryState);
+
     // Compare city and state instead of full address
     const addressChanged =
       originalCity &&
       originalState &&
-      (originalCity.toLowerCase() !== deliveryCity.toLowerCase() ||
-        originalState.toLowerCase() !== deliveryState.toLowerCase());
+      (originalCity.toLowerCase() !== normalizedDeliveryCity.toLowerCase() ||
+        originalState.toLowerCase() !== normalizedDeliveryState.toLowerCase());
 
     if (addressChanged) {
       logger.info(
-        `Delivery address changed from "${originalCity}, ${originalState}" to "${deliveryCity}, ${deliveryState}". Recalculating transit time.`,
+        `Delivery address changed from "${originalCity}, ${originalState}" to "${normalizedDeliveryCity}, ${normalizedDeliveryState}". Recalculating transit time.`,
       );
       // Note: Transit time recalculation would need to be implemented here
       // For now, we'll use the original transit time but log the change
@@ -275,6 +323,47 @@ export const createOrder = async (
       holidayDates = []; // Use empty array as fallback
     }
 
+    const normalizeTransitTime = (value: any) => {
+      if (!Array.isArray(value) || value.length < 2) {
+        return null;
+      }
+      const minDays = Number(value[0]);
+      const maxDays = Number(value[1]);
+      if (!Number.isFinite(minDays) || !Number.isFinite(maxDays)) {
+        return null;
+      }
+      return [minDays, maxDays] as [number, number];
+    };
+
+    const milesValue = Number(quoteData.miles);
+    const normalizedTransitTime = normalizeTransitTime(transitTime);
+    if (!normalizedTransitTime) {
+      const transitTimes = Array.isArray(settings?.transitTimes)
+        ? settings.transitTimes
+        : [];
+      const matchedRange = transitTimes.find(
+        (range: any) =>
+          Number.isFinite(milesValue) &&
+          Number.isFinite(range?.minMiles) &&
+          Number.isFinite(range?.maxMiles) &&
+          milesValue >= Number(range.minMiles) &&
+          milesValue <= Number(range.maxMiles),
+      );
+      if (matchedRange) {
+        transitTime = [
+          Number(matchedRange.minDays),
+          Number(matchedRange.maxDays),
+        ];
+      } else if (transitTimes.length > 0) {
+        transitTime = [
+          Number(transitTimes[0].minDays),
+          Number(transitTimes[0].maxDays),
+        ];
+      }
+    } else {
+      transitTime = normalizedTransitTime;
+    }
+
     const parseAddressParts = (addressText: string) => {
       if (!addressText) {
         return {};
@@ -323,7 +412,8 @@ export const createOrder = async (
         quoteData.delivery ||
         "";
       const parsedDelivery = parseAddressParts(deliveryFallback);
-      deliveryAddress = deliveryAddress || parsedDelivery.address || deliveryFallback;
+      deliveryAddress =
+        deliveryAddress || parsedDelivery.address || deliveryFallback;
       deliveryCity = deliveryCity || parsedDelivery.city;
       deliveryState = deliveryState || parsedDelivery.state;
       deliveryZip = deliveryZip || parsedDelivery.zip;
@@ -507,17 +597,22 @@ export const createOrder = async (
 
     // Merge request body vehicle data with original quote data
     const requestQuotes = Array.isArray(req.body.quotes) ? req.body.quotes : [];
+    const normalizeVehicle = (vehicle: any) =>
+      typeof vehicle?.toObject === "function" ? vehicle.toObject() : vehicle;
     quotes =
       requestQuotes.length > 0
         ? originalQuotes.map((originalVehicle: any, index: number) => {
+            const originalVehicleData = normalizeVehicle(originalVehicle) || {};
             const requestVehicle = requestQuotes[index] || {};
+            const requestVehicleData = normalizeVehicle(requestVehicle) || {};
             return {
-              ...originalVehicle,
-              ...requestVehicle, // VIN/year override only
-              calculatedQuotes: originalVehicle.calculatedQuotes,
+              ...originalVehicleData,
+              ...requestVehicleData, // VIN/year override only
+              pricing:
+                originalVehicleData.pricing ?? requestVehicleData.pricing,
             };
           })
-        : originalQuotes;
+        : originalQuotes.map((vehicle: any) => normalizeVehicle(vehicle));
 
     if (quotes.length === 0) {
       return next({
@@ -588,6 +683,10 @@ export const createOrder = async (
     try {
       dbVehicleData = quotes.map((quote: any, index: number) => {
         try {
+          const pricingTotals =
+            transportType === TransportType.WhiteGlove
+              ? null
+              : (quote?.pricing?.totals ?? null);
           const totalsKey =
             effectiveServiceLevel === 1
               ? "one"
@@ -596,7 +695,15 @@ export const createOrder = async (
                 : effectiveServiceLevel === 5
                   ? "five"
                   : "seven";
-          const totalsForLevel = (quote as any)?.pricing?.totals?.[totalsKey];
+          const totalsForLevel = pricingTotals?.[totalsKey];
+          const totalWhiteGlove =
+            pricingTotals?.whiteGlove ??
+            quoteData?.totalPricing?.totals?.whiteGlove ??
+            null;
+          const perVehicleWhiteGlove =
+            totalWhiteGlove != null && quotes.length > 0
+              ? totalWhiteGlove / quotes.length
+              : totalWhiteGlove;
           const totalOpen =
             totalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
             totalsForLevel?.open?.total ??
@@ -608,7 +715,10 @@ export const createOrder = async (
             totalsForLevel?.totalWithCompanyTariffAndCommission ??
             totalsForLevel?.total;
 
-          if (totalOpen == null && totalEnclosed == null) {
+          const hasWhiteGlove =
+            transportType === TransportType.WhiteGlove &&
+            perVehicleWhiteGlove != null;
+          if (totalOpen == null && totalEnclosed == null && !hasWhiteGlove) {
             logger.error(
               `Vehicle ${index}: No pricing totals found for service level ${effectiveServiceLevel}`,
             );
@@ -618,10 +728,18 @@ export const createOrder = async (
           }
 
           let calculatedQuote: any = {
-            openTransportPortal: totalOpen ?? 0,
-            enclosedTransportPortal: totalEnclosed ?? 0,
-            openTransportSD: totalOpen ?? 0,
-            enclosedTransportSD: totalEnclosed ?? 0,
+            openTransportPortal: hasWhiteGlove
+              ? perVehicleWhiteGlove
+              : (totalOpen ?? 0),
+            enclosedTransportPortal: hasWhiteGlove
+              ? perVehicleWhiteGlove
+              : (totalEnclosed ?? 0),
+            openTransportSD: hasWhiteGlove
+              ? perVehicleWhiteGlove
+              : (totalOpen ?? 0),
+            enclosedTransportSD: hasWhiteGlove
+              ? perVehicleWhiteGlove
+              : (totalEnclosed ?? 0),
             companyTariffOpen:
               totalsForLevel?.open?.companyTariff ??
               totalsForLevel?.companyTariff ??
@@ -680,6 +798,28 @@ export const createOrder = async (
             }
           }
 
+          const sourcePricing = quote?.pricing ?? {};
+          const sourceModifiers = sourcePricing?.modifiers ?? {};
+          const normalizedModifiers =
+            transportType === TransportType.WhiteGlove
+              ? {
+                  inoperable: sourceModifiers.inoperable ?? 0,
+                  routes: sourceModifiers.routes ?? 0,
+                  states: sourceModifiers.states ?? 0,
+                  oversize: sourceModifiers.oversize ?? 0,
+                  vehicles: sourceModifiers.vehicles ?? 0,
+                  globalDiscount: sourceModifiers.globalDiscount ?? 0,
+                  portalDiscount: sourceModifiers.portalDiscount ?? 0,
+                  irr: sourceModifiers.irr ?? 0,
+                  fuel: sourceModifiers.fuel ?? 0,
+                  enclosedFlat: sourceModifiers.enclosedFlat ?? 0,
+                  enclosedPercent: sourceModifiers.enclosedPercent ?? 0,
+                  commission: sourceModifiers.commission ?? 0,
+                  serviceLevel: 0,
+                  companyTariff: 0,
+                }
+              : sourceModifiers;
+
           return {
             ...quote,
             operableBool: opBool,
@@ -688,9 +828,16 @@ export const createOrder = async (
             type: quote.pricingClass?.toLowerCase() || "other",
             pricingClass: quote.pricingClass?.toLowerCase() || "other",
             pricing: {
-              ...quote.pricing,
-              totals: quote.pricing?.totals,
-              selected: calculatedQuote,
+              base: sourcePricing.base ?? 0,
+              modifiers: normalizedModifiers,
+              total: vehicleTariff ?? 0,
+              totalWithCompanyTariffAndCommission:
+                calculatedQuote.companyTariff != null
+                  ? (vehicleTariff ?? 0) + (calculatedQuote.companyTariff || 0)
+                  : (vehicleTariff ?? 0),
+              ...(transportType === TransportType.WhiteGlove
+                ? {}
+                : { totals: pricingTotals ?? sourcePricing.totals ?? null }),
             },
           };
         } catch (vehicleError) {
@@ -721,7 +868,11 @@ export const createOrder = async (
       orderUserId = quoteData.userId;
     }
 
-    if (portalId === "60d364c5176cba0017cbd78f") {
+    const portalIdForAgents =
+      String(portalId || "") || String((portalData as any)?._id || "") || "";
+    if (
+      MMI_PORTALS.includes(portalIdForAgents as (typeof MMI_PORTALS)[number])
+    ) {
       agents = [
         {
           email: "autodeskupdates@graebel.com",
@@ -736,7 +887,7 @@ export const createOrder = async (
     if (
       ((agents && agents[0] && !agents[0].name) || !agents) &&
       orderUserId &&
-      portalId !== "60d364c5176cba0017cbd78f"
+      !MMI_PORTALS.includes(portalIdForAgents as (typeof MMI_PORTALS)[number])
     ) {
       try {
         let foundUser = await User.findById(orderUserId);
@@ -805,15 +956,19 @@ export const createOrder = async (
           : (pricingTotalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
             selectedTotal);
     const modifierServiceLevel =
-      quoteData.totalPricing?.modifiers?.serviceLevels?.find(
-        (item: any) =>
-          String(item.serviceLevelOption) === String(effectiveServiceLevel),
-      )?.value ?? 0;
+      transportType === TransportType.WhiteGlove
+        ? 0
+        : (quoteData.totalPricing?.modifiers?.serviceLevels?.find(
+            (item: any) =>
+              String(item.serviceLevelOption) === String(effectiveServiceLevel),
+          )?.value ?? 0);
     const modifierCompanyTariff =
-      quoteData.totalPricing?.modifiers?.companyTariffs?.find(
-        (item: any) =>
-          String(item.serviceLevelOption) === String(effectiveServiceLevel),
-      )?.value ?? 0;
+      transportType === TransportType.WhiteGlove
+        ? 0
+        : (quoteData.totalPricing?.modifiers?.companyTariffs?.find(
+            (item: any) =>
+              String(item.serviceLevelOption) === String(effectiveServiceLevel),
+          )?.value ?? 0);
     const totalPricingSummary = {
       base: quoteData.totalPricing?.base ?? 0,
       modifiers: {
@@ -934,7 +1089,7 @@ export const createOrder = async (
       openTransport,
       transitTime,
       companyName,
-      companyLogo,
+      logo,
       moveType,
       customer: {
         name: normalizedCustomerName,
@@ -1070,6 +1225,33 @@ export const createOrder = async (
       });
     }
 
+    if (Array.isArray(agents) && agents.length > 0) {
+      try {
+        const merged = mergeNotificationEmails(
+          portalData.notificationEmails || [],
+          agents,
+        );
+        await Portal.findByIdAndUpdate(portalData._id, {
+          notificationEmails: merged,
+        });
+      } catch (error) {
+        logger.error("Failed to update portal notification emails:", error);
+      }
+    }
+
+    // Send agent notifications for non-customer portal orders
+    if (!isCustomerPortal) {
+      try {
+        await sendOrderAgentEmail({
+          orderId: String(newOrder._id),
+          userId: orderUserId || undefined,
+        });
+      } catch (notificationError) {
+        logger.error("Failed to send order agent email:", notificationError);
+        // Don't fail the order creation for notification errors
+      }
+    }
+
     // Send white glove notification with error handling
     if (transportType === TransportType.WhiteGlove) {
       try {
@@ -1106,27 +1288,7 @@ export const createOrder = async (
       }
     }
 
-    // Send COD payment request if payment type is COD and customer email exists
-    if (payment === "COD") {
-      if (newOrder.customer?.email) {
-        try {
-          await sendCODPaymentRequest(newOrder);
-          logger.info(
-            `COD payment request sent for order ${(newOrder as any).uniqueId}`,
-          );
-        } catch (notificationError) {
-          logger.error(
-            "Failed to send COD payment request:",
-            notificationError,
-          );
-          // Don't fail the order creation for notification errors
-        }
-      } else {
-        logger.warn(
-          `Cannot send COD payment request: No customer email for order ${(newOrder as any).uniqueId}`,
-        );
-      }
-    }
+    // COD payment instructions are appended to the customer confirmation email.
 
     // Send customer order confirmation email if customer email exists
     if (newOrder.customer?.email) {

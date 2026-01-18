@@ -1,5 +1,5 @@
 import express from "express";
-import { Quote, Portal } from "@/_global/models";
+import { Quote, Portal, Settings } from "@/_global/models";
 import { Status, TransportType } from "../../_global/enums";
 import { getCoordinates } from "../../_global/utils/location";
 import { getMiles } from "../services/getMiles";
@@ -8,6 +8,7 @@ import { calculateTotalPricing } from "../services/calculateTotalPricing";
 import { validateLocation } from "../services/validateLocation";
 import { customAlphabet } from "nanoid";
 import { logger } from "@/core/logger";
+import { getTransitTimeFromSettings } from "../services/getTransitTimeFromSettings";
 
 const nanoid = customAlphabet("1234567890abcdef", 10);
 
@@ -40,6 +41,7 @@ export const createQuoteCustomer = async (
       instance,
       transportType,
     } = req.body;
+    const resolvedPortalId = req.body?.portal ?? portalId;
 
     // Validation
     if (!pickup) {
@@ -193,8 +195,19 @@ export const createQuoteCustomer = async (
       });
     }
 
+    let transitTime: [number, number] | null = null;
+    try {
+      const settings = await Settings.findOne({}).sort({ updatedAt: -1 });
+      const transitTimes = Array.isArray(settings?.transitTimes)
+        ? settings.transitTimes
+        : [];
+      transitTime = getTransitTimeFromSettings(miles, transitTimes);
+    } catch (error) {
+      transitTime = null;
+    }
+
     // Get portal
-    const portal = await Portal.findById(portalId);
+    const portal = await Portal.findById(resolvedPortalId);
     if (!portal) {
       return next({
         statusCode: 404,
@@ -218,7 +231,7 @@ export const createQuoteCustomer = async (
     // Create quote
     const quoteData = {
       status: Status.Active,
-      portalId,
+      portal: resolvedPortalId,
       isCustomerPortal: true,
       customer: {
         name: formattedFullName,
@@ -245,6 +258,7 @@ export const createQuoteCustomer = async (
         },
       },
       miles,
+      transitTime: transitTime ?? [],
       ...(transportType && { transportType: transportType as TransportType }),
       vehicles: vehicleQuotes,
       totalPricing,
@@ -275,7 +289,7 @@ export const createQuoteCustomer = async (
   } catch (error) {
     logger.error("Error creating customer quote", {
       error: error instanceof Error ? error.message : error,
-      portalId: req.body?.portalId,
+      portal: req.body?.portal ?? req.body?.portalId,
     });
     next({
       statusCode: 500,

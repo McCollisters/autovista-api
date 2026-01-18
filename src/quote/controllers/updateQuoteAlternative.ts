@@ -1,5 +1,5 @@
 import express from "express";
-import { Quote, Portal, ModifierSet } from "@/_global/models";
+import { Quote, Portal, ModifierSet, Settings } from "@/_global/models";
 import { TransportType } from "../../_global/enums";
 import { getCoordinates } from "../../_global/utils/location";
 import { getMiles } from "../services/getMiles";
@@ -8,6 +8,7 @@ import { calculateTotalPricing } from "../services/calculateTotalPricing";
 import { validateLocation } from "../services/validateLocation";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { getTransitTimeFromSettings } from "../services/getTransitTimeFromSettings";
 
 /**
  * PUT /api/v1/quote
@@ -49,7 +50,7 @@ export const updateQuoteAlternative = async (
       });
     }
 
-    const originalQuote = await Quote.findById(quoteId).populate("portalId");
+    const originalQuote = await Quote.findById(quoteId).populate("portal");
 
     if (!originalQuote) {
       return next({
@@ -84,7 +85,7 @@ export const updateQuoteAlternative = async (
       return res.status(200).json(updated);
     }
 
-    const portal = originalQuote.portalId as any;
+    const portal = (originalQuote as any).portal as any;
 
     // Use provided values or fall back to existing quote values
     // Extract base commission from existing quote if not provided
@@ -104,7 +105,7 @@ export const updateQuoteAlternative = async (
         
         // Get portal modifiers to calculate fixedCommission
         const portalModifiers = await ModifierSet.findOne({
-          portalId: portal._id,
+          portal: portal._id,
         }).lean() as any;
         
         if (portalModifiers?.fixedCommission && vehicleCommission > 0 && vehicleBase > 0) {
@@ -237,6 +238,17 @@ export const updateQuoteAlternative = async (
       });
     }
 
+    let transitTime: [number, number] | null = null;
+    try {
+      const settings = await Settings.findOne({}).sort({ updatedAt: -1 });
+      const transitTimes = Array.isArray(settings?.transitTimes)
+        ? settings.transitTimes
+        : [];
+      transitTime = getTransitTimeFromSettings(miles, transitTimes);
+    } catch (error) {
+      transitTime = null;
+    }
+
     // Update vehicles with pricing
     const vehicleQuotes = await updateVehiclesWithPricing({
       portal,
@@ -272,6 +284,7 @@ export const updateQuoteAlternative = async (
     };
 
     originalQuote.miles = miles;
+    originalQuote.transitTime = transitTime ?? [];
     // Only update transportType if it was provided in the request
     if (transportType !== undefined) {
       originalQuote.transportType = finalTransportType as TransportType;

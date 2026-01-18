@@ -40,8 +40,8 @@ export interface IQuote extends Document {
   refId?: number;
   isDirect: boolean;
   status: Status;
-  portalId: Types.ObjectId;
-  userId?: Types.ObjectId;
+  portal: Types.ObjectId;
+  user?: Types.ObjectId;
   origin: IQuoteLocation;
   destination: IQuoteLocation;
   miles?: number;

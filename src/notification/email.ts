@@ -142,12 +142,30 @@ export class EmailService {
       };
     }
 
+    // Optional override: route all notifications to a single inbox.
+    const overrideRecipient = process.env.NOTIFICATION_OVERRIDE_EMAIL;
+
     // Apply default from address if not provided
     const emailOptions: EmailOptions = {
       ...options,
       from: options.from || this.defaultFrom,
       replyTo: options.replyTo || this.defaultReplyTo,
+      ...(overrideRecipient
+        ? {
+            to: overrideRecipient,
+            cc: undefined,
+            bcc: undefined,
+          }
+        : {}),
     };
+
+    logger.info("Preparing email notification", {
+      overrideRecipient: overrideRecipient || null,
+      to: emailOptions.to,
+      cc: emailOptions.cc,
+      bcc: emailOptions.bcc,
+      subject: emailOptions.subject,
+    });
 
     return await this.provider.sendEmail(emailOptions);
   }

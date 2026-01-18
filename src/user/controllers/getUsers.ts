@@ -9,7 +9,7 @@ export const getUsers = async (
 ): Promise<void> => {
   try {
     const { portalId, role } = req.query;
-    let filter: any = { status: Status.Active };
+    let filter: any = { status: { $ne: Status.Archived } };
 
     if (portalId) {
       filter.$or = [{ portalId }, { "portalRoles.portalId": portalId }];

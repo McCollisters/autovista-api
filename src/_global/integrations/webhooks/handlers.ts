@@ -141,8 +141,10 @@ export const handleSuperDispatchOrderDelivered = async (
     order.tms.updatedAt = new Date();
 
     // Add delivery confirmation fields (like old API)
-    // order.awaitingDeliveryConfirmation = true;
-    // order.orderTableDeliveryActual = new Date();
+    if (!order.notifications) {
+      order.notifications = {} as any;
+    }
+    order.notifications.awaitingDeliveryConfirmation = true;
 
     await order.save();
 
@@ -217,12 +219,10 @@ export const handleSuperDispatchOrderInvoiced = async (
     order.tms.updatedAt = new Date();
 
     // Add invoicing confirmation fields (like old API)
-    // if (order.awaitingDeliveryConfirmation === null) {
-    //   order.awaitingDeliveryConfirmation = true;
-    // }
-    // if (!order.orderTableDeliveryActual) {
-    //   order.orderTableDeliveryActual = new Date();
-    // }
+    if (!order.notifications) {
+      order.notifications = {} as any;
+    }
+    order.notifications.awaitingDeliveryConfirmation = true;
 
     await order.save();
 
@@ -341,8 +341,10 @@ export const handleSuperDispatchOrderPickedUp = async (
     order.tms.updatedAt = new Date();
 
     // Add pickup confirmation fields (like old API)
-    // order.awaitingPickupConfirmation = true;
-    // order.orderTablePickupActual = new Date();
+    if (!order.notifications) {
+      order.notifications = {} as any;
+    }
+    order.notifications.awaitingPickupConfirmation = true;
 
     await order.save();
 

@@ -5,7 +5,10 @@ export const validateQuoteBody = (
   res: Response,
   next: NextFunction,
 ) => {
-  const { origin, destination, vehicles, portalId, userId } = req.body;
+  const { origin, destination, vehicles, portalId, portal, userId, user } =
+    req.body;
+  const resolvedPortal = portal || portalId;
+  const resolvedUser = user || userId;
 
   if (!origin || typeof origin !== "string") {
     return next({
@@ -21,17 +24,17 @@ export const validateQuoteBody = (
     });
   }
 
-  if (!portalId || typeof portalId !== "string") {
+  if (!resolvedPortal || typeof resolvedPortal !== "string") {
     return next({
       statusCode: 400,
-      message: "portalId is required and must be a string",
+      message: "portal is required and must be a string",
     });
   }
 
-  if (userId && typeof userId !== "string") {
+  if (resolvedUser && typeof resolvedUser !== "string") {
     return next({
       statusCode: 400,
-      message: "userId must be a string",
+      message: "user must be a string",
     });
   }
 

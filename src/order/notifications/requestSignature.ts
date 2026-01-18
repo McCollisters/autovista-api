@@ -171,9 +171,10 @@ export async function requestSignature({
     if (hsResponse && hsResponse.signature_request) {
       // Update order with signature request information
       await Order.findByIdAndUpdate(orderId, {
-        signatureRequestSent: true,
-        signatureReceived: false,
-        signatureRequestId: hsResponse.signature_request.signature_request_id,
+        "notifications.signatureRequestSent": true,
+        "notifications.signatureReceived": false,
+        "notifications.signatureRequestId":
+          hsResponse.signature_request.signature_request_id,
       });
 
       logger.info("Signature request sent successfully", {
@@ -355,9 +356,10 @@ export async function requestSignatureMMI({
     if (hsResponse && hsResponse.signature_request) {
       // Update order with signature request information
       await Order.findByIdAndUpdate(orderId, {
-        signatureRequestSent: true,
-        signatureReceived: false,
-        signatureRequestId: hsResponse.signature_request.signature_request_id,
+        "notifications.signatureRequestSent": true,
+        "notifications.signatureReceived": false,
+        "notifications.signatureRequestId":
+          hsResponse.signature_request.signature_request_id,
       });
 
       logger.info("Signature request sent successfully (MMI)", {

@@ -1,5 +1,5 @@
 import express from "express";
-import { Quote, Portal } from "@/_global/models";
+import { Quote, Portal, Settings } from "@/_global/models";
 import { Status } from "../../_global/enums";
 import { getCoordinates } from "../../_global/utils/location";
 import { getMiles } from "../services/getMiles";
@@ -7,6 +7,7 @@ import { updateVehiclesWithPricing } from "../services/updateVehiclesWithPricing
 import { calculateTotalPricing } from "../services/calculateTotalPricing";
 import { validateLocation } from "../services/validateLocation";
 import { matchesExistingQuote } from "../services/matchesExistingQuote";
+import { getTransitTimeFromSettings } from "../services/getTransitTimeFromSettings";
 
 export const createQuote = async (
   req: express.Request,
@@ -14,15 +15,9 @@ export const createQuote = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    const {
-      portalId,
-      userId,
-      customer,
-      origin,
-      destination,
-      vehicles,
-      commission,
-    } = req.body;
+    const { customer, origin, destination, vehicles, commission } = req.body;
+    const userId = req.body?.user ?? req.body?.userId;
+    const portalId = req.body?.portal ?? req.body?.portalId;
 
     const existingQuote = await matchesExistingQuote(
       origin,
@@ -33,6 +28,27 @@ export const createQuote = async (
     );
 
     if (existingQuote) {
+      const hasTransitTime =
+        Array.isArray(existingQuote.transitTime) &&
+        existingQuote.transitTime.length >= 2;
+      if (!hasTransitTime) {
+        try {
+          const settings = await Settings.findOne({});
+          const transitTimes = Array.isArray(settings?.transitTimes)
+            ? settings?.transitTimes ?? []
+            : [];
+          const fallbackTransitTime = getTransitTimeFromSettings(
+            existingQuote.miles || 0,
+            transitTimes,
+          );
+          if (fallbackTransitTime) {
+            existingQuote.transitTime = fallbackTransitTime;
+            await existingQuote.save();
+          }
+        } catch (error) {
+          // If settings lookup fails, return existing quote unchanged.
+        }
+      }
       res.status(200).json(existingQuote);
       return;
     }
@@ -75,6 +91,17 @@ export const createQuote = async (
 
     if (!miles) {
       return next(new Error("Error calculating distance."));
+    }
+
+    let transitTime: [number, number] | null = null;
+    try {
+      const settings = await Settings.findOne({}).sort({ updatedAt: -1 });
+      const transitTimes = Array.isArray(settings?.transitTimes)
+        ? settings?.transitTimes ?? []
+        : [];
+      transitTime = getTransitTimeFromSettings(miles, transitTimes);
+    } catch (error) {
+      transitTime = null;
     }
 
     const normalizedVehicles = Array.isArray(vehicles)
@@ -129,8 +156,8 @@ export const createQuote = async (
 
     const formattedQuote = {
       status: Status.Active,
-      portalId,
-      userId,
+      portal: portalId,
+      user: userId,
       customer,
       origin: {
         userInput: origin,
@@ -151,6 +178,7 @@ export const createQuote = async (
         },
       },
       miles,
+      transitTime: transitTime ?? [],
       vehicles: vehicleQuotes,
       totalPricing,
     };

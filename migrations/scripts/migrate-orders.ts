@@ -7,6 +7,13 @@ import { Types } from "mongoose";
 
 // Configuration constants
 const MAX_ORDERS_TO_PROCESS: number | null = null; // Set to null or undefined to process all orders
+const MIGRATION_DAYS = process.env.MIGRATION_DAYS
+  ? Number(process.env.MIGRATION_DAYS)
+  : null;
+const cutoffDate =
+  MIGRATION_DAYS && MIGRATION_DAYS > 0
+    ? new Date(Date.now() - MIGRATION_DAYS * 24 * 60 * 60 * 1000)
+    : null;
 
 /**
  * Order Migration Script
@@ -88,7 +95,6 @@ interface OldOrder {
 
   // Company info
   companyName?: string;
-  companyLogo?: string;
 
   // Customer information
   customer: {
@@ -278,9 +284,14 @@ export class OrderMigration extends MigrationBase {
       const destinationOrdersCollection = destinationDb.collection("orders");
 
       // Count existing documents in source
-      const totalOrders = await sourceOrdersCollection.countDocuments();
+      const query = cutoffDate ? { createdAt: { $gte: cutoffDate } } : {};
+      const totalOrders = await sourceOrdersCollection.countDocuments(query);
       console.log(`📊 Found ${totalOrders} orders to migrate from source`);
+      if (cutoffDate) {
+        console.log(`📅 Filtering orders created since ${cutoffDate.toISOString()}`);
+      }
       const codOrdersCount = await sourceOrdersCollection.countDocuments({
+        ...query,
         paymentType: "COD",
       });
       console.log(
@@ -292,7 +303,7 @@ export class OrderMigration extends MigrationBase {
       }
 
       // Get orders from source (sorted by createdAt descending - most recent first)
-      let cursor = sourceOrdersCollection.find({}).sort({ createdAt: -1 });
+      let cursor = sourceOrdersCollection.find(query).sort({ createdAt: -1 });
 
       // Apply limit if specified for testing
       if (MAX_ORDERS_TO_PROCESS) {
@@ -519,7 +530,6 @@ export class OrderMigration extends MigrationBase {
       bookedAt: oldOrder.createdAt ? new Date(oldOrder.createdAt) : new Date(),
       isDirect: oldOrder.isCustomerPortal || false,
       reg: oldOrder.reg || null, // reg should never be 0, use null if not present
-      hasAcceptedTerms: oldOrder.termsAccepted || false,
       hasPaid:
         normalizedPaymentType === "cod"
           ? normalizedPaid === false
@@ -689,6 +699,18 @@ export class OrderMigration extends MigrationBase {
 
   private transformNotifications(oldOrder: OldOrder): any {
     return {
+      hasAcceptedTerms:
+        (oldOrder as any).termsAccepted ??
+        (oldOrder as any).hasAcceptedTerms ??
+        false,
+      termsAcceptedName: (oldOrder as any).termsAcceptedName || null,
+      signatureRequestSent: Boolean(oldOrder.signatureRequestSent),
+      signatureReceived: Boolean(oldOrder.signatureReceived),
+      signatureRequestId: (oldOrder as any).signatureRequestId || null,
+      awaitingPickupConfirmation: Boolean(oldOrder.awaitingPickupConfirmation),
+      awaitingDeliveryConfirmation: Boolean(
+        oldOrder.awaitingDeliveryConfirmation,
+      ),
       paymentRequest: {
         status: "pending",
         sentAt: null,
