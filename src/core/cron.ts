@@ -74,6 +74,15 @@ export function initializeCronJobs() {
     );
   }
 
+  const enableNotificationCron =
+    process.env.ENABLE_NOTIFICATION_CRON === "true";
+  if (!enableNotificationCron) {
+    logger.info(
+      "Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)",
+    );
+    return;
+  }
+
   cron.schedule(
     "0 8,10,12,14,16,18 * * *",
     async () => {
