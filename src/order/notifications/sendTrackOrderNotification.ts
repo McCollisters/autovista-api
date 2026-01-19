@@ -50,7 +50,7 @@ export async function sendTrackOrderNotification({
 
     // Prepare template data
     const html = template({
-      uniqueId: order.refId,
+      refId: order.refId,
       id: String(order._id),
       transportType: order.transportType,
       recipientName: recipientEmail ? "Customer" : "Team", // Customize based on recipient
@@ -68,14 +68,14 @@ export async function sendTrackOrderNotification({
     if (result.success) {
       logger.info("Track order notification sent successfully", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail: toEmail,
       });
       return { success: true };
     } else {
       logger.error("Failed to send track order notification", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail: toEmail,
         error: result.error,
       });

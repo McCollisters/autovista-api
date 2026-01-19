@@ -32,10 +32,10 @@ export const getOrderStatus = async (
       });
     }
 
-    // Try to find order by ID or uniqueId (refId)
+    // Try to find order by ID or refId
     let order;
     if (orderId.length < 7) {
-      // Likely a refId (uniqueId)
+      // Likely a refId
       order = await Order.findOne({ refId: parseInt(orderId, 10) }).populate("portalId");
     } else {
       // Likely a MongoDB ObjectId

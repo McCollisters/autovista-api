@@ -54,8 +54,6 @@ export const handleSuperDispatchOrderCancelled = async (
     order.tms.status = "order_canceled";
     order.tms.updatedAt = new Date();
 
-    // Add uniqueIdNum field (like old API)
-    // order.uniqueIdNum = parseInt(order.uniqueId);
 
     await order.save();
 
@@ -286,8 +284,6 @@ export const handleSuperDispatchOrderModified = async (
     // Update order modification timestamp
     order.tms.updatedAt = new Date();
 
-    // Add uniqueIdNum field (like old API)
-    // order.uniqueIdNum = parseInt(order.uniqueId);
 
     await order.save();
 
@@ -420,8 +416,6 @@ export const handleSuperDispatchVehicleModified = async (
     // Update order modification timestamp
     order.tms.updatedAt = new Date();
 
-    // Add uniqueIdNum field (like old API)
-    // order.uniqueIdNum = parseInt(order.uniqueId);
 
     await order.save();
 

@@ -142,7 +142,7 @@ export async function sendOrderAgentEmail({
       const html = template({
         recipientName: recipient.name || "Agent",
         intro: emailIntro,
-        uniqueId: order.refId,
+        refId: order.refId,
         reg: order.reg || "",
         transferee,
         pickupDates,

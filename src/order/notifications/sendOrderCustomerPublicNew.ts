@@ -252,7 +252,7 @@ export async function sendOrderCustomerPublicNew(
       paymentInstructionsHtml,
       trackingHtml,
       smallTextHtml,
-      uniqueId: order.refId,
+      refId: order.refId,
       termsUrl,
       recipientName,
     });
@@ -274,14 +274,14 @@ export async function sendOrderCustomerPublicNew(
     if (result.success) {
       logger.info("Customer order email sent successfully", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
         isSirva,
       });
     } else {
       logger.error("Failed to send customer order email", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
       });
     }

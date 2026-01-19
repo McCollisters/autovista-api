@@ -1,6 +1,6 @@
 /**
  * Update order from SuperDispatch data
- * 
+ *
  * This function processes a full Super Dispatch order object and updates the database order.
  * It includes checks to prevent overriding sensitive data from partial orders and withheld addresses.
  */
@@ -235,38 +235,49 @@ function processPickupAddress(
   sdOrder: SuperDispatchOrder,
   existingOrder: IOrder,
 ): Partial<IOrder["origin"]> {
-  const venue = sdOrder.pickup.venue;
+  const venue = sdOrder.pickup?.venue;
   const isWithheld = isWithheldAddress(existingOrder.origin?.address?.address);
   const isPartialOrder = existingOrder.tmsPartialOrder === true;
 
+  const sdAddressRemoved = !venue || venue.address == null;
+  const sdCityRemoved = !venue || venue.city == null;
+  const sdStateRemoved = !venue || venue.state == null;
+  const sdZipRemoved = !venue || venue.zip == null;
+
   return {
-    // Preserve name, contact_name, phone, and address if tmsPartialOrder is true
+    // Preserve name/contact if tmsPartialOrder is true or venue is missing
     contact: {
-      name: isPartialOrder
-        ? existingOrder.origin?.contact?.name
-        : venue.contact_name || undefined,
-      phone: isPartialOrder
-        ? existingOrder.origin?.contact?.phone
-        : venue.contact_phone || undefined,
-      phoneMobile: isPartialOrder
-        ? existingOrder.origin?.contact?.phoneMobile
-        : venue.contact_mobile_phone || undefined,
+      name:
+        isPartialOrder || !venue
+          ? existingOrder.origin?.contact?.name
+          : venue.contact_name || undefined,
+      phone:
+        isPartialOrder || !venue
+          ? existingOrder.origin?.contact?.phone
+          : venue.contact_phone || undefined,
+      phoneMobile:
+        isPartialOrder || !venue
+          ? existingOrder.origin?.contact?.phoneMobile
+          : venue.contact_mobile_phone || undefined,
     },
-    // Preserve existing address if it contains WITTHELD or if tmsPartialOrder is true
+    // Preserve existing address if WITTHELD, tmsPartialOrder, or SD removed it
     address: {
       address:
-        isPartialOrder || isWithheld
+        isPartialOrder || isWithheld || sdAddressRemoved
           ? existingOrder.origin?.address?.address
-          : venue.address || undefined,
-      city: isWithheld
-        ? existingOrder.origin?.address?.city
-        : venue.city || undefined,
-      state: isWithheld
-        ? existingOrder.origin?.address?.state
-        : venue.state || undefined,
-      zip: isWithheld
-        ? existingOrder.origin?.address?.zip
-        : venue.zip?.replace(/\D+/g, "") || undefined,
+          : venue?.address || undefined,
+      city:
+        isWithheld || sdCityRemoved
+          ? existingOrder.origin?.address?.city
+          : venue?.city || undefined,
+      state:
+        isWithheld || sdStateRemoved
+          ? existingOrder.origin?.address?.state
+          : venue?.state || undefined,
+      zip:
+        isWithheld || sdZipRemoved
+          ? existingOrder.origin?.address?.zip
+          : venue?.zip?.replace(/\D+/g, "") || undefined,
     },
     notes: sdOrder.pickup.notes || undefined,
     longitude: sdOrder.pickup.longitude || undefined,
@@ -278,40 +289,51 @@ function processDeliveryAddress(
   sdOrder: SuperDispatchOrder,
   existingOrder: IOrder,
 ): Partial<IOrder["destination"]> {
-  const venue = sdOrder.delivery.venue;
+  const venue = sdOrder.delivery?.venue;
   const isWithheld = isWithheldAddress(
     existingOrder.destination?.address?.address,
   );
   const isPartialOrder = existingOrder.tmsPartialOrder === true;
 
+  const sdAddressRemoved = !venue || venue.address == null;
+  const sdCityRemoved = !venue || venue.city == null;
+  const sdStateRemoved = !venue || venue.state == null;
+  const sdZipRemoved = !venue || venue.zip == null;
+
   return {
-    // Preserve name, contact_name, phone, and address if tmsPartialOrder is true
+    // Preserve name/contact if tmsPartialOrder is true or venue is missing
     contact: {
-      name: isPartialOrder
-        ? existingOrder.destination?.contact?.name
-        : venue.contact_name || undefined,
-      phone: isPartialOrder
-        ? existingOrder.destination?.contact?.phone
-        : venue.contact_phone || undefined,
-      phoneMobile: isPartialOrder
-        ? existingOrder.destination?.contact?.phoneMobile
-        : venue.contact_mobile_phone || undefined,
+      name:
+        isPartialOrder || !venue
+          ? existingOrder.destination?.contact?.name
+          : venue.contact_name || undefined,
+      phone:
+        isPartialOrder || !venue
+          ? existingOrder.destination?.contact?.phone
+          : venue.contact_phone || undefined,
+      phoneMobile:
+        isPartialOrder || !venue
+          ? existingOrder.destination?.contact?.phoneMobile
+          : venue.contact_mobile_phone || undefined,
     },
-    // Preserve existing address if it contains WITTHELD or if tmsPartialOrder is true
+    // Preserve existing address if WITTHELD, tmsPartialOrder, or SD removed it
     address: {
       address:
-        isPartialOrder || isWithheld
+        isPartialOrder || isWithheld || sdAddressRemoved
           ? existingOrder.destination?.address?.address
-          : venue.address || undefined,
-      city: isWithheld
-        ? existingOrder.destination?.address?.city
-        : venue.city || undefined,
-      state: isWithheld
-        ? existingOrder.destination?.address?.state
-        : venue.state || undefined,
-      zip: isWithheld
-        ? existingOrder.destination?.address?.zip
-        : venue.zip?.replace(/\D+/g, "") || undefined,
+          : venue?.address || undefined,
+      city:
+        isWithheld || sdCityRemoved
+          ? existingOrder.destination?.address?.city
+          : venue?.city || undefined,
+      state:
+        isWithheld || sdStateRemoved
+          ? existingOrder.destination?.address?.state
+          : venue?.state || undefined,
+      zip:
+        isWithheld || sdZipRemoved
+          ? existingOrder.destination?.address?.zip
+          : venue?.zip?.replace(/\D+/g, "") || undefined,
     },
     notes: sdOrder.delivery.notes || undefined,
     longitude: sdOrder.delivery.longitude || undefined,
@@ -337,6 +359,22 @@ function findMatchingVehicle(
         existingVehicle.model.toLowerCase() === sdVehicle.model.toLowerCase()),
   );
 }
+
+const mapSdVehicleType = (type?: string | null) => {
+  const normalized = String(type || "")
+    .toLowerCase()
+    .trim();
+  const typeMap: Record<string, string> = {
+    sedan: "sedan",
+    suv: "suv",
+    van: "van",
+    "4_door_pickup": "pickup_4_doors",
+    "2_door_pickup": "pickup_2_doors",
+    pickup: "pickup_4_doors",
+    other: "other",
+  };
+  return typeMap[normalized] || "other";
+};
 
 function processExistingVehicle(
   sdVehicle: SuperDispatchOrder["vehicles"][0],
@@ -371,7 +409,7 @@ function processExistingVehicle(
         : savedVehicle.year !== undefined && savedVehicle.year !== null
           ? savedVehicle.year
           : undefined,
-    pricingClass: sdVehicle.type,
+    pricingClass: mapSdVehicleType(sdVehicle.type),
     make: sdVehicle.make,
     model: sdVehicle.model,
     isInoperable: sdVehicle.is_inoperable,
@@ -417,7 +455,7 @@ function processNewVehicle(
       sdVehicle.year !== undefined && sdVehicle.year !== null
         ? sdVehicle.year
         : undefined,
-    pricingClass: sdVehicle.type,
+    pricingClass: mapSdVehicleType(sdVehicle.type),
     make: sdVehicle.make,
     model: sdVehicle.model,
     isInoperable: sdVehicle.is_inoperable,
@@ -506,7 +544,9 @@ export const updateOrderFromSD = async (
       );
     }
 
-    const portal = (await Portal.findById(databaseOrder.portalId).lean()) as IPortal;
+    const portal = (await Portal.findById(
+      databaseOrder.portalId,
+    ).lean()) as IPortal;
     if (!portal) {
       throw new Error(`Portal not found: ${databaseOrder.portalId}`);
     }
@@ -587,7 +627,10 @@ export const updateOrderFromSD = async (
     const deliveryDates = processDeliveryDates(superDispatchOrder);
 
     // Process addresses
-    const pickupAddress = processPickupAddress(superDispatchOrder, databaseOrder);
+    const pickupAddress = processPickupAddress(
+      superDispatchOrder,
+      databaseOrder,
+    );
     const deliveryAddress = processDeliveryAddress(
       superDispatchOrder,
       databaseOrder,
@@ -640,7 +683,8 @@ export const updateOrderFromSD = async (
       // Customer info (preserve existing)
       customer: {
         ...databaseOrder.customer,
-        notes: superDispatchOrder.customer?.notes || databaseOrder.customer?.notes,
+        notes:
+          superDispatchOrder.customer?.notes || databaseOrder.customer?.notes,
       },
 
       // Pickup info
@@ -702,4 +746,3 @@ export const updateOrderFromSD = async (
     return null;
   }
 };
-

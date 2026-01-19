@@ -145,7 +145,7 @@ export async function sendOrderDeliveryConfirmation({
       : null;
 
     const transportType = formatTransportType(order.transportType);
-    const uniqueId = order.refId;
+    const refId = order.refId;
     const reg = order.reg;
     const vehicles = formatVehiclesHTML(order.vehicles, false);
 
@@ -173,7 +173,7 @@ export async function sendOrderDeliveryConfirmation({
           vehicles,
           intro: emailIntro,
           reg,
-          uniqueId,
+          refId,
           recipientName: recipient.name ? ` ${recipient.name}` : "",
         });
 
@@ -215,7 +215,7 @@ export async function sendOrderDeliveryConfirmation({
 
     logger.info("Order delivery confirmation emails sent", {
       orderId: order._id,
-      uniqueId: order.refId,
+      refId: order.refId,
       recipientCount: recipients.length,
       successCount,
     });

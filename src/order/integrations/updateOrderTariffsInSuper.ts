@@ -61,10 +61,13 @@ export const updateOrderTariffsInSuper = async (
     );
     const sdVehicle =
       (key && sdVehiclesByMakeModel.get(key)) || sdVehicles[index] || {};
-    const totalValue = Number(vehicle?.pricing?.total);
+    const totalValue = Number(vehicle?.pricing?.totalWithCompanyTariffAndCommission);
+    const fallbackValue = Number(vehicle?.pricing?.total);
     const tariff = Number.isFinite(totalValue)
       ? totalValue
-      : Number(vehicle?.pricing?.totalWithCompanyTariffAndCommission) || 0;
+      : Number.isFinite(fallbackValue)
+        ? fallbackValue
+        : 0;
 
     return {
       ...sdVehicle,

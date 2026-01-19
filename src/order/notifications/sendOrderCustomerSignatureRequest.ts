@@ -98,7 +98,7 @@ export async function sendOrderCustomerSignatureRequest({
     if (!emailResult) {
       logger.error("Failed to send signature request email", {
         orderId,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
       });
       return {
@@ -109,7 +109,7 @@ export async function sendOrderCustomerSignatureRequest({
 
     logger.info("Signature request email sent successfully", {
       orderId,
-      uniqueId: order.refId,
+      refId: order.refId,
       recipientEmail,
       isSirva,
     });
@@ -124,7 +124,7 @@ export async function sendOrderCustomerSignatureRequest({
     if (!signatureResult.success) {
       logger.error("Failed to send HelloSign signature request", {
         orderId,
-        uniqueId: order.refId,
+        refId: order.refId,
         error: signatureResult.error,
       });
       // Email was sent successfully, so we return partial success
@@ -136,7 +136,7 @@ export async function sendOrderCustomerSignatureRequest({
 
     logger.info("Signature request sent successfully (email + HelloSign)", {
       orderId,
-      uniqueId: order.refId,
+      refId: order.refId,
       recipientEmail,
     });
 

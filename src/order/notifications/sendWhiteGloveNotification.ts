@@ -30,7 +30,7 @@ export const sendWhiteGloveNotification = async (
 
     logger.info("Sending white glove notification", {
       orderId: order._id,
-      uniqueId: order.refId,
+      refId: order.refId,
     });
 
     const senderEmail = "autologistics@mccollisters.com";
@@ -45,7 +45,7 @@ export const sendWhiteGloveNotification = async (
 
     // Prepare template data
     const html = template({
-      uniqueId: order.refId,
+      refId: order.refId,
       id: String(order._id),
     });
 
@@ -62,13 +62,13 @@ export const sendWhiteGloveNotification = async (
     if (result.success) {
       logger.info("White glove notification sent successfully", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
       });
     } else {
       logger.error("Failed to send white glove notification", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         error: result.error,
       });
     }

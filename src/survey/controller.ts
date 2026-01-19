@@ -28,7 +28,7 @@ export const createSurvey = async (
     }
 
     const portalName = portal?.companyName || "Unknown";
-    const orderRefId = order?.refId || order?.uniqueId || "Unknown";
+    const orderRefId = order?.refId || "Unknown";
     const customerEmail =
       order?.customer?.email ||
       (order?.customer as any)?.customerEmail ||

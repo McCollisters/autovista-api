@@ -81,7 +81,7 @@ export async function sendSurvey({
     if (result) {
       logger.info("Survey email sent successfully", {
         orderId,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
         surveyUrl: url,
       });
@@ -89,7 +89,7 @@ export async function sendSurvey({
     } else {
       logger.error("Failed to send survey email", {
         orderId,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
       });
       return { success: false, error: "Failed to send survey email." };

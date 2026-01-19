@@ -140,7 +140,7 @@ const buildBasePayload = (order: any) => {
   return {
     eventId: `${order.refId || order._id}-${Date.now()}`,
     orderId: order._id?.toString?.() || null,
-    uniqueId: order.refId || null,
+    refId: order.refId || null,
     portalId: getPortalIdString(order.portalId || order.portal) || null,
     superDispatchGuid: order.tms?.guid || null,
     purchaseOrderNumber: order.reg || null,
@@ -477,7 +477,7 @@ const sendToEndpoint = async (
     });
     logger.info("acertusClient: Successfully sent vehichaul update", {
       eventType,
-      uniqueId: order.refId,
+      refId: order.refId,
       sdGuid: order.tms?.guid,
       url,
     });
@@ -485,7 +485,7 @@ const sendToEndpoint = async (
   } catch (error) {
     logger.error("acertusClient: Failed vehichaul update", {
       eventType,
-      uniqueId: order.refId,
+      refId: order.refId,
       sdGuid: order.tms?.guid,
       url,
       error: error instanceof Error ? error.message : String(error),
@@ -582,7 +582,7 @@ export const sendVehicleCreate = async (order: any): Promise<Array<{ payload: an
 
   if (vehiclePayloads.length === 0) {
     logger.warn("acertusClient: No vehicles found for create payload", {
-      uniqueId: order.refId,
+      refId: order.refId,
       sdGuid: order.tms?.guid,
     });
     return [];
@@ -641,13 +641,13 @@ const sendUpdate = async (eventType: string, order: any, details: any = {}): Pro
     });
     logger.info("acertusClient: Successfully sent update", {
       eventType,
-      uniqueId: order.refId,
+      refId: order.refId,
       sdGuid: order.tms?.guid,
     });
   } catch (error) {
     logger.error("acertusClient: Failed to send update", {
       eventType,
-      uniqueId: order.refId,
+      refId: order.refId,
       sdGuid: order.tms?.guid,
       error: error instanceof Error ? error.message : String(error),
       status: (error as any).response?.status,

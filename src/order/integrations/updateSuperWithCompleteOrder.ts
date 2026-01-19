@@ -8,7 +8,7 @@
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
 import { authenticateSuperDispatch } from "@/_global/integrations/authenticateSuperDispatch";
-import { format } from "date-fns";
+import { DateTime } from "luxon";
 
 /**
  * Update partial order in Super Dispatch with complete order details
@@ -95,31 +95,53 @@ export const updateSuperWithCompleteOrder = async (
       return `${makeStr}::${modelStr}`;
     };
 
+    const normalizeText = (value?: string | number | null) =>
+      value == null ? "" : String(value).trim();
+
+    const resolveVehicleType = (pricingClass?: string | null) => {
+      const normalized = normalizeText(pricingClass).toLowerCase();
+      if (!normalized) {
+        return "other";
+      }
+      const mappedTypes: Record<string, string> = {
+        sedan: "sedan",
+        suv: "suv",
+        van: "van",
+        pickup_4_doors: "4_door_pickup",
+        pickup_2_doors: "2_door_pickup",
+        pickup: "pickup",
+        other: "other",
+      };
+      return mappedTypes[normalized] || "other";
+    };
+
+    const toFloatOrNull = (value?: string | number | null) => {
+      if (value == null) {
+        return null;
+      }
+      const parsed = Number.parseFloat(String(value));
+      return Number.isFinite(parsed) ? parsed : null;
+    };
+
+    const normalizeZipNumber = (value?: string | number | null) => {
+      if (!value && value !== 0) {
+        return null;
+      }
+      const digits = String(value).match(/\d{5}/)?.[0] || "";
+      if (!digits) {
+        return null;
+      }
+      const parsed = Number.parseInt(digits, 10);
+      return Number.isFinite(parsed) ? parsed : null;
+    };
+
     // Build vehicle data with complete details
     // Start with existing Super Dispatch vehicle to preserve all fields (including carrier price)
     const vehicleData = order.vehicles.map((vehicle, index) => {
       // Determine if vehicle is inoperable
-      let inoperable = false;
-      if (
-        vehicle.isInoperable === true ||
-        (vehicle as any).operableBool === false ||
-        (vehicle as any).operable === false ||
-        (vehicle as any).operable === "false" ||
-        (vehicle as any).operable === "No"
-      ) {
-        inoperable = true;
-      }
+      const inoperable = Boolean(vehicle.isInoperable === true);
 
-      // Format vehicle type
-      let type = vehicle.pricingClass?.toLowerCase() || "other";
-
-      if (type === "pick up 4 doors") {
-        type = "4_door_pickup";
-      }
-
-      if (type === "pick up 2 doors") {
-        type = "2_door_pickup";
-      }
+      const type = resolveVehicleType(vehicle.pricingClass);
 
       // Get corresponding vehicle from Super Dispatch by index
       const sdVehicle = sdVehicles[index] || {}; // Use empty object if no match
@@ -128,14 +150,13 @@ export const updateSuperWithCompleteOrder = async (
       const vehicleObj: any = { ...sdVehicle };
 
       // Override/set fields from the local order, preserving Super Dispatch values if local is missing
-      vehicleObj.vin =
-        vehicle.vin || sdVehicle.vin || null;
+      vehicleObj.vin = vehicle.vin || sdVehicle.vin || null;
       vehicleObj.year =
         (vehicle.year ? parseInt(vehicle.year) : undefined) ||
         (sdVehicle.year ? parseInt(sdVehicle.year) : undefined) ||
         null;
-      vehicleObj.make = vehicle.make;
-      vehicleObj.model = vehicle.model;
+      vehicleObj.make = normalizeText(vehicle.make);
+      vehicleObj.model = normalizeText(vehicle.model);
       vehicleObj.is_inoperable = inoperable;
       vehicleObj.type = type;
 
@@ -173,21 +194,26 @@ export const updateSuperWithCompleteOrder = async (
       portalEmail = (portal as any).notificationEmail.trim();
     }
 
+    const formatSuperDispatchDate = (value: Date) =>
+      `${DateTime.fromJSDate(new Date(value))
+        .toUTC()
+        .toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")}+0000`;
+
     // Format dates
     const pickupStartDate = order.schedule.pickupEstimated[0]
-      ? format(new Date(order.schedule.pickupEstimated[0]), "yyyy-MM-dd")
-      : format(new Date(order.schedule.pickupSelected), "yyyy-MM-dd");
+      ? formatSuperDispatchDate(new Date(order.schedule.pickupEstimated[0]))
+      : formatSuperDispatchDate(new Date(order.schedule.pickupSelected));
 
     const pickupEndDate = order.schedule.pickupEstimated[1]
-      ? format(new Date(order.schedule.pickupEstimated[1]), "yyyy-MM-dd")
+      ? formatSuperDispatchDate(new Date(order.schedule.pickupEstimated[1]))
       : pickupStartDate;
 
     const deliveryStartDate = order.schedule.deliveryEstimated[0]
-      ? format(new Date(order.schedule.deliveryEstimated[0]), "yyyy-MM-dd")
+      ? formatSuperDispatchDate(new Date(order.schedule.deliveryEstimated[0]))
       : pickupStartDate;
 
     const deliveryEndDate = order.schedule.deliveryEstimated[1]
-      ? format(new Date(order.schedule.deliveryEstimated[1]), "yyyy-MM-dd")
+      ? formatSuperDispatchDate(new Date(order.schedule.deliveryEstimated[1]))
       : deliveryStartDate;
 
     // Check if instructions were manually updated in Super Dispatch
@@ -233,41 +259,47 @@ export const updateSuperWithCompleteOrder = async (
         first_available_pickup_date: pickupStartDate,
         scheduled_at: pickupStartDate,
         scheduled_ends_at: pickupEndDate,
-        latitude: parseFloat(order.origin.latitude) || null,
-        longitude: parseFloat(order.origin.longitude) || null,
-        notes: order.origin.notes || null,
+        latitude: toFloatOrNull(order.origin?.latitude),
+        longitude: toFloatOrNull(order.origin?.longitude),
+        notes: order.origin?.notes || null,
         venue: {
-          address: order.origin.address?.address || null,
-          city: order.origin.address?.city || null,
-          state: order.origin.address?.state || null,
-          zip: order.origin.address?.zip || null,
-          name: order.origin.contact?.name || null,
-          contact_name: order.origin.contact?.name || null,
-          contact_email: "autologistics@mccollisters.com",
-          contact_phone: "888-819-0594",
-          contact_mobile_phone: "888-819-0594",
+          address: order.origin?.address?.address || null,
+          city: order.origin?.address?.city || null,
+          state: order.origin?.address?.state || null,
+          zip: normalizeZipNumber(order.origin?.address?.zip),
+          name:
+            order.origin?.address?.businessName ||
+            order.origin?.contact?.name ||
+            null,
+          contact_name: order.origin?.contact?.name || null,
+          contact_email: order.origin?.contact?.email || null,
+          contact_phone: order.origin?.contact?.phone || null,
+          contact_mobile_phone: order.origin?.contact?.phoneMobile || null,
         },
       },
       delivery: {
         date_type: "estimated",
         scheduled_at: deliveryStartDate,
         scheduled_ends_at: deliveryEndDate,
-        latitude: parseFloat(order.destination.latitude) || null,
-        longitude: parseFloat(order.destination.longitude) || null,
-        notes: order.destination.notes || null,
+        latitude: toFloatOrNull(order.destination?.latitude),
+        longitude: toFloatOrNull(order.destination?.longitude),
+        notes: order.destination?.notes || null,
         venue: {
-          address: order.destination.address?.address || null,
-          city: order.destination.address?.city || null,
-          state: order.destination.address?.state || null,
-          zip: order.destination.address?.zip || null,
-          name: order.destination.contact?.name || null,
-          contact_name: order.destination.contact?.name || null,
-          contact_email: "autologistics@mccollisters.com",
-          contact_phone: "888-819-0594",
-          contact_mobile_phone: "888-819-0594",
+          address: order.destination?.address?.address || null,
+          city: order.destination?.address?.city || null,
+          state: order.destination?.address?.state || null,
+          zip: normalizeZipNumber(order.destination?.address?.zip),
+          name:
+            order.destination?.address?.businessName ||
+            order.destination?.contact?.name ||
+            null,
+          contact_name: order.destination?.contact?.name || null,
+          contact_email: order.destination?.contact?.email || null,
+          contact_phone: order.destination?.contact?.phone || null,
+          contact_mobile_phone: order.destination?.contact?.phoneMobile || null,
         },
       },
-      transport_type: order.transportType.toUpperCase(),
+      transport_type: String(order.transportType || "").toUpperCase(),
       vehicles: vehicleData,
     };
 

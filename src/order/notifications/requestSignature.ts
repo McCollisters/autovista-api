@@ -98,7 +98,7 @@ export async function requestSignature({
       ],
       custom_fields: [
         {
-          name: "uniqueId",
+          name: "refId",
           value: `# ${order.refId}`,
         },
         {
@@ -179,7 +179,7 @@ export async function requestSignature({
 
       logger.info("Signature request sent successfully", {
         orderId,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
         signatureRequestId: hsResponse.signature_request.signature_request_id,
       });
@@ -188,7 +188,7 @@ export async function requestSignature({
     } else {
       logger.error("HelloSign did not return a valid response", {
         orderId,
-        uniqueId: order.refId,
+        refId: order.refId,
       });
       return { success: false, error: "Failed to send signature request" };
     }
@@ -283,7 +283,7 @@ export async function requestSignatureMMI({
       ],
       custom_fields: [
         {
-          name: "uniqueId",
+          name: "refId",
           value: `# ${order.refId}`,
         },
         {
@@ -364,7 +364,7 @@ export async function requestSignatureMMI({
 
       logger.info("Signature request sent successfully (MMI)", {
         orderId,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
         signatureRequestId: hsResponse.signature_request.signature_request_id,
       });
@@ -373,7 +373,7 @@ export async function requestSignatureMMI({
     } else {
       logger.error("HelloSign did not return a valid response (MMI)", {
         orderId,
-        uniqueId: order.refId,
+        refId: order.refId,
       });
       return { success: false, error: "Failed to send signature request" };
     }

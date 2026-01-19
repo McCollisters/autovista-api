@@ -4942,3 +4942,567 @@
   message: 'Error getting user from token',
   timestamp: '2026-01-18 17:36:39'
 }
+{
+  service: 'autovista-api',
+  error: 'invalid signature',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-18 17:51:44'
+}
+{
+  message: 'Order creation failed: No pickup date provided',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 17:52:25'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  uniqueId: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 17:52:32'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:213:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  uniqueId: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 17:52:32'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:213:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  timestamp: '2026-01-18 17:52:32'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 18:05:53'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:213:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 18:05:53'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:213:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  timestamp: '2026-01-18 18:05:53'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 18:06:04'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:213:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 18:06:04'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:213:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  timestamp: '2026-01-18 18:06:04'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:02:30'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:235:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:02:30'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:235:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  timestamp: '2026-01-18 19:02:30'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:04:56'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:272:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:04:56'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:272:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  timestamp: '2026-01-18 19:04:56'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:21:32'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:367:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:21:32'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:367:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:650:25)',
+  timestamp: '2026-01-18 19:21:32'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:23:10'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:368:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:23:10'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:368:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:23:10'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:23:42'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:368:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:23:42'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:368:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:23:42'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:27:12'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:271:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:27:12'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:271:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:27:12'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:28:22'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:276:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:28:22'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:276:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:28:22'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:30:34'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:303:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:30:34'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:303:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:30:34'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:31:47'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:303:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:31:47'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:303:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:31:47'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:35:09'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:289:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:35:09'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:289:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:35:09'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:35:22'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:289:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:35:22'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:289:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:35:22'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Unable to process the request body due to malformed JSON syntax or invalid data. Please make sure the request body is valid.","error_id":"WRONG_INPUT_ERROR","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:38:11'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:286:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:38:11'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:286:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:38:11'
+}
+{
+  service: 'autovista-api',
+  status: 400,
+  statusText: 'Bad Request',
+  error: '{"status":"fail","data":{"message":"Payment method cannot be null","error_id":"INVALID_PAYMENT_METHODS_OR_TERMS","details":null}}',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Super Dispatch API error response:',
+  timestamp: '2026-01-18 19:40:30'
+}
+{
+  service: 'autovista-api',
+  error: 'Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:286:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  orderNumber: '300023',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-18 19:40:30'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'SuperDispatch API call failed: Super Dispatch API error: 400 Bad Request',
+  stack: 'Error: Super Dispatch API error: 400 Bad Request\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:286:13)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async createOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/createOrder.ts:652:25)',
+  timestamp: '2026-01-18 19:40:30'
+}
+{
+  service: 'autovista-api',
+  error: 'DateTime is not defined',
+  stack: 'ReferenceError: DateTime is not defined\n' +
+    '    at formatSuperDispatchDate (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/updateSuperWithCompleteOrder.ts:198:7)\n' +
+    '    at updateSuperWithCompleteOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/updateSuperWithCompleteOrder.ts:204:9)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async sendOrderToTms (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/sendOrderToTms.ts:55:18)',
+  orderRefId: 300023,
+  level: 'error',
+  message: 'Error updating Super Dispatch order with complete details:',
+  timestamp: '2026-01-18 20:01:48'
+}
+{
+  service: 'autovista-api',
+  error: 'DateTime is not defined',
+  stack: 'ReferenceError: DateTime is not defined\n' +
+    '    at formatSuperDispatchDate (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/updateSuperWithCompleteOrder.ts:198:7)\n' +
+    '    at updateSuperWithCompleteOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/updateSuperWithCompleteOrder.ts:204:9)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async sendOrderToTms (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/sendOrderToTms.ts:55:18)',
+  orderId: '696d99df50eeecdc893f7f73',
+  level: 'error',
+  message: 'Error sending order to TMS:',
+  timestamp: '2026-01-18 20:01:48'
+}
+{
+  service: 'autovista-api',
+  error: 'Order validation failed: status: `Booked` is not a valid enum value for path `status`., transportType: `OPEN` is not a valid enum value for path `transportType`.',
+  stack: 'ValidationError: Order validation failed: status: `Booked` is not a valid enum value for path `status`., transportType: `OPEN` is not a valid enum value for path `transportType`.\n' +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3123:17\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1417:9\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)',
+  orderId: '696d99df50eeecdc893f7f73',
+  level: 'error',
+  message: 'Error sending order to TMS:',
+  timestamp: '2026-01-18 20:03:04'
+}

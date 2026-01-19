@@ -6,8 +6,8 @@ import { logger } from "@/core/logger";
  * POST /api/v1/order/terms
  * Accept order terms
  *
- * Body: { uniqueId: string, orderId: string }
- * Sets hasAcceptedTerms to true if uniqueId matches
+ * Body: { refId: string, orderId: string }
+ * Sets hasAcceptedTerms to true if refId matches
  */
 export const acceptOrderTerms = async (
   req: express.Request,
@@ -15,7 +15,7 @@ export const acceptOrderTerms = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    const { uniqueId, orderId, termsAcceptedName } = req.body;
+    const { refId, orderId, termsAcceptedName } = req.body;
 
     if (!orderId) {
       return next({
@@ -24,10 +24,10 @@ export const acceptOrderTerms = async (
       });
     }
 
-    if (!uniqueId) {
+    if (!refId) {
       return next({
         statusCode: 400,
-        message: "Unique ID is required.",
+        message: "Order reference ID is required.",
       });
     }
 
@@ -48,8 +48,8 @@ export const acceptOrderTerms = async (
       });
     }
 
-    // Verify uniqueId matches
-    if (order.refId?.toString() !== uniqueId.toString()) {
+    // Verify refId matches
+    if (order.refId?.toString() !== refId.toString()) {
       return next({
         statusCode: 403,
         message: "Invalid order reference ID.",
@@ -69,7 +69,7 @@ export const acceptOrderTerms = async (
       refId: order.refId,
     });
 
-    res.status(200).json({ uniqueId: order.refId });
+    res.status(200).json({ refId: order.refId });
   } catch (error) {
     logger.error("Error accepting order terms", {
       error: error instanceof Error ? error.message : error,

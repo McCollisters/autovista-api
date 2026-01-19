@@ -215,9 +215,7 @@ export const updateOrder = async (
 
             const superResponse = await sendPartialOrderToSuper({
               quotes: (updatedOrder as any).vehicles || [],
-              uniqueId: String(
-                (updatedOrder as any).uniqueId || updatedOrder.refId,
-              ),
+              orderNumber: String(updatedOrder.refId),
               reg: updatedOrder.reg ? Number(updatedOrder.reg) : undefined,
               portal,
               dateRanges,

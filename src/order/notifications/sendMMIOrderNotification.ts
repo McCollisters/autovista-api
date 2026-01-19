@@ -110,7 +110,7 @@ export async function sendMMIOrderNotification({
       deliveryZip,
       transportType,
       vehicles,
-      uniqueId: order.refId,
+      refId: order.refId,
       reg: order.reg || "",
       totalPricing: totalPricing.toFixed(2),
       billRate: billRate.toFixed(2),
@@ -130,13 +130,13 @@ export async function sendMMIOrderNotification({
     if (result.success) {
       logger.info("MMI order notification sent successfully", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
       });
     } else {
       logger.error("Failed to send MMI order notification", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
         error: result.error,
       });

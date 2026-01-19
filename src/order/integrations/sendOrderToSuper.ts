@@ -6,10 +6,11 @@
 
 import { logger } from "@/core/logger";
 import { IOrder, IPortal } from "@/_global/models";
+import { DateTime } from "luxon";
 
 interface SendOrderToSuperParams {
   quotes: any[];
-  uniqueId: string;
+  orderNumber: string;
   reg: number;
   portal: IPortal;
   dateRanges: Date[];
@@ -45,7 +46,7 @@ export const sendOrderToSuper = async (
   try {
     const {
       quotes,
-      uniqueId,
+      orderNumber,
       reg,
       portal,
       dateRanges,
@@ -75,41 +76,94 @@ export const sendOrderToSuper = async (
       serviceLevel,
     } = params;
 
+    const normalizeZip = (value?: string | number | null) => {
+      if (!value && value !== 0) {
+        return "";
+      }
+      const digits = String(value).match(/\d{5}/)?.[0] || "";
+      return digits;
+    };
+
+    const normalizeText = (value?: string | number | null) =>
+      value == null ? "" : String(value).trim();
+
+    const normalizeZipNumber = (value?: string | number | null) => {
+      const digits = normalizeZip(value);
+      if (!digits) {
+        return undefined;
+      }
+      const parsed = Number.parseInt(digits, 10);
+      return Number.isFinite(parsed) ? parsed : undefined;
+    };
+
+    const formatSuperDispatchDate = (value: Date) =>
+      `${DateTime.fromJSDate(new Date(value))
+        .toUTC()
+        .toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")}+0000`;
+
+    const resolveVehicleType = (pricingClass?: string | null) => {
+      const normalized = normalizeText(pricingClass).toLowerCase();
+      if (!normalized) {
+        return "other";
+      }
+      const mappedTypes: Record<string, string> = {
+        sedan: "sedan",
+        suv: "suv",
+        van: "van",
+        pickup_4_doors: "4_door_pickup",
+        pickup_2_doors: "2_door_pickup",
+        pickup: "pickup",
+        other: "other",
+      };
+      return mappedTypes[normalized] || "other";
+    };
+
     // Format vehicles for Super Dispatch
-    const formattedVehicles = quotes.map((quote) => ({
-      make: quote.make,
-      model: quote.model,
-      year: quote.year,
-      vin: quote.vin,
-      operable: quote.operableBool,
-      type: quote.pricingClass?.toLowerCase() || "other",
-    }));
+    const formattedVehicles = quotes.map((quote) => {
+      const isInoperable = Boolean((quote as any).isInoperable);
+      const parsedYear = quote.year ? parseInt(String(quote.year), 10) : NaN;
+      const vinValue = normalizeText(quote.vin);
+      return {
+        make: normalizeText(quote.make),
+        model: normalizeText(quote.model),
+        year: Number.isFinite(parsedYear) ? parsedYear : null,
+        vin: vinValue || null,
+        operable: !isInoperable,
+        type: resolveVehicleType(quote.pricingClass),
+      };
+    });
 
     // Format pickup and delivery dates
-    const pickupStartDate = dateRanges[0].toISOString().split("T")[0];
-    const pickupEndDate = dateRanges[1].toISOString().split("T")[0];
-    const deliveryStartDate = dateRanges[2].toISOString().split("T")[0];
-    const deliveryEndDate = dateRanges[3].toISOString().split("T")[0];
+    const pickupStartDate = formatSuperDispatchDate(dateRanges[0]);
+    const pickupEndDate = formatSuperDispatchDate(dateRanges[1]);
+    const deliveryStartDate = formatSuperDispatchDate(dateRanges[2]);
+    const deliveryEndDate = formatSuperDispatchDate(dateRanges[3]);
 
     const orderData = {
-      number: uniqueId,
+      number: String(orderNumber),
       purchase_order_number: reg,
+      payment: {
+        method: "other",
+        terms: "other",
+      },
       pickup: {
         first_available_pickup_date: pickupStartDate,
         scheduled_at: pickupStartDate,
         scheduled_ends_at: pickupEndDate,
         notes: pickupNotes,
         date_type: "estimated",
+        latitude: pickupCoords?.latitude || null,
+        longitude: pickupCoords?.longitude || null,
         venue: {
-          address: pickupAddress,
-          city: pickupCity,
-          state: pickupState,
-          zip: pickupZip,
-          name: pickupBusinessName,
-          contact_name: pickupContactName,
-          contact_email: pickupEmail,
-          contact_phone: pickupPhone,
-          contact_mobile_phone: pickupMobile,
+          address: normalizeText(pickupAddress),
+          city: normalizeText(pickupCity),
+          state: normalizeText(pickupState),
+          zip: normalizeZipNumber(pickupZip),
+          name: normalizeText(pickupBusinessName),
+          contact_name: normalizeText(pickupContactName),
+          contact_email: normalizeText(pickupEmail),
+          contact_phone: normalizeText(pickupPhone),
+          contact_mobile_phone: normalizeText(pickupMobile),
         },
       },
       delivery: {
@@ -117,33 +171,35 @@ export const sendOrderToSuper = async (
         scheduled_ends_at: deliveryEndDate,
         notes: deliveryNotes,
         date_type: "estimated",
+        latitude: deliveryCoords?.latitude || null,
+        longitude: deliveryCoords?.longitude || null,
         venue: {
-          address: deliveryAddress,
-          city: deliveryCity,
-          state: deliveryState,
-          zip: deliveryZip,
-          name: deliveryBusinessName,
-          contact_name: deliveryContactName,
-          contact_email: deliveryEmail,
-          contact_phone: deliveryPhone,
-          contact_mobile_phone: deliveryMobile,
+          address: normalizeText(deliveryAddress),
+          city: normalizeText(deliveryCity),
+          state: normalizeText(deliveryState),
+          zip: normalizeZipNumber(deliveryZip),
+          name: normalizeText(deliveryBusinessName),
+          contact_name: normalizeText(deliveryContactName),
+          contact_email: normalizeText(deliveryEmail),
+          contact_phone: normalizeText(deliveryPhone),
+          contact_mobile_phone: normalizeText(deliveryMobile),
         },
       },
       customer: {
-        address: portal.address?.address,
-        city: portal.address?.city,
-        state: portal.address?.state,
-        zip: portal.address?.zip,
-        name: portal.companyName,
+        address: portal.address?.address || null,
+        city: portal.address?.city || null,
+        state: portal.address?.state || null,
+        zip: portal.address?.zip || null,
+        name: portal.companyName || "McCollister's Auto Logistics",
         business_type: "BUSINESS",
-        email: portal.contact?.email,
-        phone: portal.contact?.phone,
-        contact_name: portal.contact?.name,
-        contact_phone: portal.contact?.phone,
-        contact_email: portal.contact?.email,
+        email: portal.contact?.email || null,
+        phone: portal.contact?.phone || null,
+        contact_name: portal.contact?.name || null,
+        contact_phone: portal.contact?.phone || null,
+        contact_email: portal.contact?.email || null,
       },
       vehicles: formattedVehicles,
-      transport_type: transportType.toUpperCase(),
+      transport_type: String(transportType || "").toUpperCase(),
     };
 
     // Make API call to Super Dispatch
@@ -174,7 +230,7 @@ export const sendOrderToSuper = async (
     const result = await response.json();
 
     logger.info("Successfully sent order to Super Dispatch", {
-      uniqueId,
+      orderNumber,
       superDispatchGuid: result.guid,
     });
 
@@ -184,4 +240,3 @@ export const sendOrderToSuper = async (
     throw error;
   }
 };
-

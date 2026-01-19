@@ -73,7 +73,6 @@ export const getOrders = async (
         case "actualDeliveryDate":
           sortField = "schedule.deliveryCompleted";
           break;
-        case "uniqueId":
         case "refId":
           sortField = "refId";
           break;
@@ -143,9 +142,9 @@ export const getOrders = async (
     if (searchText) {
       const searchStr = (searchText as string).toLowerCase();
 
-      // Handle unique ID format (m-123 or u-123)
+      // Handle refId format (m-123 or u-123)
       if (/^m-\d+$/i.test(searchStr) || /^u-\d+$/i.test(searchStr)) {
-        // Handle unique ID format (refId is stored as number, not string)
+        // Handle refId format (refId is stored as number, not string)
         const numPart = searchStr.replace(/^[mu]-/i, "");
         if (/^\d+$/.test(numPart)) {
           query.refId = parseInt(numPart, 10);

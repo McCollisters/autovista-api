@@ -207,30 +207,9 @@ const sendPickupNotificationsForOrder = async (
     });
   }
 
-  const legacyAgentEmail = String(order?.agent?.agentEmail || "").trim();
-  if (legacyAgentEmail) {
-    logger.info("Pickup notification legacy agent", {
-      orderId: order._id,
-      refId: order.refId,
-      legacyAgentEmail,
-    });
-  }
-  if (legacyAgentEmail && !sentPortalEmails.has(legacyAgentEmail.toLowerCase())) {
-    await sendOrderPickupConfirmation({
-      order,
-      recipients: [
-        {
-          email: legacyAgentEmail,
-          name: order?.agent?.agentFullName || undefined,
-        },
-      ],
-    });
-  }
-
   if (
     portalRecipients.length === 0 &&
-    agentRecipients.length === 0 &&
-    (!legacyAgentEmail || sentPortalEmails.has(legacyAgentEmail.toLowerCase()))
+    agentRecipients.length === 0
   ) {
     logger.info("No pickup notification recipients for order", {
       orderId: order._id,
@@ -348,30 +327,9 @@ const sendDeliveryNotificationsForOrder = async (
     });
   }
 
-  const legacyAgentEmail = String(order?.agent?.agentEmail || "").trim();
-  if (legacyAgentEmail) {
-    logger.info("Delivery notification legacy agent", {
-      orderId: order._id,
-      refId: order.refId,
-      legacyAgentEmail,
-    });
-  }
-  if (legacyAgentEmail && !sentPortalEmails.has(legacyAgentEmail.toLowerCase())) {
-    await sendOrderDeliveryConfirmation({
-      order,
-      recipients: [
-        {
-          email: legacyAgentEmail,
-          name: order?.agent?.agentFullName || undefined,
-        },
-      ],
-    });
-  }
-
   if (
     portalRecipients.length === 0 &&
-    agentRecipients.length === 0 &&
-    (!legacyAgentEmail || sentPortalEmails.has(legacyAgentEmail.toLowerCase()))
+    agentRecipients.length === 0
   ) {
     logger.info("No delivery notification recipients for order", {
       orderId: order._id,

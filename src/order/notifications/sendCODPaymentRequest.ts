@@ -31,9 +31,11 @@ export async function sendCODPaymentRequest(
 
   try {
     // Get email template values
-    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const { getEmailTemplate } = await import(
+      "@/email/services/getEmailTemplate"
+    );
     const emailTemplate = await getEmailTemplate("Payment Request");
-    
+
     const senderEmail = emailTemplate.senderEmail;
     const senderName = emailTemplate.senderName;
     const recipientEmail = order.customer?.email;
@@ -78,7 +80,7 @@ export async function sendCODPaymentRequest(
       pickupDates,
       vehiclesString,
       totalPrice: (order.totalPricing?.total || 0).toFixed(2),
-      uniqueId: order.refId,
+      refId: order.refId,
       recipientName: order.customer?.name || "Customer",
     });
 
@@ -99,13 +101,13 @@ export async function sendCODPaymentRequest(
     if (result.success) {
       logger.info("COD payment request sent successfully", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
       });
     } else {
       logger.error("Failed to send COD payment request", {
         orderId: order._id,
-        uniqueId: order.refId,
+        refId: order.refId,
         recipientEmail,
       });
     }

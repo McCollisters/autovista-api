@@ -114,7 +114,7 @@ export async function sendOrderPickupConfirmation({
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
     const transportType = formatTransportType(order.transportType);
-    const uniqueId = order.refId;
+    const refId = order.refId;
     const reg = order.reg;
     const vehicles = formatVehiclesHTML(order.vehicles, false);
 
@@ -140,7 +140,7 @@ export async function sendOrderPickupConfirmation({
           transportType,
           vehicles,
           intro: emailIntro,
-          uniqueId,
+          refId,
           recipientName: recipient.name ? ` ${recipient.name}` : "",
         });
 
@@ -180,7 +180,7 @@ export async function sendOrderPickupConfirmation({
 
     logger.info("Order pickup confirmation emails sent", {
       orderId: order._id,
-      uniqueId: order.refId,
+      refId: order.refId,
       recipientCount: recipients.length,
       successCount,
     });

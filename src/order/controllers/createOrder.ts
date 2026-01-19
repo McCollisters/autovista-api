@@ -210,8 +210,15 @@ export const createOrder = async (
       ? quoteData.vehicles
       : [];
     let transitTime = quoteData.transitTime;
-    let uniqueId = quoteData.uniqueId;
-    let uniqueIdNum = parseInt(uniqueId);
+    const orderNumber =
+      quoteData.refId ?? quoteData.refIdNum ?? quoteData._id?.toString();
+    const orderNumberText =
+      orderNumber !== undefined && orderNumber !== null
+        ? String(orderNumber)
+        : undefined;
+    const orderNumberNum = orderNumberText
+      ? parseInt(orderNumberText)
+      : undefined;
     let companyName = portalData.companyName;
     const logo = portalData.logo ? portalData.logo : "";
     const normalizedTransportType = String(
@@ -623,18 +630,28 @@ export const createOrder = async (
 
     // SuperDispatch integration with improved error handling
     // Send partial order initially (withheld addresses) - full details will be sent when carrier accepts
+    const hasRequiredPartialOrderFields = Boolean(
+      orderNumberText &&
+        pickupCity &&
+        pickupState &&
+        pickupZip &&
+        deliveryCity &&
+        deliveryState &&
+        deliveryZip,
+    );
     if (
       !isCustomerPortal &&
       payment !== "COD" &&
-      transportType !== TransportType.WhiteGlove
+      transportType !== TransportType.WhiteGlove &&
+      hasRequiredPartialOrderFields
     ) {
       try {
         logger.info(
-          `Sending partial order ${uniqueId} to SuperDispatch (addresses withheld)`,
+          `Sending partial order ${orderNumberText} to SuperDispatch (addresses withheld)`,
         );
         superResponse = await sendPartialOrderToSuper({
           quotes,
-          uniqueId,
+          orderNumber: orderNumberText,
           reg,
           portal,
           dateRanges,
@@ -666,7 +683,7 @@ export const createOrder = async (
         }
 
         logger.info(
-          `Successfully sent partial order ${uniqueId} to SuperDispatch. Full details will be revealed when carrier accepts.`,
+          `Successfully sent partial order ${orderNumberText} to SuperDispatch. Full details will be revealed when carrier accepts.`,
         );
       } catch (superError) {
         logger.error("SuperDispatch API call failed:", superError);
@@ -676,6 +693,23 @@ export const createOrder = async (
             "Failed to communicate with SuperDispatch. Please try again later.",
         });
       }
+    } else if (
+      !isCustomerPortal &&
+      payment !== "COD" &&
+      transportType !== TransportType.WhiteGlove
+    ) {
+      logger.warn(
+        "Skipping SuperDispatch partial order: missing required data",
+        {
+          orderNumber: orderNumberText,
+          pickupCity,
+          pickupState,
+          pickupZip,
+          deliveryCity,
+          deliveryState,
+          deliveryZip,
+        },
+      );
     }
 
     // Vehicle data processing with error handling
@@ -998,7 +1032,7 @@ export const createOrder = async (
       pricing.totalPortal = pricing?.enclosed?.total;
     }
 
-    const orderRefId = quoteData.refId ?? uniqueIdNum;
+    const orderRefId = quoteData.refId ?? orderNumberNum;
 
     // Create original order data backup before SuperDispatch updates
     const originalOrderData = {
@@ -1076,8 +1110,6 @@ export const createOrder = async (
       portalId: portalData._id,
       portal: portalData._id,
       isCustomerPortal,
-      uniqueId,
-      uniqueIdNum,
       quoteId: quoteData._id,
       quote: quoteData,
       refId: orderRefId,
@@ -1211,7 +1243,7 @@ export const createOrder = async (
       }
 
       logger.info(
-        `Successfully created order ${(newOrder as any).uniqueId} with ID ${newOrder._id}`,
+        `Successfully created order ${(newOrder as any).refId} with ID ${newOrder._id}`,
       );
     } catch (orderCreationError) {
       logger.error("Database order creation failed:", orderCreationError);
@@ -1257,7 +1289,7 @@ export const createOrder = async (
       try {
         await sendWhiteGloveNotification({ order: newOrder });
         logger.info(
-          `White glove notification sent for order ${(newOrder as any).uniqueId}`,
+          `White glove notification sent for order ${(newOrder as any).refId}`,
         );
       } catch (notificationError) {
         logger.error(
@@ -1277,7 +1309,7 @@ export const createOrder = async (
           recipientEmail: "autodesk@graebel.com",
         });
         logger.info(
-          `MMI order notification sent for order ${(newOrder as any).uniqueId}`,
+          `MMI order notification sent for order ${(newOrder as any).refId}`,
         );
       } catch (notificationError) {
         logger.error(
@@ -1295,7 +1327,7 @@ export const createOrder = async (
       try {
         await sendOrderCustomerPublicNew(newOrder);
         logger.info(
-          `Customer order confirmation email sent for order ${(newOrder as any).uniqueId}`,
+          `Customer order confirmation email sent for order ${(newOrder as any).refId}`,
         );
       } catch (notificationError) {
         logger.error("Failed to send customer order email:", notificationError);
@@ -1303,7 +1335,7 @@ export const createOrder = async (
       }
     } else {
       logger.warn(
-        `Cannot send customer order email: No customer email for order ${(newOrder as any).uniqueId}`,
+        `Cannot send customer order email: No customer email for order ${(newOrder as any).refId}`,
       );
     }
 

@@ -50,7 +50,6 @@ export const getQuotes = async (
         case "createdAt":
           sortField = "createdAt";
           break;
-        case "uniqueId":
         case "refId":
           sortField = "refId";
           break;

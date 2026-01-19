@@ -78,6 +78,14 @@ export const updateSuperWithPartialOrder = async (
 
     const existingOrder = getOrderResult.data.object;
 
+    const normalizeZip = (value?: string | number | null) => {
+      if (!value && value !== 0) {
+        return "";
+      }
+      const digits = String(value).match(/\d{5}/)?.[0] || "";
+      return digits;
+    };
+
     // Build partial order details - redact addresses and remove VINs
     const partialOrderDetails = {
       number: existingOrder.number,
@@ -89,10 +97,11 @@ export const updateSuperWithPartialOrder = async (
         terms: "other",
       },
       customer: {
-        name: null,
-        address: null,
+        name: existingOrder.customer?.name || null,
+        address: existingOrder.customer?.address || null,
         city: existingOrder.customer?.city || null,
         state: existingOrder.customer?.state || null,
+        zip: existingOrder.customer?.zip || null,
       },
       pickup: {
         date_type: "estimated",
@@ -102,10 +111,11 @@ export const updateSuperWithPartialOrder = async (
         scheduled_ends_at: existingOrder.pickup?.scheduled_ends_at,
         notes: order.origin?.notes || null,
         venue: {
-          address: "123 Example St. ADDRESS WITTHELD",
+          name: "Address Withheld",
+          address: "123 Example St. ADDRESS WITHHELD",
           city: existingOrder.pickup?.venue?.city,
           state: existingOrder.pickup?.venue?.state,
-          zip: existingOrder.pickup?.venue?.zip,
+          zip: normalizeZip(existingOrder.pickup?.venue?.zip),
         },
       },
       delivery: {
@@ -114,10 +124,11 @@ export const updateSuperWithPartialOrder = async (
         scheduled_ends_at: existingOrder.delivery?.scheduled_ends_at,
         notes: order.destination?.notes || null,
         venue: {
-          address: "123 Example St. ADDRESS WITTHELD",
+          name: "Address Withheld",
+          address: "123 Example St. ADDRESS WITHHELD",
           city: existingOrder.delivery?.venue?.city,
           state: existingOrder.delivery?.venue?.state,
-          zip: existingOrder.delivery?.venue?.zip,
+          zip: normalizeZip(existingOrder.delivery?.venue?.zip),
         },
       },
       transport_type: existingOrder.transport_type,
