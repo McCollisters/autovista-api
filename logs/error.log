@@ -5506,3 +5506,23 @@
   message: 'Error sending order to TMS:',
   timestamp: '2026-01-18 20:03:04'
 }
+{
+  service: 'autovista-api',
+  orderRefId: 300023,
+  tmsGuid: '43975611-899b-49a0-915c-7ccf053c5be9',
+  status: 410,
+  statusText: 'Gone',
+  level: 'error',
+  message: 'Failed to fetch order from Super Dispatch',
+  timestamp: '2026-01-18 21:04:06'
+}
+{
+  service: 'autovista-api',
+  orderRefId: 300023,
+  tmsGuid: '43975611-899b-49a0-915c-7ccf053c5be9',
+  status: 410,
+  statusText: 'Gone',
+  level: 'error',
+  message: 'Failed to fetch order from Super Dispatch',
+  timestamp: '2026-01-18 21:04:30'
+}

@@ -245,8 +245,14 @@ jobs:
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ACERTUS_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ACERTUS_API_KEY","Value":$val}]')
           fi
 
-          if [ -n "${{ secrets.ALLOWED_ORIGINS }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ALLOWED_ORIGINS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ALLOWED_ORIGINS","Value":$val}]')
+          ALLOWED_ORIGINS_VALUE="${{ secrets.ALLOWED_ORIGINS }}"
+          if [ -z "$ALLOWED_ORIGINS_VALUE" ]; then
+            ALLOWED_ORIGINS_VALUE="https://autovista.mccollisters.com"
+          elif [[ "$ALLOWED_ORIGINS_VALUE" != *"https://autovista.mccollisters.com"* ]]; then
+            ALLOWED_ORIGINS_VALUE="${ALLOWED_ORIGINS_VALUE},https://autovista.mccollisters.com"
+          fi
+          if [ -n "$ALLOWED_ORIGINS_VALUE" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "$ALLOWED_ORIGINS_VALUE" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ALLOWED_ORIGINS","Value":$val}]')
           fi
 
           if [ -n "${{ secrets.MAPBOX_API_KEY }}" ]; then
