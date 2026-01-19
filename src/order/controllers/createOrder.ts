@@ -749,21 +749,27 @@ export const createOrder = async (
             totalWhiteGlove != null && quotes.length > 0
               ? totalWhiteGlove / quotes.length
               : totalWhiteGlove;
-          const totalOpen =
-            totalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
+          const totalOpenBase =
             totalsForLevel?.open?.total ??
+            totalsForLevel?.total ??
+            null;
+          const totalOpenWith =
+            totalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
             totalsForLevel?.totalWithCompanyTariffAndCommission ??
-            totalsForLevel?.total;
-          const totalEnclosed =
-            totalsForLevel?.enclosed?.totalWithCompanyTariffAndCommission ??
+            totalOpenBase;
+          const totalEnclosedBase =
             totalsForLevel?.enclosed?.total ??
+            totalsForLevel?.total ??
+            null;
+          const totalEnclosedWith =
+            totalsForLevel?.enclosed?.totalWithCompanyTariffAndCommission ??
             totalsForLevel?.totalWithCompanyTariffAndCommission ??
-            totalsForLevel?.total;
+            totalEnclosedBase;
 
           const hasWhiteGlove =
             transportType === TransportType.WhiteGlove &&
             perVehicleWhiteGlove != null;
-          if (totalOpen == null && totalEnclosed == null && !hasWhiteGlove) {
+          if (totalOpenBase == null && totalEnclosedBase == null && !hasWhiteGlove) {
             logger.error(
               `Vehicle ${index}: No pricing totals found for service level ${effectiveServiceLevel}`,
             );
@@ -775,16 +781,22 @@ export const createOrder = async (
           let calculatedQuote: any = {
             openTransportPortal: hasWhiteGlove
               ? perVehicleWhiteGlove
-              : (totalOpen ?? 0),
+              : (totalOpenBase ?? 0),
             enclosedTransportPortal: hasWhiteGlove
               ? perVehicleWhiteGlove
-              : (totalEnclosed ?? 0),
+              : (totalEnclosedBase ?? 0),
             openTransportSD: hasWhiteGlove
               ? perVehicleWhiteGlove
-              : (totalOpen ?? 0),
+              : (totalOpenBase ?? 0),
             enclosedTransportSD: hasWhiteGlove
               ? perVehicleWhiteGlove
-              : (totalEnclosed ?? 0),
+              : (totalEnclosedBase ?? 0),
+            openTransportPortalWith: hasWhiteGlove
+              ? perVehicleWhiteGlove
+              : (totalOpenWith ?? totalOpenBase ?? 0),
+            enclosedTransportPortalWith: hasWhiteGlove
+              ? perVehicleWhiteGlove
+              : (totalEnclosedWith ?? totalEnclosedBase ?? 0),
             companyTariffOpen:
               totalsForLevel?.open?.companyTariff ??
               totalsForLevel?.companyTariff ??
@@ -811,11 +823,14 @@ export const createOrder = async (
 
           // Update for dual-transport quoting
           let vehicleTariff;
+          let vehicleTariffWith;
 
           if (transportType === TransportType.Open) {
             vehicleTariff = calculatedQuote.openTransportPortal;
+            vehicleTariffWith = calculatedQuote.openTransportPortalWith;
           } else {
             vehicleTariff = calculatedQuote.enclosedTransportPortal;
+            vehicleTariffWith = calculatedQuote.enclosedTransportPortalWith;
           }
 
           if (transportType === TransportType.Enclosed) {
@@ -864,6 +879,12 @@ export const createOrder = async (
                   companyTariff: 0,
                 }
               : sourceModifiers;
+          if (
+            normalizedModifiers &&
+            typeof normalizedModifiers.companyTariff === "undefined"
+          ) {
+            normalizedModifiers.companyTariff = calculatedQuote.companyTariff ?? 0;
+          }
 
           return {
             ...quote,
@@ -877,9 +898,7 @@ export const createOrder = async (
               modifiers: normalizedModifiers,
               total: vehicleTariff ?? 0,
               totalWithCompanyTariffAndCommission:
-                calculatedQuote.companyTariff != null
-                  ? (vehicleTariff ?? 0) + (calculatedQuote.companyTariff || 0)
-                  : (vehicleTariff ?? 0),
+                vehicleTariffWith ?? vehicleTariff ?? 0,
               ...(transportType === TransportType.WhiteGlove
                 ? {}
                 : { totals: pricingTotals ?? sourcePricing.totals ?? null }),
@@ -982,24 +1001,32 @@ export const createOrder = async (
             : "seven";
     let pricing: any = quoteData.totalPricing?.totals?.[totalKey];
     const pricingTotalsForLevel = pricing;
+    const baseOpenTotal =
+      pricingTotalsForLevel?.open?.total ?? pricingTotalsForLevel?.total ?? 0;
+    const baseEnclosedTotal =
+      pricingTotalsForLevel?.enclosed?.total ??
+      pricingTotalsForLevel?.total ??
+      0;
+    const totalOpenWith =
+      pricingTotalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
+      pricingTotalsForLevel?.totalWithCompanyTariffAndCommission ??
+      baseOpenTotal;
+    const totalEnclosedWith =
+      pricingTotalsForLevel?.enclosed?.totalWithCompanyTariffAndCommission ??
+      pricingTotalsForLevel?.totalWithCompanyTariffAndCommission ??
+      baseEnclosedTotal;
     const selectedTotal =
       transportType === TransportType.WhiteGlove
         ? (quoteData.totalPricing?.totals?.whiteGlove ?? 0)
         : transportType === TransportType.Enclosed
-          ? (pricingTotalsForLevel?.enclosed?.total ??
-            pricingTotalsForLevel?.total ??
-            0)
-          : (pricingTotalsForLevel?.open?.total ??
-            pricingTotalsForLevel?.total ??
-            0);
+          ? baseEnclosedTotal
+          : baseOpenTotal;
     const selectedTotalWithCompanyTariffAndCommission =
       transportType === TransportType.WhiteGlove
         ? (quoteData.totalPricing?.totals?.whiteGlove ?? 0)
         : transportType === TransportType.Enclosed
-          ? (pricingTotalsForLevel?.enclosed
-              ?.totalWithCompanyTariffAndCommission ?? selectedTotal)
-          : (pricingTotalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
-            selectedTotal);
+          ? totalEnclosedWith
+          : totalOpenWith;
     const modifierServiceLevel =
       transportType === TransportType.WhiteGlove
         ? 0

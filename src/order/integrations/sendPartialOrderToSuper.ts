@@ -169,16 +169,16 @@ export const sendPartialOrderToSuper = async (
         (quote as any)?.tariff ??
         null;
       const totalOpen =
-        totalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
         totalsForLevel?.open?.total ??
-        totalsForLevel?.totalWithCompanyTariffAndCommission ??
         totalsForLevel?.total ??
+        totalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
+        totalsForLevel?.totalWithCompanyTariffAndCommission ??
         fallbackTotal;
       const totalEnclosed =
-        totalsForLevel?.enclosed?.totalWithCompanyTariffAndCommission ??
         totalsForLevel?.enclosed?.total ??
-        totalsForLevel?.totalWithCompanyTariffAndCommission ??
         totalsForLevel?.total ??
+        totalsForLevel?.enclosed?.totalWithCompanyTariffAndCommission ??
+        totalsForLevel?.totalWithCompanyTariffAndCommission ??
         fallbackTotal;
 
       if (totalOpen == null && totalEnclosed == null) {
