@@ -53,7 +53,7 @@ jobs:
             -x ".idea/*" \
             -x "*.md" \
             -x "logs/*"
-          
+
           echo "=== Verifying deployment package contents ==="
           echo "Checking if routes files are included:"
           unzip -l autovista-api.zip | grep -E "routes\.(ts|js)" || echo "Warning: No routes files found in package!"
@@ -241,6 +241,22 @@ jobs:
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ALLOWED_ORIGINS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ALLOWED_ORIGINS","Value":$val}]')
           fi
 
+          if [ -n "${{ secrets.MAPBOX_API_KEY }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MAPBOX_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MAPBOX_API_KEY","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.SD_CLIENT_ID }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_CLIENT_ID }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_CLIENT_ID","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.SD_CLIENT_SECRET }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_CLIENT_SECRET }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_CLIENT_SECRET","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.SD_PRICING_API_KEY }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_PRICING_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_PRICING_API_KEY","Value":$val}]')
+          fi
+
           # Update the environment with all option settings
           OPTION_COUNT=$(echo "$OPTIONS" | jq 'length')
           if [ "$OPTION_COUNT" -gt 0 ]; then
@@ -282,17 +298,17 @@ jobs:
         if: success()
         run: |
           echo "Invalidating CloudFront cache after deployment..."
-          
+
           DISTRIBUTION_ID="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
-          
+
           if [ -z "$DISTRIBUTION_ID" ]; then
             echo "Warning: CLOUDFRONT_DISTRIBUTION_ID secret not set. Skipping cache invalidation."
             echo "To enable cache invalidation, add CLOUDFRONT_DISTRIBUTION_ID to GitHub Secrets."
             exit 0
           fi
-          
+
           echo "Creating CloudFront invalidation for distribution: $DISTRIBUTION_ID"
-          
+
           # Invalidate API paths that commonly change
           INVALIDATION_ID=$(aws cloudfront create-invalidation \
             --distribution-id "$DISTRIBUTION_ID" \
@@ -300,7 +316,7 @@ jobs:
             --query 'Invalidation.Id' \
             --output text \
             --region us-east-1)
-          
+
           if [ -n "$INVALIDATION_ID" ]; then
             echo "CloudFront invalidation created: $INVALIDATION_ID"
             echo "Cache invalidation is in progress. This may take a few minutes."

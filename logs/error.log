@@ -4914,3 +4914,31 @@
     '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
   timestamp: '2026-01-18 10:21:57'
 }
+{
+  service: 'autovista-api',
+  error: 'invalid signature',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-18 17:36:38'
+}
+{
+  service: 'autovista-api',
+  error: 'invalid signature',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-18 17:36:39'
+}
+{
+  service: 'autovista-api',
+  error: 'invalid signature',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-18 17:36:39'
+}
+{
+  service: 'autovista-api',
+  error: 'invalid signature',
+  level: 'error',
+  message: 'Error getting user from token',
+  timestamp: '2026-01-18 17:36:39'
+}
