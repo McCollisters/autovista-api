@@ -1,6 +1,6 @@
 import express from "express";
 import { Quote, Portal, ModifierSet, Settings } from "@/_global/models";
-import { TransportType } from "../../_global/enums";
+import { Status, TransportType } from "../../_global/enums";
 import { getCoordinates } from "../../_global/utils/location";
 import { getMiles } from "../services/getMiles";
 import { updateVehiclesWithPricing } from "../services/updateVehiclesWithPricing";
@@ -65,6 +65,16 @@ export const updateQuoteAlternative = async (
       changes: Object.keys(req.body),
     });
 
+    const normalizeStatus = (value?: string | null) => {
+      const statusValue = String(value || "").trim().toLowerCase();
+      if (statusValue === "saved") return Status.Active;
+      if (statusValue === "archived") return Status.Archived;
+      if (statusValue === "booked") return Status.Booked;
+      if (statusValue === "expired") return Status.Expired;
+      if (statusValue === "active") return Status.Active;
+      return value as any;
+    };
+
     // If only status is being updated
     if (
       status &&
@@ -74,10 +84,10 @@ export const updateQuoteAlternative = async (
       !delivery &&
       !transportType
     ) {
-      originalQuote.status = status as any;
-      if (status.toLowerCase() === "archived") {
+      originalQuote.status = normalizeStatus(status);
+      if (String(status).toLowerCase() === "archived") {
         (originalQuote as any).archivedAt = new Date();
-      } else if (status.toLowerCase() === "saved") {
+      } else if (String(status).toLowerCase() === "saved") {
         (originalQuote as any).savedAt = new Date();
       }
 
@@ -301,7 +311,7 @@ export const updateQuoteAlternative = async (
     }
 
     if (status) {
-      originalQuote.status = status as any;
+      originalQuote.status = normalizeStatus(status);
     }
 
     const updatedQuote = await originalQuote.save();

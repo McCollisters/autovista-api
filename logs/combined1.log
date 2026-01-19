@@ -133710,3 +133710,824 @@
   message: 'Request completed',
   timestamp: '2026-01-18 21:21:41'
 }
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:44:43'
+}
+{
+  service: 'autovista-api',
+  processedOrders: 64,
+  updatedOrders: 0,
+  updatedQuotes: 0,
+  dryRun: true,
+  level: 'info',
+  message: 'Purina/Nestle portal migration completed',
+  timestamp: '2026-01-18 21:44:43'
+}
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:44:58'
+}
+{
+  service: 'autovista-api',
+  processedOrders: 64,
+  updatedOrders: 64,
+  updatedQuotes: 64,
+  dryRun: false,
+  level: 'info',
+  message: 'Purina/Nestle portal migration completed',
+  timestamp: '2026-01-18 21:44:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-18 21:56:12'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-18 21:56:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-18 21:56:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '306ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-18 21:56:12'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-18 21:56:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '548ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-18 21:56:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-18 21:56:14'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-18 21:56:14'
+}
+{
+  service: 'autovista-api',
+  count: 107264,
+  returned: 50,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-18 21:56:15'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '700ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-18 21:56:15'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-18 21:56:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/696d6d396e4559c4f03f053d',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-18 21:56:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696d6d396e4559c4f03f053d',
+  statusCode: 200,
+  duration: '148ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-18 21:56:17'
+}
+{
+  service: 'autovista-api',
+  hasGlobalModifierSet: true,
+  hasStates: true,
+  statesType: 'object',
+  statesIsMap: false,
+  statesKeys: [
+    'AL', 'AR', 'AZ', 'CA', 'CO', 'CT',
+    'DE', 'FL', 'GA', 'IA', 'ID', 'IL',
+    'IN', 'KS', 'KY', 'LA', 'MA', 'ME',
+    'MH', 'MI', 'MN', 'MO', 'MS', 'MT',
+    'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+    'NV', 'NY', 'OK', 'OR', 'PA', 'RI',
+    'SC', 'SD', 'TN', 'TX', 'UT', 'VA',
+    'VT', 'WA', 'WI'
+  ],
+  level: 'info',
+  message: 'getSettings - retrieved globalModifierSet',
+  timestamp: '2026-01-18 21:56:17'
+}
+{
+  service: 'autovista-api',
+  statesMapType: 'object',
+  statesMapIsMap: false,
+  level: 'info',
+  message: 'getSettings - starting state modifiers conversion',
+  timestamp: '2026-01-18 21:56:17'
+}
+{
+  service: 'autovista-api',
+  statesType: 'object',
+  isMap: false,
+  isObject: true,
+  statesKeys: [
+    'AL', 'AR', 'AZ', 'CA', 'CO', 'CT',
+    'DE', 'FL', 'GA', 'IA', 'ID', 'IL',
+    'IN', 'KS', 'KY', 'LA', 'MA', 'ME',
+    'MH', 'MI', 'MN', 'MO', 'MS', 'MT',
+    'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+    'NV', 'NY', 'OK', 'OR', 'PA', 'RI',
+    'SC', 'SD', 'TN', 'TX', 'UT', 'VA',
+    'VT', 'WA', 'WI'
+  ],
+  sampleKey: 'AL',
+  sampleValue: { type: 'Increase', direction: 'Both Directions', amount: 75 },
+  sampleValueString: '{"type":"Increase","direction":"Both Directions","amount":75}',
+  sampleValueKeys: [ 'type', 'direction', 'amount' ],
+  level: 'info',
+  message: 'getSettings - processing state modifiers',
+  timestamp: '2026-01-18 21:56:17'
+}
+{
+  service: 'autovista-api',
+  stateModifiersCount: 45,
+  level: 'info',
+  message: 'getSettings - converted state modifiers',
+  timestamp: '2026-01-18 21:56:17'
+}
+{
+  service: 'autovista-api',
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeworks.io',
+  hasServiceLevels: true,
+  serviceLevelsCount: 4,
+  hasGlobalModifierSet: true,
+  stateModifiersCount: 45,
+  stateModifiers: '[\n' +
+    '  {\n' +
+    '    "state": "AL",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "AR",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "AZ",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "CA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "CO",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 125,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "CT",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "DE",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "FL",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "GA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "IA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 125,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "ID",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "IL",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 125,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "IN",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "KS",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "KY",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "LA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "ME",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MH",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MI",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MN",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MO",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MS",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "MT",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NC",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "ND",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NE",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NH",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NJ",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NM",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NV",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "NY",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "OK",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "OR",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 250,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "PA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "RI",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 75,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "SC",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "SD",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "TN",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "TX",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 150,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "UT",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 100,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "VA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "VT",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 200,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "WA",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 250,\n' +
+    '    "direction": "Both Directions"\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "state": "WI",\n' +
+    '    "type": "Increase",\n' +
+    '    "amount": 50,\n' +
+    '    "direction": "Outbound Only"\n' +
+    '  }\n' +
+    ']',
+  sampleStateModifier: {
+    state: 'AL',
+    type: 'Increase',
+    amount: 75,
+    direction: 'Both Directions'
+  },
+  sampleStateModifierFromGlobal: {
+    state: 'AL',
+    modifier: { type: 'Increase', direction: 'Both Directions', amount: 75 }
+  },
+  level: 'info',
+  message: 'getSettings - returning settings',
+  timestamp: '2026-01-18 21:56:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '230ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-18 21:56:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-18 21:56:19'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-18 21:56:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '433ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-18 21:56:19'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '373',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-18 21:56:20'
+}
+{
+  service: 'autovista-api',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  quoteId: '696d6d396e4559c4f03f053d',
+  changes: [
+    'status',
+    'customerFullName',
+    'portalId',
+    'pickup',
+    'delivery',
+    'vehicles',
+    'quoteId'
+  ],
+  level: 'info',
+  message: 'User anna@periscopeworks.io updating quote 696d6d396e4559c4f03f053d',
+  timestamp: '2026-01-18 21:56:20'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `saved` is not a valid enum value for path `status`.',
+  quoteId: '696d6d396e4559c4f03f053d',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-18 21:56:22'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  statusCode: 500,
+  duration: '2134ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-18 21:56:22'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '373',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-18 21:57:07'
+}
+{
+  service: 'autovista-api',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  quoteId: '696d6d396e4559c4f03f053d',
+  changes: [
+    'status',
+    'customerFullName',
+    'portalId',
+    'pickup',
+    'delivery',
+    'vehicles',
+    'quoteId'
+  ],
+  level: 'info',
+  message: 'User anna@periscopeworks.io updating quote 696d6d396e4559c4f03f053d',
+  timestamp: '2026-01-18 21:57:07'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `saved` is not a valid enum value for path `status`.',
+  quoteId: '696d6d396e4559c4f03f053d',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-18 21:57:08'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  statusCode: 500,
+  duration: '1910ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-18 21:57:08'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '373',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-18 21:57:24'
+}
+{
+  service: 'autovista-api',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  quoteId: '696d6d396e4559c4f03f053d',
+  changes: [
+    'status',
+    'customerFullName',
+    'portalId',
+    'pickup',
+    'delivery',
+    'vehicles',
+    'quoteId'
+  ],
+  level: 'info',
+  message: 'User anna@periscopeworks.io updating quote 696d6d396e4559c4f03f053d',
+  timestamp: '2026-01-18 21:57:24'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `saved` is not a valid enum value for path `status`.',
+  quoteId: '696d6d396e4559c4f03f053d',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-18 21:57:25'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  statusCode: 500,
+  duration: '962ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-18 21:57:25'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:58:22'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:58:22'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:58:22'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:58:22'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-18 21:58:22'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-18 21:58:22'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:58:40'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:58:40'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:58:40'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-18 21:58:40'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-18 21:58:40'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-18 21:58:40'
+}

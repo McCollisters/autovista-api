@@ -5526,3 +5526,27 @@
   message: 'Failed to fetch order from Super Dispatch',
   timestamp: '2026-01-18 21:04:30'
 }
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `saved` is not a valid enum value for path `status`.',
+  quoteId: '696d6d396e4559c4f03f053d',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-18 21:56:22'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `saved` is not a valid enum value for path `status`.',
+  quoteId: '696d6d396e4559c4f03f053d',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-18 21:57:08'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: status: `saved` is not a valid enum value for path `status`.',
+  quoteId: '696d6d396e4559c4f03f053d',
+  level: 'error',
+  message: 'Error updating quote',
+  timestamp: '2026-01-18 21:57:25'
+}
