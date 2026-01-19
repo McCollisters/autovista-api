@@ -162,7 +162,7 @@ export class ModifierSetMigration extends MigrationBase {
 
             const replaceResult =
               await destinationModifierSetsCollection.replaceOne(
-                { portalId: transformedModifierSet.portalId, isGlobal: false },
+                { portal: transformedModifierSet.portal, isGlobal: false },
                 transformedModifierSet,
                 { upsert: true },
               );
@@ -357,7 +357,7 @@ export class ModifierSetMigration extends MigrationBase {
       valueType: "flat",
     };
 
-    const fixedCommission: IModifier = {
+    const portalWideCommission: IModifier = {
       value: portal.portalCommission || 0,
       valueType: "flat",
     };
@@ -383,7 +383,7 @@ export class ModifierSetMigration extends MigrationBase {
     ];
 
     return {
-      portalId: portal._id, // Reference to original portal
+      portal: portal._id, // Reference to original portal
       isGlobal: false, // Portal-specific modifier sets
       inoperable,
       fuel,
@@ -396,7 +396,7 @@ export class ModifierSetMigration extends MigrationBase {
       companyTariff,
       companyTariffDiscount,
       companyTariffEnclosedFee,
-      fixedCommission,
+      portalWideCommission,
       states: new Map(), // Empty map for now
       routes: [], // Empty array for now
       zips: [], // Empty array for now
@@ -466,7 +466,7 @@ export class ModifierSetMigration extends MigrationBase {
       valueType: "flat",
     };
 
-    const fixedCommission: IModifier = {
+    const portalWideCommission: IModifier = {
       value: 0, // Default value for global modifier set
       valueType: "flat",
     };
@@ -516,7 +516,7 @@ export class ModifierSetMigration extends MigrationBase {
     }
 
     return {
-      portalId: null, // Global modifier set has no specific portal
+      portal: null, // Global modifier set has no specific portal
       isGlobal: true, // This is a global modifier set
       inoperable,
       fuel,
@@ -529,7 +529,7 @@ export class ModifierSetMigration extends MigrationBase {
       companyTariff,
       companyTariffDiscount,
       companyTariffEnclosedFee,
-      fixedCommission,
+      portalWideCommission,
       states,
       routes,
       zips: [], // Empty array for now

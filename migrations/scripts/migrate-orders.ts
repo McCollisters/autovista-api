@@ -10,6 +10,9 @@ const MAX_ORDERS_TO_PROCESS: number | null = null; // Set to null or undefined t
 const MIGRATION_DAYS = process.env.MIGRATION_DAYS
   ? Number(process.env.MIGRATION_DAYS)
   : null;
+const MIGRATION_UNIQUE_ID = process.env.MIGRATION_UNIQUE_ID
+  ? String(process.env.MIGRATION_UNIQUE_ID).trim()
+  : null;
 const cutoffDate =
   MIGRATION_DAYS && MIGRATION_DAYS > 0
     ? new Date(Date.now() - MIGRATION_DAYS * 24 * 60 * 60 * 1000)
@@ -284,7 +287,19 @@ export class OrderMigration extends MigrationBase {
       const destinationOrdersCollection = destinationDb.collection("orders");
 
       // Count existing documents in source
-      const query = cutoffDate ? { createdAt: { $gte: cutoffDate } } : {};
+      const query: Record<string, any> = cutoffDate
+        ? { createdAt: { $gte: cutoffDate } }
+        : {};
+      if (MIGRATION_UNIQUE_ID) {
+        const uniqueIdNum = Number(MIGRATION_UNIQUE_ID);
+        query.$or = [
+          { uniqueId: MIGRATION_UNIQUE_ID },
+          ...(Number.isFinite(uniqueIdNum)
+            ? [{ uniqueIdNum: uniqueIdNum }]
+            : []),
+        ];
+        console.log(`🎯 Filtering by uniqueId ${MIGRATION_UNIQUE_ID}`);
+      }
       const totalOrders = await sourceOrdersCollection.countDocuments(query);
       console.log(`📊 Found ${totalOrders} orders to migrate from source`);
       if (cutoffDate) {

@@ -16,9 +16,9 @@ export const getPortal = async (
       return;
     }
 
-    const modifierSet = await ModifierSet.findOne({ portalId: portal._id })
+    const modifierSet = await ModifierSet.findOne({ portal: portal._id })
       .select(
-        "portalId companyTariff companyTariffEnclosedFee companyTariffDiscount discount whiteGlove fuel irr oversize enclosed",
+        "portal companyTariff companyTariffEnclosedFee companyTariffDiscount discount whiteGlove fuel irr oversize enclosed portalWideCommission",
       )
       .lean();
 

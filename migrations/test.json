@@ -1,0 +1,440 @@
+{
+    "_id": {
+      "$oid": "696d607113375d497f39b5d0"
+    },
+    "isDirect": false,
+    "status": "active",
+    "portal": {
+      "$oid": "63e26995a61aff3a7efb3deb"
+    },
+    "user": {
+      "$oid": "5e9896afed92842f43fadc55"
+    },
+    "customer": {
+      "name": "Test",
+      "email": null,
+      "phone": null,
+      "trackingCode": "VUA34"
+    },
+    "origin": {
+      "userInput": "Boston, MA",
+      "validated": "Boston, MA",
+      "state": "MA",
+      "coordinates": {
+        "long": "-71.056804",
+        "lat": "42.35888"
+      }
+    },
+    "destination": {
+      "userInput": "Los Angeles, CA",
+      "validated": "Los Angeles, CA",
+      "state": "CA",
+      "coordinates": {
+        "long": "-118.254187",
+        "lat": "34.048051"
+      }
+    },
+    "miles": 2987,
+    "transitTime": [
+      4,
+      14
+    ],
+    "vehicles": [
+      {
+        "make": "Acura",
+        "model": "2.2CL",
+        "isInoperable": false,
+        "isOversize": false,
+        "pricingClass": "sedan",
+        "pricing": {
+          "base": 1300,
+          "modifiers": {
+            "inoperable": 0,
+            "routes": 0,
+            "states": 0,
+            "oversize": 0,
+            "vehicles": 0,
+            "globalDiscount": 0,
+            "portalDiscount": 25,
+            "irr": 0,
+            "fuel": 0,
+            "enclosedFlat": 250,
+            "enclosedPercent": 55,
+            "commission": 100,
+            "serviceLevels": [
+              {
+                "serviceLevelOption": "1",
+                "value": 225
+              },
+              {
+                "serviceLevelOption": "3",
+                "value": 175
+              },
+              {
+                "serviceLevelOption": "5",
+                "value": 140
+              },
+              {
+                "serviceLevelOption": "7",
+                "value": 100
+              }
+            ],
+            "companyTariffs": [
+              {
+                "serviceLevelOption": "1",
+                "value": 0
+              },
+              {
+                "serviceLevelOption": "3",
+                "value": 0
+              },
+              {
+                "serviceLevelOption": "5",
+                "value": 0
+              },
+              {
+                "serviceLevelOption": "7",
+                "value": 0
+              }
+            ]
+          },
+          "totals": {
+            "whiteGlove": 5974,
+            "one": {
+              "open": {
+                "total": 1550,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 1650
+              },
+              "enclosed": {
+                "total": 1855,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 1955
+              }
+            },
+            "three": {
+              "open": {
+                "total": 1500,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 1600
+              },
+              "enclosed": {
+                "total": 1805,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 1905
+              },
+              "total": 1500,
+              "companyTariff": 0,
+              "commission": 100,
+              "totalWithCompanyTariffAndCommission": 1600
+            },
+            "five": {
+              "open": {
+                "total": 1465,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 1565
+              },
+              "enclosed": {
+                "total": 1770,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 1870
+              },
+              "total": 1465,
+              "companyTariff": 0,
+              "commission": 100,
+              "totalWithCompanyTariffAndCommission": 1565
+            },
+            "seven": {
+              "open": {
+                "total": 1425,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 1525
+              },
+              "enclosed": {
+                "total": 1730,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 1830
+              },
+              "total": 1425,
+              "companyTariff": 0,
+              "commission": 100,
+              "totalWithCompanyTariffAndCommission": 1525
+            }
+          }
+        }
+      },
+      {
+        "make": "Subaru",
+        "model": "OUTBACK",
+        "isInoperable": true,
+        "isOversize": true,
+        "pricingClass": "suv",
+        "pricing": {
+          "base": 1687,
+          "modifiers": {
+            "inoperable": 350,
+            "routes": 0,
+            "states": 0,
+            "oversize": 50,
+            "vehicles": 0,
+            "globalDiscount": 0,
+            "portalDiscount": 25,
+            "irr": 0,
+            "fuel": 0,
+            "enclosedFlat": 250,
+            "enclosedPercent": 55,
+            "commission": 100,
+            "serviceLevels": [
+              {
+                "serviceLevelOption": "1",
+                "value": 225
+              },
+              {
+                "serviceLevelOption": "3",
+                "value": 175
+              },
+              {
+                "serviceLevelOption": "5",
+                "value": 140
+              },
+              {
+                "serviceLevelOption": "7",
+                "value": 100
+              }
+            ],
+            "companyTariffs": [
+              {
+                "serviceLevelOption": "1",
+                "value": 0
+              },
+              {
+                "serviceLevelOption": "3",
+                "value": 0
+              },
+              {
+                "serviceLevelOption": "5",
+                "value": 0
+              },
+              {
+                "serviceLevelOption": "7",
+                "value": 0
+              }
+            ]
+          },
+          "totals": {
+            "whiteGlove": 5974,
+            "one": {
+              "open": {
+                "total": 2287,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 2387
+              },
+              "enclosed": {
+                "total": 2592,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 2692
+              }
+            },
+            "three": {
+              "open": {
+                "total": 2237,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 2337
+              },
+              "enclosed": {
+                "total": 2542,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 2642
+              },
+              "total": 2237,
+              "companyTariff": 0,
+              "commission": 100,
+              "totalWithCompanyTariffAndCommission": 2337
+            },
+            "five": {
+              "open": {
+                "total": 2202,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 2302
+              },
+              "enclosed": {
+                "total": 2507,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 2607
+              },
+              "total": 2202,
+              "companyTariff": 0,
+              "commission": 100,
+              "totalWithCompanyTariffAndCommission": 2302
+            },
+            "seven": {
+              "open": {
+                "total": 2162,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 2262
+              },
+              "enclosed": {
+                "total": 2467,
+                "companyTariff": 0,
+                "commission": 100,
+                "totalWithCompanyTariffAndCommission": 2567
+              },
+              "total": 2162,
+              "companyTariff": 0,
+              "commission": 100,
+              "totalWithCompanyTariffAndCommission": 2262
+            }
+          }
+        }
+      }
+    ],
+    "totalPricing": {
+      "base": 2987,
+      "modifiers": {
+        "inoperable": 350,
+        "routes": 0,
+        "states": 0,
+        "oversize": 50,
+        "vehicles": 0,
+        "globalDiscount": 0,
+        "portalDiscount": 50,
+        "irr": 0,
+        "fuel": 0,
+        "enclosedFlat": 500,
+        "enclosedPercent": 110,
+        "commission": 200,
+        "serviceLevels": [
+          {
+            "serviceLevelOption": "1",
+            "value": 450
+          },
+          {
+            "serviceLevelOption": "3",
+            "value": 350
+          },
+          {
+            "serviceLevelOption": "5",
+            "value": 280
+          },
+          {
+            "serviceLevelOption": "7",
+            "value": 200
+          }
+        ],
+        "companyTariffs": [
+          {
+            "serviceLevelOption": "1",
+            "value": 0
+          },
+          {
+            "serviceLevelOption": "3",
+            "value": 0
+          },
+          {
+            "serviceLevelOption": "5",
+            "value": 0
+          },
+          {
+            "serviceLevelOption": "7",
+            "value": 0
+          }
+        ]
+      },
+      "totals": {
+        "whiteGlove": 11948,
+        "one": {
+          "open": {
+            "total": 3837,
+            "companyTariff": 0,
+            "commission": 200,
+            "totalWithCompanyTariffAndCommission": 4037
+          },
+          "enclosed": {
+            "total": 4447,
+            "companyTariff": 0,
+            "commission": 200,
+            "totalWithCompanyTariffAndCommission": 4647
+          }
+        },
+        "three": {
+          "open": {
+            "total": 3737,
+            "companyTariff": 0,
+            "commission": 200,
+            "totalWithCompanyTariffAndCommission": 3937
+          },
+          "enclosed": {
+            "total": 4347,
+            "companyTariff": 0,
+            "commission": 200,
+            "totalWithCompanyTariffAndCommission": 4547
+          },
+          "total": 3737,
+          "companyTariff": 0,
+          "commission": 200,
+          "totalWithCompanyTariffAndCommission": 3937
+        },
+        "five": {
+          "open": {
+            "total": 3667,
+            "companyTariff": 0,
+            "commission": 200,
+            "totalWithCompanyTariffAndCommission": 3867
+          },
+          "enclosed": {
+            "total": 4277,
+            "companyTariff": 0,
+            "commission": 200,
+            "totalWithCompanyTariffAndCommission": 4477
+          },
+          "total": 3667,
+          "companyTariff": 0,
+          "commission": 200,
+          "totalWithCompanyTariffAndCommission": 3867
+        },
+        "seven": {
+          "open": {
+            "total": 3587,
+            "companyTariff": 0,
+            "commission": 200,
+            "totalWithCompanyTariffAndCommission": 3787
+          },
+          "enclosed": {
+            "total": 4197,
+            "companyTariff": 0,
+            "commission": 200,
+            "totalWithCompanyTariffAndCommission": 4397
+          },
+          "total": 3587,
+          "companyTariff": 0,
+          "commission": 200,
+          "totalWithCompanyTariffAndCommission": 3787
+        }
+      }
+    },
+    "archivedAt": null,
+    "history": [],
+    "createdAt": {
+      "$date": "2026-01-18T22:36:33.486Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-18T22:36:33.486Z"
+    },
+    "refId": 300019,
+    "__v": 0
+  }

@@ -2,7 +2,7 @@
   "_id": "507f1f77bcf86cd799439013",
   "name": "Portal Test Modifier Set",
   "isGlobal": false,
-  "portalId": "507f1f77bcf86cd799439011",
+  "portal": "507f1f77bcf86cd799439011",
   "inoperable": {
     "value": 200,
     "valueType": "flat"
@@ -37,7 +37,7 @@
     "value": 150,
     "valueType": "flat"
   },
-  "fixedCommission": {
+  "portalWideCommission": {
     "value": 12,
     "valueType": "percentage"
   },

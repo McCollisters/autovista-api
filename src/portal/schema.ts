@@ -57,6 +57,7 @@ const portalSchema = createSchema<IPortal>({
     quoteExpiryDays: { type: Number, default: 30 },
     overrideLogo: { type: Boolean, default: false },
     enableCustomRates: { type: Boolean, default: false },
+    enableCustomOversize: { type: Boolean, default: false },
     enableJKRateCalculation: { type: Boolean, default: false },
     enableVariableCompanyTariff: { type: Boolean, default: false },
     enableWhiteGloveOverride: { type: Boolean, default: false },
@@ -64,6 +65,7 @@ const portalSchema = createSchema<IPortal>({
     enableSurvey: { type: Boolean, default: true },
     portalAdmin: {
       enableDiscount: { type: Boolean, default: true },
+      enablePortalWideCommission: { type: Boolean, default: false },
     },
     quoteDetail: {
       displayCompanyTariff: { type: Boolean, default: true },

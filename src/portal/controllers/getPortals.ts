@@ -39,16 +39,16 @@ export const getPortals = async (
     // Get all modifierSets for these portals
     const portalIds = portals.map((p) => p._id);
     const modifierSets = await ModifierSet.find({
-      portalId: { $in: portalIds },
+      portal: { $in: portalIds },
     })
-      .select("portalId companyTariff companyTariffEnclosedFee")
+      .select("portal companyTariff companyTariffEnclosedFee")
       .lean();
     
     // Create a map of portalId to modifierSet for quick lookup
     const modifierSetMap = new Map();
     modifierSets.forEach((ms) => {
-      if (ms.portalId) {
-        modifierSetMap.set(ms.portalId.toString(), ms);
+      if (ms.portal) {
+        modifierSetMap.set(ms.portal.toString(), ms);
       }
     });
     

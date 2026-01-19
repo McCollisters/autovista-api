@@ -18,9 +18,15 @@ export const getQuote = async (
     }
 
     // If portal is populated, also fetch and attach its modifierSet
-    if (quote.portal && typeof quote.portal === "object" && (quote.portal as any)._id) {
+    if (
+      quote.portal &&
+      typeof quote.portal === "object" &&
+      (quote.portal as any)._id
+    ) {
       const portalId = (quote.portal as any)._id;
-      const modifierSet = await ModifierSet.findOne({ portalId }).lean();
+      const modifierSet = await ModifierSet.findOne({
+        portal: portalId,
+      }).lean();
       if (modifierSet) {
         (quote.portal as any).modifierSet = modifierSet;
       }

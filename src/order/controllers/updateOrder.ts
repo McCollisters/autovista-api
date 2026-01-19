@@ -3,6 +3,7 @@ import { Order, Portal } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { PaymentType, TransportType } from "@/_global/enums";
 import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper";
+import { updateOrderTariffsInSuper } from "../integrations/updateOrderTariffsInSuper";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   const byEmail = new Map<string, any>();
@@ -35,11 +36,112 @@ export const updateOrder = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
-    const updatedOrder = await Order.findByIdAndUpdate(
+    logger.info("updateOrder request body", {
+      orderId: req.params.orderId,
+      user: (req as any).user?.email,
+      body: req.body,
+    });
+
+    const updateDoc: Record<string, any> = { $set: { ...req.body } };
+    const priceOverrides = req.body?.priceOverrides;
+    if (updateDoc.$set.priceOverrides) {
+      delete updateDoc.$set.priceOverrides;
+    }
+    if (req.body?.pickupLocationType) {
+      updateDoc.$set["origin.locationType"] = req.body.pickupLocationType;
+      delete updateDoc.$set.pickupLocationType;
+    }
+    if (req.body?.deliveryLocationType) {
+      updateDoc.$set["destination.locationType"] = req.body.deliveryLocationType;
+      delete updateDoc.$set.deliveryLocationType;
+    }
+
+    let updatedOrder = await Order.findByIdAndUpdate(
       req.params.orderId,
-      req.body,
+      updateDoc,
       { new: true },
     );
+
+    if (updatedOrder && priceOverrides) {
+      let totalBase = 0;
+      let totalCommission = 0;
+      let totalCompanyTariff = 0;
+      let totalWithCompanyTariffAndCommission = 0;
+
+      updatedOrder.vehicles.forEach((vehicle: any) => {
+        const override = priceOverrides?.[vehicle.model];
+        if (!override) {
+          return;
+        }
+
+        const baseTotal = Number(
+          override.basePriceOverride ??
+            override.total ??
+            override.pricing?.total ??
+            override.pricingTotal,
+        );
+        const commissionValue = Number(
+          override.commissionOverride ??
+            override.commission ??
+            override.modifiers?.commission,
+        );
+        const companyTariffValue = Number(
+          override.companyTariffOverride ??
+            override.companyTariff ??
+            override.modifiers?.companyTariff,
+        );
+
+        const nextTotal = Number.isFinite(baseTotal) ? baseTotal : 0;
+        const nextCommission = Number.isFinite(commissionValue)
+          ? commissionValue
+          : 0;
+        const nextCompanyTariff = Number.isFinite(companyTariffValue)
+          ? companyTariffValue
+          : 0;
+        const nextTotalWith = nextTotal + nextCommission + nextCompanyTariff;
+
+        vehicle.pricing = vehicle.pricing || {};
+        vehicle.pricing.base = nextTotal;
+        vehicle.pricing.total = nextTotal;
+        vehicle.pricing.modifiers = {
+          ...(vehicle.pricing.modifiers || {}),
+          commission: nextCommission,
+          companyTariff: nextCompanyTariff,
+        };
+        vehicle.pricing.totalWithCompanyTariffAndCommission = nextTotalWith;
+
+        totalBase += nextTotal;
+        totalCommission += nextCommission;
+        totalCompanyTariff += nextCompanyTariff;
+        totalWithCompanyTariffAndCommission += nextTotalWith;
+      });
+
+      updatedOrder.totalPricing = {
+        ...(updatedOrder.totalPricing || {}),
+        base: totalBase,
+        modifiers: {
+          ...(updatedOrder.totalPricing?.modifiers || {}),
+          commission: totalCommission,
+          companyTariff: totalCompanyTariff,
+        },
+        total: totalBase,
+        totalWithCompanyTariffAndCommission,
+      } as any;
+
+      updatedOrder = await updatedOrder.save();
+
+      if (updatedOrder.tms?.guid) {
+        try {
+          await updateOrderTariffsInSuper(updatedOrder);
+        } catch (error) {
+          logger.error("Failed to update Super Dispatch tariffs", {
+            orderId: updatedOrder._id,
+            tmsGuid: updatedOrder.tms?.guid,
+            error: error instanceof Error ? error.message : String(error),
+          });
+        }
+      }
+    }
 
     if (updatedOrder && Array.isArray(req.body?.agents) && req.body.agents.length > 0) {
       const portalId = (updatedOrder as any).portalId;

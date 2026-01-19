@@ -283,6 +283,7 @@ export interface IAgent {
 
 export interface IPortalAdmin {
   enableDiscount: boolean;
+  enablePortalWideCommission: boolean;
 }
 
 export interface IQuoteDetail {
@@ -306,6 +307,7 @@ export interface IOrderPDF {
 
 export interface IOptions {
   enableJKRateCalculation?: boolean;
+  enableCustomOversize?: boolean;
   orderForm: IOrderForm;
   quoteForm: IQuoteForm;
   orderPDF: IOrderPDF;

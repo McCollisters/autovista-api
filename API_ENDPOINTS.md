@@ -84,8 +84,6 @@ This document provides a comprehensive list of all available API endpoints in th
 | `POST`   | `/api/v1/order/:orderId/track`        | Request order tracking      | Yes           |
 | `POST`   | `/api/v1/order/:orderId/status`       | Get order status            | Yes           |
 | `POST`   | `/api/v1/order/:orderId/location`     | Request driver location     | Yes           |
-| `PUT`    | `/api/v1/order/:orderId/files`        | Upload order files          | Yes           |
-| `PUT`    | `/api/v1/order/mcadmin/:orderId/file` | Remove order file (admin)   | Yes (Admin)   |
 | `POST`   | `/api/v1/order/export`                | Export orders to CSV        | Yes           |
 | `GET`    | `/api/v1/order/analytics`             | Get order analytics         | Yes           |
 | `POST`   | `/api/v1/order/reports/commission`    | Generate commission reports | Yes           |

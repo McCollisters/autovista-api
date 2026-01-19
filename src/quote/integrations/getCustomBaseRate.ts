@@ -1,10 +1,10 @@
 import { IPortal } from "@/_global/models";
 import { ICustomRate } from "../../portal/schema";
 
-export const getCustomBaseRate = (miles: number, portal: IPortal) => {
+export const getCustomBaseRate = (miles: number, portal: IPortal): number | undefined => {
   try {
     if (!portal.customRates) {
-      throw new Error(`Rate sheet not found`);
+      return undefined;
     }
 
     const matchingRate = portal.customRates.find(
@@ -13,11 +13,12 @@ export const getCustomBaseRate = (miles: number, portal: IPortal) => {
     );
 
     if (!matchingRate) {
-      return 0;
+      return undefined;
     }
 
     return matchingRate.value;
   } catch (error) {
     console.log(error);
+    return undefined;
   }
 };

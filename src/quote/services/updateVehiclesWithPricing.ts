@@ -21,10 +21,15 @@ const calculateModifier = (
   modifier: { valueType: string; value: number },
   base: number,
 ): number => {
-  if (modifier.valueType === "percentage") {
-    return Math.ceil(base * (modifier.value / 100));
+  const safeBase = Number.isFinite(base) ? base : 0;
+  const value = Number(modifier?.value);
+  if (!Number.isFinite(value)) {
+    return 0;
   }
-  return modifier.value;
+  if (modifier?.valueType === "percentage") {
+    return Math.ceil(safeBase * (value / 100));
+  }
+  return value;
 };
 
 const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
@@ -36,6 +41,9 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     portal,
     commission = 0,
   } = params;
+  const normalizedCommission = Number.isFinite(Number(commission))
+    ? Number(commission)
+    : 0;
 
   // Get Autovista-wide modifiers
   const globalModifiersDoc = await ModifierSet.findOne({
@@ -50,7 +58,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
 
   // Get portal-specific modifiers
   const portalModifiers = (await ModifierSet.findOne({
-    portalId: portal._id,
+    portal: portal._id,
   }).lean()) as any;
 
   if (!globalModifiers) {
@@ -63,7 +71,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       vehicle,
       miles,
       portal,
-      commission,
+      commission: normalizedCommission,
       globalModifiers,
       portalModifiers,
     });
@@ -72,7 +80,18 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   // Get vehicle base rate from Super Dispatch or portal's custom rates
   const baseTms = (await getTMSBaseRate(vehicle, origin, destination))?.quote;
   const baseCustom = getCustomBaseRate(miles, portal);
-  const base = portal.options?.enableCustomRates ? baseCustom : baseTms;
+  
+  // If enableCustomRates is true, use custom rates, but fall back to TMS if custom rate is 0 or undefined
+  // If enableCustomRates is false or null, use TMS rates
+  let baseRaw: number | undefined;
+  if (portal.options?.enableCustomRates === true) {
+    // Use custom rate if it's a valid number > 0, otherwise fall back to TMS
+    baseRaw = (baseCustom && baseCustom > 0) ? baseCustom : baseTms;
+  } else {
+    baseRaw = baseTms;
+  }
+  
+  const base = Number.isFinite(Number(baseRaw)) ? Number(baseRaw) : 0;
 
   const whiteGloveMultiplier = portalModifiers?.whiteGlove
     ? portalModifiers.whiteGlove.multiplier
@@ -91,7 +110,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     }
   }
 
-  let calculatedCommission = commission;
+  let calculatedCommission = normalizedCommission;
   let calculatedGlobalDiscount: number = 0;
   let calculatedPortalDiscount: number = 0;
   let calculatedInoperable: number = 0;
@@ -164,13 +183,13 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     );
   }
 
-  if (portalModifiers?.fixedCommission) {
-    const fixedCommissionValue = calculateModifier(
-      portalModifiers.fixedCommission,
+  if (portalModifiers?.portalWideCommission) {
+    const portalWideCommissionValue = calculateModifier(
+      portalModifiers.portalWideCommission,
       base,
     );
-    // Add fixedCommission to the quote's commission if both exist
-    calculatedCommission = commission + fixedCommissionValue;
+    // Add portalWideCommission to the quote's commission if both exist
+    calculatedCommission = normalizedCommission + portalWideCommissionValue;
   }
 
   if (portalModifiers?.discount) {
@@ -180,20 +199,28 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     );
   }
 
-  if (globalModifiers.oversize) {
+  // Determine which oversize modifier set to use
+  // If portal.options.enableCustomRates is true, use portal modifier set's oversize rates
+  // Otherwise (false or null), use global modifier set's oversize rates
+  const oversizeModifiers = 
+    portal.options?.enableCustomRates === true && portalModifiers?.oversize
+      ? portalModifiers.oversize
+      : globalModifiers.oversize;
+
+  if (oversizeModifiers) {
     // Normalize pricing class to ensure it matches enum values (case-insensitive)
     const pricingClassNormalized = (vehicle.pricingClass || "")
       .toLowerCase()
       .trim();
     const oversizeValueType =
-      globalModifiers.oversize.valueType || "flat";
+      oversizeModifiers.valueType || "flat";
 
     // Check for SUV
     if (
       pricingClassNormalized === VehicleClass.SUV ||
       pricingClassNormalized === "suv"
     ) {
-      const suvValue = globalModifiers.oversize.suv;
+      const suvValue = oversizeModifiers.suv;
       if (suvValue !== undefined && suvValue !== null) {
         calculatedGlobalOversize = calculateModifier(
           { value: suvValue, valueType: oversizeValueType },
@@ -206,7 +233,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       pricingClassNormalized === VehicleClass.Van ||
       pricingClassNormalized === "van"
     ) {
-      const vanValue = globalModifiers.oversize.van;
+      const vanValue = oversizeModifiers.van;
       if (vanValue !== undefined && vanValue !== null) {
         calculatedGlobalOversize = calculateModifier(
           { value: vanValue, valueType: oversizeValueType },
@@ -221,7 +248,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       pricingClassNormalized === "pickup 2 doors" ||
       pricingClassNormalized === "pick up 2 doors"
     ) {
-      const pickup2Value = globalModifiers.oversize.pickup_2_doors;
+      const pickup2Value = oversizeModifiers.pickup_2_doors;
       if (pickup2Value !== undefined && pickup2Value !== null) {
         calculatedGlobalOversize = calculateModifier(
           { value: pickup2Value, valueType: oversizeValueType },
@@ -236,7 +263,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       pricingClassNormalized === "pickup 4 doors" ||
       pricingClassNormalized === "pick up 4 doors"
     ) {
-      const pickup4Value = globalModifiers.oversize.pickup_4_doors;
+      const pickup4Value = oversizeModifiers.pickup_4_doors;
       if (pickup4Value !== undefined && pickup4Value !== null) {
         calculatedGlobalOversize = calculateModifier(
           { value: pickup4Value, valueType: oversizeValueType },
@@ -249,7 +276,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       pricingClassNormalized === VehicleClass.Sedan ||
       pricingClassNormalized === "sedan"
     ) {
-      const sedanValue = (globalModifiers.oversize as any).sedan;
+      const sedanValue = (oversizeModifiers as any).sedan;
       if (sedanValue !== undefined && sedanValue !== null) {
         calculatedGlobalOversize = calculateModifier(
           { value: sedanValue, valueType: oversizeValueType },
@@ -258,9 +285,9 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       }
     }
     // Default case
-    else if (globalModifiers.oversize.default !== undefined) {
+    else if (oversizeModifiers.default !== undefined) {
       calculatedGlobalOversize = calculateModifier(
-        { value: globalModifiers.oversize.default, valueType: oversizeValueType },
+        { value: oversizeModifiers.default, valueType: oversizeValueType },
         base,
       );
     }
@@ -737,14 +764,14 @@ const getJKVehiclePrice = async ({
     companyTariff = companyTariff - portalAdminDiscount;
   }
 
-  // Calculate commission: add fixedCommission from modifier set to quote's commission if both exist
+  // Calculate commission: add portalWideCommission from modifier set to quote's commission if both exist
   let calculatedCommission = commission;
-  if (portalModifiers?.fixedCommission) {
-    const fixedCommissionValue = calculateModifier(
-      portalModifiers.fixedCommission,
+  if (portalModifiers?.portalWideCommission) {
+    const portalWideCommissionValue = calculateModifier(
+      portalModifiers.portalWideCommission,
       mcBase,
     );
-    calculatedCommission = commission + fixedCommissionValue;
+    calculatedCommission = commission + portalWideCommissionValue;
   }
 
   // JK: No service level markup - all service levels have same price

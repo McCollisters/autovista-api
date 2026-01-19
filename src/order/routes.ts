@@ -7,8 +7,6 @@ import { requestTrackOrder } from "./controllers/requestTrackOrder";
 import { getCommissionReports } from "./controllers/getCommissionReports";
 import { exportOrders } from "./controllers/exportOrders";
 import { getOrdersAnalytics } from "./controllers/getOrdersAnalytics";
-import { addOrderFiles } from "./controllers/addOrderFiles";
-import { removeOrderFile } from "./controllers/removeOrderFile";
 import { getOrderActivities } from "./controllers/getOrderActivities";
 import { acceptOrderTerms } from "./controllers/acceptOrderTerms";
 import { getOrderStatus } from "./controllers/getOrderStatus";
@@ -35,7 +33,5 @@ router.delete("/:orderId", deleteOrder);
 router.post("/:orderId/track", requestTrackOrder);
 router.post("/:orderId/status", getOrderStatus);
 router.post("/:orderId/location", requestDriverLocation);
-router.put("/:orderId/files", addOrderFiles);
-router.put("/mcadmin/:orderId/file", removeOrderFile);
 
 export default router;

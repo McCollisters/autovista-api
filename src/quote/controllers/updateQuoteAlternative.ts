@@ -89,35 +89,35 @@ export const updateQuoteAlternative = async (
 
     // Use provided values or fall back to existing quote values
     // Extract base commission from existing quote if not provided
-    // The stored commission in totalPricing.modifiers.commission is the TOTAL commission (includes fixedCommission),
+    // The stored commission in totalPricing.modifiers.commission is the TOTAL commission (includes portalWideCommission),
     // and it's the sum across all vehicles. We need the BASE commission per vehicle.
     let finalCommission = 0;
     if (commission !== undefined && commission !== null) {
       finalCommission = parseInt(String(commission), 10);
     } else {
       // Try to extract base commission from existing vehicle pricing
-      // Each vehicle has pricing.modifiers.commission which is the calculated commission (base + fixedCommission)
-      // We need to reverse-engineer the base commission by subtracting fixedCommission
+      // Each vehicle has pricing.modifiers.commission which is the calculated commission (base + portalWideCommission)
+      // We need to reverse-engineer the base commission by subtracting portalWideCommission
       if (originalQuote.vehicles && originalQuote.vehicles.length > 0) {
         const firstVehicle = originalQuote.vehicles[0];
         const vehicleCommission = (firstVehicle as any).pricing?.modifiers?.commission || 0;
         const vehicleBase = (firstVehicle as any).pricing?.base || 0;
         
-        // Get portal modifiers to calculate fixedCommission
+        // Get portal modifiers to calculate portalWideCommission
         const portalModifiers = await ModifierSet.findOne({
           portal: portal._id,
         }).lean() as any;
         
-        if (portalModifiers?.fixedCommission && vehicleCommission > 0 && vehicleBase > 0) {
-          // Calculate what fixedCommission would be for this vehicle's base rate
-          const fixedCommissionValue = portalModifiers.fixedCommission.valueType === "percentage"
-            ? Math.ceil(vehicleBase * (portalModifiers.fixedCommission.value / 100))
-            : (portalModifiers.fixedCommission.value || 0);
+        if (portalModifiers?.portalWideCommission && vehicleCommission > 0 && vehicleBase > 0) {
+          // Calculate what portalWideCommission would be for this vehicle's base rate
+          const fixedCommissionValue = portalModifiers.portalWideCommission.valueType === "percentage"
+            ? Math.ceil(vehicleBase * (portalModifiers.portalWideCommission.value / 100))
+            : (portalModifiers.portalWideCommission.value || 0);
           
-          // Extract base commission by subtracting fixedCommission
+          // Extract base commission by subtracting portalWideCommission
           finalCommission = Math.max(0, vehicleCommission - fixedCommissionValue);
         } else if (vehicleCommission > 0) {
-          // If no fixedCommission, the vehicle commission IS the base commission
+          // If no portalWideCommission, the vehicle commission IS the base commission
           finalCommission = vehicleCommission;
         }
         // If vehicleCommission is 0, finalCommission stays 0

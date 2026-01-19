@@ -15,7 +15,7 @@ export const createPortal = async (
     if (modifierSet) {
       await new ModifierSet({
         ...modifierSet,
-        portalId: createdPortal._id,
+        portal: createdPortal._id,
       }).save();
     }
 

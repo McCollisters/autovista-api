@@ -96,7 +96,7 @@ export const getModifierSets = async (
     let filter: any = { status: Status.Active };
 
     if (portalId) {
-      filter.portalId = portalId;
+      filter.portal = portalId;
     }
 
     if (role) {

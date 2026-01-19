@@ -40,7 +40,7 @@ export interface IVehicleModifier extends IModifier {
 }
 
 export interface IModifierSet extends Document {
-  portalId?: Types.ObjectId;
+  portal?: Types.ObjectId;
   isGlobal: boolean;
   inoperable?: IModifier;
   fuel?: IModifier;
@@ -61,7 +61,7 @@ export interface IModifierSet extends Document {
   companyTariff?: IModifier;
   companyTariffDiscount?: IModifier; // set by portal admins, the discount is subtracted from the company tariff
   companyTariffEnclosedFee?: IModifier; // for variable company tariffs, this is the additional fee for enclosed transport, it is added to the company tariff
-  fixedCommission?: IModifier;
+  portalWideCommission?: IModifier;
   states?: Map<
     string,
     {
@@ -77,7 +77,7 @@ export interface IModifierSet extends Document {
 }
 
 const modifierSetSchemaDefinition = {
-  portalId: createReferenceField("Portal", false),
+  portal: createReferenceField("Portal", false),
   isGlobal: { type: Boolean, default: false },
   inoperable: {
     value: { type: Number, default: 0 },
@@ -123,7 +123,7 @@ const modifierSetSchemaDefinition = {
     value: { type: Number, default: 0 },
     valueType: { type: String, default: "flat" },
   },
-  fixedCommission: {
+  portalWideCommission: {
     value: { type: Number, default: 0 },
     valueType: { type: String, default: "flat" },
   },

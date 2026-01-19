@@ -17,9 +17,9 @@ export const updatePortal = async (
       },
     );
 
-    if (modifierSet?.portalId) {
+    if (modifierSet?.portal) {
       await ModifierSet.findOneAndUpdate(
-        { portalId: modifierSet.portalId },
+        { portal: modifierSet.portal },
         { $set: modifierSet },
         { new: true, upsert: true },
       );
