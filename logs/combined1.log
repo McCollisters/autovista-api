@@ -142724,3 +142724,191 @@
   message: 'Request completed',
   timestamp: '2026-01-19 08:42:07'
 }
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50&createdStart=2025-12-05T08%3A43%3A00.219-07%3A00&cod=true&paid=true',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:43:00'
+}
+{
+  service: 'autovista-api',
+  query: '{"createdAt":{"$gte":"2025-12-05T00:00:00.000Z"},"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_user',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-19 08:43:00'
+}
+{
+  service: 'autovista-api',
+  count: 4,
+  returned: 4,
+  userRole: 'platform_user',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-19 08:43:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50&createdStart=2025-12-05T08%3A43%3A00.219-07%3A00&cod=true&paid=true',
+  statusCode: 200,
+  duration: '404ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:43:00'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:45:52'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:45:52'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:45:52'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:45:53'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 08:45:53'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 08:45:53'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:45:55'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:45:55'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:45:55'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:45:55'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 08:45:55'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 08:45:55'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:46:02'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:46:02'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:46:02'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 08:46:02'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 08:46:02'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 08:46:02'
+}

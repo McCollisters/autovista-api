@@ -1,6 +1,11 @@
 import express from "express";
 import { Order, Quote, Portal, User, Settings } from "@/_global/models";
-import { Status, TransportType, ServiceLevelOption } from "../../_global/enums";
+import {
+  Status,
+  TransportType,
+  ServiceLevelOption,
+  PaymentType,
+} from "../../_global/enums";
 import { logger } from "@/core/logger";
 import { geocode } from "../../_global/utils/geocode";
 import { formatPhoneNumber } from "../../_global/utils/formatPhoneNumber";
@@ -111,7 +116,7 @@ export const createOrder = async (
       agents = [];
     }
 
-    let payment = "Billing";
+    let payment = PaymentType.Billing;
 
     if (paymentType) {
       if (paymentType.value) {
@@ -128,7 +133,7 @@ export const createOrder = async (
       portalId === "6717abfa768fb54a3c6823b9" || // Tim Toton
       portalId === "6453ff09eafb1843de4d5cd1"
     ) {
-      payment = "COD";
+      payment = PaymentType.Cod;
     }
 
     if (!moveType) {
@@ -232,8 +237,10 @@ export const createOrder = async (
           : TransportType.Open;
 
     if (transportType === TransportType.WhiteGlove) {
-      payment = "COD";
+      payment = PaymentType.Cod;
     }
+
+    payment = String(payment || "").toLowerCase();
 
     // Check if delivery address has changed from original quote
     const originalDeliveryAddress =
@@ -641,7 +648,7 @@ export const createOrder = async (
     );
     if (
       !isCustomerPortal &&
-      payment !== "COD" &&
+      payment !== PaymentType.Cod &&
       transportType !== TransportType.WhiteGlove &&
       hasRequiredPartialOrderFields
     ) {
@@ -695,7 +702,7 @@ export const createOrder = async (
       }
     } else if (
       !isCustomerPortal &&
-      payment !== "COD" &&
+      payment !== PaymentType.Cod &&
       transportType !== TransportType.WhiteGlove
     ) {
       logger.warn(
@@ -1100,7 +1107,7 @@ export const createOrder = async (
       orderTableCustomer: normalizedCustomerName
         ? normalizedCustomerName.trim()
         : null,
-      orderTableStatus: payment === "COD" ? "Pending" : "New",
+      orderTableStatus: payment === PaymentType.Cod ? "Pending" : "New",
       orderTablePickupEst: new Date(dateRanges[0]),
       orderTableDeliveryEst: new Date(dateRanges[2]),
       userId: orderUserId,
@@ -1220,7 +1227,7 @@ export const createOrder = async (
           : null,
       },
       tmsPartialOrder:
-        payment !== "COD" &&
+        payment !== PaymentType.Cod &&
         transportType !== TransportType.WhiteGlove &&
         superResponse
           ? true

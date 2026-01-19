@@ -73,6 +73,9 @@ export const updateOrder = async (
         updateDoc.$set.hasPaid = normalized;
       }
     }
+    if (updateDoc.$set.paymentType !== undefined) {
+      updateDoc.$set.paymentType = String(updateDoc.$set.paymentType).toLowerCase();
+    }
     if (req.body?.pickupLocationType) {
       updateDoc.$set["origin.locationType"] = req.body.pickupLocationType;
       delete updateDoc.$set.pickupLocationType;
