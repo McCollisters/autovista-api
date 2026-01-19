@@ -26,7 +26,7 @@ export const getUsersByPortal = async (
     const canAccessPortal = hasPortalAccess(authUser, portalId);
 
     // Check authorization: platform roles or portal access required
-    if (!hasPlatformAccess && authUser.role !== "MCAdmin" && !canAccessPortal) {
+    if (!hasPlatformAccess && !canAccessPortal) {
       return next({
         statusCode: 401,
         message: "Unauthorized",

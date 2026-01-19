@@ -1,11 +1,12 @@
 import express from "express";
 import { Settings, ModifierSet } from "@/_global/models";
+import { ValueType } from "@/modifierSet/schema";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 
 /**
  * PUT /settings
- * Update settings (MCAdmin only)
+ * Update settings (platform admin only)
  */
 export const updateSettings = async (
   req: express.Request,
@@ -16,10 +17,10 @@ export const updateSettings = async (
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 
-    if (!authUser || (authUser.role !== "MCAdmin" && authUser.role !== "platform_admin")) {
+    if (!authUser || authUser.role !== "platform_admin") {
       return next({
         statusCode: 401,
-        message: "Unauthorized. MCAdmin or platform_admin access required.",
+        message: "Unauthorized. platform_admin access required.",
       });
     }
 
@@ -66,7 +67,9 @@ export const updateSettings = async (
 
     // Handle markup updates (stored in global ModifierSet)
     if (formName === "markup") {
-      const globalModifierSet = await ModifierSet.findOne({ isGlobal: true });
+      const globalModifierSet = (await (ModifierSet as any).findOne({
+        isGlobal: true,
+      })) as any;
 
       if (!globalModifierSet) {
         logger.error("Global ModifierSet not found", {
@@ -92,7 +95,7 @@ export const updateSettings = async (
         const numericValue = toNumber(inoperableMarkup);
         globalModifierSet.inoperable = {
           value: numericValue,
-          valueType: "flat",
+          valueType: ValueType.Flat,
         };
         logger.info("Updating inoperable markup", {
           received: inoperableMarkup,
@@ -111,7 +114,7 @@ export const updateSettings = async (
         const numericValue = toNumber(enclosedMarkup);
         globalModifierSet.enclosedFlat = {
           value: numericValue,
-          valueType: "flat",
+          valueType: ValueType.Flat,
         };
         logger.info("Updating enclosed markup", {
           received: enclosedMarkup,
@@ -123,7 +126,7 @@ export const updateSettings = async (
         const numericValue = toNumber(enclosedModifier);
         globalModifierSet.enclosedPercent = {
           value: numericValue,
-          valueType: "percentage",
+          valueType: ValueType.Percentage,
         };
         logger.info("Updating enclosed modifier", {
           received: enclosedModifier,
@@ -145,7 +148,9 @@ export const updateSettings = async (
       await globalModifierSet.save();
       
       // Verify the save by fetching the document again
-      const savedModifierSet = await ModifierSet.findById(globalModifierSet._id).lean();
+      const savedModifierSet = (await (ModifierSet as any).findById(
+        globalModifierSet._id,
+      ).lean()) as any;
       
       logger.info(`User ${authUser.email} updated global modifierSet markups`, {
         userId: authUser._id,
@@ -165,7 +170,9 @@ export const updateSettings = async (
 
     // Handle state modifiers updates (stored in global ModifierSet)
     if (formName === "state") {
-      const globalModifierSet = await ModifierSet.findOne({ isGlobal: true });
+      const globalModifierSet = (await (ModifierSet as any).findOne({
+        isGlobal: true,
+      })) as any;
 
       if (!globalModifierSet) {
         logger.error("Global ModifierSet not found", {
@@ -227,18 +234,24 @@ export const updateSettings = async (
 
         await globalModifierSet.save();
 
+        const statesCount =
+          globalModifierSet.states instanceof Map
+            ? globalModifierSet.states.size
+            : Object.keys(globalModifierSet.states || {}).length;
         logger.info(`User ${authUser.email} updated state modifiers`, {
           userId: authUser._id,
           modifierSetId: globalModifierSet._id,
           stateModifiersCount: stateModifiers.length,
-          statesCount: globalModifierSet.states.size,
+          statesCount,
         });
       }
     }
 
     // Handle state-to-state route modifiers updates (stored in global ModifierSet)
     if (formName === "statetostate") {
-      const globalModifierSet = await ModifierSet.findOne({ isGlobal: true });
+      const globalModifierSet = (await (ModifierSet as any).findOne({
+        isGlobal: true,
+      })) as any;
 
       if (!globalModifierSet) {
         logger.error("Global ModifierSet not found", {
@@ -268,7 +281,7 @@ export const updateSettings = async (
             destination: route.destination,
             value: Number(route.value) || 0,
             valueType: route.valueType || "flat",
-          }));
+          })) as any;
 
         await globalModifierSet.save();
 
@@ -282,7 +295,9 @@ export const updateSettings = async (
 
     // Handle service level modifiers updates (stored in global ModifierSet)
     if (formName === "servicelevels") {
-      const globalModifierSet = await ModifierSet.findOne({ isGlobal: true });
+      const globalModifierSet = (await (ModifierSet as any).findOne({
+        isGlobal: true,
+      })) as any;
 
       if (!globalModifierSet) {
         logger.error("Global ModifierSet not found", {
@@ -313,7 +328,7 @@ export const updateSettings = async (
           .map((level: any) => ({
             serviceLevelOption: String(level.serviceLevelOption),
             value: Number(level.value) || 0,
-          }));
+          })) as any;
 
         await globalModifierSet.save();
 
@@ -438,10 +453,12 @@ export const updateSettings = async (
     });
 
     // Get updated global ModifierSet for response (always fetch to include in response)
-    const updatedGlobalModifierSet = await ModifierSet.findOne({ isGlobal: true }).lean();
+    const updatedGlobalModifierSet = (await (ModifierSet as any).findOne({
+      isGlobal: true,
+    }).lean()) as any;
 
     // Convert states object/Map to array format for frontend
-    let stateModifiersArray = [];
+    let stateModifiersArray: Array<any> = [];
     if (updatedGlobalModifierSet?.states) {
       const statesMap = updatedGlobalModifierSet.states;
       if (statesMap instanceof Map) {
@@ -507,7 +524,7 @@ export const updateSettings = async (
       }
     }
 
-    const { makes, ...settingsData } = settings.toObject();
+    const { makes, ...settingsData } = settings.toObject() as any;
 
     const responseData = {
       ...settingsData,

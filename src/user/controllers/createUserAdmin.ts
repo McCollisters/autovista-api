@@ -22,11 +22,14 @@ export const createUserAdmin = async (
       });
     }
 
-    // Only MCAdmin or Admin can create users
-    if (authUser.role !== "MCAdmin" && authUser.role !== "Admin") {
+    // Only platform admin or platform user can create users
+    if (
+      authUser.role !== Role.PlatformAdmin &&
+      authUser.role !== Role.PlatformUser
+    ) {
       return next({
         statusCode: 403,
-        message: "Forbidden: Admin access required",
+        message: "Forbidden: Platform access required",
       });
     }
 

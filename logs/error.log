@@ -5582,3 +5582,10 @@
   message: 'Failed to send COD partial order to SuperDispatch',
   timestamp: '2026-01-19 08:37:25'
 }
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeatlantic.com',
+  level: 'error',
+  message: 'No user found with email from Google token',
+  timestamp: '2026-01-19 15:27:50'
+}
