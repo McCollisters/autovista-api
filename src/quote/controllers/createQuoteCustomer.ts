@@ -9,6 +9,7 @@ import { validateLocation } from "../services/validateLocation";
 import { customAlphabet } from "nanoid";
 import { logger } from "@/core/logger";
 import { getTransitTimeFromSettings } from "../services/getTransitTimeFromSettings";
+import { resolveId } from "@/_global/utils/resolveId";
 
 const nanoid = customAlphabet("1234567890abcdef", 10);
 
@@ -41,7 +42,7 @@ export const createQuoteCustomer = async (
       instance,
       transportType,
     } = req.body;
-    const resolvedPortalId = req.body?.portal ?? portalId;
+    const resolvedPortalId = resolveId(req.body?.portal ?? portalId);
 
     // Validation
     if (!pickup) {

@@ -4,6 +4,7 @@ import { Role } from "../schema";
 import { Status } from "../../_global/enums";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { resolveId } from "@/_global/utils/resolveId";
 
 export const createUserAdmin = async (
   req: express.Request,
@@ -69,8 +70,10 @@ export const createUserAdmin = async (
       });
     }
 
+    const resolvedPortalId = resolveId(portalId);
+
     // Verify portal exists
-    const portal = await Portal.findById(portalId);
+    const portal = await Portal.findById(resolvedPortalId);
 
     if (!portal) {
       return next({
@@ -87,18 +90,21 @@ export const createUserAdmin = async (
       firstName,
       lastName,
       role: resolvedRole,
-      portalId,
+      portalId: resolvedPortalId,
       status: Status.Active,
       fullName: `${firstName} ${lastName}`,
     };
 
     if (portalRoles) {
-      userData.portalRoles = portalRoles;
+      userData.portalRoles = portalRoles.map((entry: any) => ({
+        portalId: resolveId(entry?.portalId),
+        role: entry?.role,
+      }));
     } else if (
-      portalId &&
+      resolvedPortalId &&
       (resolvedRole === Role.PortalAdmin || resolvedRole === Role.PortalUser)
     ) {
-      userData.portalRoles = [{ portalId, role: resolvedRole }];
+      userData.portalRoles = [{ portalId: resolvedPortalId, role: resolvedRole }];
     }
 
     if (password) {

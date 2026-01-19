@@ -142912,3 +142912,4665 @@
   message: 'Server started successfully',
   timestamp: '2026-01-19 08:46:02'
 }
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:38'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:48:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/emails',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696d99df50eeecdc893f7f73/activities',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696d99df50eeecdc893f7f73',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '47ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696d99df50eeecdc893f7f73/activities',
+  statusCode: 404,
+  duration: '56ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696d99df50eeecdc893f7f73',
+  statusCode: 404,
+  duration: '54ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '125ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:40'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:48:40'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/emails',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696d99df50eeecdc893f7f73/activities',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696d99df50eeecdc893f7f73',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '46ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696d99df50eeecdc893f7f73/activities',
+  statusCode: 404,
+  duration: '59ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696d99df50eeecdc893f7f73',
+  statusCode: 404,
+  duration: '57ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '117ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:43'
+}
+{
+  service: 'autovista-api',
+  query: '{}',
+  queryPortalId: undefined,
+  userRole: 'platform_user',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-19 08:48:43'
+}
+{
+  service: 'autovista-api',
+  count: 20899,
+  returned: 50,
+  userRole: 'platform_user',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-19 08:48:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '427ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '111ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '107ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/emails',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696c07aaf1826fa1869ebcb3/activities',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696c07aaf1826fa1869ebcb3',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '56ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696c07aaf1826fa1869ebcb3/activities',
+  statusCode: 200,
+  duration: '74ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '451ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:45'
+}
+{
+  service: 'autovista-api',
+  mismatches: 'contact email',
+  sdCustomer: {
+    name: 'AutoNation',
+    contact_email: 'bonillaangelj@autonation.com',
+    contact_name: 'Juan Bonilla',
+    phone: '(954) 769-6000'
+  },
+  portalContact: {
+    companyName: 'AutoNation',
+    contactEmail: 'autologistics@mccollisters.com',
+    contactFullName: undefined,
+    companyPhone: '(954) 769-6000'
+  },
+  level: 'warn',
+  message: "[Order 222954] SuperDispatch customer data doesn't match portal contact details:",
+  timestamp: '2026-01-19 08:48:46'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 08:48:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '463ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:46'
+}
+{
+  service: 'autovista-api',
+  orderRefId: 222954,
+  tmsGuid: 'ed05cacf-8072-4473-b70d-f65c47651b39',
+  pickupDatesChanged: false,
+  deliveryDatesChanged: false,
+  level: 'info',
+  message: 'Successfully updated order from Super Dispatch',
+  timestamp: '2026-01-19 08:48:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696c07aaf1826fa1869ebcb3',
+  statusCode: 200,
+  duration: '670ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:47'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: undefined,
+  userRole: 'platform_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 08:48:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:48:48'
+}
+{
+  service: 'autovista-api',
+  count: 107271,
+  returned: 50,
+  userRole: 'platform_user',
+  portalId: undefined,
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 08:48:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '1092ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  statusCode: 200,
+  duration: '547ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:48:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user/66a2771d8e572b7da3a1b067',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:49:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/66a2771d8e572b7da3a1b067',
+  statusCode: 200,
+  duration: '100ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:49:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:49:13'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:49:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:49:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '110ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:49:13'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 08:49:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '445ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:49:13'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/api/v1/user/66a2771d8e572b7da3a1b067',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '291',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:49:17'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/66a2771d8e572b7da3a1b067',
+  statusCode: 200,
+  duration: '134ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:49:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:49:21'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  statusCode: 200,
+  duration: '551ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:49:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user/628f87dcd316e00035382c84',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:49:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/628f87dcd316e00035382c84',
+  statusCode: 200,
+  duration: '103ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:49:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:49:33'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:49:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '113ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:49:33'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/api/v1/user/628f87dcd316e00035382c84',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '276',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:49:36'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/628f87dcd316e00035382c84',
+  statusCode: 200,
+  duration: '114ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:49:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:50:28'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  statusCode: 200,
+  duration: '564ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:50:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user/64381a6a1b056c7232d20c20',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:50:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/64381a6a1b056c7232d20c20',
+  statusCode: 200,
+  duration: '101ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:50:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:50:45'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:50:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '112ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:50:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:52:10'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:52:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '151ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:52:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:52:36'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:52:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user/64381a6a1b056c7232d20c20',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:52:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '127ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:52:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/64381a6a1b056c7232d20c20',
+  statusCode: 200,
+  duration: '106ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:52:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:52:38'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:52:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:52:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '108ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:52:38'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 08:52:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '470ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:52:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:52:43'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:52:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '99ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:52:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:53:09'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:53:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user/64381a6a1b056c7232d20c20',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:53:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '132ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:53:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/64381a6a1b056c7232d20c20',
+  statusCode: 200,
+  duration: '120ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:53:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:53:17'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:53:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user/64381a6a1b056c7232d20c20',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:53:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '139ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:53:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/64381a6a1b056c7232d20c20',
+  statusCode: 200,
+  duration: '107ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:53:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:53:18'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:53:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:53:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '110ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:53:18'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 08:53:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '464ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:53:19'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/api/v1/user/64381a6a1b056c7232d20c20',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '282',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:53:23'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/64381a6a1b056c7232d20c20',
+  statusCode: 200,
+  duration: '105ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:53:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:53:26'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:53:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '118ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:53:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '168ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  query: '{}',
+  queryPortalId: undefined,
+  userRole: 'platform_user',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '109ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '116ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  count: 20899,
+  returned: 50,
+  userRole: 'platform_user',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '582ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:56:56'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 08:56:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '460ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:56:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:56:57'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 08:56:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '321ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:56:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696c07aaf1826fa1869ebcb3/activities',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:57:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/696c07aaf1826fa1869ebcb3',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:57:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/emails',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:57:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696c07aaf1826fa1869ebcb3/activities',
+  statusCode: 200,
+  duration: '57ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:57:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '55ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:57:01'
+}
+{
+  service: 'autovista-api',
+  mismatches: 'contact email',
+  sdCustomer: {
+    name: 'AutoNation',
+    contact_email: 'bonillaangelj@autonation.com',
+    contact_name: 'Juan Bonilla',
+    phone: '(954) 769-6000'
+  },
+  portalContact: {
+    companyName: 'AutoNation',
+    contactEmail: 'autologistics@mccollisters.com',
+    contactFullName: undefined,
+    companyPhone: '(954) 769-6000'
+  },
+  level: 'warn',
+  message: "[Order 222954] SuperDispatch customer data doesn't match portal contact details:",
+  timestamp: '2026-01-19 08:57:02'
+}
+{
+  service: 'autovista-api',
+  orderRefId: 222954,
+  tmsGuid: 'ed05cacf-8072-4473-b70d-f65c47651b39',
+  pickupDatesChanged: false,
+  deliveryDatesChanged: false,
+  level: 'info',
+  message: 'Successfully updated order from Super Dispatch',
+  timestamp: '2026-01-19 08:57:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696c07aaf1826fa1869ebcb3',
+  statusCode: 200,
+  duration: '756ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:57:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  statusCode: 200,
+  duration: '565ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user/6270183ddd5dc5004634f233',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/6270183ddd5dc5004634f233',
+  statusCode: 200,
+  duration: '115ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:20'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:59:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '98ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:20'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 08:59:21'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '465ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:21'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/api/v1/user/6270183ddd5dc5004634f233',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '281',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:24'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/6270183ddd5dc5004634f233',
+  statusCode: 200,
+  duration: '112ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  statusCode: 200,
+  duration: '487ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user/64931129683366f9e6ca75e1',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/64931129683366f9e6ca75e1',
+  statusCode: 200,
+  duration: '112ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:37'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 08:59:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '103ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:37'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/api/v1/user/64931129683366f9e6ca75e1',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '284',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:42'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/64931129683366f9e6ca75e1',
+  statusCode: 200,
+  duration: '110ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:49'
+}
+{
+  service: 'autovista-api',
+  query: '{}',
+  queryPortalId: undefined,
+  userRole: 'platform_user',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-19 08:59:49'
+}
+{
+  service: 'autovista-api',
+  count: 20899,
+  returned: 50,
+  userRole: 'platform_user',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-19 08:59:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '468ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:51'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: undefined,
+  userRole: 'platform_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 08:59:51'
+}
+{
+  service: 'autovista-api',
+  count: 107273,
+  returned: 50,
+  userRole: 'platform_user',
+  portalId: undefined,
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 08:59:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '1121ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 08:59:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  statusCode: 200,
+  duration: '525ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 08:59:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50&createdStart=2025-12-05T09%3A00%3A06.749-07%3A00&cod=true&paid=true',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:00:06'
+}
+{
+  service: 'autovista-api',
+  query: '{"createdAt":{"$gte":"2025-12-05T00:00:00.000Z"},"paymentType":"cod","hasPaid":false}',
+  queryPortalId: undefined,
+  userRole: 'platform_user',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 10000,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-19 09:00:06'
+}
+{
+  service: 'autovista-api',
+  count: 4,
+  returned: 4,
+  userRole: 'platform_user',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-19 09:00:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50&createdStart=2025-12-05T09%3A00%3A06.749-07%3A00&cod=true&paid=true',
+  statusCode: 200,
+  duration: '449ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:00:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:00:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/users',
+  statusCode: 200,
+  duration: '504ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:00:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user/6524165a8543335da1cf45b1',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:00:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/6524165a8543335da1cf45b1',
+  statusCode: 200,
+  duration: '108ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:00:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:00:23'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:00:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '106ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:00:23'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/api/v1/user/6524165a8543335da1cf45b1',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '300',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:00:28'
+}
+{
+  service: 'autovista-api',
+  method: 'PATCH',
+  url: '/6524165a8543335da1cf45b1',
+  statusCode: 200,
+  duration: '114ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:00:28'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:26'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:04:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '121ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:26'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:04:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '100ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:26'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 09:04:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '472ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:27'
+}
+{
+  service: 'autovista-api',
+  count: 111,
+  userRole: 'platform_user',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-01-19 09:04:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '442ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:27'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/login-social',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '1249',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:30'
+}
+{
+  service: 'autovista-api',
+  email: 'annafkh@gmail.com',
+  userId: new ObjectId('6524996159c4bd7288b51f5e'),
+  role: 'portal_user',
+  level: 'info',
+  message: 'Social login successful',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/login-social',
+  statusCode: 200,
+  duration: '339ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/69664e5968d3227b9d6860c6',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '99ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/[object%20Object]',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/[object%20Object]',
+  statusCode: 500,
+  duration: '36ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69664e5968d3227b9d6860c6',
+  statusCode: 200,
+  duration: '139ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '158ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '105ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '45ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/[object%20Object]',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/[object%20Object]',
+  statusCode: 500,
+  duration: '2ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:32'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:04:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '112ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:34'
+}
+{
+  service: 'autovista-api',
+  query: '{"portalId":{"$in":["69664e5968d3227b9d6860c6"]},"userId":"6524996159c4bd7288b51f5e"}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-01-19 09:04:34'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-01-19 09:04:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '199ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:35'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:04:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/[object%20Object]',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/[object%20Object]',
+  statusCode: 500,
+  duration: '4ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:37'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:04:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '1699ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:37'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '255',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:04:47'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  statusCode: 500,
+  duration: '5ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:04:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/[object%20Object]',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:05:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/[object%20Object]',
+  statusCode: 500,
+  duration: '7ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:05:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/69664e5968d3227b9d6860c6',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '124ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/[object%20Object]',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/[object%20Object]',
+  statusCode: 500,
+  duration: '6ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69664e5968d3227b9d6860c6',
+  statusCode: 200,
+  duration: '104ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '119ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/[object%20Object]',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/[object%20Object]',
+  statusCode: 500,
+  duration: '8ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:05:41'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '266',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:05:48'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '5380ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:05:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:05:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/696e56611aaada76ec49cbac',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:05:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 403,
+  duration: '112ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:05:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696e56611aaada76ec49cbac',
+  statusCode: 200,
+  duration: '157ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:05:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/[object%20Object]',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:06:14'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/[object%20Object]',
+  statusCode: 500,
+  duration: '1ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:06:14'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:04'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:07:04'
+}
+{
+  service: 'autovista-api',
+  count: 1,
+  returned: 1,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:07:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '922ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:06'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:07:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/696e56611aaada76ec49cbac',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '138ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 403,
+  duration: '143ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696e56611aaada76ec49cbac',
+  statusCode: 200,
+  duration: '559ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/[object%20Object]',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/[object%20Object]',
+  statusCode: 500,
+  duration: '3ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:08'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '251',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:13'
+}
+{
+  service: 'autovista-api',
+  userId: new ObjectId('6524996159c4bd7288b51f5e'),
+  quoteId: '696e56611aaada76ec49cbac',
+  changes: [
+    'portalId',
+    'status',
+    'customerFullName',
+    'commission',
+    'pickup',
+    'delivery',
+    'vehicles',
+    'quoteId'
+  ],
+  level: 'info',
+  message: 'User annafkh@gmail.com updating quote 696e56611aaada76ec49cbac',
+  timestamp: '2026-01-19 09:07:14'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('696e56611aaada76ec49cbac'),
+  refId: 300036,
+  level: 'info',
+  message: 'Quote updated successfully',
+  timestamp: '2026-01-19 09:07:15'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/',
+  statusCode: 200,
+  duration: '1239ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:15'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/696e56611aaada76ec49cbac',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:15'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696e56611aaada76ec49cbac',
+  statusCode: 200,
+  duration: '140ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:15'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '58',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:19'
+}
+{
+  service: 'autovista-api',
+  userId: new ObjectId('6524996159c4bd7288b51f5e'),
+  quoteId: '696e56611aaada76ec49cbac',
+  changes: [ 'status', 'quoteId' ],
+  level: 'info',
+  message: 'User annafkh@gmail.com updating quote 696e56611aaada76ec49cbac',
+  timestamp: '2026-01-19 09:07:19'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/',
+  statusCode: 200,
+  duration: '274ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=150',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:19'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 150,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:07:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:07:19'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:07:19'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:07:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '1008ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:20'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:07:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=150',
+  statusCode: 200,
+  duration: '1175ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:07:20'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:07:41'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:07:41'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:07:41'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:07:41'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:07:41'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:07:41'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:07:55'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:07:55'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:07:55'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:07:55'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:07:55'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:07:55'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:09:03'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:09:03'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:09:03'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:09:03'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:09:03'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:09:03'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:09:14'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:09:14'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:09:14'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:09:14'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:09:14'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:09:14'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:19'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:19'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:19'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:19'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:11:19'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:11:19'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:23'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:23'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:23'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:23'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:11:23'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:11:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:24'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:11:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '146ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:24'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:11:24'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:11:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '1239ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portal/[object%20Object]',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/[object%20Object]',
+  statusCode: 500,
+  duration: '23ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:25'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:29'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:29'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:29'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:29'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:11:29'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:11:29'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:37'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:37'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:37'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:37'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:11:37'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:11:37'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:43'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:43'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:43'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:11:43'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:11:43'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:11:43'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '267',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:43'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/',
+  statusCode: 200,
+  duration: '1602ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/696e57c13dfae6a37fa8e2e7',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 403,
+  duration: '94ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696e57c13dfae6a37fa8e2e7',
+  statusCode: 200,
+  duration: '153ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:49'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:11:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/696e57c13dfae6a37fa8e2e7',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '131ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings',
+  statusCode: 403,
+  duration: '111ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/696e57c13dfae6a37fa8e2e7',
+  statusCode: 200,
+  duration: '436ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:50'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: '58',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:52'
+}
+{
+  service: 'autovista-api',
+  userId: new ObjectId('6524996159c4bd7288b51f5e'),
+  quoteId: '696e57c13dfae6a37fa8e2e7',
+  changes: [ 'status', 'quoteId' ],
+  level: 'info',
+  message: 'User annafkh@gmail.com updating quote 696e57c13dfae6a37fa8e2e7',
+  timestamp: '2026-01-19 09:11:52'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/',
+  statusCode: 200,
+  duration: '279ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=150',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:52'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 150,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:11:52'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:11:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=150',
+  statusCode: 200,
+  duration: '839ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:53'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:11:53'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:11:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '626ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:54'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:11:54'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:11:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '676ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:56'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-01-19 09:11:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '119ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:11:57'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:11:57'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:11:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '643ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:11:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-01-19 09:13:01'
+}
+{
+  service: 'autovista-api',
+  query: '{\n' +
+    '  "portal": {\n' +
+    '    "$in": [\n' +
+    '      "69664e5968d3227b9d6860c6"\n' +
+    '    ]\n' +
+    '  },\n' +
+    '  "user": "6524996159c4bd7288b51f5e",\n' +
+    '  "$or": [\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$exists": false\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": null\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "status": {\n' +
+    '        "$nin": [\n' +
+    '          "archived",\n' +
+    '          "Archived"\n' +
+    '        ]\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}',
+  queryPortalId: '[object Object]',
+  userRole: 'portal_user',
+  portalIdParam: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  hasStatusExclusion: true,
+  level: 'info',
+  message: 'Getting quotes with query',
+  timestamp: '2026-01-19 09:13:01'
+}
+{
+  service: 'autovista-api',
+  count: 0,
+  returned: 0,
+  userRole: 'portal_user',
+  portalId: { '$in': [ '69664e5968d3227b9d6860c6' ] },
+  level: 'info',
+  message: 'Quotes retrieved',
+  timestamp: '2026-01-19 09:13:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quotes?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '738ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-01-19 09:13:02'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:13:44'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:13:44'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:13:44'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-19 09:13:44'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-01-19 09:13:44'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-01-19 09:13:44'
+}

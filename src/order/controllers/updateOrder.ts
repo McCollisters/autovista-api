@@ -4,6 +4,7 @@ import { logger } from "@/core/logger";
 import { PaymentType, TransportType } from "@/_global/enums";
 import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper";
 import { updateOrderTariffsInSuper } from "../integrations/updateOrderTariffsInSuper";
+import { resolveId } from "@/_global/utils/resolveId";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   const byEmail = new Map<string, any>();
@@ -72,6 +73,9 @@ export const updateOrder = async (
       if (normalized !== undefined) {
         updateDoc.$set.hasPaid = normalized;
       }
+    }
+    if (updateDoc.$set.portalId !== undefined) {
+      updateDoc.$set.portalId = resolveId(updateDoc.$set.portalId);
     }
     if (updateDoc.$set.paymentType !== undefined) {
       updateDoc.$set.paymentType = String(updateDoc.$set.paymentType).toLowerCase();

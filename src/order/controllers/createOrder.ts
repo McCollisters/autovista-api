@@ -17,6 +17,7 @@ import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotificat
 import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
 import { MMI_PORTALS } from "../../_global/constants/portalIds";
+import { resolveId } from "@/_global/utils/resolveId";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   const byEmail = new Map<string, any>();
@@ -117,6 +118,9 @@ export const createOrder = async (
     }
 
     let payment = PaymentType.Billing;
+
+    quoteId = resolveId(quoteId);
+    portalId = resolveId(portalId);
 
     if (paymentType) {
       if (paymentType.value) {

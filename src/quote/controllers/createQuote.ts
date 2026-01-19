@@ -8,6 +8,7 @@ import { calculateTotalPricing } from "../services/calculateTotalPricing";
 import { validateLocation } from "../services/validateLocation";
 import { matchesExistingQuote } from "../services/matchesExistingQuote";
 import { getTransitTimeFromSettings } from "../services/getTransitTimeFromSettings";
+import { resolveId } from "@/_global/utils/resolveId";
 
 export const createQuote = async (
   req: express.Request,
@@ -16,8 +17,8 @@ export const createQuote = async (
 ): Promise<void> => {
   try {
     const { customer, origin, destination, vehicles, commission } = req.body;
-    const userId = req.body?.user ?? req.body?.userId;
-    const portalId = req.body?.portal ?? req.body?.portalId;
+    const userId = resolveId(req.body?.user ?? req.body?.userId);
+    const portalId = resolveId(req.body?.portal ?? req.body?.portalId);
 
     const existingQuote = await matchesExistingQuote(
       origin,
