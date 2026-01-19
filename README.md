@@ -787,14 +787,7 @@ Scheduled tasks that run automatically.
 
 #### Features
 
-- **Migration Jobs**: Run database migrations automatically
 - **Scheduled Tasks**: Configure cron jobs for recurring tasks
-
-#### Current Jobs
-
-- **Daily Migrations**: Runs at 1:00 AM daily (timezone: America/New_York)
-  - Executes: `npm run migrate:all`
-  - Logs output and errors
 
 #### Configuration
 

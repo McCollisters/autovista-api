@@ -34,6 +34,22 @@ const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   return Array.from(byEmail.values());
 };
 
+const normalizeBoolean = (value: unknown) => {
+  if (typeof value === "boolean") {
+    return value;
+  }
+  if (typeof value === "string") {
+    const normalized = value.trim().toLowerCase();
+    if (normalized === "true") return true;
+    if (normalized === "false") return false;
+  }
+  if (typeof value === "number") {
+    if (value === 1) return true;
+    if (value === 0) return false;
+  }
+  return undefined;
+};
+
 export const updateOrder = async (
   req: express.Request,
   res: express.Response,
@@ -51,6 +67,12 @@ export const updateOrder = async (
     if (updateDoc.$set.priceOverrides) {
       delete updateDoc.$set.priceOverrides;
     }
+    if (updateDoc.$set.hasPaid !== undefined) {
+      const normalized = normalizeBoolean(updateDoc.$set.hasPaid);
+      if (normalized !== undefined) {
+        updateDoc.$set.hasPaid = normalized;
+      }
+    }
     if (req.body?.pickupLocationType) {
       updateDoc.$set["origin.locationType"] = req.body.pickupLocationType;
       delete updateDoc.$set.pickupLocationType;
@@ -60,6 +82,9 @@ export const updateOrder = async (
         req.body.deliveryLocationType;
       delete updateDoc.$set.deliveryLocationType;
     }
+
+    const existingOrder = await Order.findById(req.params.orderId);
+    const previousHasPaid = existingOrder?.hasPaid === true;
 
     let updatedOrder = await Order.findByIdAndUpdate(
       req.params.orderId,
@@ -174,13 +199,16 @@ export const updateOrder = async (
       const hasTmsGuid = Boolean(updatedOrder.tms?.guid);
       let shouldSave = false;
 
-      if (updatedOrder.hasPaid === true && isCod) {
+      const hasPaidFlipped =
+        updatedOrder.hasPaid === true && previousHasPaid !== true;
+
+      if (hasPaidFlipped && isCod) {
         updatedOrder.orderTableStatus = "New";
         shouldSave = true;
       }
 
       if (
-        updatedOrder.hasPaid === true &&
+        hasPaidFlipped &&
         isCod &&
         !isWhiteGlove &&
         !hasTmsGuid

@@ -5550,3 +5550,35 @@
   message: 'Error updating quote',
   timestamp: '2026-01-18 21:57:25'
 }
+{
+  service: 'autovista-api',
+  serviceLevel: 5,
+  make: 'CHEVROLET',
+  model: 'SUBURBAN',
+  level: 'error',
+  message: 'No pricing totals found for vehicle',
+  timestamp: '2026-01-19 08:37:25'
+}
+{
+  service: 'autovista-api',
+  error: 'No pricing found for service level 5 for vehicle CHEVROLET SUBURBAN',
+  stack: 'Error: No pricing found for service level 5 for vehicle CHEVROLET SUBURBAN\n' +
+    '    at <anonymous> (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:183:15)\n' +
+    '    at Array.map (<anonymous>)\n' +
+    '    at methods.<computed> (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/types/array/methods/index.js:1061:24)\n' +
+    '    at sendPartialOrderToSuper (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/integrations/sendPartialOrderToSuper.ts:159:47)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async updateOrder (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/controllers/updateOrder.ts:244:35)',
+  orderNumber: '222913',
+  level: 'error',
+  message: 'Error sending partial order to Super Dispatch:',
+  timestamp: '2026-01-19 08:37:25'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6969905431c55551065b6c14'),
+  error: 'No pricing found for service level 5 for vehicle CHEVROLET SUBURBAN',
+  level: 'error',
+  message: 'Failed to send COD partial order to SuperDispatch',
+  timestamp: '2026-01-19 08:37:25'
+}

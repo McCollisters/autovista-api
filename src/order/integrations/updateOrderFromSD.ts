@@ -7,6 +7,7 @@
 
 import { DateTime } from "luxon";
 import { IOrder, IPortal, Portal } from "@/_global/models";
+import { Status } from "@/_global/enums";
 import { logger } from "@/core/logger";
 import { isWithheldAddress } from "../utils/checkWithheldAddress";
 
@@ -667,7 +668,7 @@ export const updateOrderFromSD = async (
     // Build the complete order update object
     const orderUpdate: Partial<IOrder> = {
       // Basic order info
-      status: "Booked" as any,
+      status: Status.Booked,
       reg: purchaseOrderNumber,
       tms: {
         guid: superDispatchOrder.guid,

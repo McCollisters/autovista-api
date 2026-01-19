@@ -163,16 +163,23 @@ export const sendPartialOrderToSuper = async (
         missingFields.push("vehicle.make/model");
       }
       const totalsForLevel = (quote as any)?.pricing?.totals?.[totalsKey];
+      const fallbackTotal =
+        (quote as any)?.pricing?.totalWithCompanyTariffAndCommission ??
+        (quote as any)?.pricing?.total ??
+        (quote as any)?.tariff ??
+        null;
       const totalOpen =
         totalsForLevel?.open?.totalWithCompanyTariffAndCommission ??
         totalsForLevel?.open?.total ??
         totalsForLevel?.totalWithCompanyTariffAndCommission ??
-        totalsForLevel?.total;
+        totalsForLevel?.total ??
+        fallbackTotal;
       const totalEnclosed =
         totalsForLevel?.enclosed?.totalWithCompanyTariffAndCommission ??
         totalsForLevel?.enclosed?.total ??
         totalsForLevel?.totalWithCompanyTariffAndCommission ??
-        totalsForLevel?.total;
+        totalsForLevel?.total ??
+        fallbackTotal;
 
       if (totalOpen == null && totalEnclosed == null) {
         logger.error("No pricing totals found for vehicle", {
@@ -279,12 +286,13 @@ export const sendPartialOrderToSuper = async (
       body: JSON.stringify(sanitizedOrderDetails),
     });
 
+    const responseText = await response.text();
+
     if (!response.ok) {
-      const errorText = await response.text();
       logger.error("Super Dispatch API error response:", {
         status: response.status,
         statusText: response.statusText,
-        error: errorText,
+        error: responseText,
         orderNumber,
       });
       throw new Error(
@@ -292,7 +300,16 @@ export const sendPartialOrderToSuper = async (
       );
     }
 
-    const result = await response.json();
+    let result: any;
+    try {
+      result = responseText ? JSON.parse(responseText) : {};
+    } catch (parseError) {
+      logger.error("Failed to parse Super Dispatch response JSON", {
+        orderNumber,
+        error: parseError instanceof Error ? parseError.message : String(parseError),
+      });
+      throw parseError;
+    }
 
     // Handle Super Dispatch validation errors
     if (result.data?.error_id) {
