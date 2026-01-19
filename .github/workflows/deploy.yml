@@ -271,6 +271,22 @@ jobs:
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_PRICING_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_PRICING_API_KEY","Value":$val}]')
           fi
 
+          if [ -n "${{ secrets.PAPERTRAIL_HOST }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_HOST }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_HOST","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.PAPERTRAIL_PORT }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_PORT }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_PORT","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.PAPERTRAIL_APP_NAME }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_APP_NAME }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_APP_NAME","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.PAPERTRAIL_LEVEL }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_LEVEL }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_LEVEL","Value":$val}]')
+          fi
+
           # Update the environment with all option settings
           OPTION_COUNT=$(echo "$OPTIONS" | jq 'length')
           if [ "$OPTION_COUNT" -gt 0 ]; then

@@ -1,4 +1,6 @@
 import winston from "winston";
+import os from "os";
+import { PapertrailTransport } from "winston-papertrail";
 import { config } from "@/config/index";
 
 // Create logs directory if it doesn't exist
@@ -37,31 +39,53 @@ const consoleFormat = winston.format.combine(
   }),
 );
 
+const transports: winston.transport[] = [
+  // Console transport
+  new winston.transports.Console({
+    format: config.nodeEnv === "development" ? consoleFormat : logFormat,
+  }),
+
+  // File transports
+  new winston.transports.File({
+    filename: `${logDir}/error.log`,
+    level: "error",
+    maxsize: 5242880, // 5MB
+    maxFiles: 5,
+  }),
+  new winston.transports.File({
+    filename: `${logDir}/combined.log`,
+    maxsize: 5242880, // 5MB
+    maxFiles: 5,
+  }),
+];
+
+const papertrailHost = process.env.PAPERTRAIL_HOST;
+const papertrailPort = Number(process.env.PAPERTRAIL_PORT);
+const papertrailLevel =
+  process.env.PAPERTRAIL_LEVEL ||
+  (config.nodeEnv === "development" ? "debug" : "info");
+const papertrailProgram =
+  process.env.PAPERTRAIL_APP_NAME || `autovista-api-${config.nodeEnv}`;
+
+if (papertrailHost && Number.isFinite(papertrailPort)) {
+  transports.push(
+    new PapertrailTransport({
+      host: papertrailHost,
+      port: papertrailPort,
+      hostname: os.hostname(),
+      program: papertrailProgram,
+      level: papertrailLevel,
+      logFormat: (level, message) => `${level}: ${message}`,
+    }) as unknown as winston.transport,
+  );
+}
+
 // Create the logger
 export const logger = winston.createLogger({
   level: config.nodeEnv === "development" ? "debug" : "info",
   format: logFormat,
   defaultMeta: { service: "autovista-api" },
-  transports: [
-    // Console transport
-    new winston.transports.Console({
-      format: config.nodeEnv === "development" ? consoleFormat : logFormat,
-    }),
-
-    // File transports
-    new winston.transports.File({
-      filename: `${logDir}/error.log`,
-      level: "error",
-      maxsize: 5242880, // 5MB
-      maxFiles: 5,
-    }),
-    new winston.transports.File({
-      filename: `${logDir}/combined.log`,
-      maxsize: 5242880, // 5MB
-      maxFiles: 5,
-    }),
-  ],
-
+  transports,
   // Handle uncaught exceptions
   exceptionHandlers: [
     new winston.transports.File({ filename: `${logDir}/exceptions.log` }),
