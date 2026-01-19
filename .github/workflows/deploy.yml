@@ -237,6 +237,14 @@ jobs:
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_FROM_NUMBER }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_FROM_NUMBER","Value":$val}]')
           fi
 
+          if [ -n "${{ secrets.ACERTUS_LOG_ONLY }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ACERTUS_LOG_ONLY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ACERTUS_LOG_ONLY","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.ACERTUS_API_KEY }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ACERTUS_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ACERTUS_API_KEY","Value":$val}]')
+          fi
+
           if [ -n "${{ secrets.ALLOWED_ORIGINS }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ALLOWED_ORIGINS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ALLOWED_ORIGINS","Value":$val}]')
           fi
