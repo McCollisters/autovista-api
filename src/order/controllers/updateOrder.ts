@@ -9,13 +9,17 @@ const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   const byEmail = new Map<string, any>();
 
   existing.forEach((entry) => {
-    const email = String(entry?.email || "").trim().toLowerCase();
+    const email = String(entry?.email || "")
+      .trim()
+      .toLowerCase();
     if (!email) return;
     byEmail.set(email, { ...entry });
   });
 
   agents.forEach((agent) => {
-    const email = String(agent?.email || "").trim().toLowerCase();
+    const email = String(agent?.email || "")
+      .trim()
+      .toLowerCase();
     if (!email) return;
     const existingEntry = byEmail.get(email) || {};
     byEmail.set(email, {
@@ -52,7 +56,8 @@ export const updateOrder = async (
       delete updateDoc.$set.pickupLocationType;
     }
     if (req.body?.deliveryLocationType) {
-      updateDoc.$set["destination.locationType"] = req.body.deliveryLocationType;
+      updateDoc.$set["destination.locationType"] =
+        req.body.deliveryLocationType;
       delete updateDoc.$set.deliveryLocationType;
     }
 
@@ -143,7 +148,11 @@ export const updateOrder = async (
       }
     }
 
-    if (updatedOrder && Array.isArray(req.body?.agents) && req.body.agents.length > 0) {
+    if (
+      updatedOrder &&
+      Array.isArray(req.body?.agents) &&
+      req.body.agents.length > 0
+    ) {
       const portalId = (updatedOrder as any).portalId;
       const portal = portalId ? await Portal.findById(portalId) : null;
       if (portal) {
@@ -160,7 +169,8 @@ export const updateOrder = async (
     if (updatedOrder) {
       const paymentType = String(updatedOrder.paymentType || "").toLowerCase();
       const isCod = paymentType === PaymentType.Cod;
-      const isWhiteGlove = updatedOrder.transportType === TransportType.WhiteGlove;
+      const isWhiteGlove =
+        updatedOrder.transportType === TransportType.WhiteGlove;
       const hasTmsGuid = Boolean(updatedOrder.tms?.guid);
       let shouldSave = false;
 
@@ -200,12 +210,14 @@ export const updateOrder = async (
             });
           } else {
             const serviceLevel =
-              updatedOrder.schedule?.serviceLevel || (updatedOrder as any).serviceLevel;
+              updatedOrder.schedule?.serviceLevel ||
+              (updatedOrder as any).serviceLevel;
 
             const superResponse = await sendPartialOrderToSuper({
               quotes: (updatedOrder as any).vehicles || [],
-              uniqueId:
-                String((updatedOrder as any).uniqueId || updatedOrder.refId),
+              uniqueId: String(
+                (updatedOrder as any).uniqueId || updatedOrder.refId,
+              ),
               reg: updatedOrder.reg ? Number(updatedOrder.reg) : undefined,
               portal,
               dateRanges,
@@ -237,7 +249,8 @@ export const updateOrder = async (
         } catch (superError) {
           logger.error("Failed to send COD partial order to SuperDispatch", {
             orderId: updatedOrder._id,
-            error: superError instanceof Error ? superError.message : superError,
+            error:
+              superError instanceof Error ? superError.message : superError,
           });
         }
       }

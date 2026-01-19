@@ -303,7 +303,9 @@ export class OrderMigration extends MigrationBase {
       const totalOrders = await sourceOrdersCollection.countDocuments(query);
       console.log(`📊 Found ${totalOrders} orders to migrate from source`);
       if (cutoffDate) {
-        console.log(`📅 Filtering orders created since ${cutoffDate.toISOString()}`);
+        console.log(
+          `📅 Filtering orders created since ${cutoffDate.toISOString()}`,
+        );
       }
       const codOrdersCount = await sourceOrdersCollection.countDocuments({
         ...query,
