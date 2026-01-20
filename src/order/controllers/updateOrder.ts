@@ -117,57 +117,117 @@ export const updateOrder = async (
       let totalCompanyTariff = 0;
       let totalWithCompanyTariffAndCommission = 0;
 
-      updatedOrder.vehicles.forEach((vehicle: any) => {
-        const override = priceOverrides?.[vehicle.model];
-        if (!override) {
-          return;
+      const normalizeKey = (value: unknown) =>
+        String(value || "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]/g, "");
+
+      const normalizedOverrides = new Map<string, any>();
+      if (priceOverrides && typeof priceOverrides === "object") {
+        Object.entries(priceOverrides).forEach(([key, value]) => {
+          const normalizedKey = normalizeKey(key);
+          if (value && typeof value === "object") {
+            // Handle nested shape: { index: { model: overrides } }
+            const nestedEntries = Object.entries(value);
+            if (nestedEntries.length === 1) {
+              const [nestedKey, nestedValue] = nestedEntries[0];
+              normalizedOverrides.set(
+                normalizeKey(nestedKey),
+                nestedValue,
+              );
+              return;
+            }
+          }
+          normalizedOverrides.set(normalizedKey, value);
+        });
+      }
+
+      updatedOrder.vehicles.forEach((vehicle: any, vehicleIndex: number) => {
+        const modelKey = String(vehicle?.model || "").trim();
+        const normalizedModelKey = normalizeKey(modelKey);
+        let override =
+          priceOverrides?.[modelKey] ||
+          normalizedOverrides.get(normalizedModelKey);
+
+        if (
+          !override &&
+          updatedOrder.vehicles.length === 1 &&
+          normalizedOverrides.size === 1
+        ) {
+          const [[overrideKey, overrideValue]] = Array.from(
+            normalizedOverrides.entries(),
+          );
+          override = overrideValue;
         }
 
-        const baseTotal = Number(
-          override.basePriceOverride ??
-            override.total ??
-            override.pricing?.total ??
-            override.pricingTotal ??
-            vehicle.pricing?.base ??
-            vehicle.pricing?.total,
+        if (override) {
+          const baseTotal = Number(
+            override.basePriceOverride ??
+              override.total ??
+              override.pricing?.total ??
+              override.pricingTotal ??
+              vehicle.pricing?.total,
+          );
+          const commissionValue = Number(
+            override.commissionOverride ??
+              override.commission ??
+              override.modifiers?.commission ??
+              vehicle.pricing?.modifiers?.commission ??
+              (vehicle.pricing as any)?.commission,
+          );
+          const companyTariffValue = Number(
+            override.companyTariffOverride ??
+              override.companyTariff ??
+              override.modifiers?.companyTariff ??
+              vehicle.pricing?.modifiers?.companyTariff ??
+              (vehicle.pricing as any)?.companyTariff,
+          );
+
+          const nextTotal = Number.isFinite(baseTotal) ? baseTotal : 0;
+          const nextCommission = Number.isFinite(commissionValue)
+            ? commissionValue
+            : 0;
+          const nextCompanyTariff = Number.isFinite(companyTariffValue)
+            ? companyTariffValue
+            : 0;
+          const nextTotalWith = nextTotal + nextCommission + nextCompanyTariff;
+
+          vehicle.pricing = vehicle.pricing || {};
+          vehicle.pricing.total = nextTotal;
+          vehicle.pricing.modifiers = {
+            ...(vehicle.pricing.modifiers || {}),
+            commission: nextCommission,
+            companyTariff: nextCompanyTariff,
+          };
+          vehicle.pricing.totalWithCompanyTariffAndCommission = nextTotalWith;
+        }
+
+        const currentTotal = Number(vehicle.pricing?.total);
+        const currentCommission = Number(
+          vehicle.pricing?.modifiers?.commission,
         );
-        const commissionValue = Number(
-          override.commissionOverride ??
-            override.commission ??
-            override.modifiers?.commission ??
-            vehicle.pricing?.modifiers?.commission ??
-            (vehicle.pricing as any)?.commission,
+        const currentCompanyTariff = Number(
+          vehicle.pricing?.modifiers?.companyTariff,
         );
-        const companyTariffValue = Number(
-          override.companyTariffOverride ??
-            override.companyTariff ??
-            override.modifiers?.companyTariff ??
-            vehicle.pricing?.modifiers?.companyTariff ??
-            (vehicle.pricing as any)?.companyTariff,
+        const currentTotalWith = Number(
+          vehicle.pricing?.totalWithCompanyTariffAndCommission,
         );
 
-        const nextTotal = Number.isFinite(baseTotal) ? baseTotal : 0;
-        const nextCommission = Number.isFinite(commissionValue)
-          ? commissionValue
+        const safeTotal = Number.isFinite(currentTotal) ? currentTotal : 0;
+        const safeCommission = Number.isFinite(currentCommission)
+          ? currentCommission
           : 0;
-        const nextCompanyTariff = Number.isFinite(companyTariffValue)
-          ? companyTariffValue
+        const safeCompanyTariff = Number.isFinite(currentCompanyTariff)
+          ? currentCompanyTariff
           : 0;
-        const nextTotalWith = nextTotal + nextCommission + nextCompanyTariff;
+        const safeTotalWith = Number.isFinite(currentTotalWith)
+          ? currentTotalWith
+          : safeTotal + safeCommission + safeCompanyTariff;
 
-        vehicle.pricing = vehicle.pricing || {};
-        vehicle.pricing.total = nextTotal;
-        vehicle.pricing.modifiers = {
-          ...(vehicle.pricing.modifiers || {}),
-          commission: nextCommission,
-          companyTariff: nextCompanyTariff,
-        };
-        vehicle.pricing.totalWithCompanyTariffAndCommission = nextTotalWith;
-
-        totalBase += nextTotal;
-        totalCommission += nextCommission;
-        totalCompanyTariff += nextCompanyTariff;
-        totalWithCompanyTariffAndCommission += nextTotalWith;
+        totalBase += safeTotal;
+        totalCommission += safeCommission;
+        totalCompanyTariff += safeCompanyTariff;
+        totalWithCompanyTariffAndCommission += safeTotalWith;
       });
 
       updatedOrder.totalPricing = {
