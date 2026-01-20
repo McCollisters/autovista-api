@@ -1,6 +1,6 @@
 import winston from "winston";
 import os from "os";
-import PapertrailTransport from "winston-papertrail";
+import { createRequire } from "module";
 import { config } from "@/config/index";
 
 // Create logs directory if it doesn't exist
@@ -68,8 +68,10 @@ const papertrailProgram =
   process.env.PAPERTRAIL_APP_NAME || `autovista-api-${config.nodeEnv}`;
 
 if (papertrailHost && Number.isFinite(papertrailPort)) {
+  const require = createRequire(import.meta.url);
+  const { Papertrail } = require("winston-papertrail");
   transports.push(
-    new PapertrailTransport({
+    new Papertrail({
       host: papertrailHost,
       port: papertrailPort,
       hostname: os.hostname(),
