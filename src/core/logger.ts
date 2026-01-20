@@ -86,6 +86,7 @@ export const logger = winston.createLogger({
   format: logFormat,
   defaultMeta: { service: "autovista-api" },
   transports,
+
   // Handle uncaught exceptions
   exceptionHandlers: [
     new winston.transports.File({ filename: `${logDir}/exceptions.log` }),
