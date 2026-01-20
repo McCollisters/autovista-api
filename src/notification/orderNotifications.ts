@@ -43,6 +43,12 @@ export async function sendOrderNotification(
   params: OrderNotificationParams,
 ): Promise<{ success: boolean; emailSent?: boolean; smsSent?: boolean }> {
   const { orderId, type, email, sms, recipientEmail, recipientPhone } = params;
+  const emailWithTemplate = email
+    ? {
+        ...email,
+        templateName: email.templateName ?? type,
+      }
+    : undefined;
 
   try {
     const order = await Order.findById(orderId);
@@ -55,22 +61,22 @@ export async function sendOrderNotification(
 
     // Prepare metadata
     const metadata: NotificationMetadata = {
-      type: email ? "email" : sms ? "sms" : "email",
+      type: emailWithTemplate ? "email" : sms ? "sms" : "email",
       channel: type,
       orderId: orderId,
       recipientEmail:
         recipientEmail ||
-        (email
-          ? Array.isArray(email.to)
-            ? email.to[0]
-            : email.to
+        (emailWithTemplate
+          ? Array.isArray(emailWithTemplate.to)
+            ? emailWithTemplate.to[0]
+            : emailWithTemplate.to
           : undefined),
       recipientPhone: recipientPhone || sms?.to,
     };
 
     // Send notifications
     const result = await notificationManager.send({
-      email,
+      email: emailWithTemplate,
       sms,
       metadata,
     });
@@ -79,11 +85,11 @@ export async function sendOrderNotification(
     const notificationUpdate: any = {
       status: NotificationStatus.Sent,
       sentAt: new Date(),
-      recipientEmail: recipientEmail || email?.to,
+      recipientEmail: recipientEmail || emailWithTemplate?.to,
     };
 
     // Handle failures
-    if (email && result.email && !result.email.success) {
+    if (emailWithTemplate && result.email && !result.email.success) {
       notificationUpdate.status = NotificationStatus.Failed;
       notificationUpdate.failedAt = new Date();
     }

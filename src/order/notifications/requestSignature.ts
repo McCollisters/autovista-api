@@ -161,7 +161,14 @@ export async function requestSignature({
     };
 
     // Initialize HelloSign SDK
-    const hellosign = require("hellosign-sdk")({
+    if (!process.env.HELLOSIGN_API_KEY) {
+      logger.error("HelloSign API key not configured");
+      return { success: false, error: "HelloSign API key not configured." };
+    }
+
+    const hellosignModule = await import("hellosign-sdk");
+    const hellosignFactory = (hellosignModule as any).default || hellosignModule;
+    const hellosign = hellosignFactory({
       key: process.env.HELLOSIGN_API_KEY,
     });
 
@@ -346,7 +353,14 @@ export async function requestSignatureMMI({
     };
 
     // Initialize HelloSign SDK
-    const hellosign = require("hellosign-sdk")({
+    if (!process.env.HELLOSIGN_API_KEY) {
+      logger.error("HelloSign API key not configured");
+      return { success: false, error: "HelloSign API key not configured." };
+    }
+
+    const hellosignModule = await import("hellosign-sdk");
+    const hellosignFactory = (hellosignModule as any).default || hellosignModule;
+    const hellosign = hellosignFactory({
       key: process.env.HELLOSIGN_API_KEY,
     });
 

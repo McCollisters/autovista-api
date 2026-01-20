@@ -129,12 +129,28 @@ export const sendManualEmail = async (
         if (!order) {
           return next({ statusCode: 404, message: "Order not found." });
         }
-        const customerResult = await sendOrderCustomerPublicNew(order);
-        results = recipients.map((r) => ({
-          recipient: r.email,
-          success: customerResult.success ?? false,
-          error: customerResult.error,
-        }));
+        const customerResults = await Promise.allSettled(
+          recipients.map(async (recipient) => {
+            const result = await sendOrderCustomerPublicNew(order, {
+              recipientEmail: recipient.email,
+              recipientName: recipient.name,
+            });
+            return {
+              recipient: recipient.email,
+              success: result.success ?? false,
+              error: result.error,
+            };
+          }),
+        );
+        results = customerResults.map((result) =>
+          result.status === "fulfilled"
+            ? result.value
+            : {
+                recipient: "unknown",
+                success: false,
+                error: String(result.reason),
+              },
+        );
         break;
 
       case "paymentRequest":
@@ -148,12 +164,28 @@ export const sendManualEmail = async (
         if (!codOrder) {
           return next({ statusCode: 404, message: "Order not found." });
         }
-        const paymentResult = await sendCODPaymentRequest(codOrder);
-        results = recipients.map((r) => ({
-          recipient: r.email,
-          success: paymentResult.success ?? false,
-          error: paymentResult.error,
-        }));
+        const paymentResults = await Promise.allSettled(
+          recipients.map(async (recipient) => {
+            const result = await sendCODPaymentRequest(codOrder, {
+              recipientEmail: recipient.email,
+              recipientName: recipient.name,
+            });
+            return {
+              recipient: recipient.email,
+              success: result.success ?? false,
+              error: result.error,
+            };
+          }),
+        );
+        results = paymentResults.map((result) =>
+          result.status === "fulfilled"
+            ? result.value
+            : {
+                recipient: "unknown",
+                success: false,
+                error: String(result.reason),
+              },
+        );
         break;
 
       case "whiteGlove":
@@ -300,8 +332,11 @@ export const sendManualEmail = async (
             message: "Order ID is required for signature request.",
           });
         }
+        const signatureRecipient = recipients[0];
         const signatureResult = await sendOrderCustomerSignatureRequest({
           orderId,
+          recipientEmail: signatureRecipient?.email,
+          recipientName: signatureRecipient?.name,
         });
         // Signature request sends to customer email, so map to all recipients
         // In practice, this should only be the customer, but we support multiple for consistency
@@ -320,16 +355,30 @@ export const sendManualEmail = async (
           });
         }
         const { surveyUrl: customSurveyUrl } = req.body as any;
-        const surveyResult = await sendSurvey({
-          orderId,
-          surveyUrl: customSurveyUrl,
-        });
-        // Survey sends to customer email, so map to all recipients
-        results = recipients.map((r) => ({
-          recipient: r.email,
-          success: surveyResult.success,
-          error: surveyResult.error,
-        }));
+        const surveyResults = await Promise.allSettled(
+          recipients.map(async (recipient) => {
+            const result = await sendSurvey({
+              orderId,
+              surveyUrl: customSurveyUrl,
+              recipientEmail: recipient.email,
+              recipientName: recipient.name,
+            });
+            return {
+              recipient: recipient.email,
+              success: result.success,
+              error: result.error,
+            };
+          }),
+        );
+        results = surveyResults.map((result) =>
+          result.status === "fulfilled"
+            ? result.value
+            : {
+                recipient: "unknown",
+                success: false,
+                error: String(result.reason),
+              },
+        );
         break;
 
       case "custom":
@@ -349,6 +398,7 @@ export const sendManualEmail = async (
               subject: customSubject,
               html: customContent.html,
               text: customContent.text,
+              templateName: "Manual Custom Email",
             });
 
             return {

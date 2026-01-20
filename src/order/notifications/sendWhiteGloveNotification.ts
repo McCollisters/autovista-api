@@ -57,6 +57,7 @@ export const sendWhiteGloveNotification = async (
       subject,
       html,
       replyTo: senderEmail,
+      templateName: "White Glove Notification",
     });
 
     if (result.success) {

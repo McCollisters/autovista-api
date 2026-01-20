@@ -930,7 +930,9 @@ export const createOrder = async (
 
     // User lookup for agents with error handling
     if (
-      ((agents && agents[0] && !agents[0].name) || !agents) &&
+      (!agents ||
+        agents.length === 0 ||
+        (agents[0] && !agents[0].name)) &&
       orderUserId &&
       !MMI_PORTALS.includes(portalIdForAgents as (typeof MMI_PORTALS)[number])
     ) {
@@ -950,10 +952,18 @@ export const createOrder = async (
             },
           ];
         } else {
+          const resolvedUserName =
+            (foundUser as any).fullName ||
+            [foundUser.firstName, foundUser.lastName]
+              .filter(Boolean)
+              .join(" ")
+              .trim() ||
+            userName ||
+            "Unknown User";
           agents = [
             {
               email: foundUser.email,
-              name: userName,
+              name: resolvedUserName,
               pickup: true,
               delivery: true,
             },

@@ -125,6 +125,7 @@ export async function sendMMIOrderNotification({
       subject,
       html,
       replyTo: senderEmail,
+      templateName: "MMI Order Notification",
     });
 
     if (result.success) {

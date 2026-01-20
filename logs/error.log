@@ -5589,3 +5589,140 @@
   message: 'No user found with email from Google token',
   timestamp: '2026-01-19 15:27:50'
 }
+{
+  service: 'autovista-api',
+  error: "ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/customer-signature-request.hbs'",
+  stack: "Error: ENOENT: no such file or directory, open '/Users/annaharrington/Clients/McCollisters/autovista-api/templates/customer-signature-request.hbs'\n" +
+    '    at async open (node:internal/fs/promises:638:25)\n' +
+    '    at async readFile (node:internal/fs/promises:1242:14)\n' +
+    '    at async sendOrderCustomerSignatureRequest (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerSignatureRequest.ts:82:28)\n' +
+    '    at async sendManualEmail (/Users/annaharrington/Clients/McCollisters/autovista-api/src/notification/sendManualEmail.ts:303:33)',
+  level: 'error',
+  message: 'Error sending customer signature request for order 693301fecf3a63db1e43d798:',
+  timestamp: '2026-01-20 13:37:58'
+}
+{
+  service: 'autovista-api',
+  error: 'require is not defined',
+  stack: 'ReferenceError: require is not defined\n' +
+    '    at requestSignatureMMI (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/requestSignature.ts:349:23)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async requestOrderSignature (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/requestSignature.ts:413:14)\n' +
+    '    at async sendOrderCustomerSignatureRequest (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerSignatureRequest.ts:115:29)\n' +
+    '    at async sendManualEmail (/Users/annaharrington/Clients/McCollisters/autovista-api/src/notification/sendManualEmail.ts:303:33)',
+  orderId: '693301fecf3a63db1e43d798',
+  level: 'error',
+  message: 'Error requesting signature (MMI):',
+  timestamp: '2026-01-20 13:41:15'
+}
+{
+  service: 'autovista-api',
+  orderId: '693301fecf3a63db1e43d798',
+  refId: 221266,
+  error: 'require is not defined',
+  level: 'error',
+  message: 'Failed to send HelloSign signature request',
+  timestamp: '2026-01-20 13:41:15'
+}
+{
+  service: 'autovista-api',
+  error: 'require is not defined',
+  stack: 'ReferenceError: require is not defined\n' +
+    '    at requestSignatureMMI (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/requestSignature.ts:349:23)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n' +
+    '    at async requestOrderSignature (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/requestSignature.ts:413:14)\n' +
+    '    at async sendOrderCustomerSignatureRequest (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerSignatureRequest.ts:115:29)\n' +
+    '    at async sendManualEmail (/Users/annaharrington/Clients/McCollisters/autovista-api/src/notification/sendManualEmail.ts:303:33)',
+  orderId: '693301fecf3a63db1e43d798',
+  level: 'error',
+  message: 'Error requesting signature (MMI):',
+  timestamp: '2026-01-20 13:43:24'
+}
+{
+  service: 'autovista-api',
+  orderId: '693301fecf3a63db1e43d798',
+  refId: 221266,
+  error: 'require is not defined',
+  level: 'error',
+  message: 'Failed to send HelloSign signature request',
+  timestamp: '2026-01-20 13:43:24'
+}
+{
+  service: 'autovista-api',
+  error: "Cannot find package 'hellosign-sdk' imported from /Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/requestSignature.ts",
+  stack: "Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'hellosign-sdk' imported from /Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/requestSignature.ts\n" +
+    '    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:268:9)\n' +
+    '    at packageResolve (node:internal/modules/esm/resolve:768:81)\n' +
+    '    at moduleResolve (node:internal/modules/esm/resolve:854:18)\n' +
+    '    at defaultResolve (node:internal/modules/esm/resolve:984:11)\n' +
+    '    at nextResolve (node:internal/modules/esm/hooks:748:28)\n' +
+    '    at resolveBase (file:///Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/tsx/dist/esm/index.mjs?1768941856391:2:3744)\n' +
+    '    at resolveDirectory (file:///Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/tsx/dist/esm/index.mjs?1768941856391:2:4243)\n' +
+    '    at resolveTsPaths (file:///Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/tsx/dist/esm/index.mjs?1768941856391:2:4984)\n' +
+    '    at async resolve (file:///Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/tsx/dist/esm/index.mjs?1768941856391:2:5355)\n' +
+    '    at async nextResolve (node:internal/modules/esm/hooks:748:22)',
+  orderId: '693301fecf3a63db1e43d798',
+  level: 'error',
+  message: 'Error requesting signature (MMI):',
+  timestamp: '2026-01-20 13:44:41'
+}
+{
+  service: 'autovista-api',
+  orderId: '693301fecf3a63db1e43d798',
+  refId: 221266,
+  error: "Cannot find package 'hellosign-sdk' imported from /Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/requestSignature.ts",
+  level: 'error',
+  message: 'Failed to send HelloSign signature request',
+  timestamp: '2026-01-20 13:44:41'
+}
+{
+  service: 'autovista-api',
+  error: 'Invalid value "undefined" for header "Authorization"',
+  stack: 'TypeError [ERR_HTTP_INVALID_HEADER_VALUE]: Invalid value "undefined" for header "Authorization"\n' +
+    '    at ClientRequest.setHeader (node:_http_outgoing:702:3)\n' +
+    '    at new ClientRequest (node:_http_client:302:14)\n' +
+    '    at Object.request (node:https:381:10)\n' +
+    '    at makeRequest (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/hellosign-sdk/lib/HelloSignResource.js:402:19)\n' +
+    '    at Constructor._request (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/hellosign-sdk/lib/HelloSignResource.js:388:9)\n' +
+    '    at Constructor.sendWithTemplate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/hellosign-sdk/lib/HelloSignMethod.js:107:14)\n' +
+    '    at requestSignatureMMI (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/requestSignature.ts:358:57)\n' +
+    '    at async requestOrderSignature (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/requestSignature.ts:417:14)\n' +
+    '    at async sendOrderCustomerSignatureRequest (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendOrderCustomerSignatureRequest.ts:127:29)\n' +
+    '    at async sendManualEmail (/Users/annaharrington/Clients/McCollisters/autovista-api/src/notification/sendManualEmail.ts:304:33)',
+  orderId: '693301fecf3a63db1e43d798',
+  level: 'error',
+  message: 'Error requesting signature (MMI):',
+  timestamp: '2026-01-20 13:47:09'
+}
+{
+  service: 'autovista-api',
+  orderId: '693301fecf3a63db1e43d798',
+  refId: 221266,
+  error: 'Invalid value "undefined" for header "Authorization"',
+  level: 'error',
+  message: 'Failed to send HelloSign signature request',
+  timestamp: '2026-01-20 13:47:09'
+}
+{
+  service: 'autovista-api',
+  orderId: '696fc1c1c57874483f965559',
+  error: 'Order validation failed: transportType: `OPEN` is not a valid enum value for path `transportType`.',
+  stack: 'ValidationError: Order validation failed: transportType: `OPEN` is not a valid enum value for path `transportType`.\n' +
+    '    at Document.invalidate (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3362:32)\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/document.js:3123:17\n' +
+    '    at /Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/mongoose/lib/schemaType.js:1417:9\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)',
+  body: {
+    paymentType: 'Billing',
+    priceOverrides: {
+      'Other - SUV': {
+        basePriceOverride: '1568',
+        companyTariffOverride: '0',
+        commissionOverride: '250'
+      }
+    }
+  },
+  level: 'error',
+  message: 'updateOrder failed',
+  timestamp: '2026-01-20 14:13:05'
+}

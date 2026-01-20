@@ -99,6 +99,18 @@ export const updateOrder = async (
       { new: true },
     );
 
+    if (updatedOrder && updatedOrder.transportType) {
+      const transportTypeRaw = String(updatedOrder.transportType);
+      const transportTypeNormalized = transportTypeRaw.toLowerCase();
+      const validTransportTypes = Object.values(TransportType);
+      if (
+        !validTransportTypes.includes(updatedOrder.transportType as TransportType) &&
+        validTransportTypes.includes(transportTypeNormalized as TransportType)
+      ) {
+        updatedOrder.transportType = transportTypeNormalized as TransportType;
+      }
+    }
+
     if (updatedOrder && priceOverrides) {
       let totalBase = 0;
       let totalCommission = 0;
@@ -295,6 +307,12 @@ export const updateOrder = async (
 
     res.status(200).json(updatedOrder);
   } catch (error) {
+    logger.error("updateOrder failed", {
+      orderId: req.params.orderId,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      body: req.body,
+    });
     next(error);
   }
 };

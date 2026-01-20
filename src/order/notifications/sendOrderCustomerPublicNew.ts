@@ -36,6 +36,7 @@ const SIRVA_PORTAL_IDS = [
  */
 export async function sendOrderCustomerPublicNew(
   order: IOrder,
+  overrides: { recipientEmail?: string; recipientName?: string } = {},
 ): Promise<{ success: boolean; error?: string }> {
   if (!order) {
     logger.warn("Cannot send customer order email: Order is null");
@@ -87,7 +88,7 @@ export async function sendOrderCustomerPublicNew(
         "https://res.cloudinary.com/dq27r8cov/image/upload/v1631829206/McCollister%27s/autotrader-logo.png";
     }
 
-    const recipientEmail = order.customer?.email;
+    const recipientEmail = overrides.recipientEmail || order.customer?.email;
 
     if (!recipientEmail) {
       logger.warn(
@@ -96,7 +97,8 @@ export async function sendOrderCustomerPublicNew(
       return { success: false, error: "Customer email is required" };
     }
 
-    const recipientName = order.customer?.name || "Customer";
+    const recipientName =
+      overrides.recipientName || order.customer?.name || "Customer";
     const subject =
       emailTemplate.subject ||
       `Your Vehicle Transport Confirmation - Order #${order.refId}`;

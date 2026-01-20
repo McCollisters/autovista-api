@@ -65,6 +65,7 @@ export async function sendTrackOrderConfirmation({
       subject,
       html,
       from: senderEmail,
+      templateName: "Track Order Confirmation",
     });
 
     if (result.success) {

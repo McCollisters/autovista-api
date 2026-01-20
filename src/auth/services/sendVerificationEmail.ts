@@ -93,6 +93,7 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
       from: senderEmail,
       subject,
       html,
+      templateName: "Verification Code",
     });
 
     if (!result.success) {

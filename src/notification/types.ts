@@ -9,6 +9,7 @@ export interface EmailOptions {
   cc?: string | string[];
   bcc?: string | string[];
   subject: string;
+  templateName?: string;
   html?: string;
   text?: string;
   from?: string;

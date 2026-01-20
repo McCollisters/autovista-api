@@ -23,6 +23,7 @@ const __dirname = dirname(__filename);
  */
 export async function sendCODPaymentRequest(
   order: IOrder,
+  overrides: { recipientEmail?: string; recipientName?: string } = {},
 ): Promise<{ success: boolean; error?: string }> {
   if (!order) {
     logger.warn("Cannot send COD payment request: Order is null");
@@ -38,7 +39,7 @@ export async function sendCODPaymentRequest(
 
     const senderEmail = emailTemplate.senderEmail;
     const senderName = emailTemplate.senderName;
-    const recipientEmail = order.customer?.email;
+    const recipientEmail = overrides.recipientEmail || order.customer?.email;
 
     if (!recipientEmail) {
       logger.warn(
@@ -81,7 +82,7 @@ export async function sendCODPaymentRequest(
       vehiclesString,
       totalPrice: (order.totalPricing?.total || 0).toFixed(2),
       refId: order.refId,
-      recipientName: order.customer?.name || "Customer",
+      recipientName: overrides.recipientName || order.customer?.name || "Customer",
     });
 
     // Send email using order notification system to track it

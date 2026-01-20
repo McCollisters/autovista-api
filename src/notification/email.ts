@@ -159,7 +159,15 @@ export class EmailService {
         : {}),
     };
 
+    const toAddresses = Array.isArray(emailOptions.to)
+      ? emailOptions.to
+      : [emailOptions.to];
+
     logger.info("Preparing email notification", {
+      label: "email",
+      templateName: emailOptions.templateName || "unknown",
+      emailAddress: emailOptions.from || null,
+      recipient: toAddresses.length === 1 ? toAddresses[0] : toAddresses,
       overrideRecipient: overrideRecipient || null,
       to: emailOptions.to,
       cc: emailOptions.cc,

@@ -11,7 +11,7 @@
 
 import { logger } from "@/core/logger";
 import { Order } from "@/_global/models";
-import { sendOrderCustomerEmail } from "@/notification/orderNotifications";
+import { sendOrderNotification } from "@/notification/orderNotifications";
 import { requestOrderSignature } from "./requestSignature";
 import { join } from "path";
 import { readFile } from "fs/promises";
@@ -27,6 +27,8 @@ const __dirname = dirname(__filename);
 
 interface SendOrderCustomerSignatureRequestParams {
   orderId: string;
+  recipientEmail?: string;
+  recipientName?: string;
 }
 
 /**
@@ -35,6 +37,8 @@ interface SendOrderCustomerSignatureRequestParams {
  */
 export async function sendOrderCustomerSignatureRequest({
   orderId,
+  recipientEmail: overrideRecipientEmail,
+  recipientName: overrideRecipientName,
 }: SendOrderCustomerSignatureRequestParams): Promise<{
   success: boolean;
   error?: string;
@@ -46,14 +50,15 @@ export async function sendOrderCustomerSignatureRequest({
       return { success: false, error: "Order not found." };
     }
 
-    const recipientEmail = order.customer?.email;
-    const recipientName = order.customer?.name || "Customer";
+    const recipientEmail = overrideRecipientEmail || order.customer?.email;
+    const recipientName =
+      overrideRecipientName || order.customer?.name || "Customer";
 
     if (!recipientEmail) {
       logger.warn(
-        `Cannot send signature request: No customer email for order ${orderId}`,
+        `Cannot send signature request: No recipient email for order ${orderId}`,
       );
-      return { success: false, error: "Customer email is required." };
+      return { success: false, error: "Recipient email is required." };
     }
 
     // Step 1: Send email notification
@@ -70,11 +75,8 @@ export async function sendOrderCustomerSignatureRequest({
 
     // Select template based on portal type
     const templatePath = isSirva
-      ? join(
-          __dirname,
-          "../../../templates/customer-signature-request-sirva.hbs",
-        )
-      : join(__dirname, "../../../templates/customer-signature-request.hbs");
+      ? join(__dirname, "../../templates/customer-signature-request-sirva.hbs")
+      : join(__dirname, "../../templates/customer-signature-request.hbs");
 
     const subject = emailTemplate.subject || `Signature Request Required - Order #${order.refId}`;
 
@@ -88,14 +90,21 @@ export async function sendOrderCustomerSignatureRequest({
     });
 
     // Send email using order notification helper
-    const emailResult = await sendOrderCustomerEmail(
+    const emailResult = await sendOrderNotification({
       orderId,
-      "signatureRequest",
-      subject,
-      htmlContent,
-    );
+      type: "signatureRequest",
+      email: {
+        to: recipientEmail,
+        subject,
+        html: htmlContent,
+        from: senderEmail,
+        fromName: senderName,
+        replyTo: senderEmail,
+      },
+      recipientEmail,
+    });
 
-    if (!emailResult) {
+    if (!emailResult.success) {
       logger.error("Failed to send signature request email", {
         orderId,
         refId: order.refId,

@@ -79,6 +79,7 @@ export const forgotPassword = async (
       from: "autologistics@mccollisters.com",
       subject: "Your AutoVista Password Reset Link",
       html,
+      templateName: "Password Reset",
     });
 
     if (!result.success) {

@@ -165,8 +165,7 @@ export const updateSuperWithCompleteOrder = async (
       vehicleObj.tariff =
         sdVehicle.tariff !== undefined && sdVehicle.tariff !== null
           ? sdVehicle.tariff
-          : vehicle.pricing?.totalWithCompanyTariffAndCommission ||
-            vehicle.pricing?.total ||
+          : vehicle.pricing?.total ||
             (vehicle as any).tariff ||
             0;
 

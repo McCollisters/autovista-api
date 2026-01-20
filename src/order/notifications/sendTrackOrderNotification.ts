@@ -63,6 +63,7 @@ export async function sendTrackOrderNotification({
       subject,
       html,
       from: senderEmail,
+      templateName: "Track Order Notification",
     });
 
     if (result.success) {

@@ -70,6 +70,7 @@ export async function sendCarriers({
           html,
           from: senderEmail,
           fromName: senderName,
+          templateName: "Carrier Sign-Up",
         });
 
         return {

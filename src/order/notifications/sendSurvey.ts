@@ -7,7 +7,7 @@
 
 import { logger } from "@/core/logger";
 import { Order } from "@/_global/models";
-import { sendOrderCustomerEmail } from "@/notification/orderNotifications";
+import { sendOrderNotification } from "@/notification/orderNotifications";
 import { join } from "path";
 import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
@@ -22,6 +22,8 @@ const __dirname = dirname(__filename);
 interface SendSurveyParams {
   orderId: string;
   surveyUrl?: string; // Optional: custom survey URL, defaults to order-based URL
+  recipientEmail?: string;
+  recipientName?: string;
 }
 
 /**
@@ -30,6 +32,8 @@ interface SendSurveyParams {
 export async function sendSurvey({
   orderId,
   surveyUrl,
+  recipientEmail: overrideRecipientEmail,
+  recipientName: overrideRecipientName,
 }: SendSurveyParams): Promise<{ success: boolean; error?: string }> {
   try {
     const order = await Order.findById(orderId);
@@ -38,8 +42,9 @@ export async function sendSurvey({
       return { success: false, error: "Order not found." };
     }
 
-    const recipientEmail = order.customer?.email;
-    const recipientName = order.customer?.name;
+    const recipientEmail = overrideRecipientEmail || order.customer?.email;
+    const recipientName =
+      overrideRecipientName || order.customer?.name;
 
     if (!recipientEmail) {
       logger.warn(`Cannot send survey: No customer email for order ${orderId}`);
@@ -71,14 +76,21 @@ export async function sendSurvey({
     });
 
     // Send email using order notification helper
-    const result = await sendOrderCustomerEmail(
+    const result = await sendOrderNotification({
       orderId,
-      "survey",
-      subject,
-      htmlContent,
-    );
+      type: "survey",
+      email: {
+        to: recipientEmail,
+        subject,
+        html: htmlContent,
+        from: senderEmail,
+        fromName: senderName,
+        replyTo: senderEmail,
+      },
+      recipientEmail,
+    });
 
-    if (result) {
+    if (result.success) {
       logger.info("Survey email sent successfully", {
         orderId,
         refId: order.refId,
