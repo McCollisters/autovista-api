@@ -156,7 +156,6 @@ export const updateOrder = async (
         const nextTotalWith = nextTotal + nextCommission + nextCompanyTariff;
 
         vehicle.pricing = vehicle.pricing || {};
-        vehicle.pricing.base = nextTotal;
         vehicle.pricing.total = nextTotal;
         vehicle.pricing.modifiers = {
           ...(vehicle.pricing.modifiers || {}),
@@ -173,7 +172,7 @@ export const updateOrder = async (
 
       updatedOrder.totalPricing = {
         ...(updatedOrder.totalPricing || {}),
-        base: totalBase,
+        base: updatedOrder.totalPricing?.base,
         modifiers: {
           ...(updatedOrder.totalPricing?.modifiers || {}),
           commission: totalCommission,

@@ -396,6 +396,7 @@ function processExistingVehicle(
   const price = savedVehicle.pricing;
   const commission = price.modifiers?.commission || orderCommission || 0;
   const cTariff = price.modifiers?.companyTariff || orderCompanyTariff || 0;
+  const totalValue = sdVehicle.tariff;
 
   return {
     tariff: sdVehicle.tariff,
@@ -425,8 +426,8 @@ function processExistingVehicle(
         commission,
       },
       // Always update pricing from Super Dispatch
-      total: sdVehicle.tariff,
-      totalWithCompanyTariffAndCommission: sdVehicle.tariff + commission + cTariff,
+      total: totalValue,
+      totalWithCompanyTariffAndCommission: totalValue + commission + cTariff,
     },
   };
 }
@@ -438,6 +439,7 @@ function processNewVehicle(
 ) {
   const commission = orderCommission || 0;
   const cTariff = orderCompanyTariff || 0;
+  const totalValue = sdVehicle.tariff;
 
   return {
     tariff: sdVehicle.tariff,
@@ -474,8 +476,8 @@ function processNewVehicle(
         companyTariff: cTariff,
       },
       // Always update pricing from Super Dispatch
-      total: sdVehicle.tariff,
-      totalWithCompanyTariffAndCommission: sdVehicle.tariff + commission + cTariff,
+      total: totalValue,
+      totalWithCompanyTariffAndCommission: totalValue + commission + cTariff,
     },
   };
 }

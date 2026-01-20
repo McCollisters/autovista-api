@@ -247,6 +247,7 @@ export const sendPartialOrderToSuper = async (
           address: "123 Example St. ADDRESS WITTHELD",
           city: normalizedPickupCity,
           state: normalizedPickupState,
+          zip: normalizedPickupZip,
         },
       },
       delivery: {
@@ -257,6 +258,7 @@ export const sendPartialOrderToSuper = async (
           address: "123 Example St. ADDRESS WITTHELD",
           city: normalizedDeliveryCity,
           state: normalizedDeliveryState,
+          zip: normalizedDeliveryZip,
         },
       },
       transport_type: String(transportType || "").toUpperCase(),
