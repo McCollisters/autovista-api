@@ -380,7 +380,8 @@ const mapSdVehicleType = (type?: string | null) => {
 function processExistingVehicle(
   sdVehicle: SuperDispatchOrder["vehicles"][0],
   savedVehicle: IOrder["vehicles"][0],
-  portal: IPortal,
+  orderCommission: number,
+  orderCompanyTariff: number,
 ) {
   let updatedBaseQuote: number | null = null;
 
@@ -393,6 +394,8 @@ function processExistingVehicle(
   }
 
   const price = savedVehicle.pricing;
+  const commission = price.modifiers?.commission || orderCommission || 0;
+  const cTariff = price.modifiers?.companyTariff || orderCompanyTariff || 0;
 
   return {
     tariff: sdVehicle.tariff,
@@ -418,31 +421,23 @@ function processExistingVehicle(
       base: updatedBaseQuote || price.base || 0,
       modifiers: {
         ...price.modifiers,
+        companyTariff: cTariff,
+        commission,
       },
       // Always update pricing from Super Dispatch
       total: sdVehicle.tariff,
-      totalWithCompanyTariffAndCommission:
-        sdVehicle.tariff +
-        (price.modifiers.commission || 0) +
-        (price.modifiers.companyTariff || 0),
+      totalWithCompanyTariffAndCommission: sdVehicle.tariff + commission + cTariff,
     },
   };
 }
 
 function processNewVehicle(
   sdVehicle: SuperDispatchOrder["vehicles"][0],
-  portal: IPortal,
+  orderCommission: number,
+  orderCompanyTariff: number,
 ) {
-  const portalAny = portal as any;
-  let cTariff = 0;
-
-  if (portalAny.companyTariff) {
-    if (portalAny.companyTariffIsPercent) {
-      cTariff = Math.ceil(sdVehicle.tariff * (portalAny.companyTariff / 100));
-    } else {
-      cTariff = portalAny.companyTariff;
-    }
-  }
+  const commission = orderCommission || 0;
+  const cTariff = orderCompanyTariff || 0;
 
   return {
     tariff: sdVehicle.tariff,
@@ -474,13 +469,13 @@ function processNewVehicle(
         fuel: 0,
         enclosedFlat: 0,
         enclosedPercent: 0,
-        commission: 0,
+        commission,
         serviceLevel: 0,
         companyTariff: cTariff,
       },
       // Always update pricing from Super Dispatch
       total: sdVehicle.tariff,
-      totalWithCompanyTariffAndCommission: sdVehicle.tariff + cTariff,
+      totalWithCompanyTariffAndCommission: sdVehicle.tariff + commission + cTariff,
     },
   };
 }
@@ -493,18 +488,30 @@ function processVehicles(
   const vehicles: IOrder["vehicles"] = [];
   let totalSDAmt = 0;
   let totalPortalAmt = 0;
+  const orderCommission = existingOrder.totalPricing?.modifiers?.commission || 0;
+  const orderCompanyTariff =
+    existingOrder.totalPricing?.modifiers?.companyTariff || 0;
 
   sdOrder.vehicles.forEach((vehicle) => {
     const savedVehicle = findMatchingVehicle(vehicle, existingOrder.vehicles);
 
     if (savedVehicle) {
-      const vehicleData = processExistingVehicle(vehicle, savedVehicle, portal);
+      const vehicleData = processExistingVehicle(
+        vehicle,
+        savedVehicle,
+        orderCommission,
+        orderCompanyTariff,
+      );
       vehicles.push(vehicleData as IOrder["vehicles"][0]);
 
       totalSDAmt += vehicle.tariff;
       totalPortalAmt += vehicleData.pricing.totalWithCompanyTariffAndCommission;
     } else {
-      const vehicleData = processNewVehicle(vehicle, portal);
+      const vehicleData = processNewVehicle(
+        vehicle,
+        orderCommission,
+        orderCompanyTariff,
+      );
       vehicles.push(vehicleData as IOrder["vehicles"][0]);
 
       totalSDAmt += vehicle.tariff;

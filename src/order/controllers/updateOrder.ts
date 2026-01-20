@@ -127,17 +127,23 @@ export const updateOrder = async (
           override.basePriceOverride ??
             override.total ??
             override.pricing?.total ??
-            override.pricingTotal,
+            override.pricingTotal ??
+            vehicle.pricing?.base ??
+            vehicle.pricing?.total,
         );
         const commissionValue = Number(
           override.commissionOverride ??
             override.commission ??
-            override.modifiers?.commission,
+            override.modifiers?.commission ??
+            vehicle.pricing?.modifiers?.commission ??
+            (vehicle.pricing as any)?.commission,
         );
         const companyTariffValue = Number(
           override.companyTariffOverride ??
             override.companyTariff ??
-            override.modifiers?.companyTariff,
+            override.modifiers?.companyTariff ??
+            vehicle.pricing?.modifiers?.companyTariff ??
+            (vehicle.pricing as any)?.companyTariff,
         );
 
         const nextTotal = Number.isFinite(baseTotal) ? baseTotal : 0;
