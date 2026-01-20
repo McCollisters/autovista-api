@@ -1,6 +1,6 @@
 import winston from "winston";
 import os from "os";
-import { PapertrailTransport } from "winston-papertrail";
+import PapertrailTransport from "winston-papertrail";
 import { config } from "@/config/index";
 
 // Create logs directory if it doesn't exist
