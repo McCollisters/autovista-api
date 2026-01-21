@@ -737,8 +737,9 @@ export const updateOrderFromSD = async (
       miles: databaseOrder.miles,
       transportType:
         databaseOrder.transportType === "WHITEGLOVE"
-          ? databaseOrder.transportType
-          : (superDispatchOrder.transport_type.toUpperCase() as any),
+          ? TransportType.WhiteGlove
+          : (String(superDispatchOrder.transport_type || "")
+              .toLowerCase() as TransportType),
       agents: databaseOrder.agents,
       driver: databaseOrder.driver,
       hasClaim: databaseOrder.hasClaim,
