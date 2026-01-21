@@ -24,7 +24,7 @@ export function initializeCronJobs() {
 
   if (enableNotificationCron) {
     cron.schedule(
-      "0 8,10,12,14,16,18 * * *",
+      "0 6,10,14,20 * * *",
       async () => {
         try {
           if (!isProduction) {
@@ -155,6 +155,6 @@ export function initializeCronJobs() {
   }
 
   logger.info(
-    "✅ Cron jobs initialized - Notifications scheduled at 8/10/12/14/16/18",
+    "✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)",
   );
 }
