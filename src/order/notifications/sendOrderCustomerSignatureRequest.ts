@@ -17,6 +17,7 @@ import { join } from "path";
 import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
 import { SIRVA_PORTALS } from "@/_global/constants/portalIds";
+import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 // Using fileURLToPath and dirname for __dirname equivalent in ES modules
 import { fileURLToPath } from "url";
@@ -77,11 +78,21 @@ export async function sendOrderCustomerSignatureRequest({
     const templatePath = isSirva
       ? join(__dirname, "../../templates/customer-signature-request-sirva.hbs")
       : join(__dirname, "../../templates/customer-signature-request.hbs");
+    const resolvedTemplatePath = await resolveTemplatePath(
+      templatePath,
+      join(
+        process.cwd(),
+        "src/templates",
+        isSirva
+          ? "customer-signature-request-sirva.hbs"
+          : "customer-signature-request.hbs",
+      ),
+    );
 
     const subject = emailTemplate.subject || `Signature Request Required - Order #${order.refId}`;
 
     // Load and compile Handlebars template
-    const templateSource = await readFile(templatePath, "utf-8");
+    const templateSource = await readFile(resolvedTemplatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
     // Prepare template data

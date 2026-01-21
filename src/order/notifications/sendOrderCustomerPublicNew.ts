@@ -17,6 +17,7 @@ import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
 import { DateTime } from "luxon";
 import { MMI_PORTALS } from "@/_global/constants/portalIds";
+import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -73,6 +74,14 @@ export async function sendOrderCustomerPublicNew(
     const templatePath = isSirva
       ? path.join(__dirname, "../../templates/customer-order-sirva.hbs")
       : path.join(__dirname, "../../templates/customer-order-new.hbs");
+    const resolvedTemplatePath = await resolveTemplatePath(
+      templatePath,
+      path.join(
+        process.cwd(),
+        "src/templates",
+        isSirva ? "customer-order-sirva.hbs" : "customer-order-new.hbs",
+      ),
+    );
 
     const mclogo =
       "https://res.cloudinary.com/dq27r8cov/image/upload/v1616097775/McCollister%27s/mccollisters-auto-logistics.png";
@@ -228,7 +237,7 @@ export async function sendOrderCustomerPublicNew(
     const termsUrl = `https://autovista.mccollisters.com/terms/${orderId}/${order.refId}`;
 
     // Load and compile template
-    const templateSource = await readFile(templatePath, "utf-8");
+    const templateSource = await readFile(resolvedTemplatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
     // Prepare template data

@@ -16,6 +16,7 @@ import { sendOrderNotification } from "@/notification/orderNotifications";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
+import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -83,7 +84,11 @@ export async function sendOrderAgentEmail({
 
     // Load and compile Handlebars template
     const templatePath = join(__dirname, "../../templates/order-agent.hbs");
-    const templateSource = await readFile(templatePath, "utf-8");
+    const resolvedTemplatePath = await resolveTemplatePath(
+      templatePath,
+      join(process.cwd(), "src/templates/order-agent.hbs"),
+    );
+    const templateSource = await readFile(resolvedTemplatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
     // Prepare template data

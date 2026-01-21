@@ -14,6 +14,7 @@ import { IOrder } from "@/_global/models";
 import { getNotificationManager } from "@/notification";
 import { sendOrderNotification } from "@/notification/orderNotifications";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
+import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -73,7 +74,11 @@ export async function sendCODPaymentRequest(
       __dirname,
       "../../templates/cod-payment-request.hbs",
     );
-    const templateSource = await readFile(templatePath, "utf-8");
+    const resolvedTemplatePath = await resolveTemplatePath(
+      templatePath,
+      path.join(process.cwd(), "src/templates/cod-payment-request.hbs"),
+    );
+    const templateSource = await readFile(resolvedTemplatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
     // Prepare template data

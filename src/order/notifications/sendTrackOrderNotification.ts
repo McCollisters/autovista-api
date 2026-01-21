@@ -11,6 +11,7 @@ import { getNotificationManager } from "@/notification";
 import { join } from "path";
 import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
+import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 // __dirname and __filename are available in CommonJS modules
 
@@ -45,7 +46,11 @@ export async function sendTrackOrderNotification({
       __dirname,
       "../../../templates/track-order-notification.hbs",
     );
-    const templateSource = await readFile(templatePath, "utf-8");
+    const resolvedTemplatePath = await resolveTemplatePath(
+      templatePath,
+      join(process.cwd(), "src/templates/track-order-notification.hbs"),
+    );
+    const templateSource = await readFile(resolvedTemplatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
     // Prepare template data

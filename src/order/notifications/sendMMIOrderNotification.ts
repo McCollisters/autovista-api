@@ -12,6 +12,7 @@ import { IOrder } from "@/_global/models";
 import { getNotificationManager } from "@/notification";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
+import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 // __dirname and __filename are available in CommonJS modules
 
@@ -90,7 +91,11 @@ export async function sendMMIOrderNotification({
       __dirname,
       "../../../templates/mmi-order-notification.hbs",
     );
-    const templateSource = await readFile(templatePath, "utf-8");
+    const resolvedTemplatePath = await resolveTemplatePath(
+      templatePath,
+      path.join(process.cwd(), "src/templates/mmi-order-notification.hbs"),
+    );
+    const templateSource = await readFile(resolvedTemplatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
     // Prepare template data

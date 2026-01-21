@@ -10,7 +10,7 @@
     "dev": "NODE_ENV=development tsx --watch src/index.ts",
     "start": "NODE_ENV=production node dist/index.js",
     "build": "tsc || true",
-    "postbuild": "node fix-imports.cjs",
+    "postbuild": "node fix-imports.cjs && node scripts/copy-templates.cjs",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

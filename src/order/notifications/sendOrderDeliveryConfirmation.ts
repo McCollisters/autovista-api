@@ -13,6 +13,7 @@ import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
 import { format } from "date-fns";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
+import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 // Using fileURLToPath and dirname for __dirname equivalent in ES modules
 import { fileURLToPath } from "url";
@@ -151,7 +152,11 @@ export async function sendOrderDeliveryConfirmation({
 
     // Load and compile Handlebars template
     const templatePath = join(__dirname, "../../templates/order-delivery.hbs");
-    const templateSource = await readFile(templatePath, "utf-8");
+    const resolvedTemplatePath = await resolveTemplatePath(
+      templatePath,
+      join(process.cwd(), "src/templates/order-delivery.hbs"),
+    );
+    const templateSource = await readFile(resolvedTemplatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
     // Send email to each recipient

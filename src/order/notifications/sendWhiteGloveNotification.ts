@@ -11,6 +11,7 @@ import Handlebars from "handlebars";
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
 import { getNotificationManager } from "@/notification";
+import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 interface SendWhiteGloveNotificationParams {
   order: IOrder;
@@ -40,7 +41,11 @@ export const sendWhiteGloveNotification = async (
 
     // Load and compile Handlebars template
     const templatePath = join(__dirname, "../../templates/white-glove.hbs");
-    const templateSource = await readFile(templatePath, "utf-8");
+    const resolvedTemplatePath = await resolveTemplatePath(
+      templatePath,
+      join(process.cwd(), "src/templates/white-glove.hbs"),
+    );
+    const templateSource = await readFile(resolvedTemplatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
     // Prepare template data
