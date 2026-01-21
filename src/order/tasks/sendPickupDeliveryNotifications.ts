@@ -5,17 +5,24 @@ import { sendOrderDeliveryConfirmation } from "@/order/notifications/sendOrderDe
 import { MMI_PORTALS } from "@/_global/constants/portalIds";
 
 const SIRVA_PORTAL_ID = "5e99f0b420e68d5f479d7317";
-const DEFAULT_CUTOFF_DATE = new Date("2024-05-20");
+const DEFAULT_CUTOFF_DAYS = 60;
 
 type NotificationType = "pickup" | "delivery";
 
 const getCutoffDate = () => {
   const envDate = process.env.NOTIFICATION_CUTOFF_DATE;
   if (!envDate) {
-    return DEFAULT_CUTOFF_DATE;
+    const date = new Date();
+    date.setDate(date.getDate() - DEFAULT_CUTOFF_DAYS);
+    return date;
   }
   const parsed = new Date(envDate);
-  return Number.isNaN(parsed.getTime()) ? DEFAULT_CUTOFF_DATE : parsed;
+  if (!Number.isNaN(parsed.getTime())) {
+    return parsed;
+  }
+  const fallback = new Date();
+  fallback.setDate(fallback.getDate() - DEFAULT_CUTOFF_DAYS);
+  return fallback;
 };
 
 const getOrderStatus = (order: any) =>
