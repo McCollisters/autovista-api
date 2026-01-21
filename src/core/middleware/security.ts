@@ -61,13 +61,15 @@ export const requestLogger = (
   res.end = function (chunk?: any, encoding?: any): any {
     const duration = Date.now() - startTime;
 
-    logger.info("Request completed", {
-      method: req.method,
-      url: req.url,
-      statusCode: res.statusCode,
-      duration: `${duration}ms`,
-      ip: req.ip,
-    });
+    if (req.url !== "/health") {
+      logger.info("Request completed", {
+        method: req.method,
+        url: req.url,
+        statusCode: res.statusCode,
+        duration: `${duration}ms`,
+        ip: req.ip,
+      });
+    }
 
     originalEnd.call(this, chunk, encoding);
   };
