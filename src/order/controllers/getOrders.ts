@@ -44,6 +44,7 @@ export const getOrders = async (
       hasPaid,
       moveType,
       orderTableStatus,
+      status,
     } = req.query;
 
     // Parse pagination
@@ -237,12 +238,28 @@ export const getOrders = async (
       query.transportType = { $in: moveTypes };
     }
 
+    // Status filtering by tms.status (e.g., status=picked_up)
+    if (status) {
+      const statusFilters = Array.isArray(status) ? status : [status];
+      const normalizedStatuses = statusFilters
+        .map((s) => String(s).trim().toLowerCase())
+        .flatMap((s) => {
+          if (s === "delivered") {
+            // Delivered includes both "delivered" and "invoiced" statuses
+            return ["delivered", "invoiced"];
+          }
+          // For other statuses, use as-is (e.g., "picked_up" stays "picked_up")
+          return [s];
+        });
+      query["tms.status"] = { $in: normalizedStatuses };
+    }
+
     // Status filtering (orderTableStatus)
     // Map display values to database query conditions:
     // "New" = status in ["booked", "active"]
     // "Picked Up" = schedule.pickupCompleted exists AND schedule.deliveryCompleted does NOT exist
     // "Delivered" = status === "complete" AND schedule.deliveryCompleted exists
-    if (orderTableStatus) {
+    if (orderTableStatus && !status) {
       const statusFilters = Array.isArray(orderTableStatus)
         ? orderTableStatus
         : [orderTableStatus];
@@ -290,10 +307,13 @@ export const getOrders = async (
 
     // Exclude null values when sorting by pickup/delivery completed dates
     // Only add the condition if it's not already set (to avoid conflicts with status filters)
-    if (sortField === "schedule.pickupCompleted" && !query["schedule.pickupCompleted"]) {
-      query["schedule.pickupCompleted"] = { $exists: true, $ne: null };
-    } else if (sortField === "schedule.deliveryCompleted" && !query["schedule.deliveryCompleted"]) {
-      query["schedule.deliveryCompleted"] = { $exists: true, $ne: null };
+    // Don't add these filters if status parameter is provided (tms.status filter takes precedence)
+    if (!status) {
+      if (sortField === "schedule.pickupCompleted" && !query["schedule.pickupCompleted"]) {
+        query["schedule.pickupCompleted"] = { $exists: true, $ne: null };
+      } else if (sortField === "schedule.deliveryCompleted" && !query["schedule.deliveryCompleted"]) {
+        query["schedule.deliveryCompleted"] = { $exists: true, $ne: null };
+      }
     }
 
     // Debug logging
@@ -303,6 +323,9 @@ export const getOrders = async (
       userRole: authUser.role,
       portalIdParam: portalId,
       selectedPortalIdParam: selectedPortalId,
+      statusParam: status,
+      orderTableStatusParam: orderTableStatus,
+      tmsStatusFilter: query["tms.status"],
       skip: skipNum,
       limit: limitNum,
       sortField,

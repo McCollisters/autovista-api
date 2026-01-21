@@ -5726,3 +5726,129 @@
   message: 'updateOrder failed',
   timestamp: '2026-01-20 14:13:05'
 }
+{
+  service: 'autovista-api',
+  orderRefId: 219586,
+  tmsGuid: '10e84e61-e261-4b3a-8967-508aba584bed',
+  status: 410,
+  statusText: 'Gone',
+  level: 'error',
+  message: 'Failed to fetch order from Super Dispatch',
+  timestamp: '2026-01-20 22:31:25'
+}
+{
+  service: 'autovista-api',
+  eventType: 'delivery_eta',
+  refId: 222792,
+  sdGuid: '63a743aa-8e11-4016-9dcf-1d3569bc8f83',
+  url: 'https://mccollistersstaging.vehichaul.com/api/connect/broker/vehicle/delivery/eta',
+  error: 'Request failed with status code 404',
+  status: 404,
+  data: '',
+  level: 'error',
+  message: 'acertusClient: Failed vehichaul update',
+  timestamp: '2026-01-20 22:32:52'
+}
+{
+  service: 'autovista-api',
+  eventType: 'order_schedule_updated',
+  refId: 222792,
+  sdGuid: '63a743aa-8e11-4016-9dcf-1d3569bc8f83',
+  error: 'Request failed with status code 404',
+  status: 404,
+  data: '',
+  level: 'error',
+  message: 'acertusClient: Failed to send update',
+  timestamp: '2026-01-20 22:32:52'
+}
+{
+  service: 'autovista-api',
+  eventType: 'pickup_eta',
+  refId: 222792,
+  sdGuid: '63a743aa-8e11-4016-9dcf-1d3569bc8f83',
+  url: 'https://mccollistersstaging.vehichaul.com/api/connect/broker/vehicle/pickup/eta',
+  error: 'Request failed with status code 404',
+  status: 404,
+  data: '',
+  level: 'error',
+  message: 'acertusClient: Failed vehichaul update',
+  timestamp: '2026-01-20 22:32:52'
+}
+{
+  service: 'autovista-api',
+  eventType: 'order_schedule_updated',
+  refId: 222837,
+  sdGuid: '9b54135c-3af3-4f69-84e4-b147010f5aa5',
+  error: 'Request failed with status code 404',
+  status: 404,
+  data: '',
+  level: 'error',
+  message: 'acertusClient: Failed to send update',
+  timestamp: '2026-01-20 22:33:29'
+}
+{
+  service: 'autovista-api',
+  eventType: 'pickup_eta',
+  refId: 222837,
+  sdGuid: '9b54135c-3af3-4f69-84e4-b147010f5aa5',
+  url: 'https://mccollistersstaging.vehichaul.com/api/connect/broker/vehicle/pickup/eta',
+  error: 'Request failed with status code 404',
+  status: 404,
+  data: '',
+  level: 'error',
+  message: 'acertusClient: Failed vehichaul update',
+  timestamp: '2026-01-20 22:33:29'
+}
+{
+  service: 'autovista-api',
+  eventType: 'delivery_eta',
+  refId: 222837,
+  sdGuid: '9b54135c-3af3-4f69-84e4-b147010f5aa5',
+  url: 'https://mccollistersstaging.vehichaul.com/api/connect/broker/vehicle/delivery/eta',
+  error: 'Request failed with status code 404',
+  status: 404,
+  data: '',
+  level: 'error',
+  message: 'acertusClient: Failed vehichaul update',
+  timestamp: '2026-01-20 22:33:29'
+}
+{
+  service: 'autovista-api',
+  orderRefId: 196394,
+  tmsGuid: '27d54d00-d6ee-4a07-b7da-955dc9a72e92',
+  status: 410,
+  statusText: 'Gone',
+  level: 'error',
+  message: 'Failed to fetch order from Super Dispatch',
+  timestamp: '2026-01-20 22:33:48'
+}
+{
+  service: 'autovista-api',
+  orderRefId: 210497,
+  tmsGuid: '18d8c4ad-8ba8-4b9b-a594-657f382aa235',
+  status: 410,
+  statusText: 'Gone',
+  level: 'error',
+  message: 'Failed to fetch order from Super Dispatch',
+  timestamp: '2026-01-20 22:34:28'
+}
+{
+  service: 'autovista-api',
+  orderRefId: 210497,
+  tmsGuid: '18d8c4ad-8ba8-4b9b-a594-657f382aa235',
+  status: 410,
+  statusText: 'Gone',
+  level: 'error',
+  message: 'Failed to fetch order from Super Dispatch',
+  timestamp: '2026-01-20 22:34:34'
+}
+{
+  service: 'autovista-api',
+  orderRefId: 219586,
+  tmsGuid: '10e84e61-e261-4b3a-8967-508aba584bed',
+  status: 410,
+  statusText: 'Gone',
+  level: 'error',
+  message: 'Failed to fetch order from Super Dispatch',
+  timestamp: '2026-01-20 22:34:45'
+}
