@@ -130,6 +130,7 @@ export interface ICarrierAcceptedByShipperPayload {
 export interface IOfferSentPayload {
   order_guid: string;
   carrier_guid: string;
+  carrier_name?: string;
   // Add other fields as needed based on actual webhook payload
 }
 

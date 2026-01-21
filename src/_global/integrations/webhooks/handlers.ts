@@ -838,6 +838,7 @@ export const handleOfferSent = async (
       // Create new carrier
       carrierDoc = new Carrier({
         guid: payload.carrier_guid,
+        name: payload.carrier_name || `Carrier ${payload.carrier_guid}`,
         status: "approved",
         activity: [
           {
