@@ -143,21 +143,21 @@ export class EmailService {
     }
 
     // Optional override: route all notifications to a single inbox.
-    const overrideRecipient = process.env.NOTIFICATION_OVERRIDE_EMAIL;
+    const overrideRecipient = process.env.NOTIFICATION_OVERRIDE_EMAIL?.trim();
 
     // Apply default from address if not provided
     const emailOptions: EmailOptions = {
       ...options,
       from: options.from || this.defaultFrom,
       replyTo: options.replyTo || this.defaultReplyTo,
-      ...(overrideRecipient
-        ? {
-            to: overrideRecipient,
-            cc: undefined,
-            bcc: undefined,
-          }
-        : {}),
     };
+
+    // Apply override if set (must come after spreading options to ensure it overrides)
+    if (overrideRecipient) {
+      emailOptions.to = overrideRecipient;
+      emailOptions.cc = undefined;
+      emailOptions.bcc = undefined;
+    }
 
     const toAddresses = Array.isArray(emailOptions.to)
       ? emailOptions.to

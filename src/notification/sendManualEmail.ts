@@ -94,6 +94,27 @@ export const sendManualEmail = async (
 
     const notificationManager = getNotificationManager();
 
+    // Map email template names to emailType values
+    // This allows the frontend to send template names while backend uses emailType values
+    const emailTypeMap: Record<string, string> = {
+      "Order Agent": "orderAgent",
+      "Customer Order": "customerConfirmation",
+      "Customer Order Confirmation": "customerConfirmation",
+      "Payment Request": "paymentRequest",
+      "White Glove": "whiteGlove",
+      "MMI Order": "mmiOrder",
+      "Track Order": "trackOrder",
+      "Pickup Confirmation": "pickupConfirmation",
+      "Delivery Confirmation": "deliveryConfirmation",
+      "Signature Request": "signatureRequest",
+      "Survey": "survey",
+      "Survey Notification": "survey",
+      "Custom": "custom",
+    };
+
+    // Convert template name to emailType if needed
+    const normalizedEmailType = emailTypeMap[emailType] || emailType;
+
     // Handle different email types
     let results: Array<{
       recipient: string;
@@ -101,7 +122,7 @@ export const sendManualEmail = async (
       error?: string;
     }> = [];
 
-    switch (emailType) {
+    switch (normalizedEmailType) {
       case "orderAgent":
         if (!orderId) {
           return next({
@@ -109,13 +130,30 @@ export const sendManualEmail = async (
             message: "Order ID is required for order agent emails.",
           });
         }
-        // Use the existing sendOrderAgentEmail function
-        const agentResult = await sendOrderAgentEmail({ orderId });
-        results = recipients.map((r) => ({
-          recipient: r.email,
-          success: agentResult.success ?? false,
-          error: agentResult.error,
-        }));
+        // Send to each recipient from the form
+        const agentResults = await Promise.allSettled(
+          recipients.map(async (recipient) => {
+            const result = await sendOrderAgentEmail({
+              orderId,
+              recipientEmail: recipient.email,
+              recipientName: recipient.name,
+            });
+            return {
+              recipient: recipient.email,
+              success: result.success ?? false,
+              error: result.error,
+            };
+          }),
+        );
+        results = agentResults.map((result) =>
+          result.status === "fulfilled"
+            ? result.value
+            : {
+                recipient: "unknown",
+                success: false,
+                error: String(result.reason),
+              },
+        );
         break;
 
       case "customerConfirmation":
@@ -199,11 +237,30 @@ export const sendManualEmail = async (
         if (!wgOrder) {
           return next({ statusCode: 404, message: "Order not found." });
         }
-        await sendWhiteGloveNotification({ order: wgOrder });
-        results = recipients.map((r) => ({
-          recipient: r.email,
-          success: true,
-        }));
+        // Send to each recipient from the form
+        const whiteGloveResults = await Promise.allSettled(
+          recipients.map(async (recipient) => {
+            const result = await sendWhiteGloveNotification({
+              order: wgOrder,
+              recipientEmail: recipient.email,
+              recipientName: recipient.name,
+            });
+            return {
+              recipient: recipient.email,
+              success: result.success ?? false,
+              error: result.error,
+            };
+          }),
+        );
+        results = whiteGloveResults.map((result) =>
+          result.status === "fulfilled"
+            ? result.value
+            : {
+                recipient: "unknown",
+                success: false,
+                error: String(result.reason),
+              },
+        );
         break;
 
       case "mmiOrder":
@@ -217,15 +274,29 @@ export const sendManualEmail = async (
         if (!mmiOrder) {
           return next({ statusCode: 404, message: "Order not found." });
         }
-        const mmiResult = await sendMMIOrderNotification({
-          order: mmiOrder,
-          recipientEmail: recipients[0].email,
-        });
-        results = recipients.map((r) => ({
-          recipient: r.email,
-          success: mmiResult.success ?? false,
-          error: mmiResult.error,
-        }));
+        // Send to each recipient from the form
+        const mmiResults = await Promise.allSettled(
+          recipients.map(async (recipient) => {
+            const result = await sendMMIOrderNotification({
+              order: mmiOrder,
+              recipientEmail: recipient.email,
+            });
+            return {
+              recipient: recipient.email,
+              success: result.success ?? false,
+              error: result.error,
+            };
+          }),
+        );
+        results = mmiResults.map((result) =>
+          result.status === "fulfilled"
+            ? result.value
+            : {
+                recipient: "unknown",
+                success: false,
+                error: String(result.reason),
+              },
+        );
         break;
 
       case "trackOrder":
@@ -332,19 +403,30 @@ export const sendManualEmail = async (
             message: "Order ID is required for signature request.",
           });
         }
-        const signatureRecipient = recipients[0];
-        const signatureResult = await sendOrderCustomerSignatureRequest({
-          orderId,
-          recipientEmail: signatureRecipient?.email,
-          recipientName: signatureRecipient?.name,
-        });
-        // Signature request sends to customer email, so map to all recipients
-        // In practice, this should only be the customer, but we support multiple for consistency
-        results = recipients.map((r) => ({
-          recipient: r.email,
-          success: signatureResult.success,
-          error: signatureResult.error,
-        }));
+        // Send to each recipient from the form
+        const signatureResults = await Promise.allSettled(
+          recipients.map(async (recipient) => {
+            const result = await sendOrderCustomerSignatureRequest({
+              orderId,
+              recipientEmail: recipient.email,
+              recipientName: recipient.name,
+            });
+            return {
+              recipient: recipient.email,
+              success: result.success ?? false,
+              error: result.error,
+            };
+          }),
+        );
+        results = signatureResults.map((result) =>
+          result.status === "fulfilled"
+            ? result.value
+            : {
+                recipient: "unknown",
+                success: false,
+                error: String(result.reason),
+              },
+        );
         break;
 
       case "survey":
@@ -450,7 +532,7 @@ export const sendManualEmail = async (
 
         if (
           !validOrderNotificationTypes.includes(
-            emailType as OrderNotificationType,
+            normalizedEmailType as OrderNotificationType,
           )
         ) {
           return next({
@@ -465,7 +547,7 @@ export const sendManualEmail = async (
             recipients.map(async (recipient) => {
               const result = await sendOrderNotification({
                 orderId,
-                type: emailType as OrderNotificationType,
+                type: normalizedEmailType as OrderNotificationType,
                 email: {
                   to: recipient.email,
                   subject: customSubject,
@@ -504,7 +586,7 @@ export const sendManualEmail = async (
           // For now, return an error suggesting custom content is needed
           return next({
             statusCode: 400,
-            message: `Generic ${emailType} emails require custom subject and content. Please provide customSubject and customContent.`,
+            message: `Generic ${normalizedEmailType} emails require custom subject and content. Please provide customSubject and customContent.`,
           });
         }
         break;
@@ -514,7 +596,8 @@ export const sendManualEmail = async (
     const failureCount = results.filter((r) => !r.success).length;
 
     logger.info(`Manual email triggered: ${emailType}`, {
-      emailType,
+      emailType: normalizedEmailType,
+      originalEmailType: emailType,
       totalRecipients: recipients.length,
       successCount,
       failureCount,

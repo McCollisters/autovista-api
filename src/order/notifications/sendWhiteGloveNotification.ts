@@ -15,6 +15,8 @@ import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 interface SendWhiteGloveNotificationParams {
   order: IOrder;
+  recipientEmail?: string;
+  recipientName?: string;
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,19 +27,21 @@ const __dirname = dirname(__filename);
  */
 export const sendWhiteGloveNotification = async (
   params: SendWhiteGloveNotificationParams,
-): Promise<void> => {
+): Promise<{ success: boolean; error?: string }> => {
   try {
-    const { order } = params;
+    const { order, recipientEmail: customRecipientEmail, recipientName } = params;
 
     logger.info("Sending white glove notification", {
       orderId: order._id,
       refId: order.refId,
+      recipientEmail: customRecipientEmail,
     });
 
     const senderEmail = "autologistics@mccollisters.com";
     const senderName = "McCollister's AutoLogistics";
     const subject = `White Glove Order - Manual Input: #${order.refId}`;
-    const recipientEmail = "autologistics.csr@mccollisters.com";
+    // Use custom recipient email if provided, otherwise default to CSR team
+    const recipientEmail = customRecipientEmail || "autologistics.csr@mccollisters.com";
 
     // Load and compile Handlebars template
     const templatePath = join(__dirname, "../../templates/white-glove.hbs");
@@ -71,15 +75,23 @@ export const sendWhiteGloveNotification = async (
         refId: order.refId,
         recipientEmail,
       });
+      return { success: true };
     } else {
       logger.error("Failed to send white glove notification", {
         orderId: order._id,
         refId: order.refId,
         error: result.error,
       });
+      return {
+        success: false,
+        error: result.error || "Failed to send white glove notification",
+      };
     }
   } catch (error) {
     logger.error("Error sending white glove notification:", error);
-    // Don't throw - notification failures shouldn't break order creation
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
   }
 };

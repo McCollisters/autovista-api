@@ -101,9 +101,9 @@ export async function sendOrderCustomerPublicNew(
 
     if (!recipientEmail) {
       logger.warn(
-        `Cannot send customer order email: No customer email for order ${order._id}`,
+        `Cannot send customer order email: No recipient email provided for order ${order._id}`,
       );
-      return { success: false, error: "Customer email is required" };
+      return { success: false, error: "Recipient email is required" };
     }
 
     const recipientName =

@@ -24,6 +24,8 @@ const __dirname = dirname(__filename);
 interface SendOrderAgentParams {
   orderId: string;
   userId?: string;
+  recipientEmail?: string;
+  recipientName?: string;
 }
 
 /**
@@ -43,6 +45,8 @@ const DEFAULT_EMAIL_CONFIG = {
 export async function sendOrderAgentEmail({
   orderId,
   userId,
+  recipientEmail,
+  recipientName,
 }: SendOrderAgentParams): Promise<{ success: boolean; error?: string }> {
   try {
     // Get order and populate portal to check disableAgentNotifications
@@ -60,26 +64,38 @@ export async function sendOrderAgentEmail({
       return { success: false, error: "Portal not found" };
     }
 
-    // Check if agent notifications are disabled
-    if (portal.disableAgentNotifications === true) {
-      logger.info(
-        `Agent notifications are disabled for portal ${portal._id}, skipping order agent email`,
-      );
-      return { success: true }; // Return success but don't send
-    }
+    // If custom recipient email is provided, use it instead of order agents
+    let recipients: Array<{ email: string; name?: string }> = [];
+    
+    if (recipientEmail) {
+      // Use custom recipient from form
+      recipients = [{ email: recipientEmail, name: recipientName }];
+    } else {
+      // Default behavior: use agents from order
+      // Check if agent notifications are disabled
+      if (portal.disableAgentNotifications === true) {
+        logger.info(
+          `Agent notifications are disabled for portal ${portal._id}, skipping order agent email`,
+        );
+        return { success: true }; // Return success but don't send
+      }
 
-    // Check if order has agents
-    if (!order.agents || order.agents.length === 0) {
-      logger.warn(`Order ${orderId} has no agents to notify`);
-      return { success: false, error: "No agents found for order" };
-    }
+      // Check if order has agents
+      if (!order.agents || order.agents.length === 0) {
+        logger.warn(`Order ${orderId} has no agents to notify`);
+        return { success: false, error: "No agents found for order" };
+      }
 
-    // Filter agents that have email addresses
-    const recipients = order.agents.filter((agent) => agent.email);
+      // Filter agents that have email addresses
+      recipients = order.agents.filter((agent) => agent.email).map((agent) => ({
+        email: agent.email!,
+        name: agent.name,
+      }));
 
-    if (recipients.length === 0) {
-      logger.warn(`Order ${orderId} has agents but no email addresses`);
-      return { success: false, error: "No agent email addresses found" };
+      if (recipients.length === 0) {
+        logger.warn(`Order ${orderId} has agents but no email addresses`);
+        return { success: false, error: "No agent email addresses found" };
+      }
     }
 
     // Load and compile Handlebars template
@@ -174,13 +190,13 @@ export async function sendOrderAgentEmail({
         orderId,
         type: "agentsConfirmation",
         email: {
-          to: recipient.email!,
+          to: recipient.email,
           subject,
           html,
           from: senderEmail,
           replyTo: senderEmail,
         },
-        recipientEmail: recipient.email!,
+        recipientEmail: recipient.email,
       });
 
       return { recipient: recipient.email, result };

@@ -48,8 +48,8 @@ export async function sendSurvey({
       overrideRecipientName || order.customer?.name;
 
     if (!recipientEmail) {
-      logger.warn(`Cannot send survey: No customer email for order ${orderId}`);
-      return { success: false, error: "Customer email is required." };
+      logger.warn(`Cannot send survey: No recipient email provided for order ${orderId}`);
+      return { success: false, error: "Recipient email is required." };
     }
 
     // Generate survey URL if not provided

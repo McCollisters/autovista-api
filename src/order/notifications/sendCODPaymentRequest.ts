@@ -44,11 +44,11 @@ export async function sendCODPaymentRequest(
 
     if (!recipientEmail) {
       logger.warn(
-        `Cannot send COD payment request: No customer email for order ${order._id}`,
+        `Cannot send COD payment request: No recipient email provided for order ${order._id}`,
       );
       return {
         success: false,
-        error: "Error sending payment request - email required.",
+        error: "Error sending payment request - recipient email required.",
       };
     }
 
