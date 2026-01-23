@@ -41,6 +41,13 @@ const VEHICLE_CONNECT_UID_PREFIX =
   process.env.ACERTUS_VEHICLE_CONNECT_UID_PREFIX || "autonation";
 
 /**
+ * Check if Acertus integration is enabled
+ */
+const isAcertusEnabled = (): boolean => {
+  return process.env.ENABLE_ACERTUS === "true";
+};
+
+/**
  * Sanitize date value to ISO string or null
  */
 const sanitizeDate = (value: any): string | null => {
@@ -538,6 +545,11 @@ const buildDeliveryPayload = (order: any, { eta, gps = null, remarks = null }: a
  * Send pickup ETA
  */
 export const sendPickupEta = async (order: any, options: any = {}): Promise<void> => {
+  if (!isAcertusEnabled()) {
+    logger.debug("acertusClient: Acertus integration disabled, skipping sendPickupEta");
+    return;
+  }
+
   if (!isAutonationPortal(order)) {
     return;
   }
@@ -550,6 +562,11 @@ export const sendPickupEta = async (order: any, options: any = {}): Promise<void
  * Send delivery ETA
  */
 export const sendDeliveryEta = async (order: any, options: any = {}): Promise<void> => {
+  if (!isAcertusEnabled()) {
+    logger.debug("acertusClient: Acertus integration disabled, skipping sendDeliveryEta");
+    return;
+  }
+
   if (!isAutonationPortal(order)) {
     return;
   }
@@ -562,6 +579,11 @@ export const sendDeliveryEta = async (order: any, options: any = {}): Promise<vo
  * Send vehicle assign
  */
 export const sendVehicleAssign = async (order: any): Promise<boolean> => {
+  if (!isAcertusEnabled()) {
+    logger.debug("acertusClient: Acertus integration disabled, skipping sendVehicleAssign");
+    return false;
+  }
+
   if (!isAutonationPortal(order)) {
     return false;
   }

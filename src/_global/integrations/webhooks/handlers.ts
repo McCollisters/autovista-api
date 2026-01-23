@@ -7,7 +7,7 @@
 
 import { logger } from "@/core/logger";
 import { Order, Carrier } from "@/_global/models";
-import { Status } from "@/_global/enums";
+import { Status, TransportType } from "@/_global/enums";
 import {
   ISuperDispatchOrderCancelledPayload,
   ISuperDispatchOrderDeliveredPayload,
@@ -23,6 +23,26 @@ import {
   IOfferSentPayload,
   IWebhookResponse,
 } from "./types";
+
+/**
+ * Normalize transportType to ensure it matches the TransportType enum
+ * Converts uppercase values like "OPEN" to lowercase "open"
+ */
+function normalizeTransportType(order: any): void {
+  if (order.transportType) {
+    const normalizedTransportType = order.transportType.toLowerCase();
+    if (Object.values(TransportType).includes(normalizedTransportType as TransportType)) {
+      order.transportType = normalizedTransportType as TransportType;
+    } else {
+      logger.warn("Invalid transportType value, normalizing to open", {
+        orderId: order._id,
+        refId: order.refId,
+        originalTransportType: order.transportType,
+      });
+      order.transportType = TransportType.Open;
+    }
+  }
+}
 
 // Super Dispatch webhook handlers
 export const handleSuperDispatchOrderCancelled = async (
@@ -54,6 +74,8 @@ export const handleSuperDispatchOrderCancelled = async (
     order.tms.status = "order_canceled";
     order.tms.updatedAt = new Date();
 
+    // Normalize transportType before saving
+    normalizeTransportType(order);
 
     await order.save();
 
@@ -137,6 +159,9 @@ export const handleSuperDispatchOrderDelivered = async (
     order.status = Status.Complete;
     order.tms.status = "delivered";
     order.tms.updatedAt = new Date();
+
+    // Normalize transportType before saving
+    normalizeTransportType(order);
 
     // Add delivery confirmation fields (like old API)
     if (!order.notifications) {
@@ -222,6 +247,9 @@ export const handleSuperDispatchOrderInvoiced = async (
     }
     order.notifications.awaitingDeliveryConfirmation = true;
 
+    // Normalize transportType before saving
+    normalizeTransportType(order);
+
     await order.save();
 
     logger.info("Order invoiced successfully", {
@@ -284,6 +312,8 @@ export const handleSuperDispatchOrderModified = async (
     // Update order modification timestamp
     order.tms.updatedAt = new Date();
 
+    // Normalize transportType before saving
+    normalizeTransportType(order);
 
     await order.save();
 
@@ -341,6 +371,9 @@ export const handleSuperDispatchOrderPickedUp = async (
       order.notifications = {} as any;
     }
     order.notifications.awaitingPickupConfirmation = true;
+
+    // Normalize transportType before saving
+    normalizeTransportType(order);
 
     await order.save();
 
@@ -416,6 +449,8 @@ export const handleSuperDispatchVehicleModified = async (
     // Update order modification timestamp
     order.tms.updatedAt = new Date();
 
+    // Normalize transportType before saving
+    normalizeTransportType(order);
 
     await order.save();
 
@@ -519,6 +554,8 @@ export const handleCarrierAccepted = async (
 
             // Update order to mark as no longer partial
             order.tmsPartialOrder = false;
+            // Normalize transportType before saving
+            normalizeTransportType(order);
             await order.save();
 
             logger.info(
@@ -669,6 +706,9 @@ export const handleSuperDispatchOrderRemoved = async (
     order.tms.status = "order_canceled";
     order.tms.updatedAt = new Date();
 
+    // Normalize transportType before saving
+    normalizeTransportType(order);
+
     await order.save();
 
     logger.info("Order removed successfully", {
@@ -762,6 +802,8 @@ export const handleCarrierAcceptedByShipper = async (
 
             // Update order to mark as no longer partial
             order.tmsPartialOrder = false;
+            // Normalize transportType before saving
+            normalizeTransportType(order);
             await order.save();
 
             logger.info(
