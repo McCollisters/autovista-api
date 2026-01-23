@@ -17,6 +17,7 @@ import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
+import { MMI_PORTALS } from "@/_global/constants/portalIds";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -87,13 +88,35 @@ export async function sendOrderAgentEmail({
       }
 
       // Filter agents that have email addresses
-      recipients = order.agents.filter((agent) => agent.email).map((agent) => ({
+      let filteredAgents = order.agents.filter((agent) => agent.email);
+
+      // For MMI portals, only send confirmation email to autodesk@graebel.com
+      const portalIdString = String(order.portalId || portal._id || "");
+      const isMMI = MMI_PORTALS.includes(
+        portalIdString as (typeof MMI_PORTALS)[number],
+      );
+
+      if (isMMI) {
+        filteredAgents = filteredAgents.filter(
+          (agent) =>
+            String(agent.email || "").toLowerCase().trim() ===
+            "autodesk@graebel.com",
+        );
+        logger.info("MMI portal detected - filtering to autodesk@graebel.com only", {
+          orderId,
+          portalId: portalIdString,
+          originalAgentCount: order.agents.length,
+          filteredAgentCount: filteredAgents.length,
+        });
+      }
+
+      recipients = filteredAgents.map((agent) => ({
         email: agent.email!,
         name: agent.name,
       }));
 
       if (recipients.length === 0) {
-        logger.warn(`Order ${orderId} has agents but no email addresses`);
+        logger.warn(`Order ${orderId} has agents but no email addresses${isMMI ? " (after MMI filtering)" : ""}`);
         return { success: false, error: "No agent email addresses found" };
       }
     }

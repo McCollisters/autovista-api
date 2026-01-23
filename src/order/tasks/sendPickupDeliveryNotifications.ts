@@ -149,7 +149,7 @@ const sendPickupNotificationsForOrder = async (
   const portalEmails = isMMI
     ? [
         {
-          email: "autodeskupdates@graebel.com",
+          email: "autodesk@graebel.com",
           name: "Auto Desk",
           pickup: true,
           delivery: true,
@@ -269,7 +269,7 @@ const sendDeliveryNotificationsForOrder = async (
   const portalEmails = isMMI
     ? [
         {
-          email: "autodeskupdates@graebel.com",
+          email: "autodesk@graebel.com",
           name: "Auto Desk",
           pickup: true,
           delivery: true,

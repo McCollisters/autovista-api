@@ -16,7 +16,10 @@ import { sendOrderAgentEmail } from "../notifications/sendOrderAgent";
 import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotification";
 import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
-import { MMI_PORTALS } from "../../_global/constants/portalIds";
+import {
+  MMI_PORTALS,
+  GRAEBEL_AUTODESK_PORTALS,
+} from "../../_global/constants/portalIds";
 import { resolveId } from "@/_global/utils/resolveId";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
@@ -920,7 +923,7 @@ export const createOrder = async (
     ) {
       agents = [
         {
-          email: "autodeskupdates@graebel.com",
+          email: "autodesk@graebel.com",
           name: "Auto Desk",
           pickup: true,
           delivery: true,
