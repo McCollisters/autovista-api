@@ -7,7 +7,7 @@
 
 import { DateTime } from "luxon";
 import { IOrder, IPortal, Portal } from "@/_global/models";
-import { Status } from "@/_global/enums";
+import { Status, TransportType } from "@/_global/enums";
 import { logger } from "@/core/logger";
 import { isWithheldAddress } from "../utils/checkWithheldAddress";
 
@@ -735,11 +735,32 @@ export const updateOrderFromSD = async (
       userId: databaseOrder.userId,
       quoteId: databaseOrder.quoteId,
       miles: databaseOrder.miles,
-      transportType:
-        databaseOrder.transportType === "WHITEGLOVE"
-          ? TransportType.WhiteGlove
-          : (String(superDispatchOrder.transport_type || "")
-              .toLowerCase() as TransportType),
+      transportType: (() => {
+        // Preserve WhiteGlove transport type
+        if (databaseOrder.transportType === "WHITEGLOVE" || databaseOrder.transportType === TransportType.WhiteGlove) {
+          return TransportType.WhiteGlove;
+        }
+        
+        // Only update transportType from Super Dispatch if it's a valid value
+        const sdTransportType = String(superDispatchOrder.transport_type || "").toLowerCase().trim();
+        const validTransportTypes = Object.values(TransportType);
+        
+        if (sdTransportType && validTransportTypes.includes(sdTransportType as TransportType)) {
+          // Only update if it's different from the current value
+          const currentTransportType = String(databaseOrder.transportType || "").toLowerCase();
+          if (sdTransportType !== currentTransportType) {
+            logger.info("Updating transportType from Super Dispatch", {
+              orderRefId: databaseOrder.refId,
+              oldTransportType: databaseOrder.transportType,
+              newTransportType: sdTransportType,
+            });
+            return sdTransportType as TransportType;
+          }
+        }
+        
+        // Preserve existing transportType if Super Dispatch value is invalid or missing
+        return databaseOrder.transportType as TransportType;
+      })(),
       agents: databaseOrder.agents,
       driver: databaseOrder.driver,
       hasClaim: databaseOrder.hasClaim,
