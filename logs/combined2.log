@@ -50455,3 +50455,93 @@
   service: 'autovista-api',
   timestamp: '2026-01-27 09:00:54'
 }
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-27 09:03:02'
+}
+{
+  message: 'Email template not found: Customer Order, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-01-27 09:03:02'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-01-27 09:03:02'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-01-27 09:03:02'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'customerConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Your Vehicle Transport Confirmation - Order #300330',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-01-27 09:03:02'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Your Vehicle Transport Confirmation - Order #300330',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-01-27 09:03:03'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'customerConfirmation',
+    orderId: '6977d2a03ddaf4a437190a15',
+    recipientEmail: 'anna@periscopeworks.io',
+    recipientPhone: undefined
+  },
+  messageId: 'rXJpQnI_TWC4J8m_h8ZG2Q',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-01-27 09:03:03'
+}
+{
+  service: 'autovista-api',
+  orderId: '6977d2a03ddaf4a437190a15',
+  type: 'customerConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: customerConfirmation',
+  timestamp: '2026-01-27 09:03:03'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6977d2a03ddaf4a437190a15'),
+  refId: 300330,
+  recipientEmail: 'anna@periscopeworks.io',
+  isSirva: false,
+  level: 'info',
+  message: 'Customer order email sent successfully',
+  timestamp: '2026-01-27 09:03:03'
+}
+{
+  message: 'Disconnected from MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-01-27 09:03:03'
+}

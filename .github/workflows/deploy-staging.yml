@@ -1,0 +1,439 @@
+name: Deploy to Elastic Beanstalk (Staging)
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch: # Allow manual triggers
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use staging env file if present
+        run: |
+          if [ -f ".env.staging" ]; then
+            echo "Using .env.staging for staging build/runtime"
+            cp .env.staging .env
+          else
+            echo "No .env.staging found; relying on environment variables"
+          fi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: |
+          echo "Building application locally..."
+          npm run build
+          echo "Verifying build output..."
+          if [ ! -f "dist/index.js" ]; then
+            echo "ERROR: dist/index.js not found after build!"
+            exit 1
+          fi
+          echo "Build successful - dist/index.js exists"
+          ls -la dist/index.js
+
+      - name: Create deployment package
+        run: |
+          zip -r autovista-api.zip . \
+            -x "node_modules/*" \
+            -x ".git/*" \
+            -x "*.log" \
+            -x ".DS_Store" \
+            -x ".github/*" \
+            -x "tests/*" \
+            -x "*.test.ts" \
+            -x "*.test.js" \
+            -x "*.spec.ts" \
+            -x "*.spec.js" \
+            -x "coverage/*" \
+            -x ".vscode/*" \
+            -x ".idea/*" \
+            -x "*.md" \
+            -x "logs/*"
+
+          echo "=== Verifying deployment package contents ==="
+          echo "Checking if routes files are included:"
+          unzip -l autovista-api.zip | grep -E "routes\.(ts|js)" || echo "Warning: No routes files found in package!"
+          echo "Checking if dist folder exists:"
+          unzip -l autovista-api.zip | grep "dist/index.js" || echo "Warning: dist/index.js not found in package!"
+          echo "Checking if user routes are included:"
+          unzip -l autovista-api.zip | grep "src/user/routes" || echo "Warning: src/user/routes.ts not found!"
+          echo "Package size:"
+          ls -lh autovista-api.zip
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Check IAM permissions
+        run: |
+          echo "Checking current IAM user permissions..."
+          aws sts get-caller-identity
+
+          echo "Checking if SNS permissions are available..."
+          aws sns list-topics --region us-east-1 || echo "SNS permissions not available"
+
+          echo "Checking Elastic Beanstalk permissions..."
+          aws elasticbeanstalk describe-applications --region us-east-1 || echo "EB permissions not available"
+
+      - name: Check environment status and version
+        run: |
+          echo "Checking environment status..."
+          ENV_INFO=$(aws elasticbeanstalk describe-environments \
+            --environment-names autovista-api-staging-env \
+            --query 'Environments[0].{Status:Status,Health:Health,VersionLabel:VersionLabel}' \
+            --output json)
+
+          echo "Environment info: $ENV_INFO"
+
+          STATUS=$(echo $ENV_INFO | jq -r '.Status')
+          HEALTH=$(echo $ENV_INFO | jq -r '.Health')
+          VERSION=$(echo $ENV_INFO | jq -r '.VersionLabel')
+
+          echo "Current environment status: $STATUS"
+          echo "Current environment health: $HEALTH"
+          echo "Current version: $VERSION"
+
+          # If environment has Sample version and is degraded, we'll deploy to fix it
+          if [ "$VERSION" = "Sample" ] && [ "$HEALTH" = "Degraded" ]; then
+            echo "Environment has Sample version and is degraded. Deployment will replace it."
+          elif [ "$STATUS" = "Updating" ] || [ "$STATUS" = "Launching" ]; then
+            echo "Environment is currently updating. Waiting for it to complete..."
+          elif [ "$HEALTH" = "Red" ] || [ "$HEALTH" = "Degraded" ]; then
+            echo "Warning: Environment health is $HEALTH. Proceeding with deployment to recover..."
+          fi
+
+      - name: Wait for environment to be ready
+        run: |
+          echo "Waiting for environment to be ready..."
+          TIMEOUT=600  # 10 minutes timeout
+          ELAPSED=0
+          MAX_WAIT_ITERATIONS=20  # Maximum 20 iterations (10 minutes)
+          ITERATION=0
+
+          while [ $ELAPSED -lt $TIMEOUT ] && [ $ITERATION -lt $MAX_WAIT_ITERATIONS ]; do
+            STATUS=$(aws elasticbeanstalk describe-environments \
+              --environment-names autovista-api-staging-env \
+              --query 'Environments[0].Status' \
+              --output text)
+            
+            HEALTH=$(aws elasticbeanstalk describe-environments \
+              --environment-names autovista-api-staging-env \
+              --query 'Environments[0].Health' \
+              --output text)
+            
+            echo "Current environment status: $STATUS, health: $HEALTH (elapsed: ${ELAPSED}s, iteration: $ITERATION)"
+            
+            if [ "$STATUS" = "Ready" ]; then
+              echo "Environment is ready for deployment"
+              break
+            elif [ "$STATUS" = "Updating" ] || [ "$STATUS" = "Launching" ]; then
+              ITERATION=$((ITERATION + 1))
+              if [ $ITERATION -ge $MAX_WAIT_ITERATIONS ]; then
+                echo "ERROR: Environment has been updating for too long. It may be stuck in a loop."
+                echo "Please check the AWS Console and stop any ongoing updates before deploying again."
+                exit 1
+              fi
+              echo "Environment is still updating. Waiting 30 seconds... (iteration $ITERATION/$MAX_WAIT_ITERATIONS)"
+              sleep 30
+              ELAPSED=$((ELAPSED + 30))
+            elif [ "$STATUS" = "Failed" ]; then
+              echo "Environment is in failed state. Stopping deployment to prevent loop."
+              echo "Please fix the environment in AWS Console before deploying again."
+              exit 1
+            elif [ "$STATUS" = "Terminated" ]; then
+              echo "Environment has been terminated. Please recreate it."
+              exit 1
+            else
+              echo "Environment is not ready yet. Waiting 30 seconds..."
+              sleep 30
+              ELAPSED=$((ELAPSED + 30))
+            fi
+          done
+
+          if [ $ELAPSED -ge $TIMEOUT ] || [ $ITERATION -ge $MAX_WAIT_ITERATIONS ]; then
+            echo "Timeout waiting for environment to be ready"
+            echo "Environment may be stuck. Please check AWS Console before retrying."
+            exit 1
+          fi
+
+      - name: Final check before deployment
+        run: |
+          echo "Final check: Ensuring environment is ready for deployment..."
+          STATUS=$(aws elasticbeanstalk describe-environments \
+            --environment-names autovista-api-staging-env \
+            --query 'Environments[0].Status' \
+            --output text)
+
+          if [ "$STATUS" != "Ready" ]; then
+            echo "ERROR: Environment status is '$STATUS', not 'Ready'"
+            echo "Cannot deploy while environment is updating/aborting. Please wait for it to be Ready."
+            exit 1
+          fi
+
+          echo "Environment is Ready. Proceeding with deployment..."
+
+      - name: Set environment variables from GitHub Secrets
+        run: |
+          echo "Setting environment variables from GitHub Secrets..."
+
+          # Build option settings array using jq for proper JSON escaping
+          OPTIONS="[]"
+
+          # Required variables - prefer staging MongoDB if provided
+          if [ -n "${{ secrets.MONGODB_STAGING_URI }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MONGODB_STAGING_URI }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MONGODB_PROD_URI","Value":$val}]')
+          elif [ -n "${{ secrets.MONGODB_DEV_URI }}" ]; then
+            echo "WARNING: Using MONGODB_DEV_URI for staging. Consider adding MONGODB_STAGING_URI."
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MONGODB_DEV_URI }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MONGODB_PROD_URI","Value":$val}]')
+          else
+            echo "ERROR: Neither MONGODB_STAGING_URI nor MONGODB_DEV_URI secret is set!"
+          fi
+
+          # Optional but commonly used variables
+          if [ -n "${{ secrets.SD_USER }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_USER }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_USER","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.SD_PASS }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_PASS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_PASS","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.SENDGRID_API_KEY_STAGING }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SENDGRID_API_KEY_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SENDGRID_API_KEY","Value":$val}]')
+          elif [ -n "${{ secrets.SENDGRID_API_KEY }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SENDGRID_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SENDGRID_API_KEY","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.JWT_SECRET_STAGING }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.JWT_SECRET_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"JWT_SECRET","Value":$val}]')
+          elif [ -n "${{ secrets.JWT_SECRET }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.JWT_SECRET }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"JWT_SECRET","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.BASE_URL_STAGING }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.BASE_URL_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"BASE_URL","Value":$val}]')
+          elif [ -n "${{ secrets.BASE_URL }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.BASE_URL }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"BASE_URL","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.EMAIL_FROM_ADDRESS }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.EMAIL_FROM_ADDRESS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"EMAIL_FROM_ADDRESS","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.EMAIL_FROM_NAME }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.EMAIL_FROM_NAME }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"EMAIL_FROM_NAME","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.TWILIO_ACCOUNT_SID }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_ACCOUNT_SID }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_ACCOUNT_SID","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.TWILIO_AUTH_TOKEN }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_AUTH_TOKEN }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_AUTH_TOKEN","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.TWILIO_FROM_NUMBER }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_FROM_NUMBER }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_FROM_NUMBER","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.ACERTUS_LOG_ONLY }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ACERTUS_LOG_ONLY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ACERTUS_LOG_ONLY","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.ACERTUS_API_KEY }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ACERTUS_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ACERTUS_API_KEY","Value":$val}]')
+          fi
+
+          ALLOWED_ORIGINS_VALUE="${{ secrets.ALLOWED_ORIGINS_STAGING }}"
+          if [ -z "$ALLOWED_ORIGINS_VALUE" ]; then
+            ALLOWED_ORIGINS_VALUE="${{ secrets.ALLOWED_ORIGINS }}"
+          fi
+          if [ -n "$ALLOWED_ORIGINS_VALUE" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "$ALLOWED_ORIGINS_VALUE" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ALLOWED_ORIGINS","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.MAPBOX_API_KEY_STAGING }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MAPBOX_API_KEY_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MAPBOX_API_KEY","Value":$val}]')
+          elif [ -n "${{ secrets.MAPBOX_API_KEY }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MAPBOX_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MAPBOX_API_KEY","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.SD_CLIENT_ID }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_CLIENT_ID }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_CLIENT_ID","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.SD_CLIENT_SECRET }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_CLIENT_SECRET }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_CLIENT_SECRET","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.SD_PRICING_API_KEY }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_PRICING_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_PRICING_API_KEY","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.PAPERTRAIL_HOST }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_HOST }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_HOST","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.PAPERTRAIL_PORT }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_PORT }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_PORT","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.PAPERTRAIL_APP_NAME }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_APP_NAME }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_APP_NAME","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.PAPERTRAIL_LEVEL }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_LEVEL }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_LEVEL","Value":$val}]')
+          fi
+
+          if [ -n "${{ secrets.NOTIFICATION_OVERRIDE_EMAIL_STAGING }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.NOTIFICATION_OVERRIDE_EMAIL_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"NOTIFICATION_OVERRIDE_EMAIL","Value":$val}]')
+          fi
+
+          # Update the environment with all option settings
+          OPTION_COUNT=$(echo "$OPTIONS" | jq 'length')
+          if [ "$OPTION_COUNT" -gt 0 ]; then
+            echo "Updating Elastic Beanstalk environment with $OPTION_COUNT environment variable(s) from GitHub Secrets..."
+            echo "$OPTIONS" | jq '.'
+            
+            echo "$OPTIONS" > /tmp/eb-options.json
+            aws elasticbeanstalk update-environment \
+              --environment-name autovista-api-staging-env \
+              --option-settings file:///tmp/eb-options.json \
+              --region us-east-1
+            
+            echo "Waiting for environment update to complete..."
+            aws elasticbeanstalk wait environment-updated \
+              --environment-names autovista-api-staging-env \
+              --region us-east-1 || echo "Note: Environment update may still be in progress"
+            
+            echo "Environment variables updated successfully!"
+          else
+            echo "No environment variables to set from GitHub Secrets."
+          fi
+
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: autovista-api
+          environment_name: autovista-api-staging-env
+          region: us-east-1
+          version_label: "autovista-api-staging-v${{ github.run_number }}-${{ github.sha }}"
+          deployment_package: autovista-api.zip
+          wait_for_deployment: true
+          use_existing_version_if_available: true
+          wait_for_environment_recovery: 0
+        continue-on-error: true
+
+      - name: Invalidate CloudFront Cache
+        if: success()
+        run: |
+          echo "Invalidating CloudFront cache after deployment..."
+
+          DISTRIBUTION_ID="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_STAGING }}"
+
+          if [ -z "$DISTRIBUTION_ID" ]; then
+            echo "Warning: CLOUDFRONT_DISTRIBUTION_ID_STAGING secret not set. Skipping cache invalidation."
+            exit 0
+          fi
+
+          echo "Creating CloudFront invalidation for distribution: $DISTRIBUTION_ID"
+
+          # Invalidate API paths that commonly change
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
+            --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/api/v1/user" "/api/v1/users" "/api/v1/user/*" "/api/*" \
+            --query 'Invalidation.Id' \
+            --output text \
+            --region us-east-1)
+
+          if [ -n "$INVALIDATION_ID" ]; then
+            echo "CloudFront invalidation created: $INVALIDATION_ID"
+            echo "Cache invalidation is in progress. This may take a few minutes."
+          else
+            echo "Warning: Failed to create CloudFront invalidation"
+            exit 0  # Don't fail the deployment if cache invalidation fails
+          fi
+
+      - name: Fetch application logs
+        run: |
+          echo "=== Fetching application logs ==="
+          aws elasticbeanstalk retrieve-environment-info \
+            --environment-name autovista-api-staging-env \
+            --info-type tail
+
+          echo "=== Recent application events ==="
+          aws elasticbeanstalk describe-events \
+            --environment-name autovista-api-staging-env \
+            --max-items 5
+
+      - name: Configure AWS credentials for failure logs
+        if: failure()
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Fetch logs on deployment failure
+        if: failure()
+        run: |
+          echo "=== Deployment failed, fetching logs ==="
+
+          # Get the latest log files
+          aws elasticbeanstalk retrieve-environment-info \
+            --environment-name autovista-api-staging-env \
+            --info-type tail
+
+          echo "=== Recent events ==="
+          aws elasticbeanstalk describe-events \
+            --environment-name autovista-api-staging-env \
+            --max-items 20
+
+          echo "=== Environment health and status ==="
+          aws elasticbeanstalk describe-environments \
+            --environment-names autovista-api-staging-env \
+            --query 'Environments[0].{Health:Health,HealthStatus:HealthStatus,Status:Status,VersionLabel:VersionLabel}'
+
+          echo "=== Checking for aborted deployments ==="
+          EVENTS=$(aws elasticbeanstalk describe-events \
+            --environment-name autovista-api-staging-env \
+            --max-items 5 \
+            --query 'Events[?contains(Message, `aborted`) || contains(Message, `Aborted`)].{Time:EventDate,Message:Message}' \
+            --output text)
+
+          if [ -n "$EVENTS" ]; then
+            echo "Found aborted deployment events:"
+            echo "$EVENTS"
+            echo ""
+            echo "RECOMMENDATION: If you see aborted deployment errors, you may need to:"
+            echo "1. Wait for the environment to stabilize"
+            echo "2. Manually trigger a new deployment from AWS Console"
+            echo "3. Or re-run this workflow after the environment is in 'Ready' status"
+          fi
+
+          echo "=== Fetching eb-engine.log ==="
+          aws elasticbeanstalk retrieve-environment-info \
+            --environment-name autovista-api-staging-env \
+            --info-type bundle
+
+          # Exit with error to fail the workflow
+          exit 1
