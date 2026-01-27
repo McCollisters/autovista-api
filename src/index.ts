@@ -101,8 +101,18 @@ const startServer = async () => {
     // validateWebhookConfig();
     // initializeWebhooks();
 
-    // Initialize cron jobs
-    initializeCronJobs();
+    // Initialize cron jobs (skip in staging or when explicitly disabled)
+    if (
+      config.nodeEnv !== "staging" &&
+      process.env.DISABLE_CRON_JOBS !== "true"
+    ) {
+      initializeCronJobs();
+    } else {
+      logger.info("Cron jobs disabled", {
+        environment: config.nodeEnv,
+        disableFlag: process.env.DISABLE_CRON_JOBS || "false",
+      });
+    }
 
     //  sendMessage();
 
