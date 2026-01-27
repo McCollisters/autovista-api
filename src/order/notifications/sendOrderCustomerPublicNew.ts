@@ -230,7 +230,7 @@ export async function sendOrderCustomerPublicNew(
         order.transportType?.slice(1) || "Open";
 
     // Format vehicles HTML with pricing
-    const vehicles = formatVehiclesHTML(order.vehicles, true);
+    const vehicles = formatVehiclesHTML(order.vehicles, false);
 
     // Build terms URL
     const orderId = String(order._id);
