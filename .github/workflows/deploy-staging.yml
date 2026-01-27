@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: staging
+    env:
+      VERSION_LABEL: autovista-api-staging-v${{ github.run_number }}-${{ github.sha }}
+      EB_BUCKET: elasticbeanstalk-us-east-1-016551391727
 
     steps:
       - name: Checkout code
@@ -79,6 +82,16 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+
+      - name: Create Elastic Beanstalk application version
+        run: |
+          echo "Uploading application version $VERSION_LABEL to $EB_BUCKET"
+          aws s3 cp autovista-api.zip "s3://$EB_BUCKET/$VERSION_LABEL.zip"
+          aws elasticbeanstalk create-application-version \
+            --application-name autovista-api-staging \
+            --version-label "$VERSION_LABEL" \
+            --source-bundle S3Bucket="$EB_BUCKET",S3Key="$VERSION_LABEL.zip" \
+            --region us-east-1
 
       - name: Check IAM permissions
         run: |
@@ -333,10 +346,10 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: autovista-api
+          application_name: autovista-api-staging
           environment_name: autovista-api-staging-env
           region: us-east-1
-          version_label: "autovista-api-staging-v${{ github.run_number }}-${{ github.sha }}"
+          version_label: ${{ env.VERSION_LABEL }}
           deployment_package: autovista-api.zip
           wait_for_deployment: true
           use_existing_version_if_available: true
@@ -349,6 +362,9 @@ jobs:
           echo "Invalidating CloudFront cache after deployment..."
 
           DISTRIBUTION_ID="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_STAGING }}"
+          if [ -z "$DISTRIBUTION_ID" ]; then
+            DISTRIBUTION_ID="E7ITX4OKG9ZCY"
+          fi
 
           if [ -z "$DISTRIBUTION_ID" ]; then
             echo "Warning: CLOUDFRONT_DISTRIBUTION_ID_STAGING secret not set. Skipping cache invalidation."
