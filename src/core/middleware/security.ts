@@ -23,11 +23,12 @@ export const corsConfig = cors({
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
 
-    if (config.allowedOrigins.includes(origin)) {
+    const normalizedOrigin = origin.trim().replace(/\/$/, "");
+    if (config.allowedOrigins.includes(normalizedOrigin)) {
       return callback(null, true);
     }
 
-    logger.warn("CORS blocked request from origin", { origin });
+    logger.warn("CORS blocked request from origin", { origin: normalizedOrigin });
     return callback(new Error("Not allowed by CORS"), false);
   },
   credentials: true,

@@ -67,6 +67,8 @@ const getMongoDbUri = (): string => {
   return process.env.MONGODB_DEV_URI as string;
 };
 
+const normalizeOrigin = (value: string) => value.trim().replace(/\/$/, "");
+
 export const config: AppConfig = {
   port: parseInt(process.env.PORT || "8080", 10),
   nodeEnv: process.env.NODE_ENV || "development",
@@ -82,9 +84,11 @@ export const config: AppConfig = {
         "https://sqs.us-east-1.amazonaws.com/016551391727/notifications-immediate.fifo",
     },
   },
-  allowedOrigins: process.env.ALLOWED_ORIGINS?.split(",") || [
-    "http://localhost:3000",
-  ],
+  allowedOrigins: process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(",")
+        .map(normalizeOrigin)
+        .filter(Boolean)
+    : ["http://localhost:3000"],
 } as const;
 
 // Test-specific environment variables
