@@ -108,7 +108,7 @@ jobs:
         run: |
           echo "Checking environment status..."
           ENV_INFO=$(aws elasticbeanstalk describe-environments \
-            --environment-names autovista-api-staging-env \
+            --environment-names autovista-api-staging \
             --query 'Environments[0].{Status:Status,Health:Health,VersionLabel:VersionLabel}' \
             --output json)
 
@@ -141,12 +141,12 @@ jobs:
 
           while [ $ELAPSED -lt $TIMEOUT ] && [ $ITERATION -lt $MAX_WAIT_ITERATIONS ]; do
             STATUS=$(aws elasticbeanstalk describe-environments \
-              --environment-names autovista-api-staging-env \
+              --environment-names autovista-api-staging \
               --query 'Environments[0].Status' \
               --output text)
             
             HEALTH=$(aws elasticbeanstalk describe-environments \
-              --environment-names autovista-api-staging-env \
+              --environment-names autovista-api-staging \
               --query 'Environments[0].Health' \
               --output text)
             
@@ -189,7 +189,7 @@ jobs:
         run: |
           echo "Final check: Ensuring environment is ready for deployment..."
           STATUS=$(aws elasticbeanstalk describe-environments \
-            --environment-names autovista-api-staging-env \
+            --environment-names autovista-api-staging \
             --query 'Environments[0].Status' \
             --output text)
 
@@ -201,153 +201,13 @@ jobs:
 
           echo "Environment is Ready. Proceeding with deployment..."
 
-      - name: Set environment variables from GitHub Secrets
-        run: |
-          echo "Setting environment variables from GitHub Secrets..."
-
-          # Build option settings array using jq for proper JSON escaping
-          OPTIONS="[]"
-
-          # Required variables - prefer staging MongoDB if provided
-          if [ -n "${{ secrets.MONGODB_STAGING_URI }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MONGODB_STAGING_URI }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MONGODB_PROD_URI","Value":$val}]')
-          elif [ -n "${{ secrets.MONGODB_DEV_URI }}" ]; then
-            echo "WARNING: Using MONGODB_DEV_URI for staging. Consider adding MONGODB_STAGING_URI."
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MONGODB_DEV_URI }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MONGODB_PROD_URI","Value":$val}]')
-          else
-            echo "ERROR: Neither MONGODB_STAGING_URI nor MONGODB_DEV_URI secret is set!"
-          fi
-
-          # Optional but commonly used variables
-          if [ -n "${{ secrets.SD_USER }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_USER }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_USER","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.SD_PASS }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_PASS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_PASS","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.SENDGRID_API_KEY_STAGING }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SENDGRID_API_KEY_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SENDGRID_API_KEY","Value":$val}]')
-          elif [ -n "${{ secrets.SENDGRID_API_KEY }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SENDGRID_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SENDGRID_API_KEY","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.JWT_SECRET_STAGING }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.JWT_SECRET_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"JWT_SECRET","Value":$val}]')
-          elif [ -n "${{ secrets.JWT_SECRET }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.JWT_SECRET }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"JWT_SECRET","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.BASE_URL_STAGING }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.BASE_URL_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"BASE_URL","Value":$val}]')
-          elif [ -n "${{ secrets.BASE_URL }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.BASE_URL }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"BASE_URL","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.EMAIL_FROM_ADDRESS }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.EMAIL_FROM_ADDRESS }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"EMAIL_FROM_ADDRESS","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.EMAIL_FROM_NAME }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.EMAIL_FROM_NAME }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"EMAIL_FROM_NAME","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.TWILIO_ACCOUNT_SID }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_ACCOUNT_SID }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_ACCOUNT_SID","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.TWILIO_AUTH_TOKEN }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_AUTH_TOKEN }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_AUTH_TOKEN","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.TWILIO_FROM_NUMBER }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.TWILIO_FROM_NUMBER }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"TWILIO_FROM_NUMBER","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.ACERTUS_LOG_ONLY }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ACERTUS_LOG_ONLY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ACERTUS_LOG_ONLY","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.ACERTUS_API_KEY }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.ACERTUS_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ACERTUS_API_KEY","Value":$val}]')
-          fi
-
-          ALLOWED_ORIGINS_VALUE="${{ secrets.ALLOWED_ORIGINS_STAGING }}"
-          if [ -z "$ALLOWED_ORIGINS_VALUE" ]; then
-            ALLOWED_ORIGINS_VALUE="${{ secrets.ALLOWED_ORIGINS }}"
-          fi
-          if [ -n "$ALLOWED_ORIGINS_VALUE" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "$ALLOWED_ORIGINS_VALUE" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ALLOWED_ORIGINS","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.MAPBOX_API_KEY_STAGING }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MAPBOX_API_KEY_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MAPBOX_API_KEY","Value":$val}]')
-          elif [ -n "${{ secrets.MAPBOX_API_KEY }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.MAPBOX_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"MAPBOX_API_KEY","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.SD_CLIENT_ID }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_CLIENT_ID }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_CLIENT_ID","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.SD_CLIENT_SECRET }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_CLIENT_SECRET }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_CLIENT_SECRET","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.SD_PRICING_API_KEY }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_PRICING_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_PRICING_API_KEY","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.PAPERTRAIL_HOST }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_HOST }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_HOST","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.PAPERTRAIL_PORT }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_PORT }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_PORT","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.PAPERTRAIL_APP_NAME }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_APP_NAME }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_APP_NAME","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.PAPERTRAIL_LEVEL }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_LEVEL }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_LEVEL","Value":$val}]')
-          fi
-
-          if [ -n "${{ secrets.NOTIFICATION_OVERRIDE_EMAIL_STAGING }}" ]; then
-            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.NOTIFICATION_OVERRIDE_EMAIL_STAGING }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"NOTIFICATION_OVERRIDE_EMAIL","Value":$val}]')
-          fi
-
-          # Update the environment with all option settings
-          OPTION_COUNT=$(echo "$OPTIONS" | jq 'length')
-          if [ "$OPTION_COUNT" -gt 0 ]; then
-            echo "Updating Elastic Beanstalk environment with $OPTION_COUNT environment variable(s) from GitHub Secrets..."
-            echo "$OPTIONS" | jq '.'
-            
-            echo "$OPTIONS" > /tmp/eb-options.json
-            aws elasticbeanstalk update-environment \
-              --environment-name autovista-api-staging-env \
-              --option-settings file:///tmp/eb-options.json \
-              --region us-east-1
-            
-            echo "Waiting for environment update to complete..."
-            aws elasticbeanstalk wait environment-updated \
-              --environment-names autovista-api-staging-env \
-              --region us-east-1 || echo "Note: Environment update may still be in progress"
-            
-            echo "Environment variables updated successfully!"
-          else
-            echo "No environment variables to set from GitHub Secrets."
-          fi
-
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: autovista-api-staging
-          environment_name: autovista-api-staging-env
+          environment_name: autovista-api-staging
           region: us-east-1
           version_label: ${{ env.VERSION_LABEL }}
           deployment_package: autovista-api.zip
@@ -393,12 +253,12 @@ jobs:
         run: |
           echo "=== Fetching application logs ==="
           aws elasticbeanstalk retrieve-environment-info \
-            --environment-name autovista-api-staging-env \
+            --environment-name autovista-api-staging \
             --info-type tail
 
           echo "=== Recent application events ==="
           aws elasticbeanstalk describe-events \
-            --environment-name autovista-api-staging-env \
+            --environment-name autovista-api-staging \
             --max-items 5
 
       - name: Configure AWS credentials for failure logs
@@ -416,22 +276,22 @@ jobs:
 
           # Get the latest log files
           aws elasticbeanstalk retrieve-environment-info \
-            --environment-name autovista-api-staging-env \
+            --environment-name autovista-api-staging \
             --info-type tail
 
           echo "=== Recent events ==="
           aws elasticbeanstalk describe-events \
-            --environment-name autovista-api-staging-env \
+            --environment-name autovista-api-staging \
             --max-items 20
 
           echo "=== Environment health and status ==="
           aws elasticbeanstalk describe-environments \
-            --environment-names autovista-api-staging-env \
+            --environment-names autovista-api-staging \
             --query 'Environments[0].{Health:Health,HealthStatus:HealthStatus,Status:Status,VersionLabel:VersionLabel}'
 
           echo "=== Checking for aborted deployments ==="
           EVENTS=$(aws elasticbeanstalk describe-events \
-            --environment-name autovista-api-staging-env \
+            --environment-name autovista-api-staging \
             --max-items 5 \
             --query 'Events[?contains(Message, `aborted`) || contains(Message, `Aborted`)].{Time:EventDate,Message:Message}' \
             --output text)
@@ -448,7 +308,7 @@ jobs:
 
           echo "=== Fetching eb-engine.log ==="
           aws elasticbeanstalk retrieve-environment-info \
-            --environment-name autovista-api-staging-env \
+            --environment-name autovista-api-staging \
             --info-type bundle
 
           # Exit with error to fail the workflow
