@@ -58,10 +58,10 @@ export const sendOrderToTms = async (
           order.tms.status = result.status || order.tms.status || null;
           order.tms.createdAt = result.created_at
             ? new Date(result.created_at)
-            : order.tms.createdAt || null;
+            : order.tms.createdAt ?? undefined;
           order.tms.updatedAt = result.changed_at
             ? new Date(result.changed_at)
-            : order.tms.updatedAt || null;
+            : order.tms.updatedAt ?? undefined;
         }
       } else {
         const portal = await Portal.findById(order.portalId);
@@ -117,8 +117,12 @@ export const sendOrderToTms = async (
           order.tms = {
             guid: result.guid || null,
             status: result.status || null,
-            createdAt: result.created_at ? new Date(result.created_at) : null,
-            updatedAt: result.changed_at ? new Date(result.changed_at) : null,
+            createdAt: result.created_at
+              ? new Date(result.created_at)
+              : undefined,
+            updatedAt: result.changed_at
+              ? new Date(result.changed_at)
+              : undefined,
           };
         }
       }
@@ -132,10 +136,10 @@ export const sendOrderToTms = async (
           order.tms.status = result.status || order.tms.status || null;
           order.tms.createdAt = result.created_at
             ? new Date(result.created_at)
-            : order.tms.createdAt || null;
+            : order.tms.createdAt ?? undefined;
           order.tms.updatedAt = result.changed_at
             ? new Date(result.changed_at)
-            : order.tms.updatedAt || null;
+            : order.tms.updatedAt ?? undefined;
         }
       } else {
         const portal = await Portal.findById(order.portalId);
@@ -170,8 +174,12 @@ export const sendOrderToTms = async (
           order.tms = {
             guid: result.guid || null,
             status: result.status || null,
-            createdAt: result.created_at ? new Date(result.created_at) : null,
-            updatedAt: result.changed_at ? new Date(result.changed_at) : null,
+            createdAt: result.created_at
+              ? new Date(result.created_at)
+              : undefined,
+            updatedAt: result.changed_at
+              ? new Date(result.changed_at)
+              : undefined,
           };
         }
       }

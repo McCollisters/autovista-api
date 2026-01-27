@@ -97,9 +97,10 @@ export const loginSocial = async (
     //   templateName: "Login",
     // });
 
+    const userId = String((user as { _id: unknown })._id);
     logger.info("Social login successful", {
       email,
-      userId: user._id,
+      userId,
       role: user.role,
     });
 
@@ -114,7 +115,7 @@ export const loginSocial = async (
     res.status(200).json({
       token: newToken,
       role: user.role,
-      userId: user._id.toString(),
+      userId,
       portalId: user.portalId?.toString() || null,
       portalRoles,
     });

@@ -77,7 +77,7 @@ if (papertrailHost && Number.isFinite(papertrailPort)) {
       hostname: os.hostname(),
       program: papertrailProgram,
       level: papertrailLevel,
-      logFormat: (level, message) => `${level}: ${message}`,
+      logFormat: (level: string, message: string) => `${level}: ${message}`,
     }) as unknown as winston.transport,
   );
 }

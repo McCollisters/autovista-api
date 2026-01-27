@@ -36,6 +36,7 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
   codeSent: Date;
   codeExpires: Date;
 }> {
+  let templatePath: string | null = null;
   try {
     const senderEmail = "autologistics@mccollisters.com";
     const senderName = "McCollister's AutoLogistics";
@@ -56,7 +57,6 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
       join(projectRoot, "templates/verification-code.hbs"), // If templates at root
     ];
 
-    let templatePath: string | null = null;
     for (const path of possiblePaths) {
       if (existsSync(path)) {
         templatePath = path;

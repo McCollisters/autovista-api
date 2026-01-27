@@ -126,8 +126,9 @@ export const loginEmail2FA = async (
     const token = createToken(user);
 
     // Log successful login
+    const userId = String((user as { _id: unknown })._id);
     logger.info("User logged in successfully with 2FA", {
-      userId: user._id,
+      userId,
       email: user.email,
     });
 
@@ -142,7 +143,7 @@ export const loginEmail2FA = async (
     res.status(200).json({
       token,
       role: user.role,
-      userId: user._id.toString(),
+      userId,
       portalId: user.portalId?.toString() || null,
       portalRoles,
     });

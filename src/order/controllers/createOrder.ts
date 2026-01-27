@@ -16,10 +16,7 @@ import { sendOrderAgentEmail } from "../notifications/sendOrderAgent";
 import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotification";
 import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
-import {
-  MMI_PORTALS,
-  GRAEBEL_AUTODESK_PORTALS,
-} from "../../_global/constants/portalIds";
+import { MMI_PORTALS } from "../../_global/constants/portalIds";
 import { resolveId } from "@/_global/utils/resolveId";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
@@ -247,7 +244,9 @@ export const createOrder = async (
       payment = PaymentType.Cod;
     }
 
-    payment = String(payment || "").toLowerCase();
+    const normalizedPayment = String(payment || "").toLowerCase();
+    payment =
+      normalizedPayment === PaymentType.Cod ? PaymentType.Cod : PaymentType.Billing;
 
     // Check if delivery address has changed from original quote
     const originalDeliveryAddress =
@@ -644,8 +643,9 @@ export const createOrder = async (
 
     // SuperDispatch integration with improved error handling
     // Send partial order initially (withheld addresses) - full details will be sent when carrier accepts
+    const orderNumberForSuper = orderNumberText ?? "";
     const hasRequiredPartialOrderFields = Boolean(
-      orderNumberText &&
+      orderNumberForSuper &&
         pickupCity &&
         pickupState &&
         pickupZip &&
@@ -665,7 +665,7 @@ export const createOrder = async (
         );
         superResponse = await sendPartialOrderToSuper({
           quotes,
-          orderNumber: orderNumberText,
+          orderNumber: orderNumberForSuper,
           reg,
           portal,
           dateRanges,
