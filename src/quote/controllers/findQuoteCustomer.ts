@@ -28,9 +28,12 @@ export const findQuoteCustomer = async (
     customerLastName = customerLastName?.toLowerCase().trim() || null;
     customerEmail = customerEmail?.toLowerCase().trim() || null;
 
-    // Find quote by tracking code (customerCode)
+    // Find quote by confirmation code (customerCode)
     const quote = await Quote.findOne({
-      "customer.trackingCode": customerCode,
+      $or: [
+        { "customer.quoteConfirmationCode": customerCode },
+        { "customer.trackingCode": customerCode },
+      ],
     }).select("-portal"); // Exclude portal from response
 
     if (!quote) {

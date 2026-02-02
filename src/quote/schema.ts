@@ -29,6 +29,16 @@ const generateTrackingCode = (): string => {
   return Math.random().toString(36).substring(2, 7).toUpperCase();
 };
 
+// Generate quote confirmation code (6 chars)
+const generateQuoteConfirmationCode = (): string => {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code = "";
+  for (let i = 0; i < 6; i += 1) {
+    code += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return code;
+};
+
 // Customer subdocument schema
 const customerSchema = new Schema<IQuoteCustomer>(
   {
@@ -36,6 +46,7 @@ const customerSchema = new Schema<IQuoteCustomer>(
     email: { type: String },
     phone: { type: String },
     trackingCode: { type: String },
+    quoteConfirmationCode: { type: String },
   },
   { _id: false },
 );
@@ -453,6 +464,9 @@ quoteSchema.pre("save", function (this: IQuote, next: () => void) {
 
   if (this.customer && !this.customer.trackingCode) {
     this.customer.trackingCode = generateTrackingCode();
+  }
+  if (this.customer && !this.customer.quoteConfirmationCode) {
+    this.customer.quoteConfirmationCode = generateQuoteConfirmationCode();
   }
   next();
 });

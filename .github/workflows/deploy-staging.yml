@@ -223,7 +223,7 @@ jobs:
 
           DISTRIBUTION_ID="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_STAGING }}"
           if [ -z "$DISTRIBUTION_ID" ]; then
-            DISTRIBUTION_ID="E7ITX4OKG9ZCY"
+            DISTRIBUTION_ID="E2HZSS7O0OPQSE"
           fi
 
           if [ -z "$DISTRIBUTION_ID" ]; then

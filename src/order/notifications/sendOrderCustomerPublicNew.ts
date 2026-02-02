@@ -133,12 +133,8 @@ export async function sendOrderCustomerPublicNew(
     const isCOD = order.paymentType === "COD";
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
-    const pickupDatesLabel = isWhiteGlove
-      ? "Estimated Date:"
-      : "Scheduled Dates:";
-    const deliveryDatesLabel = isWhiteGlove
-      ? "Estimated Date:"
-      : "Scheduled Dates:";
+    const pickupDatesLabel = "Estimated Pickup:";
+    const deliveryDatesLabel = "Estimated Delivery:";
     const pickupDatesValue = isWhiteGlove
       ? formatSingleDate(
           order.schedule?.pickupEstimated?.[0] ||

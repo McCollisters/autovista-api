@@ -8,6 +8,7 @@ import { updateTransportOptions } from "./controllers/updateTransportOptions";
 import { findQuoteCustomer } from "./controllers/findQuoteCustomer";
 import { createQuoteCustomer } from "./controllers/createQuoteCustomer";
 import { updateQuoteAlternative } from "./controllers/updateQuoteAlternative";
+import { sendQuoteCustomerEmail } from "./controllers/sendQuoteCustomerEmail";
 
 const router = Router();
 
@@ -15,6 +16,7 @@ const router = Router();
 router.post("/transport", updateTransportOptions);
 router.post("/customer/find", findQuoteCustomer);
 router.post("/customer", createQuoteCustomer);
+router.post("/:quoteId/email", sendQuoteCustomerEmail);
 router.get("/public/:quoteId/app", getQuote);
 router.put("/", updateQuoteAlternative);
 

@@ -5852,3 +5852,422 @@
   message: 'Failed to fetch order from Super Dispatch',
   timestamp: '2026-01-20 22:34:45'
 }
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: transportType: `Open` is not a valid enum value for path `transportType`.',
+  portal: '64ece35abfc3deb98e9d180f',
+  level: 'error',
+  message: 'Error creating customer quote',
+  timestamp: '2026-02-01 13:39:47'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: transportType: `Open` is not a valid enum value for path `transportType`.',
+  portal: '64ece35abfc3deb98e9d180f',
+  level: 'error',
+  message: 'Error creating customer quote',
+  timestamp: '2026-02-01 13:39:48'
+}
+{
+  message: 'Order creation failed: No pickup date provided',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-02-01 18:49:06'
+}
+{
+  message: 'Order creation failed: No pickup date provided',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-02-01 18:50:15'
+}
+{
+  message: 'Order creation failed: No pickup date provided',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-02-01 18:51:26'
+}
+{
+  message: 'Order creation failed: No pickup date provided',
+  level: 'error',
+  service: 'autovista-api',
+  timestamp: '2026-02-01 19:24:45'
+}
+{
+  service: 'autovista-api',
+  code: 401,
+  message: 'Error sending email via SendGrid: Unauthorized',
+  response: {
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 02 Feb 2026 02:27:23 GMT',
+      'content-type': 'application/json',
+      'content-length': '116',
+      connection: 'keep-alive',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    },
+    body: {
+      errors: [
+        {
+          message: 'The provided authorization grant is invalid, expired, or revoked',
+          field: null,
+          help: null
+        }
+      ]
+    }
+  },
+  level: 'error',
+  stack: 'Error: Unauthorized\n' +
+    '    at node_modules/@sendgrid/client/src/classes/client.js:167:29\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-02-01 19:27:23'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'customerConfirmation',
+    orderId: '69800b8bb66a29c55b200e6b',
+    recipientEmail: 'test@test.com',
+    recipientPhone: undefined
+  },
+  error: 'Unauthorized',
+  level: 'error',
+  message: 'Failed to send email notification',
+  timestamp: '2026-02-01 19:27:23'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69800b8bb66a29c55b200e6b'),
+  refId: 300578,
+  recipientEmail: 'test@test.com',
+  level: 'error',
+  message: 'Failed to send customer order email',
+  timestamp: '2026-02-01 19:27:24'
+}
+{
+  service: 'autovista-api',
+  code: 401,
+  message: 'Error sending email via SendGrid: Unauthorized',
+  response: {
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 02 Feb 2026 02:37:45 GMT',
+      'content-type': 'application/json',
+      'content-length': '116',
+      connection: 'keep-alive',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    },
+    body: {
+      errors: [
+        {
+          message: 'The provided authorization grant is invalid, expired, or revoked',
+          field: null,
+          help: null
+        }
+      ]
+    }
+  },
+  level: 'error',
+  stack: 'Error: Unauthorized\n' +
+    '    at node_modules/@sendgrid/client/src/classes/client.js:167:29\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-02-01 19:37:45'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'customerConfirmation',
+    orderId: '69800df8b66a29c55b20180e',
+    recipientEmail: 'annafkh@gmail.com',
+    recipientPhone: undefined
+  },
+  error: 'Unauthorized',
+  level: 'error',
+  message: 'Failed to send email notification',
+  timestamp: '2026-02-01 19:37:45'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69800df8b66a29c55b20180e'),
+  refId: 300580,
+  recipientEmail: 'annafkh@gmail.com',
+  level: 'error',
+  message: 'Failed to send customer order email',
+  timestamp: '2026-02-01 19:37:45'
+}
+{
+  service: 'autovista-api',
+  error: 'Quote validation failed: transportType: `white glove` is not a valid enum value for path `transportType`.',
+  portal: '64ece35abfc3deb98e9d180f',
+  level: 'error',
+  message: 'Error creating customer quote',
+  timestamp: '2026-02-01 19:46:13'
+}
+{
+  service: 'autovista-api',
+  code: 401,
+  message: 'Error sending email via SendGrid: Unauthorized',
+  response: {
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 02 Feb 2026 02:56:59 GMT',
+      'content-type': 'application/json',
+      'content-length': '116',
+      connection: 'keep-alive',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    },
+    body: {
+      errors: [
+        {
+          message: 'The provided authorization grant is invalid, expired, or revoked',
+          field: null,
+          help: null
+        }
+      ]
+    }
+  },
+  level: 'error',
+  stack: 'Error: Unauthorized\n' +
+    '    at node_modules/@sendgrid/client/src/classes/client.js:167:29\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-02-01 19:56:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980127ab66a29c55b202b14'),
+  refId: 300582,
+  error: 'Unauthorized',
+  level: 'error',
+  message: 'Failed to send white glove notification',
+  timestamp: '2026-02-01 19:56:59'
+}
+{
+  service: 'autovista-api',
+  code: 401,
+  message: 'Error sending email via SendGrid: Unauthorized',
+  response: {
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 02 Feb 2026 02:56:59 GMT',
+      'content-type': 'application/json',
+      'content-length': '116',
+      connection: 'keep-alive',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    },
+    body: {
+      errors: [
+        {
+          message: 'The provided authorization grant is invalid, expired, or revoked',
+          field: null,
+          help: null
+        }
+      ]
+    }
+  },
+  level: 'error',
+  stack: 'Error: Unauthorized\n' +
+    '    at node_modules/@sendgrid/client/src/classes/client.js:167:29\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-02-01 19:56:59'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'customerConfirmation',
+    orderId: '6980127ab66a29c55b202b14',
+    recipientEmail: 'annafkh@gmail.com',
+    recipientPhone: undefined
+  },
+  error: 'Unauthorized',
+  level: 'error',
+  message: 'Failed to send email notification',
+  timestamp: '2026-02-01 19:56:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980127ab66a29c55b202b14'),
+  refId: 300582,
+  recipientEmail: 'annafkh@gmail.com',
+  level: 'error',
+  message: 'Failed to send customer order email',
+  timestamp: '2026-02-01 19:56:59'
+}
+{
+  service: 'autovista-api',
+  code: 401,
+  message: 'Error sending email via SendGrid: Unauthorized',
+  response: {
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 02 Feb 2026 03:21:00 GMT',
+      'content-type': 'application/json',
+      'content-length': '116',
+      connection: 'keep-alive',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    },
+    body: {
+      errors: [
+        {
+          message: 'The provided authorization grant is invalid, expired, or revoked',
+          field: null,
+          help: null
+        }
+      ]
+    }
+  },
+  level: 'error',
+  stack: 'Error: Unauthorized\n' +
+    '    at node_modules/@sendgrid/client/src/classes/client.js:167:29\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-02-01 20:21:00'
+}
+{
+  service: 'autovista-api',
+  quoteId: '698018142ec67897073d2d4d',
+  recipientEmail: 'annafkh@gmail.com',
+  error: 'Unauthorized',
+  level: 'error',
+  message: 'Failed to send customer quote email',
+  timestamp: '2026-02-01 20:21:00'
+}
+{
+  service: 'autovista-api',
+  code: 401,
+  message: 'Error sending email via SendGrid: Unauthorized',
+  response: {
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 02 Feb 2026 03:22:37 GMT',
+      'content-type': 'application/json',
+      'content-length': '116',
+      connection: 'keep-alive',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    },
+    body: {
+      errors: [
+        {
+          message: 'The provided authorization grant is invalid, expired, or revoked',
+          field: null,
+          help: null
+        }
+      ]
+    }
+  },
+  level: 'error',
+  stack: 'Error: Unauthorized\n' +
+    '    at node_modules/@sendgrid/client/src/classes/client.js:167:29\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-02-01 20:22:37'
+}
+{
+  service: 'autovista-api',
+  quoteId: '698018782ec67897073d2da0',
+  recipientEmail: 'annafkh@gmail.com',
+  error: 'Unauthorized',
+  level: 'error',
+  message: 'Failed to send customer quote email',
+  timestamp: '2026-02-01 20:22:37'
+}
+{
+  service: 'autovista-api',
+  code: 401,
+  message: 'Error sending email via SendGrid: Unauthorized',
+  response: {
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 02 Feb 2026 03:24:45 GMT',
+      'content-type': 'application/json',
+      'content-length': '116',
+      connection: 'keep-alive',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    },
+    body: {
+      errors: [
+        {
+          message: 'The provided authorization grant is invalid, expired, or revoked',
+          field: null,
+          help: null
+        }
+      ]
+    }
+  },
+  level: 'error',
+  stack: 'Error: Unauthorized\n' +
+    '    at node_modules/@sendgrid/client/src/classes/client.js:167:29\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-02-01 20:24:45'
+}
+{
+  service: 'autovista-api',
+  quoteId: '698018782ec67897073d2da0',
+  recipientEmail: 'annafkh@gmail.com',
+  error: 'Unauthorized',
+  level: 'error',
+  message: 'Failed to send customer quote email',
+  timestamp: '2026-02-01 20:24:45'
+}

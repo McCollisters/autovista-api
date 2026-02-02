@@ -24,6 +24,7 @@ export interface IQuoteCustomer extends ICustomer {
   email?: string;
   phone?: string;
   trackingCode?: string;
+  quoteConfirmationCode?: string;
 }
 
 export interface IQuoteLocation {

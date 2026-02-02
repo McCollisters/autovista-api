@@ -27,6 +27,12 @@ export function getDeliveryDatesString(order: IOrder): string {
     return dates[0];
   }
 
+  const startDate = dates[0];
+  const endDate = dates[dates.length - 1];
+  if (startDate === endDate) {
+    return startDate;
+  }
+
   // Return date range
-  return `${dates[0]} - ${dates[dates.length - 1]}`;
+  return `${startDate} - ${endDate}`;
 }

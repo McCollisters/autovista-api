@@ -1346,10 +1346,24 @@ export const createOrder = async (
 
     // COD payment instructions are appended to the customer confirmation email.
 
-    // Send customer order confirmation email if customer email exists
-    if (newOrder.customer?.email) {
+    // Send customer order confirmation email if customer email exists,
+    // or use NOTIFICATION_OVERRIDE_EMAIL when configured.
+    const overrideEmail = process.env.NOTIFICATION_OVERRIDE_EMAIL?.trim();
+    const shouldSendCustomerEmail = Boolean(
+      overrideEmail || newOrder.customer?.email,
+    );
+
+    if (shouldSendCustomerEmail) {
       try {
-        await sendOrderCustomerPublicNew(newOrder);
+        await sendOrderCustomerPublicNew(
+          newOrder,
+          overrideEmail
+            ? {
+                recipientEmail: overrideEmail,
+                recipientName: newOrder.customer?.name,
+              }
+            : undefined,
+        );
         logger.info(
           `Customer order confirmation email sent for order ${(newOrder as any).refId}`,
         );
