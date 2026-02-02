@@ -50616,3 +50616,206 @@
   service: 'autovista-api',
   timestamp: '2026-02-02 13:56:16'
 }
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/auth/login-social',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '1335',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  email: 'anna@periscopeworks.io',
+  userId: new ObjectId('5e9896afed92842f43fadc55'),
+  role: 'platform_admin',
+  level: 'info',
+  message: 'Social login successful',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/login-social',
+  statusCode: 200,
+  duration: '295ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/user',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  path: '/',
+  url: '/',
+  level: 'info',
+  message: 'getAuthorizedUser called',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '144ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-02 13:56:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/',
+  statusCode: 200,
+  duration: '405ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-02 13:56:56'
+}
+{
+  service: 'autovista-api',
+  count: 112,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-02-02 13:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '473ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-02 13:56:56'
+}
+{
+  service: 'autovista-api',
+  count: 112,
+  userRole: 'platform_admin',
+  userEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'getPortals - returning portals',
+  timestamp: '2026-02-02 13:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/portals',
+  statusCode: 200,
+  duration: '735ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-02 13:56:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-02 13:56:57'
+}
+{
+  service: 'autovista-api',
+  query: '{}',
+  queryPortalId: undefined,
+  userRole: 'platform_admin',
+  portalIdParam: undefined,
+  selectedPortalIdParam: undefined,
+  statusParam: undefined,
+  orderTableStatusParam: undefined,
+  tmsStatusFilter: undefined,
+  skip: 0,
+  limit: 50,
+  sortField: 'refId',
+  sortOrder: -1,
+  level: 'info',
+  message: 'Getting orders with query',
+  timestamp: '2026-02-02 13:56:57'
+}
+{
+  service: 'autovista-api',
+  count: 21085,
+  returned: 50,
+  userRole: 'platform_admin',
+  portalId: undefined,
+  level: 'info',
+  message: 'Orders retrieved',
+  timestamp: '2026-02-02 13:56:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/orders?sortby=refId&sortorder=-1&skip=0&limit=50',
+  statusCode: 200,
+  duration: '539ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-02 13:56:57'
+}
