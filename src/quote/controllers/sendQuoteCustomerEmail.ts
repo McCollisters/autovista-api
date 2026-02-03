@@ -90,7 +90,10 @@ export const sendQuoteCustomerEmail = async (
     );
     const encodedCode = encodeURIComponent(code);
     const encodedEmail = encodeURIComponent(recipientEmail);
-    const url = `https://autovista.mccollisters.com/public/quote/${quote._id}?code=${encodedCode}&email=${encodedEmail}`;
+    const baseUrl =
+      process.env.BASE_URL || "https://autovista.mccollisters.com";
+    const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
+    const url = `${normalizedBaseUrl}/public/quote/${quote._id}?code=${encodedCode}&email=${encodedEmail}`;
 
     const pickupLocation =
       quote.origin?.validated || quote.origin?.userInput || "";
@@ -120,6 +123,8 @@ export const sendQuoteCustomerEmail = async (
     const templateSource = await readFile(templatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
+    const emailLogo =
+      process.env.QUOTE_EMAIL_LOGO_URL || portal?.logo || MC_LOGO;
     const html = template({
       firstName,
       code,
@@ -133,8 +138,8 @@ export const sendQuoteCustomerEmail = async (
       fiveday,
       sevenday,
       companyName: portal?.companyName || "",
-      logo: portal?.logo || MC_LOGO,
-      logo2: MC_LOGO,
+      logo: emailLogo,
+      logo2: emailLogo,
     });
 
     const notificationManager = getNotificationManager();

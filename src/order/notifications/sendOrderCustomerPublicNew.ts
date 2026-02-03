@@ -174,7 +174,9 @@ export async function sendOrderCustomerPublicNew(
       `
       : "";
     const baseUrl =
-      process.env.BASE_URL || "https://autovista.mccollisters.com";
+      process.env.ORDER_STATUS_BASE_URL ||
+      process.env.BASE_URL ||
+      "https://autovista.mccollisters.com";
     const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
     const orderStatusUrl = `${normalizedBaseUrl}/public/order-status`;
     const trackingHtml = isMMI
