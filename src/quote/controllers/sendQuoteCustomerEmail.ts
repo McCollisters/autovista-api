@@ -90,7 +90,7 @@ export const sendQuoteCustomerEmail = async (
     );
     const encodedCode = encodeURIComponent(code);
     const encodedEmail = encodeURIComponent(recipientEmail);
-    const url = `https://autovista.mccollisters.com/public/quote/${quote._id}#code=${encodedCode}&email=${encodedEmail}`;
+    const url = `https://autovista.mccollisters.com/public/quote/${quote._id}?code=${encodedCode}&email=${encodedEmail}`;
 
     const pickupLocation =
       quote.origin?.validated || quote.origin?.userInput || "";
