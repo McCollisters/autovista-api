@@ -88,7 +88,7 @@ jobs:
           echo "Uploading application version $VERSION_LABEL to $EB_BUCKET"
           aws s3 cp autovista-api.zip "s3://$EB_BUCKET/$VERSION_LABEL.zip"
           aws elasticbeanstalk create-application-version \
-            --application-name autovista-api-staging \
+            --application-name autovista-api \
             --version-label "$VERSION_LABEL" \
             --source-bundle S3Bucket="$EB_BUCKET",S3Key="$VERSION_LABEL.zip" \
             --region us-east-1
@@ -206,7 +206,7 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: autovista-api-staging
+          application_name: autovista-api
           environment_name: autovista-api-staging
           region: us-east-1
           version_label: ${{ env.VERSION_LABEL }}

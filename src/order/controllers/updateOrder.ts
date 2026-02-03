@@ -99,6 +99,10 @@ export const updateOrder = async (
       { new: true },
     );
 
+    if (!updatedOrder) {
+      return next({ statusCode: 404, message: "Order not found." });
+    }
+
     if (updatedOrder && updatedOrder.transportType) {
       const transportTypeRaw = String(updatedOrder.transportType);
       const transportTypeNormalized = transportTypeRaw.toLowerCase();
@@ -111,7 +115,7 @@ export const updateOrder = async (
       }
     }
 
-    if (updatedOrder && priceOverrides) {
+    if (priceOverrides) {
       let totalBase = 0;
       let totalCommission = 0;
       let totalCompanyTariff = 0;
@@ -275,99 +279,90 @@ export const updateOrder = async (
       }
     }
 
-    if (updatedOrder) {
-      const paymentType = String(updatedOrder.paymentType || "").toLowerCase();
-      const isCod = paymentType === PaymentType.Cod;
-      const isWhiteGlove =
-        updatedOrder.transportType === TransportType.WhiteGlove;
-      const hasTmsGuid = Boolean(updatedOrder.tms?.guid);
-      let shouldSave = false;
+    const paymentType = String(updatedOrder.paymentType || "").toLowerCase();
+    const isCod = paymentType === PaymentType.Cod;
+    const isWhiteGlove = updatedOrder.transportType === TransportType.WhiteGlove;
+    const hasTmsGuid = Boolean(updatedOrder.tms?.guid);
+    let shouldSave = false;
 
-      const hasPaidFlipped =
-        updatedOrder.hasPaid === true && previousHasPaid !== true;
+    const hasPaidFlipped =
+      updatedOrder.hasPaid === true && previousHasPaid !== true;
 
-      if (hasPaidFlipped && isCod) {
-        updatedOrder.orderTableStatus = "New";
-        shouldSave = true;
-      }
+    if (hasPaidFlipped && isCod) {
+      updatedOrder.orderTableStatus = "New";
+      shouldSave = true;
+    }
 
-      if (
-        hasPaidFlipped &&
-        isCod &&
-        !isWhiteGlove &&
-        !hasTmsGuid
-      ) {
-        try {
-          const portal = await Portal.findById(updatedOrder.portalId);
-          const pickupStart =
-            updatedOrder.schedule?.pickupEstimated?.[0] ||
-            updatedOrder.schedule?.pickupSelected;
-          const pickupEnd =
-            updatedOrder.schedule?.pickupEstimated?.[1] ||
-            updatedOrder.schedule?.pickupSelected;
-          const deliveryStart = updatedOrder.schedule?.deliveryEstimated?.[0];
-          const deliveryEnd = updatedOrder.schedule?.deliveryEstimated?.[1];
-          const dateRanges = [
-            pickupStart,
-            pickupEnd,
-            deliveryStart || pickupEnd,
-            deliveryEnd || deliveryStart || pickupEnd,
-          ].filter(Boolean) as Date[];
+    if (hasPaidFlipped && isCod && !isWhiteGlove && !hasTmsGuid) {
+      try {
+        const portal = await Portal.findById(updatedOrder.portalId);
+        const pickupStart =
+          updatedOrder.schedule?.pickupEstimated?.[0] ||
+          updatedOrder.schedule?.pickupSelected;
+        const pickupEnd =
+          updatedOrder.schedule?.pickupEstimated?.[1] ||
+          updatedOrder.schedule?.pickupSelected;
+        const deliveryStart = updatedOrder.schedule?.deliveryEstimated?.[0];
+        const deliveryEnd = updatedOrder.schedule?.deliveryEstimated?.[1];
+        const dateRanges = [
+          pickupStart,
+          pickupEnd,
+          deliveryStart || pickupEnd,
+          deliveryEnd || deliveryStart || pickupEnd,
+        ].filter(Boolean) as Date[];
 
-          if (!portal || dateRanges.length < 4) {
-            logger.warn("Skipping SuperDispatch partial order send", {
-              orderId: updatedOrder._id,
-              hasPortal: Boolean(portal),
-              dateRangesLength: dateRanges.length,
-            });
-          } else {
-            const serviceLevel =
-              updatedOrder.schedule?.serviceLevel ||
-              (updatedOrder as any).serviceLevel;
-
-            const superResponse = await sendPartialOrderToSuper({
-              quotes: (updatedOrder as any).vehicles || [],
-              orderNumber: String(updatedOrder.refId),
-              reg: updatedOrder.reg ? Number(updatedOrder.reg) : undefined,
-              portal,
-              dateRanges,
-              transportType: updatedOrder.transportType,
-              pickupCity: updatedOrder.origin?.address?.city || "",
-              pickupState: updatedOrder.origin?.address?.state || "",
-              pickupZip: updatedOrder.origin?.address?.zip || "",
-              deliveryCity: updatedOrder.destination?.address?.city || "",
-              deliveryState: updatedOrder.destination?.address?.state || "",
-              deliveryZip: updatedOrder.destination?.address?.zip || "",
-              serviceLevel: Number(serviceLevel),
-            });
-
-            if (superResponse) {
-              updatedOrder.tms = {
-                guid: superResponse?.guid || null,
-                status: superResponse?.status || null,
-                createdAt: superResponse?.created_at
-                  ? new Date(superResponse.created_at)
-                  : null,
-                updatedAt: superResponse?.changed_at
-                  ? new Date(superResponse.changed_at)
-                  : null,
-              };
-              updatedOrder.tmsPartialOrder = true;
-              shouldSave = true;
-            }
-          }
-        } catch (superError) {
-          logger.error("Failed to send COD partial order to SuperDispatch", {
+        if (!portal || dateRanges.length < 4) {
+          logger.warn("Skipping SuperDispatch partial order send", {
             orderId: updatedOrder._id,
-            error:
-              superError instanceof Error ? superError.message : superError,
+            hasPortal: Boolean(portal),
+            dateRangesLength: dateRanges.length,
           });
-        }
-      }
+        } else {
+          const serviceLevel =
+            updatedOrder.schedule?.serviceLevel ||
+            (updatedOrder as any).serviceLevel;
 
-      if (shouldSave) {
-        await updatedOrder.save();
+          const superResponse = await sendPartialOrderToSuper({
+            quotes: (updatedOrder as any).vehicles || [],
+            orderNumber: String(updatedOrder.refId),
+            reg: updatedOrder.reg ? Number(updatedOrder.reg) : undefined,
+            portal,
+            dateRanges,
+            transportType: updatedOrder.transportType,
+            pickupCity: updatedOrder.origin?.address?.city || "",
+            pickupState: updatedOrder.origin?.address?.state || "",
+            pickupZip: updatedOrder.origin?.address?.zip || "",
+            deliveryCity: updatedOrder.destination?.address?.city || "",
+            deliveryState: updatedOrder.destination?.address?.state || "",
+            deliveryZip: updatedOrder.destination?.address?.zip || "",
+            serviceLevel: Number(serviceLevel),
+          });
+
+          if (superResponse) {
+            updatedOrder.tms = {
+              guid: superResponse?.guid || null,
+              status: superResponse?.status || null,
+              createdAt: superResponse?.created_at
+                ? new Date(superResponse.created_at)
+                : undefined,
+              updatedAt: superResponse?.changed_at
+                ? new Date(superResponse.changed_at)
+                : undefined,
+            };
+            updatedOrder.tmsPartialOrder = true;
+            shouldSave = true;
+          }
+        }
+      } catch (superError) {
+        logger.error("Failed to send COD partial order to SuperDispatch", {
+          orderId: updatedOrder._id,
+          error: superError instanceof Error ? superError.message : superError,
+        });
       }
+    }
+
+    if (shouldSave) {
+      await updatedOrder.save();
     }
 
     res.status(200).json(updatedOrder);

@@ -66,6 +66,8 @@ export const sendOrderToTms = async (
       } else {
         const portal = await Portal.findById(order.portalId);
         const dateRanges = buildDateRanges(order);
+        const regValue = Number(order.reg);
+        const safeReg = Number.isFinite(regValue) ? regValue : 0;
         if (!portal || dateRanges.length < 4) {
           return next({
             statusCode: 400,
@@ -76,7 +78,7 @@ export const sendOrderToTms = async (
         result = await sendOrderToSuper({
           quotes: (order as any).vehicles || [],
           orderNumber: String(order.refId),
-          reg: order.reg ? Number(order.reg) : undefined,
+          reg: safeReg,
           portal,
           dateRanges,
           pickupCoords: {

@@ -43,6 +43,7 @@ export interface IOrder extends Document {
   refId: number;
   reg: string;
   status: Status;
+  orderTableStatus?: string;
   portalId: Types.ObjectId;
   userId?: Types.ObjectId;
   quoteId: Types.ObjectId;
@@ -154,6 +155,7 @@ const orderSchemaDefinition = {
   refId: { type: Number, required: true },
   reg: { type: String },
   status: createStatusField(Status, true),
+  orderTableStatus: { type: String },
   portalId: createReferenceField("Portal", true),
   userId: createReferenceField("User", false),
   quoteId: createReferenceField("Quote", true),

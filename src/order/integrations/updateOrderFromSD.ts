@@ -80,16 +80,18 @@ interface SuperDispatchOrder {
 // DATE UTILITIES
 // ============================================================================
 
-function processDate(dateString: string | undefined): DateTime | null {
-  if (!dateString) return null;
+function processDate(dateString: string | undefined): DateTime | undefined {
+  if (!dateString) return undefined;
   try {
     return DateTime.fromISO(dateString).setZone("America/New_York");
   } catch (e) {
-    return null;
+    return undefined;
   }
 }
 
-function generateDateString(dateObj: DateTime | Date | null): string | null {
+function generateDateString(
+  dateObj: DateTime | Date | undefined,
+): string | null {
   if (!dateObj) return null;
 
   try {
