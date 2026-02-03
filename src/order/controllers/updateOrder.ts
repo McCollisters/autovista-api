@@ -281,7 +281,8 @@ export const updateOrder = async (
 
     const paymentType = String(updatedOrder.paymentType || "").toLowerCase();
     const isCod = paymentType === PaymentType.Cod;
-    const isWhiteGlove = updatedOrder.transportType === TransportType.WhiteGlove;
+    const isWhiteGlove =
+      updatedOrder?.transportType === TransportType.WhiteGlove;
     const hasTmsGuid = Boolean(updatedOrder.tms?.guid);
     let shouldSave = false;
 

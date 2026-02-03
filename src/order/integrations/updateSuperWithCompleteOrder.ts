@@ -28,6 +28,10 @@ export const updateSuperWithCompleteOrder = async (
     // Authenticate with Super Dispatch
     const token = await authenticateSuperDispatch();
 
+    if (!order.portalId) {
+      throw new Error(`Order ${order.refId} has no associated portal`);
+    }
+
     // Populate portal if not already populated
     let portal = order.portalId;
     if (typeof portal === "object" && portal !== null) {
@@ -267,7 +271,7 @@ export const updateSuperWithCompleteOrder = async (
           state: order.origin?.address?.state || null,
           zip: normalizeZipNumber(order.origin?.address?.zip),
           name:
-            order.origin?.address?.businessName ||
+            order.origin?.contact?.companyName ||
             order.origin?.contact?.name ||
             null,
           contact_name: order.origin?.contact?.name || null,
@@ -289,7 +293,7 @@ export const updateSuperWithCompleteOrder = async (
           state: order.destination?.address?.state || null,
           zip: normalizeZipNumber(order.destination?.address?.zip),
           name:
-            order.destination?.address?.businessName ||
+            order.destination?.contact?.companyName ||
             order.destination?.contact?.name ||
             null,
           contact_name: order.destination?.contact?.name || null,

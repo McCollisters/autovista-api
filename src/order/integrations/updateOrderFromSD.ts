@@ -7,7 +7,7 @@
 
 import { DateTime } from "luxon";
 import { IOrder, IPortal, Portal } from "@/_global/models";
-import { Status, TransportType } from "@/_global/enums";
+import { Status, TransportType, USState } from "@/_global/enums";
 import { logger } from "@/core/logger";
 import { isWithheldAddress } from "../utils/checkWithheldAddress";
 
@@ -234,6 +234,15 @@ function processDeliveryDates(sdOrder: SuperDispatchOrder): ProcessedDates {
 // ADDRESS PROCESSING
 // ============================================================================
 
+const normalizeUSState = (value?: string | null): USState | undefined => {
+  if (!value) return undefined;
+  const normalized = String(value).trim().toUpperCase();
+  const validStates = Object.values(USState);
+  return validStates.includes(normalized as USState)
+    ? (normalized as USState)
+    : undefined;
+};
+
 function processPickupAddress(
   sdOrder: SuperDispatchOrder,
   existingOrder: IOrder,
@@ -276,7 +285,7 @@ function processPickupAddress(
       state:
         isWithheld || sdStateRemoved
           ? existingOrder.origin?.address?.state
-          : venue?.state || undefined,
+          : normalizeUSState(venue?.state),
       zip:
         isWithheld || sdZipRemoved
           ? existingOrder.origin?.address?.zip
@@ -332,7 +341,7 @@ function processDeliveryAddress(
       state:
         isWithheld || sdStateRemoved
           ? existingOrder.destination?.address?.state
-          : venue?.state || undefined,
+          : normalizeUSState(venue?.state),
       zip:
         isWithheld || sdZipRemoved
           ? existingOrder.destination?.address?.zip
@@ -379,12 +388,34 @@ const mapSdVehicleType = (type?: string | null) => {
   return typeMap[normalized] || "other";
 };
 
+type OrderVehicle = IOrder["vehicles"][0];
+
+const normalizeOrderModifiers = (
+  modifiers?: Partial<OrderVehicle["pricing"]["modifiers"]>,
+): OrderVehicle["pricing"]["modifiers"] => ({
+  inoperable: modifiers?.inoperable ?? 0,
+  routes: modifiers?.routes ?? 0,
+  states: modifiers?.states ?? 0,
+  oversize: modifiers?.oversize ?? 0,
+  vehicles: modifiers?.vehicles ?? 0,
+  globalDiscount: modifiers?.globalDiscount ?? 0,
+  portalDiscount: modifiers?.portalDiscount ?? 0,
+  irr: modifiers?.irr ?? 0,
+  fuel: modifiers?.fuel ?? 0,
+  enclosedFlat: modifiers?.enclosedFlat ?? 0,
+  enclosedPercent: modifiers?.enclosedPercent ?? 0,
+  commission: modifiers?.commission ?? 0,
+  serviceLevels:
+    (modifiers as any)?.serviceLevels ?? (modifiers as any)?.serviceLevel ?? 0,
+  companyTariff: modifiers?.companyTariff ?? 0,
+});
+
 function processExistingVehicle(
   sdVehicle: SuperDispatchOrder["vehicles"][0],
   savedVehicle: IOrder["vehicles"][0],
   orderCommission: number,
   orderCompanyTariff: number,
-) {
+): OrderVehicle {
   let updatedBaseQuote: number | null = null;
 
   // If Super's pricing does not equal the database amt, update the base quote
@@ -399,6 +430,7 @@ function processExistingVehicle(
   const commission = price.modifiers?.commission || orderCommission || 0;
   const cTariff = price.modifiers?.companyTariff || orderCompanyTariff || 0;
   const totalValue = sdVehicle.tariff;
+  const normalizedModifiers = normalizeOrderModifiers(price.modifiers);
 
   return {
     tariff: sdVehicle.tariff,
@@ -423,7 +455,7 @@ function processExistingVehicle(
     pricing: {
       base: updatedBaseQuote || price.base || 0,
       modifiers: {
-        ...price.modifiers,
+        ...normalizedModifiers,
         companyTariff: cTariff,
         commission,
       },
@@ -438,7 +470,7 @@ function processNewVehicle(
   sdVehicle: SuperDispatchOrder["vehicles"][0],
   orderCommission: number,
   orderCompanyTariff: number,
-) {
+): OrderVehicle {
   const commission = orderCommission || 0;
   const cTariff = orderCompanyTariff || 0;
   const totalValue = sdVehicle.tariff;
@@ -474,7 +506,7 @@ function processNewVehicle(
         enclosedFlat: 0,
         enclosedPercent: 0,
         commission,
-        serviceLevel: 0,
+        serviceLevels: 0,
         companyTariff: cTariff,
       },
       // Always update pricing from Super Dispatch
@@ -506,7 +538,7 @@ function processVehicles(
         orderCommission,
         orderCompanyTariff,
       );
-      vehicles.push(vehicleData as IOrder["vehicles"][0]);
+      vehicles.push(vehicleData);
 
       totalSDAmt += vehicle.tariff;
       totalPortalAmt += vehicleData.pricing.totalWithCompanyTariffAndCommission;
@@ -516,7 +548,7 @@ function processVehicles(
         orderCommission,
         orderCompanyTariff,
       );
-      vehicles.push(vehicleData as IOrder["vehicles"][0]);
+      vehicles.push(vehicleData);
 
       totalSDAmt += vehicle.tariff;
       totalPortalAmt += vehicleData.pricing.totalWithCompanyTariffAndCommission;
@@ -556,9 +588,9 @@ export const updateOrderFromSD = async (
       );
     }
 
-    const portal = (await Portal.findById(
-      databaseOrder.portalId,
-    ).lean()) as IPortal;
+    const portal = await Portal.findById(databaseOrder.portalId)
+      .lean<IPortal | null>()
+      .exec();
     if (!portal) {
       throw new Error(`Portal not found: ${databaseOrder.portalId}`);
     }
@@ -738,18 +770,28 @@ export const updateOrderFromSD = async (
       quoteId: databaseOrder.quoteId,
       miles: databaseOrder.miles,
       transportType: (() => {
-        // Preserve WhiteGlove transport type
-        if (databaseOrder.transportType === "WHITEGLOVE" || databaseOrder.transportType === TransportType.WhiteGlove) {
+        const currentTransportType = String(
+          databaseOrder.transportType || "",
+        ).toLowerCase();
+
+        // Preserve WhiteGlove transport type regardless of SD value
+        if (currentTransportType === TransportType.WhiteGlove) {
           return TransportType.WhiteGlove;
         }
-        
+
         // Only update transportType from Super Dispatch if it's a valid value
-        const sdTransportType = String(superDispatchOrder.transport_type || "").toLowerCase().trim();
+        const sdTransportType = String(
+          superDispatchOrder.transport_type || "",
+        )
+          .toLowerCase()
+          .trim();
         const validTransportTypes = Object.values(TransportType);
-        
-        if (sdTransportType && validTransportTypes.includes(sdTransportType as TransportType)) {
+
+        if (
+          sdTransportType &&
+          validTransportTypes.includes(sdTransportType as TransportType)
+        ) {
           // Only update if it's different from the current value
-          const currentTransportType = String(databaseOrder.transportType || "").toLowerCase();
           if (sdTransportType !== currentTransportType) {
             logger.info("Updating transportType from Super Dispatch", {
               orderRefId: databaseOrder.refId,
@@ -759,7 +801,7 @@ export const updateOrderFromSD = async (
             return sdTransportType as TransportType;
           }
         }
-        
+
         // Preserve existing transportType if Super Dispatch value is invalid or missing
         return databaseOrder.transportType as TransportType;
       })(),
