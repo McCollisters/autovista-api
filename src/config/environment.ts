@@ -62,7 +62,13 @@ const getMongoDbUri = (): string => {
   if (nodeEnv === "production") {
     return (process.env.MONGODB_PROD_URI || process.env.MONGODB_DEV_URI) as string;
   }
-  
+
+  // In staging, prefer MONGODB_STAGING_URI, fallback to MONGODB_DEV_URI
+  if (nodeEnv === "staging") {
+    return (process.env.MONGODB_STAGING_URI ||
+      process.env.MONGODB_DEV_URI) as string;
+  }
+
   // In development/test, use MONGODB_DEV_URI
   return process.env.MONGODB_DEV_URI as string;
 };
@@ -107,6 +113,11 @@ if (nodeEnv === "production") {
   if (!process.env.MONGODB_PROD_URI && !process.env.MONGODB_DEV_URI) {
     requiredEnvVars.push("MONGODB_PROD_URI or MONGODB_DEV_URI");
   }
+} else if (nodeEnv === "staging") {
+  // In staging, require either MONGODB_STAGING_URI or MONGODB_DEV_URI
+  if (!process.env.MONGODB_STAGING_URI && !process.env.MONGODB_DEV_URI) {
+    requiredEnvVars.push("MONGODB_STAGING_URI or MONGODB_DEV_URI");
+  }
 } else {
   // In development, require MONGODB_DEV_URI
   requiredEnvVars.push("MONGODB_DEV_URI");
@@ -115,6 +126,9 @@ if (nodeEnv === "production") {
 const missingVars = requiredEnvVars.filter((varName) => {
   if (varName === "MONGODB_PROD_URI or MONGODB_DEV_URI") {
     return !process.env.MONGODB_PROD_URI && !process.env.MONGODB_DEV_URI;
+  }
+  if (varName === "MONGODB_STAGING_URI or MONGODB_DEV_URI") {
+    return !process.env.MONGODB_STAGING_URI && !process.env.MONGODB_DEV_URI;
   }
   return !process.env[varName];
 });
