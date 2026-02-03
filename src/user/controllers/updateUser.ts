@@ -56,7 +56,8 @@ export const updateUser = async (
     if (typeof firstName !== "undefined") userToUpdate.firstName = firstName;
     if (typeof lastName !== "undefined") userToUpdate.lastName = lastName;
     if (typeof phone !== "undefined") userToUpdate.phone = phone;
-    if (typeof mobilePhone !== "undefined") userToUpdate.mobilePhone = mobilePhone;
+    if (typeof mobilePhone !== "undefined")
+      userToUpdate.mobilePhone = mobilePhone;
     if (typeof role !== "undefined") userToUpdate.role = role;
     if (typeof status !== "undefined") {
       userToUpdate.status =
@@ -120,10 +121,13 @@ export const updateUser = async (
         });
 
         if (!result.success) {
-          logger.error("Failed to send password reset email after admin update", {
-            email: recipientEmail,
-            error: result.error,
-          });
+          logger.error(
+            "Failed to send password reset email after admin update",
+            {
+              email: recipientEmail,
+              error: result.error,
+            },
+          );
           // Don't fail the request, just log the error
         } else {
           // Update user with reset token and expiration

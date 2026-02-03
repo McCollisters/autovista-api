@@ -56,7 +56,8 @@ async function run(options: ScriptOptions = {}) {
     };
 
     const totalUsers = await User.countDocuments(query);
-    const limit = options.limit && options.limit > 0 ? options.limit : totalUsers;
+    const limit =
+      options.limit && options.limit > 0 ? options.limit : totalUsers;
     console.log(
       `Found ${totalUsers} user(s) with non-bcrypt passwords. Processing ${limit}${
         options.dryRun ? " (dry run)" : ""
@@ -79,7 +80,9 @@ async function run(options: ScriptOptions = {}) {
       }
 
       if (options.dryRun) {
-        console.log(`Would rehash password for user ${user._id} (${user.email})`);
+        console.log(
+          `Would rehash password for user ${user._id} (${user.email})`,
+        );
         continue;
       }
 
