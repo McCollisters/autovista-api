@@ -44,6 +44,9 @@ const VEHICLE_CONNECT_UID_PREFIX =
  * Check if Acertus integration is enabled
  */
 const isAcertusEnabled = (): boolean => {
+  if (process.env.DISABLE_ACERTUS_UPDATES === "true") {
+    return false;
+  }
   return process.env.ENABLE_ACERTUS === "true";
 };
 

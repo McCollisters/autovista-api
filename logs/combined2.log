@@ -94422,3 +94422,3294 @@
   message: 'Request completed',
   timestamp: '2026-02-02 22:46:17'
 }
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 10:44:37'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 10:44:37'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 10:44:37'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 10:44:37'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-02-03 10:44:37'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-02-03 10:44:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 10:45:07'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 10:45:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '196ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 10:45:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:08:43'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:08:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '238ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:08:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:22:53'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:22:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '306ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:22:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:23:32'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:23:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '250ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:23:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:24:05'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:24:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '203ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:24:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:24:07'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:24:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '156ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:24:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:24:25'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:24:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '213ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:24:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:24:48'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:24:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '167ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:24:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:24:51'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:24:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '170ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:24:51'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '235',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:25:28'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('69823d9d60bebd8baae3755e'),
+  refId: 300693,
+  trackingCode: 'A975C8DE65',
+  level: 'info',
+  message: 'Customer created quote 300693',
+  timestamp: '2026-02-03 11:25:33'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 200,
+  duration: '4840ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:25:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69823d9d60bebd8baae3755e/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:25:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69823d9d60bebd8baae3755e/app',
+  statusCode: 200,
+  duration: '174ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:25:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69823d9d60bebd8baae3755e/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:26:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69823d9d60bebd8baae3755e/app',
+  statusCode: 200,
+  duration: '145ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:26:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69823d9d60bebd8baae3755e/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:27:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69823d9d60bebd8baae3755e/app',
+  statusCode: 200,
+  duration: '199ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:27:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:27:38'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:27:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '209ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:27:38'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '302',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:49:05'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('6982432260bebd8baae375af'),
+  refId: 300694,
+  trackingCode: 'B2DE1AE536',
+  level: 'info',
+  message: 'Customer created quote 300694',
+  timestamp: '2026-02-03 11:49:06'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 200,
+  duration: '1513ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:49:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/6982432260bebd8baae375af/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:49:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/6982432260bebd8baae375af/app',
+  statusCode: 200,
+  duration: '200ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:49:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:51:45'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-02-03 11:51:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '172ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:51:46'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '302',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:52:19'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('698243e460bebd8baae375fa'),
+  refId: 300695,
+  trackingCode: '07F0CE7900',
+  level: 'info',
+  message: 'Customer created quote 300695',
+  timestamp: '2026-02-03 11:52:20'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 200,
+  duration: '1873ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:52:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:52:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '148ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:52:21'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/698243e460bebd8baae375fa/email',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '29',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:54:19'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 11:54:19'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-02-03 11:54:19'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Your Requested Auto Transport Quote #TW44ZH',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 11:54:19'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Your Requested Auto Transport Quote #TW44ZH',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 11:54:19'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/698243e460bebd8baae375fa/email',
+  statusCode: 200,
+  duration: '526ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:54:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:54:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:54:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '238ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:54:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '213ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:54:23'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer/find',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '61',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:58:04'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer/find',
+  statusCode: 200,
+  duration: '345ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:58:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:58:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '163ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:58:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:58:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 11:58:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '160ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:58:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '247ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 11:58:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:00:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:00:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '209ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:00:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '700ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:00:48'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer/find',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '61',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:03:50'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer/find',
+  statusCode: 200,
+  duration: '458ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:03:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:03:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '139ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:03:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:04:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:04:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '155ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:04:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '226ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:04:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:08:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:08:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '384ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:08:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '379ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:08:22'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/order/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '785',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:10:51'
+}
+{
+  message: 'Geocoding pickup address: 123 Test Street Boston MA 02492',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:10:51'
+}
+{
+  message: 'Geocoding delivery address: 456 Test Ave Los Angeles CA 90009',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:10:52'
+}
+{
+  message: 'Date ranges calculated: 2026-02-10T19:09:36.773Z, 2026-02-10T19:09:36.773Z, 2026-02-14T19:09:36.773Z, 2026-02-24T19:09:36.773Z',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:10:52'
+}
+{
+  message: 'Creating order in database for quote 698243e460bebd8baae375fa',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:10:52'
+}
+{
+  message: 'Successfully created order 300695 with ID 6982483c60bebd8baae38cf6',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:10:52'
+}
+{
+  message: 'Email template not found: Customer Order, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:10:52'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'customerConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Your Vehicle Transport Confirmation - Order #300695',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 12:10:52'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Your Vehicle Transport Confirmation - Order #300695',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 12:10:53'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'customerConfirmation',
+    orderId: '6982483c60bebd8baae38cf6',
+    recipientEmail: 'anna@periscopeworks.io',
+    recipientPhone: undefined
+  },
+  messageId: 'InLKENIcQHSY0VgyqD5r-g',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 12:10:53'
+}
+{
+  service: 'autovista-api',
+  orderId: '6982483c60bebd8baae38cf6',
+  type: 'customerConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: customerConfirmation',
+  timestamp: '2026-02-03 12:10:53'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6982483c60bebd8baae38cf6'),
+  refId: 300695,
+  recipientEmail: 'anna@periscopeworks.io',
+  isSirva: false,
+  level: 'info',
+  message: 'Customer order email sent successfully',
+  timestamp: '2026-02-03 12:10:53'
+}
+{
+  message: 'Customer order confirmation email sent for order 300695',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:10:53'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 201,
+  duration: '1664ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:10:53'
+}
+{
+  service: 'autovista-api',
+  portalId: '64ece35abfc3deb98e9d180f',
+  level: 'info',
+  message: 'Public customer order creation attempted',
+  timestamp: '2026-02-03 12:10:53'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '56',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:10:53'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  statusCode: 401,
+  duration: '4ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:10:53'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:19:13'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:19:13'
+}
+{
+  message: 'Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:19:13'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 12:19:13'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-02-03 12:19:13'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-02-03 12:19:13'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/order/300695/status',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: '49',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:20:53'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/300695/status',
+  statusCode: 200,
+  duration: '214ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:20:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:22:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:22:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '155ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:22:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '585ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:22:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:22:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:22:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '172ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:22:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '447ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:22:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:24:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:24:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '165ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:24:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '244ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:24:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:24:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:24:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '293ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:24:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/698243e460bebd8baae375fa/app',
+  statusCode: 200,
+  duration: '348ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:24:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:28:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:28:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  statusCode: 404,
+  duration: '56ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:28:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '249ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:28:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:28:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:28:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  statusCode: 404,
+  duration: '53ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:28:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '197ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:28:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:34:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:34:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  statusCode: 404,
+  duration: '57ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:34:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '249ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:34:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:34:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  statusCode: 404,
+  duration: '66ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:34:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-02-03 12:34:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/698243e460bebd8baae375fa/app',
+  statusCode: 404,
+  duration: '106ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-02-03 12:34:54'
+}

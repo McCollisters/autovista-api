@@ -173,6 +173,10 @@ export async function sendOrderCustomerPublicNew(
         </p>
       `
       : "";
+    const baseUrl =
+      process.env.BASE_URL || "https://autovista.mccollisters.com";
+    const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
+    const orderStatusUrl = `${normalizedBaseUrl}/public/order-status`;
     const trackingHtml = isMMI
       ? ""
       : `<tr>
@@ -180,7 +184,7 @@ export async function sendOrderCustomerPublicNew(
               <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0;">
                 <strong>The below link will bring you to our customer portal where you can log in and follow the progress
                 of your transport:</strong><br />
-                <a href="https://autovista.mccollisters.com/order-status">https://autovista.mccollisters.com/order-status</a>
+                <a href="${orderStatusUrl}">${orderStatusUrl}</a>
               </p>
             </td>
           </tr>`;
@@ -230,7 +234,7 @@ export async function sendOrderCustomerPublicNew(
 
     // Build terms URL
     const orderId = String(order._id);
-    const termsUrl = `https://autovista.mccollisters.com/terms/${orderId}/${order.refId}`;
+    const termsUrl = `${normalizedBaseUrl}/terms/${orderId}/${order.refId}`;
 
     // Load and compile template
     const templateSource = await readFile(resolvedTemplatePath, "utf-8");
