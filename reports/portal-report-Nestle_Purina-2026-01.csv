@@ -1,0 +1,5 @@
+customer name,origin,destination,pickup date,delivery date,number of vehicles,vehicle information,price,commission,company tariff,grand total
+,,,,,3,TOTAL,4303,750,0,5053
+Megan Bailey,"131 Chinqua Penn Trail, Reidsville, NC, 27320","2515 Schultz Dr. unit 40, Clinton, IA, 52732",01/15/2026,01/16/2026,1,2022 JEEP PATRIOT,1288,250,0,1538
+Kamile Shaw,"2590 Bristol Dr, Clinton, IA, 52732","1610 Jenkins Rd Apt #603, Bakersfield, CA, 93314",01/26/2026,02/02/2026,2,"2024 BMW X7 (VIN: 5UX23EM01R9S47638)
+2020 Chevrolet Equinox (VIN: 2GNAXHEV4L6176491)",3015,500,0,3515

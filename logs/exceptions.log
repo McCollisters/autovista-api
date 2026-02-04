@@ -1282,3 +1282,447 @@
   service: 'autovista-api',
   timestamp: '2026-01-18 10:21:02'
 }
+{
+  error: TypeError: Cannot read properties of undefined (reading 'length')
+      at DerivedLogger.add (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:374:45)
+      at DerivedLogger.transportEvent (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:660:14)
+      at LegacyTransportStream.emit (node:events:530:35)
+      at LegacyTransportStream.transportError (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js:32:10)
+      at exports.Papertrail.emit (node:events:518:28)
+      at Papertrail._silentErrorEmitter (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:479:8)
+      at TLSSocket.onErrored (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:236:8)
+      at Object.onceWrapper (node:events:633:26)
+      at TLSSocket.emit (node:events:518:28)
+      at emitErrorNT (node:internal/streams/destroy:170:8),
+  level: 'error',
+  message: "uncaughtException: Cannot read properties of undefined (reading 'length')\n" +
+    "TypeError: Cannot read properties of undefined (reading 'length')\n" +
+    '    at DerivedLogger.add (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:374:45)\n' +
+    '    at DerivedLogger.transportEvent (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:660:14)\n' +
+    '    at LegacyTransportStream.emit (node:events:530:35)\n' +
+    '    at LegacyTransportStream.transportError (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js:32:10)\n' +
+    '    at exports.Papertrail.emit (node:events:518:28)\n' +
+    '    at Papertrail._silentErrorEmitter (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:479:8)\n' +
+    '    at TLSSocket.onErrored (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:236:8)\n' +
+    '    at Object.onceWrapper (node:events:633:26)\n' +
+    '    at TLSSocket.emit (node:events:518:28)\n' +
+    '    at emitErrorNT (node:internal/streams/destroy:170:8)',
+  stack: "TypeError: Cannot read properties of undefined (reading 'length')\n" +
+    '    at DerivedLogger.add (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:374:45)\n' +
+    '    at DerivedLogger.transportEvent (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:660:14)\n' +
+    '    at LegacyTransportStream.emit (node:events:530:35)\n' +
+    '    at LegacyTransportStream.transportError (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js:32:10)\n' +
+    '    at exports.Papertrail.emit (node:events:518:28)\n' +
+    '    at Papertrail._silentErrorEmitter (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:479:8)\n' +
+    '    at TLSSocket.onErrored (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:236:8)\n' +
+    '    at Object.onceWrapper (node:events:633:26)\n' +
+    '    at TLSSocket.emit (node:events:518:28)\n' +
+    '    at emitErrorNT (node:internal/streams/destroy:170:8)',
+  exception: true,
+  date: 'Wed Feb 04 2026 14:36:11 GMT-0700 (Mountain Standard Time)',
+  process: {
+    pid: 9586,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-portal-monthly-report.ts',
+      '69664e5968d3227b9d6860c6',
+      '2026-01'
+    ],
+    memoryUsage: {
+      rss: 28852224,
+      heapTotal: 32702464,
+      heapUsed: 30118320,
+      external: 23194496,
+      arrayBuffers: 18301161
+    }
+  },
+  os: {
+    loadavg: [ 5.00634765625, 4.2919921875, 3.42919921875 ],
+    uptime: 799749
+  },
+  trace: [
+    {
+      column: 45,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js',
+      function: 'DerivedLogger.add',
+      line: 374,
+      method: 'add',
+      native: false
+    },
+    {
+      column: 14,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js',
+      function: 'DerivedLogger.transportEvent',
+      line: 660,
+      method: 'transportEvent',
+      native: false
+    },
+    {
+      column: 35,
+      file: 'node:events',
+      function: 'LegacyTransportStream.emit',
+      line: 530,
+      method: 'emit',
+      native: false
+    },
+    {
+      column: 10,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js',
+      function: 'LegacyTransportStream.transportError',
+      line: 32,
+      method: 'transportError',
+      native: false
+    },
+    {
+      column: 28,
+      file: 'node:events',
+      function: 'exports.Papertrail.emit',
+      line: 518,
+      method: 'emit',
+      native: false
+    },
+    {
+      column: 8,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js',
+      function: 'Papertrail._silentErrorEmitter',
+      line: 479,
+      method: '_silentErrorEmitter',
+      native: false
+    },
+    {
+      column: 8,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js',
+      function: 'TLSSocket.onErrored',
+      line: 236,
+      method: 'onErrored',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:events',
+      function: 'Object.onceWrapper',
+      line: 633,
+      method: 'onceWrapper',
+      native: false
+    },
+    {
+      column: 28,
+      file: 'node:events',
+      function: 'TLSSocket.emit',
+      line: 518,
+      method: 'emit',
+      native: false
+    },
+    {
+      column: 8,
+      file: 'node:internal/streams/destroy',
+      function: 'emitErrorNT',
+      line: 170,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2026-02-04 14:36:11'
+}
+{
+  error: TypeError: Cannot read properties of undefined (reading 'length')
+      at DerivedLogger.add (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:374:45)
+      at DerivedLogger.transportEvent (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:660:14)
+      at LegacyTransportStream.emit (node:events:530:35)
+      at LegacyTransportStream.transportError (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js:32:10)
+      at exports.Papertrail.emit (node:events:518:28)
+      at Papertrail._silentErrorEmitter (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:479:8)
+      at TLSSocket.onErrored (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:236:8)
+      at Object.onceWrapper (node:events:633:26)
+      at TLSSocket.emit (node:events:518:28)
+      at emitErrorNT (node:internal/streams/destroy:170:8),
+  level: 'error',
+  message: "uncaughtException: Cannot read properties of undefined (reading 'length')\n" +
+    "TypeError: Cannot read properties of undefined (reading 'length')\n" +
+    '    at DerivedLogger.add (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:374:45)\n' +
+    '    at DerivedLogger.transportEvent (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:660:14)\n' +
+    '    at LegacyTransportStream.emit (node:events:530:35)\n' +
+    '    at LegacyTransportStream.transportError (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js:32:10)\n' +
+    '    at exports.Papertrail.emit (node:events:518:28)\n' +
+    '    at Papertrail._silentErrorEmitter (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:479:8)\n' +
+    '    at TLSSocket.onErrored (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:236:8)\n' +
+    '    at Object.onceWrapper (node:events:633:26)\n' +
+    '    at TLSSocket.emit (node:events:518:28)\n' +
+    '    at emitErrorNT (node:internal/streams/destroy:170:8)',
+  stack: "TypeError: Cannot read properties of undefined (reading 'length')\n" +
+    '    at DerivedLogger.add (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:374:45)\n' +
+    '    at DerivedLogger.transportEvent (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:660:14)\n' +
+    '    at LegacyTransportStream.emit (node:events:530:35)\n' +
+    '    at LegacyTransportStream.transportError (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js:32:10)\n' +
+    '    at exports.Papertrail.emit (node:events:518:28)\n' +
+    '    at Papertrail._silentErrorEmitter (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:479:8)\n' +
+    '    at TLSSocket.onErrored (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:236:8)\n' +
+    '    at Object.onceWrapper (node:events:633:26)\n' +
+    '    at TLSSocket.emit (node:events:518:28)\n' +
+    '    at emitErrorNT (node:internal/streams/destroy:170:8)',
+  exception: true,
+  date: 'Wed Feb 04 2026 14:36:11 GMT-0700 (Mountain Standard Time)',
+  process: {
+    pid: 11779,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-portal-monthly-report.ts',
+      '69664e5968d3227b9d6860c6',
+      '2026-01'
+    ],
+    memoryUsage: {
+      rss: 28999680,
+      heapTotal: 32702464,
+      heapUsed: 30137296,
+      external: 23194496,
+      arrayBuffers: 18301161
+    }
+  },
+  os: {
+    loadavg: [ 5.00634765625, 4.2919921875, 3.42919921875 ],
+    uptime: 799749
+  },
+  trace: [
+    {
+      column: 45,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js',
+      function: 'DerivedLogger.add',
+      line: 374,
+      method: 'add',
+      native: false
+    },
+    {
+      column: 14,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js',
+      function: 'DerivedLogger.transportEvent',
+      line: 660,
+      method: 'transportEvent',
+      native: false
+    },
+    {
+      column: 35,
+      file: 'node:events',
+      function: 'LegacyTransportStream.emit',
+      line: 530,
+      method: 'emit',
+      native: false
+    },
+    {
+      column: 10,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js',
+      function: 'LegacyTransportStream.transportError',
+      line: 32,
+      method: 'transportError',
+      native: false
+    },
+    {
+      column: 28,
+      file: 'node:events',
+      function: 'exports.Papertrail.emit',
+      line: 518,
+      method: 'emit',
+      native: false
+    },
+    {
+      column: 8,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js',
+      function: 'Papertrail._silentErrorEmitter',
+      line: 479,
+      method: '_silentErrorEmitter',
+      native: false
+    },
+    {
+      column: 8,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js',
+      function: 'TLSSocket.onErrored',
+      line: 236,
+      method: 'onErrored',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:events',
+      function: 'Object.onceWrapper',
+      line: 633,
+      method: 'onceWrapper',
+      native: false
+    },
+    {
+      column: 28,
+      file: 'node:events',
+      function: 'TLSSocket.emit',
+      line: 518,
+      method: 'emit',
+      native: false
+    },
+    {
+      column: 8,
+      file: 'node:internal/streams/destroy',
+      function: 'emitErrorNT',
+      line: 170,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2026-02-04 14:36:11'
+}
+{
+  error: TypeError: Cannot read properties of undefined (reading 'length')
+      at DerivedLogger.add (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:374:45)
+      at DerivedLogger.transportEvent (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:660:14)
+      at LegacyTransportStream.emit (node:events:530:35)
+      at LegacyTransportStream.transportError (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js:32:10)
+      at exports.Papertrail.emit (node:events:518:28)
+      at Papertrail._silentErrorEmitter (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:479:8)
+      at TLSSocket.onErrored (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:236:8)
+      at Object.onceWrapper (node:events:633:26)
+      at TLSSocket.emit (node:events:518:28)
+      at emitErrorNT (node:internal/streams/destroy:170:8),
+  level: 'error',
+  message: "uncaughtException: Cannot read properties of undefined (reading 'length')\n" +
+    "TypeError: Cannot read properties of undefined (reading 'length')\n" +
+    '    at DerivedLogger.add (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:374:45)\n' +
+    '    at DerivedLogger.transportEvent (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:660:14)\n' +
+    '    at LegacyTransportStream.emit (node:events:530:35)\n' +
+    '    at LegacyTransportStream.transportError (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js:32:10)\n' +
+    '    at exports.Papertrail.emit (node:events:518:28)\n' +
+    '    at Papertrail._silentErrorEmitter (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:479:8)\n' +
+    '    at TLSSocket.onErrored (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:236:8)\n' +
+    '    at Object.onceWrapper (node:events:633:26)\n' +
+    '    at TLSSocket.emit (node:events:518:28)\n' +
+    '    at emitErrorNT (node:internal/streams/destroy:170:8)',
+  stack: "TypeError: Cannot read properties of undefined (reading 'length')\n" +
+    '    at DerivedLogger.add (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:374:45)\n' +
+    '    at DerivedLogger.transportEvent (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js:660:14)\n' +
+    '    at LegacyTransportStream.emit (node:events:530:35)\n' +
+    '    at LegacyTransportStream.transportError (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js:32:10)\n' +
+    '    at exports.Papertrail.emit (node:events:518:28)\n' +
+    '    at Papertrail._silentErrorEmitter (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:479:8)\n' +
+    '    at TLSSocket.onErrored (/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js:236:8)\n' +
+    '    at Object.onceWrapper (node:events:633:26)\n' +
+    '    at TLSSocket.emit (node:events:518:28)\n' +
+    '    at emitErrorNT (node:internal/streams/destroy:170:8)',
+  exception: true,
+  date: 'Wed Feb 04 2026 14:36:11 GMT-0700 (Mountain Standard Time)',
+  process: {
+    pid: 5203,
+    uid: 501,
+    gid: 20,
+    cwd: '/Users/annaharrington/Clients/McCollisters/autovista-api',
+    execPath: '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+    version: 'v22.14.0',
+    argv: [
+      '/Users/annaharrington/.nvm/versions/node/v22.14.0/bin/node',
+      '/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-portal-monthly-report.ts',
+      '69664e5968d3227b9d6860c6',
+      '2026-01'
+    ],
+    memoryUsage: {
+      rss: 28672000,
+      heapTotal: 32178176,
+      heapUsed: 29619344,
+      external: 23194496,
+      arrayBuffers: 18301161
+    }
+  },
+  os: {
+    loadavg: [ 5.00634765625, 4.2919921875, 3.42919921875 ],
+    uptime: 799749
+  },
+  trace: [
+    {
+      column: 45,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js',
+      function: 'DerivedLogger.add',
+      line: 374,
+      method: 'add',
+      native: false
+    },
+    {
+      column: 14,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston/lib/winston/logger.js',
+      function: 'DerivedLogger.transportEvent',
+      line: 660,
+      method: 'transportEvent',
+      native: false
+    },
+    {
+      column: 35,
+      file: 'node:events',
+      function: 'LegacyTransportStream.emit',
+      line: 530,
+      method: 'emit',
+      native: false
+    },
+    {
+      column: 10,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-transport/legacy.js',
+      function: 'LegacyTransportStream.transportError',
+      line: 32,
+      method: 'transportError',
+      native: false
+    },
+    {
+      column: 28,
+      file: 'node:events',
+      function: 'exports.Papertrail.emit',
+      line: 518,
+      method: 'emit',
+      native: false
+    },
+    {
+      column: 8,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js',
+      function: 'Papertrail._silentErrorEmitter',
+      line: 479,
+      method: '_silentErrorEmitter',
+      native: false
+    },
+    {
+      column: 8,
+      file: '/Users/annaharrington/Clients/McCollisters/autovista-api/node_modules/winston-papertrail/lib/winston-papertrail.js',
+      function: 'TLSSocket.onErrored',
+      line: 236,
+      method: 'onErrored',
+      native: false
+    },
+    {
+      column: 26,
+      file: 'node:events',
+      function: 'Object.onceWrapper',
+      line: 633,
+      method: 'onceWrapper',
+      native: false
+    },
+    {
+      column: 28,
+      file: 'node:events',
+      function: 'TLSSocket.emit',
+      line: 518,
+      method: 'emit',
+      native: false
+    },
+    {
+      column: 8,
+      file: 'node:internal/streams/destroy',
+      function: 'emitErrorNT',
+      line: 170,
+      method: null,
+      native: false
+    }
+  ],
+  service: 'autovista-api',
+  timestamp: '2026-02-04 14:36:11'
+}

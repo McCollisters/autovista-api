@@ -63125,3 +63125,51 @@
   message: 'Notification run completed',
   timestamp: '2026-02-03 20:40:44'
 }
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-04 09:54:33'
+}
+{
+  service: 'autovista-api',
+  portal: 'Nestle Purina',
+  month: '2026-01',
+  outputPath: '/Users/annaharrington/Clients/McCollisters/autovista-api/reports/portal-report-Nestle_Purina-2026-01.csv',
+  orders: 3,
+  level: 'info',
+  message: 'CSV report generated',
+  timestamp: '2026-02-04 09:54:33'
+}
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-04 09:57:47'
+}
+{
+  service: 'autovista-api',
+  portal: 'Nestle Purina',
+  month: '2026-01',
+  outputPath: '/Users/annaharrington/Clients/McCollisters/autovista-api/reports/portal-report-Nestle_Purina-2026-01.csv',
+  orders: 2,
+  level: 'info',
+  message: 'CSV report generated',
+  timestamp: '2026-02-04 09:57:48'
+}
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-04 09:59:25'
+}
+{
+  service: 'autovista-api',
+  portal: 'Nestle Purina',
+  month: '2026-01',
+  outputPath: '/Users/annaharrington/Clients/McCollisters/autovista-api/reports/portal-report-Nestle_Purina-2026-01.csv',
+  orders: 2,
+  level: 'info',
+  message: 'CSV report generated',
+  timestamp: '2026-02-04 09:59:26'
+}

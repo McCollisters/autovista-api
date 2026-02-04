@@ -1,6 +1,7 @@
 import cron from "node-cron";
 import { logger } from "./logger";
 import { sendPickupDeliveryNotifications } from "@/order/tasks/sendPickupDeliveryNotifications";
+import { sendPortalMonthlyReport } from "@/order/tasks/sendPortalMonthlyReport";
 import { Quote, Portal, Order, Settings } from "@/_global/models";
 import { Status } from "@/_global/enums";
 
@@ -35,6 +36,37 @@ export function initializeCronJobs() {
       timezone: "America/New_York",
     },
   );
+
+  const enablePortalMonthlyReportCron =
+    process.env.ENABLE_PORTAL_MONTHLY_REPORT_CRON !== "false";
+
+  if (!enablePortalMonthlyReportCron) {
+    logger.info(
+      "Portal monthly report cron disabled (ENABLE_PORTAL_MONTHLY_REPORT_CRON == false)",
+    );
+  } else {
+    cron.schedule(
+      "0 8 1 * *",
+      async () => {
+        try {
+          if (!isProduction) {
+            logger.info(
+              "Skipping portal monthly report in non-production mode",
+            );
+            return;
+          }
+          await sendPortalMonthlyReport();
+        } catch (error) {
+          logger.error("Portal monthly report cron failed", {
+            error: error instanceof Error ? error.message : String(error),
+          });
+        }
+      },
+      {
+        timezone: "America/New_York",
+      },
+    );
+  }
 
   const enableQuoteExpirationCron =
     process.env.ENABLE_QUOTE_EXPIRATION_CRON !== "false";
