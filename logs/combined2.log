@@ -50819,3 +50819,6199 @@
   message: 'Request completed',
   timestamp: '2026-02-02 13:56:57'
 }
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:30:54'
+}
+{
+  service: 'autovista-api',
+  preserveFlags: true,
+  cutoffDate: '2025-12-06T03:30:54.337Z',
+  tmsCutoffDate: '2026-02-02T03:30:54.337Z',
+  overrideEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'Notification run options',
+  timestamp: '2026-02-03 20:30:54'
+}
+{
+  service: 'autovista-api',
+  count: 17,
+  cutoffDate: '2025-12-06T03:30:54.337Z',
+  tmsCutoffDate: '2026-02-02T03:30:54.337Z',
+  preserveFlags: true,
+  level: 'info',
+  message: 'Pickup notification candidates',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('695c19e63821f5674397671d'),
+  refId: 222413,
+  portalId: '60d364c5176cba0017cbd78f',
+  isMMI: true,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 1,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('695c19e63821f5674397671d'),
+  refId: 222413,
+  portalRecipients: [ 'autodesk@graebel.com' ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #421597 / (222413)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #421597 / (222413)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '695c19e63821f5674397671d',
+    recipientEmail: 'autodesk@graebel.com',
+    recipientPhone: undefined
+  },
+  messageId: 'x13yVtBqRbWAmTQdYGBf7A',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  orderId: '695c19e63821f5674397671d',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('695c19e63821f5674397671d'),
+  refId: 222413,
+  recipientCount: 1,
+  successCount: 1,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('695c19e63821f5674397671d'),
+  refId: 222413,
+  agentRecipients: [ 'autodeskupdates@graebel.com' ],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:55'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #421597 / (222413)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #421597 / (222413)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '695c19e63821f5674397671d',
+    recipientEmail: 'autodeskupdates@graebel.com',
+    recipientPhone: undefined
+  },
+  messageId: '_CjdiQ9ZRhq8bzvh28QxyQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: '695c19e63821f5674397671d',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('695c19e63821f5674397671d'),
+  refId: 222413,
+  recipientCount: 1,
+  successCount: 1,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69403b9b95d3ed2f0fbaadef'),
+  refId: 221708,
+  portalId: '64ece35abfc3deb98e9d180f',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69403b9b95d3ed2f0fbaadef'),
+  refId: 221708,
+  portalRecipients: [
+    'bbailey@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #221708',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #221708',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #221708',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #221708',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '69403b9b95d3ed2f0fbaadef',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'JttPhwr2TUqg2C2dkEqQiA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: '69403b9b95d3ed2f0fbaadef',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #221708',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '69403b9b95d3ed2f0fbaadef',
+    recipientEmail: 'bbailey@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'WTjnts8LQz2Evk7XcjXC0A',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #221708',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '69403b9b95d3ed2f0fbaadef',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'b-VDOl1qSS25E9urz22O4A',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: '69403b9b95d3ed2f0fbaadef',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: '69403b9b95d3ed2f0fbaadef',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69403b9b95d3ed2f0fbaadef'),
+  refId: 221708,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69403b9b95d3ed2f0fbaadef'),
+  refId: 221708,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696e67b553605329a6352f64'),
+  refId: 300039,
+  portalId: '5e98963fed92842f43fadc53',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696e67b553605329a6352f64'),
+  refId: 300039,
+  portalRecipients: [
+    'sgriffey@mccollisters.com',
+    'bwayong@mccollisters.com',
+    'jvargas@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300039',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300039',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300039',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300039',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '696e67b553605329a6352f64',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'xVb91xLGQku8CLKEfDsJGg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300039',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '696e67b553605329a6352f64',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'YbueHsvuSCiU1w2slK1Jew',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:56'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300039',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '696e67b553605329a6352f64',
+    recipientEmail: 'sgriffey@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'u2gdFTe4SjaU23x24OG-xw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: '696e67b553605329a6352f64',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: '696e67b553605329a6352f64',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: '696e67b553605329a6352f64',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696e67b553605329a6352f64'),
+  refId: 300039,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696e67b553605329a6352f64'),
+  refId: 300039,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696f9eb1a169acf1190eefdc'),
+  refId: 300079,
+  portalId: '60d364c5176cba0017cbd78f',
+  isMMI: true,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 1,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696f9eb1a169acf1190eefdc'),
+  refId: 300079,
+  portalRecipients: [ 'autodesk@graebel.com' ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #422206-Kia 422207- Hyundai / (300079)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #422206-Kia 422207- Hyundai / (300079)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '696f9eb1a169acf1190eefdc',
+    recipientEmail: 'autodesk@graebel.com',
+    recipientPhone: undefined
+  },
+  messageId: 'hCp8QrhwRn6fEHPHN_g_wA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: '696f9eb1a169acf1190eefdc',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696f9eb1a169acf1190eefdc'),
+  refId: 300079,
+  recipientCount: 1,
+  successCount: 1,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696f9eb1a169acf1190eefdc'),
+  refId: 300079,
+  agentRecipients: [ 'autodeskupdates@graebel.com' ],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #422206-Kia 422207- Hyundai / (300079)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #422206-Kia 422207- Hyundai / (300079)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '696f9eb1a169acf1190eefdc',
+    recipientEmail: 'autodeskupdates@graebel.com',
+    recipientPhone: undefined
+  },
+  messageId: 'NLymYwY8QgGaGjN-8_cpdQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: '696f9eb1a169acf1190eefdc',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696f9eb1a169acf1190eefdc'),
+  refId: 300079,
+  recipientCount: 1,
+  successCount: 1,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69722bed9253049c790bbe55'),
+  refId: 300108,
+  portalId: '5e99f0b420e68d5f479d7317',
+  isMMI: false,
+  isSirva: true,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69722bed9253049c790bbe55'),
+  refId: 300108,
+  portalRecipients: [],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69722bed9253049c790bbe55'),
+  refId: 300108,
+  agentRecipients: [ 'dkane@mccollisters.com' ],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #593405 / (300108)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #593405 / (300108)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '69722bed9253049c790bbe55',
+    recipientEmail: 'dkane@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'kL53hFj1QZKH5StPbIfr3w',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: '69722bed9253049c790bbe55',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69722bed9253049c790bbe55'),
+  refId: 300108,
+  recipientCount: 1,
+  successCount: 1,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69737c8b24eae306db22710e'),
+  refId: 222723,
+  portalId: '5e99f0b420e68d5f479d7317',
+  isMMI: false,
+  isSirva: true,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69737c8b24eae306db22710e'),
+  refId: 222723,
+  portalRecipients: [],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69737c8b24eae306db22710e'),
+  refId: 222723,
+  agentRecipients: [ 'dkane@mccollisters.com' ],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #482698 / (222723)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:57'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #482698 / (222723)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '69737c8b24eae306db22710e',
+    recipientEmail: 'dkane@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '1JaKY6HPRO26i_u3GMS42A',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: '69737c8b24eae306db22710e',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69737c8b24eae306db22710e'),
+  refId: 222723,
+  recipientCount: 1,
+  successCount: 1,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973b14adb644d51c9424317'),
+  refId: 300252,
+  portalId: '60d364c5176cba0017cbd78f',
+  isMMI: true,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 1,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973b14adb644d51c9424317'),
+  refId: 300252,
+  portalRecipients: [ 'autodesk@graebel.com' ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #422450 / (300252)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #422450 / (300252)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6973b14adb644d51c9424317',
+    recipientEmail: 'autodesk@graebel.com',
+    recipientPhone: undefined
+  },
+  messageId: '2WaGgIi4SH-QPOdK0khesA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973b14adb644d51c9424317',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973b14adb644d51c9424317'),
+  refId: 300252,
+  recipientCount: 1,
+  successCount: 1,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973b14adb644d51c9424317'),
+  refId: 300252,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973e793db644d51c9425cdc'),
+  refId: 300272,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973e793db644d51c9425cdc'),
+  refId: 300272,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #96583 / (300272)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #96583 / (300272)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #96583 / (300272)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #96583 / (300272)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6973e793db644d51c9425cdc',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'jGdzDvnPRnmTMOZFgkbTTg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #96583 / (300272)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6973e793db644d51c9425cdc',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '909V3XXGQ4ifVO84OXMB2Q',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #96583 / (300272)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6973e793db644d51c9425cdc',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'PTc-YKb0RyqSb_5lXnDL4w',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973e793db644d51c9425cdc',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973e793db644d51c9425cdc',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973e793db644d51c9425cdc',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973e793db644d51c9425cdc'),
+  refId: 300272,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973e793db644d51c9425cdc'),
+  refId: 300272,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973f63bbe144c1f15e38e27'),
+  refId: 300276,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973f63bbe144c1f15e38e27'),
+  refId: 300276,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6973f63bbe144c1f15e38e27',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'CUQ8scnsS5WEGGzo4agrWA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6973f63bbe144c1f15e38e27',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'mDrN1E9YReW16R__urgg0w',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6973f63bbe144c1f15e38e27',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'LgRQH2IbQxOogZHVGIpHCw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973f63bbe144c1f15e38e27',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973f63bbe144c1f15e38e27',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973f63bbe144c1f15e38e27',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973f63bbe144c1f15e38e27'),
+  refId: 300276,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973f63bbe144c1f15e38e27'),
+  refId: 300276,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a86d1de4ffdb9254b6fc2'),
+  refId: 300385,
+  portalId: '64ece35abfc3deb98e9d180f',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a86d1de4ffdb9254b6fc2'),
+  refId: 300385,
+  portalRecipients: [
+    'bbailey@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300385',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300385',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300385',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300385',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697a86d1de4ffdb9254b6fc2',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'DfOwcS_sSJmATlaumICNIQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300385',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697a86d1de4ffdb9254b6fc2',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'WAxE0KAlTV6JmvbwKAQNnQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300385',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697a86d1de4ffdb9254b6fc2',
+    recipientEmail: 'bbailey@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'jjTgPxaUSP6cgbP4eQcG-A',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:58'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a86d1de4ffdb9254b6fc2',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a86d1de4ffdb9254b6fc2',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a86d1de4ffdb9254b6fc2',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a86d1de4ffdb9254b6fc2'),
+  refId: 300385,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a86d1de4ffdb9254b6fc2'),
+  refId: 300385,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bd259a4a2d30e4a5b2073'),
+  refId: 300487,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bd259a4a2d30e4a5b2073'),
+  refId: 300487,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #98220 / (300487)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #98220 / (300487)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #98220 / (300487)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #98220 / (300487)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697bd259a4a2d30e4a5b2073',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'wGh0b5EVQuOqVnGuahOeAw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #98220 / (300487)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697bd259a4a2d30e4a5b2073',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'q5B4tzJ5Q6WfLXaCPTq5rw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #98220 / (300487)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697bd259a4a2d30e4a5b2073',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '-Qo0mzlBQZiW2q3vAIpTQA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: '697bd259a4a2d30e4a5b2073',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: '697bd259a4a2d30e4a5b2073',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: '697bd259a4a2d30e4a5b2073',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bd259a4a2d30e4a5b2073'),
+  refId: 300487,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bd259a4a2d30e4a5b2073'),
+  refId: 300487,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bea9ca4a2d30e4a5b2a0a'),
+  refId: 300494,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bea9ca4a2d30e4a5b2a0a'),
+  refId: 300494,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300494',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300494',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:30:59'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300494',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300494',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697bea9ca4a2d30e4a5b2a0a',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'dtavebklTrGJqpRn67iIog',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300494',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697bea9ca4a2d30e4a5b2a0a',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'gViN7Xw5QFy0S-HhumYe_Q',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: '697bea9ca4a2d30e4a5b2a0a',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300494',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697bea9ca4a2d30e4a5b2a0a',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'UlgioYyTS0a2WJkIwN4MaQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: '697bea9ca4a2d30e4a5b2a0a',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: '697bea9ca4a2d30e4a5b2a0a',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bea9ca4a2d30e4a5b2a0a'),
+  refId: 300494,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bea9ca4a2d30e4a5b2a0a'),
+  refId: 300494,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d21dea4a2d30e4a5b72de'),
+  refId: 300539,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d21dea4a2d30e4a5b72de'),
+  refId: 300539,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #98689 / (300539)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #98689 / (300539)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #98689 / (300539)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #98689 / (300539)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697d21dea4a2d30e4a5b72de',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'O8zRH_hYQ-CXQwA_xs4bOg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #98689 / (300539)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697d21dea4a2d30e4a5b72de',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '0rzn_2pkSf2tOl8VJwL5gA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #98689 / (300539)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697d21dea4a2d30e4a5b72de',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'DQ9Hv7vFSXGIFTpzjYmyLQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: '697d21dea4a2d30e4a5b72de',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: '697d21dea4a2d30e4a5b72de',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: '697d21dea4a2d30e4a5b72de',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d21dea4a2d30e4a5b72de'),
+  refId: 300539,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d21dea4a2d30e4a5b72de'),
+  refId: 300539,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d3af775cf1b732844eb15'),
+  refId: 300545,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d3af775cf1b732844eb15'),
+  refId: 300545,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #98704 / (300545)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #98704 / (300545)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #98704 / (300545)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:00'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #98704 / (300545)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697d3af775cf1b732844eb15',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'Pstiys3GRRuhcvN1vltbiA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #98704 / (300545)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697d3af775cf1b732844eb15',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'EY_wPnWrT0mC64opHwZQYw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #98704 / (300545)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '697d3af775cf1b732844eb15',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '-3_qT8RgR-qUTaplbH1c_w',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: '697d3af775cf1b732844eb15',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: '697d3af775cf1b732844eb15',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: '697d3af775cf1b732844eb15',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d3af775cf1b732844eb15'),
+  refId: 300545,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d3af775cf1b732844eb15'),
+  refId: 300545,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980f04578d350c6a49d5605'),
+  refId: 300618,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980f04578d350c6a49d5605'),
+  refId: 300618,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300618',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300618',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300618',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300618',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6980f04578d350c6a49d5605',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'UbYaJVUGTV-no-phiewxPA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300618',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6980f04578d350c6a49d5605',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'vwCqAPbBTJe8PUvJtxUnXg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300618',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6980f04578d350c6a49d5605',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'XoLe6ExuSp2uGxiJms097w',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: '6980f04578d350c6a49d5605',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: '6980f04578d350c6a49d5605',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: '6980f04578d350c6a49d5605',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980f04578d350c6a49d5605'),
+  refId: 300618,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980f04578d350c6a49d5605'),
+  refId: 300618,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980f13e78d350c6a49d56b0'),
+  refId: 300619,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980f13e78d350c6a49d56b0'),
+  refId: 300619,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300619',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300619',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300619',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300619',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6980f13e78d350c6a49d56b0',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'YwKAsynNTXeMKLpevu8-Uw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300619',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6980f13e78d350c6a49d56b0',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'PgRiV1a8TnmUjo7sYk2kmQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300619',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6980f13e78d350c6a49d56b0',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'OH-F9giIRimtvOGvJhxMJQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: '6980f13e78d350c6a49d56b0',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: '6980f13e78d350c6a49d56b0',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: '6980f13e78d350c6a49d56b0',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980f13e78d350c6a49d56b0'),
+  refId: 300619,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6980f13e78d350c6a49d56b0'),
+  refId: 300619,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:31:01'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6981005078d350c6a49d685b'),
+  refId: 300630,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Pickup notification portal context',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6981005078d350c6a49d685b'),
+  refId: 300630,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Pickup notification recipients',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300630',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300630',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsPickupConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Pickup Confirmation - REG #300630',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300630',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6981005078d350c6a49d685b',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '_ZbpCVdXQ3OTcz-zcIGXWw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300630',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6981005078d350c6a49d685b',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'vdjW_R-hTKmQ0gCfmE-QlQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Pickup Confirmation - REG #300630',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsPickupConfirmation',
+    orderId: '6981005078d350c6a49d685b',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'ZLBUnnqWQSehtWxwoGlMaQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  orderId: '6981005078d350c6a49d685b',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  orderId: '6981005078d350c6a49d685b',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  orderId: '6981005078d350c6a49d685b',
+  type: 'agentsPickupConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsPickupConfirmation',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6981005078d350c6a49d685b'),
+  refId: 300630,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order pickup confirmation emails sent',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6981005078d350c6a49d685b'),
+  refId: 300630,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Pickup notification agent recipients',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  count: 18,
+  cutoffDate: '2025-12-06T03:30:54.337Z',
+  tmsCutoffDate: '2026-02-02T03:30:54.337Z',
+  preserveFlags: true,
+  level: 'info',
+  message: 'Delivery notification candidates',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('695d4e88e2576f828d074e90'),
+  refId: 222462,
+  portalId: '64ece35abfc3deb98e9d180f',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('695d4e88e2576f828d074e90'),
+  refId: 222462,
+  portalRecipients: [
+    'bbailey@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #222462',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #222462',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #222462',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #222462',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '695d4e88e2576f828d074e90',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'MQKvF4W_SYePffWoMswhVA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #222462',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '695d4e88e2576f828d074e90',
+    recipientEmail: 'bbailey@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'RGXz7RiJSkKJMAlHFboFnA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #222462',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '695d4e88e2576f828d074e90',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'FG7yvFreRRqFqNrXh85IHg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:02'
+}
+{
+  service: 'autovista-api',
+  orderId: '695d4e88e2576f828d074e90',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: '695d4e88e2576f828d074e90',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: '695d4e88e2576f828d074e90',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('695d4e88e2576f828d074e90'),
+  refId: 222462,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('695d4e88e2576f828d074e90'),
+  refId: 222462,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696574c068d3227b9d67c9d7'),
+  refId: 222615,
+  portalId: '69664e5968d3227b9d6860c6',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 0,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696574c068d3227b9d67c9d7'),
+  refId: 222615,
+  portalRecipients: [],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696574c068d3227b9d67c9d7'),
+  refId: 222615,
+  agentRecipients: [ 'tbollinger@mccollisters.com' ],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #U110-48-6 (HHGD) / (222615)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #U110-48-6 (HHGD) / (222615)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '696574c068d3227b9d67c9d7',
+    recipientEmail: 'tbollinger@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '9Wu4LINMSjmCC0ZO2vZRvg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: '696574c068d3227b9d67c9d7',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696574c068d3227b9d67c9d7'),
+  refId: 222615,
+  recipientCount: 1,
+  successCount: 1,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696aa262ff32f446da032f81'),
+  refId: 222934,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696aa262ff32f446da032f81'),
+  refId: 222934,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #94595 / (222934)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #94595 / (222934)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #94595 / (222934)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #94595 / (222934)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '696aa262ff32f446da032f81',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'RxUYFN7tQ_OiI2VWU9DR9A',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #94595 / (222934)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '696aa262ff32f446da032f81',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'xOJt_tSyQXK6mgVycKO5QA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #94595 / (222934)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '696aa262ff32f446da032f81',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'LMs5JBIUR0m4Yse3aVN_fQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: '696aa262ff32f446da032f81',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:03'
+}
+{
+  service: 'autovista-api',
+  orderId: '696aa262ff32f446da032f81',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:04'
+}
+{
+  service: 'autovista-api',
+  orderId: '696aa262ff32f446da032f81',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:04'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696aa262ff32f446da032f81'),
+  refId: 222934,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:04'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('696aa262ff32f446da032f81'),
+  refId: 222934,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:04'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69714b3b156dabccc2fb017f'),
+  refId: 300183,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:04'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69714b3b156dabccc2fb017f'),
+  refId: 300183,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:04'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:04'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #95847 / (300183)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:05'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #95847 / (300183)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:05'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #95847 / (300183)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:05'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #95847 / (300183)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69714b3b156dabccc2fb017f',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'yLjVR9XbRPGLYqPq0jrRLw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #95847 / (300183)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69714b3b156dabccc2fb017f',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'AvB8JQYnRj2dEoqSyuMPBg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #95847 / (300183)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69714b3b156dabccc2fb017f',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'Q-V7TqvGRA-KkIkh2rM_oQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  orderId: '69714b3b156dabccc2fb017f',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  orderId: '69714b3b156dabccc2fb017f',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  orderId: '69714b3b156dabccc2fb017f',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69714b3b156dabccc2fb017f'),
+  refId: 300183,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69714b3b156dabccc2fb017f'),
+  refId: 300183,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69714da7156dabccc2fb023d'),
+  refId: 300185,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69714da7156dabccc2fb023d'),
+  refId: 300185,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #95848 / (300185)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #95848 / (300185)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #95848 / (300185)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #95848 / (300185)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69714da7156dabccc2fb023d',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '9NnXy8SuQ-CEe848c_38Qw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:06'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #95848 / (300185)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69714da7156dabccc2fb023d',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'BDTSIAowSKi2XNW2ZZoEog',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #95848 / (300185)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69714da7156dabccc2fb023d',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'OitXlCxcRYOokhr_2TbLuQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: '69714da7156dabccc2fb023d',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: '69714da7156dabccc2fb023d',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: '69714da7156dabccc2fb023d',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69714da7156dabccc2fb023d'),
+  refId: 300185,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69714da7156dabccc2fb023d'),
+  refId: 300185,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697257b2156dabccc2fb6f33'),
+  refId: 300209,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697257b2156dabccc2fb6f33'),
+  refId: 300209,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #95924 / (300209)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #95924 / (300209)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #95924 / (300209)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #95924 / (300209)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697257b2156dabccc2fb6f33',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'OaRQWCZ2QpGc0VPMAVQX-w',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #95924 / (300209)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697257b2156dabccc2fb6f33',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'loVT1bMUSp-1QMEnFifVUQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #95924 / (300209)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697257b2156dabccc2fb6f33',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'Cic8yvQMQn-4jdyKkcRzbQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: '697257b2156dabccc2fb6f33',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: '697257b2156dabccc2fb6f33',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: '697257b2156dabccc2fb6f33',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697257b2156dabccc2fb6f33'),
+  refId: 300209,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697257b2156dabccc2fb6f33'),
+  refId: 300209,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973b14adb644d51c9424317'),
+  refId: 300252,
+  portalId: '60d364c5176cba0017cbd78f',
+  isMMI: true,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 1,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973b14adb644d51c9424317'),
+  refId: 300252,
+  portalRecipients: [ 'autodesk@graebel.com' ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #422450 / (300252)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #422450 / (300252)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6973b14adb644d51c9424317',
+    recipientEmail: 'autodesk@graebel.com',
+    recipientPhone: undefined
+  },
+  messageId: 'ET6RPfuXQkKzzRA-oPb_cw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973b14adb644d51c9424317',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973b14adb644d51c9424317'),
+  refId: 300252,
+  recipientCount: 1,
+  successCount: 1,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973b14adb644d51c9424317'),
+  refId: 300252,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973f63bbe144c1f15e38e27'),
+  refId: 300276,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973f63bbe144c1f15e38e27'),
+  refId: 300276,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:07'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6973f63bbe144c1f15e38e27',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'E7fBapIsSeCYLqoa2rmlTw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6973f63bbe144c1f15e38e27',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'TwMQR9_8SbOzmbJ65ObZ5w',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #96590 / (300276)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6973f63bbe144c1f15e38e27',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '2Mir1IJhRV6DefwL7w07hw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973f63bbe144c1f15e38e27',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973f63bbe144c1f15e38e27',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: '6973f63bbe144c1f15e38e27',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973f63bbe144c1f15e38e27'),
+  refId: 300276,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6973f63bbe144c1f15e38e27'),
+  refId: 300276,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6974183cbe144c1f15e39926'),
+  refId: 300283,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6974183cbe144c1f15e39926'),
+  refId: 300283,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #96619 / (300283)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #96619 / (300283)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #96619 / (300283)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #96619 / (300283)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6974183cbe144c1f15e39926',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 's0dpDMguRj2aoecw5kONdQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #96619 / (300283)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6974183cbe144c1f15e39926',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'ACQQFuFETXy4ytWr4xRffg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #96619 / (300283)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6974183cbe144c1f15e39926',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'HGcviQC-RNu99MN7F18YjA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: '6974183cbe144c1f15e39926',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: '6974183cbe144c1f15e39926',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: '6974183cbe144c1f15e39926',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6974183cbe144c1f15e39926'),
+  refId: 300283,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6974183cbe144c1f15e39926'),
+  refId: 300283,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69750077db644d51c942986a'),
+  refId: 300298,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69750077db644d51c942986a'),
+  refId: 300298,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300298',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300298',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300298',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:08'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300298',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69750077db644d51c942986a',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '3aypJycdSRm7ER1omnEDLQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300298',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69750077db644d51c942986a',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'lPLTX22lS5Sq6xC_feXUUA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300298',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69750077db644d51c942986a',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'h-ZhBmorSuqK5UISfJtgGw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: '69750077db644d51c942986a',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: '69750077db644d51c942986a',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: '69750077db644d51c942986a',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69750077db644d51c942986a'),
+  refId: 300298,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69750077db644d51c942986a'),
+  refId: 300298,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69750a78db644d51c94298f6'),
+  refId: 300299,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69750a78db644d51c94298f6'),
+  refId: 300299,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300299',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300299',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300299',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300299',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69750a78db644d51c94298f6',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'zNChm9VGQY670gmtS4hXfw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300299',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69750a78db644d51c94298f6',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'DEAC08huQSCw1LWE8MrOng',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300299',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '69750a78db644d51c94298f6',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'G69ZJjWyS26DQhvkvbnqXA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: '69750a78db644d51c94298f6',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: '69750a78db644d51c94298f6',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: '69750a78db644d51c94298f6',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69750a78db644d51c94298f6'),
+  refId: 300299,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69750a78db644d51c94298f6'),
+  refId: 300299,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6977cab3be144c1f15e44258'),
+  refId: 300327,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6977cab3be144c1f15e44258'),
+  refId: 300327,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300327',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300327',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300327',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:09'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300327',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6977cab3be144c1f15e44258',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '9VnYF98qTDOsfEwJVGXiMg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300327',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6977cab3be144c1f15e44258',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'jIq6QJhMSB23WEXKwA3FQg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300327',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '6977cab3be144c1f15e44258',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'XrZvlsYmR0uhpTM00pY0FQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: '6977cab3be144c1f15e44258',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: '6977cab3be144c1f15e44258',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: '6977cab3be144c1f15e44258',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6977cab3be144c1f15e44258'),
+  refId: 300327,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('6977cab3be144c1f15e44258'),
+  refId: 300327,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a193d465de6bb9fd35a8c'),
+  refId: 300404,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a193d465de6bb9fd35a8c'),
+  refId: 300404,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #97731 / (300404)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #97731 / (300404)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #97731 / (300404)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #97731 / (300404)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a193d465de6bb9fd35a8c',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'Ae6-WKO0Tcytdt6Mf3UNxA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #97731 / (300404)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a193d465de6bb9fd35a8c',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'nbhEYdPlQX-BqMYeQ_wUGw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #97731 / (300404)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a193d465de6bb9fd35a8c',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'U8RAhYdcTCeY20jCMG0TEA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a193d465de6bb9fd35a8c',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a193d465de6bb9fd35a8c',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a193d465de6bb9fd35a8c',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a193d465de6bb9fd35a8c'),
+  refId: 300404,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a193d465de6bb9fd35a8c'),
+  refId: 300404,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a1acbde4ffdb9254b446d'),
+  refId: 300405,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a1acbde4ffdb9254b446d'),
+  refId: 300405,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #97732 / (300405)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #97732 / (300405)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #97732 / (300405)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #97732 / (300405)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a1acbde4ffdb9254b446d',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '4cxcyhamTqiOoKsXmNECLg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:10'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #97732 / (300405)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a1acbde4ffdb9254b446d',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'fbYN5PI2S8-NKSNen8IIZQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #97732 / (300405)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a1acbde4ffdb9254b446d',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'Vk5aUXSCS6mlgOK2KYRfSg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a1acbde4ffdb9254b446d',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a1acbde4ffdb9254b446d',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a1acbde4ffdb9254b446d',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a1acbde4ffdb9254b446d'),
+  refId: 300405,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a1acbde4ffdb9254b446d'),
+  refId: 300405,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a7aff465de6bb9fd37f9c'),
+  refId: 300435,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a7aff465de6bb9fd37f9c'),
+  refId: 300435,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #97878 / (300435)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #97878 / (300435)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #97878 / (300435)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #97878 / (300435)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a7aff465de6bb9fd37f9c',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'Hc9wR8RGRTaqK6WNHsicdg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #97878 / (300435)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a7aff465de6bb9fd37f9c',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'pILL9J2GSxiBUCbxD5Vjew',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #97878 / (300435)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a7aff465de6bb9fd37f9c',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'CIq52NxaQpavjGJLpGZC5w',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a7aff465de6bb9fd37f9c',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a7aff465de6bb9fd37f9c',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a7aff465de6bb9fd37f9c',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a7aff465de6bb9fd37f9c'),
+  refId: 300435,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a7aff465de6bb9fd37f9c'),
+  refId: 300435,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a7d07465de6bb9fd38097'),
+  refId: 300438,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a7d07465de6bb9fd38097'),
+  refId: 300438,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300438',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300438',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300438',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:11'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300438',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a7d07465de6bb9fd38097',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'Ktf8nnX8SXyKreOtdw0NhQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300438',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a7d07465de6bb9fd38097',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'SPxFtervTr-E0ojq99GIVg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300438',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697a7d07465de6bb9fd38097',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'L0rokPWHTtqs75G8ut7LhA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a7d07465de6bb9fd38097',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a7d07465de6bb9fd38097',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: '697a7d07465de6bb9fd38097',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a7d07465de6bb9fd38097'),
+  refId: 300438,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697a7d07465de6bb9fd38097'),
+  refId: 300438,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bea9ca4a2d30e4a5b2a0a'),
+  refId: 300494,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bea9ca4a2d30e4a5b2a0a'),
+  refId: 300494,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300494',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300494',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #300494',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300494',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697bea9ca4a2d30e4a5b2a0a',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '53uQcRQSSmyq2seK3XO1Hw',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300494',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697bea9ca4a2d30e4a5b2a0a',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '6WZkizIVSnGis6KCXQRnqA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #300494',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697bea9ca4a2d30e4a5b2a0a',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'z0NP1nwjSGquR3Zj_ZbFig',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: '697bea9ca4a2d30e4a5b2a0a',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: '697bea9ca4a2d30e4a5b2a0a',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: '697bea9ca4a2d30e4a5b2a0a',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bea9ca4a2d30e4a5b2a0a'),
+  refId: 300494,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697bea9ca4a2d30e4a5b2a0a'),
+  refId: 300494,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d0f9ba4a2d30e4a5b65be'),
+  refId: 300532,
+  portalId: '62b89733d996a00046fe815e',
+  isMMI: false,
+  isSirva: false,
+  isSirvaNonDomestic: false,
+  portalEmailCount: 3,
+  level: 'info',
+  message: 'Delivery notification portal context',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d0f9ba4a2d30e4a5b65be'),
+  refId: 300532,
+  portalRecipients: [
+    'jvargas@mccollisters.com',
+    'gchua@mccollisters.com',
+    'bwayong@mccollisters.com'
+  ],
+  level: 'info',
+  message: 'Delivery notification recipients',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  message: 'Email template not found: Delivery Confirmation, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #98652 / (300532)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #98652 / (300532)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'agentsDeliveryConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Vehicle Delivery Confirmation - REG #98652 / (300532)',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #98652 / (300532)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697d0f9ba4a2d30e4a5b65be',
+    recipientEmail: 'jvargas@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: '9FhRoUFLRgqNwqS6KsoCSQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #98652 / (300532)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697d0f9ba4a2d30e4a5b65be',
+    recipientEmail: 'gchua@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'W1t1_P6GTZeVSF-6FAK8VA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Vehicle Delivery Confirmation - REG #98652 / (300532)',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'agentsDeliveryConfirmation',
+    orderId: '697d0f9ba4a2d30e4a5b65be',
+    recipientEmail: 'bwayong@mccollisters.com',
+    recipientPhone: undefined
+  },
+  messageId: 'gqyiW0xUQvmzOuVTlO-3YQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: '697d0f9ba4a2d30e4a5b65be',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: '697d0f9ba4a2d30e4a5b65be',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: '697d0f9ba4a2d30e4a5b65be',
+  type: 'agentsDeliveryConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: agentsDeliveryConfirmation',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d0f9ba4a2d30e4a5b65be'),
+  refId: 300532,
+  recipientCount: 3,
+  successCount: 3,
+  level: 'info',
+  message: 'Order delivery confirmation emails sent',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('697d0f9ba4a2d30e4a5b65be'),
+  refId: 300532,
+  agentRecipients: [],
+  level: 'info',
+  message: 'Delivery notification agent recipients',
+  timestamp: '2026-02-03 20:31:12'
+}
+{
+  service: 'autovista-api',
+  overrideEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'Notification run completed (flags preserved)',
+  timestamp: '2026-02-03 20:31:12'
+}

@@ -28,6 +28,30 @@ const getCutoffDate = () => {
 const getOrderStatus = (order: any) =>
   String(order?.tms?.status || order?.sdStatus || "").toLowerCase();
 
+const HOURS_48_MS = 48 * 60 * 60 * 1000;
+
+const isWithinLast48Hours = (value?: Date | string | null) => {
+  if (!value) {
+    return false;
+  }
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return false;
+  }
+  return Date.now() - date.getTime() <= HOURS_48_MS;
+};
+
+const getPickupNotificationDate = (order: any) =>
+  order?.schedule?.pickupCompleted ||
+  order?.schedule?.pickupEstimated?.[0] ||
+  order?.schedule?.pickupSelected ||
+  null;
+
+const getDeliveryNotificationDate = (order: any) =>
+  order?.schedule?.deliveryCompleted ||
+  order?.schedule?.deliveryEstimated?.[0] ||
+  null;
+
 const isSirvaOrder = (order: any) =>
   String(order?.portalId || "") === SIRVA_PORTAL_ID ||
   order?.companyName === "SIRVA WORLDWIDE RELO & MOVING";
@@ -129,6 +153,16 @@ const sendPickupNotificationsForOrder = async (
       refId: order.refId,
       status,
       awaitingPickup,
+    });
+    return;
+  }
+
+  const pickupDate = getPickupNotificationDate(order);
+  if (!isWithinLast48Hours(pickupDate)) {
+    logger.info("Pickup notification skipped - outside 48h window", {
+      orderId: order._id,
+      refId: order.refId,
+      pickupDate: pickupDate ? new Date(pickupDate).toISOString() : null,
     });
     return;
   }
@@ -253,6 +287,16 @@ const sendDeliveryNotificationsForOrder = async (
     return;
   }
 
+  const deliveryDate = getDeliveryNotificationDate(order);
+  if (!isWithinLast48Hours(deliveryDate)) {
+    logger.info("Delivery notification skipped - outside 48h window", {
+      orderId: order._id,
+      refId: order.refId,
+      deliveryDate: deliveryDate ? new Date(deliveryDate).toISOString() : null,
+    });
+    return;
+  }
+
   const portal = await Portal.findById(order.portalId);
   if (!portal) {
     logger.warn("Delivery notification skipped - portal not found", {
@@ -358,24 +402,28 @@ export const sendPickupDeliveryNotifications = async (
 ) => {
   const preserveFlags = Boolean(options.preserveFlags);
   const cutoffDate = getCutoffDate();
-  const tmsCutoffDate = new Date(Date.now() - 48 * 60 * 60 * 1000);
+  const recentDateCutoff = new Date(Date.now() - HOURS_48_MS);
   const overrideEmail = process.env.NOTIFICATION_OVERRIDE_EMAIL;
   logger.info("Notification run options", {
     preserveFlags,
     cutoffDate: cutoffDate.toISOString(),
-    tmsCutoffDate: tmsCutoffDate.toISOString(),
+    recentDateCutoff: recentDateCutoff.toISOString(),
     overrideEmail: overrideEmail || null,
   });
 
   const pickupOrders = await Order.find({
     "notifications.awaitingPickupConfirmation": true,
     updatedAt: { $gt: cutoffDate },
-    "tms.updatedAt": { $gte: tmsCutoffDate },
+    $or: [
+      { "schedule.pickupCompleted": { $gte: recentDateCutoff } },
+      { "schedule.pickupEstimated.0": { $gte: recentDateCutoff } },
+      { "schedule.pickupSelected": { $gte: recentDateCutoff } },
+    ],
   });
   logger.info("Pickup notification candidates", {
     count: pickupOrders.length,
     cutoffDate: cutoffDate.toISOString(),
-    tmsCutoffDate: tmsCutoffDate.toISOString(),
+    recentDateCutoff: recentDateCutoff.toISOString(),
     preserveFlags,
   });
 
@@ -393,12 +441,15 @@ export const sendPickupDeliveryNotifications = async (
   const deliveryOrders = await Order.find({
     "notifications.awaitingDeliveryConfirmation": true,
     updatedAt: { $gt: cutoffDate },
-    "tms.updatedAt": { $gte: tmsCutoffDate },
+    $or: [
+      { "schedule.deliveryCompleted": { $gte: recentDateCutoff } },
+      { "schedule.deliveryEstimated.0": { $gte: recentDateCutoff } },
+    ],
   });
   logger.info("Delivery notification candidates", {
     count: deliveryOrders.length,
     cutoffDate: cutoffDate.toISOString(),
-    tmsCutoffDate: tmsCutoffDate.toISOString(),
+    recentDateCutoff: recentDateCutoff.toISOString(),
     preserveFlags,
   });
 
