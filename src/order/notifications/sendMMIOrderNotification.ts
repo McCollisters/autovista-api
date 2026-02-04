@@ -42,9 +42,7 @@ export async function sendMMIOrderNotification({
     }
 
     // Extract pickup information
-    const pickupAddress =
-      order.origin?.address?.address ||
-      "";
+    const pickupAddress = order.origin?.address?.address || "";
     const pickupCity = order.origin?.address?.city || "";
     const pickupState = order.origin?.address?.state || "";
     const pickupZip = order.origin?.address?.zip || "";
@@ -55,9 +53,7 @@ export async function sendMMIOrderNotification({
     let customerEmail = order.customer?.email || "Not provided";
 
     // Extract delivery information
-    const deliveryAddress =
-      order.destination?.address?.address ||
-      "";
+    const deliveryAddress = order.destination?.address?.address || "";
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
     const deliveryZip = order.destination?.address?.zip || "";

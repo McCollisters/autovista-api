@@ -32,7 +32,9 @@ const formatVehiclesHtml = (vehicles: any[] = []) => {
       const make = vehicle.make || "";
       const model = vehicle.model || "";
       const vin = vehicle.vin ? `<br />VIN: ${vehicle.vin}` : "";
-      const inoperable = vehicle.isInoperable ? "<br /><em>Inoperable</em>" : "";
+      const inoperable = vehicle.isInoperable
+        ? "<br /><em>Inoperable</em>"
+        : "";
       return `<li><strong>${year}${make} ${model}</strong>${vin}${inoperable}</li>`;
     })
     .join("");
@@ -77,9 +79,7 @@ export const sendQuoteCustomerEmail = async (
       : null;
 
     const recipientName =
-      quote.customer?.name ||
-      quote.customer?.customerFullName ||
-      "Customer";
+      quote.customer?.name || quote.customer?.customerFullName || "Customer";
     const firstName = String(recipientName).split(" ")[0] || "Customer";
     const code = String(
       quote.customer?.quoteConfirmationCode ||
@@ -103,18 +103,10 @@ export const sendQuoteCustomerEmail = async (
     const vehicles = formatVehiclesHtml(quote.vehicles || []);
     const totals = quote.totalPricing?.totals;
 
-    const oneday = Math.ceil(
-      getPricingTotal(totals, transportType, "one"),
-    );
-    const threeday = Math.ceil(
-      getPricingTotal(totals, transportType, "three"),
-    );
-    const fiveday = Math.ceil(
-      getPricingTotal(totals, transportType, "five"),
-    );
-    const sevenday = Math.ceil(
-      getPricingTotal(totals, transportType, "seven"),
-    );
+    const oneday = Math.ceil(getPricingTotal(totals, transportType, "one"));
+    const threeday = Math.ceil(getPricingTotal(totals, transportType, "three"));
+    const fiveday = Math.ceil(getPricingTotal(totals, transportType, "five"));
+    const sevenday = Math.ceil(getPricingTotal(totals, transportType, "seven"));
 
     const templatePath = path.join(
       process.cwd(),
