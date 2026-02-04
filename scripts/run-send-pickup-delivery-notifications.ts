@@ -1,7 +1,8 @@
 #!/usr/bin/env tsx
 /**
- * Send pickup/delivery notifications without clearing flags.
- * Requires NOTIFICATION_OVERRIDE_EMAIL to be set.
+ * Send pickup/delivery notifications.
+ * Optional: NOTIFICATION_OVERRIDE_EMAIL to route all emails to one inbox.
+ * Optional: PRESERVE_NOTIFICATION_FLAGS=false to update awaiting flags.
  */
 
 import "dotenv/config";
@@ -12,22 +13,24 @@ import { sendPickupDeliveryNotifications } from "../src/order/tasks/sendPickupDe
 
 const run = async () => {
   const overrideEmail = process.env.NOTIFICATION_OVERRIDE_EMAIL;
-
+  const preserveFlagsEnv =
+    process.env.PRESERVE_NOTIFICATION_FLAGS ?? "true";
+  const preserveFlags = preserveFlagsEnv.toLowerCase() !== "false";
   if (!overrideEmail) {
-    logger.error(
-      "NOTIFICATION_OVERRIDE_EMAIL is required for this script. Aborting.",
+    logger.warn(
+      "NOTIFICATION_OVERRIDE_EMAIL not set. Emails will go to real recipients.",
     );
-    process.exit(1);
   }
 
   try {
     await mongoose.connect(config.database.uri, config.database.options);
     logger.info("Connected to MongoDB");
 
-    await sendPickupDeliveryNotifications({ preserveFlags: true });
+    await sendPickupDeliveryNotifications({ preserveFlags });
 
-    logger.info("Notification run completed (flags preserved)", {
-      overrideEmail,
+    logger.info("Notification run completed", {
+      overrideEmail: overrideEmail || null,
+      preserveFlags,
     });
   } catch (error) {
     logger.error("Notification run failed", {
