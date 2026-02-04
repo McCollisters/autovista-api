@@ -122,6 +122,22 @@ export const sendManualEmail = async (
       error?: string;
     }> = [];
 
+    const clearAwaitingFlag = async (
+      orderToUpdate: any,
+      flag: "awaitingPickupConfirmation" | "awaitingDeliveryConfirmation",
+    ) => {
+      if (!orderToUpdate) {
+        return;
+      }
+      if (!orderToUpdate.notifications) {
+        orderToUpdate.notifications = {};
+      }
+      if (orderToUpdate.notifications[flag] === true) {
+        orderToUpdate.notifications[flag] = false;
+        await orderToUpdate.save();
+      }
+    };
+
     switch (normalizedEmailType) {
       case "orderAgent":
         if (!orderId) {
@@ -370,6 +386,12 @@ export const sendManualEmail = async (
           order: pickupOrder,
           recipients,
         });
+        if (results.some((result) => result.success)) {
+          await clearAwaitingFlag(
+            pickupOrder,
+            "awaitingPickupConfirmation",
+          );
+        }
         break;
 
       case "deliveryConfirmation":
@@ -394,6 +416,12 @@ export const sendManualEmail = async (
             : undefined,
           deliveryAdjustedDateString,
         });
+        if (results.some((result) => result.success)) {
+          await clearAwaitingFlag(
+            deliveryOrder,
+            "awaitingDeliveryConfirmation",
+          );
+        }
         break;
 
       case "signatureRequest":
