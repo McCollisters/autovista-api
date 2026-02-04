@@ -358,20 +358,24 @@ export const sendPickupDeliveryNotifications = async (
 ) => {
   const preserveFlags = Boolean(options.preserveFlags);
   const cutoffDate = getCutoffDate();
+  const tmsCutoffDate = new Date(Date.now() - 48 * 60 * 60 * 1000);
   const overrideEmail = process.env.NOTIFICATION_OVERRIDE_EMAIL;
   logger.info("Notification run options", {
     preserveFlags,
     cutoffDate: cutoffDate.toISOString(),
+    tmsCutoffDate: tmsCutoffDate.toISOString(),
     overrideEmail: overrideEmail || null,
   });
 
   const pickupOrders = await Order.find({
     "notifications.awaitingPickupConfirmation": true,
     updatedAt: { $gt: cutoffDate },
+    "tms.updatedAt": { $gte: tmsCutoffDate },
   });
   logger.info("Pickup notification candidates", {
     count: pickupOrders.length,
     cutoffDate: cutoffDate.toISOString(),
+    tmsCutoffDate: tmsCutoffDate.toISOString(),
     preserveFlags,
   });
 
@@ -389,10 +393,12 @@ export const sendPickupDeliveryNotifications = async (
   const deliveryOrders = await Order.find({
     "notifications.awaitingDeliveryConfirmation": true,
     updatedAt: { $gt: cutoffDate },
+    "tms.updatedAt": { $gte: tmsCutoffDate },
   });
   logger.info("Delivery notification candidates", {
     count: deliveryOrders.length,
     cutoffDate: cutoffDate.toISOString(),
+    tmsCutoffDate: tmsCutoffDate.toISOString(),
     preserveFlags,
   });
 

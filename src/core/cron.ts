@@ -14,37 +14,27 @@ export function initializeCronJobs() {
   if (!isProduction) {
     logger.info("Cron jobs enabled (non-production mode)");
   }
-  const enableNotificationCron =
-    process.env.ENABLE_NOTIFICATION_CRON === "true";
-  if (!enableNotificationCron) {
-    logger.info(
-      "Notification cron disabled (ENABLE_NOTIFICATION_CRON != true)",
-    );
-  }
-
-  if (enableNotificationCron) {
-    cron.schedule(
-      "0 6,10,14,20 * * *",
-      async () => {
-        try {
-          if (!isProduction) {
-            logger.info(
-              "Skipping pickup/delivery notifications in non-production",
-            );
-            return;
-          }
-          await sendPickupDeliveryNotifications();
-        } catch (error) {
-          logger.error("Pickup/delivery notification cron failed", {
-            error: error instanceof Error ? error.message : String(error),
-          });
+  cron.schedule(
+    "0 6,10,14,20 * * *",
+    async () => {
+      try {
+        if (!isProduction) {
+          logger.info(
+            "Skipping pickup/delivery notifications in non-production",
+          );
+          return;
         }
-      },
-      {
-        timezone: "America/New_York",
-      },
-    );
-  }
+        await sendPickupDeliveryNotifications();
+      } catch (error) {
+        logger.error("Pickup/delivery notification cron failed", {
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
+    },
+    {
+      timezone: "America/New_York",
+    },
+  );
 
   const enableQuoteExpirationCron =
     process.env.ENABLE_QUOTE_EXPIRATION_CRON !== "false";
