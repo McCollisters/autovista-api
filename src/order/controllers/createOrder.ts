@@ -1344,8 +1344,6 @@ export const createOrder = async (
       }
     }
 
-    // COD payment instructions are appended to the customer confirmation email.
-
     // Send customer order confirmation email if customer email exists
     if (newOrder.customer?.email) {
       try {
@@ -1361,6 +1359,22 @@ export const createOrder = async (
       logger.warn(
         `Cannot send customer order email: No customer email for order ${(newOrder as any).refId}`,
       );
+    }
+
+    // Send COD payment request email if COD and customer email exists
+    if (newOrder.paymentType === PaymentType.Cod && newOrder.customer?.email) {
+      try {
+        await sendCODPaymentRequest(newOrder);
+        logger.info(
+          `COD payment request email sent for order ${(newOrder as any).refId}`,
+        );
+      } catch (notificationError) {
+        logger.error(
+          "Failed to send COD payment request email:",
+          notificationError,
+        );
+        // Don't fail the order creation for notification errors
+      }
     }
 
     res.status(201).json(newOrder);
