@@ -84,17 +84,15 @@ export async function sendOrderCustomerPublicNew(
     );
 
     const mclogo =
-      "https://res.cloudinary.com/dq27r8cov/image/upload/v1616097775/McCollister%27s/mccollisters-auto-logistics.png";
+      "https://autovista-assets.s3.us-west-1.amazonaws.com/MCC-Wordmark-RGB-Blue.png";
 
-    // Handle special company logos
+    // Handle special company names
     if (portal.companyName === "Move Easy") {
       companyName = "MoveEasy and";
-      logo =
-        "https://res.cloudinary.com/dq27r8cov/image/upload/v1616098696/McCollister%27s/moveeasy-logo.png";
+      logo = mclogo;
     } else if (portal.companyName === "AutoTrader.com") {
       companyName = "AutoTrader.com and";
-      logo =
-        "https://res.cloudinary.com/dq27r8cov/image/upload/v1631829206/McCollister%27s/autotrader-logo.png";
+      logo = mclogo;
     }
 
     const recipientEmail = overrides.recipientEmail || order.customer?.email;
@@ -178,7 +176,9 @@ export async function sendOrderCustomerPublicNew(
       process.env.BASE_URL ||
       "https://autovista.mccollisters.com";
     const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
-    const orderStatusUrl = `${normalizedBaseUrl}/public/order-status`;
+    const orderStatusUrl = `${normalizedBaseUrl}/public/order-status?email=${encodeURIComponent(
+      recipientEmail,
+    )}`;
     const trackingHtml = isMMI
       ? ""
       : `<tr>

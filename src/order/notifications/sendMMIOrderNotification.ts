@@ -119,7 +119,7 @@ export async function sendMMIOrderNotification({
       reg: order.reg || "",
       totalPricing: totalPricing.toFixed(2),
       billRate: billRate.toFixed(2),
-      logo: "https://res.cloudinary.com/dq27r8cov/image/upload/v1616097775/McCollister%27s/mccollisters-auto-logistics.png",
+      logo: "https://autovista-assets.s3.us-west-1.amazonaws.com/MCC-Wordmark-RGB-Blue.png",
     });
 
     // Send email using notification manager

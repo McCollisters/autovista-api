@@ -7,7 +7,7 @@ import { logger } from "@/core/logger";
 import { getNotificationManager } from "@/notification";
 
 const MC_LOGO =
-  "https://res.cloudinary.com/dq27r8cov/image/upload/v1616097775/McCollister%27s/mccollisters-auto-logistics.png";
+  "https://autovista-assets.s3.us-west-1.amazonaws.com/MCC-Wordmark-RGB-Blue.png";
 
 const formatTransportType = (transportType?: string | null) => {
   const normalized = String(transportType || "")
@@ -123,8 +123,7 @@ export const sendQuoteCustomerEmail = async (
     const templateSource = await readFile(templatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
-    const emailLogo =
-      process.env.QUOTE_EMAIL_LOGO_URL || portal?.logo || MC_LOGO;
+    const emailLogo = MC_LOGO;
     const html = template({
       firstName,
       code,
