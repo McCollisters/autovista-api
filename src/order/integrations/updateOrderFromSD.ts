@@ -750,12 +750,40 @@ export const updateOrderFromSD = async (
       // Schedule updates
       schedule: {
         ...databaseOrder.schedule,
-        pickupEstimated: pickupDates.scheduledAt
-          ? [pickupDates.scheduledAt.toJSDate()]
-          : databaseOrder.schedule.pickupEstimated,
-        deliveryEstimated: deliveryDates.scheduledAt
-          ? [deliveryDates.scheduledAt.toJSDate()]
-          : databaseOrder.schedule.deliveryEstimated,
+        pickupEstimated: (() => {
+          if (!pickupDates.scheduledAt) {
+            return databaseOrder.schedule.pickupEstimated;
+          }
+          if (pickupDates.scheduledEndsAt) {
+            return [
+              pickupDates.scheduledAt.toJSDate(),
+              pickupDates.scheduledEndsAt.toJSDate(),
+            ];
+          }
+          const status = String(superDispatchOrder.status || "").toLowerCase();
+          const existing = databaseOrder.schedule.pickupEstimated;
+          if (status === "new" && Array.isArray(existing) && existing.length > 1) {
+            return existing;
+          }
+          return [pickupDates.scheduledAt.toJSDate()];
+        })(),
+        deliveryEstimated: (() => {
+          if (!deliveryDates.scheduledAt) {
+            return databaseOrder.schedule.deliveryEstimated;
+          }
+          if (deliveryDates.scheduledEndsAt) {
+            return [
+              deliveryDates.scheduledAt.toJSDate(),
+              deliveryDates.scheduledEndsAt.toJSDate(),
+            ];
+          }
+          const status = String(superDispatchOrder.status || "").toLowerCase();
+          const existing = databaseOrder.schedule.deliveryEstimated;
+          if (status === "new" && Array.isArray(existing) && existing.length > 1) {
+            return existing;
+          }
+          return [deliveryDates.scheduledAt.toJSDate()];
+        })(),
         pickupCompleted: pickupDates.adjustedDate
           ? pickupDates.adjustedDate.toJSDate()
           : databaseOrder.schedule.pickupCompleted,

@@ -28,6 +28,31 @@ const getCutoffDate = () => {
 const getOrderStatus = (order: any) =>
   String(order?.tms?.status || order?.sdStatus || "").toLowerCase();
 
+const HOURS_48_MS = 48 * 60 * 60 * 1000;
+
+const isWithinLast48Hours = (value?: Date | string | null) => {
+  if (!value) {
+    return false;
+  }
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return false;
+  }
+  const diffMs = Date.now() - date.getTime();
+  return diffMs >= 0 && diffMs <= HOURS_48_MS;
+};
+
+const getPickupNotificationDate = (order: any) =>
+  order?.schedule?.pickupCompleted ||
+  order?.schedule?.pickupEstimated?.[0] ||
+  order?.schedule?.pickupSelected ||
+  null;
+
+const getDeliveryNotificationDate = (order: any) =>
+  order?.schedule?.deliveryCompleted ||
+  order?.schedule?.deliveryEstimated?.[0] ||
+  null;
+
 const isSirvaOrder = (order: any) =>
   String(order?.portalId || "") === SIRVA_PORTAL_ID ||
   order?.companyName === "SIRVA WORLDWIDE RELO & MOVING";
@@ -133,12 +158,50 @@ const sendPickupNotificationsForOrder = async (
     return;
   }
 
+  const pickupDate = getPickupNotificationDate(order);
+  if (!isWithinLast48Hours(pickupDate)) {
+    logger.info("Pickup notification skipped - outside 48h window", {
+      orderId: order._id,
+      refId: order.refId,
+      pickupDate: pickupDate ? new Date(pickupDate).toISOString() : null,
+    });
+    return;
+  }
+
   const portal = await Portal.findById(order.portalId);
   if (!portal) {
     logger.warn("Pickup notification skipped - portal not found", {
       orderId: order._id,
       portalId: order.portalId,
     });
+    return;
+  }
+
+  const agentRecipients = normalizeRecipients(
+    Array.isArray(order.agents)
+      ? order.agents
+          .filter((agent: any) => agentWantsNotification(agent, "pickup"))
+      : [],
+  );
+
+  logger.info("Pickup notification agent recipients", {
+    orderId: order._id,
+    refId: order.refId,
+    agentRecipients: agentRecipients.map((recipient) => recipient.email),
+  });
+
+  if (agentRecipients.length > 0) {
+    await sendOrderPickupConfirmation({
+      order,
+      recipients: agentRecipients,
+    });
+    if (!preserveFlags) {
+      if (!order.notifications) {
+        order.notifications = {};
+      }
+      order.notifications.awaitingPickupConfirmation = false;
+      await order.save();
+    }
     return;
   }
 
@@ -173,10 +236,6 @@ const sendPickupNotificationsForOrder = async (
     filterPortalRecipients(portalEmails, "pickup", isSirva, isSirvaNonDomestic),
   );
 
-  const sentPortalEmails = new Set(
-    portalRecipients.map((recipient) => recipient.email.toLowerCase()),
-  );
-
   logger.info("Pickup notification recipients", {
     orderId: order._id,
     refId: order.refId,
@@ -188,36 +247,7 @@ const sendPickupNotificationsForOrder = async (
       order,
       recipients: portalRecipients,
     });
-  }
-
-  const agentRecipients = normalizeRecipients(
-    Array.isArray(order.agents)
-      ? order.agents
-          .filter((agent: any) => agentWantsNotification(agent, "pickup"))
-          .filter((agent: any) => {
-            const email = String(agent?.email || "").toLowerCase();
-            return email && !sentPortalEmails.has(email);
-          })
-      : [],
-  );
-
-  logger.info("Pickup notification agent recipients", {
-    orderId: order._id,
-    refId: order.refId,
-    agentRecipients: agentRecipients.map((recipient) => recipient.email),
-  });
-
-  if (agentRecipients.length > 0) {
-    await sendOrderPickupConfirmation({
-      order,
-      recipients: agentRecipients,
-    });
-  }
-
-  if (
-    portalRecipients.length === 0 &&
-    agentRecipients.length === 0
-  ) {
+  } else {
     logger.info("No pickup notification recipients for order", {
       orderId: order._id,
       refId: order.refId,
@@ -253,12 +283,50 @@ const sendDeliveryNotificationsForOrder = async (
     return;
   }
 
+  const deliveryDate = getDeliveryNotificationDate(order);
+  if (!isWithinLast48Hours(deliveryDate)) {
+    logger.info("Delivery notification skipped - outside 48h window", {
+      orderId: order._id,
+      refId: order.refId,
+      deliveryDate: deliveryDate ? new Date(deliveryDate).toISOString() : null,
+    });
+    return;
+  }
+
   const portal = await Portal.findById(order.portalId);
   if (!portal) {
     logger.warn("Delivery notification skipped - portal not found", {
       orderId: order._id,
       portalId: order.portalId,
     });
+    return;
+  }
+
+  const agentRecipients = normalizeRecipients(
+    Array.isArray(order.agents)
+      ? order.agents
+          .filter((agent: any) => agentWantsNotification(agent, "delivery"))
+      : [],
+  );
+
+  logger.info("Delivery notification agent recipients", {
+    orderId: order._id,
+    refId: order.refId,
+    agentRecipients: agentRecipients.map((recipient) => recipient.email),
+  });
+
+  if (agentRecipients.length > 0) {
+    await sendOrderDeliveryConfirmation({
+      order,
+      recipients: agentRecipients,
+    });
+    if (!preserveFlags) {
+      if (!order.notifications) {
+        order.notifications = {};
+      }
+      order.notifications.awaitingDeliveryConfirmation = false;
+      await order.save();
+    }
     return;
   }
 
@@ -290,11 +358,12 @@ const sendDeliveryNotificationsForOrder = async (
   });
 
   const portalRecipients = normalizeRecipients(
-    filterPortalRecipients(portalEmails, "delivery", isSirva, isSirvaNonDomestic),
-  );
-
-  const sentPortalEmails = new Set(
-    portalRecipients.map((recipient) => recipient.email.toLowerCase()),
+    filterPortalRecipients(
+      portalEmails,
+      "delivery",
+      isSirva,
+      isSirvaNonDomestic,
+    ),
   );
 
   logger.info("Delivery notification recipients", {
@@ -308,36 +377,7 @@ const sendDeliveryNotificationsForOrder = async (
       order,
       recipients: portalRecipients,
     });
-  }
-
-  const agentRecipients = normalizeRecipients(
-    Array.isArray(order.agents)
-      ? order.agents
-          .filter((agent: any) => agentWantsNotification(agent, "delivery"))
-          .filter((agent: any) => {
-            const email = String(agent?.email || "").toLowerCase();
-            return email && !sentPortalEmails.has(email);
-          })
-      : [],
-  );
-
-  logger.info("Delivery notification agent recipients", {
-    orderId: order._id,
-    refId: order.refId,
-    agentRecipients: agentRecipients.map((recipient) => recipient.email),
-  });
-
-  if (agentRecipients.length > 0) {
-    await sendOrderDeliveryConfirmation({
-      order,
-      recipients: agentRecipients,
-    });
-  }
-
-  if (
-    portalRecipients.length === 0 &&
-    agentRecipients.length === 0
-  ) {
+  } else {
     logger.info("No delivery notification recipients for order", {
       orderId: order._id,
       refId: order.refId,
@@ -358,20 +398,28 @@ export const sendPickupDeliveryNotifications = async (
 ) => {
   const preserveFlags = Boolean(options.preserveFlags);
   const cutoffDate = getCutoffDate();
+  const recentDateCutoff = new Date(Date.now() - HOURS_48_MS);
   const overrideEmail = process.env.NOTIFICATION_OVERRIDE_EMAIL;
   logger.info("Notification run options", {
     preserveFlags,
     cutoffDate: cutoffDate.toISOString(),
+    recentDateCutoff: recentDateCutoff.toISOString(),
     overrideEmail: overrideEmail || null,
   });
 
   const pickupOrders = await Order.find({
     "notifications.awaitingPickupConfirmation": true,
     updatedAt: { $gt: cutoffDate },
+    $or: [
+      { "schedule.pickupCompleted": { $gte: recentDateCutoff } },
+      { "schedule.pickupEstimated.0": { $gte: recentDateCutoff } },
+      { "schedule.pickupSelected": { $gte: recentDateCutoff } },
+    ],
   });
   logger.info("Pickup notification candidates", {
     count: pickupOrders.length,
     cutoffDate: cutoffDate.toISOString(),
+    recentDateCutoff: recentDateCutoff.toISOString(),
     preserveFlags,
   });
 
@@ -389,10 +437,15 @@ export const sendPickupDeliveryNotifications = async (
   const deliveryOrders = await Order.find({
     "notifications.awaitingDeliveryConfirmation": true,
     updatedAt: { $gt: cutoffDate },
+    $or: [
+      { "schedule.deliveryCompleted": { $gte: recentDateCutoff } },
+      { "schedule.deliveryEstimated.0": { $gte: recentDateCutoff } },
+    ],
   });
   logger.info("Delivery notification candidates", {
     count: deliveryOrders.length,
     cutoffDate: cutoffDate.toISOString(),
+    recentDateCutoff: recentDateCutoff.toISOString(),
     preserveFlags,
   });
 

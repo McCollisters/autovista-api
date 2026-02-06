@@ -64,6 +64,7 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
       }
     }
 
+    let html: string;
     if (!templatePath) {
       // Log detailed error for debugging
       logger.error("Verification code template not found", {
@@ -75,16 +76,16 @@ export async function sendVerificationEmail(recipientEmail: string): Promise<{
         templatesExists: existsSync(join(projectRoot, "src/templates")),
         distExists: existsSync(join(projectRoot, "dist")),
       });
-      throw new Error(`Verification code template not found. Checked paths: ${possiblePaths.join(", ")}. Working directory: ${projectRoot}`);
+      html = `<p>Your verification code is <strong>${code}</strong>.</p>`;
+    } else {
+      logger.debug("Loading verification code template", { templatePath });
+
+      const source = readFileSync(templatePath, "utf8");
+      const template = Handlebars.compile(source);
+
+      // Render template with code
+      html = template({ code });
     }
-
-    logger.debug("Loading verification code template", { templatePath });
-
-    const source = readFileSync(templatePath, "utf8");
-    const template = Handlebars.compile(source);
-
-    // Render template with code
-    const html = template({ code });
 
     // Send email using notification manager
     const notificationManager = getNotificationManager();

@@ -16,10 +16,31 @@ export function getPickupDatesString(order: IOrder): string {
   ) {
     // Fallback to pickupSelected if estimated dates not available
     if (order.schedule?.pickupSelected) {
-      const date = DateTime.fromJSDate(order.schedule.pickupSelected)
-        .setZone(TIMEZONE)
-        .toLocaleString(DateTime.DATE_MED);
-      return date;
+      const pickupStart = DateTime.fromJSDate(order.schedule.pickupSelected).setZone(
+        TIMEZONE,
+      );
+      const serviceLevelRaw = order.schedule?.serviceLevel;
+      const serviceLevel = Number(serviceLevelRaw);
+
+      if (Number.isFinite(serviceLevel) && serviceLevel > 1) {
+        const serviceLevelOffset = serviceLevel - 1;
+        let count = 0;
+        let pickupEnd = pickupStart;
+
+        while (count < serviceLevelOffset) {
+          pickupEnd = pickupEnd.plus({ days: 1 });
+          const dayOfWeek = pickupEnd.weekday; // 1 = Monday, 7 = Sunday
+          const isWeekend = dayOfWeek === 6 || dayOfWeek === 7;
+
+          if (!isWeekend) {
+            count++;
+          }
+        }
+
+        return `${pickupStart.toLocaleString(DateTime.DATE_MED)} - ${pickupEnd.toLocaleString(DateTime.DATE_MED)}`;
+      }
+
+      return pickupStart.toLocaleString(DateTime.DATE_MED);
     }
     return "TBD";
   }
@@ -34,12 +55,12 @@ export function getPickupDatesString(order: IOrder): string {
     return dates[0];
   }
 
-  const startDate = dates[0];
-  const endDate = dates[dates.length - 1];
-  if (startDate === endDate) {
-    return startDate;
+  const start = dates[0];
+  const end = dates[dates.length - 1];
+  if (start === end) {
+    return start;
   }
 
   // Return date range
-  return `${startDate} - ${endDate}`;
+  return `${start} - ${end}`;
 }

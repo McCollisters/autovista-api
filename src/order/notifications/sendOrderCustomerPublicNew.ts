@@ -131,8 +131,32 @@ export async function sendOrderCustomerPublicNew(
     const isCOD = order.paymentType === "COD";
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
-    const pickupDatesLabel = "Estimated Pickup:";
-    const deliveryDatesLabel = "Estimated Delivery:";
+    const hasPickupRange = (() => {
+      const estimated = order.schedule?.pickupEstimated;
+      if (!Array.isArray(estimated) || estimated.length < 2) {
+        return false;
+      }
+      const first = estimated[0];
+      const last = estimated[estimated.length - 1];
+      if (!first || !last) {
+        return false;
+      }
+      const firstValue = DateTime.fromJSDate(new Date(first))
+        .setZone("America/New_York")
+        .toISODate();
+      const lastValue = DateTime.fromJSDate(new Date(last))
+        .setZone("America/New_York")
+        .toISODate();
+      return Boolean(firstValue && lastValue && firstValue !== lastValue);
+    })();
+    const pickupDatesLabel = isWhiteGlove
+      ? "Estimated Date:"
+      : hasPickupRange
+        ? "Pickup Within:"
+        : "Estimated Pickup:";
+    const deliveryDatesLabel = isWhiteGlove
+      ? "Estimated Date:"
+      : "Scheduled Dates:";
     const pickupDatesValue = isWhiteGlove
       ? formatSingleDate(
           order.schedule?.pickupEstimated?.[0] ||
@@ -148,29 +172,6 @@ export async function sendOrderCustomerPublicNew(
       order.totalPricing?.totalPortal ||
       0;
     const totalPriceDisplay = Math.ceil(totalPrice);
-    const paymentInstructionsHtml = isCOD
-      ? `
-        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
-          <strong>Payment Required (COD):</strong> We must receive payment in full before scheduling pickup. Please do not pay the driver directly.
-        </p>
-        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
-          Pay online here:
-          <a href="https://www.convergepay.com/hosted-payments?ssl_txn_auth_token=YtH5YU2ER7alJZ%2FD73aAegAAAZW6CTk1">https://www.convergepay.com/hosted-payments</a>
-        </p>
-        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
-          Enter the total of <strong>$${totalPriceDisplay}</strong> and use order # <strong>${order.refId}</strong>.
-        </p>
-        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
-          Payment must be received at least three (3) business days before pickup. Payments made later may require rescheduling.
-        </p>
-        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
-          A 3% credit card surcharge applies (debit cards are 1% + $0.25). The surcharge appears as a separate line item on your receipt.
-        </p>
-        <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 10px;">
-          If you do not receive a payment confirmation email after submitting, please do not retry. Contact us for assistance.
-        </p>
-      `
-      : "";
     const baseUrl =
       process.env.ORDER_STATUS_BASE_URL ||
       process.env.BASE_URL ||
@@ -262,7 +263,6 @@ export async function sendOrderCustomerPublicNew(
       transportType,
       vehicles,
       totalPrice: totalPriceDisplay,
-      paymentInstructionsHtml,
       trackingHtml,
       smallTextHtml,
       refId: order.refId,

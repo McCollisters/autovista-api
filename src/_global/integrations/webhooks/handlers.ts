@@ -8,6 +8,7 @@
 import { logger } from "@/core/logger";
 import { Order, Carrier } from "@/_global/models";
 import { Status, TransportType } from "@/_global/enums";
+import { updateSuperWithPartialOrder } from "@/order/integrations/updateSuperWithPartialOrder";
 import {
   ISuperDispatchOrderCancelledPayload,
   ISuperDispatchOrderDeliveredPayload,
@@ -657,6 +658,47 @@ export const handleCarrierCanceled = async (
       logger.info(
         `Carrier ${payload.carrier_guid} canceled order ${payload.order_guid}`,
       );
+
+      const order = await Order.findOne({ "tms.guid": payload.order_guid });
+      if (!order) {
+        logger.warn("Order not found for carrier canceled webhook", {
+          orderGuid: payload.order_guid,
+        });
+      } else {
+        try {
+          const result = await updateSuperWithPartialOrder(order);
+          if (result && order.tms) {
+            order.tms.status = result.status || order.tms.status || null;
+            order.tms.createdAt = result.created_at
+              ? new Date(result.created_at)
+              : order.tms.createdAt || null;
+            order.tms.updatedAt = result.changed_at
+              ? new Date(result.changed_at)
+              : order.tms.updatedAt || null;
+          }
+
+          order.tmsPartialOrder = true;
+          await Order.findByIdAndUpdate(order._id, {
+            $set: {
+              tms: order.tms,
+              tmsPartialOrder: order.tmsPartialOrder,
+            },
+          });
+
+          logger.info(
+            `Updated Super Dispatch order ${order.refId} to partial after carrier cancellation`,
+          );
+        } catch (error) {
+          logger.error(
+            "Failed to update Super Dispatch order to partial after carrier cancellation",
+            {
+              orderGuid: payload.order_guid,
+              orderId: order._id,
+              error: error instanceof Error ? error.message : String(error),
+            },
+          );
+        }
+      }
     } else {
       logger.warn("Carrier canceled webhook missing order_guid");
     }
