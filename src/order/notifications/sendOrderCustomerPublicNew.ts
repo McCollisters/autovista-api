@@ -133,9 +133,29 @@ export async function sendOrderCustomerPublicNew(
     const isCOD = order.paymentType === "COD";
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
+    const hasPickupRange = (() => {
+      const estimated = order.schedule?.pickupEstimated;
+      if (!Array.isArray(estimated) || estimated.length < 2) {
+        return false;
+      }
+      const first = estimated[0];
+      const last = estimated[estimated.length - 1];
+      if (!first || !last) {
+        return false;
+      }
+      const firstValue = DateTime.fromJSDate(new Date(first))
+        .setZone("America/New_York")
+        .toISODate();
+      const lastValue = DateTime.fromJSDate(new Date(last))
+        .setZone("America/New_York")
+        .toISODate();
+      return Boolean(firstValue && lastValue && firstValue !== lastValue);
+    })();
     const pickupDatesLabel = isWhiteGlove
       ? "Estimated Date:"
-      : "Pickup Within:";
+      : hasPickupRange
+        ? "Pickup Within:"
+        : "Estimated Pickup:";
     const deliveryDatesLabel = isWhiteGlove
       ? "Estimated Date:"
       : "Scheduled Dates:";

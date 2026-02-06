@@ -55,6 +55,12 @@ export function getPickupDatesString(order: IOrder): string {
     return dates[0];
   }
 
+  const start = dates[0];
+  const end = dates[dates.length - 1];
+  if (start === end) {
+    return start;
+  }
+
   // Return date range
-  return `${dates[0]} - ${dates[dates.length - 1]}`;
+  return `${start} - ${end}`;
 }
