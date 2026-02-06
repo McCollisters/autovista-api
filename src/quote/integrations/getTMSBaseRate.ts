@@ -5,6 +5,9 @@ export const getTMSBaseRate = async (
   origin: string,
   destination: string,
 ) => {
+  origin = origin.trim();
+  destination = destination.trim();
+
   // Addresses current Super Dispatch bug with Midland quotes
   if (origin === "Midland, MI") {
     origin = "Freeland, MI";
