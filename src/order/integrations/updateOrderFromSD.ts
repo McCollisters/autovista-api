@@ -257,20 +257,11 @@ function processPickupAddress(
   const sdZipRemoved = !venue || venue.zip == null;
 
   return {
-    // Preserve name/contact if tmsPartialOrder is true or venue is missing
+    // Always preserve our DB contact—Super has portal/office contact, not customer
     contact: {
-      name:
-        isPartialOrder || !venue
-          ? existingOrder.origin?.contact?.name
-          : venue.contact_name || undefined,
-      phone:
-        isPartialOrder || !venue
-          ? existingOrder.origin?.contact?.phone
-          : venue.contact_phone || undefined,
-      phoneMobile:
-        isPartialOrder || !venue
-          ? existingOrder.origin?.contact?.phoneMobile
-          : venue.contact_mobile_phone || undefined,
+      name: existingOrder.origin?.contact?.name,
+      phone: existingOrder.origin?.contact?.phone,
+      phoneMobile: existingOrder.origin?.contact?.phoneMobile,
     },
     // Preserve existing address if WITTHELD, tmsPartialOrder, or SD removed it
     address: {
@@ -313,20 +304,11 @@ function processDeliveryAddress(
   const sdZipRemoved = !venue || venue.zip == null;
 
   return {
-    // Preserve name/contact if tmsPartialOrder is true or venue is missing
+    // Always preserve our DB contact—Super has portal/office contact, not customer
     contact: {
-      name:
-        isPartialOrder || !venue
-          ? existingOrder.destination?.contact?.name
-          : venue.contact_name || undefined,
-      phone:
-        isPartialOrder || !venue
-          ? existingOrder.destination?.contact?.phone
-          : venue.contact_phone || undefined,
-      phoneMobile:
-        isPartialOrder || !venue
-          ? existingOrder.destination?.contact?.phoneMobile
-          : venue.contact_mobile_phone || undefined,
+      name: existingOrder.destination?.contact?.name,
+      phone: existingOrder.destination?.contact?.phone,
+      phoneMobile: existingOrder.destination?.contact?.phoneMobile,
     },
     // Preserve existing address if WITTHELD, tmsPartialOrder, or SD removed it
     address: {

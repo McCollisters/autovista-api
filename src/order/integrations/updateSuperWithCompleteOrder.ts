@@ -197,6 +197,10 @@ export const updateSuperWithCompleteOrder = async (
       portalEmail = (portal as any).notificationEmail.trim();
     }
 
+    // Always use McCollisters office contact for Super Dispatch—never send customer email/phone.
+    const sdContactEmail = "autologistics@mccollisters.com";
+    const sdContactPhone = "888-819-0594";
+
     const formatSuperDispatchDate = (value: Date) =>
       `${DateTime.fromJSDate(new Date(value))
         .toUTC()
@@ -275,9 +279,9 @@ export const updateSuperWithCompleteOrder = async (
             order.origin?.contact?.name ||
             null,
           contact_name: order.origin?.contact?.name || null,
-          contact_email: order.origin?.contact?.email || null,
-          contact_phone: order.origin?.contact?.phone || null,
-          contact_mobile_phone: order.origin?.contact?.phoneMobile || null,
+          contact_email: sdContactEmail,
+          contact_phone: sdContactPhone,
+          contact_mobile_phone: sdContactPhone,
         },
       },
       delivery: {
@@ -297,9 +301,9 @@ export const updateSuperWithCompleteOrder = async (
             order.destination?.contact?.name ||
             null,
           contact_name: order.destination?.contact?.name || null,
-          contact_email: order.destination?.contact?.email || null,
-          contact_phone: order.destination?.contact?.phone || null,
-          contact_mobile_phone: order.destination?.contact?.phoneMobile || null,
+          contact_email: sdContactEmail,
+          contact_phone: sdContactPhone,
+          contact_mobile_phone: sdContactPhone,
         },
       },
       transport_type: String(order.transportType || "").toUpperCase(),
