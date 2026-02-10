@@ -32,6 +32,22 @@ const calculateModifier = (
   return value;
 };
 
+const normalizePercentModifier = (
+  modifier: { valueType?: string; value?: number } | number | undefined,
+): { valueType: string; value: number } | null => {
+  if (modifier == null) {
+    return null;
+  }
+  if (typeof modifier === "number") {
+    return { valueType: "percentage", value: modifier };
+  }
+  const value = Number(modifier.value);
+  if (!Number.isFinite(value)) {
+    return null;
+  }
+  return { valueType: "percentage", value };
+};
+
 const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   const {
     vehicle,
@@ -306,9 +322,12 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     );
   }
 
-  if (globalModifiers.enclosedPercent) {
+  const enclosedPercentModifier = normalizePercentModifier(
+    globalModifiers.enclosedPercent,
+  );
+  if (enclosedPercentModifier) {
     calculatedEnclosedPercent = calculateModifier(
-      globalModifiers.enclosedPercent,
+      enclosedPercentModifier,
       base,
     );
   }
@@ -717,11 +736,11 @@ const getJKVehiclePrice = async ({
     vehicle.transportType === "WHITEGLOVE";
 
   // Apply enclosed modifier if applicable
+  let enclosedModifierAmt = 0;
   if (isEnclosed && globalModifiers.enclosedModifier) {
-    const enclosedModifierAmt = Math.ceil(
+    enclosedModifierAmt = Math.ceil(
       mcBase * (globalModifiers.enclosedModifier / 100),
     );
-    // Note: JK doesn't add this to base, it's just calculated
   }
 
   // Apply enclosed surcharge
@@ -777,12 +796,23 @@ const getJKVehiclePrice = async ({
   // JK: No service level markup - all service levels have same price
   const serviceLevelMarkup = 0;
 
-  // Calculate totals (same for all service levels in JK)
-  const totalSD =
-    mcBase + enclosedMarkup + serviceLevelMarkup + inoperableMarkup;
-  const totalPortal =
+  const openTotalSD = mcBase + serviceLevelMarkup + inoperableMarkup;
+  const openTotalPortal =
+    mcBase +
+    serviceLevelMarkup +
+    inoperableMarkup +
+    calculatedCommission +
+    companyTariff;
+  const enclosedTotalSD =
     mcBase +
     enclosedMarkup +
+    enclosedModifierAmt +
+    serviceLevelMarkup +
+    inoperableMarkup;
+  const enclosedTotalPortal =
+    mcBase +
+    enclosedMarkup +
+    enclosedModifierAmt +
     serviceLevelMarkup +
     inoperableMarkup +
     calculatedCommission +
@@ -802,7 +832,7 @@ const getJKVehiclePrice = async ({
       irr: 0,
       fuel: 0,
       enclosedFlat: enclosedMarkup,
-      enclosedPercent: 0,
+      enclosedPercent: enclosedModifierAmt,
       commission: calculatedCommission,
       serviceLevels: [], // JK: No service level variations
       companyTariffs: [
@@ -822,77 +852,77 @@ const getJKVehiclePrice = async ({
       ],
     },
     totals: {
-      whiteGlove: roundCurrency(totalSD), // Same as other service levels
+      whiteGlove: roundCurrency(openTotalSD), // Same as open for JK
       one: {
         open: {
-          total: roundCurrency(totalSD),
+          total: roundCurrency(openTotalSD),
           companyTariff: companyTariff,
           commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+          totalWithCompanyTariffAndCommission: roundCurrency(openTotalPortal),
         },
         enclosed: {
-          total: roundCurrency(totalSD),
+          total: roundCurrency(enclosedTotalSD),
           companyTariff: companyTariff,
           commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+          totalWithCompanyTariffAndCommission: roundCurrency(enclosedTotalPortal),
         },
       },
       three: {
         open: {
-          total: roundCurrency(totalSD),
+          total: roundCurrency(openTotalSD),
           companyTariff: companyTariff,
           commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+          totalWithCompanyTariffAndCommission: roundCurrency(openTotalPortal),
         },
         enclosed: {
-          total: roundCurrency(totalSD + enclosedMarkup),
+          total: roundCurrency(enclosedTotalSD),
           companyTariff: companyTariff,
           commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal + enclosedMarkup),
+          totalWithCompanyTariffAndCommission: roundCurrency(enclosedTotalPortal),
         },
         // Legacy fallback
-        total: roundCurrency(totalSD),
+        total: roundCurrency(openTotalSD),
         companyTariff: companyTariff,
         commission: calculatedCommission,
-        totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+        totalWithCompanyTariffAndCommission: roundCurrency(openTotalPortal),
       },
       five: {
         open: {
-          total: roundCurrency(totalSD),
+          total: roundCurrency(openTotalSD),
           companyTariff: companyTariff,
           commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+          totalWithCompanyTariffAndCommission: roundCurrency(openTotalPortal),
         },
         enclosed: {
-          total: roundCurrency(totalSD + enclosedMarkup),
+          total: roundCurrency(enclosedTotalSD),
           companyTariff: companyTariff,
           commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal + enclosedMarkup),
+          totalWithCompanyTariffAndCommission: roundCurrency(enclosedTotalPortal),
         },
         // Legacy fallback
-        total: roundCurrency(totalSD),
+        total: roundCurrency(openTotalSD),
         companyTariff: companyTariff,
         commission: calculatedCommission,
-        totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+        totalWithCompanyTariffAndCommission: roundCurrency(openTotalPortal),
       },
       seven: {
         open: {
-          total: roundCurrency(totalSD),
+          total: roundCurrency(openTotalSD),
           companyTariff: companyTariff,
           commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+          totalWithCompanyTariffAndCommission: roundCurrency(openTotalPortal),
         },
         enclosed: {
-          total: roundCurrency(totalSD + enclosedMarkup),
+          total: roundCurrency(enclosedTotalSD),
           companyTariff: companyTariff,
           commission: calculatedCommission,
-          totalWithCompanyTariffAndCommission: roundCurrency(totalPortal + enclosedMarkup),
+          totalWithCompanyTariffAndCommission: roundCurrency(enclosedTotalPortal),
         },
         // Legacy fallback
-        total: roundCurrency(totalSD),
+        total: roundCurrency(openTotalSD),
         companyTariff: companyTariff,
         commission: calculatedCommission,
-        totalWithCompanyTariffAndCommission: roundCurrency(totalPortal),
+        totalWithCompanyTariffAndCommission: roundCurrency(openTotalPortal),
       },
     },
   };
