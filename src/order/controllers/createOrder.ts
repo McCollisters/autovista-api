@@ -1023,10 +1023,19 @@ export const createOrder = async (
     const modifierCompanyTariff =
       transportType === TransportType.WhiteGlove
         ? 0
-        : (quoteData.totalPricing?.modifiers?.companyTariffs?.find(
-            (item: any) =>
-              String(item.serviceLevelOption) === String(effectiveServiceLevel),
-          )?.value ?? 0);
+        : transportType === TransportType.Enclosed
+          ? (pricingTotalsForLevel?.enclosed?.companyTariff ??
+            quoteData.totalPricing?.modifiers?.companyTariffs?.find(
+              (item: any) =>
+                String(item.serviceLevelOption) ===
+                String(effectiveServiceLevel),
+            )?.value ??
+            0)
+          : (quoteData.totalPricing?.modifiers?.companyTariffs?.find(
+              (item: any) =>
+                String(item.serviceLevelOption) ===
+                String(effectiveServiceLevel),
+            )?.value ?? 0);
     const totalPricingSummary = {
       base: quoteData.totalPricing?.base ?? 0,
       modifiers: {

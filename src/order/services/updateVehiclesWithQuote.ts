@@ -194,6 +194,37 @@ export const updateVehiclesWithQuote = async ({
       const { companyTariff, commission } =
         getCompanyTariffAndCommission(serviceLevel);
 
+      const companyTariffs = useEnclosedTotals
+        ? [
+            {
+              serviceLevelOption: ServiceLevelOption.OneDay,
+              value:
+                quoteVehicle.pricing.totals.one.enclosed.companyTariff || 0,
+            },
+            {
+              serviceLevelOption: ServiceLevelOption.ThreeDay,
+              value: getServiceLevelField(
+                ServiceLevelOption.ThreeDay,
+                "companyTariff",
+              ),
+            },
+            {
+              serviceLevelOption: ServiceLevelOption.FiveDay,
+              value: getServiceLevelField(
+                ServiceLevelOption.FiveDay,
+                "companyTariff",
+              ),
+            },
+            {
+              serviceLevelOption: ServiceLevelOption.SevenDay,
+              value: getServiceLevelField(
+                ServiceLevelOption.SevenDay,
+                "companyTariff",
+              ),
+            },
+          ]
+        : modifiers.companyTariffs || [];
+
       return {
         ...quoteVehicle,
         pricing: {
@@ -214,7 +245,7 @@ export const updateVehiclesWithQuote = async ({
               transportType === "enclosed" ? modifiers.enclosedPercent || 0 : 0,
             commission: commission,
             serviceLevels: modifiers.serviceLevels || [],
-            companyTariffs: modifiers.companyTariffs || [],
+            companyTariffs,
           },
           totals: {
             whiteGlove: quoteVehicle.pricing.totals.whiteGlove || 0,
