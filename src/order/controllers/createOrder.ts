@@ -762,6 +762,15 @@ export const createOrder = async (
             totalsForLevel?.enclosed?.total ??
             totalsForLevel?.totalWithCompanyTariffAndCommission ??
             totalsForLevel?.total;
+          const selectedTotals =
+            transportType === TransportType.Enclosed
+              ? totalsForLevel?.enclosed
+              : totalsForLevel?.open;
+          const selectedTotal = selectedTotals?.total ?? null;
+          const selectedCompanyTariff = selectedTotals?.companyTariff ?? null;
+          const selectedCommission = selectedTotals?.commission ?? null;
+          const selectedTotalWith =
+            selectedTotals?.totalWithCompanyTariffAndCommission ?? null;
 
           const hasWhiteGlove =
             transportType === TransportType.WhiteGlove &&
@@ -862,11 +871,23 @@ export const createOrder = async (
                   fuel: sourceModifiers.fuel ?? 0,
                   enclosedFlat: sourceModifiers.enclosedFlat ?? 0,
                   enclosedPercent: sourceModifiers.enclosedPercent ?? 0,
-                  commission: sourceModifiers.commission ?? 0,
+                  commission:
+                    selectedCommission ?? sourceModifiers.commission ?? 0,
                   serviceLevel: 0,
-                  companyTariff: 0,
+                  companyTariff: selectedCompanyTariff ?? 0,
                 }
               : sourceModifiers;
+
+          const vehicleTotal =
+            selectedTotal ??
+            (transportType === TransportType.WhiteGlove
+              ? perVehicleWhiteGlove
+              : vehicleTariff ?? 0);
+          const vehicleTotalWith =
+            selectedTotalWith ??
+            (vehicleTotal ?? 0) +
+              (selectedCompanyTariff ?? calculatedQuote.companyTariff ?? 0) +
+              (selectedCommission ?? sourceModifiers.commission ?? 0);
 
           return {
             ...quote,
@@ -878,11 +899,8 @@ export const createOrder = async (
             pricing: {
               base: sourcePricing.base ?? 0,
               modifiers: normalizedModifiers,
-              total: vehicleTariff ?? 0,
-              totalWithCompanyTariffAndCommission:
-                calculatedQuote.companyTariff != null
-                  ? (vehicleTariff ?? 0) + (calculatedQuote.companyTariff || 0)
-                  : (vehicleTariff ?? 0),
+              total: vehicleTotal ?? 0,
+              totalWithCompanyTariffAndCommission: vehicleTotalWith ?? 0,
               ...(transportType === TransportType.WhiteGlove
                 ? {}
                 : { totals: pricingTotals ?? sourcePricing.totals ?? null }),
