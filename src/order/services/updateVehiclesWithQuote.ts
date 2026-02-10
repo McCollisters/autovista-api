@@ -26,19 +26,6 @@ export const updateVehiclesWithQuote = async ({
         throw new Error("Quote vehicle pricing is required");
       }
 
-      // Get service level fee from the new structure
-      const serviceLevelFee = getServiceLevelValue(
-        quoteVehicle.pricing.modifiers.serviceLevels || [],
-        serviceLevel,
-      );
-
-      // Calculate enclosed fees from the new flat structure
-      const enclosedFee =
-        transportType === "enclosed"
-          ? (quoteVehicle.pricing.modifiers.enclosedFlat || 0) +
-            (quoteVehicle.pricing.modifiers.enclosedPercent || 0)
-          : 0;
-
       // Get base from the new structure
       const base =
         transportType === TransportType.WhiteGlove
@@ -46,6 +33,24 @@ export const updateVehiclesWithQuote = async ({
           : quoteVehicle.pricing.base?.tms > 0
             ? quoteVehicle.pricing.base.tms
             : quoteVehicle.pricing.base?.custom || 0;
+
+      // Get service level fee from the new structure
+      const serviceLevelFee = getServiceLevelValue(
+        quoteVehicle.pricing.modifiers.serviceLevels || [],
+        serviceLevel,
+      );
+
+      // Calculate enclosed fees: flat + percent of base
+      const enclosedPercentRaw =
+        quoteVehicle.pricing.modifiers.enclosedPercent || 0;
+      const enclosedPercentFee = Math.ceil(
+        base * (Number(enclosedPercentRaw) / 100),
+      );
+      const enclosedFee =
+        transportType === "enclosed"
+          ? (quoteVehicle.pricing.modifiers.enclosedFlat || 0) +
+            enclosedPercentFee
+          : 0;
 
       // Get modifiers from the new flat structure
       const modifiers = quoteVehicle.pricing.modifiers;

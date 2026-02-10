@@ -18,10 +18,22 @@ export const formatOrderTotalPricing = async ({
       throw new Error();
     }
 
+    const base =
+      quote.transportType === TransportType.WhiteGlove
+        ? totalPricing.base.whiteGlove
+        : quote.totalPricing.base.tms > 0
+          ? totalPricing.base.tms
+          : totalPricing.base.custom || 0;
+
+    const enclosedPercentRaw =
+      totalPricing.modifiers.conditional?.enclosedPercent || 0;
+    const enclosedPercentFee = Math.ceil(
+      base * (Number(enclosedPercentRaw) / 100),
+    );
     const enclosedFee =
       transportType === "enclosed"
         ? (totalPricing.modifiers.conditional?.enclosedFlat || 0) +
-          (totalPricing.modifiers.conditional?.enclosedPercent || 0)
+          enclosedPercentFee
         : 0;
 
     const serviceLevelFee =
@@ -29,13 +41,6 @@ export const formatOrderTotalPricing = async ({
         totalPricing?.modifiers.conditional?.serviceLevels || [],
         serviceLevel,
       ) || 0;
-
-    const base =
-      quote.transportType === TransportType.WhiteGlove
-        ? totalPricing.base.whiteGlove
-        : quote.totalPricing.base.tms > 0
-          ? totalPricing.base.tms
-          : totalPricing.base.custom || 0;
 
     const globalMod = totalPricing.modifiers.global;
     const portalMod = totalPricing.modifiers.portal;
