@@ -70,65 +70,120 @@ export const updateVehiclesWithQuote = async ({
         enclosedFee +
         serviceLevelFee;
 
-      // Get service level totals from the new structure
+      const useEnclosedTotals = transportType === "enclosed";
+
       const getServiceLevelTotals = (serviceLevel: string) => {
-        if (!quoteVehicle.pricing?.totals) return 0;
+        const totals = quoteVehicle.pricing?.totals;
+        if (!totals) return 0;
+        const totalsAny = totals as any;
 
         switch (serviceLevel) {
           case ServiceLevelOption.WhiteGlove:
-            return quoteVehicle.pricing.totals.whiteGlove || 0;
+            return totals.whiteGlove || 0;
           case ServiceLevelOption.OneDay:
-            return transportType === "enclosed"
-              ? quoteVehicle.pricing.totals.one.enclosed.total || 0
-              : quoteVehicle.pricing.totals.one.open.total || 0;
+            return useEnclosedTotals
+              ? totals.one.enclosed.total || 0
+              : totals.one.open.total || 0;
           case ServiceLevelOption.ThreeDay:
-            return quoteVehicle.pricing.totals.three.total || 0;
+            return useEnclosedTotals
+              ? totalsAny.three?.enclosed?.total ?? totals.three?.total ?? 0
+              : totalsAny.three?.open?.total ?? totals.three?.total ?? 0;
           case ServiceLevelOption.FiveDay:
-            return quoteVehicle.pricing.totals.five.total || 0;
+            return useEnclosedTotals
+              ? totalsAny.five?.enclosed?.total ?? totals.five?.total ?? 0
+              : totalsAny.five?.open?.total ?? totals.five?.total ?? 0;
           case ServiceLevelOption.SevenDay:
-            return quoteVehicle.pricing.totals.seven.total || 0;
+            return useEnclosedTotals
+              ? totalsAny.seven?.enclosed?.total ?? totals.seven?.total ?? 0
+              : totalsAny.seven?.open?.total ?? totals.seven?.total ?? 0;
           default:
             return 0;
         }
       };
 
-      // Get company tariff and commission from service level totals
+      const getServiceLevelField = (
+        serviceLevel: string,
+        field:
+          | "total"
+          | "companyTariff"
+          | "commission"
+          | "totalWithCompanyTariffAndCommission",
+      ) => {
+        const totals = quoteVehicle.pricing?.totals;
+        if (!totals) return 0;
+        const totalsAny = totals as any;
+
+        switch (serviceLevel) {
+          case ServiceLevelOption.ThreeDay: {
+            const level = totalsAny.three;
+            return useEnclosedTotals
+              ? level?.enclosed?.[field] ?? level?.[field] ?? 0
+              : level?.open?.[field] ?? level?.[field] ?? 0;
+          }
+          case ServiceLevelOption.FiveDay: {
+            const level = totalsAny.five;
+            return useEnclosedTotals
+              ? level?.enclosed?.[field] ?? level?.[field] ?? 0
+              : level?.open?.[field] ?? level?.[field] ?? 0;
+          }
+          case ServiceLevelOption.SevenDay: {
+            const level = totalsAny.seven;
+            return useEnclosedTotals
+              ? level?.enclosed?.[field] ?? level?.[field] ?? 0
+              : level?.open?.[field] ?? level?.[field] ?? 0;
+          }
+          default:
+            return 0;
+        }
+      };
+
       const getCompanyTariffAndCommission = (serviceLevel: string) => {
-        if (!quoteVehicle.pricing?.totals)
-          return { companyTariff: 0, commission: 0 };
+        const totals = quoteVehicle.pricing?.totals;
+        if (!totals) return { companyTariff: 0, commission: 0 };
 
         switch (serviceLevel) {
           case ServiceLevelOption.OneDay:
-            return transportType === "enclosed"
+            return useEnclosedTotals
               ? {
-                  companyTariff:
-                    quoteVehicle.pricing.totals.one.enclosed.companyTariff || 0,
-                  commission:
-                    quoteVehicle.pricing.totals.one.enclosed.commission || 0,
+                  companyTariff: totals.one.enclosed.companyTariff || 0,
+                  commission: totals.one.enclosed.commission || 0,
                 }
               : {
-                  companyTariff:
-                    quoteVehicle.pricing.totals.one.open.companyTariff || 0,
-                  commission:
-                    quoteVehicle.pricing.totals.one.open.commission || 0,
+                  companyTariff: totals.one.open.companyTariff || 0,
+                  commission: totals.one.open.commission || 0,
                 };
           case ServiceLevelOption.ThreeDay:
             return {
-              companyTariff:
-                quoteVehicle.pricing.totals.three.companyTariff || 0,
-              commission: quoteVehicle.pricing.totals.three.commission || 0,
+              companyTariff: getServiceLevelField(
+                ServiceLevelOption.ThreeDay,
+                "companyTariff",
+              ),
+              commission: getServiceLevelField(
+                ServiceLevelOption.ThreeDay,
+                "commission",
+              ),
             };
           case ServiceLevelOption.FiveDay:
             return {
-              companyTariff:
-                quoteVehicle.pricing.totals.five.companyTariff || 0,
-              commission: quoteVehicle.pricing.totals.five.commission || 0,
+              companyTariff: getServiceLevelField(
+                ServiceLevelOption.FiveDay,
+                "companyTariff",
+              ),
+              commission: getServiceLevelField(
+                ServiceLevelOption.FiveDay,
+                "commission",
+              ),
             };
           case ServiceLevelOption.SevenDay:
             return {
-              companyTariff:
-                quoteVehicle.pricing.totals.seven.companyTariff || 0,
-              commission: quoteVehicle.pricing.totals.seven.commission || 0,
+              companyTariff: getServiceLevelField(
+                ServiceLevelOption.SevenDay,
+                "companyTariff",
+              ),
+              commission: getServiceLevelField(
+                ServiceLevelOption.SevenDay,
+                "commission",
+              ),
             };
           default:
             return { companyTariff: 0, commission: 0 };
@@ -186,31 +241,49 @@ export const updateVehiclesWithQuote = async ({
               },
             },
             three: {
-              total: quoteVehicle.pricing.totals.three.total || 0,
-              companyTariff:
-                quoteVehicle.pricing.totals.three.companyTariff || 0,
-              commission: quoteVehicle.pricing.totals.three.commission || 0,
-              totalWithCompanyTariffAndCommission:
-                quoteVehicle.pricing.totals.three
-                  .totalWithCompanyTariffAndCommission || 0,
+              total: getServiceLevelField(ServiceLevelOption.ThreeDay, "total"),
+              companyTariff: getServiceLevelField(
+                ServiceLevelOption.ThreeDay,
+                "companyTariff",
+              ),
+              commission: getServiceLevelField(
+                ServiceLevelOption.ThreeDay,
+                "commission",
+              ),
+              totalWithCompanyTariffAndCommission: getServiceLevelField(
+                ServiceLevelOption.ThreeDay,
+                "totalWithCompanyTariffAndCommission",
+              ),
             },
             five: {
-              total: quoteVehicle.pricing.totals.five.total || 0,
-              companyTariff:
-                quoteVehicle.pricing.totals.five.companyTariff || 0,
-              commission: quoteVehicle.pricing.totals.five.commission || 0,
-              totalWithCompanyTariffAndCommission:
-                quoteVehicle.pricing.totals.five
-                  .totalWithCompanyTariffAndCommission || 0,
+              total: getServiceLevelField(ServiceLevelOption.FiveDay, "total"),
+              companyTariff: getServiceLevelField(
+                ServiceLevelOption.FiveDay,
+                "companyTariff",
+              ),
+              commission: getServiceLevelField(
+                ServiceLevelOption.FiveDay,
+                "commission",
+              ),
+              totalWithCompanyTariffAndCommission: getServiceLevelField(
+                ServiceLevelOption.FiveDay,
+                "totalWithCompanyTariffAndCommission",
+              ),
             },
             seven: {
-              total: quoteVehicle.pricing.totals.seven.total || 0,
-              companyTariff:
-                quoteVehicle.pricing.totals.seven.companyTariff || 0,
-              commission: quoteVehicle.pricing.totals.seven.commission || 0,
-              totalWithCompanyTariffAndCommission:
-                quoteVehicle.pricing.totals.seven
-                  .totalWithCompanyTariffAndCommission || 0,
+              total: getServiceLevelField(ServiceLevelOption.SevenDay, "total"),
+              companyTariff: getServiceLevelField(
+                ServiceLevelOption.SevenDay,
+                "companyTariff",
+              ),
+              commission: getServiceLevelField(
+                ServiceLevelOption.SevenDay,
+                "commission",
+              ),
+              totalWithCompanyTariffAndCommission: getServiceLevelField(
+                ServiceLevelOption.SevenDay,
+                "totalWithCompanyTariffAndCommission",
+              ),
             },
           },
         },
