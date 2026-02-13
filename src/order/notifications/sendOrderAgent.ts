@@ -133,8 +133,17 @@ export async function sendOrderAgentEmail({
     // Prepare template data
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
-    const vehicles = formatVehiclesHTML(order.vehicles, false);
+    const vehicles = formatVehiclesHTML(order.vehicles, true);
     const transferee = order.customer?.name || order.customer?.email || "";
+
+    // Order total for display (same logic as customer/MMI notifications)
+    const totalPrice =
+      order.totalPricing?.totalWithCompanyTariffAndCommission ??
+      order.totalPricing?.totalPortal ??
+      order.totalPricing?.total ??
+      0;
+    const totalPriceDisplay =
+      totalPrice > 0 ? totalPrice.toFixed(2) : null;
 
     // Build subject
     let subject = `New Booked Order Confirmation - Order #${order.refId}`;
@@ -207,6 +216,7 @@ export async function sendOrderAgentEmail({
         deliveryZip,
         transportType,
         vehicles,
+        totalPriceDisplay,
       });
 
       const result = await sendOrderNotification({

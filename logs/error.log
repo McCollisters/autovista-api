@@ -5852,3 +5852,37 @@
   message: 'Failed to fetch order from Super Dispatch',
   timestamp: '2026-01-20 22:34:45'
 }
+{
+  service: 'autovista-api',
+  eventType: 'order_schedule_updated',
+  refId: 300910,
+  sdGuid: 'f2c2ebc6-ab27-42ae-9500-7f8753cb8d51',
+  error: 'Request failed with status code 404',
+  status: 404,
+  data: '',
+  level: 'error',
+  message: 'acertusClient: Failed to send update',
+  timestamp: '2026-02-09 21:59:02'
+}
+{
+  service: 'autovista-api',
+  level: 'error',
+  message: 'Error in sendMMIOrderNotification: __dirname is not defined',
+  stack: 'ReferenceError: __dirname is not defined\n' +
+    '    at sendMMIOrderNotification (/Users/annaharrington/Clients/McCollisters/autovista-api/src/order/notifications/sendMMIOrderNotification.ts:91:7)\n' +
+    '    at sendMMIOrderEmail (/Users/annaharrington/Clients/McCollisters/autovista-api/scripts/run-send-mmi-order-notification-override.ts:68:26)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)',
+  timestamp: '2026-02-13 16:30:52'
+}
+{
+  service: 'autovista-api',
+  eventType: 'order_schedule_updated',
+  refId: 301185,
+  sdGuid: 'a6449e59-e7e9-4506-91f7-d929e831bc4c',
+  error: 'Request failed with status code 404',
+  status: 404,
+  data: '',
+  level: 'error',
+  message: 'acertusClient: Failed to send update',
+  timestamp: '2026-02-13 16:37:52'
+}

@@ -1,11 +1,13 @@
 /**
- * Send MMI Order Notification
+ * Agents Order Confirmation with Pricing
  *
- * Sends MMI-specific order notification to designated recipient
+ * Sends order confirmation with order total and vehicle pricing to designated recipient.
+ * Triggered automatically for MMI portals; can also be sent manually from the app.
  */
 
 import { readFile } from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
@@ -14,7 +16,8 @@ import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
-// __dirname and __filename are available in CommonJS modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 interface SendMMIOrderNotificationParams {
   order: IOrder;
@@ -22,7 +25,7 @@ interface SendMMIOrderNotificationParams {
 }
 
 /**
- * Send MMI order notification
+ * Send Agents Order Confirmation with Pricing
  */
 export async function sendMMIOrderNotification({
   recipientEmail,
@@ -89,7 +92,7 @@ export async function sendMMIOrderNotification({
     // Load and compile template
     const templatePath = path.join(
       __dirname,
-      "../../../templates/mmi-order-notification.hbs",
+      "../../templates/mmi-order-notification.hbs",
     );
     const resolvedTemplatePath = await resolveTemplatePath(
       templatePath,
@@ -130,17 +133,17 @@ export async function sendMMIOrderNotification({
       subject,
       html,
       replyTo: senderEmail,
-      templateName: "MMI Order Notification",
+      templateName: "Agents Order Confirmation with Pricing",
     });
 
     if (result.success) {
-      logger.info("MMI order notification sent successfully", {
+      logger.info("Agents order confirmation with pricing sent successfully", {
         orderId: order._id,
         refId: order.refId,
         recipientEmail,
       });
     } else {
-      logger.error("Failed to send MMI order notification", {
+      logger.error("Failed to send agents order confirmation with pricing", {
         orderId: order._id,
         refId: order.refId,
         recipientEmail,
@@ -153,7 +156,7 @@ export async function sendMMIOrderNotification({
       error: result.error,
     };
   } catch (error) {
-    logger.error("Error in sendMMIOrderNotification:", error);
+    logger.error("Error in sendAgentsOrderConfirmationWithPricing:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : String(error),

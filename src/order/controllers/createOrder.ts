@@ -1322,8 +1322,12 @@ export const createOrder = async (
       }
     }
 
-    // Send agent notifications for non-customer portal orders
-    if (!isCustomerPortal) {
+    // Send agent notifications for non-customer portal orders (MMI gets MMI-specific email only, not agent confirmation)
+    const portalIdForNotifications = String(portal._id);
+    const isMMIPortal = MMI_PORTALS.includes(
+      portalIdForNotifications as (typeof MMI_PORTALS)[number],
+    );
+    if (!isCustomerPortal && !isMMIPortal) {
       try {
         await sendOrderAgentEmail({
           orderId: String(newOrder._id),
@@ -1351,20 +1355,19 @@ export const createOrder = async (
       }
     }
 
-    // Send MMI order notification if portal is MMI
-    const portalIdString = String(portal._id);
-    if (MMI_PORTALS.includes(portalIdString as (typeof MMI_PORTALS)[number])) {
+    // Send Agents Order Confirmation with Pricing if portal is MMI (this is the only order confirmation MMI agents receive)
+    if (isMMIPortal) {
       try {
         await sendMMIOrderNotification({
           order: newOrder,
           recipientEmail: "autodesk@graebel.com",
         });
         logger.info(
-          `MMI order notification sent for order ${(newOrder as any).refId}`,
+          `Agents order confirmation with pricing sent for order ${(newOrder as any).refId}`,
         );
       } catch (notificationError) {
         logger.error(
-          "Failed to send MMI order notification:",
+          "Failed to send agents order confirmation with pricing:",
           notificationError,
         );
         // Don't fail the order creation for notification errors

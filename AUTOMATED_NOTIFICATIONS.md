@@ -7,11 +7,12 @@ This doc lists the order and quote notifications that are sent automatically, pl
 ### Order creation
 - **Agent order confirmation**
   - Trigger: `POST /api/v1/order` (also `POST /api/v1/order/customer` via `createOrder`)
-  - Conditions: `isCustomerPortal` is false and `portal.disableAgentNotifications !== true`
+  - Conditions: `isCustomerPortal` is false, portal is not in `MMI_PORTALS`, and `portal.disableAgentNotifications !== true`
   - Recipients: `order.agents` with email addresses
   - Implementation: `src/order/controllers/createOrder.ts` → `sendOrderAgentEmail` (`src/order/notifications/sendOrderAgent.ts`)
   - Template: `src/templates/order-agent.hbs`
   - Notification type stored: `agentsConfirmation`
+  - Notes: MMI portals do not receive this; they receive Agents Order Confirmation with Pricing only (below).
 
 - **Customer order confirmation**
   - Trigger: `POST /api/v1/order` and `POST /api/v1/order/customer`
@@ -28,12 +29,13 @@ This doc lists the order and quote notifications that are sent automatically, pl
   - Implementation: `src/order/controllers/createOrder.ts` → `sendWhiteGloveNotification` (`src/order/notifications/sendWhiteGloveNotification.ts`)
   - Template: `src/templates/white-glove.hbs`
 
-- **MMI order notification**
-  - Trigger: `POST /api/v1/order`
-  - Conditions: `portalId` is in `MMI_PORTALS`
-  - Recipients: `autodesk@graebel.com` (passed by controller)
+- **Agents Order Confirmation with Pricing**
+  - Trigger: `POST /api/v1/order` (automatic for MMI portals); also available manually via `POST /api/v1/notifications/send` with `emailType: "Agents Order Confirmation with Pricing"`.
+  - Conditions (automatic): `portalId` is in `MMI_PORTALS`
+  - Recipients (automatic): `autodesk@graebel.com` (passed by controller). Manual: recipients from request body.
   - Implementation: `src/order/controllers/createOrder.ts` → `sendMMIOrderNotification` (`src/order/notifications/sendMMIOrderNotification.ts`)
   - Template: `src/templates/mmi-order-notification.hbs`
+  - Notes: This is the only order confirmation MMI agents receive (includes order total and vehicle pricing). Can be sent manually from the app for any order.
 
 ### Track order requests
 - **Customer confirmation of tracking request**

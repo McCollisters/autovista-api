@@ -102,7 +102,8 @@ export const sendManualEmail = async (
       "Customer Order Confirmation": "customerConfirmation",
       "Payment Request": "paymentRequest",
       "White Glove": "whiteGlove",
-      "MMI Order": "mmiOrder",
+      "Agents Order Confirmation with Pricing": "agentsOrderConfirmationWithPricing",
+      "MMI Order": "agentsOrderConfirmationWithPricing",
       "Track Order": "trackOrder",
       "Pickup Confirmation": "pickupConfirmation",
       "Delivery Confirmation": "deliveryConfirmation",
@@ -279,22 +280,23 @@ export const sendManualEmail = async (
         );
         break;
 
-      case "mmiOrder":
+      case "agentsOrderConfirmationWithPricing":
         if (!orderId) {
           return next({
             statusCode: 400,
-            message: "Order ID is required for MMI order emails.",
+            message:
+              "Order ID is required for Agents Order Confirmation with Pricing emails.",
           });
         }
-        const mmiOrder = await Order.findById(orderId);
-        if (!mmiOrder) {
+        const orderForPricingEmail = await Order.findById(orderId);
+        if (!orderForPricingEmail) {
           return next({ statusCode: 404, message: "Order not found." });
         }
         // Send to each recipient from the form
-        const mmiResults = await Promise.allSettled(
+        const pricingEmailResults = await Promise.allSettled(
           recipients.map(async (recipient) => {
             const result = await sendMMIOrderNotification({
-              order: mmiOrder,
+              order: orderForPricingEmail,
               recipientEmail: recipient.email,
             });
             return {
@@ -304,7 +306,7 @@ export const sendManualEmail = async (
             };
           }),
         );
-        results = mmiResults.map((result) =>
+        results = pricingEmailResults.map((result) =>
           result.status === "fulfilled"
             ? result.value
             : {
