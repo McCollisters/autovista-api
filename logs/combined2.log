@@ -69234,3 +69234,156 @@
   message: 'Request completed',
   timestamp: '2026-02-13 16:39:43'
 }
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-18 08:53:34'
+}
+{
+  message: 'Email template not found: Survey, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-18 08:53:35'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-18 08:53:35'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-02-18 08:53:35'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'survey',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "We're Listening. How did we do?",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-18 08:53:35'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "We're Listening. How did we do?",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'survey',
+    orderId: '692f0729ccea7356fab72f50',
+    recipientEmail: 'anna@periscopeworks.io',
+    recipientPhone: undefined
+  },
+  messageId: 'ODdZiZVJS8eRjGudn0HRMg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  service: 'autovista-api',
+  orderId: '692f0729ccea7356fab72f50',
+  type: 'survey',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: survey',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  service: 'autovista-api',
+  orderId: '692f0729ccea7356fab72f50',
+  refId: 221040,
+  recipientEmail: 'anna@periscopeworks.io',
+  surveyUrl: 'https://autovista.mccollisters.com/customer-survey/692f0729ccea7356fab72f50',
+  level: 'info',
+  message: 'Survey email sent successfully',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  message: 'Email template not found: Survey, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'surveyReminder',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "McCollister's Values your Opinion",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "McCollister's Values your Opinion",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'surveyReminder',
+    orderId: '692f0729ccea7356fab72f50',
+    recipientEmail: 'anna@periscopeworks.io',
+    recipientPhone: undefined
+  },
+  messageId: 'DYTM_5ftTcSnpFVEJwf2pA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  service: 'autovista-api',
+  orderId: '692f0729ccea7356fab72f50',
+  type: 'surveyReminder',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: surveyReminder',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  service: 'autovista-api',
+  orderId: '692f0729ccea7356fab72f50',
+  refId: 221040,
+  recipientEmail: 'anna@periscopeworks.io',
+  level: 'info',
+  message: 'Pre-survey notification MMI sent successfully',
+  timestamp: '2026-02-18 08:53:36'
+}
+{
+  message: 'Disconnected from MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-02-18 08:53:36'
+}

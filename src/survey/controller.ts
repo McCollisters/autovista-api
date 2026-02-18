@@ -88,6 +88,12 @@ export const createSurvey = async (
       explanation: additionalFeedback,
     });
 
+    if (order?._id) {
+      await Order.findByIdAndUpdate(order._id, {
+        "notifications.survey.surveyCompleted": true,
+      });
+    }
+
     res.status(200).send("Survey Completed");
 
   } catch (error) {

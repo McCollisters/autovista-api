@@ -199,6 +199,8 @@ export interface INotification {
   sentAt?: Date;
   failedAt?: Date;
   recipientEmail?: string;
+  /** Set to true when a survey response is submitted for this order (survey only). */
+  surveyCompleted?: boolean;
 }
 
 export interface INotifications {

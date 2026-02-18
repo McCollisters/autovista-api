@@ -51,6 +51,19 @@ This doc lists the order and quote notifications that are sent automatically, pl
   - Implementation: `src/order/controllers/requestTrackOrder.ts` and `src/order/controllers/requestDriverLocation.ts`
   - Template: `src/templates/track-order-notification.hbs`
 
+## Survey notifications (cron)
+
+### Cron schedule
+- Trigger: `initializeCronJobs` in `src/core/cron.ts`
+- Schedule: `0 8 * * *` (8:00 daily, America/New_York)
+- Conditions: `NODE_ENV === "production"`
+
+### Logic
+- **All orders (including MMI):** Standard survey **48 hours after delivered**. Eligibility: `tms.status` in `delivered`/`invoiced`, `tms.updatedAt` between 48 and 72 hours ago, customer has email, `notifications.survey.sentAt` not set. Sends "We're Listening. How did we do?" via `sendSurvey` → `src/templates/survey.hbs`. Updates `notifications.survey`.
+- **MMI portals (MMI_PORTALS: MMI_1, MMI_2) additionally:** Pre-survey notification **the day of delivery**. Eligibility: same status/email, `tms.updatedAt` in the last 24 hours, `notifications.surveyReminder.sentAt` not set, `portalId` in `MMI_PORTALS`. Sends "McCollister's Values your Opinion" via `sendPreSurveyNotificationMmi` → `src/templates/mmi-pre-survey-notification.hbs`. Updates `notifications.surveyReminder`. MMI thus receives both the pre-survey (day of delivery) and the standard survey (48h later).
+
+Implementation: `src/order/tasks/sendSurveyNotifications.ts`, `src/order/notifications/sendSurvey.ts`, `src/order/notifications/sendPreSurveyNotificationMmi.ts`.
+
 ## Pickup and delivery notifications (cron)
 
 ### Cron schedule

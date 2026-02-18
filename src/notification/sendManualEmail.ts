@@ -19,6 +19,7 @@ import { sendOrderPickupConfirmation } from "@/order/notifications/sendOrderPick
 import { sendOrderDeliveryConfirmation } from "@/order/notifications/sendOrderDeliveryConfirmation";
 import { sendOrderCustomerSignatureRequest } from "@/order/notifications/sendOrderCustomerSignatureRequest";
 import { sendSurvey } from "@/order/notifications/sendSurvey";
+import { sendPreSurveyNotificationMmi } from "@/order/notifications/sendPreSurveyNotificationMmi";
 import { sendCarriers } from "@/notification/sendCarriers";
 import type { OrderNotificationType } from "@/notification/orderNotifications";
 
@@ -110,6 +111,7 @@ export const sendManualEmail = async (
       "Signature Request": "signatureRequest",
       "Survey": "survey",
       "Survey Notification": "survey",
+      "Pre-Survey Notification MMI": "surveyReminder",
       "Custom": "custom",
     };
 
@@ -483,6 +485,42 @@ export const sendManualEmail = async (
           }),
         );
         results = surveyResults.map((result) =>
+          result.status === "fulfilled"
+            ? result.value
+            : {
+                recipient: "unknown",
+                success: false,
+                error: String(result.reason),
+              },
+        );
+        break;
+
+      case "surveyReminder":
+        if (!orderId) {
+          return next({
+            statusCode: 400,
+            message: "Order ID is required for Pre-Survey Notification MMI emails.",
+          });
+        }
+        const preSurveyOrder = await Order.findById(orderId);
+        if (!preSurveyOrder) {
+          return next({ statusCode: 404, message: "Order not found." });
+        }
+        const preSurveyResults = await Promise.allSettled(
+          recipients.map(async (recipient) => {
+            const result = await sendPreSurveyNotificationMmi({
+              orderId,
+              recipientEmail: recipient.email,
+              recipientName: recipient.name,
+            });
+            return {
+              recipient: recipient.email,
+              success: result.success ?? false,
+              error: result.error,
+            };
+          }),
+        );
+        results = preSurveyResults.map((result) =>
           result.status === "fulfilled"
             ? result.value
             : {

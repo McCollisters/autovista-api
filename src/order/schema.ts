@@ -34,6 +34,7 @@ const createNotificationSchema = () => ({
   sentAt: { type: Date },
   failedAt: { type: Date },
   recipientEmail: { type: String },
+  surveyCompleted: { type: Boolean },
 });
 
 export interface IOrder extends Document {
