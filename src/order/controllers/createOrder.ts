@@ -16,10 +16,7 @@ import { sendOrderAgentEmail } from "../notifications/sendOrderAgent";
 import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotification";
 import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
-import {
-  MMI_PORTALS,
-  GRAEBEL_AUTODESK_PORTALS,
-} from "../../_global/constants/portalIds";
+import { MMI_PORTALS } from "../../_global/constants/portalIds";
 import { resolveId } from "@/_global/utils/resolveId";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
@@ -936,15 +933,27 @@ export const createOrder = async (
 
     const portalIdForAgents =
       String(portalId || "") || String((portalData as any)?._id || "") || "";
+    // MMI orders always have two agents: autodeskupdates gets pickup/delivery (no confirmation);
+    // autodesk gets confirmation only (no pickup/delivery)
     if (
       MMI_PORTALS.includes(portalIdForAgents as (typeof MMI_PORTALS)[number])
     ) {
       agents = [
         {
-          email: "autodesk@graebel.com",
+          email: "autodeskupdates@graebel.com",
           name: "Auto Desk",
           pickup: true,
           delivery: true,
+          enablePickupNotifications: true,
+          enableDeliveryNotifications: true,
+        },
+        {
+          email: "autodesk@graebel.com",
+          name: "Auto Desk",
+          pickup: false,
+          delivery: false,
+          enablePickupNotifications: false,
+          enableDeliveryNotifications: false,
         },
       ];
     }
