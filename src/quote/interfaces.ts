@@ -21,6 +21,8 @@ import {
 
 export interface IQuoteCustomer extends ICustomer {
   name?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
   phone?: string;
   trackingCode?: string;

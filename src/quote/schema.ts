@@ -43,6 +43,8 @@ const generateQuoteConfirmationCode = (): string => {
 const customerSchema = new Schema<IQuoteCustomer>(
   {
     name: { type: String },
+    firstName: { type: String },
+    lastName: { type: String },
     email: { type: String },
     phone: { type: String },
     trackingCode: { type: String },

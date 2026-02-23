@@ -76,6 +76,8 @@ export function createContactSchema() {
   return {
     companyName: { type: String },
     name: { type: String },
+    firstName: { type: String },
+    lastName: { type: String },
     email: { type: String },
     phone: { type: String },
     phoneMobile: { type: String },

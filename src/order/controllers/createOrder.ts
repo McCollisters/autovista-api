@@ -16,6 +16,7 @@ import { sendOrderAgentEmail } from "../notifications/sendOrderAgent";
 import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotification";
 import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
+import { sendQuoteEmailToCustomer } from "@/quote/services/sendQuoteEmailToCustomer";
 import { MMI_PORTALS } from "../../_global/constants/portalIds";
 import { resolveId } from "@/_global/utils/resolveId";
 
@@ -492,8 +493,21 @@ export const createOrder = async (
       });
     }
 
+    const quoteFirst = quote?.customer?.firstName?.trim?.() || (quote?.customer as any)?.firstName;
+    const quoteLast = quote?.customer?.lastName?.trim?.() || (quote?.customer as any)?.lastName;
+    const effectiveCustomerFirstName = customerFirstName ?? quoteFirst ?? "";
+    const effectiveCustomerLastName = customerLastName ?? quoteLast ?? "";
+    const nameFromFirstLast =
+      [effectiveCustomerFirstName, effectiveCustomerLastName]
+        .filter(Boolean)
+        .join(" ")
+        .trim() || null;
     const normalizedCustomerName =
-      customerFullName || customer?.name || quote.customer?.name || "";
+      nameFromFirstLast ||
+      customerFullName ||
+      customer?.name ||
+      quote.customer?.name ||
+      "";
     const normalizedCustomerEmail =
       customerEmail || customer?.email || quote.customer?.email || "";
     const normalizedCustomerPhone =
@@ -1109,8 +1123,8 @@ export const createOrder = async (
       transportType,
       customer: {
         name: normalizedCustomerName,
-        firstName: customerFirstName,
-        lastName: customerLastName,
+        firstName: effectiveCustomerFirstName || undefined,
+        lastName: effectiveCustomerLastName || undefined,
         phone: customerPhone,
         phoneMobile: customerMobile,
         email: normalizedCustomerEmail,
@@ -1188,6 +1202,8 @@ export const createOrder = async (
       moveType,
       customer: {
         name: normalizedCustomerName,
+        firstName: effectiveCustomerFirstName || undefined,
+        lastName: effectiveCustomerLastName || undefined,
         email: normalizedCustomerEmail,
         phone: customerPhone,
         phoneMobile: customerMobile,
@@ -1415,6 +1431,31 @@ export const createOrder = async (
       logger.warn(
         `Cannot send customer order email: No customer email for order ${(newOrder as any).refId}`,
       );
+    }
+
+    // Send quote details email to customer (quote has required email from public form)
+    const quoteCustomerEmail = quote?.customer?.email?.trim?.() || (quote?.customer as any)?.email;
+    if (quoteCustomerEmail) {
+      try {
+        const quoteEmailResult = await sendQuoteEmailToCustomer(
+          quote,
+          quoteCustomerEmail,
+        );
+        if (quoteEmailResult.success) {
+          logger.info(
+            `Quote details email sent to customer for quote ${quoteId}`,
+          );
+        } else {
+          logger.warn(
+            `Failed to send quote details email for quote ${quoteId}: ${quoteEmailResult.error}`,
+          );
+        }
+      } catch (notificationError) {
+        logger.error(
+          "Failed to send quote details email to customer:",
+          notificationError,
+        );
+      }
     }
 
     // Send COD payment request email if COD and customer email exists

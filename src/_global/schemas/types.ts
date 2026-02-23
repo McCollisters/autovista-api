@@ -23,6 +23,8 @@ import {
 export interface IContact {
   companyName?: string;
   name?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
   phone?: string;
   phoneMobile?: string;
@@ -248,6 +250,8 @@ export interface IHistoryItem {
 
 export interface ICustomer {
   name?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
   phone?: string;
   trackingCode?: string;

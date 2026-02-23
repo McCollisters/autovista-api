@@ -136,15 +136,19 @@ export const createQuoteCustomer = async (
         .join(" ");
     };
 
-    const formattedFirstName = customerFirstName
-      ? formatName(customerFirstName)
+    const formattedFirstName =
+      customerFirstName ?? (customer as any)?.firstName ?? "";
+    const formattedLastName =
+      customerLastName ?? (customer as any)?.lastName ?? "";
+    const formattedFirst = formattedFirstName
+      ? formatName(String(formattedFirstName))
       : "";
-    const formattedLastName = customerLastName
-      ? formatName(customerLastName)
+    const formattedLast = formattedLastName
+      ? formatName(String(formattedLastName))
       : "";
     const formattedFullName =
-      formattedFirstName && formattedLastName
-        ? `${formattedFirstName} ${formattedLastName}`
+      formattedFirst && formattedLast
+        ? `${formattedFirst} ${formattedLast}`
         : customer?.name
         ? formatName(customer.name)
         : customerFullName
@@ -236,6 +240,8 @@ export const createQuoteCustomer = async (
       isCustomerPortal: true,
       customer: {
         name: formattedFullName,
+        firstName: formattedFirst || undefined,
+        lastName: formattedLast || undefined,
         email: formattedEmail,
         phone: customer?.phone || null,
         trackingCode: userFriendlyId,
