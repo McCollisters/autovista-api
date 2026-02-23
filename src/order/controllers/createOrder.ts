@@ -762,6 +762,15 @@ export const createOrder = async (
             totalsForLevel?.enclosed?.total ??
             totalsForLevel?.totalWithCompanyTariffAndCommission ??
             totalsForLevel?.total;
+          const selectedTotals =
+            transportType === TransportType.Enclosed
+              ? totalsForLevel?.enclosed
+              : totalsForLevel?.open;
+          const selectedTotal = selectedTotals?.total ?? null;
+          const selectedCompanyTariff = selectedTotals?.companyTariff ?? null;
+          const selectedCommission = selectedTotals?.commission ?? null;
+          const selectedTotalWith =
+            selectedTotals?.totalWithCompanyTariffAndCommission ?? null;
 
           const hasWhiteGlove =
             transportType === TransportType.WhiteGlove &&
@@ -862,11 +871,23 @@ export const createOrder = async (
                   fuel: sourceModifiers.fuel ?? 0,
                   enclosedFlat: sourceModifiers.enclosedFlat ?? 0,
                   enclosedPercent: sourceModifiers.enclosedPercent ?? 0,
-                  commission: sourceModifiers.commission ?? 0,
+                  commission:
+                    selectedCommission ?? sourceModifiers.commission ?? 0,
                   serviceLevel: 0,
-                  companyTariff: 0,
+                  companyTariff: selectedCompanyTariff ?? 0,
                 }
               : sourceModifiers;
+
+          const vehicleTotal =
+            selectedTotal ??
+            (transportType === TransportType.WhiteGlove
+              ? perVehicleWhiteGlove
+              : vehicleTariff ?? 0);
+          const vehicleTotalWith =
+            selectedTotalWith ??
+            (vehicleTotal ?? 0) +
+              (selectedCompanyTariff ?? calculatedQuote.companyTariff ?? 0) +
+              (selectedCommission ?? sourceModifiers.commission ?? 0);
 
           return {
             ...quote,
@@ -878,11 +899,8 @@ export const createOrder = async (
             pricing: {
               base: sourcePricing.base ?? 0,
               modifiers: normalizedModifiers,
-              total: vehicleTariff ?? 0,
-              totalWithCompanyTariffAndCommission:
-                calculatedQuote.companyTariff != null
-                  ? (vehicleTariff ?? 0) + (calculatedQuote.companyTariff || 0)
-                  : (vehicleTariff ?? 0),
+              total: vehicleTotal ?? 0,
+              totalWithCompanyTariffAndCommission: vehicleTotalWith ?? 0,
               ...(transportType === TransportType.WhiteGlove
                 ? {}
                 : { totals: pricingTotals ?? sourcePricing.totals ?? null }),
@@ -918,15 +936,27 @@ export const createOrder = async (
 
     const portalIdForAgents =
       String(portalId || "") || String((portalData as any)?._id || "") || "";
+    // MMI orders always have two agents: autodeskupdates gets pickup/delivery (no confirmation);
+    // autodesk gets confirmation only (no pickup/delivery)
     if (
       MMI_PORTALS.includes(portalIdForAgents as (typeof MMI_PORTALS)[number])
     ) {
       agents = [
         {
-          email: "autodesk@graebel.com",
+          email: "autodeskupdates@graebel.com",
           name: "Auto Desk",
           pickup: true,
           delivery: true,
+          enablePickupNotifications: true,
+          enableDeliveryNotifications: true,
+        },
+        {
+          email: "autodesk@graebel.com",
+          name: "Auto Desk",
+          pickup: false,
+          delivery: false,
+          enablePickupNotifications: false,
+          enableDeliveryNotifications: false,
         },
       ];
     }
@@ -1023,10 +1053,19 @@ export const createOrder = async (
     const modifierCompanyTariff =
       transportType === TransportType.WhiteGlove
         ? 0
-        : (quoteData.totalPricing?.modifiers?.companyTariffs?.find(
-            (item: any) =>
-              String(item.serviceLevelOption) === String(effectiveServiceLevel),
-          )?.value ?? 0);
+        : transportType === TransportType.Enclosed
+          ? (pricingTotalsForLevel?.enclosed?.companyTariff ??
+            quoteData.totalPricing?.modifiers?.companyTariffs?.find(
+              (item: any) =>
+                String(item.serviceLevelOption) ===
+                String(effectiveServiceLevel),
+            )?.value ??
+            0)
+          : (quoteData.totalPricing?.modifiers?.companyTariffs?.find(
+              (item: any) =>
+                String(item.serviceLevelOption) ===
+                String(effectiveServiceLevel),
+            )?.value ?? 0);
     const totalPricingSummary = {
       base: quoteData.totalPricing?.base ?? 0,
       modifiers: {
@@ -1295,8 +1334,12 @@ export const createOrder = async (
       }
     }
 
-    // Send agent notifications for non-customer portal orders
-    if (!isCustomerPortal) {
+    // Send agent notifications for non-customer portal orders (MMI gets MMI-specific email only, not agent confirmation)
+    const portalIdForNotifications = String(portal._id);
+    const isMMIPortal = MMI_PORTALS.includes(
+      portalIdForNotifications as (typeof MMI_PORTALS)[number],
+    );
+    if (!isCustomerPortal && !isMMIPortal) {
       try {
         await sendOrderAgentEmail({
           orderId: String(newOrder._id),
@@ -1324,20 +1367,19 @@ export const createOrder = async (
       }
     }
 
-    // Send MMI order notification if portal is MMI
-    const portalIdString = String(portal._id);
-    if (MMI_PORTALS.includes(portalIdString as (typeof MMI_PORTALS)[number])) {
+    // Send Agents Order Confirmation with Pricing if portal is MMI (this is the only order confirmation MMI agents receive)
+    if (isMMIPortal) {
       try {
         await sendMMIOrderNotification({
           order: newOrder,
           recipientEmail: "autodesk@graebel.com",
         });
         logger.info(
-          `MMI order notification sent for order ${(newOrder as any).refId}`,
+          `Agents order confirmation with pricing sent for order ${(newOrder as any).refId}`,
         );
       } catch (notificationError) {
         logger.error(
-          "Failed to send MMI order notification:",
+          "Failed to send agents order confirmation with pricing:",
           notificationError,
         );
         // Don't fail the order creation for notification errors

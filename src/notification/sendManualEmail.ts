@@ -19,6 +19,7 @@ import { sendOrderPickupConfirmation } from "@/order/notifications/sendOrderPick
 import { sendOrderDeliveryConfirmation } from "@/order/notifications/sendOrderDeliveryConfirmation";
 import { sendOrderCustomerSignatureRequest } from "@/order/notifications/sendOrderCustomerSignatureRequest";
 import { sendSurvey } from "@/order/notifications/sendSurvey";
+import { sendPreSurveyNotificationMmi } from "@/order/notifications/sendPreSurveyNotificationMmi";
 import { sendCarriers } from "@/notification/sendCarriers";
 import type { OrderNotificationType } from "@/notification/orderNotifications";
 
@@ -102,13 +103,15 @@ export const sendManualEmail = async (
       "Customer Order Confirmation": "customerConfirmation",
       "Payment Request": "paymentRequest",
       "White Glove": "whiteGlove",
-      "MMI Order": "mmiOrder",
+      "Agents Order Confirmation with Pricing": "agentsOrderConfirmationWithPricing",
+      "MMI Order": "agentsOrderConfirmationWithPricing",
       "Track Order": "trackOrder",
       "Pickup Confirmation": "pickupConfirmation",
       "Delivery Confirmation": "deliveryConfirmation",
       "Signature Request": "signatureRequest",
       "Survey": "survey",
       "Survey Notification": "survey",
+      "Pre-Survey Notification MMI": "surveyReminder",
       "Custom": "custom",
     };
 
@@ -279,22 +282,23 @@ export const sendManualEmail = async (
         );
         break;
 
-      case "mmiOrder":
+      case "agentsOrderConfirmationWithPricing":
         if (!orderId) {
           return next({
             statusCode: 400,
-            message: "Order ID is required for MMI order emails.",
+            message:
+              "Order ID is required for Agents Order Confirmation with Pricing emails.",
           });
         }
-        const mmiOrder = await Order.findById(orderId);
-        if (!mmiOrder) {
+        const orderForPricingEmail = await Order.findById(orderId);
+        if (!orderForPricingEmail) {
           return next({ statusCode: 404, message: "Order not found." });
         }
         // Send to each recipient from the form
-        const mmiResults = await Promise.allSettled(
+        const pricingEmailResults = await Promise.allSettled(
           recipients.map(async (recipient) => {
             const result = await sendMMIOrderNotification({
-              order: mmiOrder,
+              order: orderForPricingEmail,
               recipientEmail: recipient.email,
             });
             return {
@@ -304,7 +308,7 @@ export const sendManualEmail = async (
             };
           }),
         );
-        results = mmiResults.map((result) =>
+        results = pricingEmailResults.map((result) =>
           result.status === "fulfilled"
             ? result.value
             : {
@@ -481,6 +485,42 @@ export const sendManualEmail = async (
           }),
         );
         results = surveyResults.map((result) =>
+          result.status === "fulfilled"
+            ? result.value
+            : {
+                recipient: "unknown",
+                success: false,
+                error: String(result.reason),
+              },
+        );
+        break;
+
+      case "surveyReminder":
+        if (!orderId) {
+          return next({
+            statusCode: 400,
+            message: "Order ID is required for Pre-Survey Notification MMI emails.",
+          });
+        }
+        const preSurveyOrder = await Order.findById(orderId);
+        if (!preSurveyOrder) {
+          return next({ statusCode: 404, message: "Order not found." });
+        }
+        const preSurveyResults = await Promise.allSettled(
+          recipients.map(async (recipient) => {
+            const result = await sendPreSurveyNotificationMmi({
+              orderId,
+              recipientEmail: recipient.email,
+              recipientName: recipient.name,
+            });
+            return {
+              recipient: recipient.email,
+              success: result.success ?? false,
+              error: result.error,
+            };
+          }),
+        );
+        results = preSurveyResults.map((result) =>
           result.status === "fulfilled"
             ? result.value
             : {

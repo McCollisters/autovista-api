@@ -7,11 +7,12 @@ This doc lists the order and quote notifications that are sent automatically, pl
 ### Order creation
 - **Agent order confirmation**
   - Trigger: `POST /api/v1/order` (also `POST /api/v1/order/customer` via `createOrder`)
-  - Conditions: `isCustomerPortal` is false and `portal.disableAgentNotifications !== true`
+  - Conditions: `isCustomerPortal` is false, portal is not in `MMI_PORTALS`, and `portal.disableAgentNotifications !== true`
   - Recipients: `order.agents` with email addresses
   - Implementation: `src/order/controllers/createOrder.ts` → `sendOrderAgentEmail` (`src/order/notifications/sendOrderAgent.ts`)
   - Template: `src/templates/order-agent.hbs`
   - Notification type stored: `agentsConfirmation`
+  - Notes: MMI portals do not receive this; they receive Agents Order Confirmation with Pricing only (below).
 
 - **Customer order confirmation**
   - Trigger: `POST /api/v1/order` and `POST /api/v1/order/customer`
@@ -28,12 +29,13 @@ This doc lists the order and quote notifications that are sent automatically, pl
   - Implementation: `src/order/controllers/createOrder.ts` → `sendWhiteGloveNotification` (`src/order/notifications/sendWhiteGloveNotification.ts`)
   - Template: `src/templates/white-glove.hbs`
 
-- **MMI order notification**
-  - Trigger: `POST /api/v1/order`
-  - Conditions: `portalId` is in `MMI_PORTALS`
-  - Recipients: `autodesk@graebel.com` (passed by controller)
+- **Agents Order Confirmation with Pricing**
+  - Trigger: `POST /api/v1/order` (automatic for MMI portals); also available manually via `POST /api/v1/notifications/send` with `emailType: "Agents Order Confirmation with Pricing"`.
+  - Conditions (automatic): `portalId` is in `MMI_PORTALS`
+  - Recipients (automatic): `autodesk@graebel.com` (passed by controller). Manual: recipients from request body.
   - Implementation: `src/order/controllers/createOrder.ts` → `sendMMIOrderNotification` (`src/order/notifications/sendMMIOrderNotification.ts`)
   - Template: `src/templates/mmi-order-notification.hbs`
+  - Notes: This is the only order confirmation MMI agents receive (includes order total and vehicle pricing). Can be sent manually from the app for any order.
 
 ### Track order requests
 - **Customer confirmation of tracking request**
@@ -48,6 +50,19 @@ This doc lists the order and quote notifications that are sent automatically, pl
   - Recipients: `autologistics@mccollisters.com` by default
   - Implementation: `src/order/controllers/requestTrackOrder.ts` and `src/order/controllers/requestDriverLocation.ts`
   - Template: `src/templates/track-order-notification.hbs`
+
+## Survey notifications (cron)
+
+### Cron schedule
+- Trigger: `initializeCronJobs` in `src/core/cron.ts`
+- Schedule: `0 8 * * *` (8:00 daily, America/New_York)
+- Conditions: `NODE_ENV === "production"`
+
+### Logic
+- **All orders (including MMI):** Standard survey **48 hours after delivered**. Eligibility: `tms.status` in `delivered`/`invoiced`, `tms.updatedAt` between 48 and 72 hours ago, customer has email, `notifications.survey.sentAt` not set. Sends "We're Listening. How did we do?" via `sendSurvey` → `src/templates/survey.hbs`. Updates `notifications.survey`.
+- **MMI portals (MMI_PORTALS: MMI_1, MMI_2) additionally:** Pre-survey notification **the day of delivery**. Eligibility: same status/email, `tms.updatedAt` in the last 24 hours, `notifications.surveyReminder.sentAt` not set, `portalId` in `MMI_PORTALS`. Sends "McCollister's Values your Opinion" via `sendPreSurveyNotificationMmi` → `src/templates/mmi-pre-survey-notification.hbs`. Updates `notifications.surveyReminder`. MMI thus receives both the pre-survey (day of delivery) and the standard survey (48h later).
+
+Implementation: `src/order/tasks/sendSurveyNotifications.ts`, `src/order/notifications/sendSurvey.ts`, `src/order/notifications/sendPreSurveyNotificationMmi.ts`.
 
 ## Pickup and delivery notifications (cron)
 

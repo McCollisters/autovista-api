@@ -208,7 +208,7 @@ The Order Service includes comprehensive notification handlers:
 - [`src/order/notifications/sendTrackOrderNotification.ts`](src/order/notifications/sendTrackOrderNotification.ts) - Tracking updates
 - [`src/order/notifications/sendCODPaymentRequest.ts`](src/order/notifications/sendCODPaymentRequest.ts) - COD payment request
 - [`src/order/notifications/sendWhiteGloveNotification.ts`](src/order/notifications/sendWhiteGloveNotification.ts) - White glove service notifications
-- [`src/order/notifications/sendMMIOrderNotification.ts`](src/order/notifications/sendMMIOrderNotification.ts) - MMI order notifications
+- [`src/order/notifications/sendMMIOrderNotification.ts`](src/order/notifications/sendMMIOrderNotification.ts) - Agents Order Confirmation with Pricing (MMI + manual)
 - [`src/order/notifications/sendOrderAgent.ts`](src/order/notifications/sendOrderAgent.ts) - Agent notifications
 - [`src/order/notifications/requestSignature.ts`](src/order/notifications/requestSignature.ts) - Signature request handling
 - [`src/order/notifications/sendSurvey.ts`](src/order/notifications/sendSurvey.ts) - Post-delivery survey

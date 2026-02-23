@@ -6,13 +6,26 @@ import {
   createMockQuote,
 } from "@tests/utils/testDataFactory";
 import { mockRequest, mockResponse, mockNext } from "@tests/utils/mockHelpers";
-import { Status, ServiceLevelOption, PaymentType } from "@/_global/enums";
+import {
+  Status,
+  ServiceLevelOption,
+  PaymentType,
+  TransportType,
+} from "@/_global/enums";
+import { MMI_PORTALS } from "@/_global/constants/portalIds";
 
 // Mock the services
 jest.mock("../../../src/order/services/updateVehiclesWithQuote");
 jest.mock("../../../src/order/services/sendOrderToSD");
 jest.mock("../../../src/order/services/formatOrderTotalPricing");
 jest.mock("../../../src/order/integrations/sendPartialOrderToSuper");
+
+// Mock notification modules so we can assert which emails are sent
+jest.mock("../../../src/order/notifications/sendOrderAgent");
+jest.mock("../../../src/order/notifications/sendMMIOrderNotification");
+jest.mock("../../../src/order/notifications/sendOrderCustomerPublicNew");
+jest.mock("../../../src/order/notifications/sendCODPaymentRequest");
+jest.mock("../../../src/order/notifications/sendWhiteGloveNotification");
 
 // Mock the models
 jest.mock("@/_global/models", () => ({
@@ -650,6 +663,203 @@ describe("createOrder Controller", () => {
         expect(updateVehiclesWithQuote).toHaveBeenCalled();
         expect(formatOrderTotalPricing).toHaveBeenCalled();
       }
+    });
+  });
+
+  describe("Order creation notifications", () => {
+    const mockPricingData = {
+      base: 1000,
+      modifiers: {},
+      totals: {
+        whiteGlove: 2000,
+        one: {
+          open: {
+            total: 2000,
+            companyTariff: 150,
+            commission: 50,
+            totalWithCompanyTariffAndCommission: 2200,
+          },
+          enclosed: { total: 2600, companyTariff: 195, commission: 50, totalWithCompanyTariffAndCommission: 2845 },
+        },
+        three: { total: 1800, companyTariff: 120, commission: 50, totalWithCompanyTariffAndCommission: 1970 },
+        five: { total: 1600, companyTariff: 90, commission: 50, totalWithCompanyTariffAndCommission: 1740 },
+        seven: { total: 1400, companyTariff: 60, commission: 50, totalWithCompanyTariffAndCommission: 1510 },
+      },
+    };
+
+    async function setupSuccessfulOrderCreation(overrides: {
+      portalId?: string;
+      mockOrder?: Record<string, unknown>;
+      transportType?: string;
+      paymentType?: string;
+      customerEmail?: string;
+      isCustomerPortal?: boolean;
+    } = {}) {
+      const portalId = overrides.portalId ?? "test-portal-id";
+      const mockOrder = {
+        _id: "test-order-id",
+        refId: 301182,
+        status: Status.Active,
+        portalId,
+        userId: "test-user-id",
+        quoteId: "test-quote-id",
+        transportType: overrides.transportType ?? "open",
+        miles: 1000,
+        vehicles: [],
+        totalPricing: {},
+        schedule: {},
+        paymentType: overrides.paymentType ?? PaymentType.Billing,
+        customer: overrides.customerEmail
+          ? { name: "Test Customer", email: overrides.customerEmail, phone: "555-9999" }
+          : undefined,
+        tms: { guid: "test-guid", status: "active", createdAt: new Date(), updatedAt: new Date() },
+        ...overrides.mockOrder,
+      };
+
+      req.body.portalId = portalId;
+      req.body.paymentType = overrides.paymentType ?? req.body.paymentType;
+      req.body.transportType = overrides.transportType ?? req.body.transportType;
+
+      const mockQuote = createMockQuote({
+        _id: "test-quote-id",
+        portalId,
+        refId: 301182,
+        isCustomerPortal: overrides.isCustomerPortal ?? false,
+        vehicleQuotes: [{ ...createMockVehicle(), calculatedQuotes: JSON.stringify([{ days: 1, total: 1200, totalSD: 1100, totalPortal: 1200 }]) }],
+        transportType: "open",
+      });
+
+      const {
+        updateVehiclesWithQuote,
+      } = require("../../../src/order/services/updateVehiclesWithQuote");
+      const { formatOrderTotalPricing } = require("../../../src/order/services/formatOrderTotalPricing");
+      const { sendOrderToSD } = require("../../../src/order/services/sendOrderToSD");
+      const { sendPartialOrderToSuper } = require("../../../src/order/integrations/sendPartialOrderToSuper");
+      const { Quote, Portal, Settings } = require("@/_global/models");
+      const { Order } = require("@/_global/models");
+      const sendOrderAgentEmail = require("../../../src/order/notifications/sendOrderAgent").sendOrderAgentEmail;
+      const sendMMIOrderNotification = require("../../../src/order/notifications/sendMMIOrderNotification").sendMMIOrderNotification;
+      const sendOrderCustomerPublicNew = require("../../../src/order/notifications/sendOrderCustomerPublicNew").sendOrderCustomerPublicNew;
+      const sendCODPaymentRequest = require("../../../src/order/notifications/sendCODPaymentRequest").sendCODPaymentRequest;
+      const sendWhiteGloveNotification = require("../../../src/order/notifications/sendWhiteGloveNotification").sendWhiteGloveNotification;
+
+      updateVehiclesWithQuote.mockResolvedValue([{ ...createMockVehicle(), pricing: mockPricingData }]);
+      formatOrderTotalPricing.mockResolvedValue(mockPricingData);
+      sendPartialOrderToSuper.mockResolvedValue({ success: true });
+      sendOrderToSD.mockResolvedValue({ status: "success", data: { object: { guid: "test-guid", status: "active", created_at: new Date(), changed_at: new Date() } } });
+
+      const mockPortal = { _id: portalId, companyName: "Test Company", logo: "https://example.com/logo.png" };
+      Portal.findById.mockResolvedValue(mockPortal);
+      Settings.findOne.mockResolvedValue({ holidayDates: [] });
+      // @ts-ignore
+      mockQuote.save = jest.fn().mockResolvedValue(mockQuote);
+      Quote.findById.mockResolvedValue(mockQuote);
+      Quote.findByIdAndUpdate.mockResolvedValue(mockQuote);
+      // @ts-ignore - mock return types
+      Order.findOne = jest.fn().mockResolvedValue(null);
+      // @ts-ignore - mock return types
+      Order.find = jest.fn().mockResolvedValue([]);
+      Order.findByIdAndUpdate.mockResolvedValue({ ...mockOrder, tms: mockOrder.tms });
+
+      const mockOrderInstance = {
+        save: jest.fn().mockResolvedValue(mockOrder),
+      };
+      Order.mockImplementation(() => mockOrderInstance as any);
+
+      sendOrderAgentEmail.mockResolvedValue({ success: true });
+      sendMMIOrderNotification.mockResolvedValue({ success: true });
+      sendOrderCustomerPublicNew.mockResolvedValue({ success: true });
+      sendCODPaymentRequest.mockResolvedValue({ success: true });
+      sendWhiteGloveNotification.mockResolvedValue(undefined);
+
+      await createOrder(req, res, next);
+
+      return {
+        sendOrderAgentEmail,
+        sendMMIOrderNotification,
+        sendOrderCustomerPublicNew,
+        sendCODPaymentRequest,
+        sendWhiteGloveNotification,
+      };
+    }
+
+    it("sends Agents Order Confirmation with Pricing to autodesk@graebel.com when portal is MMI and does not send agent order confirmation", async () => {
+      const mocks = await setupSuccessfulOrderCreation({
+        portalId: MMI_PORTALS[0],
+        customerEmail: "customer@example.com",
+      });
+
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(mocks.sendMMIOrderNotification).toHaveBeenCalledTimes(1);
+      expect(mocks.sendMMIOrderNotification).toHaveBeenCalledWith({
+        order: expect.objectContaining({ _id: "test-order-id", refId: 301182 }),
+        recipientEmail: "autodesk@graebel.com",
+      });
+      expect(mocks.sendOrderAgentEmail).not.toHaveBeenCalled();
+    });
+
+    it("sends agent order confirmation when portal is not MMI and does not send Agents Order Confirmation with Pricing", async () => {
+      const mocks = await setupSuccessfulOrderCreation({
+        portalId: "test-portal-id",
+        customerEmail: "customer@example.com",
+      });
+
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(mocks.sendOrderAgentEmail).toHaveBeenCalledTimes(1);
+      expect(mocks.sendOrderAgentEmail).toHaveBeenCalledWith(
+        expect.objectContaining({
+          orderId: "test-order-id",
+        })
+      );
+      expect(mocks.sendMMIOrderNotification).not.toHaveBeenCalled();
+    });
+
+    it("sends customer order confirmation when order has customer email", async () => {
+      const mocks = await setupSuccessfulOrderCreation({
+        portalId: "test-portal-id",
+        customerEmail: "customer@example.com",
+      });
+
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(mocks.sendOrderCustomerPublicNew).toHaveBeenCalledTimes(1);
+      expect(mocks.sendOrderCustomerPublicNew).toHaveBeenCalledWith(
+        expect.objectContaining({
+          _id: "test-order-id",
+          customer: expect.objectContaining({ email: "customer@example.com" }),
+        })
+      );
+    });
+
+    it("sends COD payment request when paymentType is COD and order has customer email", async () => {
+      const mocks = await setupSuccessfulOrderCreation({
+        portalId: "test-portal-id",
+        paymentType: PaymentType.Cod,
+        customerEmail: "customer@example.com",
+      });
+
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(mocks.sendCODPaymentRequest).toHaveBeenCalledTimes(1);
+      expect(mocks.sendCODPaymentRequest).toHaveBeenCalledWith(
+        expect.objectContaining({
+          _id: "test-order-id",
+          paymentType: PaymentType.Cod,
+          customer: expect.objectContaining({ email: "customer@example.com" }),
+        })
+      );
+    });
+
+    it("sends white glove notification when transportType is WhiteGlove", async () => {
+      const mocks = await setupSuccessfulOrderCreation({
+        portalId: "test-portal-id",
+        transportType: TransportType.WhiteGlove,
+        mockOrder: { transportType: TransportType.WhiteGlove },
+      });
+
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(mocks.sendWhiteGloveNotification).toHaveBeenCalledTimes(1);
+      expect(mocks.sendWhiteGloveNotification).toHaveBeenCalledWith({
+        order: expect.objectContaining({ _id: "test-order-id", transportType: TransportType.WhiteGlove }),
+      });
     });
   });
 });

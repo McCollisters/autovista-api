@@ -66,6 +66,12 @@
 
                             <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4"> {{ transportType }} Carrier </td>
                         </tr>
+                        {{#if totalPriceDisplay}}
+                        <tr>
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; width: 200px;"><strong>Order Total:</strong></td>
+                            <td style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4;">${{ totalPriceDisplay }}</td>
+                        </tr>
+                        {{/if}}
                     </table>
                 </p>
             </td>
