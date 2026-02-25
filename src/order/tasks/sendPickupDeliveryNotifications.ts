@@ -410,10 +410,20 @@ export const sendPickupDeliveryNotifications = async (
   const pickupOrders = await Order.find({
     "notifications.awaitingPickupConfirmation": true,
     updatedAt: { $gt: cutoffDate },
-    $or: [
-      { "schedule.pickupCompleted": { $gte: recentDateCutoff } },
-      { "schedule.pickupEstimated.0": { $gte: recentDateCutoff } },
-      { "schedule.pickupSelected": { $gte: recentDateCutoff } },
+    $and: [
+      {
+        $or: [
+          { "notifications.agentsPickupConfirmation.sentAt": { $exists: false } },
+          { "notifications.agentsPickupConfirmation.sentAt": null },
+        ],
+      },
+      {
+        $or: [
+          { "schedule.pickupCompleted": { $gte: recentDateCutoff } },
+          { "schedule.pickupEstimated.0": { $gte: recentDateCutoff } },
+          { "schedule.pickupSelected": { $gte: recentDateCutoff } },
+        ],
+      },
     ],
   });
   logger.info("Pickup notification candidates", {
@@ -437,9 +447,19 @@ export const sendPickupDeliveryNotifications = async (
   const deliveryOrders = await Order.find({
     "notifications.awaitingDeliveryConfirmation": true,
     updatedAt: { $gt: cutoffDate },
-    $or: [
-      { "schedule.deliveryCompleted": { $gte: recentDateCutoff } },
-      { "schedule.deliveryEstimated.0": { $gte: recentDateCutoff } },
+    $and: [
+      {
+        $or: [
+          { "notifications.agentsDeliveryConfirmation.sentAt": { $exists: false } },
+          { "notifications.agentsDeliveryConfirmation.sentAt": null },
+        ],
+      },
+      {
+        $or: [
+          { "schedule.deliveryCompleted": { $gte: recentDateCutoff } },
+          { "schedule.deliveryEstimated.0": { $gte: recentDateCutoff } },
+        ],
+      },
     ],
   });
   logger.info("Delivery notification candidates", {
