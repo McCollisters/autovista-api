@@ -35,6 +35,8 @@ export interface AppConfig {
   database: DatabaseConfig;
   aws: AWSConfig;
   allowedOrigins: string[];
+  /** Extra origins allowed for CORS (e.g. corporate proxy origins). Merged with allowedOrigins when evaluating CORS. */
+  additionalAllowedOrigins: string[];
   notifications?: NotificationConfig;
 }
 
@@ -95,6 +97,11 @@ export const config: AppConfig = {
         .map(normalizeOrigin)
         .filter(Boolean)
     : ["http://localhost:3000"],
+  additionalAllowedOrigins: process.env.ADDITIONAL_ALLOWED_ORIGINS
+    ? process.env.ADDITIONAL_ALLOWED_ORIGINS.split(",")
+        .map(normalizeOrigin)
+        .filter(Boolean)
+    : [],
 } as const;
 
 // Test-specific environment variables

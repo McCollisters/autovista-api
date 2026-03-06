@@ -20,15 +20,26 @@ export const helmetConfig = helmet({
 // CORS configuration
 export const corsConfig = cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
+    // Allow requests with no origin (e.g. mobile apps, curl, or proxy that strips Origin)
     if (!origin) return callback(null, true);
 
+    // Some corporate proxies or browsers send the literal string "null" as Origin; allow it.
+    if (origin.trim() === "null") return callback(null, true);
+
     const normalizedOrigin = origin.trim().replace(/\/$/, "");
-    if (config.allowedOrigins.includes(normalizedOrigin)) {
+    const allowed = [
+      ...config.allowedOrigins,
+      ...config.additionalAllowedOrigins,
+    ];
+    if (allowed.includes(normalizedOrigin)) {
       return callback(null, true);
     }
 
-    logger.warn("CORS blocked request from origin", { origin: normalizedOrigin });
+    logger.warn("CORS blocked request from origin", {
+      blockedOrigin: normalizedOrigin,
+      allowedOrigins: allowed,
+      hint: "Add the blocked origin to ALLOWED_ORIGINS or ADDITIONAL_ALLOWED_ORIGINS.",
+    });
     return callback(new Error("Not allowed by CORS"), false);
   },
   credentials: true,
@@ -121,8 +132,13 @@ export const securityErrorHandler = (
   next: NextFunction,
 ) => {
   if (err.message === "Not allowed by CORS") {
-    logger.warn("CORS error", {
+    const allowed = [
+      ...config.allowedOrigins,
+      ...config.additionalAllowedOrigins,
+    ];
+    logger.warn("CORS error (403 response)", {
       origin: req.get("Origin"),
+      allowedOrigins: allowed,
       ip: req.ip,
       userAgent: req.get("User-Agent"),
     });

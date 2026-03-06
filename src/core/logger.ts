@@ -70,16 +70,40 @@ const papertrailProgram =
 if (papertrailHost && Number.isFinite(papertrailPort)) {
   const require = createRequire(import.meta.url);
   const { Papertrail } = require("winston-papertrail");
-  transports.push(
-    new Papertrail({
-      host: papertrailHost,
-      port: papertrailPort,
-      hostname: os.hostname(),
-      program: papertrailProgram,
-      level: papertrailLevel,
-      logFormat: (level: string, message: string) => `${level}: ${message}`,
-    }) as unknown as winston.transport,
-  );
+  const { EventEmitter } = require("events");
+
+  const papertrailInstance = new Papertrail({
+    host: papertrailHost,
+    port: papertrailPort,
+    hostname: os.hostname(),
+    program: papertrailProgram,
+    level: papertrailLevel,
+    logFormat: (level: string, message: string) => `${level}: ${message}`,
+  });
+
+  // Swallow Papertrail connection errors so they never reach Winston.
+  // When the legacy transport emits 'error', Winston 3 tries to re-add the transport
+  // and assumes it has a .log property, which the internal wrapper doesn't, causing
+  // uncaughtException: Cannot read properties of undefined (reading 'length').
+  papertrailInstance.on("error", (err: Error) => {
+    // eslint-disable-next-line no-console
+    console.error("[Papertrail] connection error:", err?.message ?? err);
+  });
+
+  // Wrapper that forwards log() to Papertrail but never emits 'error', so Winston
+  // never runs its buggy re-add path when the connection fails.
+  const papertrailWrapper = Object.assign(new EventEmitter(), {
+    log(
+      level: string,
+      msg: string,
+      meta: unknown,
+      callback?: (err?: Error) => void,
+    ) {
+      papertrailInstance.log(level, msg, meta, callback ?? (() => {}));
+    },
+    level: papertrailLevel,
+  });
+  transports.push(papertrailWrapper as unknown as winston.transport);
 }
 
 // Create the logger
