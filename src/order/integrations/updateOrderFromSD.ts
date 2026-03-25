@@ -282,7 +282,14 @@ function processPickupAddress(
           ? existingOrder.origin?.address?.zip
           : venue?.zip?.replace(/\D+/g, "") || undefined,
     },
-    notes: sdOrder.pickup.notes || undefined,
+    // While order is still partial in TMS, SD often has no/empty notes; never wipe our DB notes.
+    // After full order is sent to SD, tmsPartialOrder is false and SD can carry real notes again.
+    notes: isPartialOrder
+      ? existingOrder.origin?.notes
+      : (() => {
+          const sd = String(sdOrder.pickup?.notes ?? "").trim();
+          return sd ? sdOrder.pickup!.notes : existingOrder.origin?.notes;
+        })(),
     longitude: sdOrder.pickup.longitude || undefined,
     latitude: sdOrder.pickup.latitude || undefined,
   };
@@ -329,7 +336,12 @@ function processDeliveryAddress(
           ? existingOrder.destination?.address?.zip
           : venue?.zip?.replace(/\D+/g, "") || undefined,
     },
-    notes: sdOrder.delivery.notes || undefined,
+    notes: isPartialOrder
+      ? existingOrder.destination?.notes
+      : (() => {
+          const sd = String(sdOrder.delivery?.notes ?? "").trim();
+          return sd ? sdOrder.delivery!.notes : existingOrder.destination?.notes;
+        })(),
     longitude: sdOrder.delivery.longitude || undefined,
     latitude: sdOrder.delivery.latitude || undefined,
   };

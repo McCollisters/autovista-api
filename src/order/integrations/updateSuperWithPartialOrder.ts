@@ -109,7 +109,7 @@ export const updateSuperWithPartialOrder = async (
           existingOrder.pickup?.first_available_pickup_date,
         scheduled_at: existingOrder.pickup?.scheduled_at,
         scheduled_ends_at: existingOrder.pickup?.scheduled_ends_at,
-        notes: order.origin?.notes || null,
+        // Omit notes for partial updates so SD does not store/clear them; full order update sends notes again.
         venue: {
           name: "Address Withheld",
           address: "123 Example St. ADDRESS WITHHELD",
@@ -122,7 +122,7 @@ export const updateSuperWithPartialOrder = async (
         date_type: "estimated",
         scheduled_at: existingOrder.delivery?.scheduled_at,
         scheduled_ends_at: existingOrder.delivery?.scheduled_ends_at,
-        notes: order.destination?.notes || null,
+        // Omit notes for partial updates (see pickup notes above).
         venue: {
           name: "Address Withheld",
           address: "123 Example St. ADDRESS WITHHELD",
