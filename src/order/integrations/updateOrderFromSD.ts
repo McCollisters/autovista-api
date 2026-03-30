@@ -234,6 +234,26 @@ function processDeliveryDates(sdOrder: SuperDispatchOrder): ProcessedDates {
 // ADDRESS PROCESSING
 // ============================================================================
 
+/**
+ * Merge pickup/delivery notes from Super Dispatch with DB. While `tmsPartialOrder` is true,
+ * always keep existing DB notes (SD often has none). After full order is in SD, prefer non-empty SD notes.
+ * Exported for unit tests.
+ */
+export function mergePickupDeliveryNotesFromSd(
+  isPartialOrder: boolean,
+  sdNotes: string | undefined | null,
+  existingNotes: string | undefined | null,
+): string | undefined {
+  if (isPartialOrder) {
+    return existingNotes ?? undefined;
+  }
+  const trimmed = String(sdNotes ?? "").trim();
+  if (trimmed) {
+    return sdNotes as string;
+  }
+  return existingNotes ?? undefined;
+}
+
 const normalizeUSState = (value?: string | null): USState | undefined => {
   if (!value) return undefined;
   const normalized = String(value).trim().toUpperCase();
@@ -283,13 +303,11 @@ function processPickupAddress(
           : venue?.zip?.replace(/\D+/g, "") || undefined,
     },
     // While order is still partial in TMS, SD often has no/empty notes; never wipe our DB notes.
-    // After full order is sent to SD, tmsPartialOrder is false and SD can carry real notes again.
-    notes: isPartialOrder
-      ? existingOrder.origin?.notes
-      : (() => {
-          const sd = String(sdOrder.pickup?.notes ?? "").trim();
-          return sd ? sdOrder.pickup!.notes : existingOrder.origin?.notes;
-        })(),
+    notes: mergePickupDeliveryNotesFromSd(
+      isPartialOrder,
+      sdOrder.pickup?.notes,
+      existingOrder.origin?.notes,
+    ),
     longitude: sdOrder.pickup.longitude || undefined,
     latitude: sdOrder.pickup.latitude || undefined,
   };
@@ -336,12 +354,11 @@ function processDeliveryAddress(
           ? existingOrder.destination?.address?.zip
           : venue?.zip?.replace(/\D+/g, "") || undefined,
     },
-    notes: isPartialOrder
-      ? existingOrder.destination?.notes
-      : (() => {
-          const sd = String(sdOrder.delivery?.notes ?? "").trim();
-          return sd ? sdOrder.delivery!.notes : existingOrder.destination?.notes;
-        })(),
+    notes: mergePickupDeliveryNotesFromSd(
+      isPartialOrder,
+      sdOrder.delivery?.notes,
+      existingOrder.destination?.notes,
+    ),
     longitude: sdOrder.delivery.longitude || undefined,
     latitude: sdOrder.delivery.latitude || undefined,
   };

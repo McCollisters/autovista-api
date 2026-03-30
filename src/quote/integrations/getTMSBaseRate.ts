@@ -1,5 +1,30 @@
 import { IVehicle } from "../../_global/interfaces";
 
+const NO_ROUTE_AVAILABLE_TYPE = "NO_ROUTE_AVAILABLE";
+
+const formatNoRouteAvailableMessage = (
+  origin: string,
+  destination: string,
+): string =>
+  `Unable to generate an automatic quote from ${origin} to ${destination} because no drivable route was found between the locations. Verify the pickup and delivery locations (including ZIP/state) or quote this shipment manually for special routing.`;
+
+const parseErrorBody = (
+  errorBody: string,
+): {
+  type?: string;
+  message?: string;
+} | null => {
+  try {
+    const parsed = JSON.parse(errorBody);
+    return {
+      type: parsed?.data?.type,
+      message: parsed?.data?.message,
+    };
+  } catch (_error) {
+    return null;
+  }
+};
+
 export const getTMSBaseRate = async (
   vehicle: Partial<IVehicle>,
   origin: string,
@@ -73,15 +98,27 @@ export const getTMSBaseRate = async (
     });
 
     if (!response.ok) {
-      // Try to get error details from response body
-      let errorMessage = `HTTP error! status: ${response.status}`;
+      let errorBody = "";
       try {
-        const errorBody = await response.text();
-        if (errorBody) {
-          errorMessage += ` - ${errorBody}`;
-        }
-      } catch (e) {
-        // If we can't read the body, just use the status
+        errorBody = await response.text();
+      } catch (_error) {
+        // If we cannot read the body, fall back to status-only handling below.
+      }
+
+      const parsedError = errorBody ? parseErrorBody(errorBody) : null;
+      if (
+        response.status === 400 &&
+        parsedError?.type === NO_ROUTE_AVAILABLE_TYPE
+      ) {
+        throw new Error(formatNoRouteAvailableMessage(origin, destination));
+      }
+
+      // Try to provide a concise provider message before falling back to raw body.
+      let errorMessage = `HTTP error! status: ${response.status}`;
+      if (parsedError?.message) {
+        errorMessage += ` - ${parsedError.message}`;
+      } else if (errorBody) {
+        errorMessage += ` - ${errorBody}`;
       }
       throw new Error(errorMessage);
     }
