@@ -3216,3 +3216,6902 @@
   message: 'Server started successfully',
   timestamp: '2026-02-22 19:54:54'
 }
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:27:47'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:27:47'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:27:47'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 09:27:47'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 09:27:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:28:13'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:28:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '165ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:28:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:28:32'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:28:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '153ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:28:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:28:38'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:28:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '158ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:28:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:28:52'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:28:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '137ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:28:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:28:58'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:28:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '149ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:28:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:29:03'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:29:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '169ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:29:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:31:02'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:31:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '165ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:31:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:31:03'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:31:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '167ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:31:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:31:24'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:31:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '150ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:31:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:31:36'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:31:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '192ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:31:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:32:22'
+}
+{
+  service: 'autovista-api',
+  count: 77,
+  sample: {
+    _id: new ObjectId('5eb17918a0d72e11faf5f435'),
+    make: 'Acura',
+    models: [
+      {
+        model: '2.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe599'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.3CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59a'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '2.5TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59b'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.0CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59c'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2CL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59d'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.2TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59e'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: '3.5RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe59f'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ILX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a0'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'INTEGRA',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a1'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'LEGEND',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a2'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'MDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a3'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'NSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a4'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a5'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a6'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a7'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'RSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a8'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'SLX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5a9'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TL',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5aa'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TLX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ab'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'TSX',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ac'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'VIGOR',
+        pricingClass: 'sedan',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ad'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      },
+      {
+        model: 'ZDX',
+        pricingClass: 'suv',
+        _id: new ObjectId('696820bfc19d0dfcabfbe5ae'),
+        createdAt: 2026-01-14T23:03:27.753Z,
+        updatedAt: 2026-01-14T23:03:27.753Z
+      }
+    ],
+    createdAt: 2026-01-13T05:33:00.831Z,
+    updatedAt: 2026-01-14T23:03:27.753Z
+  },
+  level: 'info',
+  message: 'Makes retrieved successfully',
+  timestamp: '2026-03-30 09:32:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/brands',
+  statusCode: 200,
+  duration: '161ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:32:22'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:35'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:35'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:35'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 09:34:35'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 09:34:35'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:49'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:49'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:49'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 09:34:49'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 09:34:49'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:56'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:56'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:56'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 09:34:56'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 09:34:56'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:59'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:59'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:34:59'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 09:34:59'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 09:34:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:35:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '219ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:35:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:35:14'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '220ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:35:14'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:38:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '229ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:38:01'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:38:39'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:38:39'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:38:39'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 09:38:39'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 09:38:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:39:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '257ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:39:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:40:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '229ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:40:05'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:41:18'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:41:18'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 09:41:19'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 09:41:19'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 09:41:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:41:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '237ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:41:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:42:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '239ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:42:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:43:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '200ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:43:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:43:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '241ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:43:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:43:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '250ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:43:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:44:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '210ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:44:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:44:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '236ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:44:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:45:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '228ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:45:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:45:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '218ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:45:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:45:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '216ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:45:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:45:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '223ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:45:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 09:50:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '233ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 09:50:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:09:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '612ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:09:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:18:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '214ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:18:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:19:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '201ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:19:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:19:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '209ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:19:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:19:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '216ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:19:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:19:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '232ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:19:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:20:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '212ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:20:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:22:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '231ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:22:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:29:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '213ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:29:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:30:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '229ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:30:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:31:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '180ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:31:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:54:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '233ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:54:34'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '321',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:54:52'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('69caaae1f556915b546e3b84'),
+  refId: 302998,
+  trackingCode: '6D23642F78',
+  pickupStartDate: 2026-04-02T06:00:00.000Z,
+  level: 'info',
+  message: 'Customer created quote 302998',
+  timestamp: '2026-03-30 10:54:57'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 200,
+  duration: '5416ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:54:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:54:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '163ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:54:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:56:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '137ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:56:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:56:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '153ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:56:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:56:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '146ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:56:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:56:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '136ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:56:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:57:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '162ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:57:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:57:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '146ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:57:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:57:14'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '220ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:57:15'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:57:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '197ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:57:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:57:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '150ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:57:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:57:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '155ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:57:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:57:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '137ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:57:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 10:58:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '140ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 10:58:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:00:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '157ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:00:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:01:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '145ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:01:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:03:30'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '168ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:03:30'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:03:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '135ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:03:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:05:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '139ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:05:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:05:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '150ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:05:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:05:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '148ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:05:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:05:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '146ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:05:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:07:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '159ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:07:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:21:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '137ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:21:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:31:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '180ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:31:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:33:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '173ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:33:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:35:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '161ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:35:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:37:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '164ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:37:25'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/69caaae1f556915b546e3b84/email',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '29',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:37:31'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 11:37:31'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-03-30 11:37:31'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Your Requested Auto Transport Quote #3WGYCV',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-30 11:37:31'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Your Requested Auto Transport Quote #3WGYCV',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-30 11:37:32'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/69caaae1f556915b546e3b84/email',
+  statusCode: 200,
+  duration: '496ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:37:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69caaae1f556915b546e3b84/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 11:39:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69caaae1f556915b546e3b84/app',
+  statusCode: 200,
+  duration: '138ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 11:39:11'
+}
+{
+  message: 'Skipping pickup/delivery notifications in non-production',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:00:00'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:31:33'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:31:33'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:31:33'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 12:31:33'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 12:31:33'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:33:39'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:33:39'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:33:39'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 12:33:39'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 12:33:39'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:33:46'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:33:46'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:33:46'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 12:33:46'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 12:33:46'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:33:59'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:33:59'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:33:59'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 12:33:59'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 12:33:59'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:29'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:29'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:29'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 12:34:29'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 12:34:29'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:32'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:32'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:32'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 12:34:32'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 12:34:32'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:34'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:34'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:34'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 12:34:34'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 12:34:34'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:38'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:38'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:34:38'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 12:34:38'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 12:34:38'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:35:43'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:35:43'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 12:35:43'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 12:35:43'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 12:35:43'
+}
+{
+  message: 'Skipping pickup/delivery notifications in non-production',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 18:00:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:08:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '275ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:08:29'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:09:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '260ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:09:05'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '320',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:09:30'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('69cb1ece60edea6c1c3b98bd'),
+  refId: 303040,
+  trackingCode: '7A3180434E',
+  pickupStartDate: 2026-04-02T06:00:00.000Z,
+  level: 'info',
+  message: 'Customer created quote 303040',
+  timestamp: '2026-03-30 19:09:35'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 200,
+  duration: '4927ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:09:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:09:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '146ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:09:35'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:11:29'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:11:29'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:11:30'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 19:11:30'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 19:11:30'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:14:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '189ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:14:20'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/69cb1ece60edea6c1c3b98bd/email',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '29',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:14:27'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:14:28'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-03-30 19:14:28'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-30 19:14:28'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-30 19:14:28'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/69cb1ece60edea6c1c3b98bd/email',
+  statusCode: 200,
+  duration: '396ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:14:28'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/69cb1ece60edea6c1c3b98bd/email',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '30',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:14:47'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-30 19:14:47'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-30 19:14:48'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/69cb1ece60edea6c1c3b98bd/email',
+  statusCode: 200,
+  duration: '375ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:14:48'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/69cb1ece60edea6c1c3b98bd/email',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '29',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:18:30'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-30 19:18:30'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-30 19:18:30'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/69cb1ece60edea6c1c3b98bd/email',
+  statusCode: 200,
+  duration: '495ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:18:30'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:19:23'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:19:23'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:19:23'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 19:19:23'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 19:19:23'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:20:23'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:20:23'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:20:23'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 19:20:23'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 19:20:23'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:22:07'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:22:07'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:22:07'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 19:22:07'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 19:22:07'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:22:14'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:22:14'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-30 19:22:14'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-30 19:22:14'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-30 19:22:14'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:23:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '182ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:23:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:23:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:23:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '182ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:23:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '287ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:23:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:33:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-30 19:33:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '158ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:33:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '250ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-30 19:33:00'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 09:59:57'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 09:59:57'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 09:59:57'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-31 09:59:57'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-31 09:59:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:04:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:04:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '166ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:04:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '257ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:04:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:04:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:04:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '242ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:04:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '230ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:04:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:05:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:05:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '160ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:05:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '271ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:05:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:05:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:05:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '158ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:05:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '221ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:05:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:06:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:06:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '173ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:06:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '255ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:06:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:06:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:06:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '177ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:06:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '237ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:06:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:15:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:15:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '162ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:15:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '227ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:15:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:17:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:17:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '160ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:17:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '244ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:17:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:18:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:18:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '165ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:18:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '227ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:18:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:22:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:22:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '156ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:22:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '214ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:22:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:24:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:24:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '167ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:24:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '238ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:24:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:26:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:26:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '163ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:26:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '236ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:26:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:29:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:29:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '174ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:29:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '252ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:29:24'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/order/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '1046',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:30:33'
+}
+{
+  message: 'Geocoding pickup address: Boston Boston MA ',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:33'
+}
+{
+  message: 'Geocoding delivery address: 123 Test Los Angeles CA 90001',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:34'
+}
+{
+  message: 'Date ranges calculated: 2026-04-02T06:00:00.000Z, 2026-04-02T06:00:00.000Z, 2026-04-06T06:00:00.000Z, 2026-04-16T06:00:00.000Z',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:34'
+}
+{
+  message: 'Creating order in database for quote 69cb1ece60edea6c1c3b98bd',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:34'
+}
+{
+  message: 'Successfully created order 303040 with ID 69cbf6aad7bcc6646f63adb5',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:34'
+}
+{
+  message: 'Email template not found: Customer Order, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:34'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:34'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-03-31 10:30:34'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'customerConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Your Vehicle Transport Confirmation - Order #303040',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-31 10:30:34'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Your Vehicle Transport Confirmation - Order #303040',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'customerConfirmation',
+    orderId: '69cbf6aad7bcc6646f63adb5',
+    recipientEmail: 'anna@periscopeworks.io',
+    recipientPhone: undefined
+  },
+  messageId: 'Kj3wJkc-SuOdetFtfSIbRQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  orderId: '69cbf6aad7bcc6646f63adb5',
+  type: 'customerConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: customerConfirmation',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69cbf6aad7bcc6646f63adb5'),
+  refId: 303040,
+  recipientEmail: 'anna@periscopeworks.io',
+  isSirva: false,
+  level: 'info',
+  message: 'Customer order email sent successfully',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  message: 'Customer order confirmation email sent for order 303040',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  message: 'Quote details email sent to customer for quote 69cb1ece60edea6c1c3b98bd',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  message: 'Email template not found: Payment Request, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'paymentRequest',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Payment for your Auto Transport',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Payment for your Auto Transport',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'paymentRequest',
+    orderId: '69cbf6aad7bcc6646f63adb5',
+    recipientEmail: 'annafkh@gmail.com',
+    recipientPhone: undefined
+  },
+  messageId: 's4eHChIWQ0CFlOY2d5IRqg',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  orderId: '69cbf6aad7bcc6646f63adb5',
+  type: 'paymentRequest',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: paymentRequest',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69cbf6aad7bcc6646f63adb5'),
+  refId: 303040,
+  recipientEmail: 'annafkh@gmail.com',
+  level: 'info',
+  message: 'COD payment request sent successfully',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  message: 'COD payment request email sent for order 303040',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 201,
+  duration: '2630ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  portalId: '64ece35abfc3deb98e9d180f',
+  level: 'info',
+  message: 'Public customer order creation attempted',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '56',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  statusCode: 401,
+  duration: '11ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 10:30:35'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:22:13'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:22:13'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:22:13'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-31 13:22:13'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-31 13:22:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:22:15'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:22:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '180ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:22:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '255ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:22:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cb1ece60edea6c1c3b98bd/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:24:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cb1ece60edea6c1c3b98bd/app',
+  statusCode: 200,
+  duration: '176ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:24:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:24:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '238ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:24:18'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '313',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:33:13'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:33:18'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-03-31 13:33:18'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-31 13:33:18'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-31 13:33:19'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('69cc217eef1ad545bacf5754'),
+  recipientEmail: 'annafkh@gmail.com',
+  level: 'info',
+  message: 'Customer quote confirmation email sent',
+  timestamp: '2026-03-31 13:33:19'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('69cc217eef1ad545bacf5754'),
+  refId: 303090,
+  trackingCode: '2C1040D954',
+  pickupStartDate: 2026-04-03T06:00:00.000Z,
+  level: 'info',
+  message: 'Customer created quote 303090',
+  timestamp: '2026-03-31 13:33:19'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 200,
+  duration: '6027ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:33:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:33:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '151ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:33:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:35:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:35:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '145ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:35:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '235ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:35:50'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:36:40'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:36:40'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:36:40'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-31 13:36:40'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-31 13:36:40'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:36:45'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:36:45'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:36:45'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-31 13:36:45'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-31 13:36:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:40:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:40:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '192ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:40:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '257ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:40:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:40:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:40:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '185ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:40:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '263ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:40:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:40:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:40:52'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '162ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:40:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '247ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:40:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:41:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:41:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '166ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:41:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '257ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:41:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:44:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:44:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '182ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:44:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '257ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:44:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:45:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:45:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '171ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:45:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '246ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:45:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:46:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:46:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '160ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:46:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '248ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:46:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:47:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:47:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '164ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:47:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '234ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:47:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:47:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:47:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '149ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:47:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '229ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:47:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:48:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:48:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '164ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:48:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '240ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:48:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:49:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:49:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '149ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:49:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '219ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:49:47'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/order/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '972',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:49:53'
+}
+{
+  message: 'Geocoding pickup address: Boston Boston MA ',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:53'
+}
+{
+  message: 'Geocoding delivery address: Los Angeles Los Angeles CA ',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:53'
+}
+{
+  message: 'Date ranges calculated: 2026-04-03T06:00:00.000Z, 2026-04-03T06:00:00.000Z, 2026-04-07T06:00:00.000Z, 2026-04-17T06:00:00.000Z',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:53'
+}
+{
+  message: 'Creating order in database for quote 69cc217eef1ad545bacf5754',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:53'
+}
+{
+  message: 'Successfully created order 303090 with ID 69cc256131a04ac4f2041983',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:53'
+}
+{
+  message: 'Email template not found: Customer Order, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'customerConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Your Vehicle Transport Confirmation - Order #303090',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Your Vehicle Transport Confirmation - Order #303090',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'customerConfirmation',
+    orderId: '69cc256131a04ac4f2041983',
+    recipientEmail: 'anna@periscopeworks.io',
+    recipientPhone: undefined
+  },
+  messageId: 'XnbveoijQWG-_MnEFHLuVQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  orderId: '69cc256131a04ac4f2041983',
+  type: 'customerConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: customerConfirmation',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69cc256131a04ac4f2041983'),
+  refId: 303090,
+  recipientEmail: 'anna@periscopeworks.io',
+  isSirva: false,
+  level: 'info',
+  message: 'Customer order email sent successfully',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  message: 'Customer order confirmation email sent for order 303090',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  message: 'Quote details email sent to customer for quote 69cc217eef1ad545bacf5754',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  message: 'Email template not found: Payment Request, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'paymentRequest',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: 'Payment for your Auto Transport',
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: 'Payment for your Auto Transport',
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'paymentRequest',
+    orderId: '69cc256131a04ac4f2041983',
+    recipientEmail: 'annafkh@gmail.com',
+    recipientPhone: undefined
+  },
+  messageId: 'BUTRFcwFSc2NVnXBxloFRQ',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  orderId: '69cc256131a04ac4f2041983',
+  type: 'paymentRequest',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: paymentRequest',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69cc256131a04ac4f2041983'),
+  refId: 303090,
+  recipientEmail: 'annafkh@gmail.com',
+  level: 'info',
+  message: 'COD payment request sent successfully',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  message: 'COD payment request email sent for order 303090',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 201,
+  duration: '1948ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:49:54'
+}
+{
+  service: 'autovista-api',
+  portalId: '64ece35abfc3deb98e9d180f',
+  level: 'info',
+  message: 'Public customer order creation attempted',
+  timestamp: '2026-03-31 13:49:55'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '56',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 13:49:55'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  statusCode: 401,
+  duration: '4ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 13:49:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 14:16:40'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 14:16:40'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '143ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 14:16:40'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '228ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 14:16:40'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 14:17:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 14:17:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '173ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 14:17:21'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '247ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 14:17:21'
+}
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 16:52:16'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 16:52:16'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-03-31 16:52:16'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-03-31 16:52:16'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-03-31 16:52:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 16:52:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 16:52:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '246ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 16:52:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '345ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 16:52:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 16:53:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69cc217eef1ad545bacf5754/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-03-31 16:53:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69cc217eef1ad545bacf5754/app',
+  statusCode: 200,
+  duration: '164ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 16:53:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '250ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-03-31 16:53:14'
+}

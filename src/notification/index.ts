@@ -42,7 +42,7 @@ function createEmailService(config: NotificationConfig["email"]): EmailService {
   const provider = new SendGridEmailProvider(
     sendGridApiKey,
     config.fromAddress || "autologistics@mccollisters.com",
-    config.fromName || "McCollister's AutoLogistics",
+    config.fromName || "McCollister's Auto Logistics",
     config.replyTo || "autologistics@mccollisters.com",
   );
 
@@ -119,7 +119,7 @@ export function createNotificationManager(
       enabled: process.env.EMAIL_ENABLED !== "false",
       fromAddress:
         process.env.EMAIL_FROM_ADDRESS || "autologistics@mccollisters.com",
-      fromName: process.env.EMAIL_FROM_NAME || "McCollister's AutoLogistics",
+      fromName: process.env.EMAIL_FROM_NAME || "McCollister's Auto Logistics",
       replyTo: process.env.EMAIL_REPLY_TO || "autologistics@mccollisters.com",
     },
     sms: {

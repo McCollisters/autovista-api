@@ -51,10 +51,11 @@ export class SendGridEmailProvider implements EmailProvider {
         : [];
 
       const fromEmail = options.from || this.fromAddress;
-      const fromField = this.fromName
+      const displayName = options.fromName || this.fromName;
+      const fromField = displayName
         ? {
             email: fromEmail,
-            name: this.fromName,
+            name: displayName,
           }
         : fromEmail;
 

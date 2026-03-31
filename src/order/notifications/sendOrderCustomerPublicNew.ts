@@ -9,6 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import Handlebars from "handlebars";
+import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 import { logger } from "@/core/logger";
 import { IOrder, Portal } from "@/_global/models";
 import { sendOrderNotification } from "@/notification/orderNotifications";
@@ -172,11 +173,10 @@ export async function sendOrderCustomerPublicNew(
       order.totalPricing?.totalPortal ||
       0;
     const totalPriceDisplay = Math.ceil(totalPrice);
-    const baseUrl =
-      process.env.ORDER_STATUS_BASE_URL ||
-      process.env.BASE_URL ||
-      "https://autovista.mccollisters.com";
-    const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
+    const orderStatusOverride = process.env.ORDER_STATUS_BASE_URL?.trim();
+    const normalizedBaseUrl = orderStatusOverride
+      ? orderStatusOverride.replace(/\/$/, "")
+      : getPortalBaseUrl();
     const orderStatusUrl = `${normalizedBaseUrl}/public/order-status?email=${encodeURIComponent(
       recipientEmail,
     )}`;
