@@ -116,6 +116,13 @@ function generateDateString(
   }
 }
 
+/** Luxon invalid DateTime → Invalid JS Date breaks Mongoose + Moment; never persist those. */
+function luxonToValidJsDate(dt: DateTime | undefined): Date | undefined {
+  if (!dt || !dt.isValid) return undefined;
+  const d = dt.toJSDate();
+  return Number.isNaN(d.getTime()) ? undefined : d;
+}
+
 function isValidDate(dateString: string | undefined): boolean {
   if (!dateString) return false;
 
@@ -794,6 +801,52 @@ export const updateOrderFromSD = async (
     const purchaseOrderNumber =
       superDispatchOrder.purchase_order_number || databaseOrder.reg;
 
+    const nextPickupEstimated = (() => {
+      if (!pickupDates.scheduledAt) {
+        return databaseOrder.schedule.pickupEstimated;
+      }
+      if (pickupDates.scheduledEndsAt) {
+        return [
+          pickupDates.scheduledAt.toJSDate(),
+          pickupDates.scheduledEndsAt.toJSDate(),
+        ];
+      }
+      const start = pickupDates.scheduledAt.toJSDate();
+      const existing = databaseOrder.schedule.pickupEstimated;
+      if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
+        const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
+        const oldEnd = new Date(existing[1]).getTime();
+        if (Number.isFinite(oldStart) && oldEnd > oldStart) {
+          const spanMs = oldEnd - oldStart;
+          return [start, new Date(start.getTime() + spanMs)];
+        }
+      }
+      return [start];
+    })();
+
+    const nextDeliveryEstimated = (() => {
+      if (!deliveryDates.scheduledAt) {
+        return databaseOrder.schedule.deliveryEstimated;
+      }
+      if (deliveryDates.scheduledEndsAt) {
+        return [
+          deliveryDates.scheduledAt.toJSDate(),
+          deliveryDates.scheduledEndsAt.toJSDate(),
+        ];
+      }
+      const start = deliveryDates.scheduledAt.toJSDate();
+      const existing = databaseOrder.schedule.deliveryEstimated;
+      if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
+        const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
+        const oldEnd = new Date(existing[1]).getTime();
+        if (Number.isFinite(oldStart) && oldEnd > oldStart) {
+          const spanMs = oldEnd - oldStart;
+          return [start, new Date(start.getTime() + spanMs)];
+        }
+      }
+      return [start];
+    })();
+
     // Build the complete order update object
     const orderUpdate: Partial<IOrder> = {
       // Basic order info
@@ -833,61 +886,29 @@ export const updateOrderFromSD = async (
       vehicles: vehicleData.vehicles,
       totalPricing: vehicleData.totalPricing,
 
-      // Schedule updates
+      // Schedule updates (pickupSelected must track SD window start — UI maps pickupScheduledAt from it)
       schedule: {
         ...databaseOrder.schedule,
-        pickupEstimated: (() => {
-          if (!pickupDates.scheduledAt) {
-            return databaseOrder.schedule.pickupEstimated;
+        pickupEstimated: nextPickupEstimated,
+        pickupSelected: (() => {
+          const fromSd = luxonToValidJsDate(pickupDates.scheduledAt);
+          if (fromSd) return fromSd;
+          const est0 = Array.isArray(nextPickupEstimated)
+            ? nextPickupEstimated[0]
+            : undefined;
+          if (est0) {
+            const d = est0 instanceof Date ? est0 : new Date(est0);
+            if (!Number.isNaN(d.getTime())) return d;
           }
-          if (pickupDates.scheduledEndsAt) {
-            return [
-              pickupDates.scheduledAt.toJSDate(),
-              pickupDates.scheduledEndsAt.toJSDate(),
-            ];
-          }
-          // Apply SD pickup start even for new / not-yet-picked-up orders so
-          // schedule changes made in Super Dispatch sync to the portal.
-          const start = pickupDates.scheduledAt.toJSDate();
-          const existing = databaseOrder.schedule.pickupEstimated;
-          if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
-            const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
-            const oldEnd = new Date(existing[1]).getTime();
-            if (Number.isFinite(oldStart) && oldEnd > oldStart) {
-              const spanMs = oldEnd - oldStart;
-              return [start, new Date(start.getTime() + spanMs)];
-            }
-          }
-          return [start];
+          return databaseOrder.schedule.pickupSelected;
         })(),
-        deliveryEstimated: (() => {
-          if (!deliveryDates.scheduledAt) {
-            return databaseOrder.schedule.deliveryEstimated;
-          }
-          if (deliveryDates.scheduledEndsAt) {
-            return [
-              deliveryDates.scheduledAt.toJSDate(),
-              deliveryDates.scheduledEndsAt.toJSDate(),
-            ];
-          }
-          const start = deliveryDates.scheduledAt.toJSDate();
-          const existing = databaseOrder.schedule.deliveryEstimated;
-          if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
-            const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
-            const oldEnd = new Date(existing[1]).getTime();
-            if (Number.isFinite(oldStart) && oldEnd > oldStart) {
-              const spanMs = oldEnd - oldStart;
-              return [start, new Date(start.getTime() + spanMs)];
-            }
-          }
-          return [start];
-        })(),
-        pickupCompleted: pickupDates.adjustedDate
-          ? pickupDates.adjustedDate.toJSDate()
-          : databaseOrder.schedule.pickupCompleted,
-        deliveryCompleted: deliveryDates.adjustedDate
-          ? deliveryDates.adjustedDate.toJSDate()
-          : databaseOrder.schedule.deliveryCompleted,
+        deliveryEstimated: nextDeliveryEstimated,
+        pickupCompleted:
+          luxonToValidJsDate(pickupDates.adjustedDate) ??
+          databaseOrder.schedule.pickupCompleted,
+        deliveryCompleted:
+          luxonToValidJsDate(deliveryDates.adjustedDate) ??
+          databaseOrder.schedule.deliveryCompleted,
       },
 
       // Preserve existing fields
