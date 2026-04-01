@@ -18,6 +18,8 @@ interface SuperDispatchOrder {
   changed_at: string;
   purchase_order_number?: string;
   transport_type: string;
+  /** Some SD responses expose Carrier Pickup Date at order root */
+  carrier_pickup_date?: string;
   customer?: {
     name?: string;
     contact_email?: string;
@@ -26,10 +28,15 @@ interface SuperDispatchOrder {
     notes?: string;
   };
   pickup: {
+    /** Super Dispatch UI: "Carrier Pickup Date" (carrier / dispatcher updates) */
+    carrier_pickup_date?: string;
+    carrier_pickup_at?: string;
+    carrier_pickup_ends_at?: string;
     /** Often set on new / estimated orders when scheduled_at is absent */
     first_available_pickup_date?: string;
     scheduled_at?: string;
     scheduled_ends_at?: string;
+    /** Often populated when carrier sets a firm pickup window (see also carrier_pickup_*) */
     adjusted_date?: string;
     date_type?: string;
     longitude?: string;
@@ -113,7 +120,21 @@ function isValidDate(dateString: string | undefined): boolean {
   if (!dateString) return false;
 
   try {
-    const date = DateTime.fromISO(dateString);
+    let date = DateTime.fromISO(dateString);
+    if (!date.isValid) {
+      const trimmed = dateString.trim();
+      const ymd = /^(\d{4})-(\d{2})-(\d{2})$/.exec(trimmed);
+      if (ymd) {
+        date = DateTime.fromObject(
+          {
+            year: Number(ymd[1]),
+            month: Number(ymd[2]),
+            day: Number(ymd[3]),
+          },
+          { zone: "America/New_York" },
+        );
+      }
+    }
     const minDate = DateTime.fromISO("2000-01-01");
     const maxDate = DateTime.now().plus({ years: 5 });
 
@@ -121,6 +142,56 @@ function isValidDate(dateString: string | undefined): boolean {
   } catch (e) {
     return false;
   }
+}
+
+/** Pick the pickup start instant Super Dispatch intends for scheduling (Carrier Pickup Date first). */
+function resolvePickupStartIso(sdOrder: SuperDispatchOrder): string | undefined {
+  const pickup = sdOrder.pickup;
+  const pickupAny = pickup as Record<string, string | undefined>;
+  const status = String(sdOrder.status || "").toLowerCase();
+  const isTerminalPickup =
+    status === "picked_up" ||
+    status === "delivered" ||
+    status === "invoiced" ||
+    status === "order_canceled";
+
+  const candidates: (string | undefined)[] = [
+    sdOrder.carrier_pickup_date,
+    (sdOrder as Record<string, string | undefined>).carrierPickupDate,
+    pickup.carrier_pickup_date,
+    pickupAny.carrierPickupDate,
+    pickup.carrier_pickup_at,
+    pickupAny.carrierPickupAt,
+  ];
+  // Before pickup is complete, carrier firm dates often live on adjusted_date or carrier_* only.
+  if (!isTerminalPickup) {
+    candidates.push(pickup.adjusted_date);
+  }
+  candidates.push(pickup.scheduled_at, pickup.first_available_pickup_date);
+
+  for (const c of candidates) {
+    if (c && isValidDate(c)) {
+      return c;
+    }
+  }
+  return undefined;
+}
+
+/** Pickup window end: prefer carrier-specific end, then broker scheduled end. */
+function resolvePickupEndIso(sdOrder: SuperDispatchOrder): string | undefined {
+  const pickup = sdOrder.pickup;
+  const pickupAny = pickup as Record<string, string | undefined>;
+  const candidates = [
+    pickup.carrier_pickup_ends_at,
+    pickupAny.carrierPickupEndsAt,
+    pickup.scheduled_ends_at,
+  ];
+  for (const c of candidates) {
+    if (c && isValidDate(c)) {
+      return c;
+    }
+  }
+  return undefined;
 }
 
 // ============================================================================
@@ -171,13 +242,7 @@ function processPickupDates(sdOrder: SuperDispatchOrder): ProcessedDates {
   const pickup = sdOrder.pickup;
   const dates: ProcessedDates = {};
 
-  const pickupStartIso =
-    pickup.scheduled_at && isValidDate(pickup.scheduled_at)
-      ? pickup.scheduled_at
-      : pickup.first_available_pickup_date &&
-          isValidDate(pickup.first_available_pickup_date)
-        ? pickup.first_available_pickup_date
-        : undefined;
+  const pickupStartIso = resolvePickupStartIso(sdOrder);
 
   if (pickupStartIso) {
     dates.scheduledAt = processDate(pickupStartIso);
@@ -185,8 +250,9 @@ function processPickupDates(sdOrder: SuperDispatchOrder): ProcessedDates {
     dates.orderTablePickupEst = dates.scheduledAt;
   }
 
-  if (pickup.scheduled_ends_at && isValidDate(pickup.scheduled_ends_at)) {
-    dates.scheduledEndsAt = processDate(pickup.scheduled_ends_at);
+  const pickupEndIso = resolvePickupEndIso(sdOrder);
+  if (pickupEndIso) {
+    dates.scheduledEndsAt = processDate(pickupEndIso);
     dates.scheduledEndsAtString = generateDateString(dates.scheduledEndsAt);
     dates.orderTablePickupEnd = dates.scheduledEndsAt;
   }
