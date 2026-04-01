@@ -26,6 +26,8 @@ interface SuperDispatchOrder {
     notes?: string;
   };
   pickup: {
+    /** Often set on new / estimated orders when scheduled_at is absent */
+    first_available_pickup_date?: string;
     scheduled_at?: string;
     scheduled_ends_at?: string;
     adjusted_date?: string;
@@ -169,8 +171,16 @@ function processPickupDates(sdOrder: SuperDispatchOrder): ProcessedDates {
   const pickup = sdOrder.pickup;
   const dates: ProcessedDates = {};
 
-  if (pickup.scheduled_at && isValidDate(pickup.scheduled_at)) {
-    dates.scheduledAt = processDate(pickup.scheduled_at);
+  const pickupStartIso =
+    pickup.scheduled_at && isValidDate(pickup.scheduled_at)
+      ? pickup.scheduled_at
+      : pickup.first_available_pickup_date &&
+          isValidDate(pickup.first_available_pickup_date)
+        ? pickup.first_available_pickup_date
+        : undefined;
+
+  if (pickupStartIso) {
+    dates.scheduledAt = processDate(pickupStartIso);
     dates.scheduledAtString = generateDateString(dates.scheduledAt);
     dates.orderTablePickupEst = dates.scheduledAt;
   }
@@ -187,10 +197,9 @@ function processPickupDates(sdOrder: SuperDispatchOrder): ProcessedDates {
     dates.orderTablePickupActual = dates.adjustedDate;
   } else if (
     !["new", "accepted"].includes(sdOrder.status.toLowerCase()) &&
-    pickup.scheduled_at &&
-    isValidDate(pickup.scheduled_at)
+    pickupStartIso
   ) {
-    dates.adjustedDate = processDate(pickup.scheduled_at);
+    dates.adjustedDate = processDate(pickupStartIso);
     dates.adjustedDateString = generateDateString(dates.adjustedDate);
   }
 
@@ -742,12 +751,19 @@ export const updateOrderFromSD = async (
               pickupDates.scheduledEndsAt.toJSDate(),
             ];
           }
-          const status = String(superDispatchOrder.status || "").toLowerCase();
+          // Apply SD pickup start even for new / not-yet-picked-up orders so
+          // schedule changes made in Super Dispatch sync to the portal.
+          const start = pickupDates.scheduledAt.toJSDate();
           const existing = databaseOrder.schedule.pickupEstimated;
-          if (status === "new" && Array.isArray(existing) && existing.length > 1) {
-            return existing;
+          if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
+            const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
+            const oldEnd = new Date(existing[1]).getTime();
+            if (Number.isFinite(oldStart) && oldEnd > oldStart) {
+              const spanMs = oldEnd - oldStart;
+              return [start, new Date(start.getTime() + spanMs)];
+            }
           }
-          return [pickupDates.scheduledAt.toJSDate()];
+          return [start];
         })(),
         deliveryEstimated: (() => {
           if (!deliveryDates.scheduledAt) {
@@ -759,12 +775,17 @@ export const updateOrderFromSD = async (
               deliveryDates.scheduledEndsAt.toJSDate(),
             ];
           }
-          const status = String(superDispatchOrder.status || "").toLowerCase();
+          const start = deliveryDates.scheduledAt.toJSDate();
           const existing = databaseOrder.schedule.deliveryEstimated;
-          if (status === "new" && Array.isArray(existing) && existing.length > 1) {
-            return existing;
+          if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
+            const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
+            const oldEnd = new Date(existing[1]).getTime();
+            if (Number.isFinite(oldStart) && oldEnd > oldStart) {
+              const spanMs = oldEnd - oldStart;
+              return [start, new Date(start.getTime() + spanMs)];
+            }
           }
-          return [deliveryDates.scheduledAt.toJSDate()];
+          return [start];
         })(),
         pickupCompleted: pickupDates.adjustedDate
           ? pickupDates.adjustedDate.toJSDate()
