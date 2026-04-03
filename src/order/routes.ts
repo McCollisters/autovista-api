@@ -12,6 +12,7 @@ import { acceptOrderTerms } from "./controllers/acceptOrderTerms";
 import { getOrderStatus } from "./controllers/getOrderStatus";
 import { requestDriverLocation } from "./controllers/requestDriverLocation";
 import { createOrderCustomer } from "./controllers/createOrderCustomer";
+import { sendOrderShareEmail } from "./controllers/sendOrderShareEmail";
 import { sendOrderToTms } from "./controllers/sendOrderToTms";
 
 const router = Router();
@@ -27,6 +28,7 @@ router.post("/customer", createOrderCustomer);
 router.post("/", createOrder);
 
 // Parameterized routes
+router.post("/:orderId/email", sendOrderShareEmail);
 router.get("/:orderId", getOrder);
 router.get("/:orderId/activities", getOrderActivities);
 router.post("/:orderId/tms/send", sendOrderToTms);

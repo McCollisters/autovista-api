@@ -16,21 +16,24 @@
       cellspacing="0"
       style="empty-cells: hide; margin: 0 auto; padding: 15px; width: 600px"
     >
-      <tr>
-        <td valign="top" style="width: 600px; margin: 0 auto;">
-          <p
-            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"
-          >Hi
-            {{firstName}},</p>
-        </td>
-      </tr>
+      {{#unless isShareRecipient}}
+        <tr>
+          <td valign="top" style="width: 600px; margin: 0 auto;">
+            <p
+              style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;"
+            >Hi
+              {{firstName}},</p>
+          </td>
+        </tr>
+      {{/unless}}
 
       <tr>
         <td valign="top" style="width: 600px; margin: 0 auto;">
           <p
             style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 15px;"
-          >Thank you for requesting an auto transport quote through the
-            McCollister's app.</p>
+          >{{#if isShareRecipient}}{{sharerName}} requested an auto transport quote through the
+            McCollister's app and wanted to share it with you.{{else}}Thank you for requesting an auto transport quote through the
+            McCollister's app.{{/if}}</p>
           <p
             style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 15px;"
           >Your quote is ready. This email includes a summary of your vehicle
