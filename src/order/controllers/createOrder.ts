@@ -14,8 +14,8 @@ import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper
 import { sendWhiteGloveNotification } from "../notifications/sendWhiteGloveNotification";
 import { sendOrderAgentEmail } from "../notifications/sendOrderAgent";
 import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotification";
-import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
+import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { sendQuoteEmailToCustomer } from "@/quote/services/sendQuoteEmailToCustomer";
 import { MMI_PORTALS } from "../../_global/constants/portalIds";
 import { resolveId } from "@/_global/utils/resolveId";
@@ -1458,8 +1458,13 @@ export const createOrder = async (
       }
     }
 
-    // Send COD payment request email if COD and customer email exists
-    if (newOrder.paymentType === PaymentType.Cod && newOrder.customer?.email) {
+    // Public embed (customer portal) confirmation email already includes payment;
+    // regular portal routes still send the legacy standalone COD payment-request email.
+    if (
+      !isCustomerPortal &&
+      newOrder.paymentType === PaymentType.Cod &&
+      newOrder.customer?.email
+    ) {
       try {
         await sendCODPaymentRequest(newOrder);
         logger.info(
@@ -1470,7 +1475,6 @@ export const createOrder = async (
           "Failed to send COD payment request email:",
           notificationError,
         );
-        // Don't fail the order creation for notification errors
       }
     }
 

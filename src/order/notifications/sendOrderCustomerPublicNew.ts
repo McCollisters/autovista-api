@@ -11,17 +11,45 @@ import { dirname } from "path";
 import Handlebars from "handlebars";
 import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 import { logger } from "@/core/logger";
+import { PaymentType, TransportType } from "@/_global/enums";
 import { IOrder, Portal } from "@/_global/models";
 import { sendOrderNotification } from "@/notification/orderNotifications";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
-import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
+import { formatVehiclesPlain } from "./utils/formatVehiclesPlain";
 import { DateTime } from "luxon";
-import { MMI_PORTALS } from "@/_global/constants/portalIds";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+function recipientFirstNameFromName(name: string): string {
+  const t = String(name ?? "").trim();
+  if (!t) return "there";
+  const first = t.split(/\s+/)[0];
+  return first || "there";
+}
+
+/** "Mar 1 – Mar 5" → "Between Mar 1 and Mar 5"; single date unchanged */
+function toBetweenWindowDisplay(dateRangeStr: string): string {
+  const s = String(dateRangeStr || "").trim();
+  if (!s || s === "TBD") return s || "TBD";
+  const m = s.match(/^(.+?)\s+-\s+(.+)$/);
+  if (m && m[1].trim() !== m[2].trim()) {
+    return `Between ${m[1].trim()} and ${m[2].trim()}`;
+  }
+  return s;
+}
+
+function transportTypeDisplayLabel(orderTransportType?: string): string {
+  const t = String(orderTransportType || "").toLowerCase();
+  if (t === TransportType.WhiteGlove) return "White Glove";
+  if (t === TransportType.Enclosed) return "Enclosed";
+  return "Open";
+}
+
+const COD_PAYMENT_HOSTED_URL =
+  "https://www.convergepay.com/hosted-payments?ssl_txn_auth_token=YtH5YU2ER7alJZ%2FD73aAegAAAZW6CTk1";
 
 /**
  * Sirva portal IDs
@@ -67,9 +95,6 @@ export async function sendOrderCustomerPublicNew(
 
     const portalIdString = String(order.portalId);
     const isSirva = SIRVA_PORTAL_IDS.includes(portalIdString);
-    const isMMI = MMI_PORTALS.includes(
-      portalIdString as (typeof MMI_PORTALS)[number],
-    );
 
     // Determine template path
     const templatePath = isSirva
@@ -107,20 +132,14 @@ export async function sendOrderCustomerPublicNew(
 
     const recipientName =
       overrides.recipientName || order.customer?.name || "Customer";
-    const subject =
-      emailTemplate.subject ||
-      `Your Vehicle Transport Confirmation - Order #${order.refId}`;
+    const recipientFirstName = recipientFirstNameFromName(recipientName);
+    const subject = "Your McCollister's Auto Transport Order Is Confirmed";
 
-    // Extract address information
-    const pickupAddress = order.origin?.address?.address || "";
     const pickupCity = order.origin?.address?.city || "";
     const pickupState = order.origin?.address?.state || "";
-    const pickupZip = order.origin?.address?.zip || "";
 
-    const deliveryAddress = order.destination?.address?.address || "";
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
-    const deliveryZip = order.destination?.address?.zip || "";
 
     const formatSingleDate = (date?: Date | string | null) => {
       if (!date) return "TBD";
@@ -128,36 +147,10 @@ export async function sendOrderCustomerPublicNew(
         .setZone("America/New_York")
         .toLocaleString(DateTime.DATE_MED);
     };
-    const isWhiteGlove = order.transportType === "WHITEGLOVE";
-    const isCOD = order.paymentType === "COD";
+    const isWhiteGlove = order.transportType === TransportType.WhiteGlove;
+    const isCOD = order.paymentType === PaymentType.Cod;
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
-    const hasPickupRange = (() => {
-      const estimated = order.schedule?.pickupEstimated;
-      if (!Array.isArray(estimated) || estimated.length < 2) {
-        return false;
-      }
-      const first = estimated[0];
-      const last = estimated[estimated.length - 1];
-      if (!first || !last) {
-        return false;
-      }
-      const firstValue = DateTime.fromJSDate(new Date(first))
-        .setZone("America/New_York")
-        .toISODate();
-      const lastValue = DateTime.fromJSDate(new Date(last))
-        .setZone("America/New_York")
-        .toISODate();
-      return Boolean(firstValue && lastValue && firstValue !== lastValue);
-    })();
-    const pickupDatesLabel = isWhiteGlove
-      ? "Estimated Date:"
-      : hasPickupRange
-        ? "Pickup Within:"
-        : "Estimated Pickup:";
-    const deliveryDatesLabel = isWhiteGlove
-      ? "Estimated Date:"
-      : "Scheduled Dates:";
     const pickupDatesValue = isWhiteGlove
       ? formatSingleDate(
           order.schedule?.pickupEstimated?.[0] ||
@@ -168,11 +161,8 @@ export async function sendOrderCustomerPublicNew(
     const deliveryDatesValue = isWhiteGlove
       ? formatSingleDate(order.schedule?.deliveryEstimated?.[0] || null)
       : deliveryDates;
-    const totalPrice =
-      order.totalPricing?.totalWithCompanyTariffAndCommission ||
-      order.totalPricing?.totalPortal ||
-      0;
-    const totalPriceDisplay = Math.ceil(totalPrice);
+    const pickupWindowDisplay = toBetweenWindowDisplay(pickupDatesValue);
+    const deliveryWindowDisplay = toBetweenWindowDisplay(deliveryDatesValue);
     const orderStatusOverride = process.env.ORDER_STATUS_BASE_URL?.trim();
     const normalizedBaseUrl = orderStatusOverride
       ? orderStatusOverride.replace(/\/$/, "")
@@ -180,64 +170,26 @@ export async function sendOrderCustomerPublicNew(
     const orderStatusUrl = `${normalizedBaseUrl}/public/order-status?email=${encodeURIComponent(
       recipientEmail,
     )}`;
-    const trackingHtml = isMMI
-      ? ""
-      : `<tr>
-            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0;">
-                <strong>The below link will bring you to our customer portal where you can log in and follow the progress
-                of your transport:</strong><br />
-                <a href="${orderStatusUrl}">${orderStatusUrl}</a>
-              </p>
-            </td>
-          </tr>`;
-    const smallTextHtml = isMMI
-      ? `<tr>
-            <td valign="top" style="width: 600px; padding-bottom: 15px;margin: 0 auto;">
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">**Please
-                note that you must be available during the entire spread for the dates above. If you are unable to
-                release or accept your vehicle(s) during the entire spread, you may have a delegate assigned to
-                release or accept your vehicle(s) on your behalf. Please provide us with the name and contact
-                information for your assigned delegate ASAP.</p>
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">If you are not available and do not have anyone to act as your delegate, then we will need to go back to the account and ask for coverage of potential terminal storage and re-delivery fees due to no one being available during the required spreads. <u>Please be aware that denial by the account may result in required terminal fees to be paid by you directly out of pocket prior to your vehicle(s) being delivered as the assigned driver cannot hold your vehicle(s) on the truck.</u></p>
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; font-size: 12px; font-style: italic;">You
-                or your assigned delegate will be notified a day in advance of the actual pick up and delivery date
-                and provided an ESTIMATED window of arrival for the driver. This is only an estimate and subject to
-                change as you must be prepared for the driver to arrive from 7am until before dark on the day of
-                pick up or delivery. We try our best to try to provide accurate estimates but due to uncontrollable
-                circumstances such as traffic, weather, mechanical issue, prior scheduling delays experienced by
-                the driver, etc. they are subject to change.</p>
-            </td>
-          </tr>`
-      : `<tr>
-            <td valign="top" style="width: 600px; padding-bottom: 15px;margin: 0 auto;">
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">**Please
-                note that you must be available during the entire spread for the dates above. If you are unable to
-                release or accept your vehicle(s) during the entire spread, you may have a delegate assigned to
-                release or accept your vehicle(s) on your behalf. Please provide us with the name and contact
-                information for your assigned delegate ASAP.</p>
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">If you are not available and do not have anyone to act as your delegate, then we will need to ask for coverage of potential terminal storage and re-delivery fees due to no one being available during the required spreads.</p>
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; font-size: 12px; font-style: italic;">You
-                or your assigned delegate will be notified a day in advance of the actual pick up and delivery date
-                and provided an ESTIMATED window of arrival for the driver. This is only an estimate and subject to
-                change as you must be prepared for the driver to arrive from 7am until before dark on the day of
-                pick up or delivery. We try our best to try to provide accurate estimates but due to uncontrollable
-                circumstances such as traffic, weather, mechanical issue, prior scheduling delays experienced by
-                the driver, etc. they are subject to change.</p>
-            </td>
-          </tr>`;
+    const faqUrl = `${normalizedBaseUrl}/public/quote`;
 
-    // Format transport type
-    const transportType =
-      order.transportType?.charAt(0).toUpperCase() +
-        order.transportType?.slice(1) || "Open";
+    const pickupLocationShort =
+      [pickupCity, pickupState]
+        .map((x) => String(x || "").trim())
+        .filter(Boolean)
+        .join(", ") || "TBD";
+    const deliveryLocationShort =
+      [deliveryCity, deliveryState]
+        .map((x) => String(x || "").trim())
+        .filter(Boolean)
+        .join(", ") || "TBD";
 
-    // Format vehicles HTML with pricing
-    const vehicles = formatVehiclesHTML(order.vehicles, false);
+    const transportTypeDisplay = transportTypeDisplayLabel(order.transportType);
 
-    // Build terms URL
+    const vehiclesPlain = formatVehiclesPlain(order.vehicles);
+
     const orderId = String(order._id);
-    const termsUrl = `${normalizedBaseUrl}/terms/${orderId}/${order.refId}`;
+    /** Read-only terms page; customers accept during public booking */
+    const termsUrl = `${normalizedBaseUrl}/public/terms`;
 
     // Load and compile template
     const templateSource = await readFile(resolvedTemplatePath, "utf-8");
@@ -248,26 +200,22 @@ export async function sendOrderCustomerPublicNew(
       logo: logo || mclogo,
       companyName,
       mclogo,
-      pickupDatesLabel,
-      pickupDatesValue,
-      pickupAddress,
-      pickupCity,
-      pickupState,
-      pickupZip,
-      deliveryDatesLabel,
-      deliveryDatesValue,
-      deliveryAddress,
-      deliveryCity,
-      deliveryState,
-      deliveryZip,
-      transportType,
-      vehicles,
-      totalPrice: totalPriceDisplay,
-      trackingHtml,
-      smallTextHtml,
+      pickupLocationShort,
+      deliveryLocationShort,
+      pickupWindowDisplay,
+      deliveryWindowDisplay,
+      transportTypeDisplay,
+      vehiclesPlain,
       refId: order.refId,
       termsUrl,
+      orderStatusUrl,
+      faqUrl,
+      paymentUrl: COD_PAYMENT_HOSTED_URL,
+      showPaymentSection: isCOD,
+      sectionNextNumber: isCOD ? "6" : "5",
+      sectionNotesNumber: isCOD ? "7" : "6",
       recipientName,
+      recipientFirstName,
     });
 
     // Send email using order notification system

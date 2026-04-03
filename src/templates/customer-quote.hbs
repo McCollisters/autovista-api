@@ -36,10 +36,13 @@
             McCollister's app.{{/if}}</p>
           <p
             style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 15px;"
-          >Your quote is ready. This email includes a summary of your vehicle
+          >{{#if isShareRecipient}}This email includes a summary of your vehicle
             and route details, along with pricing options based on different
             pickup windows to help you choose the option that best fits your
-            budget and schedule.</p>
+            budget and schedule.{{else}}Your quote is ready. This email includes a summary of your vehicle
+            and route details, along with pricing options based on different
+            pickup windows to help you choose the option that best fits your
+            budget and schedule.{{/if}}</p>
           <p
             style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 15px;"
           >When you're ready to move forward, you can book your order using the
@@ -103,9 +106,15 @@
 
       <tr>
         <td valign="top" style="width: 600px; margin: 0 auto;">
+          {{#if isWhiteGlove}}
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 10px;"
+          ><strong>White Glove Pricing:</strong></p>
+          {{else}}
           <p
             style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 10px;"
           ><strong>Pricing Options by Pickup Window:</strong></p>
+          {{/if}}
         </td>
       </tr>
 
@@ -113,7 +122,7 @@
         <tr>
           <td
             style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.6; padding-bottom: 6px;"
-          >White Glove &mdash; {{whiteGlovePriceDisplay}}</td>
+          >{{whiteGlovePriceDisplay}}</td>
         </tr>
       {{else}}
         <tr>
