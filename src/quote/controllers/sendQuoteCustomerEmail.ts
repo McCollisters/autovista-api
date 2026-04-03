@@ -21,7 +21,9 @@ export const sendQuoteCustomerEmail = async (
       return next({ statusCode: 404, message: "Quote not found." });
     }
 
-    const result = await sendQuoteEmailToCustomer(quote, recipientEmail);
+    const result = await sendQuoteEmailToCustomer(quote, recipientEmail, {
+      variant: "share",
+    });
 
     if (!result.success) {
       return next({

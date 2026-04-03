@@ -38,6 +38,24 @@ const formatVehiclesSummaryPlain = (vehicles: any[] = []) => {
     .join("; ");
 };
 
+export type SendQuoteEmailVariant = "confirmation" | "share";
+
+export type SendQuoteEmailOptions = {
+  variant?: SendQuoteEmailVariant;
+};
+
+const buildSharerDisplayName = (customer: any): string => {
+  const first = String(customer?.firstName ?? "").trim();
+  const last = String(customer?.lastName ?? "").trim();
+  const fromParts = [first, last].filter(Boolean).join(" ").trim();
+  if (fromParts) return fromParts;
+  const full = String(
+    customer?.name || customer?.customerFullName || "",
+  ).trim();
+  if (full) return full;
+  return "Someone";
+};
+
 const getPricingTotal = (
   totals: any,
   transportType: string,
@@ -56,12 +74,16 @@ const getPricingTotal = (
 /**
  * Sends the quote details email to a recipient (e.g. customer).
  * Quote can be a lean object or Mongoose document.
+ * Use variant "share" when someone emails the quote to another address from the app.
  */
 export const sendQuoteEmailToCustomer = async (
   quote: any,
   recipientEmail: string,
+  options?: SendQuoteEmailOptions,
 ): Promise<{ success: boolean; error?: string }> => {
   const quoteId = quote?._id?.toString?.() || quote?._id;
+  const variant: SendQuoteEmailVariant = options?.variant ?? "confirmation";
+  const isShareRecipient = variant === "share";
 
   try {
     const recipientName =
@@ -70,6 +92,7 @@ export const sendQuoteEmailToCustomer = async (
       (quote?.customer as any)?.firstName?.trim?.() ||
       String(recipientName).split(" ")[0] ||
       "Customer";
+    const sharerName = buildSharerDisplayName(quote?.customer);
     const code = String(
       quote?.customer?.quoteConfirmationCode ||
         quote?.customer?.trackingCode ||
@@ -141,6 +164,8 @@ export const sendQuoteEmailToCustomer = async (
     const emailLogo = MC_LOGO;
     const html = template({
       firstName,
+      sharerName,
+      isShareRecipient,
       code,
       bookUrl,
       refIdDisplay,
@@ -162,7 +187,9 @@ export const sendQuoteEmailToCustomer = async (
     });
 
     const notificationManager = getNotificationManager();
-    const subject = "Your McCollister's Auto Transport Quote";
+    const subject = isShareRecipient
+      ? "A McCollister's auto transport quote was shared with you"
+      : "Your McCollister's Auto Transport Quote";
 
     const result = await notificationManager.sendEmail({
       to: recipientEmail,
