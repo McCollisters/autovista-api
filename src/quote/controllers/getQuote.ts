@@ -1,5 +1,6 @@
 import express from "express";
-import { Quote, ModifierSet } from "@/_global/models";
+import { Quote, ModifierSet, Order } from "@/_global/models";
+import { Status } from "@/_global/enums";
 
 export const getQuote = async (
   req: express.Request,
@@ -37,6 +38,16 @@ export const getQuote = async (
     }
     if (quote && (quote as any).user && !(quote as any).userId) {
       (quote as any).userId = (quote as any).user;
+    }
+
+    const statusLower = String((quote as any).status || "").toLowerCase();
+    if (statusLower === Status.Booked) {
+      const linkedOrder = await Order.findOne({ quoteId: (quote as any)._id })
+        .select("_id")
+        .lean();
+      if (linkedOrder?._id) {
+        (quote as any).bookedOrderId = String(linkedOrder._id);
+      }
     }
 
     res.status(200).json(quote);

@@ -762,7 +762,7 @@ describe("createOrder Controller", () => {
       Order.findByIdAndUpdate.mockResolvedValue({ ...mockOrder, tms: mockOrder.tms });
 
       const mockOrderInstance = {
-        save: jest.fn().mockResolvedValue(mockOrder),
+        save: jest.fn().mockResolvedValue(mockOrder as never),
       };
       Order.mockImplementation(() => mockOrderInstance as any);
 
