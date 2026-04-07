@@ -36,19 +36,16 @@
             McCollister's app.{{/if}}</p>
           <p
             style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 15px;"
-          >{{#if isShareRecipient}}This email includes a summary of your vehicle
-            and route details, along with pricing options based on different
-            pickup windows to help you choose the option that best fits your
-            budget and schedule.{{else}}Your quote is ready. This email includes a summary of your vehicle
+          >{{#if isShareRecipient}}This email includes a summary of vehicle and route details, along with pricing options based on different pickup windows.{{else}}Your quote is ready. This email includes a summary of your vehicle
             and route details, along with pricing options based on different
             pickup windows to help you choose the option that best fits your
             budget and schedule.{{/if}}</p>
           <p
             style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 15px;"
-          >When you're ready to move forward, you can book your order using the
+          >{{#if isShareRecipient}}This order can be booked by clicking the Book Now button below. You'll be asked to enter the confirmation code shown here to access the quote and complete the booking.{{else}}When you're ready to move forward, you can book your order using the
             Book Now button below. After clicking, you'll be asked to enter the
             confirmation code shown here to access your quote and complete your
-            booking.</p>
+            booking.{{/if}}</p>
         </td>
       </tr>
 
