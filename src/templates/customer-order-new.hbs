@@ -11,19 +11,26 @@
     <table class="table" cellpadding="0" cellspacing="0" style="empty-cells: hide; margin: 0 auto; padding: 15px; width: 600px">
         <tr>
             <td valign="top" style="width: 600px; margin: 0 auto;">
+                {{#unless isShareRecipient}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">Hi {{recipientFirstName}},</p>
+                {{/unless}}
+                {{#if isShareRecipient}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">{{sharerName}} booked an auto transport order through McCollister's and wanted to share the confirmation with you.</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 20px; ">This email includes a summary of the transport details, including the selected pickup window and vehicle information. Please review the information below and keep this email for your records.</p>
+                {{else}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">Your auto transport order has been successfully booked.</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; ">This email confirms your order and includes a summary of your transport details, including your selected pickup window and vehicle information. Please review the information below and keep this email for your records.</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 20px; ">Our team will be in touch as your pickup window approaches.</p>
+                {{/if}}
 
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">Order Summary</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Order Number:</strong> {{refId}}</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Transport Type:</strong> {{transportTypeDisplay}}</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Vehicle(s):</strong> {{vehiclesPlain}}</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Pickup Location:</strong> {{pickupLocationShort}}</p>
-                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Pickup Window*:</strong> {{pickupWindowDisplay}}</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>{{pickupDetailLabel}}*:</strong> {{pickupDetailDisplay}}</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Delivery Location:</strong> {{deliveryLocationShort}}</p>
-                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 24px 0;"><strong>Delivery Window*:</strong> {{deliveryWindowDisplay}}</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 24px 0;"><strong>{{deliveryDetailLabel}}*:</strong> {{deliveryDetailDisplay}}</p>
             </td>
         </tr>
 
@@ -45,15 +52,27 @@
             <td valign="top" style="width: 600px; margin: 0 auto;">
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">{{sectionNextNumber}}. What You Can Do Next</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Review Terms &amp; Conditions:</strong></p>
+                {{#if isShareRecipient}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;">View the Terms &amp; Conditions the customer agreed to at the time of booking:<br />
+                    <a href="{{termsUrl}}">View Terms &amp; Conditions</a></p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Customer portal:</strong></p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;">The booking customer can log in to the customer portal to follow the progress of this transport and view order details. The link below opens the portal with the account email on file:<br />
+                    <a href="{{orderStatusUrl}}">Go to Customer Portal</a></p>
+                {{else}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;">View the Terms &amp; Conditions you agreed to at the time of booking:<br />
                     <a href="{{termsUrl}}">View Terms &amp; Conditions</a></p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Access Your Customer Portal:</strong></p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;">Log in to your customer portal to follow the progress of your transport and view your order details:<br />
                     <a href="{{orderStatusUrl}}">Go to Customer Portal</a></p>
+                {{/if}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Learn more:</strong></p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;">Visit our FAQ page for answers to common questions about pickup, delivery, and the transport process:<br />
                     <a href="{{faqUrl}}">View FAQs</a></p>
+                {{#if isShareRecipient}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;">If you or the booking customer have questions or need assistance, our team is here to help.</p>
+                {{else}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;">If you have questions or need assistance at any point, our team is here to help.</p>
+                {{/if}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 24px 0;">McCollister's Auto Logistics</p>
             </td>
         </tr>
@@ -61,9 +80,15 @@
         <tr>
             <td valign="top" style="width: 600px; margin: 0 auto;">
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">{{sectionNotesNumber}}. Important Notes</p>
+                {{#if isShareRecipient}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0; font-size: 13px;">*Please note that the booking customer (or their delegate) must be available during the entire pickup and delivery windows listed above. If they are unable to release or accept the vehicle(s) during the full window, they may assign a delegate to act on their behalf. The delegate's name and contact information should be provided as soon as possible.</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0; font-size: 13px;">If no one is available during the required window, additional terminal storage or redelivery fees may apply.</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0; font-size: 13px;">The booking customer or their assigned delegate will be notified one day in advance of the actual pickup and delivery date and provided with an estimated arrival window. Arrival times are subject to change due to factors such as traffic, weather, mechanical issues, or prior scheduling delays. Drivers may arrive anytime between 7:00 a.m. and before dark.</p>
+                {{else}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0; font-size: 13px;">*Please note that you must be available during the entire pickup and delivery windows listed above. If you are unable to release or accept your vehicle(s) during the full window, you may assign a delegate to act on your behalf. Please provide your delegate's name and contact information as soon as possible.</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0; font-size: 13px;">If no one is available during the required window, additional terminal storage or redelivery fees may apply.</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0; font-size: 13px;">You or your assigned delegate will be notified one day in advance of the actual pickup and delivery date and provided with an estimated arrival window. Arrival times are subject to change due to factors such as traffic, weather, mechanical issues, or prior scheduling delays. Drivers may arrive anytime between 7:00 a.m. and before dark.</p>
+                {{/if}}
                 {{#if showPaymentSection}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 20px 0; font-size: 13px;">**Your order will not be officially scheduled for pickup until payment is received in full via credit card. We do not allow customers to pay drivers directly. Payment must be received at least three (3) business days prior to your scheduled pickup date.</p>
                 {{/if}}

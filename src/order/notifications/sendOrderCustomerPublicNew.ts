@@ -14,11 +14,10 @@ import { logger } from "@/core/logger";
 import { PaymentType, TransportType } from "@/_global/enums";
 import { IOrder, Portal } from "@/_global/models";
 import { sendOrderNotification } from "@/notification/orderNotifications";
-import { getPickupDatesString } from "./utils/getPickupDatesString";
-import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { formatVehiclesPlain } from "./utils/formatVehiclesPlain";
-import { DateTime } from "luxon";
+import { formatOrderStatusDetailEmailDates } from "./utils/formatOrderStatusDetailEmailDates";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
+import { resolveOrderCustomerEmailForTracking } from "../utils/resolveOrderCustomerEmailForTracking";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,15 +29,18 @@ function recipientFirstNameFromName(name: string): string {
   return first || "there";
 }
 
-/** "Mar 1 – Mar 5" → "Between Mar 1 and Mar 5"; single date unchanged */
-function toBetweenWindowDisplay(dateRangeStr: string): string {
-  const s = String(dateRangeStr || "").trim();
-  if (!s || s === "TBD") return s || "TBD";
-  const m = s.match(/^(.+?)\s+-\s+(.+)$/);
-  if (m && m[1].trim() !== m[2].trim()) {
-    return `Between ${m[1].trim()} and ${m[2].trim()}`;
-  }
-  return s;
+/** Display name for "X shared this with you" (order customer / booker). */
+function buildSharerDisplayName(customer: IOrder["customer"]): string {
+  const c = customer as Record<string, unknown> | undefined;
+  const first = String(c?.firstName ?? "").trim();
+  const last = String(c?.lastName ?? "").trim();
+  const fromParts = [first, last].filter(Boolean).join(" ").trim();
+  if (fromParts) return fromParts;
+  const full = String(
+    c?.name || c?.customerFullName || "",
+  ).trim();
+  if (full) return full;
+  return "Someone";
 }
 
 function transportTypeDisplayLabel(orderTransportType?: string): string {
@@ -64,9 +66,16 @@ const SIRVA_PORTAL_IDS = [
 /**
  * Send order customer email notification
  */
+export type SendOrderCustomerEmailVariant = "confirmation" | "share";
+
 export async function sendOrderCustomerPublicNew(
   order: IOrder,
-  overrides: { recipientEmail?: string; recipientName?: string } = {},
+  overrides: {
+    recipientEmail?: string;
+    recipientName?: string;
+    /** Use "share" when emailing a third party from Share via email (not the booker). */
+    variant?: SendOrderCustomerEmailVariant;
+  } = {},
 ): Promise<{ success: boolean; error?: string }> {
   if (!order) {
     logger.warn("Cannot send customer order email: Order is null");
@@ -130,10 +139,18 @@ export async function sendOrderCustomerPublicNew(
       return { success: false, error: "Recipient email is required" };
     }
 
+    const variant: SendOrderCustomerEmailVariant =
+      overrides.variant ?? "confirmation";
+    const isShareRecipient = variant === "share";
+
     const recipientName =
       overrides.recipientName || order.customer?.name || "Customer";
     const recipientFirstName = recipientFirstNameFromName(recipientName);
-    const subject = "Your McCollister's Auto Transport Order Is Confirmed";
+    const sharerName = buildSharerDisplayName(order.customer);
+
+    const subject = isShareRecipient
+      ? "A McCollister's auto transport order was shared with you"
+      : "Your McCollister's Auto Transport Order Is Confirmed";
 
     const pickupCity = order.origin?.address?.city || "";
     const pickupState = order.origin?.address?.state || "";
@@ -141,34 +158,25 @@ export async function sendOrderCustomerPublicNew(
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
 
-    const formatSingleDate = (date?: Date | string | null) => {
-      if (!date) return "TBD";
-      return DateTime.fromJSDate(new Date(date))
-        .setZone("America/New_York")
-        .toLocaleString(DateTime.DATE_MED);
-    };
-    const isWhiteGlove = order.transportType === TransportType.WhiteGlove;
     const isCOD = order.paymentType === PaymentType.Cod;
-    const pickupDates = getPickupDatesString(order);
-    const deliveryDates = getDeliveryDatesString(order);
-    const pickupDatesValue = isWhiteGlove
-      ? formatSingleDate(
-          order.schedule?.pickupEstimated?.[0] ||
-            order.schedule?.pickupSelected ||
-            null,
-        )
-      : pickupDates;
-    const deliveryDatesValue = isWhiteGlove
-      ? formatSingleDate(order.schedule?.deliveryEstimated?.[0] || null)
-      : deliveryDates;
-    const pickupWindowDisplay = toBetweenWindowDisplay(pickupDatesValue);
-    const deliveryWindowDisplay = toBetweenWindowDisplay(deliveryDatesValue);
+    const {
+      pickupDetailLabel,
+      pickupDetailDisplay,
+      deliveryDetailLabel,
+      deliveryDetailDisplay,
+    } = formatOrderStatusDetailEmailDates(order);
     const orderStatusOverride = process.env.ORDER_STATUS_BASE_URL?.trim();
     const normalizedBaseUrl = orderStatusOverride
       ? orderStatusOverride.replace(/\/$/, "")
       : getPortalBaseUrl();
+    const customerEmailForStatusLink =
+      resolveOrderCustomerEmailForTracking(order) ||
+      String(order.customer?.email || "").trim();
+    const emailForStatusUrl = isShareRecipient
+      ? customerEmailForStatusLink || recipientEmail
+      : recipientEmail;
     const orderStatusUrl = `${normalizedBaseUrl}/public/order-status?email=${encodeURIComponent(
-      recipientEmail,
+      emailForStatusUrl,
     )}`;
     const faqUrl = `${normalizedBaseUrl}/public/quote`;
 
@@ -195,6 +203,8 @@ export async function sendOrderCustomerPublicNew(
     const templateSource = await readFile(resolvedTemplatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
 
+    const showPaymentSection = isCOD && !isShareRecipient;
+
     // Prepare template data
     const html = template({
       logo: logo || mclogo,
@@ -202,8 +212,10 @@ export async function sendOrderCustomerPublicNew(
       mclogo,
       pickupLocationShort,
       deliveryLocationShort,
-      pickupWindowDisplay,
-      deliveryWindowDisplay,
+      pickupDetailLabel,
+      pickupDetailDisplay,
+      deliveryDetailLabel,
+      deliveryDetailDisplay,
       transportTypeDisplay,
       vehiclesPlain,
       refId: order.refId,
@@ -211,11 +223,13 @@ export async function sendOrderCustomerPublicNew(
       orderStatusUrl,
       faqUrl,
       paymentUrl: COD_PAYMENT_HOSTED_URL,
-      showPaymentSection: isCOD,
-      sectionNextNumber: isCOD ? "6" : "5",
-      sectionNotesNumber: isCOD ? "7" : "6",
+      showPaymentSection,
+      sectionNextNumber: showPaymentSection ? "6" : "5",
+      sectionNotesNumber: showPaymentSection ? "7" : "6",
       recipientName,
       recipientFirstName,
+      isShareRecipient,
+      sharerName,
     });
 
     // Send email using order notification system

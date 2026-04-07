@@ -27,7 +27,7 @@ export const sendOrderShareEmail = async (
 
     const result = await sendOrderCustomerPublicNew(order, {
       recipientEmail,
-      recipientName: order.customer?.name,
+      variant: "share",
     });
 
     if (!result.success) {
