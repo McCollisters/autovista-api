@@ -106,12 +106,13 @@ export const sendOrderToSuper = async (
       if (!normalized) {
         return "other";
       }
+      /* Super Dispatch public API allows pickup | 4_door_pickup but not 2_door_pickup (400 INVALID_VEHICLE_TYPE). */
       const mappedTypes: Record<string, string> = {
         sedan: "sedan",
         suv: "suv",
         van: "van",
         pickup_4_doors: "4_door_pickup",
-        pickup_2_doors: "2_door_pickup",
+        pickup_2_doors: "pickup",
         pickup: "pickup",
         other: "other",
       };
