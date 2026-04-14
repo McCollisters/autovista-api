@@ -1,7 +1,6 @@
 import express from "express";
 import { User } from "@/_global/models";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
-import { Role } from "../schema";
 import { logger } from "@/core/logger";
 import { createToken } from "@/_global/utils/createToken";
 import { getNotificationManager } from "@/notification";
@@ -34,11 +33,11 @@ export const updateUser = async (
     // Get the authenticated user to check if they're an admin
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
-    const isAdminUpdatingPassword =
+    const isPasswordPatch = typeof password !== "undefined";
+    const shouldSendPasswordChangeEmail =
+      isPasswordPatch &&
       authUser &&
-      (authUser.role === Role.PlatformAdmin ||
-        authUser.role === Role.PlatformUser) &&
-      typeof password !== "undefined";
+      String(authUser._id) !== String(req.params.userId);
 
     const userToUpdate = await User.findById(req.params.userId);
     if (!userToUpdate) {
@@ -86,12 +85,12 @@ export const updateUser = async (
     }
 
     await userToUpdate.save();
-    const updatedUser = await userToUpdate
-      .populate("portalId")
-      .populate("portalRoles.portalId");
+    await userToUpdate.populate("portalId");
+    await userToUpdate.populate("portalRoles.portalId");
+    const updatedUser = userToUpdate;
 
-    // If admin updated password, send password reset email
-    if (isAdminUpdatingPassword && updatedUser) {
+    // If another user updated this user's password, send reset link email
+    if (shouldSendPasswordChangeEmail && updatedUser) {
       try {
         // Create reset token (using JWT token) - use updatedUser in case role changed
         const token = createToken(updatedUser);

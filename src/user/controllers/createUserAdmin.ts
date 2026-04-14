@@ -5,6 +5,7 @@ import { Status } from "../../_global/enums";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { resolveId } from "@/_global/utils/resolveId";
+import { sendNewUserWelcomeEmail } from "../services/sendNewUserWelcomeEmail";
 
 export const createUserAdmin = async (
   req: express.Request,
@@ -128,6 +129,15 @@ export const createUserAdmin = async (
       return next({
         statusCode: 500,
         message: "There was an error creating this user.",
+      });
+    }
+
+    const welcomeResult = await sendNewUserWelcomeEmail(newUser);
+    if (!welcomeResult.success) {
+      logger.error("Failed to send welcome email for new user", {
+        email: newUser.email,
+        userId: newUser._id,
+        error: welcomeResult.error,
       });
     }
 
