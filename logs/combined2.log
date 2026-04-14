@@ -18672,3 +18672,4152 @@
   message: 'Request completed',
   timestamp: '2026-04-09 09:41:17'
 }
+{
+  message: 'Connected to MongoDB successfully',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 09:36:39'
+}
+{
+  message: 'Cron jobs enabled (non-production mode)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 09:36:39'
+}
+{
+  message: '✅ Cron jobs initialized - Notifications scheduled at 6/10/14/20 (6am/10am/2pm/8pm EST)',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 09:36:39'
+}
+{
+  service: 'autovista-api',
+  routes: [
+    'GET /api/v1/user (current user)',
+    'GET /api/v1/users (list users)',
+    'GET /api/v1/user/:userId',
+    'POST /api/v1/user',
+    'PATCH /api/v1/user/:userId',
+    'DELETE /api/v1/user/:userId'
+  ],
+  level: 'info',
+  message: 'API routes registered',
+  timestamp: '2026-04-12 09:36:39'
+}
+{
+  service: 'autovista-api',
+  port: 8080,
+  environment: 'development',
+  nodeVersion: 'v22.14.0',
+  level: 'info',
+  message: 'Server started successfully',
+  timestamp: '2026-04-12 09:36:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:36:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '480ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:37:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:40:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '251ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:40:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:41:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '228ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:41:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:45:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '284ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:45:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:45:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '213ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:45:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:49:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '197ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:49:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:50:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '209ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:50:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:50:22'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '314ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:50:23'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:56:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '213ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:56:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:58:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '208ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:58:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:58:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '231ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:58:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:59:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '216ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:59:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 09:59:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '190ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 09:59:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:00:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '274ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:00:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:00:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '234ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:00:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:08:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '206ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:08:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:08:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '305ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:08:51'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '312',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:09:14'
+}
+{
+  message: 'SMS is enabled but Twilio credentials are missing. SMS service will be disabled.',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 10:09:19'
+}
+{
+  service: 'autovista-api',
+  email: { enabled: true, provider: 'sendgrid' },
+  sms: { enabled: false, provider: 'twilio' },
+  level: 'info',
+  message: 'Notification manager initialized',
+  timestamp: '2026-04-12 10:09:19'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-04-12 10:09:19'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-04-12 10:09:19'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('69dbc3ae9e2bc7d4c0a7416a'),
+  recipientEmail: 'annafkh@gmail.com',
+  level: 'info',
+  message: 'Customer quote confirmation email sent',
+  timestamp: '2026-04-12 10:09:19'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('69dbc3ae9e2bc7d4c0a7416a'),
+  refId: 303557,
+  trackingCode: 'D89C97EE4C',
+  pickupStartDate: 2026-04-17T06:00:00.000Z,
+  quoteConfirmationEmailSent: true,
+  level: 'info',
+  message: 'Customer created quote 303557',
+  timestamp: '2026-04-12 10:09:19'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 200,
+  duration: '5271ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:09:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:09:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '183ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:09:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:09:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '193ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:09:28'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:09:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '161ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:09:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:11:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '160ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:11:17'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:11:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '160ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:11:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:13:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '170ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:13:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:14:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '160ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:14:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:14:28'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '239ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:14:28'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:14:35'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '205ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:14:36'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:14:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '140ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:14:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:15:21'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '172ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:15:21'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:15:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '145ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:15:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:16:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '155ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:16:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:17:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '160ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:17:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:17:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '150ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:17:41'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:18:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '159ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:18:57'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:19:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '144ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:19:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:19:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '149ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:19:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:19:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '146ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:19:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:19:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '153ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:19:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:20:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '164ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:20:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:20:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '152ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:20:13'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:20:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '164ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:20:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:20:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '150ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:20:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:20:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '171ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:20:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:20:55'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '156ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:20:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '167ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '140ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '135ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:14'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '141ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:14'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '155ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '156ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '141ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '159ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '144ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:21:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '145ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:21:56'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:22:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '163ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:22:34'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:22:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '160ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:22:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:22:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '172ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:22:39'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:22:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '143ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:22:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:23:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '154ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:23:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:23:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '133ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:23:31'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:23:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '136ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:23:38'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:24:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '135ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:24:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:24:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '165ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:24:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:24:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '145ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:24:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:25:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '148ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:25:27'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:25:50'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '173ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:25:51'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:47:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '167ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:47:01'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:58:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '154ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:58:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:58:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 10:58:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '148ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:58:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '226ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 10:58:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:08:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:08:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '163ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:08:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '241ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:08:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:10:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:10:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '162ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:10:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '250ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:10:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:10:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:10:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '158ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:10:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '242ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:10:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:11:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:11:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '163ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:11:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '232ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:11:04'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:13:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:13:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '165ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:13:25'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '244ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:13:26'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:15:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:15:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '170ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:15:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '218ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:15:16'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:15:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 11:15:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '150ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:15:24'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '223ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 11:15:25'
+}
+{
+  message: 'Skipping pickup/delivery notifications in non-production',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:00:00'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:04:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:04:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '166ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:04:37'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '233ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:04:37'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/order/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '1138',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:04:43'
+}
+{
+  message: 'Geocoding pickup address: 123 Test Boston MA 02492',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:04:43'
+}
+{
+  message: 'Geocoding delivery address: 123 Test Los Angeles CA 10001',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:04:44'
+}
+{
+  message: 'Date ranges calculated: 2026-04-17T06:00:00.000Z, 2026-04-23T06:00:00.000Z, 2026-04-21T06:00:00.000Z, 2026-05-07T06:00:00.000Z',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:04:44'
+}
+{
+  message: 'Creating order in database for quote 69dbc3ae9e2bc7d4c0a7416a',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:04:44'
+}
+{
+  message: 'Successfully created order 303557 with ID 69dbdebc9e2bc7d4c0a76b39',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:04:44'
+}
+{
+  message: 'Email template not found: Customer Order, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:04:44'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'customerConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Order Is Confirmed",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-04-12 12:04:44'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Order Is Confirmed",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'customerConfirmation',
+    orderId: '69dbdebc9e2bc7d4c0a76b39',
+    recipientEmail: 'anna@periscopeworks.io',
+    recipientPhone: undefined
+  },
+  messageId: 'jzGrEwGiQP-WgADl-nvTxA',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  orderId: '69dbdebc9e2bc7d4c0a76b39',
+  type: 'customerConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: customerConfirmation',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69dbdebc9e2bc7d4c0a76b39'),
+  refId: 303557,
+  recipientEmail: 'anna@periscopeworks.io',
+  isSirva: false,
+  level: 'info',
+  message: 'Customer order email sent successfully',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  message: 'Customer order confirmation email sent for order 303557',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  message: 'Quote details email sent to customer for quote 69dbc3ae9e2bc7d4c0a7416a',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 201,
+  duration: '2087ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  portalId: '64ece35abfc3deb98e9d180f',
+  level: 'info',
+  message: 'Public customer order creation attempted',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '56',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  statusCode: 401,
+  duration: '3ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:04:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:06:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:06:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '227ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:06:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '218ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:06:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:06:05'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:06:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '213ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:06:06'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:06:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:06:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '256ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:06:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '251ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:06:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:06:49'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:06:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '230ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:06:49'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:07:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:07:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '241ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:07:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '229ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:07:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:07:20'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:07:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '193ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:07:21'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:07:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:07:47'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '237ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:07:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '228ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:07:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:07:48'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:07:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '221ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:07:48'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:08:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:08:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '232ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:08:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '220ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:08:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:08:20'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:08:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '199ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:08:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:08:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:08:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '214ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:08:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '209ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:08:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:08:42'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:08:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '197ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:08:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:08:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:08:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '241ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:08:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '237ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:08:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:08:58'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:08:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '203ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:08:58'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:09:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:09:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '218ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:09:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '217ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:09:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:09:10'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:09:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '187ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:09:10'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:09:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:09:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '219ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:09:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '216ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:09:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:09:20'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:09:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '203ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:09:20'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:09:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:09:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '235ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:09:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '234ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:09:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:09:59'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:09:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '197ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:09:59'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:10:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:10:18'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '208ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:10:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '207ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:10:19'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:12:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:12:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '234ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:12:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '234ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:12:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:12:09'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:12:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '215ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:12:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:12:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:12:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '217ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:12:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '216ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:12:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:12:54'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:12:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '202ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:12:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:13:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:13:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '204ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:13:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '217ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:13:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:13:05'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:13:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '212ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:13:05'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:13:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:13:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '210ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:13:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '218ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:13:11'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:13:11'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:13:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '197ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:13:12'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:14:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:14:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '232ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:14:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '228ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:14:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:14:07'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:14:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '220ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:14:07'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:14:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:14:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '200ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:14:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '216ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:14:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:14:33'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:14:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '215ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:14:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:15:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:15:02'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '270ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:15:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '299ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:15:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:15:03'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:15:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '231ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:15:03'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:15:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:15:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '220ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:15:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '233ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:15:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:15:43'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:15:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '198ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:15:43'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:15:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:15:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '222ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:15:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '221ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:15:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:15:53'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:15:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '192ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:15:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:16:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:16:32'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '218ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:16:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '215ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:16:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/order/69dbdebc9e2bc7d4c0a76b39',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:16:33'
+}
+{
+  message: 'Order 303557 has no Super Dispatch GUID, skipping update',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:16:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/69dbdebc9e2bc7d4c0a76b39',
+  statusCode: 200,
+  duration: '194ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:16:33'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:17:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:17:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '237ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:17:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbc3ae9e2bc7d4c0a7416a/app',
+  statusCode: 200,
+  duration: '225ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:17:46'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:17:53'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '230ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:17:54'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:18:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc89173f563c49521cdea/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:18:08'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbc89173f563c49521cdea/app',
+  statusCode: 404,
+  duration: '55ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:18:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '234ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:18:09'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:18:21'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '231ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:18:21'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/quote/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '322',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:18:37'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-04-12 12:18:42'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-04-12 12:18:42'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('69dbe2019e2bc7d4c0a7de0d'),
+  recipientEmail: 'annafkh@gmail.com',
+  level: 'info',
+  message: 'Customer quote confirmation email sent',
+  timestamp: '2026-04-12 12:18:42'
+}
+{
+  service: 'autovista-api',
+  quoteId: new ObjectId('69dbe2019e2bc7d4c0a7de0d'),
+  refId: 303563,
+  trackingCode: 'CC046BE1B5',
+  pickupStartDate: 2026-04-16T06:00:00.000Z,
+  quoteConfirmationEmailSent: true,
+  level: 'info',
+  message: 'Customer created quote 303563',
+  timestamp: '2026-04-12 12:18:42'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 200,
+  duration: '5036ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:18:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbe2019e2bc7d4c0a7de0d/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:18:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbe2019e2bc7d4c0a7de0d/app',
+  statusCode: 200,
+  duration: '153ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:18:42'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:18:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbe2019e2bc7d4c0a7de0d/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:18:44'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbe2019e2bc7d4c0a7de0d/app',
+  statusCode: 200,
+  duration: '171ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:18:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '238ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:18:45'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/settings/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:19:15'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/api/v1/quote/public/69dbe2019e2bc7d4c0a7de0d/app',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: undefined,
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:19:15'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/public/69dbe2019e2bc7d4c0a7de0d/app',
+  statusCode: 200,
+  duration: '172ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:19:15'
+}
+{
+  service: 'autovista-api',
+  method: 'GET',
+  url: '/customer',
+  statusCode: 200,
+  duration: '261ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:19:15'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/api/v1/order/customer',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '1088',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:19:50'
+}
+{
+  message: 'Geocoding pickup address: 123 Test Boston MA 10001',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:19:50'
+}
+{
+  message: 'Geocoding delivery address: Test Los Angeles CA 10001',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:19:51'
+}
+{
+  message: 'Date ranges calculated: 2026-04-16T06:00:00.000Z, 2026-04-16T06:00:00.000Z, 2026-04-20T06:00:00.000Z, 2026-04-30T06:00:00.000Z',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:19:51'
+}
+{
+  message: 'Creating order in database for quote 69dbe2019e2bc7d4c0a7de0d',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:19:51'
+}
+{
+  message: 'Successfully created order 303563 with ID 69dbe2479e2bc7d4c0a7e74b',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:19:51'
+}
+{
+  message: 'Email template not found: Customer Order, using defaults',
+  level: 'warn',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:19:51'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'customerConfirmation',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Order Is Confirmed",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-04-12 12:19:51'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Order Is Confirmed",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-04-12 12:19:51'
+}
+{
+  service: 'autovista-api',
+  metadata: {
+    type: 'email',
+    channel: 'customerConfirmation',
+    orderId: '69dbe2479e2bc7d4c0a7e74b',
+    recipientEmail: 'anna@periscopeworks.io',
+    recipientPhone: undefined
+  },
+  messageId: '8xjpFSDNSf-BGbhvgQZOng',
+  level: 'info',
+  message: 'Email notification sent successfully',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  service: 'autovista-api',
+  orderId: '69dbe2479e2bc7d4c0a7e74b',
+  type: 'customerConfirmation',
+  emailSuccess: true,
+  smsSuccess: undefined,
+  level: 'info',
+  message: 'Order notification sent: customerConfirmation',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  service: 'autovista-api',
+  orderId: new ObjectId('69dbe2479e2bc7d4c0a7e74b'),
+  refId: 303563,
+  recipientEmail: 'anna@periscopeworks.io',
+  isSirva: false,
+  level: 'info',
+  message: 'Customer order email sent successfully',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  message: 'Customer order confirmation email sent for order 303563',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  service: 'autovista-api',
+  label: 'email',
+  templateName: 'Customer Quote',
+  emailAddress: 'autologistics@mccollisters.com',
+  recipient: 'anna@periscopeworks.io',
+  overrideRecipient: 'anna@periscopeworks.io',
+  to: 'anna@periscopeworks.io',
+  cc: undefined,
+  bcc: undefined,
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Preparing email notification',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  service: 'autovista-api',
+  statusCode: 202,
+  to: [ 'anna@periscopeworks.io' ],
+  subject: "Your McCollister's Auto Transport Quote",
+  level: 'info',
+  message: 'Email sent via SendGrid',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  message: 'Quote details email sent to customer for quote 69dbe2019e2bc7d4c0a7de0d',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  service: 'autovista-api',
+  method: 'POST',
+  url: '/customer',
+  statusCode: 201,
+  duration: '1762ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  service: 'autovista-api',
+  portalId: '64ece35abfc3deb98e9d180f',
+  level: 'info',
+  message: 'Public customer order creation attempted',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  ip: '::1',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36',
+  contentLength: '56',
+  level: 'info',
+  message: 'Incoming request',
+  timestamp: '2026-04-12 12:19:52'
+}
+{
+  service: 'autovista-api',
+  method: 'PUT',
+  url: '/api/v1/quote',
+  statusCode: 401,
+  duration: '2ms',
+  ip: '::1',
+  level: 'info',
+  message: 'Request completed',
+  timestamp: '2026-04-12 12:19:52'
+}
