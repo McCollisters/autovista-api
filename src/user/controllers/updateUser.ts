@@ -85,9 +85,17 @@ export const updateUser = async (
     }
 
     await userToUpdate.save();
-    await userToUpdate.populate("portalId");
-    await userToUpdate.populate("portalRoles.portalId");
-    const updatedUser = userToUpdate;
+    // Use Query.populate (chainable). Document.populate returns a Promise, so
+    // doc.populate("a").populate("b") fails at runtime ("populate is not a function").
+    const updatedUser = await User.findById(userToUpdate._id)
+      .populate("portalId")
+      .populate("portalRoles.portalId");
+    if (!updatedUser) {
+      return next({
+        statusCode: 404,
+        message: "User not found",
+      });
+    }
 
     // If another user updated this user's password, send reset link email
     if (shouldSendPasswordChangeEmail && updatedUser) {
