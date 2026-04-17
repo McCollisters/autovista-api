@@ -17,6 +17,7 @@ import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
+import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
 import { MMI_PORTALS } from "@/_global/constants/portalIds";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -185,10 +186,7 @@ export async function sendOrderAgentEmail({
     const senderName = emailTemplate.senderName || DEFAULT_EMAIL_CONFIG.senderName;
     const emailIntro = emailTemplate.emailIntro || DEFAULT_EMAIL_CONFIG.emailIntro;
 
-    // Format transport type for display
-    const transportType =
-      order.transportType?.charAt(0).toUpperCase() +
-        order.transportType?.slice(1) || "Open";
+    const transportType = formatTransportTypeLabel(order.transportType);
 
     // Send email to each recipient
     const emailPromises = recipients.map(async (recipient) => {

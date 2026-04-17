@@ -15,6 +15,7 @@ import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
+import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
 
 // Using fileURLToPath and dirname for __dirname equivalent in ES modules
 import { fileURLToPath } from "url";
@@ -22,26 +23,6 @@ import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-const formatTransportType = (value: unknown) => {
-  const raw = String(value || "").trim();
-  if (!raw) {
-    return "";
-  }
-  const normalized = raw.toLowerCase();
-  if (normalized === "whiteglove") {
-    return "White Glove";
-  }
-  const spaced = raw
-    .replace(/[_-]+/g, " ")
-    .replace(/([a-z])([A-Z])/g, "$1 $2");
-  return spaced
-    .split(" ")
-    .map((word) =>
-      word ? `${word.charAt(0).toUpperCase()}${word.slice(1).toLowerCase()}` : "",
-    )
-    .join(" ");
-};
 
 interface SendOrderPickupConfirmationParams {
   order: IOrder;
@@ -114,7 +95,9 @@ export async function sendOrderPickupConfirmation({
 
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
-    const transportType = formatTransportType(order.transportType);
+    const transportType = formatTransportTypeLabel(order.transportType, {
+      whenEmpty: "",
+    });
     const refId = order.refId;
     const reg = order.reg;
     const vehicles = formatVehiclesHTML(order.vehicles, false);

@@ -14,6 +14,7 @@ import { IOrder } from "@/_global/models";
 import { getNotificationManager } from "@/notification";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
+import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -65,10 +66,7 @@ export async function sendMMIOrderNotification({
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
 
-    // Format transport type
-    const transportType =
-      order.transportType?.charAt(0).toUpperCase() +
-        order.transportType?.slice(1) || "Open";
+    const transportType = formatTransportTypeLabel(order.transportType);
 
     // Format vehicles
     let vehicles = "";

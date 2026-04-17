@@ -4,22 +4,10 @@ import Handlebars from "handlebars";
 import { Quote, Portal } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getNotificationManager } from "@/notification";
+import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
 
 const MC_LOGO =
   "https://autovista-assets.s3.us-west-1.amazonaws.com/MCC-Wordmark-RGB-Blue.png";
-
-const formatTransportType = (transportType?: string | null) => {
-  const normalized = String(transportType || "")
-    .replace(/[_\s]+/g, "")
-    .toUpperCase();
-  if (normalized === "WHITEGLOVE") {
-    return "White Glove";
-  }
-  if (normalized === "ENCLOSED") {
-    return "Enclosed";
-  }
-  return "Open";
-};
 
 const formatVehiclesHtml = (vehicles: any[] = []) => {
   if (!vehicles.length) {
@@ -94,7 +82,7 @@ export const sendQuoteEmailToCustomer = async (
       quote?.origin?.validated || quote?.origin?.userInput || "";
     const deliveryLocation =
       quote?.destination?.validated || quote?.destination?.userInput || "";
-    const transportType = formatTransportType(quote?.transportType);
+    const transportType = formatTransportTypeLabel(quote?.transportType);
     const vehicles = formatVehiclesHtml(quote?.vehicles || []);
     const totals = quote?.totalPricing?.totals;
 

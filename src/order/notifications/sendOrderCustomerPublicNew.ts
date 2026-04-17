@@ -18,6 +18,7 @@ import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
 import { DateTime } from "luxon";
 import { MMI_PORTALS } from "@/_global/constants/portalIds";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
+import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -227,10 +228,7 @@ export async function sendOrderCustomerPublicNew(
             </td>
           </tr>`;
 
-    // Format transport type
-    const transportType =
-      order.transportType?.charAt(0).toUpperCase() +
-        order.transportType?.slice(1) || "Open";
+    const transportType = formatTransportTypeLabel(order.transportType);
 
     // Format vehicles HTML with pricing
     const vehicles = formatVehiclesHTML(order.vehicles, false);
