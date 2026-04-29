@@ -19,6 +19,7 @@ import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPu
 import { sendQuoteEmailToCustomer } from "@/quote/services/sendQuoteEmailToCustomer";
 import { MMI_PORTALS } from "../../_global/constants/portalIds";
 import { resolveId } from "@/_global/utils/resolveId";
+import { normalizeTransportTypeToEnum } from "@/_global/utils/formatTransportTypeLabel";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   const byEmail = new Map<string, any>();
@@ -231,15 +232,9 @@ export const createOrder = async (
       : undefined;
     let companyName = portalData.companyName;
     const logo = portalData.logo ? portalData.logo : "";
-    const normalizedTransportType = String(
-      transportType || quoteData.transportType || "",
-    ).toLowerCase();
-    transportType =
-      normalizedTransportType === TransportType.Enclosed
-        ? TransportType.Enclosed
-        : normalizedTransportType === TransportType.WhiteGlove
-          ? TransportType.WhiteGlove
-          : TransportType.Open;
+    transportType = normalizeTransportTypeToEnum(
+      transportType ?? quoteData.transportType,
+    );
 
     if (transportType === TransportType.WhiteGlove) {
       payment = PaymentType.Cod;

@@ -18,7 +18,10 @@ import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
 import { DateTime } from "luxon";
 import { MMI_PORTALS } from "@/_global/constants/portalIds";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
-import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
+import {
+  formatTransportTypeLabelForOrder,
+  isOrderWhiteGlove,
+} from "@/_global/utils/formatTransportTypeLabel";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -128,7 +131,7 @@ export async function sendOrderCustomerPublicNew(
         .setZone("America/New_York")
         .toLocaleString(DateTime.DATE_MED);
     };
-    const isWhiteGlove = order.transportType === "WHITEGLOVE";
+    const isWhiteGlove = isOrderWhiteGlove(order);
     const isCOD = order.paymentType === "COD";
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
@@ -228,7 +231,7 @@ export async function sendOrderCustomerPublicNew(
             </td>
           </tr>`;
 
-    const transportType = formatTransportTypeLabel(order.transportType);
+    const transportType = formatTransportTypeLabelForOrder(order);
 
     // Format vehicles HTML with pricing
     const vehicles = formatVehiclesHTML(order.vehicles, false);

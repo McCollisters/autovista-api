@@ -12,7 +12,7 @@ import { join } from "path";
 import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
-import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
+import { formatTransportTypeLabelForOrder } from "@/_global/utils/formatTransportTypeLabel";
 
 // __dirname and __filename are available in CommonJS modules
 
@@ -58,7 +58,7 @@ export async function sendTrackOrderNotification({
     const html = template({
       refId: order.refId,
       id: String(order._id),
-      transportType: formatTransportTypeLabel(order.transportType),
+      transportType: formatTransportTypeLabelForOrder(order),
       recipientName: recipientEmail ? "Customer" : "Team", // Customize based on recipient
     });
 

@@ -15,7 +15,7 @@ import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
-import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
+import { formatTransportTypeLabelForOrder } from "@/_global/utils/formatTransportTypeLabel";
 
 // Using fileURLToPath and dirname for __dirname equivalent in ES modules
 import { fileURLToPath } from "url";
@@ -95,7 +95,7 @@ export async function sendOrderPickupConfirmation({
 
     const pickupDates = getPickupDatesString(order);
     const deliveryDates = getDeliveryDatesString(order);
-    const transportType = formatTransportTypeLabel(order.transportType, {
+    const transportType = formatTransportTypeLabelForOrder(order, {
       whenEmpty: "",
     });
     const refId = order.refId;

@@ -14,7 +14,7 @@ import Handlebars from "handlebars";
 import { format } from "date-fns";
 import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
-import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
+import { formatTransportTypeLabelForOrder } from "@/_global/utils/formatTransportTypeLabel";
 
 // Using fileURLToPath and dirname for __dirname equivalent in ES modules
 import { fileURLToPath } from "url";
@@ -126,7 +126,7 @@ export async function sendOrderDeliveryConfirmation({
         ]
       : null;
 
-    const transportType = formatTransportTypeLabel(order.transportType, {
+    const transportType = formatTransportTypeLabelForOrder(order, {
       whenEmpty: "",
     });
     const refId = order.refId;
