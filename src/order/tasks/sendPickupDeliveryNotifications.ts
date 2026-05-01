@@ -122,6 +122,24 @@ const normalizeRecipients = (
     }))
     .filter((entry) => Boolean(entry.email));
 
+/** Agents first so duplicate addresses keep the agent row (email casing, name). */
+const mergeRecipientsDedupe = (
+  agents: Array<{ email: string; name?: string }>,
+  portal: Array<{ email: string; name?: string }>,
+) => {
+  const seen = new Set<string>();
+  const out: Array<{ email: string; name?: string }> = [];
+  for (const entry of [...agents, ...portal]) {
+    const key = entry.email.toLowerCase();
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    out.push(entry);
+  }
+  return out;
+};
+
 const sendPickupNotificationsForOrder = async (
   order: any,
   preserveFlags: boolean,
@@ -184,27 +202,6 @@ const sendPickupNotificationsForOrder = async (
       : [],
   );
 
-  logger.info("Pickup notification agent recipients", {
-    orderId: order._id,
-    refId: order.refId,
-    agentRecipients: agentRecipients.map((recipient) => recipient.email),
-  });
-
-  if (agentRecipients.length > 0) {
-    await sendOrderPickupConfirmation({
-      order,
-      recipients: agentRecipients,
-    });
-    if (!preserveFlags) {
-      if (!order.notifications) {
-        order.notifications = {};
-      }
-      order.notifications.awaitingPickupConfirmation = false;
-      await order.save();
-    }
-    return;
-  }
-
   const portalIdString = String(order.portalId || portal?._id || "");
   const isMMI = MMI_PORTALS.includes(
     portalIdString as (typeof MMI_PORTALS)[number],
@@ -222,7 +219,13 @@ const sendPickupNotificationsForOrder = async (
   const isSirva = isSirvaOrder(order);
   const isSirvaNonDomestic = Boolean(order?.sirvaNonDomestic);
 
-  logger.info("Pickup notification portal context", {
+  const portalRecipients = normalizeRecipients(
+    filterPortalRecipients(portalEmails, "pickup", isSirva, isSirvaNonDomestic),
+  );
+
+  const recipients = mergeRecipientsDedupe(agentRecipients, portalRecipients);
+
+  logger.info("Pickup notification recipients", {
     orderId: order._id,
     refId: order.refId,
     portalId: portalIdString,
@@ -230,22 +233,15 @@ const sendPickupNotificationsForOrder = async (
     isSirva,
     isSirvaNonDomestic,
     portalEmailCount: portalEmails.length,
+    agentRecipients: agentRecipients.map((r) => r.email),
+    portalRecipients: portalRecipients.map((r) => r.email),
+    mergedRecipients: recipients.map((r) => r.email),
   });
 
-  const portalRecipients = normalizeRecipients(
-    filterPortalRecipients(portalEmails, "pickup", isSirva, isSirvaNonDomestic),
-  );
-
-  logger.info("Pickup notification recipients", {
-    orderId: order._id,
-    refId: order.refId,
-    portalRecipients: portalRecipients.map((recipient) => recipient.email),
-  });
-
-  if (portalRecipients.length > 0) {
+  if (recipients.length > 0) {
     await sendOrderPickupConfirmation({
       order,
-      recipients: portalRecipients,
+      recipients,
     });
   } else {
     logger.info("No pickup notification recipients for order", {
@@ -309,27 +305,6 @@ const sendDeliveryNotificationsForOrder = async (
       : [],
   );
 
-  logger.info("Delivery notification agent recipients", {
-    orderId: order._id,
-    refId: order.refId,
-    agentRecipients: agentRecipients.map((recipient) => recipient.email),
-  });
-
-  if (agentRecipients.length > 0) {
-    await sendOrderDeliveryConfirmation({
-      order,
-      recipients: agentRecipients,
-    });
-    if (!preserveFlags) {
-      if (!order.notifications) {
-        order.notifications = {};
-      }
-      order.notifications.awaitingDeliveryConfirmation = false;
-      await order.save();
-    }
-    return;
-  }
-
   const portalIdString = String(order.portalId || portal?._id || "");
   const isMMI = MMI_PORTALS.includes(
     portalIdString as (typeof MMI_PORTALS)[number],
@@ -347,16 +322,6 @@ const sendDeliveryNotificationsForOrder = async (
   const isSirva = isSirvaOrder(order);
   const isSirvaNonDomestic = Boolean(order?.sirvaNonDomestic);
 
-  logger.info("Delivery notification portal context", {
-    orderId: order._id,
-    refId: order.refId,
-    portalId: portalIdString,
-    isMMI,
-    isSirva,
-    isSirvaNonDomestic,
-    portalEmailCount: portalEmails.length,
-  });
-
   const portalRecipients = normalizeRecipients(
     filterPortalRecipients(
       portalEmails,
@@ -366,16 +331,25 @@ const sendDeliveryNotificationsForOrder = async (
     ),
   );
 
+  const recipients = mergeRecipientsDedupe(agentRecipients, portalRecipients);
+
   logger.info("Delivery notification recipients", {
     orderId: order._id,
     refId: order.refId,
-    portalRecipients: portalRecipients.map((recipient) => recipient.email),
+    portalId: portalIdString,
+    isMMI,
+    isSirva,
+    isSirvaNonDomestic,
+    portalEmailCount: portalEmails.length,
+    agentRecipients: agentRecipients.map((r) => r.email),
+    portalRecipients: portalRecipients.map((r) => r.email),
+    mergedRecipients: recipients.map((r) => r.email),
   });
 
-  if (portalRecipients.length > 0) {
+  if (recipients.length > 0) {
     await sendOrderDeliveryConfirmation({
       order,
-      recipients: portalRecipients,
+      recipients,
     });
   } else {
     logger.info("No delivery notification recipients for order", {

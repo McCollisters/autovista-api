@@ -67,23 +67,24 @@ Implementation: `src/order/tasks/sendSurveyNotifications.ts`, `src/order/notific
 ## Pickup and delivery notifications (cron)
 
 ### Cron schedule
-- Trigger: `initializeCronJobs` in `src/core/cron.ts`
-- Schedule: `0 8,10,12,14,16,18 * * *` (America/New_York)
-- Conditions:
-  - `ENABLE_NOTIFICATION_CRON === "true"`
-  - `NODE_ENV === "production"`
+- Trigger: `initializeCronJobs` in `src/core/cron.ts` (called from `src/index.ts` when cron is enabled)
+- Schedule: `0 6,10,14,20 * * *` (6:00, 10:00, 14:00, and 20:00 daily, America/New_York)
+- Cron is **not** registered when `config.nodeEnv === "staging"` or `DISABLE_CRON_JOBS === "true"` (`src/index.ts`).
+- Inside the job, pickup/delivery sends run only when `NODE_ENV === "production"`; otherwise the handler returns without sending.
 
 ### Pickup confirmations
 - Trigger: `sendPickupDeliveryNotifications` → `sendPickupNotificationsForOrder`
-- Order filters:
+- Order filters (cron query; see `sendPickupDeliveryNotifications`):
   - `notifications.awaitingPickupConfirmation === true`
-  - `updatedAt > NOTIFICATION_CUTOFF_DATE` (default `2024-05-20`)
-  - Status must be `picked_up` (skips if `invoiced` or status mismatch unless `preserveFlags` is used)
-- Recipients:
-  - Portal notification emails where `pickup === true`
-  - MMI portals override recipient list to `autodeskupdates@graebel.com`
-  - Sirva portals filter by `sirvadomestic`/`sirvanondomestic`
-  - Agent emails where `agent.pickup` (or related flags) is true, excluding duplicates already sent to the portal list
+  - `updatedAt` after the cutoff date (`NOTIFICATION_CUTOFF_DATE` if set and valid; otherwise **rolling 60 days** before “now”)
+  - `notifications.agentsPickupConfirmation.sentAt` missing or null
+  - Pickup schedule field (`pickupCompleted`, `pickupEstimated.0`, or `pickupSelected`) within the last **48 hours**
+- Per-order gates in `sendPickupNotificationsForOrder`: status must be `picked_up` (special case skips `invoiced` unless `preserveFlags`); pickup event time must fall within the last 48 hours unless `preserveFlags` is used.
+- **Recipients (single send, merged list):**
+  - **Order agents** on the order who want pickup notifications (`pickup`, `enablePickupNotifications`, or `emailPickUp`).
+  - **Plus** portal addresses from `portal.notificationEmails` (or legacy `portal.emails`) where `pickup === true`, after Sirva domestic/non-domestic filtering when applicable.
+  - **MMI portals** (`MMI_PORTALS`): the portal side of the list is overridden to `autodeskupdates@graebel.com`; agents on the order are still included if they qualify.
+  - Lists are **merged with deduplication** by email (case-insensitive). **Agents are ordered first**, so if the same address appears on both the order and the portal, one email is sent and the agent row wins for casing/name.
 - Implementation:
   - `src/order/tasks/sendPickupDeliveryNotifications.ts`
   - `src/order/notifications/sendOrderPickupConfirmation.ts`
@@ -92,15 +93,16 @@ Implementation: `src/order/tasks/sendSurveyNotifications.ts`, `src/order/notific
 
 ### Delivery confirmations
 - Trigger: `sendPickupDeliveryNotifications` → `sendDeliveryNotificationsForOrder`
-- Order filters:
+- Order filters (cron query):
   - `notifications.awaitingDeliveryConfirmation === true`
-  - `updatedAt > NOTIFICATION_CUTOFF_DATE` (default `2024-05-20`)
-  - Status must be `delivered` or `invoiced` unless `preserveFlags` is used
-- Recipients:
-  - Portal notification emails where `delivery === true`
-  - MMI portals override recipient list to `autodeskupdates@graebel.com`
-  - Sirva portals filter by `sirvadomestic`/`sirvanondomestic`
-  - Agent emails where `agent.delivery` (or related flags) is true, excluding duplicates already sent to the portal list
+  - `updatedAt` after the same cutoff as pickup (env or 60-day rolling window)
+  - `notifications.agentsDeliveryConfirmation.sentAt` missing or null
+  - `deliveryCompleted` or `deliveryEstimated.0` within the last **48 hours**
+- Per-order gates: status must be `delivered` or `invoiced` unless `preserveFlags`; delivery event time within last 48 hours unless `preserveFlags`.
+- **Recipients (single send, merged list):**
+  - **Order agents** who want delivery notifications (`delivery`, `enableDeliveryNotifications`, or `emailDelivery`).
+  - **Plus** portal notification emails where `delivery === true`, with the same Sirva and MMI rules as pickup.
+  - **Dedupe:** same as pickup (agents first, then portal, one email per address).
 - Implementation:
   - `src/order/tasks/sendPickupDeliveryNotifications.ts`
   - `src/order/notifications/sendOrderDeliveryConfirmation.ts`

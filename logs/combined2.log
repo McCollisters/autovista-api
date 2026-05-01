@@ -5304,3 +5304,69 @@
   message: 'Request completed',
   timestamp: '2026-04-01 10:27:29'
 }
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-05-01 08:13:09'
+}
+{
+  service: 'autovista-api',
+  dryRun: true,
+  scanned: 374,
+  ordersUpdated: 372,
+  pickupFlagsCleared: 163,
+  deliveryFlagsCleared: 351,
+  thresholdMeaning: 'event strictly before this instant are cleared',
+  threshold: '2026-04-30T14:13:09.592Z',
+  level: 'info',
+  message: 'Clear stale awaiting pickup/delivery flags — complete',
+  timestamp: '2026-05-01 08:13:10'
+}
+{
+  message: 'Disconnected from MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-05-01 08:13:10'
+}
+{
+  message: 'Connected to MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-05-01 08:13:59'
+}
+{
+  service: 'autovista-api',
+  matched: 250,
+  modified: 250,
+  level: 'info',
+  message: 'Bulk write batch',
+  timestamp: '2026-05-01 08:14:00'
+}
+{
+  service: 'autovista-api',
+  matched: 122,
+  modified: 122,
+  level: 'info',
+  message: 'Bulk write batch',
+  timestamp: '2026-05-01 08:14:00'
+}
+{
+  service: 'autovista-api',
+  dryRun: false,
+  scanned: 374,
+  ordersUpdated: 372,
+  pickupFlagsCleared: 163,
+  deliveryFlagsCleared: 351,
+  thresholdMeaning: 'event strictly before this instant are cleared',
+  threshold: '2026-04-30T14:13:59.214Z',
+  level: 'info',
+  message: 'Clear stale awaiting pickup/delivery flags — complete',
+  timestamp: '2026-05-01 08:14:00'
+}
+{
+  message: 'Disconnected from MongoDB',
+  level: 'info',
+  service: 'autovista-api',
+  timestamp: '2026-05-01 08:14:00'
+}
