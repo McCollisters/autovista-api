@@ -50,6 +50,19 @@ const isAcertusEnabled = (): boolean => {
   return process.env.ENABLE_ACERTUS === "true";
 };
 
+/** Logs and swallows — Acertus must never take down the API on failure. */
+const logAcertusFailure = (
+  operation: string,
+  error: unknown,
+  context?: Record<string, unknown>,
+): void => {
+  logger.error(`acertusClient: ${operation} failed (non-fatal)`, {
+    ...context,
+    error: error instanceof Error ? error.message : String(error),
+    stack: error instanceof Error ? error.stack : undefined,
+  });
+};
+
 /**
  * Sanitize date value to ISO string or null
  */
@@ -557,8 +570,15 @@ export const sendPickupEta = async (order: any, options: any = {}): Promise<void
     return;
   }
 
-  const payload = buildPickupPayload(order, options);
-  await sendToEndpoint(PICKUP_PATH, payload, "pickup_eta", order);
+  try {
+    const payload = buildPickupPayload(order, options);
+    await sendToEndpoint(PICKUP_PATH, payload, "pickup_eta", order);
+  } catch (error) {
+    logAcertusFailure("sendPickupEta", error, {
+      refId: order?.refId,
+      sdGuid: order?.tms?.guid,
+    });
+  }
 };
 
 /**
@@ -574,109 +594,139 @@ export const sendDeliveryEta = async (order: any, options: any = {}): Promise<vo
     return;
   }
 
-  const payload = buildDeliveryPayload(order, options);
-  await sendToEndpoint(DELIVERY_PATH, payload, "delivery_eta", order);
+  try {
+    const payload = buildDeliveryPayload(order, options);
+    await sendToEndpoint(DELIVERY_PATH, payload, "delivery_eta", order);
+  } catch (error) {
+    logAcertusFailure("sendDeliveryEta", error, {
+      refId: order?.refId,
+      sdGuid: order?.tms?.guid,
+    });
+  }
 };
 
 /**
  * Send vehicle assign
  */
 export const sendVehicleAssign = async (order: any): Promise<boolean> => {
-  if (!isAcertusEnabled()) {
-    logger.debug("acertusClient: Acertus integration disabled, skipping sendVehicleAssign");
+  try {
+    if (!isAcertusEnabled()) {
+      logger.debug("acertusClient: Acertus integration disabled, skipping sendVehicleAssign");
+      return false;
+    }
+
+    if (!isAutonationPortal(order)) {
+      return false;
+    }
+
+    const payload = buildAssignPayload(order);
+    return await sendToEndpoint(ASSIGN_PATH, payload, "load_assign", order);
+  } catch (error) {
+    logAcertusFailure("sendVehicleAssign", error, {
+      refId: order?.refId,
+      sdGuid: order?.tms?.guid,
+    });
     return false;
   }
-
-  if (!isAutonationPortal(order)) {
-    return false;
-  }
-
-  const payload = buildAssignPayload(order);
-  return sendToEndpoint(ASSIGN_PATH, payload, "load_assign", order);
 };
 
 /**
  * Send vehicle create - Creates vehicles in Acertus
  */
 export const sendVehicleCreate = async (order: any): Promise<Array<{ payload: any; success: boolean }>> => {
-  if (!isAutonationPortal(order)) {
-    return [];
-  }
+  try {
+    if (!isAutonationPortal(order)) {
+      return [];
+    }
 
-  const vehiclePayloads = buildVehicleCreatePayloads(order);
+    const vehiclePayloads = buildVehicleCreatePayloads(order);
 
-  if (vehiclePayloads.length === 0) {
-    logger.warn("acertusClient: No vehicles found for create payload", {
-      refId: order.refId,
-      sdGuid: order.tms?.guid,
+    if (vehiclePayloads.length === 0) {
+      logger.warn("acertusClient: No vehicles found for create payload", {
+        refId: order.refId,
+        sdGuid: order.tms?.guid,
+      });
+      return [];
+    }
+
+    const results = [];
+
+    for (const payload of vehiclePayloads) {
+      const success = await sendToEndpoint(
+        CUSTOMER_VEHICLE_PATH,
+        payload,
+        "customer_vehicle_create",
+        order,
+      );
+      results.push({ payload, success });
+    }
+
+    return results;
+  } catch (error) {
+    logAcertusFailure("sendVehicleCreate", error, {
+      refId: order?.refId,
+      sdGuid: order?.tms?.guid,
     });
     return [];
   }
-
-  const results = [];
-
-  for (const payload of vehiclePayloads) {
-    const success = await sendToEndpoint(
-      CUSTOMER_VEHICLE_PATH,
-      payload,
-      "customer_vehicle_create",
-      order,
-    );
-    results.push({ payload, success });
-  }
-
-  return results;
 };
 
 /**
  * Send update to Acertus API endpoint
  */
 const sendUpdate = async (eventType: string, order: any, details: any = {}): Promise<void> => {
-  if (!isAutonationPortal(order)) {
-    return;
-  }
-
-  if (!API_ENDPOINT) {
-    logger.warn(
-      "acertusClient: ACERTUS_API_URL is not configured, skipping update",
-      { eventType },
-    );
-    return;
-  }
-
-  const payload = {
-    ...buildBasePayload(order),
-    eventType,
-    sentAt: new Date().toISOString(),
-    details,
-  };
-
-  const headers: any = {
-    "Content-Type": "application/json",
-  };
-
-  if (API_KEY) {
-    headers.Authorization = `Bearer ${API_KEY}`;
-  }
-
   try {
-    await axios.post(API_ENDPOINT, payload, {
-      headers,
-      timeout: DEFAULT_TIMEOUT_MS,
-    });
-    logger.info("acertusClient: Successfully sent update", {
+    if (!isAutonationPortal(order)) {
+      return;
+    }
+
+    if (!API_ENDPOINT) {
+      logger.warn(
+        "acertusClient: ACERTUS_API_URL is not configured, skipping update",
+        { eventType },
+      );
+      return;
+    }
+
+    const payload = {
+      ...buildBasePayload(order),
       eventType,
-      refId: order.refId,
-      sdGuid: order.tms?.guid,
-    });
+      sentAt: new Date().toISOString(),
+      details,
+    };
+
+    const headers: any = {
+      "Content-Type": "application/json",
+    };
+
+    if (API_KEY) {
+      headers.Authorization = `Bearer ${API_KEY}`;
+    }
+
+    try {
+      await axios.post(API_ENDPOINT, payload, {
+        headers,
+        timeout: DEFAULT_TIMEOUT_MS,
+      });
+      logger.info("acertusClient: Successfully sent update", {
+        eventType,
+        refId: order.refId,
+        sdGuid: order.tms?.guid,
+      });
+    } catch (error) {
+      logger.error("acertusClient: Failed to send update", {
+        eventType,
+        refId: order.refId,
+        sdGuid: order.tms?.guid,
+        error: error instanceof Error ? error.message : String(error),
+        status: (error as any).response?.status,
+        data: (error as any).response?.data,
+      });
+    }
   } catch (error) {
-    logger.error("acertusClient: Failed to send update", {
-      eventType,
-      refId: order.refId,
-      sdGuid: order.tms?.guid,
-      error: error instanceof Error ? error.message : String(error),
-      status: (error as any).response?.status,
-      data: (error as any).response?.data,
+    logAcertusFailure(`sendUpdate:${eventType}`, error, {
+      refId: order?.refId,
+      sdGuid: order?.tms?.guid,
     });
   }
 };
@@ -685,58 +735,79 @@ const sendUpdate = async (eventType: string, order: any, details: any = {}): Pro
  * Notify order created
  */
 export const notifyOrderCreated = async (order: any): Promise<void> => {
-  if (!isAutonationPortal(order)) {
-    return;
+  try {
+    if (!isAutonationPortal(order)) {
+      return;
+    }
+
+    await sendUpdate("order_created", order, {
+      source: "autovista-api",
+    });
+
+    await Promise.all([sendPickupEta(order), sendDeliveryEta(order)]);
+  } catch (error) {
+    logAcertusFailure("notifyOrderCreated", error, {
+      refId: order?.refId,
+      sdGuid: order?.tms?.guid,
+    });
   }
-
-  await sendUpdate("order_created", order, {
-    source: "autovista-api",
-  });
-
-  await Promise.all([sendPickupEta(order), sendDeliveryEta(order)]);
 };
 
 /**
  * Notify order picked up
  */
 export const notifyOrderPickedUp = async (order: any): Promise<void> => {
-  if (!isAutonationPortal(order)) {
-    return;
+  try {
+    if (!isAutonationPortal(order)) {
+      return;
+    }
+
+    const actualDate =
+      order.schedule?.pickupCompleted ||
+      order.schedule?.pickupSelected ||
+      order.schedule?.pickupEstimated?.[0] ||
+      new Date();
+
+    await Promise.all([
+      sendUpdate("order_picked_up", order, {
+        pickupActualAt: sanitizeDate(actualDate),
+      }),
+      sendPickupEta(order, { eta: actualDate }),
+    ]);
+  } catch (error) {
+    logAcertusFailure("notifyOrderPickedUp", error, {
+      refId: order?.refId,
+      sdGuid: order?.tms?.guid,
+    });
   }
-
-  const actualDate =
-    order.schedule?.pickupCompleted ||
-    order.schedule?.pickupSelected ||
-    order.schedule?.pickupEstimated?.[0] ||
-    new Date();
-
-  await Promise.all([
-    sendUpdate("order_picked_up", order, {
-      pickupActualAt: sanitizeDate(actualDate),
-    }),
-    sendPickupEta(order, { eta: actualDate }),
-  ]);
 };
 
 /**
  * Notify order delivered
  */
 export const notifyOrderDelivered = async (order: any): Promise<void> => {
-  if (!isAutonationPortal(order)) {
-    return;
+  try {
+    if (!isAutonationPortal(order)) {
+      return;
+    }
+
+    const actualDate =
+      order.schedule?.deliveryCompleted ||
+      order.schedule?.deliveryEstimated?.[0] ||
+      new Date();
+
+    await Promise.all([
+      sendUpdate("order_delivered", order, {
+        deliveryActualAt: sanitizeDate(actualDate),
+      }),
+      sendDeliveryEta(order, { eta: actualDate }),
+    ]);
+  } catch (error) {
+    logAcertusFailure("notifyOrderDelivered", error, {
+      refId: order?.refId,
+      sdGuid: order?.tms?.guid,
+    });
   }
-
-  const actualDate =
-    order.schedule?.deliveryCompleted ||
-    order.schedule?.deliveryEstimated?.[0] ||
-    new Date();
-
-  await Promise.all([
-    sendUpdate("order_delivered", order, {
-      deliveryActualAt: sanitizeDate(actualDate),
-    }),
-    sendDeliveryEta(order, { eta: actualDate }),
-  ]);
 };
 
 /**
@@ -746,37 +817,44 @@ export const notifyOrderScheduleUpdated = async (
   order: any,
   { pickupDatesChanged = false, deliveryDatesChanged = false }: any = {},
 ): Promise<void> => {
-  if (!isAutonationPortal(order)) {
-    return;
-  }
+  try {
+    if (!isAutonationPortal(order)) {
+      return;
+    }
 
-  const tasks = [
-    sendUpdate("order_schedule_updated", order, {
-      pickupDatesChanged,
-      deliveryDatesChanged,
-    }),
-  ];
-
-  if (pickupDatesChanged) {
-    tasks.push(
-      sendPickupEta(order, {
-        eta:
-          order.schedule?.pickupSelected ||
-          order.schedule?.pickupEstimated?.[0] ||
-          new Date(),
+    const tasks = [
+      sendUpdate("order_schedule_updated", order, {
+        pickupDatesChanged,
+        deliveryDatesChanged,
       }),
-    );
-  }
+    ];
 
-  if (deliveryDatesChanged) {
-    tasks.push(
-      sendDeliveryEta(order, {
-        eta: order.schedule?.deliveryEstimated?.[0] || new Date(),
-      }),
-    );
-  }
+    if (pickupDatesChanged) {
+      tasks.push(
+        sendPickupEta(order, {
+          eta:
+            order.schedule?.pickupSelected ||
+            order.schedule?.pickupEstimated?.[0] ||
+            new Date(),
+        }),
+      );
+    }
 
-  await Promise.all(tasks);
+    if (deliveryDatesChanged) {
+      tasks.push(
+        sendDeliveryEta(order, {
+          eta: order.schedule?.deliveryEstimated?.[0] || new Date(),
+        }),
+      );
+    }
+
+    await Promise.all(tasks);
+  } catch (error) {
+    logAcertusFailure("notifyOrderScheduleUpdated", error, {
+      refId: order?.refId,
+      sdGuid: order?.tms?.guid,
+    });
+  }
 };
 
 export { AUTONATION_PORTAL_ID };

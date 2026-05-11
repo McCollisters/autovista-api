@@ -447,7 +447,7 @@ async function processAcertusLoad(data: any): Promise<void> {
         }
       }
 
-      throw saveError;
+      return;
     }
   } catch (error) {
     logger.error("Error in processAcertusLoad:", {
@@ -455,7 +455,6 @@ async function processAcertusLoad(data: any): Promise<void> {
       stack: error instanceof Error ? error.stack : undefined,
       loadNumber: data?.load?.number,
     });
-    throw error;
   }
 }
 
