@@ -5,8 +5,9 @@
  */
 
 import { logger } from "@/core/logger";
-import { IOrder, IPortal } from "@/_global/models";
+import { IPortal } from "@/_global/models";
 import { DateTime } from "luxon";
+import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
 
 interface SendOrderToSuperParams {
   quotes: any[];
@@ -101,23 +102,6 @@ export const sendOrderToSuper = async (
         .toUTC()
         .toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")}+0000`;
 
-    const resolveVehicleType = (pricingClass?: string | null) => {
-      const normalized = normalizeText(pricingClass).toLowerCase();
-      if (!normalized) {
-        return "other";
-      }
-      const mappedTypes: Record<string, string> = {
-        sedan: "sedan",
-        suv: "suv",
-        van: "van",
-        pickup_4_doors: "4_door_pickup",
-        pickup_2_doors: "2_door_pickup",
-        pickup: "pickup",
-        other: "other",
-      };
-      return mappedTypes[normalized] || "other";
-    };
-
     // Format vehicles for Super Dispatch
     const formattedVehicles = quotes.map((quote) => {
       const isInoperable = Boolean((quote as any).isInoperable);
@@ -129,7 +113,7 @@ export const sendOrderToSuper = async (
         year: Number.isFinite(parsedYear) ? parsedYear : null,
         vin: vinValue || null,
         operable: !isInoperable,
-        type: resolveVehicleType(quote.pricingClass),
+        type: mapPricingClassToSuperDispatchVehicleType(quote.pricingClass),
       };
     });
 

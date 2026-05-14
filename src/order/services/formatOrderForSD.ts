@@ -2,6 +2,7 @@ import { IOrder } from "@/_global/models";
 import { IAddress } from "../../_global/interfaces";
 import { getDeliveryRanges } from "./getDeliveryRanges";
 import { Portal } from "@/_global/models";
+import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
 
 function formatAddress({ address, addressLine2 }: IAddress): string {
   return addressLine2 ? `${address} ${addressLine2}` : address || "";
@@ -41,7 +42,7 @@ export const formatOrderForSD = async (order: IOrder) => {
         model: vehicle.model,
         is_inoperable: vehicle.isInoperable,
         tariff: vehicle.pricing?.base,
-        pricingClass: vehicle.pricingClass,
+        type: mapPricingClassToSuperDispatchVehicleType(vehicle.pricingClass),
       };
     });
 

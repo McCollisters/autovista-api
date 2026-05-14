@@ -10,6 +10,7 @@ import { IPortal } from "@/_global/models";
 import { IVehicle } from "@/_global/schemas/types";
 import { DateTime } from "luxon";
 import { authenticateSuperDispatch } from "@/_global/integrations/authenticateSuperDispatch";
+import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
 
 interface VehicleWithCalculatedQuotes extends IVehicle {
   calculatedQuotes?: any[] | string;
@@ -109,23 +110,6 @@ export const sendPartialOrderToSuper = async (
       return value;
     };
 
-    const resolveVehicleType = (pricingClass?: string | null) => {
-      const normalized = normalizeText(pricingClass).toLowerCase();
-      if (!normalized) {
-        return "other";
-      }
-      const mappedTypes: Record<string, string> = {
-        sedan: "sedan",
-        suv: "suv",
-        van: "van",
-        pickup_4_doors: "4_door_pickup",
-        pickup_2_doors: "2_door_pickup",
-        pickup: "pickup",
-        other: "other",
-      };
-      return mappedTypes[normalized] || "other";
-    };
-
     const normalizedServiceLevel = Number(serviceLevel);
     const totalsKey =
       normalizedServiceLevel === 1
@@ -199,7 +183,7 @@ export const sendPartialOrderToSuper = async (
         make,
         model,
         is_inoperable: inoperable,
-        type: resolveVehicleType(quote.pricingClass),
+        type: mapPricingClassToSuperDispatchVehicleType(quote.pricingClass),
         year: Number.isFinite(parsedYear) ? parsedYear : null,
         vin: vinValue || null,
       };

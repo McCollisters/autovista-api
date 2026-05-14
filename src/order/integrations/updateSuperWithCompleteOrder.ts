@@ -9,6 +9,7 @@ import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
 import { authenticateSuperDispatch } from "@/_global/integrations/authenticateSuperDispatch";
 import { DateTime } from "luxon";
+import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
 
 /**
  * Update partial order in Super Dispatch with complete order details
@@ -102,23 +103,6 @@ export const updateSuperWithCompleteOrder = async (
     const normalizeText = (value?: string | number | null) =>
       value == null ? "" : String(value).trim();
 
-    const resolveVehicleType = (pricingClass?: string | null) => {
-      const normalized = normalizeText(pricingClass).toLowerCase();
-      if (!normalized) {
-        return "other";
-      }
-      const mappedTypes: Record<string, string> = {
-        sedan: "sedan",
-        suv: "suv",
-        van: "van",
-        pickup_4_doors: "4_door_pickup",
-        pickup_2_doors: "2_door_pickup",
-        pickup: "pickup",
-        other: "other",
-      };
-      return mappedTypes[normalized] || "other";
-    };
-
     const toFloatOrNull = (value?: string | number | null) => {
       if (value == null) {
         return null;
@@ -145,7 +129,9 @@ export const updateSuperWithCompleteOrder = async (
       // Determine if vehicle is inoperable
       const inoperable = Boolean(vehicle.isInoperable === true);
 
-      const type = resolveVehicleType(vehicle.pricingClass);
+      const type = mapPricingClassToSuperDispatchVehicleType(
+        vehicle.pricingClass,
+      );
 
       // Get corresponding vehicle from Super Dispatch by index
       const sdVehicle = sdVehicles[index] || {}; // Use empty object if no match
