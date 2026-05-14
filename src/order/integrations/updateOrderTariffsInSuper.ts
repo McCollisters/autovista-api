@@ -1,6 +1,7 @@
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
 import { authenticateSuperDispatch } from "@/_global/integrations/authenticateSuperDispatch";
+import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
 
 export const updateOrderTariffsInSuper = async (
   order: IOrder,
@@ -63,10 +64,16 @@ export const updateOrderTariffsInSuper = async (
       (key && sdVehiclesByMakeModel.get(key)) || sdVehicles[index] || {};
     const totalValue = Number(vehicle?.pricing?.total);
     const tariff = Number.isFinite(totalValue) ? totalValue : 0;
+    const type = mapPricingClassToSuperDispatchVehicleType(
+      vehicle.pricingClass,
+    );
+    const isInoperable = Boolean(vehicle.isInoperable === true);
 
     return {
       ...sdVehicle,
       tariff,
+      type,
+      is_inoperable: isInoperable,
     };
   });
 

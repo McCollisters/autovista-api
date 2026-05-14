@@ -92,6 +92,7 @@ export const updateOrder = async (
 
     const existingOrder = await Order.findById(req.params.orderId);
     const previousHasPaid = existingOrder?.hasPaid === true;
+    let pushedVehicleSnapshotToSuper = false;
 
     let updatedOrder = await Order.findByIdAndUpdate(
       req.params.orderId,
@@ -251,6 +252,7 @@ export const updateOrder = async (
       if (updatedOrder.tms?.guid) {
         try {
           await updateOrderTariffsInSuper(updatedOrder);
+          pushedVehicleSnapshotToSuper = true;
         } catch (error) {
           logger.error("Failed to update Super Dispatch tariffs", {
             orderId: updatedOrder._id,
@@ -364,6 +366,23 @@ export const updateOrder = async (
 
     if (shouldSave) {
       await updatedOrder.save();
+    }
+
+    if (
+      updatedOrder.tms?.guid &&
+      Array.isArray(req.body?.vehicles) &&
+      !pushedVehicleSnapshotToSuper
+    ) {
+      try {
+        await updateOrderTariffsInSuper(updatedOrder);
+        pushedVehicleSnapshotToSuper = true;
+      } catch (error) {
+        logger.error("Failed to sync Super Dispatch vehicles after update", {
+          orderId: updatedOrder._id,
+          tmsGuid: updatedOrder.tms?.guid,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
     }
 
     res.status(200).json(updatedOrder);
