@@ -494,15 +494,17 @@ const sendToEndpoint = async (
   }
 
   try {
-    await axios.post(url, body, {
+    const response = await axios.post(url, body, {
       headers,
       timeout: DEFAULT_TIMEOUT_MS,
     });
-    logger.info("acertusClient: Successfully sent vehichaul update", {
+    logger.info("acertusClient: Acertus vehichaul request completed", {
       eventType,
       refId: order.refId,
       sdGuid: order.tms?.guid,
       url,
+      httpStatus: response.status,
+      responseData: response.data,
     });
     return true;
   } catch (error) {
@@ -704,20 +706,24 @@ const sendUpdate = async (eventType: string, order: any, details: any = {}): Pro
     }
 
     try {
-      await axios.post(API_ENDPOINT, payload, {
+      const response = await axios.post(API_ENDPOINT, payload, {
         headers,
         timeout: DEFAULT_TIMEOUT_MS,
       });
-      logger.info("acertusClient: Successfully sent update", {
+      logger.info("acertusClient: Acertus order-updates request completed", {
         eventType,
         refId: order.refId,
         sdGuid: order.tms?.guid,
+        url: API_ENDPOINT,
+        httpStatus: response.status,
+        responseData: response.data,
       });
     } catch (error) {
       logger.error("acertusClient: Failed to send update", {
         eventType,
         refId: order.refId,
         sdGuid: order.tms?.guid,
+        url: API_ENDPOINT,
         error: error instanceof Error ? error.message : String(error),
         status: (error as any).response?.status,
         data: (error as any).response?.data,
