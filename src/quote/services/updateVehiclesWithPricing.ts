@@ -636,7 +636,8 @@ export const updateVehiclesWithPricing = async ({
             };
             
             // Use mapped value if available, otherwise use the original (schema validation will catch invalid values)
-            pricingClass = pricingClassMap[normalizedPricingClass] || modelData.pricingClass;
+            pricingClass = (pricingClassMap[normalizedPricingClass] ||
+              modelData.pricingClass) as typeof VehicleClass[keyof typeof VehicleClass];
           }
         }
       } catch (error) {
