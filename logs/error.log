@@ -1,0 +1,55 @@
+{
+  service: 'autovista-api',
+  vin: 'WP1BA2AY4PDA25376',
+  url: 'https://mccollistersstaging.vehichaul.com/api/connect/customer/vehicle?vin=WP1BA2AY4PDA25376',
+  error: 'Request failed with status code 401',
+  status: 401,
+  data: '{error:"Bad credentials"}',
+  level: 'error',
+  message: 'acertusClient: Vehicle status by VIN failed (non-fatal)',
+  timestamp: '2026-05-17 21:58:58'
+}
+{
+  service: 'autovista-api',
+  vin: 'WP1BA2AY4PDA25376',
+  url: 'https://mccollistersstaging.vehichaul.com/api/connect/customer/vehicle?vin=WP1BA2AY4PDA25376',
+  error: 'Request failed with status code 401',
+  status: 401,
+  data: '{error:"Bad credentials"}',
+  level: 'error',
+  message: 'acertusClient: Vehicle status by VIN failed (non-fatal)',
+  timestamp: '2026-05-17 22:00:07'
+}
+{
+  service: 'autovista-api',
+  vin: 'WP1BA2AY4PDA25376',
+  url: 'https://mccollisters.vehichaul.com/api/connect/customer/vehicle?vin=WP1BA2AY4PDA25376',
+  error: 'Request failed with status code 401',
+  status: 401,
+  data: '{error:"Bad credentials"}',
+  level: 'error',
+  message: 'acertusClient: Vehicle status by VIN failed (non-fatal)',
+  timestamp: '2026-05-17 22:01:52'
+}
+{
+  service: 'autovista-api',
+  vin: 'WP1BA2AY4PDA25376',
+  url: 'https://mccollisters.vehichaul.com/api/connect/customer/vehicle?vin=WP1BA2AY4PDA25376',
+  error: 'Request failed with status code 401',
+  status: 401,
+  data: '{error:"Bad credentials"}',
+  level: 'error',
+  message: 'acertusClient: Vehicle status by VIN failed (non-fatal)',
+  timestamp: '2026-05-17 22:03:08'
+}
+{
+  service: 'autovista-api',
+  vin: 'WP1BA2AY4PDA25376',
+  url: 'https://mccollisters.vehichaul.com/api/connect/customer/vehicle?vin=WP1BA2AY4PDA25376',
+  error: 'Request failed with status code 401',
+  status: 401,
+  data: '{error:"Bad credentials"}',
+  level: 'error',
+  message: 'acertusClient: Vehicle status by VIN failed (non-fatal)',
+  timestamp: '2026-05-17 22:03:45'
+}
