@@ -6,6 +6,10 @@ import { getJKBaseRate } from "../integrations/getJKBaseRate";
 import { ServiceLevelOption, VehicleClass } from "../../_global/enums";
 import { IVehicleModifier, IModifierSet } from "../../modifierSet/schema";
 import { roundCurrency } from "../../_global/utils/roundCurrency";
+import {
+  isPre1975ClassicModel,
+  shouldAutoSetVehicleOversize,
+} from "../../_global/utils/vehicleOversize";
 import { Types } from "mongoose";
 
 interface VehiclePriceParams {
@@ -224,12 +228,27 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
       : globalModifiers.oversize;
 
   if (oversizeModifiers) {
+    const oversizeValueType = oversizeModifiers.valueType || "flat";
+
+    // Pre-1975 classic (e.g. "Other-pre 1975 classic") — always oversize surcharge
+    if (isPre1975ClassicModel(vehicle.model)) {
+      const pre1975Rate =
+        oversizeModifiers.default ??
+        oversizeModifiers.suv ??
+        oversizeModifiers.van ??
+        oversizeModifiers.pickup_4_doors ??
+        oversizeModifiers.pickup_2_doors;
+      if (pre1975Rate !== undefined && pre1975Rate !== null) {
+        calculatedGlobalOversize = calculateModifier(
+          { value: pre1975Rate, valueType: oversizeValueType },
+          base,
+        );
+      }
+    } else {
     // Normalize pricing class to ensure it matches enum values (case-insensitive)
     const pricingClassNormalized = (vehicle.pricingClass || "")
       .toLowerCase()
       .trim();
-    const oversizeValueType =
-      oversizeModifiers.valueType || "flat";
 
     // Check for SUV
     if (
@@ -306,6 +325,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
         { value: oversizeModifiers.default, valueType: oversizeValueType },
         base,
       );
+    }
     }
   }
 
@@ -651,12 +671,10 @@ export const updateVehiclesWithPricing = async ({
     // Determine final pricing class
     const finalPricingClass = pricingClass || vehicle.pricingClass || VehicleClass.Sedan;
     
-    // Automatically set isOversize to true for SUVs, vans, and pickups if not explicitly set
-    const shouldBeOversize = 
-      finalPricingClass === VehicleClass.SUV ||
-      finalPricingClass === VehicleClass.Van ||
-      finalPricingClass === VehicleClass.Pickup2Door ||
-      finalPricingClass === VehicleClass.Pickup4Door;
+    const shouldBeOversize = shouldAutoSetVehicleOversize({
+      model: vehicle.model,
+      pricingClass: finalPricingClass,
+    });
     
     // Use the looked-up pricing class (or existing one if lookup didn't find anything)
     const vehicleWithPricingClass = {

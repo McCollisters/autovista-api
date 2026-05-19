@@ -239,6 +239,27 @@ describe("updateVehiclesWithPricing", () => {
       expect(result[0].pricing?.modifiers.oversize).toBe(200); // From mock modifier set SUV value
     });
 
+    it("should apply oversize for Other-pre 1975 classic model (sedan class)", async () => {
+      const vehicles = [
+        createMockVehicle({
+          model: "Other-pre 1975 classic",
+          pricingClass: VehicleClass.Sedan,
+        }),
+      ];
+
+      const result = await updateVehiclesWithPricing({
+        portal: createMockPortal(),
+        vehicles,
+        miles: 1000,
+        origin: "New York, NY",
+        destination: "Los Angeles, CA",
+        commission: 50,
+      });
+
+      expect(result[0].isOversize).toBe(true);
+      expect(result[0].pricing?.modifiers.oversize).toBe(175); // default oversize rate in mock set
+    });
+
     it("should apply enclosed modifiers for enclosed transport", async () => {
       const vehicles = [
         createMockVehicle({ transportType: TransportType.Enclosed }),
