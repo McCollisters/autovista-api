@@ -10,8 +10,25 @@ import { customAlphabet } from "nanoid";
 import { logger } from "@/core/logger";
 import { getTransitTimeFromSettings } from "../services/getTransitTimeFromSettings";
 import { resolveId } from "@/_global/utils/resolveId";
+import {
+  getMinimumCustomerPickupDate,
+  isPickupDateAllowed,
+  parseDateOnlyInput,
+} from "../utils/customerPickupDate";
+import { sendQuoteEmailToCustomer } from "../services/sendQuoteEmailToCustomer";
 
 const nanoid = customAlphabet("1234567890abcdef", 10);
+
+/** Normalize and extract customer email from public quote payloads (nested or flat). */
+function normalizeCustomerEmail(body: Record<string, unknown>): string | null {
+  const pick = (v: unknown): string => (typeof v === "string" ? v.trim() : "");
+  const raw =
+    pick((body?.customer as { email?: unknown } | undefined)?.email) ||
+    pick(body?.customerEmail) ||
+    pick(body?.email);
+  if (!raw) return null;
+  return raw.toLowerCase();
+}
 
 /**
  * POST /api/v1/quote/customer
@@ -33,7 +50,6 @@ export const createQuoteCustomer = async (
       customerFirstName,
       customerLastName,
       customerFullName,
-      customerEmail,
       customer,
       pickup,
       delivery,
@@ -41,6 +57,7 @@ export const createQuoteCustomer = async (
       portalId,
       instance,
       transportType,
+      pickupStartDate: pickupStartDateRaw,
     } = req.body;
     const resolvedPortalId = resolveId(req.body?.portal ?? portalId);
 
@@ -154,8 +171,7 @@ export const createQuoteCustomer = async (
         : customerFullName
         ? formatName(customerFullName)
         : null;
-    const formattedEmail =
-      customer?.email?.toLowerCase?.() || customerEmail?.toLowerCase() || null;
+    const formattedEmail = normalizeCustomerEmail(req.body as Record<string, unknown>);
 
     // Validate locations
     const originValidated = await validateLocation(pickup);
@@ -201,14 +217,58 @@ export const createQuoteCustomer = async (
     }
 
     let transitTime: [number, number] | null = null;
+    let holidayDates: Date[] = [];
     try {
       const settings = await Settings.findOne({}).sort({ updatedAt: -1 });
       const transitTimes = Array.isArray(settings?.transitTimes)
         ? settings.transitTimes
         : [];
       transitTime = getTransitTimeFromSettings(miles, transitTimes);
+      holidayDates = Array.isArray(settings?.holidays)
+        ? settings.holidays.map((h: Date | string) =>
+            h instanceof Date ? h : new Date(h),
+          )
+        : [];
     } catch (error) {
       transitTime = null;
+    }
+
+    let pickupStartDate: Date | undefined;
+    if (
+      pickupStartDateRaw !== undefined &&
+      pickupStartDateRaw !== null &&
+      pickupStartDateRaw !== ""
+    ) {
+      const rawStr =
+        typeof pickupStartDateRaw === "string"
+          ? pickupStartDateRaw
+          : String(pickupStartDateRaw);
+      const parsed =
+        parseDateOnlyInput(rawStr) ||
+        (() => {
+          const d = new Date(rawStr);
+          return isNaN(d.getTime()) ? null : d;
+        })();
+      if (!parsed) {
+        return next({
+          statusCode: 400,
+          message: "Please enter a valid pickup date.",
+        });
+      }
+      const normalizedPickup = new Date(
+        parsed.getFullYear(),
+        parsed.getMonth(),
+        parsed.getDate(),
+      );
+      const minPickup = getMinimumCustomerPickupDate(new Date(), holidayDates);
+      if (!isPickupDateAllowed(normalizedPickup, minPickup, holidayDates)) {
+        return next({
+          statusCode: 400,
+          message:
+            "Pickup date must be at least three business days from today and cannot fall on a weekend or holiday.",
+        });
+      }
+      pickupStartDate = normalizedPickup;
     }
 
     // Get portal
@@ -267,32 +327,71 @@ export const createQuoteCustomer = async (
       miles,
       transitTime: transitTime ?? [],
       ...(transportType && { transportType: transportType as TransportType }),
+      // Stored on Quote.pickupStartDate (see quote schema) when the client sends a valid date.
+      ...(pickupStartDate && { pickupStartDate }),
       vehicles: vehicleQuotes,
       totalPricing,
     };
 
     const quote = await new Quote(quoteData).save();
 
-    // TODO: Send quote email if customer email provided
-    // if (customerEmail) {
-    //   try {
-    //     const { sendQuoteCustomer } = await import("../notifications/sendQuoteCustomer");
-    //     await sendQuoteCustomer(quote);
-    //   } catch (emailError) {
-    //     logger.warn("Failed to send quote customer email", {
-    //       error: emailError instanceof Error ? emailError.message : emailError,
-    //       quoteId: quote._id,
-    //     });
-    //   }
-    // }
+    let quoteConfirmationEmailSent = false;
+    let quoteConfirmationEmailError: string | undefined;
+
+    if (!formattedEmail) {
+      logger.warn(
+        "createQuoteCustomer: no customer email in request; skipping confirmation email",
+        {
+          quoteId: quote._id,
+          hasCustomerObject: !!req.body?.customer,
+        },
+      );
+    } else {
+      try {
+        const emailResult = await sendQuoteEmailToCustomer(
+          quote.toObject(),
+          formattedEmail,
+        );
+        quoteConfirmationEmailSent = emailResult.success;
+        if (!emailResult.success) {
+          quoteConfirmationEmailError = emailResult.error;
+          logger.warn("Failed to send customer quote confirmation email", {
+            quoteId: quote._id,
+            recipientEmail: formattedEmail,
+            error: emailResult.error,
+          });
+        } else {
+          logger.info("Customer quote confirmation email sent", {
+            quoteId: quote._id,
+            recipientEmail: formattedEmail,
+          });
+        }
+      } catch (emailError) {
+        quoteConfirmationEmailError =
+          emailError instanceof Error ? emailError.message : String(emailError);
+        logger.warn("Failed to send customer quote confirmation email", {
+          error: quoteConfirmationEmailError,
+          quoteId: quote._id,
+        });
+      }
+    }
 
     logger.info(`Customer created quote ${quote.refId}`, {
       quoteId: quote._id,
       refId: quote.refId,
       trackingCode: userFriendlyId,
+      pickupStartDate: quote.pickupStartDate ?? null,
+      quoteConfirmationEmailSent,
     });
 
-    res.status(200).json(quote);
+    const quoteJson = quote.toObject();
+    res.status(200).json({
+      ...quoteJson,
+      quoteConfirmationEmailSent,
+      ...(quoteConfirmationEmailError && {
+        quoteConfirmationEmailError,
+      }),
+    });
   } catch (error) {
     logger.error("Error creating customer quote", {
       error: error instanceof Error ? error.message : error,
