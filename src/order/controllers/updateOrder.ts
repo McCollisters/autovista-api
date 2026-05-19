@@ -5,6 +5,10 @@ import { PaymentType, TransportType } from "@/_global/enums";
 import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper";
 import { updateOrderTariffsInSuper } from "../integrations/updateOrderTariffsInSuper";
 import { resolveId } from "@/_global/utils/resolveId";
+import {
+  didOrderVehiclePricingClassChange,
+  recalculateOrderVehiclesAfterPricingClassChange,
+} from "../services/recalculateOrderVehiclePricingForClassChange";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   const byEmail = new Map<string, any>();
@@ -113,6 +117,38 @@ export const updateOrder = async (
         validTransportTypes.includes(transportTypeNormalized as TransportType)
       ) {
         updatedOrder.transportType = transportTypeNormalized as TransportType;
+      }
+    }
+
+    if (
+      existingOrder &&
+      didOrderVehiclePricingClassChange(
+        existingOrder.vehicles,
+        updatedOrder.vehicles,
+      )
+    ) {
+      const portalForPricing = await Portal.findById(updatedOrder.portalId);
+      if (portalForPricing) {
+        try {
+          updatedOrder = await recalculateOrderVehiclesAfterPricingClassChange(
+            updatedOrder,
+            portalForPricing as any,
+          );
+        } catch (error) {
+          logger.error(
+            "Failed to recalculate vehicle pricing after pricingClass change",
+            {
+              orderId: updatedOrder._id,
+              refId: updatedOrder.refId,
+              error: error instanceof Error ? error.message : String(error),
+            },
+          );
+        }
+      } else {
+        logger.warn(
+          "Skipping vehicle pricing recalc after class change: portal not found",
+          { orderId: updatedOrder._id },
+        );
       }
     }
 

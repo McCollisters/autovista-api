@@ -202,6 +202,7 @@ const orderSchemaDefinition = {
       vin: { type: String },
       class: { type: String },
       isInoperable: { type: Boolean, required: true, default: false },
+      isOversize: { type: Boolean, default: false },
       pricingClass: {
         type: String,
         enum: Object.values(VehicleClass),

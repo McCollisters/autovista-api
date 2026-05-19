@@ -591,6 +591,7 @@ export const updateVehiclesWithPricing = async ({
   origin,
   destination,
   commission,
+  options,
 }: {
   portal: IPortal;
   vehicles: Array<Partial<IVehicle>>;
@@ -598,14 +599,15 @@ export const updateVehiclesWithPricing = async ({
   origin: string;
   destination: string;
   commission: number;
+  options?: { skipBrandModelPricingClassLookup?: boolean };
 }): Promise<IVehicle[]> => {
   const updatedVehicles: IVehicle[] = [];
 
   for (const vehicle of vehicles) {
     // Look up pricing class from brand/model data if not already set or if it needs to be corrected
     let pricingClass = vehicle.pricingClass;
-    
-    if (vehicle.make && vehicle.model) {
+
+    if (!options?.skipBrandModelPricingClassLookup && vehicle.make && vehicle.model) {
       try {
         const brand = await Brand.findOne({ 
           make: { $regex: new RegExp(`^${vehicle.make}$`, 'i') } 
