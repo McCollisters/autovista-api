@@ -17,11 +17,7 @@ import { sendOrderNotification } from "@/notification/orderNotifications";
 import { formatVehiclesPlain } from "./utils/formatVehiclesPlain";
 import { formatOrderStatusDetailEmailDates } from "./utils/formatOrderStatusDetailEmailDates";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
-<<<<<<< HEAD
-import { isOrderWhiteGlove } from "@/_global/utils/formatTransportTypeLabel";
-=======
 import { resolveOrderCustomerEmailForTracking } from "../utils/resolveOrderCustomerEmailForTracking";
->>>>>>> 42dea90 (order flow updates)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -162,38 +158,13 @@ export async function sendOrderCustomerPublicNew(
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
 
-<<<<<<< HEAD
-    const formatSingleDate = (date?: Date | string | null) => {
-      if (!date) return "TBD";
-      return DateTime.fromJSDate(new Date(date))
-        .setZone("America/New_York")
-        .toLocaleString(DateTime.DATE_MED);
-    };
-    const isWhiteGlove = isOrderWhiteGlove(order);
     const isCOD = order.paymentType === "COD";
-    const pickupDates = getPickupDatesString(order);
-    const deliveryDates = getDeliveryDatesString(order);
-    const pickupDatesValue = isWhiteGlove
-      ? formatSingleDate(
-          order.schedule?.pickupEstimated?.[0] ||
-            order.schedule?.pickupSelected ||
-            null,
-        )
-      : pickupDates;
-    const deliveryDatesValue = isWhiteGlove
-      ? formatSingleDate(order.schedule?.deliveryEstimated?.[0] || null)
-      : deliveryDates;
-    const pickupWindowDisplay = toBetweenWindowDisplay(pickupDatesValue);
-    const deliveryWindowDisplay = toBetweenWindowDisplay(deliveryDatesValue);
-=======
-    const isCOD = order.paymentType === PaymentType.Cod;
     const {
       pickupDetailLabel,
       pickupDetailDisplay,
       deliveryDetailLabel,
       deliveryDetailDisplay,
     } = formatOrderStatusDetailEmailDates(order);
->>>>>>> 42dea90 (order flow updates)
     const orderStatusOverride = process.env.ORDER_STATUS_BASE_URL?.trim();
     const normalizedBaseUrl = orderStatusOverride
       ? orderStatusOverride.replace(/\/$/, "")
