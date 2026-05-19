@@ -20,14 +20,6 @@ router.get("/health", async (req: Request, res: Response) => {
       },
     };
 
-    // Skip logging for ELB health checkers to reduce log noise
-    const userAgent = req.get("User-Agent") || "";
-    if (!userAgent.includes("ELB-HealthChecker")) {
-      logger.info("Health check requested", {
-        ip: req.ip,
-        userAgent,
-      });
-    }
     res.status(200).json(health);
   } catch (error) {
     logger.error("Health check failed", {
@@ -95,16 +87,6 @@ router.get("/health/detailed", async (req: Request, res: Response) => {
     };
 
     const statusCode = dbTestPassed ? 200 : 503;
-    // Skip logging for ELB health checkers to reduce log noise
-    const userAgent = req.get("User-Agent") || "";
-    if (!userAgent.includes("ELB-HealthChecker")) {
-      logger.info("Detailed health check requested", {
-        ip: req.ip,
-        userAgent,
-        status: health.status,
-        dbStatus: dbStatus,
-      });
-    }
 
     res.status(statusCode).json(health);
   } catch (error) {

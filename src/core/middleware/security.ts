@@ -51,15 +51,73 @@ export const corsConfig = cors({
 // Rate limiting is handled by CloudFront
 // Removed express-rate-limit middleware - using CloudFront rate limiting instead
 
+/** Set LOG_HTTP_REQUESTS=false to disable general API access logs (webhooks still log). */
+export const isHttpRequestLoggingEnabled = (): boolean =>
+  process.env.LOG_HTTP_REQUESTS !== "false";
+
+const pathOnly = (url: string): string => url.split("?")[0];
+
+const isHealthProbePath = (url: string): boolean => {
+  const path = pathOnly(url);
+  return (
+    path === "/health" ||
+    path === "/health/detailed" ||
+    path.endsWith("/health")
+  );
+};
+
+/** ELB/K8s probes — never log (dominates Papertrail volume). */
+export const shouldSkipRequestAccessLog = (req: Request): boolean => {
+  if (isHealthProbePath(req.url)) {
+    return true;
+  }
+
+  const userAgent = req.get("User-Agent") || "";
+  if (
+    userAgent.includes("ELB-HealthChecker") ||
+    userAgent.includes("HealthChecker") ||
+    userAgent.includes("kube-probe")
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
+/** Super Dispatch / Acertus callbacks — logged by requestLogger. */
+export const isWebhookCallbackPath = (url: string): boolean =>
+  pathOnly(url).startsWith("/callback");
+
+/** Registry webhooks — logged by webhookLogger (skip duplicate in requestLogger). */
+export const isRegistryWebhookApiPath = (url: string): boolean =>
+  pathOnly(url).startsWith("/api/v1/webhooks");
+
+export const shouldLogHttpRequest = (req: Request): boolean => {
+  if (shouldSkipRequestAccessLog(req)) {
+    return false;
+  }
+  if (isWebhookCallbackPath(req.url) || isRegistryWebhookApiPath(req.url)) {
+    return true;
+  }
+  return isHttpRequestLoggingEnabled();
+};
+
 // Request logging middleware
 export const requestLogger = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
+  if (isRegistryWebhookApiPath(req.url)) {
+    return next();
+  }
+
+  if (!shouldLogHttpRequest(req)) {
+    return next();
+  }
+
   const startTime = Date.now();
 
-  // Log the request
   logger.info("Incoming request", {
     method: req.method,
     url: req.url,
@@ -68,20 +126,17 @@ export const requestLogger = (
     contentLength: req.get("Content-Length"),
   });
 
-  // Override res.end to log response
   const originalEnd = res.end;
   res.end = function (chunk?: any, encoding?: any): any {
     const duration = Date.now() - startTime;
 
-    if (req.url !== "/health") {
-      logger.info("Request completed", {
-        method: req.method,
-        url: req.url,
-        statusCode: res.statusCode,
-        duration: `${duration}ms`,
-        ip: req.ip,
-      });
-    }
+    logger.info("Request completed", {
+      method: req.method,
+      url: req.url,
+      statusCode: res.statusCode,
+      duration: `${duration}ms`,
+      ip: req.ip,
+    });
 
     originalEnd.call(this, chunk, encoding);
   };

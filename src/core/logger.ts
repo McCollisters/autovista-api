@@ -14,14 +14,13 @@ try {
   // Directory might already exist, ignore error
 }
 
-// Define log format
+// JSON only — prettyPrint duplicates each line on Papertrail ([Symbol(splat)], etc.)
 const logFormat = winston.format.combine(
   winston.format.timestamp({
     format: "YYYY-MM-DD HH:mm:ss",
   }),
   winston.format.errors({ stack: true }),
   winston.format.json(),
-  winston.format.prettyPrint(),
 );
 
 // Define console format for development
@@ -124,21 +123,17 @@ export const logger = winston.createLogger({
   ],
 });
 
-// Create a stream for Morgan HTTP logging
+// Legacy Morgan stream — follows LOG_HTTP_REQUESTS (default on)
 export const morganStream = {
   write: (message: string) => {
-    logger.info(message.trim());
+    if (process.env.LOG_HTTP_REQUESTS !== "false") {
+      logger.info(message.trim());
+    }
   },
 };
 
-// Helper functions for common logging patterns
+/** @deprecated Use requestLogger middleware */
 export const logRequest = (req: any, res: any, next: any) => {
-  logger.info("Incoming request", {
-    method: req.method,
-    url: req.url,
-    ip: req.ip,
-    userAgent: req.get("User-Agent"),
-  });
   next();
 };
 
