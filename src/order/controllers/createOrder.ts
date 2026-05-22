@@ -16,7 +16,6 @@ import { sendOrderAgentEmail } from "../notifications/sendOrderAgent";
 import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotification";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
 import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
-import { sendQuoteEmailToCustomer } from "@/quote/services/sendQuoteEmailToCustomer";
 import { MMI_PORTALS } from "../../_global/constants/portalIds";
 import { resolveId } from "@/_global/utils/resolveId";
 import { normalizeTransportTypeToEnum } from "@/_global/utils/formatTransportTypeLabel";
@@ -1428,30 +1427,8 @@ export const createOrder = async (
       );
     }
 
-    // Send quote details email to customer (quote has required email from public form)
-    const quoteCustomerEmail = quote?.customer?.email?.trim?.() || (quote?.customer as any)?.email;
-    if (quoteCustomerEmail) {
-      try {
-        const quoteEmailResult = await sendQuoteEmailToCustomer(
-          quote,
-          quoteCustomerEmail,
-        );
-        if (quoteEmailResult.success) {
-          logger.info(
-            `Quote details email sent to customer for quote ${quoteId}`,
-          );
-        } else {
-          logger.warn(
-            `Failed to send quote details email for quote ${quoteId}: ${quoteEmailResult.error}`,
-          );
-        }
-      } catch (notificationError) {
-        logger.error(
-          "Failed to send quote details email to customer:",
-          notificationError,
-        );
-      }
-    }
+    // Quote confirmation email is sent once from createQuoteCustomer (public quote form).
+    // Do not resend here on book — that duplicated the customer quote email.
 
     // Public embed (customer portal) confirmation email already includes payment;
     // regular portal routes still send the legacy standalone COD payment-request email.

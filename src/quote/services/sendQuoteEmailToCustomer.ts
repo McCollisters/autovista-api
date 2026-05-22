@@ -13,6 +13,9 @@ import {
 const MC_LOGO =
   "https://autovista-assets.s3.us-west-1.amazonaws.com/MCC-Wordmark-RGB-Blue.png";
 
+const QUOTE_EMAIL_FROM = "autotransport@mccollisters.com";
+const QUOTE_EMAIL_FROM_NAME = "McCollister's Auto Transport";
+
 const formatVehiclesSummaryPlain = (vehicles: any[] = []) => {
   if (!vehicles.length) return "";
   return vehicles
@@ -183,9 +186,9 @@ export const sendQuoteEmailToCustomer = async (
       to: recipientEmail,
       subject,
       html,
-      from: "autologistics@mccollisters.com",
-      fromName: "McCollister's Auto Logistics",
-      replyTo: "autologistics@mccollisters.com",
+      from: QUOTE_EMAIL_FROM,
+      fromName: QUOTE_EMAIL_FROM_NAME,
+      replyTo: QUOTE_EMAIL_FROM,
       templateName: "Customer Quote",
     });
 

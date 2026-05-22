@@ -53,3 +53,29 @@
   message: 'acertusClient: Vehicle status by VIN failed (non-fatal)',
   timestamp: '2026-05-17 22:03:45'
 }
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:34:40"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:34:46"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:34:55"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:35:00"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:35:47"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:37:27"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:37:35"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:39:20"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:39:43"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:40:10"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:40:49"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:41:37"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:41:40"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:41:56"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:42:30"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:42:30"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:42:32"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:43:48"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:44:50"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:44:51"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:44:52"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:44:52"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:44:59"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:45:19"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:46:43"}
+{"error":"connect ECONNREFUSED 89.194.218.115:27017","level":"error","message":"Error getting customer settings","service":"autovista-api","timestamp":"2026-05-21 18:51:01"}
