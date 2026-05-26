@@ -31,13 +31,65 @@
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>{{pickupDetailLabel}}*:</strong> {{pickupDetailDisplay}}</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Delivery Location:</strong> {{deliveryLocationShort}}</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 24px 0;"><strong>{{deliveryDetailLabel}}*:</strong> {{deliveryDetailDisplay}}</p>
+
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">Pickup Details</p>
+                {{#if pickupDetails.businessName}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Business Name:</strong> {{pickupDetails.businessName}}</p>
+                {{/if}}
+                {{#if pickupDetails.contactName}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Contact Name:</strong> {{pickupDetails.contactName}}</p>
+                {{/if}}
+                {{#if pickupDetails.email}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Email:</strong> {{pickupDetails.email}}</p>
+                {{/if}}
+                {{#if pickupDetails.phone}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Phone:</strong> {{pickupDetails.phone}}</p>
+                {{/if}}
+                {{#if pickupDetails.mobilePhone}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Mobile Phone:</strong> {{pickupDetails.mobilePhone}}</p>
+                {{/if}}
+                {{#if pickupDetails.alternativePhone}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Alternative Phone:</strong> {{pickupDetails.alternativePhone}}</p>
+                {{/if}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Pickup Address:</strong><br />{{pickupDetails.addressLine1Display}}{{#if pickupDetails.addressLine2Display}}<br />{{pickupDetails.addressLine2Display}}{{/if}}</p>
+                {{#if pickupDetails.notes}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 24px 0;"><strong>Pickup Notes:</strong> {{pickupDetails.notes}}</p>
+                {{else}}
+                <div style="margin-bottom: 24px;"></div>
+                {{/if}}
+
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">Delivery Details</p>
+                {{#if deliveryDetails.businessName}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Business Name:</strong> {{deliveryDetails.businessName}}</p>
+                {{/if}}
+                {{#if deliveryDetails.contactName}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Contact Name:</strong> {{deliveryDetails.contactName}}</p>
+                {{/if}}
+                {{#if deliveryDetails.email}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Email:</strong> {{deliveryDetails.email}}</p>
+                {{/if}}
+                {{#if deliveryDetails.phone}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Phone:</strong> {{deliveryDetails.phone}}</p>
+                {{/if}}
+                {{#if deliveryDetails.mobilePhone}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Mobile Phone:</strong> {{deliveryDetails.mobilePhone}}</p>
+                {{/if}}
+                {{#if deliveryDetails.alternativePhone}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Alternative Phone:</strong> {{deliveryDetails.alternativePhone}}</p>
+                {{/if}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Delivery Address:</strong><br />{{deliveryDetails.addressLine1Display}}{{#if deliveryDetails.addressLine2Display}}<br />{{deliveryDetails.addressLine2Display}}{{/if}}</p>
+                {{#if deliveryDetails.notes}}
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 24px 0;"><strong>Delivery Notes:</strong> {{deliveryDetails.notes}}</p>
+                {{else}}
+                <div style="margin-bottom: 24px;"></div>
+                {{/if}}
             </td>
         </tr>
 
         {{#if showPaymentSection}}
         <tr>
             <td valign="top" style="width: 600px; margin: 0 auto;">
-                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">5. Complete Your Booking — Payment Required</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">Complete Your Booking — Payment Required</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;">To officially schedule your vehicle for pickup, payment must be submitted in full.</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 16px 0;">Please use the secure link below to complete payment.</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;">
@@ -50,7 +102,7 @@
 
         <tr>
             <td valign="top" style="width: 600px; margin: 0 auto;">
-                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">{{sectionNextNumber}}. What You Can Do Next</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">What You Can Do Next</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Review Terms &amp; Conditions:</strong></p>
                 {{#if isShareRecipient}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;">View the Terms &amp; Conditions the customer agreed to at the time of booking:<br />
@@ -66,20 +118,18 @@
                     <a href="{{orderStatusUrl}}">Go to Customer Portal</a></p>
                 {{/if}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;"><strong>Learn more:</strong></p>
-                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;">Visit our FAQ page for answers to common questions about pickup, delivery, and the transport process:<br />
-                    <a href="{{faqUrl}}">View FAQs</a></p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0;"><a href="{{faqUrl}}">Explore our FAQs for answers</a></p>
                 {{#if isShareRecipient}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;">If you or the booking customer have questions or need assistance, our team is here to help.</p>
                 {{else}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px 0;">If you have questions or need assistance at any point, our team is here to help.</p>
                 {{/if}}
-                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 24px 0;">McCollister's Auto Logistics</p>
             </td>
         </tr>
 
         <tr>
             <td valign="top" style="width: 600px; margin: 0 auto;">
-                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">{{sectionNotesNumber}}. Important Notes</p>
+                <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">Important Notes</p>
                 {{#if isShareRecipient}}
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0; font-size: 13px;">*Please note that the booking customer (or their delegate) must be available during the entire pickup and delivery windows listed above. If they are unable to release or accept the vehicle(s) during the full window, they may assign a delegate to act on their behalf. The delegate's name and contact information should be provided as soon as possible.</p>
                 <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 12px 0; font-size: 13px;">If no one is available during the required window, additional terminal storage or redelivery fees may apply.</p>
@@ -97,7 +147,8 @@
 
         <tr>
             <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
-               <p style="font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4;">Reach out to:<br/><a href="tel:8888190594">(888) 819-0594</a><br />autologistics@mccollisters.com</p>
+               <p style="font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0;">McCollister's Auto Transport</p>
+               <p style="font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4;"><a href="tel:8888190594">(888) 819-0594</a><br />autotransport@mccollisters.com</p>
             </td>
         </tr>
 

@@ -6,12 +6,10 @@
 
 import { readFile } from "fs/promises";
 import path from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
 import Handlebars from "handlebars";
 import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 import { logger } from "@/core/logger";
-import { TransportType } from "@/_global/enums";
+import { PaymentType, TransportType } from "@/_global/enums";
 import { IOrder, Portal } from "@/_global/models";
 import { sendOrderNotification } from "@/notification/orderNotifications";
 import { formatVehiclesPlain } from "./utils/formatVehiclesPlain";
@@ -19,8 +17,23 @@ import { formatOrderStatusDetailEmailDates } from "./utils/formatOrderStatusDeta
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 import { resolveOrderCustomerEmailForTracking } from "../utils/resolveOrderCustomerEmailForTracking";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const CUSTOMER_ORDER_EMAIL_FROM = "autotransport@mccollisters.com";
+const CUSTOMER_ORDER_EMAIL_FROM_NAME = "McCollister's Auto Transport";
+
+type LocationKind = "pickup" | "delivery";
+
+type LocationDetails = {
+  businessName: string;
+  contactName: string;
+  email: string;
+  phone: string;
+  mobilePhone: string;
+  alternativePhone: string;
+  addressLine1: string;
+  addressLine1Display: string;
+  addressLine2Display: string;
+  notes: string;
+};
 
 function recipientFirstNameFromName(name: string): string {
   const t = String(name ?? "").trim();
@@ -48,6 +61,101 @@ function transportTypeDisplayLabel(orderTransportType?: string): string {
   if (t === TransportType.WhiteGlove) return "White Glove";
   if (t === TransportType.Enclosed) return "Enclosed";
   return "Open";
+}
+
+function firstNonEmpty(...values: unknown[]): string {
+  for (const value of values) {
+    const trimmed = String(value ?? "").trim();
+    if (trimmed) return trimmed;
+  }
+  return "";
+}
+
+function formatCityStateZip(city: string, state: string, zip: string): string {
+  const cityState = [city, state].filter(Boolean).join(", ");
+  return [cityState, zip].filter(Boolean).join(" ").trim();
+}
+
+function buildLocationDetails(order: IOrder, kind: LocationKind): LocationDetails {
+  const orderData = order as unknown as {
+    pickup?: Record<string, unknown>;
+    delivery?: Record<string, unknown>;
+    origin?: {
+      contact?: Record<string, unknown>;
+      address?: Record<string, unknown>;
+      notes?: unknown;
+    };
+    destination?: {
+      contact?: Record<string, unknown>;
+      address?: Record<string, unknown>;
+      notes?: unknown;
+    };
+  };
+  const detail =
+    kind === "pickup" ? (orderData.pickup ?? {}) : (orderData.delivery ?? {});
+  const location =
+    kind === "pickup" ? (orderData.origin ?? {}) : (orderData.destination ?? {});
+  const contact = location.contact ?? {};
+  const address = location.address ?? {};
+
+  const businessName = firstNonEmpty(
+    kind === "pickup" ? detail.pickupBusinessName : detail.deliveryBusinessName,
+    contact.companyName,
+  );
+  const contactName = firstNonEmpty(
+    kind === "pickup" ? detail.pickupContactName : detail.deliveryContactName,
+    contact.name,
+  );
+  const email = firstNonEmpty(
+    kind === "pickup" ? detail.pickupEmail : detail.deliveryEmail,
+    contact.email,
+  );
+  const phone = firstNonEmpty(
+    kind === "pickup" ? detail.pickupPhone : detail.deliveryPhone,
+    contact.phone,
+  );
+  const mobilePhone = firstNonEmpty(
+    kind === "pickup" ? detail.pickupMobilePhone : detail.deliveryMobilePhone,
+    contact.phoneMobile,
+  );
+  const alternativePhone = firstNonEmpty(
+    kind === "pickup" ? detail.pickupAltPhone : detail.deliveryAltPhone,
+    contact.phoneAlt,
+  );
+  const addressLine1 = firstNonEmpty(
+    kind === "pickup" ? detail.pickupAddress : detail.deliveryAddress,
+    address.address,
+  );
+  const city = firstNonEmpty(
+    kind === "pickup" ? detail.pickupCity : detail.deliveryCity,
+    address.city,
+  );
+  const state = firstNonEmpty(
+    kind === "pickup" ? detail.pickupState : detail.deliveryState,
+    address.state,
+  );
+  const zip = firstNonEmpty(
+    kind === "pickup" ? detail.pickupZip : detail.deliveryZip,
+    address.zip,
+  );
+  const notes = firstNonEmpty(
+    kind === "pickup" ? detail.pickupNotes : detail.deliveryNotes,
+    location.notes,
+  );
+  const addressLine2Display = formatCityStateZip(city, state, zip);
+
+  return {
+    businessName,
+    contactName,
+    email,
+    phone,
+    mobilePhone,
+    alternativePhone,
+    addressLine1,
+    addressLine1Display: addressLine1 || "—",
+    addressLine2Display,
+    notes,
+  };
 }
 
 const COD_PAYMENT_HOSTED_URL =
@@ -90,15 +198,6 @@ export async function sendOrderCustomerPublicNew(
       return { success: false, error: "Portal not found" };
     }
 
-    // Get email template values
-    const { getEmailTemplate } = await import(
-      "@/email/services/getEmailTemplate"
-    );
-    const emailTemplate = await getEmailTemplate("Customer Order");
-
-    const senderEmail = emailTemplate.senderEmail;
-    const senderName = emailTemplate.senderName;
-
     let logo: string | undefined;
     let companyName = "";
 
@@ -106,16 +205,15 @@ export async function sendOrderCustomerPublicNew(
     const isSirva = SIRVA_PORTAL_IDS.includes(portalIdString);
 
     // Determine template path
+    const templateFileName = isSirva
+      ? "customer-order-sirva.hbs"
+      : "customer-order-new.hbs";
     const templatePath = isSirva
-      ? path.join(__dirname, "../../templates/customer-order-sirva.hbs")
-      : path.join(__dirname, "../../templates/customer-order-new.hbs");
+      ? path.join(process.cwd(), "dist/templates/customer-order-sirva.hbs")
+      : path.join(process.cwd(), "dist/templates/customer-order-new.hbs");
     const resolvedTemplatePath = await resolveTemplatePath(
       templatePath,
-      path.join(
-        process.cwd(),
-        "src/templates",
-        isSirva ? "customer-order-sirva.hbs" : "customer-order-new.hbs",
-      ),
+      path.join(process.cwd(), "src/templates", templateFileName),
     );
 
     const mclogo =
@@ -158,7 +256,7 @@ export async function sendOrderCustomerPublicNew(
     const deliveryCity = order.destination?.address?.city || "";
     const deliveryState = order.destination?.address?.state || "";
 
-    const isCOD = order.paymentType === "COD";
+    const isCOD = order.paymentType === PaymentType.Cod;
     const {
       pickupDetailLabel,
       pickupDetailDisplay,
@@ -194,6 +292,8 @@ export async function sendOrderCustomerPublicNew(
     const transportTypeDisplay = transportTypeDisplayLabel(order.transportType);
 
     const vehiclesPlain = formatVehiclesPlain(order.vehicles);
+    const pickupDetails = buildLocationDetails(order, "pickup");
+    const deliveryDetails = buildLocationDetails(order, "delivery");
 
     const orderId = String(order._id);
     /** Read-only terms page; customers accept during public booking */
@@ -216,6 +316,8 @@ export async function sendOrderCustomerPublicNew(
       pickupDetailDisplay,
       deliveryDetailLabel,
       deliveryDetailDisplay,
+      pickupDetails,
+      deliveryDetails,
       transportTypeDisplay,
       vehiclesPlain,
       refId: order.refId,
@@ -240,8 +342,9 @@ export async function sendOrderCustomerPublicNew(
         to: recipientEmail,
         subject,
         html,
-        from: senderEmail,
-        replyTo: senderEmail,
+        from: CUSTOMER_ORDER_EMAIL_FROM,
+        fromName: CUSTOMER_ORDER_EMAIL_FROM_NAME,
+        replyTo: CUSTOMER_ORDER_EMAIL_FROM,
       },
       recipientEmail,
     });
