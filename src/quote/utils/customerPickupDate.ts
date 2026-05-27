@@ -80,24 +80,48 @@ export function parseDateOnlyInput(input: string): Date | null {
   return dt;
 }
 
+export function formatEmbedDateDot(date: Date): string | null {
+  const d = date instanceof Date ? date : new Date(date);
+  if (isNaN(d.getTime())) return null;
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  const yyyy = d.getFullYear();
+  return `${mm}.${dd}.${yyyy}`;
+}
+
+export function formatEmbedDateRange(startDate: Date, endDate: Date): string | null {
+  const start = formatEmbedDateDot(startDate);
+  const end = formatEmbedDateDot(endDate);
+  if (!start || !end) return null;
+  return `${start}\u2013${end}`;
+}
+
 /**
- * e.g. "Between 3/31/2026 and 4/1/2026" (calendar end = start + offset days).
+ * Match public quote detail pickup-window display:
+ * - 1-day
+ * - 04.27.2026-04.30.2026 style dotted ranges
+ */
+export function formatPickupWindowEmailLabel(
+  startDate: Date,
+  serviceLevelDays: number,
+): string {
+  const start = new Date(startDate);
+  start.setHours(0, 0, 0, 0);
+  const end = new Date(start);
+  end.setDate(end.getDate() + serviceLevelDays);
+  const range = formatEmbedDateRange(start, end);
+  const windowLabel = `${serviceLevelDays}-day pickup`;
+  return range ? `${windowLabel}: ${range}` : windowLabel;
+}
+
+/**
+ * @deprecated Use formatPickupWindowEmailLabel for customer quote emails.
  */
 export function formatPickupWindowBetweenLabel(
   startDate: Date,
   endOffsetCalendarDays: number,
 ): string {
-  const start = new Date(startDate);
-  start.setHours(0, 0, 0, 0);
-  const end = new Date(start);
-  end.setDate(end.getDate() + endOffsetCalendarDays);
-  const fmt = (d: Date) =>
-    d.toLocaleDateString("en-US", {
-      month: "numeric",
-      day: "numeric",
-      year: "numeric",
-    });
-  return `Between ${fmt(start)} and ${fmt(end)}`;
+  return formatPickupWindowEmailLabel(startDate, endOffsetCalendarDays);
 }
 
 /**

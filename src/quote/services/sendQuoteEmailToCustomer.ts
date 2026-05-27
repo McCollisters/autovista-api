@@ -6,7 +6,7 @@ import { logger } from "@/core/logger";
 import { getNotificationManager } from "@/notification";
 import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
 import {
-  formatPickupWindowBetweenLabel,
+  formatPickupWindowEmailLabel,
   parsePickupStartDateFromQuote,
 } from "../utils/customerPickupDate";
 
@@ -133,17 +133,17 @@ export const sendQuoteEmailToCustomer = async (
     const hasPickupStart = pickupStart != null;
 
     const pickupLabelOne = hasPickupStart
-      ? formatPickupWindowBetweenLabel(pickupStart!, 1)
-      : "Selected date + 1 day";
+      ? formatPickupWindowEmailLabel(pickupStart!, 1)
+      : "1-day pickup: Selected date + 1 day";
     const pickupLabelThree = hasPickupStart
-      ? formatPickupWindowBetweenLabel(pickupStart!, 3)
-      : "Selected date + 3 days";
+      ? formatPickupWindowEmailLabel(pickupStart!, 3)
+      : "3-day pickup: Selected date + 3 days";
     const pickupLabelFive = hasPickupStart
-      ? formatPickupWindowBetweenLabel(pickupStart!, 5)
-      : "Selected date + 5 days";
+      ? formatPickupWindowEmailLabel(pickupStart!, 5)
+      : "5-day pickup: Selected date + 5 days";
     const pickupLabelSeven = hasPickupStart
-      ? formatPickupWindowBetweenLabel(pickupStart!, 7)
-      : "Selected date + 7 days";
+      ? formatPickupWindowEmailLabel(pickupStart!, 7)
+      : "7-day pickup: Selected date + 7 days";
 
     const templatePath = path.join(
       process.cwd(),

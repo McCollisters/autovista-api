@@ -5,7 +5,8 @@ import { logger } from "@/core/logger";
 
 /**
  * POST /api/v1/order/:orderId/email
- * Sends the customer order confirmation email to an arbitrary recipient (share via email).
+ * Sends the new customer order confirmation template to an arbitrary recipient
+ * with share-variant subject and intro copy.
  */
 export const sendOrderShareEmail = async (
   req: express.Request,

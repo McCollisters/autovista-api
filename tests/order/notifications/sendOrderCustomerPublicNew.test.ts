@@ -164,7 +164,7 @@ describe("sendOrderCustomerPublicNew", () => {
     expect(sendOrderNotification).toHaveBeenCalledWith(
       expect.objectContaining({
         email: expect.objectContaining({
-          subject: "A McCollister's auto transport order was shared with you",
+          subject: "A McCollister's Auto Transport Order Was Shared With You",
         }),
       }),
     );
@@ -174,6 +174,21 @@ describe("sendOrderCustomerPublicNew", () => {
     await sendOrderCustomerPublicNew(baseOrder());
     expect(readFile).toHaveBeenCalled();
     const paths = (readFile as jest.Mock).mock.calls.map((c) => c[0] as string);
+    expect(paths.some((p) => String(p).includes("customer-order-new"))).toBe(
+      true,
+    );
+  });
+
+  it("uses the new template even for legacy Sirva portal ids", async () => {
+    const order = baseOrder();
+    order.portalId = "621e2882dee77a00351e5aac" as never;
+
+    await sendOrderCustomerPublicNew(order);
+
+    const paths = (readFile as jest.Mock).mock.calls.map((c) => c[0] as string);
+    expect(paths.some((p) => String(p).includes("customer-order-sirva"))).toBe(
+      false,
+    );
     expect(paths.some((p) => String(p).includes("customer-order-new"))).toBe(
       true,
     );
@@ -218,5 +233,17 @@ describe("sendOrderCustomerPublicNew", () => {
         notes: "Call on arrival",
       }),
     );
+  });
+
+  it("rejects outdated customer order templates", async () => {
+    (readFile as jest.MockedFunction<typeof readFile>).mockResolvedValue(
+      "<html>Welcome to McCollister's Auto Logistics!</html>" as never,
+    );
+
+    const result = await sendOrderCustomerPublicNew(baseOrder());
+
+    expect(result.success).toBe(false);
+    expect(result.error).toMatch(/outdated or misconfigured/i);
+    expect(sendOrderNotification).not.toHaveBeenCalled();
   });
 });

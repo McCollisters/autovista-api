@@ -162,16 +162,6 @@ const COD_PAYMENT_HOSTED_URL =
   "https://www.convergepay.com/hosted-payments?ssl_txn_auth_token=YtH5YU2ER7alJZ%2FD73aAegAAAZW6CTk1";
 
 /**
- * Sirva portal IDs
- */
-const SIRVA_PORTAL_IDS = [
-  "621e2882dee77a00351e5aac",
-  "65fb221d27f5b6f47701f8ea",
-  "66056b34982f1bf738687859",
-  "5e99f0b420e68d5f479d7317",
-];
-
-/**
  * Send order customer email notification
  */
 export type SendOrderCustomerEmailVariant = "confirmation" | "share";
@@ -201,19 +191,22 @@ export async function sendOrderCustomerPublicNew(
     let logo: string | undefined;
     let companyName = "";
 
-    const portalIdString = String(order.portalId);
-    const isSirva = SIRVA_PORTAL_IDS.includes(portalIdString);
-
-    // Determine template path
-    const templateFileName = isSirva
-      ? "customer-order-sirva.hbs"
-      : "customer-order-new.hbs";
-    const templatePath = isSirva
-      ? path.join(process.cwd(), "dist/templates/customer-order-sirva.hbs")
-      : path.join(process.cwd(), "dist/templates/customer-order-new.hbs");
+    // Always use the new public confirmation template for embedded/public order flow.
+    const templateFileName = "customer-order-new.hbs";
+    const distTemplatePath = path.join(
+      process.cwd(),
+      "dist/templates",
+      templateFileName,
+    );
+    const srcTemplatePath = path.join(
+      process.cwd(),
+      "src/templates",
+      templateFileName,
+    );
+    const isProduction = process.env.NODE_ENV === "production";
     const resolvedTemplatePath = await resolveTemplatePath(
-      templatePath,
-      path.join(process.cwd(), "src/templates", templateFileName),
+      isProduction ? distTemplatePath : srcTemplatePath,
+      isProduction ? srcTemplatePath : distTemplatePath,
     );
 
     const mclogo =
@@ -247,7 +240,7 @@ export async function sendOrderCustomerPublicNew(
     const sharerName = buildSharerDisplayName(order.customer);
 
     const subject = isShareRecipient
-      ? "A McCollister's auto transport order was shared with you"
+      ? "A McCollister's Auto Transport Order Was Shared With You"
       : "Your McCollister's Auto Transport Order Is Confirmed";
 
     const pickupCity = order.origin?.address?.city || "";
@@ -301,6 +294,21 @@ export async function sendOrderCustomerPublicNew(
 
     // Load and compile template
     const templateSource = await readFile(resolvedTemplatePath, "utf-8");
+    if (
+      !templateSource.includes(
+        "Your auto transport order has been successfully booked.",
+      )
+    ) {
+      logger.error("Unexpected customer order email template loaded", {
+        orderId: order._id,
+        refId: order.refId,
+        resolvedTemplatePath,
+      });
+      return {
+        success: false,
+        error: "Customer order email template is outdated or misconfigured.",
+      };
+    }
     const template = Handlebars.compile(templateSource);
 
     const showPaymentSection = isCOD && !isShareRecipient;
@@ -354,7 +362,8 @@ export async function sendOrderCustomerPublicNew(
         orderId: order._id,
         refId: order.refId,
         recipientEmail,
-        isSirva,
+        templatePath: resolvedTemplatePath,
+        variant,
       });
     } else {
       logger.error("Failed to send customer order email", {
