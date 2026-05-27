@@ -1,12 +1,13 @@
 /**
  * Pickup/delivery labels and value lines for customer emails — aligned with
- * mc_portal_react OrderStatusDetail (M/DD dates, parentheticals, White Glove, service level 1).
+ * mc_portal_react OrderStatusDetail (MM.DD.YYYY dot dates, parentheticals, White Glove, service level 1).
  */
 
 import type { IOrder } from "@/_global/models";
-import { DateTime } from "luxon";
-
-const TIMEZONE = "America/New_York";
+import {
+  formatEmbedDateDot,
+  formatEmbedDateRange,
+} from "@/quote/utils/customerPickupDate";
 
 function normalizeDateTypeKey(value: unknown): string {
   return String(value ?? "")
@@ -15,9 +16,8 @@ function normalizeDateTypeKey(value: unknown): string {
     .replace(/\s+/g, "_");
 }
 
-/** Match Moment.js format="M/DD" (month + / + two-digit day). */
-function formatMdd(date: Date): string {
-  return DateTime.fromJSDate(date).setZone(TIMEZONE).toFormat("M/dd");
+function formatDateDot(date: Date): string {
+  return formatEmbedDateDot(date) ?? "—";
 }
 
 function getPickupStartEnd(order: IOrder): { start: Date | null; end: Date | null } {
@@ -120,11 +120,11 @@ export function formatOrderStatusDetailEmailDates(order: IOrder): {
 
   let pickupDetailDisplay: string;
   if (isWhiteGlove) {
-    pickupDetailDisplay = puStart ? formatMdd(puStart) : "—";
+    pickupDetailDisplay = puStart ? formatDateDot(puStart) : "—";
   } else if (!puStart) {
     pickupDetailDisplay = "—";
   } else {
-    let line = formatMdd(puStart);
+    let line: string;
     if (
       !showAsSingleDayEstimatedPickup &&
       puStart &&
@@ -133,7 +133,9 @@ export function formatOrderStatusDetailEmailDates(order: IOrder): {
       pickupDateTypeString !== "Exact" &&
       pickupDateTypeString !== "Not Earlier Than"
     ) {
-      line += ` - ${formatMdd(puEnd)}`;
+      line = formatEmbedDateRange(puStart, puEnd) ?? formatDateDot(puStart);
+    } else {
+      line = formatDateDot(puStart);
     }
     if (pickupRangeParenthetical) {
       line += ` (${pickupRangeParenthetical})`;
@@ -147,9 +149,11 @@ export function formatOrderStatusDetailEmailDates(order: IOrder): {
   if (!delStart) {
     deliveryDetailDisplay = "—";
   } else {
-    let line = formatMdd(delStart);
+    let line: string;
     if (delEnd) {
-      line += ` - ${formatMdd(delEnd)}`;
+      line = formatEmbedDateRange(delStart, delEnd) ?? formatDateDot(delStart);
+    } else {
+      line = formatDateDot(delStart);
     }
     if (deliveryRangeParenthetical) {
       line += ` (${deliveryRangeParenthetical})`;

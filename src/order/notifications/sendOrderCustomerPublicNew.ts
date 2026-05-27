@@ -243,12 +243,6 @@ export async function sendOrderCustomerPublicNew(
       ? "A McCollister's Auto Transport Order Was Shared With You"
       : "Your McCollister's Auto Transport Order Is Confirmed";
 
-    const pickupCity = order.origin?.address?.city || "";
-    const pickupState = order.origin?.address?.state || "";
-
-    const deliveryCity = order.destination?.address?.city || "";
-    const deliveryState = order.destination?.address?.state || "";
-
     const isCOD = order.paymentType === PaymentType.Cod;
     const {
       pickupDetailLabel,
@@ -270,17 +264,6 @@ export async function sendOrderCustomerPublicNew(
       emailForStatusUrl,
     )}`;
     const faqUrl = `${normalizedBaseUrl}/public/quote`;
-
-    const pickupLocationShort =
-      [pickupCity, pickupState]
-        .map((x) => String(x || "").trim())
-        .filter(Boolean)
-        .join(", ") || "TBD";
-    const deliveryLocationShort =
-      [deliveryCity, deliveryState]
-        .map((x) => String(x || "").trim())
-        .filter(Boolean)
-        .join(", ") || "TBD";
 
     const transportTypeDisplay = transportTypeDisplayLabel(order.transportType);
 
@@ -318,8 +301,6 @@ export async function sendOrderCustomerPublicNew(
       logo: logo || mclogo,
       companyName,
       mclogo,
-      pickupLocationShort,
-      deliveryLocationShort,
       pickupDetailLabel,
       pickupDetailDisplay,
       deliveryDetailLabel,
