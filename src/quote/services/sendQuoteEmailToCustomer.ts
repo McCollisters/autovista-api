@@ -179,7 +179,7 @@ export const sendQuoteEmailToCustomer = async (
 
     const notificationManager = getNotificationManager();
     const subject = isShareRecipient
-      ? "A McCollister's auto transport quote was shared with you"
+      ? "A McCollister's Auto Transport Quote Was Shared With You"
       : "Your McCollister's Auto Transport Quote";
 
     const result = await notificationManager.sendEmail({
