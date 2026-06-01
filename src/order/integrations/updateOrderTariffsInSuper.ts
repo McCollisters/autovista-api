@@ -2,6 +2,10 @@ import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
 import { authenticateSuperDispatch } from "@/_global/integrations/authenticateSuperDispatch";
 import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
+import {
+  matchSuperDispatchVehicles,
+  collectUnmatchedSdVehicles,
+} from "@/order/integrations/matchSuperDispatchVehicles";
 
 export const updateOrderTariffsInSuper = async (
   order: IOrder,
@@ -41,27 +45,16 @@ export const updateOrderTariffsInSuper = async (
     ? existingOrder.vehicles
     : [];
 
-  const getMakeModelKey = (make: string, model: string) => {
-    const makeStr = (make || "").toLowerCase().trim();
-    const modelStr = (model || "").toLowerCase().trim();
-    return `${makeStr}::${modelStr}`;
-  };
-
-  const sdVehiclesByMakeModel = new Map<string, any>();
-  sdVehicles.forEach((sdVehicle: any) => {
-    const key = getMakeModelKey(sdVehicle.make, sdVehicle.model);
-    if (key) {
-      sdVehiclesByMakeModel.set(key, sdVehicle);
-    }
-  });
+  // Match each local vehicle to at most one SD vehicle so the PATCH can never
+  // emit two entries that share the same SD vehicle guid (which SD collapses
+  // into a single vehicle, dropping the extras).
+  const matchedSdVehicles = matchSuperDispatchVehicles(
+    sdVehicles,
+    order.vehicles || [],
+  );
 
   const updatedVehicles = (order.vehicles || []).map((vehicle, index) => {
-    const key = getMakeModelKey(
-      String(vehicle.make || ""),
-      String(vehicle.model || ""),
-    );
-    const sdVehicle =
-      (key && sdVehiclesByMakeModel.get(key)) || sdVehicles[index] || {};
+    const sdVehicle = matchedSdVehicles[index] || {};
     const totalValue = Number(vehicle?.pricing?.total);
     const tariff = Number.isFinite(totalValue) ? totalValue : 0;
     const type = mapPricingClassToSuperDispatchVehicleType(
@@ -77,13 +70,36 @@ export const updateOrderTariffsInSuper = async (
     };
   });
 
+  // Super Dispatch PATCH replaces the whole vehicles array (RFC 7396 merge
+  // patch), so any SD vehicle we omit is deleted. Preserve SD vehicles we
+  // couldn't match to keep the local list from ever truncating SD.
+  const preservedSdVehicles = collectUnmatchedSdVehicles(
+    sdVehicles,
+    matchedSdVehicles,
+  ).map((sdVehicle: any) => ({ ...sdVehicle }));
+
+  const vehiclesPayload = [...updatedVehicles, ...preservedSdVehicles];
+
+  if (preservedSdVehicles.length > 0) {
+    logger.warn(
+      "Preserving unmatched Super Dispatch vehicles to avoid deletion on tariff update",
+      {
+        orderRefId: order.refId,
+        superDispatchGuid: order.tms.guid,
+        localVehicleCount: (order.vehicles || []).length,
+        sdVehicleCount: sdVehicles.length,
+        preservedCount: preservedSdVehicles.length,
+      },
+    );
+  }
+
   const patchOrderResponse = await fetch(`${apiUrl}/orders/${order.tms.guid}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/merge-patch+json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ vehicles: updatedVehicles }),
+    body: JSON.stringify({ vehicles: vehiclesPayload }),
   });
 
   if (!patchOrderResponse.ok) {

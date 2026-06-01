@@ -10,6 +10,10 @@ import { IOrder } from "@/_global/models";
 import { authenticateSuperDispatch } from "@/_global/integrations/authenticateSuperDispatch";
 import { DateTime } from "luxon";
 import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
+import {
+  matchSuperDispatchVehicles,
+  collectUnmatchedSdVehicles,
+} from "@/order/integrations/matchSuperDispatchVehicles";
 
 /**
  * Update partial order in Super Dispatch with complete order details
@@ -93,13 +97,6 @@ export const updateSuperWithCompleteOrder = async (
 
     const sdVehicles = existingOrder.vehicles || [];
 
-    // Helper function to create a key from make and model
-    const getMakeModelKey = (make: string, model: string) => {
-      const makeStr = (make || "").toLowerCase().trim();
-      const modelStr = (model || "").toLowerCase().trim();
-      return `${makeStr}::${modelStr}`;
-    };
-
     const normalizeText = (value?: string | number | null) =>
       value == null ? "" : String(value).trim();
 
@@ -123,6 +120,14 @@ export const updateSuperWithCompleteOrder = async (
       return Number.isFinite(parsed) ? parsed : null;
     };
 
+    // Match each local vehicle to at most one SD vehicle so the PATCH can never
+    // emit two entries that share the same SD vehicle guid (which SD collapses
+    // into a single vehicle, dropping the extras).
+    const matchedSdVehicles = matchSuperDispatchVehicles(
+      sdVehicles,
+      order.vehicles || [],
+    );
+
     // Build vehicle data with complete details
     // Start with existing Super Dispatch vehicle to preserve all fields (including carrier price)
     const vehicleData = order.vehicles.map((vehicle, index) => {
@@ -133,8 +138,8 @@ export const updateSuperWithCompleteOrder = async (
         vehicle.pricingClass,
       );
 
-      // Get corresponding vehicle from Super Dispatch by index
-      const sdVehicle = sdVehicles[index] || {}; // Use empty object if no match
+      // Get the matched Super Dispatch vehicle (consumed at most once)
+      const sdVehicle = matchedSdVehicles[index] || {}; // Use empty object if no match
 
       // Start with the existing Super Dispatch vehicle object to preserve all its fields
       const vehicleObj: any = { ...sdVehicle };
@@ -161,6 +166,29 @@ export const updateSuperWithCompleteOrder = async (
 
       return vehicleObj;
     });
+
+    // Super Dispatch PATCH replaces the whole vehicles array (RFC 7396 merge
+    // patch), so any SD vehicle we omit is deleted. Preserve SD vehicles we
+    // couldn't match to keep the local list from ever truncating SD.
+    const preservedSdVehicles = collectUnmatchedSdVehicles(
+      sdVehicles,
+      matchedSdVehicles,
+    ).map((sdVehicle: any) => ({ ...sdVehicle }));
+
+    if (preservedSdVehicles.length > 0) {
+      logger.warn(
+        "Preserving unmatched Super Dispatch vehicles to avoid deletion on complete-order release",
+        {
+          orderRefId: order.refId,
+          superDispatchGuid,
+          localVehicleCount: (order.vehicles || []).length,
+          sdVehicleCount: sdVehicles.length,
+          preservedCount: preservedSdVehicles.length,
+        },
+      );
+    }
+
+    const vehiclesPayload = [...vehicleData, ...preservedSdVehicles];
 
     // Email validation function
     const isValidEmail = (email: string | undefined | null): boolean => {
@@ -293,7 +321,7 @@ export const updateSuperWithCompleteOrder = async (
         },
       },
       transport_type: String(order.transportType || "").toUpperCase(),
-      vehicles: vehicleData,
+      vehicles: vehiclesPayload,
     };
 
     // Make PATCH request to Super Dispatch
