@@ -113,6 +113,43 @@ export function getCustomerPickupWindowEndDate(
 }
 
 /**
+ * Mirrors mc_portal_react customerPickupWindow.resolvePickupScheduledEnd —
+ * used by OrderDetail / OrderStatusDetail before displaying pickup ranges.
+ */
+export function resolvePickupScheduledEnd(
+  start: Date | string | null | undefined,
+  end: Date | string | null | undefined,
+  serviceLevel: string | number | null | undefined,
+): Date | null {
+  if (!start) {
+    return end ? new Date(end) : null;
+  }
+
+  const sl = Number(serviceLevel);
+  if (!Number.isFinite(sl) || sl <= 0) {
+    return end ? new Date(end) : null;
+  }
+
+  const startDate = new Date(start);
+  if (Number.isNaN(startDate.getTime())) {
+    return end ? new Date(end) : null;
+  }
+  startDate.setHours(0, 0, 0, 0);
+
+  if (end) {
+    const endDate = new Date(end);
+    if (!Number.isNaN(endDate.getTime())) {
+      endDate.setHours(0, 0, 0, 0);
+      if (endDate.getTime() !== startDate.getTime()) {
+        return endDate;
+      }
+    }
+  }
+
+  return getCustomerPickupWindowEndDate(startDate, sl);
+}
+
+/**
  * Match public quote detail pickup-window display:
  * - 1-day
  * - 04.27.2026-04.30.2026 style dotted ranges

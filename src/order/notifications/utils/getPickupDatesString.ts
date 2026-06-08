@@ -5,34 +5,11 @@
  */
 
 import { IOrder } from "@/_global/models";
-import { getCustomerPickupWindowEndDate } from "@/quote/utils/customerPickupDate";
-import { DateTime } from "luxon";
-
-const TIMEZONE = "America/New_York";
-
-function resolvePickupEndDate(order: IOrder, pickupStart: Date): Date {
-  const storedEnd = order.schedule?.pickupEstimated?.[1];
-  if (storedEnd) {
-    const end = new Date(storedEnd);
-    if (
-      end.getFullYear() !== pickupStart.getFullYear() ||
-      end.getMonth() !== pickupStart.getMonth() ||
-      end.getDate() !== pickupStart.getDate()
-    ) {
-      return end;
-    }
-  }
-
-  const serviceLevel = Number(
-    order.schedule?.serviceLevel ??
-      (order as { serviceLevel?: string | number }).serviceLevel,
-  );
-  if (Number.isFinite(serviceLevel) && serviceLevel > 0) {
-    return getCustomerPickupWindowEndDate(pickupStart, serviceLevel);
-  }
-
-  return pickupStart;
-}
+import {
+  formatEmbedDateDot,
+  formatEmbedDateRange,
+  resolvePickupScheduledEnd,
+} from "@/quote/utils/customerPickupDate";
 
 export function getPickupDatesString(order: IOrder): string {
   const pickupStartRaw =
@@ -42,19 +19,29 @@ export function getPickupDatesString(order: IOrder): string {
     return "TBD";
   }
 
-  const pickupStart = DateTime.fromJSDate(new Date(pickupStartRaw)).setZone(
-    TIMEZONE,
+  const pickupEndRaw =
+    order.schedule?.pickupEstimated?.[1] ??
+    order.schedule?.pickupEstimated?.[0] ??
+    null;
+  const serviceLevel =
+    order.schedule?.serviceLevel ??
+    (order as { serviceLevel?: string | number }).serviceLevel ??
+    null;
+
+  const pickupStart = new Date(pickupStartRaw);
+  const pickupEnd = resolvePickupScheduledEnd(
+    pickupStart,
+    pickupEndRaw ? new Date(pickupEndRaw) : null,
+    serviceLevel,
   );
-  const pickupEnd = DateTime.fromJSDate(
-    resolvePickupEndDate(order, new Date(pickupStartRaw)),
-  ).setZone(TIMEZONE);
 
-  const startLabel = pickupStart.toLocaleString(DateTime.DATE_MED);
-  const endLabel = pickupEnd.toLocaleString(DateTime.DATE_MED);
-
-  if (startLabel === endLabel) {
-    return startLabel;
+  if (!pickupEnd) {
+    return formatEmbedDateDot(pickupStart) || "TBD";
   }
 
-  return `${startLabel} - ${endLabel}`;
+  return (
+    formatEmbedDateRange(pickupStart, pickupEnd) ||
+    formatEmbedDateDot(pickupStart) ||
+    "TBD"
+  );
 }

@@ -1,14 +1,13 @@
 /**
- * Pickup/delivery labels and value lines for customer emails — aligned with
- * mc_portal_react OrderStatusDetail (MM.DD.YYYY dot dates, parentheticals, White Glove, service level 1).
+ * Pickup/delivery labels and value lines for customer emails.
+ * Mirrors mc_portal_react OrderStatusDetail transform + formatPickupDisplayDot.
  */
 
 import type { IOrder } from "@/_global/models";
 import {
   formatEmbedDateDot,
   formatEmbedDateRange,
-  getCustomerPickupWindowEndDate,
-  isSameCalendarDay,
+  resolvePickupScheduledEnd,
 } from "@/quote/utils/customerPickupDate";
 
 function normalizeDateTypeKey(value: unknown): string {
@@ -18,76 +17,74 @@ function normalizeDateTypeKey(value: unknown): string {
     .replace(/\s+/g, "_");
 }
 
-function formatDateDot(date: Date): string {
-  return formatEmbedDateDot(date) ?? "—";
+/** Same as OrderStatusDetail.formatPickupDisplayDot */
+function formatPickupDisplayDot(
+  pickupScheduledAt: Date | null,
+  pickupScheduledEndsAt: Date | null,
+  showAsSingleDay: boolean,
+): string {
+  if (!pickupScheduledAt) {
+    return "—";
+  }
+  if (!showAsSingleDay && pickupScheduledEndsAt) {
+    return (
+      formatEmbedDateRange(pickupScheduledAt, pickupScheduledEndsAt) ||
+      formatEmbedDateDot(pickupScheduledAt) ||
+      "—"
+    );
+  }
+  return formatEmbedDateDot(pickupScheduledAt) || "—";
 }
 
-function resolvePickupWindowServiceLevel(order: IOrder): number | null {
-  const raw =
-    (order.schedule as { serviceLevel?: string | number } | undefined)
-      ?.serviceLevel ?? (order as { serviceLevel?: string | number }).serviceLevel;
-  const n = Number(raw);
-  return Number.isFinite(n) && n > 0 ? n : null;
+function resolvePickupDates(order: IOrder): {
+  pickupScheduledAt: Date | null;
+  pickupScheduledEndsAt: Date | null;
+} {
+  const pickupStartRaw =
+    order.schedule?.pickupEstimated?.[0] ??
+    order.schedule?.pickupSelected ??
+    null;
+  const pickupEndRaw =
+    order.schedule?.pickupEstimated?.[1] ??
+    order.schedule?.pickupEstimated?.[0] ??
+    null;
+  const pickupServiceLevel =
+    order.schedule?.serviceLevel ??
+    (order as { serviceLevel?: string | number }).serviceLevel ??
+    null;
+
+  if (!pickupStartRaw) {
+    return { pickupScheduledAt: null, pickupScheduledEndsAt: null };
+  }
+
+  const pickupScheduledAt = new Date(pickupStartRaw);
+  const pickupScheduledEndsAt = resolvePickupScheduledEnd(
+    pickupScheduledAt,
+    pickupEndRaw ? new Date(pickupEndRaw) : null,
+    pickupServiceLevel,
+  );
+
+  return { pickupScheduledAt, pickupScheduledEndsAt };
 }
 
-function resolveCustomerPickupEnd(
-  start: Date,
-  end: Date | null,
-  serviceLevel: number | null,
-): Date | null {
-  if (!serviceLevel) {
-    return end;
-  }
-  if (!end || isSameCalendarDay(start, end)) {
-    return getCustomerPickupWindowEndDate(start, serviceLevel);
-  }
-  return end;
-}
+function resolveDeliveryDates(order: IOrder): {
+  deliveryScheduledAt: Date | null;
+  deliveryScheduledEndsAt: Date | null;
+} {
+  const deliveryStartRaw = order.schedule?.deliveryEstimated?.[0] ?? null;
+  const deliveryEndRaw =
+    order.schedule?.deliveryEstimated?.[1] ??
+    order.schedule?.deliveryEstimated?.[0] ??
+    null;
 
-function getPickupStartEnd(order: IOrder): { start: Date | null; end: Date | null } {
-  const serviceLevel = resolvePickupWindowServiceLevel(order);
-  const p = (order as { pickup?: Record<string, unknown> }).pickup;
-  if (p?.pickupScheduledAt) {
-    const start = new Date(p.pickupScheduledAt as string | Date);
-    const endRaw = p.pickupScheduledEndsAt
-      ? new Date(p.pickupScheduledEndsAt as string | Date)
-      : null;
-    return {
-      start,
-      end: resolveCustomerPickupEnd(start, endRaw, serviceLevel),
-    };
+  if (!deliveryStartRaw) {
+    return { deliveryScheduledAt: null, deliveryScheduledEndsAt: null };
   }
-  const sch = order.schedule;
-  const startRaw = sch?.pickupEstimated?.[0] ?? sch?.pickupSelected ?? null;
-  const endRaw = sch?.pickupEstimated?.[1] ?? null;
-  const start = startRaw ? new Date(startRaw) : null;
-  const end = start
-    ? resolveCustomerPickupEnd(
-        start,
-        endRaw ? new Date(endRaw) : null,
-        serviceLevel,
-      )
-    : null;
-  return { start, end };
-}
 
-function getDeliveryStartEnd(order: IOrder): { start: Date | null; end: Date | null } {
-  const d = (order as { delivery?: Record<string, unknown> }).delivery;
-  if (d?.deliveryScheduledAt) {
-    return {
-      start: new Date(d.deliveryScheduledAt as string | Date),
-      end: d.deliveryScheduledEndsAt
-        ? new Date(d.deliveryScheduledEndsAt as string | Date)
-        : null,
-    };
-  }
-  const de = order.schedule?.deliveryEstimated;
-  if (!de?.length) {
-    return { start: null, end: null };
-  }
-  const start = new Date(de[0]);
-  const end = de.length > 1 ? new Date(de[de.length - 1]) : new Date(de[0]);
-  return { start, end };
+  return {
+    deliveryScheduledAt: new Date(deliveryStartRaw),
+    deliveryScheduledEndsAt: deliveryEndRaw ? new Date(deliveryEndRaw) : null,
+  };
 }
 
 export function formatOrderStatusDetailEmailDates(order: IOrder): {
@@ -134,52 +131,47 @@ export function formatOrderStatusDetailEmailDates(order: IOrder): {
     ? null
     : pickupDateTypeString || null;
 
-  const { start: puStart, end: puEnd } = getPickupStartEnd(order);
-  const { start: delStart, end: delEnd } = getDeliveryStartEnd(order);
+  const { pickupScheduledAt, pickupScheduledEndsAt } = resolvePickupDates(order);
+  const { deliveryScheduledAt, deliveryScheduledEndsAt } =
+    resolveDeliveryDates(order);
 
   const pickupDetailLabel = isWhiteGlove ? "Pickup Estimate" : "Pickup";
 
   let pickupDetailDisplay: string;
   if (isWhiteGlove) {
-    pickupDetailDisplay = puStart ? formatDateDot(puStart) : "—";
-  } else if (!puStart) {
-    pickupDetailDisplay = "—";
+    pickupDetailDisplay = pickupScheduledAt
+      ? formatEmbedDateDot(pickupScheduledAt) || "—"
+      : "—";
   } else {
-    let line: string;
-    if (
-      puStart &&
-      puEnd &&
-      !isSameCalendarDay(puStart, puEnd) &&
-      pickupDateTypeString &&
-      pickupDateTypeString !== "Exact" &&
-      pickupDateTypeString !== "Not Earlier Than"
-    ) {
-      line = formatEmbedDateRange(puStart, puEnd) ?? formatDateDot(puStart);
-    } else {
-      line = formatDateDot(puStart);
-    }
-    if (pickupRangeParenthetical) {
-      line += ` (${pickupRangeParenthetical})`;
-    }
-    pickupDetailDisplay = line;
+    const pickupLine = formatPickupDisplayDot(
+      pickupScheduledAt,
+      pickupScheduledEndsAt,
+      pickupDateTypeString === "Exact" ||
+        pickupDateTypeString === "Not Earlier Than",
+    );
+    pickupDetailDisplay = pickupRangeParenthetical
+      ? `${pickupLine} (${pickupRangeParenthetical})`
+      : pickupLine;
   }
 
   const deliveryDetailLabel = "Delivery";
 
   let deliveryDetailDisplay: string;
-  if (!delStart) {
+  if (!deliveryScheduledAt) {
     deliveryDetailDisplay = "—";
   } else {
-    let line: string;
-    if (delEnd) {
-      line = formatEmbedDateRange(delStart, delEnd) ?? formatDateDot(delStart);
+    let deliveryLine: string;
+    if (deliveryScheduledEndsAt) {
+      deliveryLine =
+        formatEmbedDateRange(deliveryScheduledAt, deliveryScheduledEndsAt) ||
+        formatEmbedDateDot(deliveryScheduledAt) ||
+        "—";
     } else {
-      line = formatDateDot(delStart);
+      deliveryLine = formatEmbedDateDot(deliveryScheduledAt) || "—";
     }
-    if (deliveryRangeParenthetical) {
-      line += ` (${deliveryRangeParenthetical})`;
-    }
-    deliveryDetailDisplay = line;
+    deliveryDetailDisplay = deliveryRangeParenthetical
+      ? `${deliveryLine} (${deliveryRangeParenthetical})`
+      : deliveryLine;
   }
 
   return {
