@@ -12,6 +12,7 @@ import { join } from "path";
 import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
+import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 
 // Using fileURLToPath and dirname for __dirname equivalent in ES modules
 import { fileURLToPath } from "url";
@@ -54,8 +55,7 @@ export async function sendSurvey({
 
     // Generate survey URL if not provided
     const url =
-      surveyUrl ||
-      `https://autovista.mccollisters.com/customer-survey/${orderId}`;
+      surveyUrl || `${getPortalBaseUrl()}/customer-survey/${orderId}`;
 
     // Get email template values
     const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");

@@ -5,6 +5,7 @@ import Handlebars from "handlebars";
 import { logger } from "@/core/logger";
 import { getNotificationManager } from "@/notification";
 import { createToken } from "@/_global/utils/createToken";
+import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 import type { IUser } from "@/user/schema";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -45,11 +46,11 @@ export async function sendNewUserWelcomeEmail(user: IUser): Promise<{
     }
 
     const firstName = user.firstName || "User";
+    const resetUrl = `${getPortalBaseUrl()}/reset-password/${token}`;
     let html: string;
 
     if (!templatePath) {
       logger.error("new-user template not found", { possiblePaths });
-      const resetUrl = `https://autovista.mccollisters.com/reset-password/${token}`;
       html = `<p>Hi ${firstName},</p><p>Welcome to AutoVista.</p><p><a href="${resetUrl}">Set your password</a></p>`;
     } else {
       const source = readFileSync(templatePath, "utf8");
@@ -59,6 +60,7 @@ export async function sendNewUserWelcomeEmail(user: IUser): Promise<{
         emailIntro: DEFAULT_EMAIL_INTRO,
         emailBody: DEFAULT_EMAIL_BODY,
         token,
+        resetUrl,
       });
     }
 
