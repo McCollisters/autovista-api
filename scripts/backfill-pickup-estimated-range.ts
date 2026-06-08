@@ -84,7 +84,7 @@ async function main() {
 
     const schedule = order.schedule || {};
     const serviceLevel = Number(schedule.serviceLevel);
-    if (!Number.isFinite(serviceLevel) || serviceLevel <= 1) {
+    if (!Number.isFinite(serviceLevel) || serviceLevel <= 0) {
       skipped++;
       continue;
     }
@@ -92,14 +92,20 @@ async function main() {
     const pickupEstimated = Array.isArray(schedule.pickupEstimated)
       ? schedule.pickupEstimated
       : [];
-    const hasRange = pickupEstimated.length > 1 && pickupEstimated[1];
-    if (hasRange) {
+    const baseDate = schedule.pickupSelected || pickupEstimated[0];
+    if (!baseDate) {
       skipped++;
       continue;
     }
 
-    const baseDate = schedule.pickupSelected || pickupEstimated[0];
-    if (!baseDate) {
+    const storedEnd = pickupEstimated[1] ? new Date(pickupEstimated[1]) : null;
+    const storedStart = new Date(baseDate);
+    const hasDistinctRange =
+      storedEnd &&
+      (storedEnd.getFullYear() !== storedStart.getFullYear() ||
+        storedEnd.getMonth() !== storedStart.getMonth() ||
+        storedEnd.getDate() !== storedStart.getDate());
+    if (hasDistinctRange) {
       skipped++;
       continue;
     }

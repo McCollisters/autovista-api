@@ -97,6 +97,22 @@ export function formatEmbedDateRange(startDate: Date, endDate: Date): string | n
 }
 
 /**
+ * Customer pickup window end — matches quote embed / book-order review:
+ * 1-Day Pickup → selected date through the next calendar day (+1), etc.
+ */
+export function getCustomerPickupWindowEndDate(
+  startDate: Date | string,
+  serviceLevelDays: number,
+): Date {
+  const start =
+    startDate instanceof Date ? new Date(startDate) : new Date(startDate);
+  start.setHours(0, 0, 0, 0);
+  const end = new Date(start);
+  end.setDate(end.getDate() + serviceLevelDays);
+  return end;
+}
+
+/**
  * Match public quote detail pickup-window display:
  * - 1-day
  * - 04.27.2026-04.30.2026 style dotted ranges
@@ -107,8 +123,7 @@ export function formatPickupWindowEmailLabel(
 ): string {
   const start = new Date(startDate);
   start.setHours(0, 0, 0, 0);
-  const end = new Date(start);
-  end.setDate(end.getDate() + serviceLevelDays);
+  const end = getCustomerPickupWindowEndDate(start, serviceLevelDays);
   const range = formatEmbedDateRange(start, end);
   const windowLabel = `${serviceLevelDays}-day pickup`;
   return range ? `${windowLabel}: ${range}` : windowLabel;
