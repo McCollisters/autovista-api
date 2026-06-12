@@ -85,8 +85,8 @@ export function formatEmbedDateDot(date: Date): string | null {
   if (isNaN(d.getTime())) return null;
   const mm = String(d.getMonth() + 1).padStart(2, "0");
   const dd = String(d.getDate()).padStart(2, "0");
-  const yyyy = d.getFullYear();
-  return `${mm}.${dd}.${yyyy}`;
+  const yy = String(d.getFullYear() % 100).padStart(2, "0");
+  return `${mm}.${dd}.${yy}`;
 }
 
 export function formatEmbedDateRange(startDate: Date, endDate: Date): string | null {
@@ -152,7 +152,7 @@ export function resolvePickupScheduledEnd(
 /**
  * Match public quote detail pickup-window display:
  * - 1-day
- * - 04.27.2026-04.30.2026 style dotted ranges
+ * - 04.27.26-04.30.26 style dotted ranges
  */
 export function formatPickupWindowEmailLabel(
   startDate: Date,

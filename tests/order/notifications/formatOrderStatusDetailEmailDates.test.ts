@@ -16,10 +16,10 @@ describe("formatOrderStatusDetailEmailDates", () => {
     } as never);
 
     expect(result.pickupDetailDisplay).toBe(
-      "06.12.2026–06.13.2026 (Estimated)",
+      "06.12.26–06.13.26 (Estimated)",
     );
     expect(result.deliveryDetailDisplay).toBe(
-      "06.15.2026–06.26.2026 (Estimated range based on transit time)",
+      "06.15.26–06.26.26 (Estimated range based on transit time)",
     );
   });
 
@@ -36,6 +36,6 @@ describe("formatOrderStatusDetailEmailDates", () => {
       },
     } as never);
 
-    expect(result.pickupDetailDisplay).toBe("06.12.2026 (Exact)");
+    expect(result.pickupDetailDisplay).toBe("06.12.26 (Exact)");
   });
 });
