@@ -1,5 +1,9 @@
 import { describe, it, expect, beforeEach, jest } from "@jest/globals";
-import { handleCarrierCanceled } from "@/\u005fglobal/integrations/webhooks/handlers";
+import {
+  handleCarrierCanceled,
+  handleSuperDispatchOrderModified,
+  handleSuperDispatchVehicleModified,
+} from "@/\u005fglobal/integrations/webhooks/handlers";
 
 jest.mock("@/_global/models", () => ({
   Order: {
@@ -15,10 +19,71 @@ jest.mock("@/order/integrations/updateSuperWithPartialOrder", () => ({
   updateSuperWithPartialOrder: jest.fn(),
 }));
 
+jest.mock("@/order/integrations/saveSDUpdatesToDB", () => ({
+  syncOrderFromSdWebhook: jest.fn(),
+}));
+
 const { Order, Carrier } = require("@/_global/models");
 const {
   updateSuperWithPartialOrder,
 } = require("@/order/integrations/updateSuperWithPartialOrder");
+const { syncOrderFromSdWebhook } = require("@/order/integrations/saveSDUpdatesToDB");
+
+describe("handleSuperDispatchOrderModified", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("syncs order from Super Dispatch on order.modified webhook", async () => {
+    const order = {
+      _id: "order-id",
+      refId: "12345",
+      tms: { guid: "sd-guid" },
+      tmsPartialOrder: true,
+      save: jest.fn(),
+    };
+
+    Order.findOne.mockResolvedValue(order);
+    syncOrderFromSdWebhook.mockResolvedValue(undefined);
+
+    const response = await handleSuperDispatchOrderModified(
+      { order_guid: "sd-guid" },
+      {},
+    );
+
+    expect(syncOrderFromSdWebhook).toHaveBeenCalledWith(order);
+    expect(order.save).not.toHaveBeenCalled();
+    expect(response.success).toBe(true);
+  });
+});
+
+describe("handleSuperDispatchVehicleModified", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("syncs order from Super Dispatch on vehicle.modified webhook", async () => {
+    const order = {
+      _id: "order-id",
+      refId: "12345",
+      tms: { guid: "sd-guid" },
+      tmsPartialOrder: true,
+      save: jest.fn(),
+    };
+
+    Order.findOne.mockResolvedValue(order);
+    syncOrderFromSdWebhook.mockResolvedValue(undefined);
+
+    const response = await handleSuperDispatchVehicleModified(
+      { order_guid: "sd-guid" },
+      {},
+    );
+
+    expect(syncOrderFromSdWebhook).toHaveBeenCalledWith(order);
+    expect(order.save).not.toHaveBeenCalled();
+    expect(response.success).toBe(true);
+  });
+});
 
 describe("handleCarrierCanceled", () => {
   beforeEach(() => {

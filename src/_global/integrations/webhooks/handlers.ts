@@ -9,6 +9,7 @@ import { logger } from "@/core/logger";
 import { Order, Carrier } from "@/_global/models";
 import { Status, TransportType } from "@/_global/enums";
 import { updateSuperWithPartialOrder } from "@/order/integrations/updateSuperWithPartialOrder";
+import { syncOrderFromSdWebhook } from "@/order/integrations/saveSDUpdatesToDB";
 import {
   ISuperDispatchOrderCancelledPayload,
   ISuperDispatchOrderDeliveredPayload,
@@ -308,15 +309,10 @@ export const handleSuperDispatchOrderModified = async (
       orderId: order._id,
       refId: order.refId,
       tmsGuid: payload.order_guid,
+      tmsPartialOrder: order.tmsPartialOrder === true,
     });
 
-    // Update order modification timestamp
-    order.tms.updatedAt = new Date();
-
-    // Normalize transportType before saving
-    normalizeTransportType(order);
-
-    await order.save();
+    await syncOrderFromSdWebhook(order);
 
     logger.info("Order modified successfully", {
       orderId: order._id,
@@ -447,18 +443,13 @@ export const handleSuperDispatchVehicleModified = async (
       };
     }
 
-    // Update order modification timestamp
-    order.tms.updatedAt = new Date();
-
-    // Normalize transportType before saving
-    normalizeTransportType(order);
-
-    await order.save();
+    await syncOrderFromSdWebhook(order);
 
     logger.info("Vehicle modified successfully", {
       orderId: order._id,
       refId: order.refId,
       tmsGuid: payload.order_guid,
+      tmsPartialOrder: order.tmsPartialOrder === true,
     });
 
     return {

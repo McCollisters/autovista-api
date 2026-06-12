@@ -609,10 +609,86 @@ function processNewVehicle(
   };
 }
 
+function buildScheduleFromProcessedDates(
+  databaseOrder: IOrder,
+  pickupDates: ProcessedDates,
+  deliveryDates: ProcessedDates,
+): IOrder["schedule"] {
+  const nextPickupEstimated = (() => {
+    if (!pickupDates.scheduledAt) {
+      return databaseOrder.schedule.pickupEstimated;
+    }
+    if (pickupDates.scheduledEndsAt) {
+      return [
+        pickupDates.scheduledAt.toJSDate(),
+        pickupDates.scheduledEndsAt.toJSDate(),
+      ];
+    }
+    const start = pickupDates.scheduledAt.toJSDate();
+    const existing = databaseOrder.schedule.pickupEstimated;
+    if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
+      const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
+      const oldEnd = new Date(existing[1]).getTime();
+      if (Number.isFinite(oldStart) && oldEnd > oldStart) {
+        const spanMs = oldEnd - oldStart;
+        return [start, new Date(start.getTime() + spanMs)];
+      }
+    }
+    return [start];
+  })();
+
+  const nextDeliveryEstimated = (() => {
+    if (!deliveryDates.scheduledAt) {
+      return databaseOrder.schedule.deliveryEstimated;
+    }
+    if (deliveryDates.scheduledEndsAt) {
+      return [
+        deliveryDates.scheduledAt.toJSDate(),
+        deliveryDates.scheduledEndsAt.toJSDate(),
+      ];
+    }
+    const start = deliveryDates.scheduledAt.toJSDate();
+    const existing = databaseOrder.schedule.deliveryEstimated;
+    if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
+      const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
+      const oldEnd = new Date(existing[1]).getTime();
+      if (Number.isFinite(oldStart) && oldEnd > oldStart) {
+        const spanMs = oldEnd - oldStart;
+        return [start, new Date(start.getTime() + spanMs)];
+      }
+    }
+    return [start];
+  })();
+
+  return {
+    ...databaseOrder.schedule,
+    pickupEstimated: nextPickupEstimated,
+    pickupSelected: (() => {
+      const fromSd = luxonToValidJsDate(pickupDates.scheduledAt);
+      if (fromSd) return fromSd;
+      const est0 = Array.isArray(nextPickupEstimated)
+        ? nextPickupEstimated[0]
+        : undefined;
+      if (est0) {
+        const d = est0 instanceof Date ? est0 : new Date(est0);
+        if (!Number.isNaN(d.getTime())) return d;
+      }
+      return databaseOrder.schedule.pickupSelected;
+    })(),
+    deliveryEstimated: nextDeliveryEstimated,
+    pickupCompleted:
+      luxonToValidJsDate(pickupDates.adjustedDate) ??
+      databaseOrder.schedule.pickupCompleted,
+    deliveryCompleted:
+      luxonToValidJsDate(deliveryDates.adjustedDate) ??
+      databaseOrder.schedule.deliveryCompleted,
+  };
+}
+
 function processVehicles(
   sdOrder: SuperDispatchOrder,
   existingOrder: IOrder,
-  portal: IPortal,
+  _portal: IPortal,
 ) {
   const vehicles: IOrder["vehicles"] = [];
   let totalSDAmt = 0;
@@ -661,6 +737,65 @@ function processVehicles(
 // ============================================================================
 // MAIN FUNCTION
 // ============================================================================
+
+/**
+ * Sync schedule dates, vehicles, and TMS metadata from Super Dispatch without
+ * touching addresses, customer, or order status. Safe while `tmsPartialOrder`
+ * is true (addresses remain withheld in SD).
+ */
+export const updateOrderScheduleAndVehiclesFromSD = async (
+  superDispatchOrder: SuperDispatchOrder,
+  databaseOrder: IOrder,
+): Promise<Partial<IOrder> | null> => {
+  try {
+    if (!superDispatchOrder) {
+      return null;
+    }
+
+    const portal = await Portal.findById(databaseOrder.portalId)
+      .lean<IPortal | null>()
+      .exec();
+    if (!portal) {
+      throw new Error(`Portal not found: ${databaseOrder.portalId}`);
+    }
+
+    const pickupDates = processPickupDates(superDispatchOrder);
+    const deliveryDates = processDeliveryDates(superDispatchOrder);
+    const vehicleData = processVehicles(
+      superDispatchOrder,
+      databaseOrder,
+      portal,
+    );
+
+    return {
+      vehicles: vehicleData.vehicles,
+      totalPricing: vehicleData.totalPricing,
+      schedule: buildScheduleFromProcessedDates(
+        databaseOrder,
+        pickupDates,
+        deliveryDates,
+      ),
+      tms: {
+        guid: superDispatchOrder.guid,
+        status: superDispatchOrder.status,
+        updatedAt: superDispatchOrder.changed_at
+          ? new Date(superDispatchOrder.changed_at)
+          : new Date(),
+        createdAt: superDispatchOrder.created_at
+          ? new Date(superDispatchOrder.created_at)
+          : databaseOrder.tms?.createdAt || new Date(),
+      },
+      tmsPartialOrder: databaseOrder.tmsPartialOrder,
+    };
+  } catch (error) {
+    logger.error("Error in updateOrderScheduleAndVehiclesFromSD:", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      orderRefId: databaseOrder.refId,
+    });
+    return null;
+  }
+};
 
 /**
  * Update order from SuperDispatch data
@@ -801,51 +936,11 @@ export const updateOrderFromSD = async (
     const purchaseOrderNumber =
       superDispatchOrder.purchase_order_number || databaseOrder.reg;
 
-    const nextPickupEstimated = (() => {
-      if (!pickupDates.scheduledAt) {
-        return databaseOrder.schedule.pickupEstimated;
-      }
-      if (pickupDates.scheduledEndsAt) {
-        return [
-          pickupDates.scheduledAt.toJSDate(),
-          pickupDates.scheduledEndsAt.toJSDate(),
-        ];
-      }
-      const start = pickupDates.scheduledAt.toJSDate();
-      const existing = databaseOrder.schedule.pickupEstimated;
-      if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
-        const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
-        const oldEnd = new Date(existing[1]).getTime();
-        if (Number.isFinite(oldStart) && oldEnd > oldStart) {
-          const spanMs = oldEnd - oldStart;
-          return [start, new Date(start.getTime() + spanMs)];
-        }
-      }
-      return [start];
-    })();
-
-    const nextDeliveryEstimated = (() => {
-      if (!deliveryDates.scheduledAt) {
-        return databaseOrder.schedule.deliveryEstimated;
-      }
-      if (deliveryDates.scheduledEndsAt) {
-        return [
-          deliveryDates.scheduledAt.toJSDate(),
-          deliveryDates.scheduledEndsAt.toJSDate(),
-        ];
-      }
-      const start = deliveryDates.scheduledAt.toJSDate();
-      const existing = databaseOrder.schedule.deliveryEstimated;
-      if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
-        const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
-        const oldEnd = new Date(existing[1]).getTime();
-        if (Number.isFinite(oldStart) && oldEnd > oldStart) {
-          const spanMs = oldEnd - oldStart;
-          return [start, new Date(start.getTime() + spanMs)];
-        }
-      }
-      return [start];
-    })();
+    const scheduleUpdate = buildScheduleFromProcessedDates(
+      databaseOrder,
+      pickupDates,
+      deliveryDates,
+    );
 
     // Build the complete order update object
     const orderUpdate: Partial<IOrder> = {
@@ -887,29 +982,7 @@ export const updateOrderFromSD = async (
       totalPricing: vehicleData.totalPricing,
 
       // Schedule updates (pickupSelected must track SD window start — UI maps pickupScheduledAt from it)
-      schedule: {
-        ...databaseOrder.schedule,
-        pickupEstimated: nextPickupEstimated,
-        pickupSelected: (() => {
-          const fromSd = luxonToValidJsDate(pickupDates.scheduledAt);
-          if (fromSd) return fromSd;
-          const est0 = Array.isArray(nextPickupEstimated)
-            ? nextPickupEstimated[0]
-            : undefined;
-          if (est0) {
-            const d = est0 instanceof Date ? est0 : new Date(est0);
-            if (!Number.isNaN(d.getTime())) return d;
-          }
-          return databaseOrder.schedule.pickupSelected;
-        })(),
-        deliveryEstimated: nextDeliveryEstimated,
-        pickupCompleted:
-          luxonToValidJsDate(pickupDates.adjustedDate) ??
-          databaseOrder.schedule.pickupCompleted,
-        deliveryCompleted:
-          luxonToValidJsDate(deliveryDates.adjustedDate) ??
-          databaseOrder.schedule.deliveryCompleted,
-      },
+      schedule: scheduleUpdate,
 
       // Preserve existing fields
       portalId: databaseOrder.portalId,
