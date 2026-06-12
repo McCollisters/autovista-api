@@ -240,8 +240,8 @@ export async function sendOrderCustomerPublicNew(
     const sharerName = buildSharerDisplayName(order.customer);
 
     const subject = isShareRecipient
-      ? "A McCollister's Auto Transport Order Was Shared With You"
-      : "Your McCollister's Auto Transport Order Is Confirmed";
+      ? "A McCollister's Auto Transport order was shared with you"
+      : "Your McCollister's Auto Transport order is confirmed";
 
     const isCOD = order.paymentType === PaymentType.Cod;
     const {

@@ -143,7 +143,7 @@ describe("sendOrderCustomerPublicNew", () => {
     expect(sendOrderNotification).toHaveBeenCalledWith(
       expect.objectContaining({
         email: expect.objectContaining({
-          subject: "Your McCollister's Auto Transport Order Is Confirmed",
+          subject: "Your McCollister's Auto Transport order is confirmed",
         }),
       }),
     );
@@ -164,7 +164,7 @@ describe("sendOrderCustomerPublicNew", () => {
     expect(sendOrderNotification).toHaveBeenCalledWith(
       expect.objectContaining({
         email: expect.objectContaining({
-          subject: "A McCollister's Auto Transport Order Was Shared With You",
+          subject: "A McCollister's Auto Transport order was shared with you",
         }),
       }),
     );
