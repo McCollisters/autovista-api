@@ -45,7 +45,8 @@
     "migrate:survey-responses:down": "tsx -r dotenv/config migrations/scripts/migrate-survey-responses.ts down",
     "migrate:portal-roles": "tsx -r dotenv/config scripts/migrate-portal-roles.ts",
     "fix:modifier-sets-enclosed": "tsx -r dotenv/config migrations/scripts/fix-modifier-sets-enclosed.ts",
-    "dedupe:modifier-sets": "tsx -r dotenv/config migrations/scripts/dedupe-modifier-sets.ts"
+    "dedupe:modifier-sets": "tsx -r dotenv/config migrations/scripts/dedupe-modifier-sets.ts",
+    "scan:orphaned-portals": "tsx -r dotenv/config scripts/scan-orphaned-portal-records.ts"
   },
   "keywords": [],
   "license": "MIT",

@@ -7,6 +7,14 @@ jest.mock("@/_global/models", () => ({
   },
 }));
 
+jest.mock("@/core/logger", () => ({
+  logger: {
+    error: jest.fn(),
+    info: jest.fn(),
+    warn: jest.fn(),
+  },
+}));
+
 const { Portal } = require("@/_global/models");
 
 describe("updateOrderScheduleAndVehiclesFromSD", () => {

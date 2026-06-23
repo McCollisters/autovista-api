@@ -7,7 +7,7 @@
 
 import { DateTime } from "luxon";
 import { IOrder, IPortal, Portal } from "@/_global/models";
-import { Status, TransportType, USState } from "@/_global/enums";
+import { Status, TransportType, USState, VehicleClass } from "@/_global/enums";
 import { logger } from "@/core/logger";
 import { isWithheldAddress } from "../utils/checkWithheldAddress";
 
@@ -154,7 +154,7 @@ function isValidDate(dateString: string | undefined): boolean {
 /** Pick the pickup start instant Super Dispatch intends for scheduling (Carrier Pickup Date first). */
 function resolvePickupStartIso(sdOrder: SuperDispatchOrder): string | undefined {
   const pickup = sdOrder.pickup;
-  const pickupAny = pickup as Record<string, string | undefined>;
+  const pickupAny = pickup as unknown as Record<string, string | undefined>;
   const status = String(sdOrder.status || "").toLowerCase();
   const isTerminalPickup =
     status === "picked_up" ||
@@ -164,7 +164,7 @@ function resolvePickupStartIso(sdOrder: SuperDispatchOrder): string | undefined 
 
   const candidates: (string | undefined)[] = [
     sdOrder.carrier_pickup_date,
-    (sdOrder as Record<string, string | undefined>).carrierPickupDate,
+    (sdOrder as unknown as Record<string, string | undefined>).carrierPickupDate,
     pickup.carrier_pickup_date,
     pickupAny.carrierPickupDate,
     pickup.carrier_pickup_at,
@@ -187,7 +187,7 @@ function resolvePickupStartIso(sdOrder: SuperDispatchOrder): string | undefined 
 /** Pickup window end: prefer carrier-specific end, then broker scheduled end. */
 function resolvePickupEndIso(sdOrder: SuperDispatchOrder): string | undefined {
   const pickup = sdOrder.pickup;
-  const pickupAny = pickup as Record<string, string | undefined>;
+  const pickupAny = pickup as unknown as Record<string, string | undefined>;
   const candidates = [
     pickup.carrier_pickup_ends_at,
     pickupAny.carrierPickupEndsAt,
@@ -345,18 +345,31 @@ const normalizeUSState = (value?: string | null): USState | undefined => {
     : undefined;
 };
 
+const hasSdValue = (value: string | null | undefined): value is string =>
+  value != null && String(value).trim() !== "";
+
+export function shouldUseSuperDispatchAddressValue(
+  sdValue: string | null | undefined,
+): boolean {
+  return hasSdValue(sdValue) && !isWithheldAddress(sdValue);
+}
+
+const normalizeZip = (value?: string | null): string | undefined => {
+  if (!shouldUseSuperDispatchAddressValue(value)) {
+    return undefined;
+  }
+  return String(value).replace(/\D+/g, "") || undefined;
+};
+
 function processPickupAddress(
   sdOrder: SuperDispatchOrder,
   existingOrder: IOrder,
 ): Partial<IOrder["origin"]> {
   const venue = sdOrder.pickup?.venue;
-  const isWithheld = isWithheldAddress(existingOrder.origin?.address?.address);
-  const isPartialOrder = existingOrder.tmsPartialOrder === true;
-
-  const sdAddressRemoved = !venue || venue.address == null;
-  const sdCityRemoved = !venue || venue.city == null;
-  const sdStateRemoved = !venue || venue.state == null;
-  const sdZipRemoved = !venue || venue.zip == null;
+  const sdAddress = venue?.address;
+  const sdCity = venue?.city;
+  const sdState = normalizeUSState(venue?.state);
+  const sdZip = normalizeZip(venue?.zip);
 
   return {
     // Always preserve our DB contact—Super has portal/office contact, not customer
@@ -365,28 +378,21 @@ function processPickupAddress(
       phone: existingOrder.origin?.contact?.phone,
       phoneMobile: existingOrder.origin?.contact?.phoneMobile,
     },
-    // Preserve existing address if WITTHELD, tmsPartialOrder, or SD removed it
+    // Keep withheld/blank SD placeholders out, but allow real SD address edits to flow back.
     address: {
-      address:
-        isPartialOrder || isWithheld || sdAddressRemoved
-          ? existingOrder.origin?.address?.address
-          : venue?.address || undefined,
+      address: shouldUseSuperDispatchAddressValue(sdAddress)
+        ? sdAddress
+        : existingOrder.origin?.address?.address,
       city:
-        isWithheld || sdCityRemoved
-          ? existingOrder.origin?.address?.city
-          : venue?.city || undefined,
-      state:
-        isWithheld || sdStateRemoved
-          ? existingOrder.origin?.address?.state
-          : normalizeUSState(venue?.state),
-      zip:
-        isWithheld || sdZipRemoved
-          ? existingOrder.origin?.address?.zip
-          : venue?.zip?.replace(/\D+/g, "") || undefined,
+        shouldUseSuperDispatchAddressValue(sdCity)
+          ? sdCity
+          : existingOrder.origin?.address?.city,
+      state: sdState || existingOrder.origin?.address?.state,
+      zip: sdZip || existingOrder.origin?.address?.zip,
     },
     // While order is still partial in TMS, SD often has no/empty notes; never wipe our DB notes.
     notes: mergePickupDeliveryNotesFromSd(
-      isPartialOrder,
+      existingOrder.tmsPartialOrder === true,
       sdOrder.pickup?.notes,
       existingOrder.origin?.notes,
     ),
@@ -400,15 +406,10 @@ function processDeliveryAddress(
   existingOrder: IOrder,
 ): Partial<IOrder["destination"]> {
   const venue = sdOrder.delivery?.venue;
-  const isWithheld = isWithheldAddress(
-    existingOrder.destination?.address?.address,
-  );
-  const isPartialOrder = existingOrder.tmsPartialOrder === true;
-
-  const sdAddressRemoved = !venue || venue.address == null;
-  const sdCityRemoved = !venue || venue.city == null;
-  const sdStateRemoved = !venue || venue.state == null;
-  const sdZipRemoved = !venue || venue.zip == null;
+  const sdAddress = venue?.address;
+  const sdCity = venue?.city;
+  const sdState = normalizeUSState(venue?.state);
+  const sdZip = normalizeZip(venue?.zip);
 
   return {
     // Always preserve our DB contact—Super has portal/office contact, not customer
@@ -417,27 +418,20 @@ function processDeliveryAddress(
       phone: existingOrder.destination?.contact?.phone,
       phoneMobile: existingOrder.destination?.contact?.phoneMobile,
     },
-    // Preserve existing address if WITTHELD, tmsPartialOrder, or SD removed it
+    // Keep withheld/blank SD placeholders out, but allow real SD address edits to flow back.
     address: {
-      address:
-        isPartialOrder || isWithheld || sdAddressRemoved
-          ? existingOrder.destination?.address?.address
-          : venue?.address || undefined,
+      address: shouldUseSuperDispatchAddressValue(sdAddress)
+        ? sdAddress
+        : existingOrder.destination?.address?.address,
       city:
-        isWithheld || sdCityRemoved
-          ? existingOrder.destination?.address?.city
-          : venue?.city || undefined,
-      state:
-        isWithheld || sdStateRemoved
-          ? existingOrder.destination?.address?.state
-          : normalizeUSState(venue?.state),
-      zip:
-        isWithheld || sdZipRemoved
-          ? existingOrder.destination?.address?.zip
-          : venue?.zip?.replace(/\D+/g, "") || undefined,
+        shouldUseSuperDispatchAddressValue(sdCity)
+          ? sdCity
+          : existingOrder.destination?.address?.city,
+      state: sdState || existingOrder.destination?.address?.state,
+      zip: sdZip || existingOrder.destination?.address?.zip,
     },
     notes: mergePickupDeliveryNotesFromSd(
-      isPartialOrder,
+      existingOrder.tmsPartialOrder === true,
       sdOrder.delivery?.notes,
       existingOrder.destination?.notes,
     ),
@@ -465,20 +459,20 @@ function findMatchingVehicle(
   );
 }
 
-const mapSdVehicleType = (type?: string | null) => {
+const mapSdVehicleType = (type?: string | null): VehicleClass => {
   const normalized = String(type || "")
     .toLowerCase()
     .trim();
-  const typeMap: Record<string, string> = {
-    sedan: "sedan",
-    suv: "suv",
-    van: "van",
-    "4_door_pickup": "pickup_4_doors",
-    "2_door_pickup": "pickup_2_doors",
-    pickup: "pickup_4_doors",
-    other: "other",
+  const typeMap: Record<string, VehicleClass> = {
+    sedan: VehicleClass.Sedan,
+    suv: VehicleClass.SUV,
+    van: VehicleClass.Van,
+    "4_door_pickup": VehicleClass.Pickup4Door,
+    "2_door_pickup": VehicleClass.Pickup2Door,
+    pickup: VehicleClass.Pickup4Door,
+    other: VehicleClass.Other,
   };
-  return typeMap[normalized] || "other";
+  return typeMap[normalized] || VehicleClass.Other;
 };
 
 type OrderVehicle = IOrder["vehicles"][0];
@@ -499,9 +493,9 @@ const normalizeOrderModifiers = (
   enclosedPercent: modifiers?.enclosedPercent ?? 0,
   commission: modifiers?.commission ?? 0,
   serviceLevels:
-    (modifiers as any)?.serviceLevels ?? (modifiers as any)?.serviceLevel ?? 0,
+    (modifiers as any)?.serviceLevels ?? (modifiers as any)?.serviceLevel ?? [],
   companyTariff: modifiers?.companyTariff ?? 0,
-});
+}) as OrderVehicle["pricing"]["modifiers"];
 
 function processExistingVehicle(
   sdVehicle: SuperDispatchOrder["vehicles"][0],
@@ -556,7 +550,7 @@ function processExistingVehicle(
       total: totalValue,
       totalWithCompanyTariffAndCommission: totalValue + commission + cTariff,
     },
-  };
+  } as unknown as OrderVehicle;
 }
 
 function processNewVehicle(
@@ -599,14 +593,14 @@ function processNewVehicle(
         enclosedFlat: 0,
         enclosedPercent: 0,
         commission,
-        serviceLevels: 0,
+        serviceLevels: [],
         companyTariff: cTariff,
       },
       // Always update pricing from Super Dispatch
       total: totalValue,
       totalWithCompanyTariffAndCommission: totalValue + commission + cTariff,
     },
-  };
+  } as unknown as OrderVehicle;
 }
 
 function buildScheduleFromProcessedDates(

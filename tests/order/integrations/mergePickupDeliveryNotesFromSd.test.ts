@@ -1,5 +1,13 @@
-import { describe, it, expect } from "@jest/globals";
+import { describe, it, expect, jest } from "@jest/globals";
 import { mergePickupDeliveryNotesFromSd } from "@/order/integrations/updateOrderFromSD";
+
+jest.mock("@/core/logger", () => ({
+  logger: {
+    error: jest.fn(),
+    info: jest.fn(),
+    warn: jest.fn(),
+  },
+}));
 
 describe("mergePickupDeliveryNotesFromSd", () => {
   describe("partial order (tmsPartialOrder true)", () => {

@@ -1,0 +1,7 @@
+
+> autovista-api@1.0.0 scan:orphaned-portals
+> tsx -r dotenv/config scripts/scan-orphaned-portal-records.ts --limit=100
+
+undefined is a legacy winston transport. Consider upgrading: 
+- Upgrade docs: https://github.com/winstonjs/winston/blob/master/UPGRADE-3.0.md
+{"level":"info","message":"Connected to MongoDB","service":"autovista-api","timestamp":"2026-06-23 09:25:09"}

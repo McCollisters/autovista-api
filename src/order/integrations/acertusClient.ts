@@ -370,18 +370,45 @@ const buildVehicleCreatePayloads = (order: any) => {
 /**
  * Build carrier payload
  */
-const buildCarrierPayload = (order: any) => {
+const cleanString = (value: unknown): string | null => {
+  if (value === null || value === undefined) {
+    return null;
+  }
+  const trimmed = String(value).trim();
+  return trimmed || null;
+};
+
+const buildDriverPayload = (order: any) => {
+  const carrierDriver = order.tms?.carrier?.driver || {};
+  const orderDriver = order.driver || {};
+  const name =
+    cleanString(carrierDriver.name) ||
+    cleanString(orderDriver.name) ||
+    cleanString(orderDriver.fullName);
+  const identifier =
+    cleanString(carrierDriver.identifier) ||
+    cleanString(orderDriver.identifier) ||
+    cleanString(orderDriver.captivatedId);
+
+  if (!name && !identifier) {
+    return null;
+  }
+
+  return {
+    name,
+    identifier,
+    signature: cleanString(carrierDriver.signature),
+  };
+};
+
+export const buildCarrierPayload = (order: any) => {
   const carrier = order.tms?.carrier || {};
   return {
     scac: carrier.scac || DEFAULT_CARRIER_SCAC || "",
     name: carrier.name || DEFAULT_CARRIER_NAME,
     identifier:
       carrier.identifier || DEFAULT_CARRIER_IDENTIFIER || DEFAULT_CARRIER_SCAC,
-    driver: {
-      name: carrier.driver?.name || order.driver?.name || null,
-      identifier: carrier.driver?.identifier || null,
-      signature: carrier.driver?.signature || null,
-    },
+    driver: buildDriverPayload(order),
   };
 };
 
