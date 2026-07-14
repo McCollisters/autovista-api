@@ -127,8 +127,8 @@ export const sendOrderToSuper = async (
       number: String(orderNumber),
       purchase_order_number: reg,
       payment: {
-        method: "other",
-        terms: "other",
+        method: "ach",
+        terms: "10_days",
       },
       pickup: {
         first_available_pickup_date: pickupStartDate,

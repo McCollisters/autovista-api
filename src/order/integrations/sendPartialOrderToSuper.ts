@@ -219,8 +219,8 @@ export const sendPartialOrderToSuper = async (
       instructions:
         "Full order details will be released upon carrier approval by our office within 1 business day",
       payment: {
-        method: "other",
-        terms: "other",
+        method: "ach",
+        terms: "10_days",
       },
       pickup: {
         date_type: "estimated",

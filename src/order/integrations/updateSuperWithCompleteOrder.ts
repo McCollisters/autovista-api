@@ -232,8 +232,8 @@ export const updateSuperWithCompleteOrder = async (
       // Remove default partial order instruction, but preserve manually updated instructions
       instructions: instructionsToUse,
       payment: {
-        method: "other",
-        terms: "other",
+        method: "ach",
+        terms: "10_days",
       },
       customer: {
         name: (portal as any).companyName || null,
