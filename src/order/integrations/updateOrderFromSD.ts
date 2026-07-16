@@ -123,6 +123,83 @@ function luxonToValidJsDate(dt: DateTime | undefined): Date | undefined {
   return Number.isNaN(d.getTime()) ? undefined : d;
 }
 
+const SCHEDULE_TIMEZONE = "America/New_York";
+
+function isSameCalendarDay(
+  a: DateTime | Date,
+  b: DateTime | Date,
+): boolean {
+  const toNyDate = (value: DateTime | Date) => {
+    const dt =
+      value instanceof Date
+        ? DateTime.fromJSDate(value).setZone(SCHEDULE_TIMEZONE)
+        : value.setZone(SCHEDULE_TIMEZONE);
+    return dt.isValid ? dt.toISODate() : null;
+  };
+  const aDay = toNyDate(a);
+  const bDay = toNyDate(b);
+  return Boolean(aDay && bDay && aDay === bDay);
+}
+
+/**
+ * Transit window width in days: maxDays - minDays.
+ * Customers always see a delivery range; never a single exact date.
+ */
+function getTransitSpreadDays(
+  transitTime: number[] | undefined | null,
+): number | null {
+  if (!Array.isArray(transitTime) || transitTime.length < 2) return null;
+  const minDays = Number(transitTime[0]);
+  const maxDays = Number(transitTime[1]);
+  if (!Number.isFinite(minDays) || !Number.isFinite(maxDays)) return null;
+  const spread = maxDays - minDays;
+  if (spread > 0) return spread;
+  // If min === max, still expand by maxDays when positive so we keep a range.
+  if (maxDays > 0) return maxDays;
+  return null;
+}
+
+/**
+ * When Super Dispatch supplies a single delivery date (exact / no distinct end),
+ * expand it into [start, start + transitSpread] using the order's transit time.
+ */
+function expandSingleDeliveryDateToRange(
+  start: Date,
+  transitTime: number[] | undefined | null,
+  existingDeliveryEstimated?: Date[],
+): [Date, Date] {
+  const spreadDays = getTransitSpreadDays(transitTime);
+  if (spreadDays != null) {
+    const end = DateTime.fromJSDate(start)
+      .setZone(SCHEDULE_TIMEZONE)
+      .plus({ days: spreadDays })
+      .toJSDate();
+    return [start, end];
+  }
+
+  // Fallback: preserve prior delivery window width when transit time is missing.
+  if (
+    Array.isArray(existingDeliveryEstimated) &&
+    existingDeliveryEstimated.length > 1 &&
+    existingDeliveryEstimated[1]
+  ) {
+    const oldStart = existingDeliveryEstimated[0]
+      ? new Date(existingDeliveryEstimated[0]).getTime()
+      : NaN;
+    const oldEnd = new Date(existingDeliveryEstimated[1]).getTime();
+    if (Number.isFinite(oldStart) && oldEnd > oldStart) {
+      return [start, new Date(start.getTime() + (oldEnd - oldStart))];
+    }
+  }
+
+  // Last resort: 1-day range so customers never see a single date.
+  const end = DateTime.fromJSDate(start)
+    .setZone(SCHEDULE_TIMEZONE)
+    .plus({ days: 1 })
+    .toJSDate();
+  return [start, end];
+}
+
 function isValidDate(dateString: string | undefined): boolean {
   if (!dateString) return false;
 
@@ -635,23 +712,29 @@ function buildScheduleFromProcessedDates(
     if (!deliveryDates.scheduledAt) {
       return databaseOrder.schedule.deliveryEstimated;
     }
-    if (deliveryDates.scheduledEndsAt) {
+
+    const start = deliveryDates.scheduledAt.toJSDate();
+    const hasDistinctRangeEnd =
+      Boolean(deliveryDates.scheduledEndsAt) &&
+      !isSameCalendarDay(
+        deliveryDates.scheduledAt,
+        deliveryDates.scheduledEndsAt!,
+      );
+
+    // Super Dispatch provided a real date range — use it as-is.
+    if (hasDistinctRangeEnd && deliveryDates.scheduledEndsAt) {
       return [
-        deliveryDates.scheduledAt.toJSDate(),
+        start,
         deliveryDates.scheduledEndsAt.toJSDate(),
       ];
     }
-    const start = deliveryDates.scheduledAt.toJSDate();
-    const existing = databaseOrder.schedule.deliveryEstimated;
-    if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
-      const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
-      const oldEnd = new Date(existing[1]).getTime();
-      if (Number.isFinite(oldStart) && oldEnd > oldStart) {
-        const spanMs = oldEnd - oldStart;
-        return [start, new Date(start.getTime() + spanMs)];
-      }
-    }
-    return [start];
+
+    // Exact / single date from SD — always expand to a transit-time range.
+    return expandSingleDeliveryDateToRange(
+      start,
+      databaseOrder.transitTime,
+      databaseOrder.schedule.deliveryEstimated,
+    );
   })();
 
   return {

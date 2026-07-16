@@ -1,0 +1,25 @@
+customer name,origin,destination,pickup date,delivery date,number of vehicles,vehicle information,price,commission,company tariff,grand total
+,,,,,23,TOTAL,29324,250,6600,36174
+Robert Fenrich,"190 Nicholas Ln., Watsonville, CA, 95076","16155 Addington Ct., Newbury, OH, 44065",04/24/2026,05/06/2026,1,1999 Lexus LX470 (VIN: JT6HT00W6x0044374),1977,250,0,2227
+Gary Moore,"857 Green Meadows Drive, Jackson, MO, 63755","129 Mcree Way, Aylett, VA, 23009",05/05/2026,05/09/2026,1,2021 Toyota AVALON,925,0,300,1225
+Tyler / Diamond Reese,"378 WALNUT DR., Hartwell, GA, 30643","Will update, St. Joseph, MO, 64501",04/23/2026,04/25/2026,1,2015 Ford FUSION,1035,0,300,1335
+Tyler / Diamond Reese,"378 Walnut Dr., Hartwell, GA, 30643","Going Direct she should update soon, St. Joseph, MO, 64501",04/28/2026,04/29/2026,1,2015 Ford FUSION,1035,0,300,1335
+David Law,"1769 NEHEMIAH DR., Manteca, CA, 95336","16304 DOWNEY TERRACE CT., Wildwood, MO, 63011",06/03/2026,06/10/2026,2,"2021 Mazda CX-30 (VIN: 3MVDMBEYOMM242305)
+2015 Toyota Corolla (VIN: 5YFBURHE4FP178610)",2925,0,600,3525
+Timothy/Nanette Keating ,"10411 Redbud Dr., Aurora, OH, 44202","2710 Trengate Way, Bakersfield, CA, 93311",04/16/2026,04/20/2026,1,2023 Nissan Murano (VIN: 5N1AZ2BSXPC102222),1475,0,300,1775
+Jonathan Griffiths,"196 Sunny Brook Ter., Newnan, GA, 30265","w/update, St. Louis, MO, 63128",04/24/2026,04/24/2026,1,1972 Ford F100,787,0,300,1087
+Brock Bowen,"2139 ELLINGWOOD PT., Connelly Springs, NC, 28612","4101 HOHENSEE DR., Lincoln, NE, 68516",05/13/2026,05/15/2026,1,2017 Honda Ridgeline,1375,0,300,1675
+Christopher Johnson / Cris,"516 WINDING WAY, Hartwell, GA, 30643","1639 MISTY HOLLOW CT., St. Louis, MO, 63038",05/20/2026,05/22/2026,2,"2019 Dodge RAM 1500
+2023 Nissan PATHFINDER",2050,0,600,2650
+Jill Grogan,"8627 NE 101 ST., Kansas City, MO, 64157","6551 Blantyre Rd, Warrenton, VA, 20187",05/21/2026,05/23/2026,1,2017 Jeep Cherokee (VIN: 1C4PJMDS0HW664693),1075,0,300,1375
+Mackenzie Jackson,"5920 E UNIVERSITY BLVD 4125, Dallas, TX, 75206","Direct will have to update once firm., Bloomfield, MO, 63825",07/06/2026,07/07/2026,1,2026 Mazda CX-50 (VIN: 7MMVABDL7TN470181),825,0,300,1125
+Wendy Schellhorn,"331 HIGHLAND RIDGE DR, Hartwell, GA, 30643","Temp housing, Batavia, OH, 45103",05/20/2026,05/22/2026,1,2023 Tesla Model 3 (VIN: 5YJ3E1EC9PF5822103),850,0,300,1150
+Carolyn Ellis,"3005 SW 28TH AVENUE APARTMENT C, Amarillo, TX, 79110","201 STAFFORD DR., King William, VA, 23150",05/18/2026,05/21/2026,1,2024 Chevrolet SILVERADO,1975,0,300,2275
+Rory Pack,"44023 W NEELY DR, Maricopa, AZ, 85138","22 Jake Aly, Carlisle, PA, 17013",06/12/2026,06/15/2026,1,2023 Kia FORTE (VIN: KNAFU4A24C5608209),1625,0,300,1925
+Brett Peterson,"1503 CORBIN DR, Milford, OH, 45150","will update to temp home, Amarillo, TX, 79101",06/24/2026,06/26/2026,2,"2024 Honda HR-V (VIN: 3CZRZ1H57TM707952)
+2026 Mazda CX-5 (VIN: JM3KFBCM9M0476486)",2950,0,600,3550
+Brett Peterson,"1503 CORBIN DR, Milford, OH, 45150","will update, Hereford, TX, 79045",06/25/2026,06/27/2026,2,"2024 Honda HR-V (VIN: 3CZRZ1H57TM707952)
+2026 Mazda CX-5 (VIN: JM3KFBCM9M0476486)",2950,0,600,3550
+Syrita Murray,"530 Horizon Drive, Suwanee, GA, 30024","3311 S HAMMONS BLVD G418, Joplin, MO, 64804",06/15/2026,06/22/2026,1,2022 Lexus RX,0,0,300,300
+Syrita Murray,"2796 PALMVIEW CT SW, Atlanta, GA, 30331","3311 S HAMMONS BLVD G418, Joplin, MO, 64804",06/15/2026,06/22/2026,1,2022 Lexus RX,1995,0,300,2295
+Donald Damozonio,"1360 kari ct apt 200, Oconomowoc, WI, 53066","4255 E Soliere Ave, Apt 131, Flagstaff, AZ, 86004",06/23/2026,07/01/2026,1,2025 Hyundai IONIQ,1495,0,300,1795
