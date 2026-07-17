@@ -10,7 +10,12 @@ import {
 } from "@/order/reports/portalMonthlyReport";
 
 const DEFAULT_PORTAL_ID = "69664e5968d3227b9d6860c6";
-const DEFAULT_RECIPIENTS = ["anna@periscopeworks.io"];
+const DEFAULT_RECIPIENTS = (
+  process.env.PORTAL_MONTHLY_REPORT_RECIPIENTS || "jpippin@mccollisters.com"
+)
+  .split(",")
+  .map((address) => address.trim())
+  .filter(Boolean);
 const REPORT_TIMEZONE = "America/New_York";
 const DEFAULT_DATE_FIELD: PortalMonthlyReportDateField = "createdAt";
 
@@ -30,8 +35,10 @@ export async function sendPortalMonthlyReport(
     : DEFAULT_RECIPIENTS;
   const dateField = options.dateField || DEFAULT_DATE_FIELD;
 
+  // Default to the previous month: the cron fires on the 1st and should
+  // report on the month that just ended.
   const nowEastern = DateTime.now().setZone(REPORT_TIMEZONE);
-  const reportMonthBase = options.month || nowEastern.plus({ months: 1 });
+  const reportMonthBase = options.month || nowEastern.minus({ months: 1 });
   const reportMonth = DateTime.fromObject(
     {
       year: reportMonthBase.year,

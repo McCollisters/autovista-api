@@ -1,10 +1,37 @@
 import cron from "node-cron";
+import mongoose from "mongoose";
+import { DateTime } from "luxon";
 import { logger } from "./logger";
 import { sendPickupDeliveryNotifications } from "@/order/tasks/sendPickupDeliveryNotifications";
 import { sendPortalMonthlyReport } from "@/order/tasks/sendPortalMonthlyReport";
 import { sendSurveyNotifications } from "@/order/tasks/sendSurveyNotifications";
 import { Quote, Portal, Order, Settings } from "@/_global/models";
 import { Status } from "@/_global/enums";
+
+/**
+ * Acquire a one-time lock for a named cron run, shared across all app
+ * instances via MongoDB. The app runs on multiple EC2 instances behind
+ * Elastic Beanstalk auto-scaling, and each instance registers its own cron
+ * schedulers - without this lock, every instance fires the job and the same
+ * email goes out once per instance.
+ *
+ * Uses an insert on a fixed _id so exactly one instance can win; the rest
+ * get a duplicate-key error and skip.
+ */
+async function acquireCronLock(lockKey: string): Promise<boolean> {
+  try {
+    await mongoose.connection.collection("cron_locks").insertOne({
+      _id: lockKey as any,
+      createdAt: new Date(),
+    });
+    return true;
+  } catch (error: any) {
+    if (error?.code === 11000) {
+      return false;
+    }
+    throw error;
+  }
+}
 
 /**
  * Initialize cron jobs
@@ -77,6 +104,21 @@ export function initializeCronJobs() {
             );
             return;
           }
+
+          const reportMonth = DateTime.now()
+            .setZone("America/New_York")
+            .minus({ months: 1 })
+            .toFormat("yyyy-MM");
+          const lockKey = `portal-monthly-report:${reportMonth}`;
+          const acquired = await acquireCronLock(lockKey);
+          if (!acquired) {
+            logger.info(
+              "Portal monthly report already sent by another instance, skipping",
+              { lockKey },
+            );
+            return;
+          }
+
           await sendPortalMonthlyReport();
         } catch (error) {
           logger.error("Portal monthly report cron failed", {
