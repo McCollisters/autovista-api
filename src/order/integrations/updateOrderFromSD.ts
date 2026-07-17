@@ -10,6 +10,10 @@ import { IOrder, IPortal, Portal } from "@/_global/models";
 import { Status, TransportType, USState } from "@/_global/enums";
 import { logger } from "@/core/logger";
 import { isWithheldAddress } from "../utils/checkWithheldAddress";
+import {
+  expandSingleDeliveryDateToRange,
+  isSameCalendarDay,
+} from "../utils/deliveryDateRange";
 
 interface SuperDispatchOrder {
   guid: string;
@@ -828,23 +832,29 @@ export const updateOrderFromSD = async (
       if (!deliveryDates.scheduledAt) {
         return databaseOrder.schedule.deliveryEstimated;
       }
-      if (deliveryDates.scheduledEndsAt) {
+
+      const start = deliveryDates.scheduledAt.toJSDate();
+      const hasDistinctRangeEnd =
+        Boolean(deliveryDates.scheduledEndsAt) &&
+        !isSameCalendarDay(
+          deliveryDates.scheduledAt,
+          deliveryDates.scheduledEndsAt!,
+        );
+
+      // Preserve a real range supplied by Super Dispatch.
+      if (hasDistinctRangeEnd && deliveryDates.scheduledEndsAt) {
         return [
-          deliveryDates.scheduledAt.toJSDate(),
+          start,
           deliveryDates.scheduledEndsAt.toJSDate(),
         ];
       }
-      const start = deliveryDates.scheduledAt.toJSDate();
-      const existing = databaseOrder.schedule.deliveryEstimated;
-      if (Array.isArray(existing) && existing.length > 1 && existing[1]) {
-        const oldStart = existing[0] ? new Date(existing[0]).getTime() : NaN;
-        const oldEnd = new Date(existing[1]).getTime();
-        if (Number.isFinite(oldStart) && oldEnd > oldStart) {
-          const spanMs = oldEnd - oldStart;
-          return [start, new Date(start.getTime() + spanMs)];
-        }
-      }
-      return [start];
+
+      // Expand exact/single SD dates using the order's transit-time spread.
+      return expandSingleDeliveryDateToRange(
+        start,
+        databaseOrder.transitTime,
+        databaseOrder.schedule.deliveryEstimated,
+      );
     })();
 
     // Build the complete order update object
