@@ -125,7 +125,7 @@ function luxonToValidJsDate(dt: DateTime | undefined): Date | undefined {
 
 const SCHEDULE_TIMEZONE = "America/New_York";
 
-function isSameCalendarDay(
+export function isSameCalendarDay(
   a: DateTime | Date,
   b: DateTime | Date,
 ): boolean {
@@ -145,7 +145,7 @@ function isSameCalendarDay(
  * Transit window width in days: maxDays - minDays.
  * Customers always see a delivery range; never a single exact date.
  */
-function getTransitSpreadDays(
+export function getTransitSpreadDays(
   transitTime: number[] | undefined | null,
 ): number | null {
   if (!Array.isArray(transitTime) || transitTime.length < 2) return null;
@@ -163,7 +163,7 @@ function getTransitSpreadDays(
  * When Super Dispatch supplies a single delivery date (exact / no distinct end),
  * expand it into [start, start + transitSpread] using the order's transit time.
  */
-function expandSingleDeliveryDateToRange(
+export function expandSingleDeliveryDateToRange(
   start: Date,
   transitTime: number[] | undefined | null,
   existingDeliveryEstimated?: Date[],
