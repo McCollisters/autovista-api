@@ -10,6 +10,7 @@ import { IOrder, IPortal, Portal } from "@/_global/models";
 import { Status, TransportType, USState, VehicleClass } from "@/_global/enums";
 import { logger } from "@/core/logger";
 import { isWithheldAddress } from "../utils/checkWithheldAddress";
+import { normalizeUsZip } from "@/_global/utils/normalizeUsZip";
 
 interface SuperDispatchOrder {
   guid: string;
@@ -435,7 +436,7 @@ const normalizeZip = (value?: string | null): string | undefined => {
   if (!shouldUseSuperDispatchAddressValue(value)) {
     return undefined;
   }
-  return String(value).replace(/\D+/g, "") || undefined;
+  return normalizeUsZip(value) || undefined;
 };
 
 function processPickupAddress(

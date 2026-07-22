@@ -14,6 +14,7 @@ import {
   matchSuperDispatchVehicles,
   collectUnmatchedSdVehicles,
 } from "@/order/integrations/matchSuperDispatchVehicles";
+import { normalizeUsZip } from "@/_global/utils/normalizeUsZip";
 
 /**
  * Update partial order in Super Dispatch with complete order details
@@ -108,16 +109,9 @@ export const updateSuperWithCompleteOrder = async (
       return Number.isFinite(parsed) ? parsed : null;
     };
 
-    const normalizeZipNumber = (value?: string | number | null) => {
-      if (!value && value !== 0) {
-        return null;
-      }
-      const digits = String(value).match(/\d{5}/)?.[0] || "";
-      if (!digits) {
-        return null;
-      }
-      const parsed = Number.parseInt(digits, 10);
-      return Number.isFinite(parsed) ? parsed : null;
+    const normalizeZipValue = (value?: string | number | null) => {
+      const zip = normalizeUsZip(value);
+      return zip || null;
     };
 
     // Match each local vehicle to at most one SD vehicle so the PATCH can never
@@ -287,7 +281,7 @@ export const updateSuperWithCompleteOrder = async (
           address: order.origin?.address?.address || null,
           city: order.origin?.address?.city || null,
           state: order.origin?.address?.state || null,
-          zip: normalizeZipNumber(order.origin?.address?.zip),
+          zip: normalizeZipValue(order.origin?.address?.zip),
           name:
             order.origin?.contact?.companyName ||
             order.origin?.contact?.name ||
@@ -309,7 +303,7 @@ export const updateSuperWithCompleteOrder = async (
           address: order.destination?.address?.address || null,
           city: order.destination?.address?.city || null,
           state: order.destination?.address?.state || null,
-          zip: normalizeZipNumber(order.destination?.address?.zip),
+          zip: normalizeZipValue(order.destination?.address?.zip),
           name:
             order.destination?.contact?.companyName ||
             order.destination?.contact?.name ||

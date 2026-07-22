@@ -6,6 +6,7 @@
  */
 
 import mongoose, { Schema, SchemaDefinition } from "mongoose";
+import { normalizeUsZip } from "../utils/normalizeUsZip";
 
 /**
  * Creates a schema with standard options
@@ -94,7 +95,16 @@ export function createAddressSchema() {
     addressLine2: { type: String },
     city: { type: String },
     state: { type: String },
-    zip: { type: String },
+    zip: {
+      type: String,
+      // Keep leading zeros (e.g. NJ 07039) so Super Dispatch syncs don't fail.
+      set: (value: unknown) => {
+        if (value == null || value === "") {
+          return value;
+        }
+        return normalizeUsZip(value as string | number);
+      },
+    },
     notes: { type: String },
     coordinates: createCoordinatesSchema(),
   };

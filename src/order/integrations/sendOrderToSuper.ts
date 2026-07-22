@@ -8,6 +8,7 @@ import { logger } from "@/core/logger";
 import { IPortal } from "@/_global/models";
 import { DateTime } from "luxon";
 import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
+import { normalizeUsZip } from "@/_global/utils/normalizeUsZip";
 
 interface SendOrderToSuperParams {
   quotes: any[];
@@ -77,24 +78,12 @@ export const sendOrderToSuper = async (
       serviceLevel,
     } = params;
 
-    const normalizeZip = (value?: string | number | null) => {
-      if (!value && value !== 0) {
-        return "";
-      }
-      const digits = String(value).match(/\d{5}/)?.[0] || "";
-      return digits;
-    };
-
     const normalizeText = (value?: string | number | null) =>
       value == null ? "" : String(value).trim();
 
-    const normalizeZipNumber = (value?: string | number | null) => {
-      const digits = normalizeZip(value);
-      if (!digits) {
-        return undefined;
-      }
-      const parsed = Number.parseInt(digits, 10);
-      return Number.isFinite(parsed) ? parsed : undefined;
+    const normalizeZipValue = (value?: string | number | null) => {
+      const zip = normalizeUsZip(value);
+      return zip || undefined;
     };
 
     const formatSuperDispatchDate = (value: Date) =>
@@ -142,7 +131,7 @@ export const sendOrderToSuper = async (
           address: normalizeText(pickupAddress),
           city: normalizeText(pickupCity),
           state: normalizeText(pickupState),
-          zip: normalizeZipNumber(pickupZip),
+          zip: normalizeZipValue(pickupZip),
           name: normalizeText(pickupBusinessName),
           contact_name: normalizeText(pickupContactName),
           contact_email: normalizeText(pickupEmail),
@@ -161,7 +150,7 @@ export const sendOrderToSuper = async (
           address: normalizeText(deliveryAddress),
           city: normalizeText(deliveryCity),
           state: normalizeText(deliveryState),
-          zip: normalizeZipNumber(deliveryZip),
+          zip: normalizeZipValue(deliveryZip),
           name: normalizeText(deliveryBusinessName),
           contact_name: normalizeText(deliveryContactName),
           contact_email: normalizeText(deliveryEmail),

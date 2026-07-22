@@ -3,6 +3,7 @@ import { IAddress } from "../../_global/interfaces";
 import { getDeliveryRanges } from "./getDeliveryRanges";
 import { Portal } from "@/_global/models";
 import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
+import { normalizeUsZip } from "@/_global/utils/normalizeUsZip";
 
 function formatAddress({ address, addressLine2 }: IAddress): string {
   return addressLine2 ? `${address} ${addressLine2}` : address || "";
@@ -62,7 +63,7 @@ export const formatOrderForSD = async (order: IOrder) => {
           address: pickupAddress,
           city: origin.address?.city,
           state: origin.address?.state,
-          zip: origin.address?.zip,
+          zip: normalizeUsZip(origin.address?.zip) || origin.address?.zip,
           name: origin.contact?.companyName,
           contact_name: origin.contact?.name,
           contact_email: origin.contact?.email,
@@ -79,7 +80,7 @@ export const formatOrderForSD = async (order: IOrder) => {
           address: deliveryAddress,
           city: destination.address?.city,
           state: destination.address?.state,
-          zip: destination.address?.zip,
+          zip: normalizeUsZip(destination.address?.zip) || destination.address?.zip,
           name: destination.contact?.companyName,
           contact_name: destination.contact?.name,
           contact_email: destination.contact?.email,

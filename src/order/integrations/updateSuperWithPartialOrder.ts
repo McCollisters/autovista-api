@@ -8,6 +8,7 @@
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
 import { authenticateSuperDispatch } from "@/_global/integrations/authenticateSuperDispatch";
+import { normalizeUsZip } from "@/_global/utils/normalizeUsZip";
 
 /**
  * Update existing order in Super Dispatch with partial/redacted details
@@ -78,14 +79,6 @@ export const updateSuperWithPartialOrder = async (
 
     const existingOrder = getOrderResult.data.object;
 
-    const normalizeZip = (value?: string | number | null) => {
-      if (!value && value !== 0) {
-        return "";
-      }
-      const digits = String(value).match(/\d{5}/)?.[0] || "";
-      return digits;
-    };
-
     // Build partial order details - redact addresses and remove VINs
     const partialOrderDetails = {
       number: existingOrder.number,
@@ -115,7 +108,7 @@ export const updateSuperWithPartialOrder = async (
           address: "123 Example St. ADDRESS WITHHELD",
           city: existingOrder.pickup?.venue?.city,
           state: existingOrder.pickup?.venue?.state,
-          zip: normalizeZip(existingOrder.pickup?.venue?.zip),
+          zip: normalizeUsZip(existingOrder.pickup?.venue?.zip),
         },
       },
       delivery: {
@@ -128,7 +121,7 @@ export const updateSuperWithPartialOrder = async (
           address: "123 Example St. ADDRESS WITHHELD",
           city: existingOrder.delivery?.venue?.city,
           state: existingOrder.delivery?.venue?.state,
-          zip: normalizeZip(existingOrder.delivery?.venue?.zip),
+          zip: normalizeUsZip(existingOrder.delivery?.venue?.zip),
         },
       },
       transport_type: existingOrder.transport_type,

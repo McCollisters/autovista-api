@@ -11,6 +11,7 @@ import { IVehicle } from "@/_global/schemas/types";
 import { DateTime } from "luxon";
 import { authenticateSuperDispatch } from "@/_global/integrations/authenticateSuperDispatch";
 import { mapPricingClassToSuperDispatchVehicleType } from "@/order/integrations/mapPricingClassToSuperDispatchVehicleType";
+import { normalizeUsZip } from "@/_global/utils/normalizeUsZip";
 
 interface VehicleWithCalculatedQuotes extends IVehicle {
   calculatedQuotes?: any[] | string;
@@ -69,14 +70,6 @@ export const sendPartialOrderToSuper = async (
     // Authenticate with Super Dispatch and get token
     const token = await authenticateSuperDispatch();
 
-    const normalizeZip = (value?: string | number | null) => {
-      if (!value && value !== 0) {
-        return "";
-      }
-      const digits = String(value).match(/\d{5}/)?.[0] || "";
-      return digits;
-    };
-
     const normalizeText = (value?: string | number | null) =>
       value == null ? "" : String(value).trim();
 
@@ -126,10 +119,10 @@ export const sendPartialOrderToSuper = async (
 
     const normalizedPickupCity = normalizeText(pickupCity);
     const normalizedPickupState = normalizeState(pickupState);
-    const normalizedPickupZip = normalizeZip(pickupZip);
+    const normalizedPickupZip = normalizeUsZip(pickupZip);
     const normalizedDeliveryCity = normalizeText(deliveryCity);
     const normalizedDeliveryState = normalizeState(deliveryState);
-    const normalizedDeliveryZip = normalizeZip(deliveryZip);
+    const normalizedDeliveryZip = normalizeUsZip(deliveryZip);
 
     const missingFields: string[] = [];
     if (!normalizedPickupCity) missingFields.push("pickup.city");
