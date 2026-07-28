@@ -10,6 +10,7 @@ import { getOrdersAnalytics } from "./controllers/getOrdersAnalytics";
 import { getOrderActivities } from "./controllers/getOrderActivities";
 import { acceptOrderTerms } from "./controllers/acceptOrderTerms";
 import { getOrderStatus } from "./controllers/getOrderStatus";
+import { getOrderStatusPrefill } from "./controllers/getOrderStatusPrefill";
 import { requestDriverLocation } from "./controllers/requestDriverLocation";
 import { createOrderCustomer } from "./controllers/createOrderCustomer";
 import { sendOrderToTms } from "./controllers/sendOrderToTms";
@@ -22,6 +23,7 @@ router.get("/analytics", getOrdersAnalytics);
 router.post("/reports/commission", getCommissionReports);
 router.post("/terms", acceptOrderTerms);
 router.post("/customer", createOrderCustomer);
+router.get("/status-prefill", getOrderStatusPrefill);
 
 // General routes
 router.post("/", createOrder);

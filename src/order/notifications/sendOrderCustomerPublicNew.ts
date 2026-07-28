@@ -22,6 +22,7 @@ import {
   formatTransportTypeLabelForOrder,
   isOrderWhiteGlove,
 } from "@/_global/utils/formatTransportTypeLabel";
+import { createOrderStatusPrefillToken } from "@/_global/utils/orderStatusPrefillToken";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -181,9 +182,19 @@ export async function sendOrderCustomerPublicNew(
       process.env.BASE_URL ||
       "https://autovista.mccollisters.com";
     const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
-    const orderStatusUrl = `${normalizedBaseUrl}/public/order-status?email=${encodeURIComponent(
-      recipientEmail,
-    )}`;
+    let orderStatusUrl = `${normalizedBaseUrl}/public/order-status`;
+    try {
+      const prefillToken = createOrderStatusPrefillToken(recipientEmail);
+      orderStatusUrl = `${orderStatusUrl}?token=${encodeURIComponent(prefillToken)}`;
+    } catch (error) {
+      logger.warn(
+        "Could not create order status prefill token; linking without token",
+        {
+          orderId: order._id,
+          error: error instanceof Error ? error.message : error,
+        },
+      );
+    }
     const trackingHtml = isMMI
       ? ""
       : `<tr>
