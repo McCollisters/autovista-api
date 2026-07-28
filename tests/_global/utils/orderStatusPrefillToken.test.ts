@@ -1,8 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach, jest } from "@jest/globals";
 import {
   createOrderStatusPrefillToken,
+  createQuoteEmailPrefillToken,
   verifyOrderStatusPrefillToken,
-  ORDER_STATUS_PREFILL_PURPOSE,
+  QUOTE_EMAIL_PREFILL_PURPOSE,
 } from "@/_global/utils/orderStatusPrefillToken";
 import crypto from "crypto";
 
@@ -35,6 +36,13 @@ describe("orderStatusPrefillToken", () => {
     const result = verifyOrderStatusPrefillToken(token);
 
     expect(result).toEqual({ email: "customer@example.com" });
+  });
+
+  it("creates quote prefill tokens that resolve the same way", () => {
+    const token = createQuoteEmailPrefillToken("Quote.User@Example.COM");
+    expect(verifyOrderStatusPrefillToken(token)).toEqual({
+      email: "quote.user@example.com",
+    });
   });
 
   it("does not expose the email in the token string", () => {
@@ -72,7 +80,7 @@ describe("orderStatusPrefillToken", () => {
     const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
     const plaintext = Buffer.from(
       JSON.stringify({
-        purpose: ORDER_STATUS_PREFILL_PURPOSE,
+        purpose: QUOTE_EMAIL_PREFILL_PURPOSE,
         email: "customer@example.com",
         exp: Date.now() - 1000,
       }),

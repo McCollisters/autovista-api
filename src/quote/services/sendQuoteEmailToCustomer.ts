@@ -5,6 +5,7 @@ import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 import { logger } from "@/core/logger";
 import { getNotificationManager } from "@/notification";
 import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
+import { createQuoteEmailPrefillToken } from "@/_global/utils/orderStatusPrefillToken";
 import {
   formatPickupWindowEmailLabel,
   parsePickupStartDateFromQuote,
@@ -92,9 +93,22 @@ export const sendQuoteEmailToCustomer = async (
         quote?._id,
     );
     const encodedCode = encodeURIComponent(code);
-    const encodedEmail = encodeURIComponent(recipientEmail);
     const normalizedBaseUrl = getPortalBaseUrl();
-    const bookUrl = `${normalizedBaseUrl}/public/quote/${quote._id}/book?code=${encodedCode}&email=${encodedEmail}`;
+    const emailForPrefill =
+      String(quote?.customer?.email || "").trim() || recipientEmail;
+    let bookUrl = `${normalizedBaseUrl}/public/quote/${quote._id}/book?code=${encodedCode}`;
+    try {
+      const prefillToken = createQuoteEmailPrefillToken(emailForPrefill);
+      bookUrl = `${bookUrl}&token=${encodeURIComponent(prefillToken)}`;
+    } catch (error) {
+      logger.warn(
+        "Could not create quote email prefill token; linking without token",
+        {
+          quoteId,
+          error: error instanceof Error ? error.message : error,
+        },
+      );
+    }
 
     const refIdDisplay = String(
       quote?.refId ?? quote?.uniqueId ?? code,
