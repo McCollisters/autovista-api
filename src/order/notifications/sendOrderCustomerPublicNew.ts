@@ -16,6 +16,7 @@ import { formatVehiclesPlain } from "./utils/formatVehiclesPlain";
 import { formatOrderStatusDetailEmailDates } from "./utils/formatOrderStatusDetailEmailDates";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 import { resolveOrderCustomerEmailForTracking } from "../utils/resolveOrderCustomerEmailForTracking";
+import { createOrderStatusPrefillToken } from "@/_global/utils/orderStatusPrefillToken";
 
 const CUSTOMER_ORDER_EMAIL_FROM = "autotransport@mccollisters.com";
 const CUSTOMER_ORDER_EMAIL_FROM_NAME = "McCollister's Auto Transport";
@@ -260,9 +261,19 @@ export async function sendOrderCustomerPublicNew(
     const emailForStatusUrl = isShareRecipient
       ? customerEmailForStatusLink || recipientEmail
       : recipientEmail;
-    const orderStatusUrl = `${normalizedBaseUrl}/public/order-status?email=${encodeURIComponent(
-      emailForStatusUrl,
-    )}`;
+    let orderStatusUrl = `${normalizedBaseUrl}/public/order-status`;
+    try {
+      const prefillToken = createOrderStatusPrefillToken(emailForStatusUrl);
+      orderStatusUrl = `${orderStatusUrl}?token=${encodeURIComponent(prefillToken)}`;
+    } catch (error) {
+      logger.warn(
+        "Could not create order status prefill token; linking without token",
+        {
+          orderId: order._id,
+          error: error instanceof Error ? error.message : error,
+        },
+      );
+    }
     const faqUrl = `${normalizedBaseUrl}/public/quote`;
 
     const transportTypeDisplay = transportTypeDisplayLabel(order.transportType);
