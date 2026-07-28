@@ -5,6 +5,7 @@ import { Quote, Portal } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getNotificationManager } from "@/notification";
 import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
+import { createQuoteEmailPrefillToken } from "@/_global/utils/orderStatusPrefillToken";
 
 const MC_LOGO =
   "https://autovista-assets.s3.us-west-1.amazonaws.com/MCC-Wordmark-RGB-Blue.png";
@@ -72,11 +73,22 @@ export const sendQuoteEmailToCustomer = async (
         quote?._id,
     );
     const encodedCode = encodeURIComponent(code);
-    const encodedEmail = encodeURIComponent(recipientEmail);
     const baseUrl =
       process.env.BASE_URL || "https://autovista.mccollisters.com";
     const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
-    const url = `${normalizedBaseUrl}/public/quote/${quote._id}?code=${encodedCode}&email=${encodedEmail}`;
+    let url = `${normalizedBaseUrl}/public/quote/${quote._id}?code=${encodedCode}`;
+    try {
+      const prefillToken = createQuoteEmailPrefillToken(recipientEmail);
+      url = `${url}&token=${encodeURIComponent(prefillToken)}`;
+    } catch (error) {
+      logger.warn(
+        "Could not create quote email prefill token; linking without token",
+        {
+          quoteId,
+          error: error instanceof Error ? error.message : error,
+        },
+      );
+    }
 
     const pickupLocation =
       quote?.origin?.validated || quote?.origin?.userInput || "";

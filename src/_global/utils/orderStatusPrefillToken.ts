@@ -1,9 +1,9 @@
 /**
- * Encrypted tokens for order-status email prefilling.
+ * Encrypted tokens for email prefilling from outbound links.
  *
- * Confirmation emails link to the customer portal with an opaque token instead
- * of a raw email query param. The frontend exchanges the token for an email
- * via GET /api/v1/order/status-prefill.
+ * Used so confirmation/quote emails can link into the customer portal without
+ * putting a raw email address in the URL. The frontend exchanges the token for
+ * an email via GET /api/v1/order/status-prefill.
  *
  * Tokens use AES-256-GCM so the email is not readable from the URL (unlike a
  * plain JWT, whose payload is only base64-encoded).
@@ -13,12 +13,18 @@ import crypto from "crypto";
 import { logger } from "@/core/logger";
 
 export const ORDER_STATUS_PREFILL_PURPOSE = "order-status-prefill";
+export const QUOTE_EMAIL_PREFILL_PURPOSE = "quote-email-prefill";
 
-/** Prefill links remain usable for the typical transport lifecycle. */
+const ALLOWED_PREFILL_PURPOSES = new Set<string>([
+  ORDER_STATUS_PREFILL_PURPOSE,
+  QUOTE_EMAIL_PREFILL_PURPOSE,
+]);
+
+/** Prefill links remain usable for the typical transport/quote lifecycle. */
 export const ORDER_STATUS_PREFILL_TTL_MS = 180 * 24 * 60 * 60 * 1000;
 
 type PrefillTokenPayload = {
-  purpose: typeof ORDER_STATUS_PREFILL_PURPOSE;
+  purpose: string;
   email: string;
   exp: number;
 };
@@ -35,17 +41,17 @@ function deriveKey(secret: string): Buffer {
   return crypto.createHash("sha256").update(secret).digest();
 }
 
-/**
- * Create an opaque encrypted token that can later be resolved to an email.
- */
-export function createOrderStatusPrefillToken(email: string): string {
+function createEmailPrefillToken(email: string, purpose: string): string {
   const normalizedEmail = email.trim().toLowerCase();
   if (!normalizedEmail) {
     throw new Error("Email is required to create a prefill token");
   }
+  if (!ALLOWED_PREFILL_PURPOSES.has(purpose)) {
+    throw new Error(`Unsupported prefill token purpose: ${purpose}`);
+  }
 
   const payload: PrefillTokenPayload = {
-    purpose: ORDER_STATUS_PREFILL_PURPOSE,
+    purpose,
     email: normalizedEmail,
     exp: Date.now() + ORDER_STATUS_PREFILL_TTL_MS,
   };
@@ -58,6 +64,20 @@ export function createOrderStatusPrefillToken(email: string): string {
   const tag = cipher.getAuthTag();
 
   return Buffer.concat([iv, tag, encrypted]).toString("base64url");
+}
+
+/**
+ * Create an opaque encrypted token for order-status email autofill.
+ */
+export function createOrderStatusPrefillToken(email: string): string {
+  return createEmailPrefillToken(email, ORDER_STATUS_PREFILL_PURPOSE);
+}
+
+/**
+ * Create an opaque encrypted token for quote email autofill/verification.
+ */
+export function createQuoteEmailPrefillToken(email: string): string {
+  return createEmailPrefillToken(email, QUOTE_EMAIL_PREFILL_PURPOSE);
 }
 
 /**
@@ -88,10 +108,13 @@ export function verifyOrderStatusPrefillToken(
       decipher.update(encrypted),
       decipher.final(),
     ]);
-    const payload = JSON.parse(decrypted.toString("utf8")) as Partial<PrefillTokenPayload>;
+    const payload = JSON.parse(
+      decrypted.toString("utf8"),
+    ) as Partial<PrefillTokenPayload>;
 
     if (
-      payload.purpose !== ORDER_STATUS_PREFILL_PURPOSE ||
+      typeof payload.purpose !== "string" ||
+      !ALLOWED_PREFILL_PURPOSES.has(payload.purpose) ||
       typeof payload.email !== "string" ||
       !payload.email.trim() ||
       typeof payload.exp !== "number" ||
@@ -102,7 +125,7 @@ export function verifyOrderStatusPrefillToken(
 
     return { email: payload.email.trim().toLowerCase() };
   } catch (error) {
-    logger.warn("Invalid order status prefill token", {
+    logger.warn("Invalid email prefill token", {
       error: error instanceof Error ? error.message : error,
     });
     return null;
