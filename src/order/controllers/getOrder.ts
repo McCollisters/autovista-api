@@ -10,7 +10,7 @@ export const getOrder = async (
   try {
     const { orderId } = req.params;
     let order = await Order.findById(orderId)
-      .populate("portalId", "companyName"); // Populate portal to get companyName
+      .populate("portalId", "companyName logo options displayMCLogo"); // Populate portal for company + PDF logo
 
     if (!order) {
       return next({ statusCode: 404, message: "Order not found." });
@@ -19,7 +19,7 @@ export const getOrder = async (
     await saveSDUpdatesToDB(order);
 
     order = await Order.findById(orderId)
-      .populate("portalId", "companyName");
+      .populate("portalId", "companyName logo options displayMCLogo");
 
     res.status(200).json(order);
   } catch (error) {

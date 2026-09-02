@@ -156,6 +156,20 @@ export const createOrder = async (
       return next({ statusCode: 400, message: "No pick up date selected." });
     }
 
+    const parsedPickupStartDate = new Date(pickupStartDate);
+    if (
+      Number.isNaN(parsedPickupStartDate.getTime()) ||
+      parsedPickupStartDate.getUTCFullYear() < 2000
+    ) {
+      logger.error("Order creation failed: Invalid pickup date provided", {
+        pickupStartDate,
+      });
+      return next({
+        statusCode: 400,
+        message: "Please select a valid pick up date.",
+      });
+    }
+
     if (!portalId) {
       logger.error("Order creation failed: No portal ID provided");
       return next({ statusCode: 400, message: "Portal ID is required." });
@@ -590,7 +604,7 @@ export const createOrder = async (
     let dateRanges;
     try {
       dateRanges = getDateRanges(
-        pickupStartDate,
+        parsedPickupStartDate,
         effectiveServiceLevel,
         transitTime,
         holidayDates,

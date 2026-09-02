@@ -474,8 +474,10 @@ function processPickupAddress(
       sdOrder.pickup?.notes,
       existingOrder.origin?.notes,
     ),
-    longitude: sdOrder.pickup.longitude || undefined,
-    latitude: sdOrder.pickup.latitude || undefined,
+    longitude:
+      sdOrder.pickup.longitude || existingOrder.origin?.longitude || undefined,
+    latitude:
+      sdOrder.pickup.latitude || existingOrder.origin?.latitude || undefined,
   };
 }
 
@@ -513,8 +515,14 @@ function processDeliveryAddress(
       sdOrder.delivery?.notes,
       existingOrder.destination?.notes,
     ),
-    longitude: sdOrder.delivery.longitude || undefined,
-    latitude: sdOrder.delivery.latitude || undefined,
+    longitude:
+      sdOrder.delivery.longitude ||
+      existingOrder.destination?.longitude ||
+      undefined,
+    latitude:
+      sdOrder.delivery.latitude ||
+      existingOrder.destination?.latitude ||
+      undefined,
   };
 }
 
@@ -817,9 +825,10 @@ function processVehicles(
 // ============================================================================
 
 /**
- * Sync schedule dates, vehicles, and TMS metadata from Super Dispatch without
- * touching addresses, customer, or order status. Safe while `tmsPartialOrder`
- * is true (addresses remain withheld in SD).
+ * Sync schedule dates, vehicles, TMS metadata, and withheld-safe addresses
+ * from Super Dispatch without touching customer or order status. Safe while
+ * `tmsPartialOrder` is true: withheld SD placeholders are ignored, but real
+ * Super Dispatch street edits still flow into Autovista.
  */
 export const updateOrderScheduleAndVehiclesFromSD = async (
   superDispatchOrder: SuperDispatchOrder,
@@ -839,6 +848,14 @@ export const updateOrderScheduleAndVehiclesFromSD = async (
 
     const pickupDates = processPickupDates(superDispatchOrder);
     const deliveryDates = processDeliveryDates(superDispatchOrder);
+    const pickupAddress = processPickupAddress(
+      superDispatchOrder,
+      databaseOrder,
+    );
+    const deliveryAddress = processDeliveryAddress(
+      superDispatchOrder,
+      databaseOrder,
+    );
     const vehicleData = processVehicles(
       superDispatchOrder,
       databaseOrder,
@@ -846,6 +863,14 @@ export const updateOrderScheduleAndVehiclesFromSD = async (
     );
 
     return {
+      origin: {
+        ...databaseOrder.origin,
+        ...pickupAddress,
+      },
+      destination: {
+        ...databaseOrder.destination,
+        ...deliveryAddress,
+      },
       vehicles: vehicleData.vehicles,
       totalPricing: vehicleData.totalPricing,
       schedule: buildScheduleFromProcessedDates(

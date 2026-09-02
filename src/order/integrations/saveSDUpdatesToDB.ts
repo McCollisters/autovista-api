@@ -175,9 +175,11 @@ export const saveSDUpdatesToDB = async (order: IOrder): Promise<void> => {
 };
 
 /**
- * Sync schedule dates and vehicles from Super Dispatch after a webhook.
+ * Sync Super Dispatch changes after a webhook.
  * Partial orders (`tmsPartialOrder`) use a lightweight sync that does not
- * touch addresses or order status; full orders receive a complete sync.
+ * touch customer or order status. Real Super Dispatch address edits are
+ * applied; withheld placeholders are ignored. Full orders receive a complete
+ * sync.
  */
 export const syncOrderFromSdWebhook = async (order: IOrder): Promise<void> => {
   try {

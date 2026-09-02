@@ -151,7 +151,7 @@ describe("updateOrderFromSD address sync", () => {
     expect(result?.origin?.address?.address).toBe("789 Updated Pickup Rd");
     expect(result?.origin?.address?.city).toBe("Houston");
     expect(result?.origin?.address?.state).toBe("TX");
-    expect(result?.origin?.address?.zip).toBe("770021234");
+    expect(result?.origin?.address?.zip).toBe("77002");
   });
 
   it("does not overwrite street address with a Super Dispatch withheld placeholder", async () => {
@@ -164,6 +164,39 @@ describe("updateOrderFromSD address sync", () => {
     expect(result?.destination?.address?.city).toBe("San Antonio");
     expect(result?.destination?.address?.zip).toBe("78205");
   });
+
+  it("does not overwrite a real local street with the correctly spelled WITHHELD placeholder", async () => {
+    const result = await updateOrderFromSD(
+      buildSuperDispatchOrder({
+        pickup: {
+          scheduled_at: "2026-06-18",
+          scheduled_ends_at: "2026-06-20",
+          date_type: "estimated",
+          notes: "",
+          venue: {
+            address: "123 Example St. ADDRESS WITHHELD",
+            city: "Detroit Lakes",
+            state: "MN",
+            zip: "56501",
+          },
+        },
+      }) as any,
+      buildDatabaseOrder({
+        tmsPartialOrder: false,
+        origin: {
+          contact: { name: "Pickup Contact", phone: "1112223333" },
+          address: {
+            address: "32129 ST HWY 34",
+            city: "Detroit Lakes",
+            state: "MN",
+            zip: "56501",
+          },
+        },
+      }) as any,
+    );
+
+    expect(result?.origin?.address?.address).toBe("32129 ST HWY 34");
+  });
 });
 
 describe("shouldUseSuperDispatchAddressValue", () => {
@@ -173,6 +206,9 @@ describe("shouldUseSuperDispatchAddressValue", () => {
     expect(shouldUseSuperDispatchAddressValue("   ")).toBe(false);
     expect(
       shouldUseSuperDispatchAddressValue("123 Example St. ADDRESS WITTHELD"),
+    ).toBe(false);
+    expect(
+      shouldUseSuperDispatchAddressValue("123 Example St. ADDRESS WITHHELD"),
     ).toBe(false);
   });
 

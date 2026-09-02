@@ -1,28 +1,31 @@
 /**
- * Utility functions to check if addresses contain "WITTHELD"
- * This prevents updates to orders with withheld/sensitive address information
+ * Detect Super Dispatch withheld/redacted address placeholders.
+ *
+ * Create-partial uses the typo "WITTHELD"; later partial updates used the
+ * correctly spelled "WITHHELD". Treat both as placeholders so they cannot
+ * overwrite real Autovista or Super Dispatch street addresses.
  */
 
 import { IOrder } from "@/_global/models";
 
+const WITHHELD_ADDRESS_PATTERN = /WITTHELD|WITHHELD/i;
+
 /**
- * Check if a specific address string contains "WITTHELD"
- * @param address - The address string to check
- * @returns True if address contains "WITTHELD", false otherwise
+ * Check if a specific address string is a withheld placeholder
  */
-export const isWithheldAddress = (address: string | null | undefined): boolean => {
+export const isWithheldAddress = (
+  address: string | null | undefined,
+): boolean => {
   if (!address) return false;
-  return address.toUpperCase().includes("WITTHELD");
+  return WITHHELD_ADDRESS_PATTERN.test(address);
 };
 
 /**
- * Check if any address in an order contains "WITTHELD"
- * This prevents updates to orders with withheld/sensitive address information
- * @param order - The order object to check
- * @returns True if any address contains "WITTHELD", false otherwise
+ * Check if any address in an order contains a withheld placeholder
  */
-export const checkForWithheldAddress = (order: IOrder | Partial<IOrder>): boolean => {
-  // Check pickup address
+export const checkForWithheldAddress = (
+  order: IOrder | Partial<IOrder>,
+): boolean => {
   if (
     order.origin?.address?.address &&
     isWithheldAddress(order.origin.address.address)
@@ -30,7 +33,6 @@ export const checkForWithheldAddress = (order: IOrder | Partial<IOrder>): boolea
     return true;
   }
 
-  // Check delivery address
   if (
     order.destination?.address?.address &&
     isWithheldAddress(order.destination.address.address)
@@ -40,4 +42,3 @@ export const checkForWithheldAddress = (order: IOrder | Partial<IOrder>): boolea
 
   return false;
 };
-

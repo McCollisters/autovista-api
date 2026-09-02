@@ -7,6 +7,7 @@
 import { DateTime } from "luxon";
 
 const TIMEZONE = "America/New_York";
+const MIN_VALID_PICKUP_YEAR = 2000;
 
 export const getDateRanges = (
   pickupStartDate: string | Date,
@@ -14,9 +15,19 @@ export const getDateRanges = (
   transitTime: number[],
   holidayDates: Date[] = [],
 ): Date[] => {
-  let pickupStart = DateTime.fromJSDate(new Date(pickupStartDate)).setZone(
-    TIMEZONE,
-  );
+  const parsedPickup = new Date(pickupStartDate);
+  if (
+    Number.isNaN(parsedPickup.getTime()) ||
+    parsedPickup.getUTCFullYear() < MIN_VALID_PICKUP_YEAR
+  ) {
+    throw new Error("Invalid pickup start date");
+  }
+
+  let pickupStart = DateTime.fromJSDate(parsedPickup).setZone(TIMEZONE);
+
+  if (!pickupStart.isValid) {
+    throw new Error("Invalid pickup start date");
+  }
 
   const holidayStrings = holidayDates.map((holiday) =>
     DateTime.fromJSDate(new Date(holiday)).setZone(TIMEZONE).toISODate(),

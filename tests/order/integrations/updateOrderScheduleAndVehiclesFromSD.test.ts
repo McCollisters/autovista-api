@@ -31,7 +31,7 @@ describe("updateOrderScheduleAndVehiclesFromSD", () => {
     });
   });
 
-  it("syncs schedule dates and vehicles without origin/destination", async () => {
+  it("syncs schedule dates and vehicles without overwriting streets with blank SD venues", async () => {
     const databaseOrder = {
       refId: "12345",
       portalId: "portal-id",
@@ -109,8 +109,9 @@ describe("updateOrderScheduleAndVehiclesFromSD", () => {
     );
 
     expect(result).not.toBeNull();
-    expect(result?.origin).toBeUndefined();
-    expect(result?.destination).toBeUndefined();
+    expect(result?.origin?.address?.address).toBe("123 Main St");
+    expect(result?.destination?.address?.address).toBe("456 Oak Ave");
+    expect(result?.origin?.notes).toBe("Pickup gate code");
     expect(result?.status).toBeUndefined();
     expect(result?.tmsPartialOrder).toBe(true);
     expect(result?.tms?.status).toBe("new");
@@ -119,6 +120,82 @@ describe("updateOrderScheduleAndVehiclesFromSD", () => {
     expect(result?.vehicles?.[0]?.isInoperable).toBe(true);
     expect(result?.schedule?.pickupEstimated?.[0]).toBeInstanceOf(Date);
     expect(result?.schedule?.deliveryEstimated?.[1]).toBeInstanceOf(Date);
+  });
+
+  it("applies real Super Dispatch street edits while ignoring withheld placeholders", async () => {
+    const databaseOrder = {
+      refId: "12345",
+      portalId: "portal-id",
+      tmsPartialOrder: true,
+      transitTime: [2, 10],
+      schedule: {
+        pickupEstimated: [new Date("2026-06-17T12:00:00.000Z")],
+        pickupSelected: new Date("2026-06-17T12:00:00.000Z"),
+        deliveryEstimated: [new Date("2026-06-21T12:00:00.000Z")],
+      },
+      origin: {
+        contact: { name: "Pickup Contact" },
+        address: {
+          address: "32129 ST HWY 34",
+          city: "Detroit Lakes",
+          state: "MN",
+          zip: "56501",
+        },
+      },
+      destination: {
+        contact: { name: "Delivery Contact" },
+        address: {
+          address: "4335 Camelot Cir",
+          city: "Naperville",
+          state: "IL",
+          zip: "60564",
+        },
+      },
+      vehicles: [],
+      totalPricing: {
+        total: 0,
+        totalWithCompanyTariffAndCommission: 0,
+        modifiers: { commission: 0, companyTariff: 0 },
+      },
+    };
+
+    const superDispatchOrder = {
+      guid: "sd-guid",
+      status: "new",
+      created_at: "2026-06-01T10:00:00.000Z",
+      changed_at: "2026-06-10T15:30:00.000Z",
+      transport_type: "open",
+      pickup: {
+        scheduled_at: "2026-06-18",
+        venue: {
+          address: "100 New Pickup Rd",
+          city: "Detroit Lakes",
+          state: "MN",
+          zip: "56501",
+        },
+        latitude: "46.83198",
+        longitude: "-95.7284",
+      },
+      delivery: {
+        scheduled_at: "2026-06-21",
+        venue: {
+          address: "123 Example St. ADDRESS WITHHELD",
+          city: "Naperville",
+          state: "IL",
+          zip: "60564",
+        },
+      },
+      vehicles: [],
+    };
+
+    const result = await updateOrderScheduleAndVehiclesFromSD(
+      superDispatchOrder as any,
+      databaseOrder as any,
+    );
+
+    expect(result?.origin?.address?.address).toBe("100 New Pickup Rd");
+    expect(result?.origin?.contact?.name).toBe("Pickup Contact");
+    expect(result?.destination?.address?.address).toBe("4335 Camelot Cir");
   });
 
   it("uses Super Dispatch delivery range when start and end differ", async () => {
