@@ -432,6 +432,81 @@ export function shouldUseSuperDispatchAddressValue(
   return hasSdValue(sdValue) && !isWithheldAddress(sdValue);
 }
 
+const shouldUseSuperDispatchVehicleValue = (
+  sdValue: string | number | null | undefined,
+): boolean => {
+  if (sdValue == null) {
+    return false;
+  }
+  return String(sdValue).trim() !== "";
+};
+
+const resolveStreetFromSuperDispatch = (
+  sdAddress: string | null | undefined,
+  existingAddress?: string,
+  existingLine2?: string,
+  isPartial = false,
+): {
+  address?: string;
+  addressLine2?: string;
+  usedSuperDispatchStreet: boolean;
+} => {
+  const avHasRealStreet = shouldUseSuperDispatchAddressValue(existingAddress);
+  // While partial, Autovista street edits are not pushed to Super. Do not let a
+  // later Super webhook overwrite a real Autovista street. Still accept Super
+  // street when Autovista is blank or withheld (Sep 2 sync).
+  if (isPartial && avHasRealStreet) {
+    return {
+      address: existingAddress,
+      addressLine2: existingLine2,
+      usedSuperDispatchStreet: false,
+    };
+  }
+
+  if (!shouldUseSuperDispatchAddressValue(sdAddress)) {
+    return {
+      address: existingAddress,
+      addressLine2: existingLine2,
+      usedSuperDispatchStreet: false,
+    };
+  }
+
+  const line2 = String(existingLine2 || "").trim();
+  const street = String(sdAddress).trim();
+  if (line2 && street.toLowerCase().endsWith(line2.toLowerCase())) {
+    return {
+      address: street.slice(0, street.length - line2.length).trim() || street,
+      addressLine2: existingLine2,
+      usedSuperDispatchStreet: true,
+    };
+  }
+
+  return {
+    address: sdAddress,
+    addressLine2: existingLine2,
+    usedSuperDispatchStreet: true,
+  };
+};
+
+const resolveCoordsFromSuperDispatch = (
+  sdStreet: string | null | undefined,
+  sdLongitude: string | undefined,
+  sdLatitude: string | undefined,
+  existingLongitude?: string,
+  existingLatitude?: string,
+) => {
+  if (shouldUseSuperDispatchAddressValue(sdStreet)) {
+    return {
+      longitude: sdLongitude || existingLongitude || undefined,
+      latitude: sdLatitude || existingLatitude || undefined,
+    };
+  }
+  return {
+    longitude: existingLongitude || undefined,
+    latitude: existingLatitude || undefined,
+  };
+};
+
 const normalizeZip = (value?: string | null): string | undefined => {
   if (!shouldUseSuperDispatchAddressValue(value)) {
     return undefined;
@@ -448,19 +523,28 @@ function processPickupAddress(
   const sdCity = venue?.city;
   const sdState = normalizeUSState(venue?.state);
   const sdZip = normalizeZip(venue?.zip);
+  const isPartial = existingOrder.tmsPartialOrder === true;
+  const { usedSuperDispatchStreet, ...streetAddress } =
+    resolveStreetFromSuperDispatch(
+      sdAddress,
+      existingOrder.origin?.address?.address,
+      existingOrder.origin?.address?.addressLine2,
+      isPartial,
+    );
 
   return {
     // Always preserve our DB contact—Super has portal/office contact, not customer
     contact: {
+      companyName: existingOrder.origin?.contact?.companyName,
       name: existingOrder.origin?.contact?.name,
       phone: existingOrder.origin?.contact?.phone,
       phoneMobile: existingOrder.origin?.contact?.phoneMobile,
+      email: existingOrder.origin?.contact?.email,
     },
-    // Keep withheld/blank SD placeholders out, but allow real SD address edits to flow back.
+    // Keep withheld/blank SD placeholders out. After full release, real SD street
+    // edits still flow back. While partial, keep a real Autovista street.
     address: {
-      address: shouldUseSuperDispatchAddressValue(sdAddress)
-        ? sdAddress
-        : existingOrder.origin?.address?.address,
+      ...streetAddress,
       city:
         shouldUseSuperDispatchAddressValue(sdCity)
           ? sdCity
@@ -470,14 +554,17 @@ function processPickupAddress(
     },
     // While order is still partial in TMS, SD often has no/empty notes; never wipe our DB notes.
     notes: mergePickupDeliveryNotesFromSd(
-      existingOrder.tmsPartialOrder === true,
+      isPartial,
       sdOrder.pickup?.notes,
       existingOrder.origin?.notes,
     ),
-    longitude:
-      sdOrder.pickup.longitude || existingOrder.origin?.longitude || undefined,
-    latitude:
-      sdOrder.pickup.latitude || existingOrder.origin?.latitude || undefined,
+    ...resolveCoordsFromSuperDispatch(
+      usedSuperDispatchStreet ? sdAddress : null,
+      sdOrder.pickup.longitude,
+      sdOrder.pickup.latitude,
+      existingOrder.origin?.longitude,
+      existingOrder.origin?.latitude,
+    ),
   };
 }
 
@@ -490,19 +577,28 @@ function processDeliveryAddress(
   const sdCity = venue?.city;
   const sdState = normalizeUSState(venue?.state);
   const sdZip = normalizeZip(venue?.zip);
+  const isPartial = existingOrder.tmsPartialOrder === true;
+  const { usedSuperDispatchStreet, ...streetAddress } =
+    resolveStreetFromSuperDispatch(
+      sdAddress,
+      existingOrder.destination?.address?.address,
+      existingOrder.destination?.address?.addressLine2,
+      isPartial,
+    );
 
   return {
     // Always preserve our DB contact—Super has portal/office contact, not customer
     contact: {
+      companyName: existingOrder.destination?.contact?.companyName,
       name: existingOrder.destination?.contact?.name,
       phone: existingOrder.destination?.contact?.phone,
       phoneMobile: existingOrder.destination?.contact?.phoneMobile,
+      email: existingOrder.destination?.contact?.email,
     },
-    // Keep withheld/blank SD placeholders out, but allow real SD address edits to flow back.
+    // Keep withheld/blank SD placeholders out. After full release, real SD street
+    // edits still flow back. While partial, keep a real Autovista street.
     address: {
-      address: shouldUseSuperDispatchAddressValue(sdAddress)
-        ? sdAddress
-        : existingOrder.destination?.address?.address,
+      ...streetAddress,
       city:
         shouldUseSuperDispatchAddressValue(sdCity)
           ? sdCity
@@ -511,18 +607,17 @@ function processDeliveryAddress(
       zip: sdZip || existingOrder.destination?.address?.zip,
     },
     notes: mergePickupDeliveryNotesFromSd(
-      existingOrder.tmsPartialOrder === true,
+      isPartial,
       sdOrder.delivery?.notes,
       existingOrder.destination?.notes,
     ),
-    longitude:
-      sdOrder.delivery.longitude ||
-      existingOrder.destination?.longitude ||
-      undefined,
-    latitude:
-      sdOrder.delivery.latitude ||
-      existingOrder.destination?.latitude ||
-      undefined,
+    ...resolveCoordsFromSuperDispatch(
+      usedSuperDispatchStreet ? sdAddress : null,
+      sdOrder.delivery.longitude,
+      sdOrder.delivery.latitude,
+      existingOrder.destination?.longitude,
+      existingOrder.destination?.latitude,
+    ),
   };
 }
 
@@ -607,24 +702,27 @@ function processExistingVehicle(
 
   return {
     tariff: sdVehicle.tariff,
-    // Always use Super Dispatch VIN if available, otherwise preserve original
-    vin:
-      sdVehicle.vin !== undefined && sdVehicle.vin !== null
-        ? sdVehicle.vin
-        : savedVehicle.vin !== undefined && savedVehicle.vin !== null
-          ? savedVehicle.vin
-          : undefined,
-    // Always use Super Dispatch year if available, otherwise preserve original
-    year:
-      sdVehicle.year !== undefined && sdVehicle.year !== null
-        ? sdVehicle.year
-        : savedVehicle.year !== undefined && savedVehicle.year !== null
-          ? savedVehicle.year
-          : undefined,
+    vin: shouldUseSuperDispatchVehicleValue(sdVehicle.vin)
+      ? String(sdVehicle.vin).trim()
+      : savedVehicle.vin !== undefined && savedVehicle.vin !== null
+        ? savedVehicle.vin
+        : undefined,
+    year: shouldUseSuperDispatchVehicleValue(sdVehicle.year)
+      ? String(sdVehicle.year)
+      : savedVehicle.year !== undefined && savedVehicle.year !== null
+        ? savedVehicle.year
+        : undefined,
     pricingClass: mapSdVehicleType(sdVehicle.type),
-    make: sdVehicle.make,
-    model: sdVehicle.model,
-    isInoperable: sdVehicle.is_inoperable,
+    make: shouldUseSuperDispatchVehicleValue(sdVehicle.make)
+      ? String(sdVehicle.make)
+      : savedVehicle.make,
+    model: shouldUseSuperDispatchVehicleValue(sdVehicle.model)
+      ? String(sdVehicle.model)
+      : savedVehicle.model,
+    isInoperable:
+      typeof sdVehicle.is_inoperable === "boolean"
+        ? sdVehicle.is_inoperable
+        : savedVehicle.isInoperable,
     pricing: {
       base: updatedBaseQuote || price.base || 0,
       modifiers: {
@@ -651,15 +749,12 @@ function processNewVehicle(
   return {
     tariff: sdVehicle.tariff,
     // Use Super Dispatch VIN if available, otherwise undefined
-    vin:
-      sdVehicle.vin !== undefined && sdVehicle.vin !== null
-        ? sdVehicle.vin
-        : undefined,
-    // Use Super Dispatch year if available, otherwise undefined
-    year:
-      sdVehicle.year !== undefined && sdVehicle.year !== null
-        ? sdVehicle.year
-        : undefined,
+    vin: shouldUseSuperDispatchVehicleValue(sdVehicle.vin)
+      ? String(sdVehicle.vin).trim()
+      : undefined,
+    year: shouldUseSuperDispatchVehicleValue(sdVehicle.year)
+      ? String(sdVehicle.year)
+      : undefined,
     pricingClass: mapSdVehicleType(sdVehicle.type),
     make: sdVehicle.make,
     model: sdVehicle.model,

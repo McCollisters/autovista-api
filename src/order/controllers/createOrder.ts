@@ -1140,6 +1140,7 @@ export const createOrder = async (
       },
       origin: {
         contact: {
+          companyName: pickupBusinessName,
           name: pickupContactName,
           phone: pickupPhone,
           phoneMobile: pickupMobile,
@@ -1156,6 +1157,7 @@ export const createOrder = async (
       },
       destination: {
         contact: {
+          companyName: deliveryBusinessName,
           name: deliveryContactName,
           phone: deliveryPhone,
           phoneMobile: deliveryMobile,
@@ -1221,7 +1223,9 @@ export const createOrder = async (
       pickupLocationType,
       deliveryLocationType,
       origin: {
+        locationType: pickupLocationType,
         contact: {
+          companyName: pickupBusinessName,
           name: pickupContactName,
           phone: pickupPhone,
           phoneMobile: pickupMobile,
@@ -1255,7 +1259,9 @@ export const createOrder = async (
         pickupDateType: "Estimated",
       },
       destination: {
+        locationType: deliveryLocationType,
         contact: {
+          companyName: deliveryBusinessName,
           name: deliveryContactName,
           phone: deliveryPhone,
           phoneMobile: deliveryMobile,

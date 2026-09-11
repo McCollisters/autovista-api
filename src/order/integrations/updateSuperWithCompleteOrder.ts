@@ -15,6 +15,119 @@ import {
   collectUnmatchedSdVehicles,
 } from "@/order/integrations/matchSuperDispatchVehicles";
 import { normalizeUsZip } from "@/_global/utils/normalizeUsZip";
+import { isWithheldAddress } from "@/order/utils/checkWithheldAddress";
+
+const formatAddress = (address?: {
+  address?: string;
+  addressLine2?: string;
+}) => {
+  if (!address) {
+    return "";
+  }
+  const base = address.address || "";
+  const line2 = address.addressLine2 || "";
+  return line2 ? `${base} ${line2}`.trim() : base;
+};
+
+const streetForCompleteRelease = (
+  avAddress?: { address?: string; addressLine2?: string },
+  sdStreet?: string | null,
+): string | null => {
+  const avStreet = formatAddress(avAddress);
+  if (avStreet && !isWithheldAddress(avStreet)) {
+    return avStreet;
+  }
+  if (sdStreet && !isWithheldAddress(sdStreet)) {
+    return sdStreet;
+  }
+  return null;
+};
+
+const formatSuperDispatchDate = (value: Date) =>
+  `${DateTime.fromJSDate(new Date(value))
+    .toUTC()
+    .toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")}+0000`;
+
+const firstValidSdDate = (
+  ...values: Array<string | null | undefined>
+): string | null => {
+  for (const value of values) {
+    if (value == null) continue;
+    const trimmed = String(value).trim();
+    if (!trimmed) continue;
+    const iso = DateTime.fromISO(trimmed);
+    if (iso.isValid) {
+      return trimmed;
+    }
+    if (/^\d{4}-\d{2}-\d{2}(T[\d:.+-Z]+)?$/.test(trimmed)) {
+      return trimmed;
+    }
+  }
+  return null;
+};
+
+export const resolveCompleteReleaseScheduleDates = (
+  existingSdOrder: {
+    pickup?: {
+      scheduled_at?: string | null;
+      scheduled_ends_at?: string | null;
+      first_available_pickup_date?: string | null;
+    };
+    delivery?: {
+      scheduled_at?: string | null;
+      scheduled_ends_at?: string | null;
+    };
+  },
+  order: Pick<IOrder, "schedule">,
+): {
+  pickupStartDate: string;
+  pickupEndDate: string;
+  deliveryStartDate: string;
+  deliveryEndDate: string;
+} => {
+  const avPickupStart = order.schedule.pickupEstimated[0]
+    ? formatSuperDispatchDate(new Date(order.schedule.pickupEstimated[0]))
+    : formatSuperDispatchDate(new Date(order.schedule.pickupSelected));
+  const avPickupEnd = order.schedule.pickupEstimated[1]
+    ? formatSuperDispatchDate(new Date(order.schedule.pickupEstimated[1]))
+    : avPickupStart;
+  const avDeliveryStart = order.schedule.deliveryEstimated[0]
+    ? formatSuperDispatchDate(new Date(order.schedule.deliveryEstimated[0]))
+    : avPickupStart;
+  const avDeliveryEnd = order.schedule.deliveryEstimated[1]
+    ? formatSuperDispatchDate(new Date(order.schedule.deliveryEstimated[1]))
+    : avDeliveryStart;
+
+  const sdPickupStart = firstValidSdDate(
+    existingSdOrder.pickup?.scheduled_at,
+    existingSdOrder.pickup?.first_available_pickup_date,
+  );
+  const sdPickupEnd = firstValidSdDate(
+    existingSdOrder.pickup?.scheduled_ends_at,
+  );
+  const sdDeliveryStart = firstValidSdDate(
+    existingSdOrder.delivery?.scheduled_at,
+  );
+  const sdDeliveryEnd = firstValidSdDate(
+    existingSdOrder.delivery?.scheduled_ends_at,
+  );
+
+  const pickupStartDate = sdPickupStart || avPickupStart;
+  const pickupEndDate = sdPickupStart
+    ? sdPickupEnd || sdPickupStart
+    : avPickupEnd;
+  const deliveryStartDate = sdDeliveryStart || avDeliveryStart;
+  const deliveryEndDate = sdDeliveryStart
+    ? sdDeliveryEnd || sdDeliveryStart
+    : avDeliveryEnd;
+
+  return {
+    pickupStartDate,
+    pickupEndDate,
+    deliveryStartDate,
+    deliveryEndDate,
+  };
+};
 
 /**
  * Update partial order in Super Dispatch with complete order details
@@ -209,27 +322,14 @@ export const updateSuperWithCompleteOrder = async (
     const sdContactEmail = "autologistics@mccollisters.com";
     const sdContactPhone = "888-819-0594";
 
-    const formatSuperDispatchDate = (value: Date) =>
-      `${DateTime.fromJSDate(new Date(value))
-        .toUTC()
-        .toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")}+0000`;
-
-    // Format dates
-    const pickupStartDate = order.schedule.pickupEstimated[0]
-      ? formatSuperDispatchDate(new Date(order.schedule.pickupEstimated[0]))
-      : formatSuperDispatchDate(new Date(order.schedule.pickupSelected));
-
-    const pickupEndDate = order.schedule.pickupEstimated[1]
-      ? formatSuperDispatchDate(new Date(order.schedule.pickupEstimated[1]))
-      : pickupStartDate;
-
-    const deliveryStartDate = order.schedule.deliveryEstimated[0]
-      ? formatSuperDispatchDate(new Date(order.schedule.deliveryEstimated[0]))
-      : pickupStartDate;
-
-    const deliveryEndDate = order.schedule.deliveryEstimated[1]
-      ? formatSuperDispatchDate(new Date(order.schedule.deliveryEstimated[1]))
-      : deliveryStartDate;
+    // Prefer Super Dispatch windows from the GET. Autovista schedule can lag a
+    // Super date change that has not webhooked yet; do not overwrite those.
+    const {
+      pickupStartDate,
+      pickupEndDate,
+      deliveryStartDate,
+      deliveryEndDate,
+    } = resolveCompleteReleaseScheduleDates(existingOrder, order);
 
     // Check if instructions were manually updated in Super Dispatch
     // Only remove the default partial order instruction, preserve any custom instructions
@@ -278,7 +378,10 @@ export const updateSuperWithCompleteOrder = async (
         longitude: toFloatOrNull(order.origin?.longitude),
         notes: order.origin?.notes || null,
         venue: {
-          address: order.origin?.address?.address || null,
+          address: streetForCompleteRelease(
+            order.origin?.address,
+            existingOrder.pickup?.venue?.address,
+          ),
           city: order.origin?.address?.city || null,
           state: order.origin?.address?.state || null,
           zip: normalizeZipValue(order.origin?.address?.zip),
@@ -300,7 +403,10 @@ export const updateSuperWithCompleteOrder = async (
         longitude: toFloatOrNull(order.destination?.longitude),
         notes: order.destination?.notes || null,
         venue: {
-          address: order.destination?.address?.address || null,
+          address: streetForCompleteRelease(
+            order.destination?.address,
+            existingOrder.delivery?.venue?.address,
+          ),
           city: order.destination?.address?.city || null,
           state: order.destination?.address?.state || null,
           zip: normalizeZipValue(order.destination?.address?.zip),

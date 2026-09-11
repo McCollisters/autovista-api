@@ -4,11 +4,20 @@ import { logger } from "@/core/logger";
 import { PaymentType, TransportType } from "@/_global/enums";
 import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper";
 import { updateOrderTariffsInSuper } from "../integrations/updateOrderTariffsInSuper";
+import { updateSuperDispatchAddresses } from "../integrations/updateSuperDispatchAddresses";
 import { resolveId } from "@/_global/utils/resolveId";
+import { geocode } from "@/_global/utils/geocode";
 import {
   didOrderVehiclePricingClassChange,
   recalculateOrderVehiclesAfterPricingClassChange,
 } from "../services/recalculateOrderVehiclePricingForClassChange";
+import {
+  applyLocationAddressToUpdateDoc,
+  applyLocationContactToUpdateDoc,
+  applyLocationNotesToUpdateDoc,
+  formatLocationAddressForGeocode,
+} from "../services/applyLocationAddressUpdates";
+import { applyVehicleDetailsToUpdateDoc } from "../services/applyVehicleDetailsUpdates";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   const byEmail = new Map<string, any>();
@@ -97,6 +106,125 @@ export const updateOrder = async (
     const existingOrder = await Order.findById(req.params.orderId);
     const previousHasPaid = existingOrder?.hasPaid === true;
     let pushedVehicleSnapshotToSuper = false;
+    let addressFieldsUpdated = false;
+    let vehicleDetailsUpdated = false;
+
+    if (updateDoc.$set.vehicleDetails) {
+      delete updateDoc.$set.vehicleDetails;
+    }
+
+    if (req.body?.originAddress) {
+      addressFieldsUpdated =
+        applyLocationAddressToUpdateDoc(
+          updateDoc,
+          "origin",
+          req.body.originAddress,
+        ) || addressFieldsUpdated;
+      delete updateDoc.$set.originAddress;
+    }
+    if (req.body?.destinationAddress) {
+      addressFieldsUpdated =
+        applyLocationAddressToUpdateDoc(
+          updateDoc,
+          "destination",
+          req.body.destinationAddress,
+        ) || addressFieldsUpdated;
+      delete updateDoc.$set.destinationAddress;
+    }
+    if (req.body?.originContact) {
+      addressFieldsUpdated =
+        applyLocationContactToUpdateDoc(
+          updateDoc,
+          "origin",
+          req.body.originContact,
+        ) || addressFieldsUpdated;
+      delete updateDoc.$set.originContact;
+    }
+    if (req.body?.destinationContact) {
+      addressFieldsUpdated =
+        applyLocationContactToUpdateDoc(
+          updateDoc,
+          "destination",
+          req.body.destinationContact,
+        ) || addressFieldsUpdated;
+      delete updateDoc.$set.destinationContact;
+    }
+    if (req.body?.originNotes !== undefined) {
+      addressFieldsUpdated =
+        applyLocationNotesToUpdateDoc(
+          updateDoc,
+          "origin",
+          req.body.originNotes,
+        ) || addressFieldsUpdated;
+      delete updateDoc.$set.originNotes;
+    }
+    if (req.body?.destinationNotes !== undefined) {
+      addressFieldsUpdated =
+        applyLocationNotesToUpdateDoc(
+          updateDoc,
+          "destination",
+          req.body.destinationNotes,
+        ) || addressFieldsUpdated;
+      delete updateDoc.$set.destinationNotes;
+    }
+
+    if (existingOrder) {
+      vehicleDetailsUpdated = applyVehicleDetailsToUpdateDoc(
+        updateDoc,
+        req.body?.vehicleDetails,
+        existingOrder.vehicles?.length || 0,
+      );
+    }
+
+    if (addressFieldsUpdated && existingOrder) {
+      if (req.body?.originAddress) {
+        const pickupQuery = formatLocationAddressForGeocode(
+          req.body.originAddress,
+          existingOrder.origin?.address,
+        );
+        if (pickupQuery) {
+          try {
+            const pickupCoords = await geocode(pickupQuery);
+            if (pickupCoords?.latitude && pickupCoords?.longitude) {
+              updateDoc.$set["origin.latitude"] = pickupCoords.latitude;
+              updateDoc.$set["origin.longitude"] = pickupCoords.longitude;
+            }
+          } catch (geocodeError) {
+            logger.error("Failed to geocode pickup address update", {
+              orderId: req.params.orderId,
+              error:
+                geocodeError instanceof Error
+                  ? geocodeError.message
+                  : String(geocodeError),
+            });
+          }
+        }
+      }
+      if (req.body?.destinationAddress) {
+        const deliveryQuery = formatLocationAddressForGeocode(
+          req.body.destinationAddress,
+          existingOrder.destination?.address,
+        );
+        if (deliveryQuery) {
+          try {
+            const deliveryCoords = await geocode(deliveryQuery);
+            if (deliveryCoords?.latitude && deliveryCoords?.longitude) {
+              updateDoc.$set["destination.latitude"] = deliveryCoords.latitude;
+              updateDoc.$set["destination.longitude"] =
+                deliveryCoords.longitude;
+            }
+          } catch (geocodeError) {
+            logger.error("Failed to geocode delivery address update", {
+              orderId: req.params.orderId,
+              error:
+                geocodeError instanceof Error
+                  ? geocodeError.message
+                  : String(geocodeError),
+            });
+          }
+        }
+      }
+    }
 
     let updatedOrder = await Order.findByIdAndUpdate(
       req.params.orderId,
@@ -106,6 +234,22 @@ export const updateOrder = async (
 
     if (!updatedOrder) {
       return next({ statusCode: 404, message: "Order not found." });
+    }
+
+    if (addressFieldsUpdated && updatedOrder.tms?.guid) {
+      // Partial loads get city/state/zip only; streets stay withheld.
+      // Pushing city/zip keeps later getOrder pulls from Super Dispatch
+      // from overwriting the Autovista edit with the old venue.
+      try {
+        await updateSuperDispatchAddresses(updatedOrder);
+      } catch (error) {
+        logger.error("Failed to sync address update to Super Dispatch", {
+          orderId: updatedOrder._id,
+          refId: updatedOrder.refId,
+          tmsGuid: updatedOrder.tms?.guid,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
     }
 
     if (updatedOrder && updatedOrder.transportType) {
@@ -406,7 +550,7 @@ export const updateOrder = async (
 
     if (
       updatedOrder.tms?.guid &&
-      Array.isArray(req.body?.vehicles) &&
+      (Array.isArray(req.body?.vehicles) || vehicleDetailsUpdated) &&
       !pushedVehicleSnapshotToSuper
     ) {
       try {

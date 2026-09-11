@@ -62,8 +62,25 @@ export const updateOrderTariffsInSuper = async (
     );
     const isInoperable = Boolean(vehicle.isInoperable === true);
 
+    const parsedYear = vehicle.year ? parseInt(String(vehicle.year), 10) : NaN;
+    const hasSdVin =
+      sdVehicle.vin != null && String(sdVehicle.vin).trim() !== "";
+    const avVin = vehicle.vin ? String(vehicle.vin).trim() : "";
+    // Keep VIN withheld on partial loads. If Super already has a VIN, push the
+    // Autovista value so order-detail edits stay in sync with webhooks.
+    const nextVin =
+      order.tmsPartialOrder === true
+        ? hasSdVin
+          ? avVin || sdVehicle.vin
+          : null
+        : avVin || sdVehicle.vin || null;
+
     return {
       ...sdVehicle,
+      make: vehicle.make || sdVehicle.make || null,
+      model: vehicle.model || sdVehicle.model || null,
+      year: Number.isFinite(parsedYear) ? parsedYear : sdVehicle.year || null,
+      vin: nextVin,
       tariff,
       type,
       is_inoperable: isInoperable,

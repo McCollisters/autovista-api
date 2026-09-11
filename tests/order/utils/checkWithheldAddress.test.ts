@@ -14,6 +14,7 @@ describe("isWithheldAddress", () => {
 
   it("detects the correctly spelled WITHHELD placeholder", () => {
     expect(isWithheldAddress("123 Example St. ADDRESS WITHHELD")).toBe(true);
+    expect(isWithheldAddress("Address Withheld")).toBe(true);
   });
 
   it("does not treat real streets as withheld", () => {
