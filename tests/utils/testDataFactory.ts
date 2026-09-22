@@ -50,6 +50,7 @@ export const createMockModifierSet = (overrides: any = {}) => ({
     TX: { direction: "both", valueType: "flat", value: 0 },
   },
   oversize: {
+    default: 175,
     suv: 200,
     van: 300,
     pickup_2_doors: 150,

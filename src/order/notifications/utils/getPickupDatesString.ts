@@ -5,62 +5,43 @@
  */
 
 import { IOrder } from "@/_global/models";
-import { DateTime } from "luxon";
-
-const TIMEZONE = "America/New_York";
+import {
+  formatEmbedDateDot,
+  formatEmbedDateRange,
+  resolvePickupScheduledEnd,
+} from "@/quote/utils/customerPickupDate";
 
 export function getPickupDatesString(order: IOrder): string {
-  if (
-    !order.schedule?.pickupEstimated ||
-    order.schedule.pickupEstimated.length === 0
-  ) {
-    // Fallback to pickupSelected if estimated dates not available
-    if (order.schedule?.pickupSelected) {
-      const pickupStart = DateTime.fromJSDate(order.schedule.pickupSelected).setZone(
-        TIMEZONE,
-      );
-      const serviceLevelRaw = order.schedule?.serviceLevel;
-      const serviceLevel = Number(serviceLevelRaw);
+  const pickupStartRaw =
+    order.schedule?.pickupEstimated?.[0] ?? order.schedule?.pickupSelected;
 
-      if (Number.isFinite(serviceLevel) && serviceLevel > 1) {
-        const serviceLevelOffset = serviceLevel - 1;
-        let count = 0;
-        let pickupEnd = pickupStart;
-
-        while (count < serviceLevelOffset) {
-          pickupEnd = pickupEnd.plus({ days: 1 });
-          const dayOfWeek = pickupEnd.weekday; // 1 = Monday, 7 = Sunday
-          const isWeekend = dayOfWeek === 6 || dayOfWeek === 7;
-
-          if (!isWeekend) {
-            count++;
-          }
-        }
-
-        return `${pickupStart.toLocaleString(DateTime.DATE_MED)} - ${pickupEnd.toLocaleString(DateTime.DATE_MED)}`;
-      }
-
-      return pickupStart.toLocaleString(DateTime.DATE_MED);
-    }
+  if (!pickupStartRaw) {
     return "TBD";
   }
 
-  const dates = order.schedule.pickupEstimated.map((date) =>
-    DateTime.fromJSDate(date)
-      .setZone(TIMEZONE)
-      .toLocaleString(DateTime.DATE_MED),
+  const pickupEndRaw =
+    order.schedule?.pickupEstimated?.[1] ??
+    order.schedule?.pickupEstimated?.[0] ??
+    null;
+  const serviceLevel =
+    order.schedule?.serviceLevel ??
+    (order as { serviceLevel?: string | number }).serviceLevel ??
+    null;
+
+  const pickupStart = new Date(pickupStartRaw);
+  const pickupEnd = resolvePickupScheduledEnd(
+    pickupStart,
+    pickupEndRaw ? new Date(pickupEndRaw) : null,
+    serviceLevel,
   );
 
-  if (dates.length === 1) {
-    return dates[0];
+  if (!pickupEnd) {
+    return formatEmbedDateDot(pickupStart) || "TBD";
   }
 
-  const start = dates[0];
-  const end = dates[dates.length - 1];
-  if (start === end) {
-    return start;
-  }
-
-  // Return date range
-  return `${start} - ${end}`;
+  return (
+    formatEmbedDateRange(pickupStart, pickupEnd) ||
+    formatEmbedDateDot(pickupStart) ||
+    "TBD"
+  );
 }

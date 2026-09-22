@@ -1,32 +1,51 @@
 import { readFile } from "fs/promises";
 import path from "path";
 import Handlebars from "handlebars";
-import { Quote, Portal } from "@/_global/models";
+import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 import { logger } from "@/core/logger";
 import { getNotificationManager } from "@/notification";
 import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
 import { createQuoteEmailPrefillToken } from "@/_global/utils/orderStatusPrefillToken";
+import {
+  formatPickupWindowEmailLabel,
+  parsePickupStartDateFromQuote,
+} from "../utils/customerPickupDate";
 
 const MC_LOGO =
   "https://autovista-assets.s3.us-west-1.amazonaws.com/MCC-Wordmark-RGB-Blue.png";
 
-const formatVehiclesHtml = (vehicles: any[] = []) => {
-  if (!vehicles.length) {
-    return "<p>No vehicles listed.</p>";
-  }
-  const items = vehicles
-    .map((vehicle) => {
-      const year = vehicle.year ? `${vehicle.year} ` : "";
-      const make = vehicle.make || "";
-      const model = vehicle.model || "";
-      const vin = vehicle.vin ? `<br />VIN: ${vehicle.vin}` : "";
-      const inoperable = vehicle.isInoperable
-        ? "<br /><em>Inoperable</em>"
-        : "";
-      return `<li><strong>${year}${make} ${model}</strong>${vin}${inoperable}</li>`;
+const QUOTE_EMAIL_FROM = "autotransport@mccollisters.com";
+const QUOTE_EMAIL_FROM_NAME = "McCollister's Auto Transport";
+
+const formatVehiclesSummaryPlain = (vehicles: any[] = []) => {
+  if (!vehicles.length) return "";
+  return vehicles
+    .map((v) => {
+      const year = v.year ? `${String(v.year)} ` : "";
+      const make = String(v.make || "").trim();
+      const model = String(v.model || "").trim();
+      return `${year}${make} ${model}`.trim();
     })
-    .join("");
-  return `<ul>${items}</ul>`;
+    .filter(Boolean)
+    .join("; ");
+};
+
+export type SendQuoteEmailVariant = "confirmation" | "share";
+
+export type SendQuoteEmailOptions = {
+  variant?: SendQuoteEmailVariant;
+};
+
+const buildSharerDisplayName = (customer: any): string => {
+  const first = String(customer?.firstName ?? "").trim();
+  const last = String(customer?.lastName ?? "").trim();
+  const fromParts = [first, last].filter(Boolean).join(" ").trim();
+  if (fromParts) return fromParts;
+  const full = String(
+    customer?.name || customer?.customerFullName || "",
+  ).trim();
+  if (full) return full;
+  return "Someone";
 };
 
 const getPricingTotal = (
@@ -47,24 +66,25 @@ const getPricingTotal = (
 /**
  * Sends the quote details email to a recipient (e.g. customer).
  * Quote can be a lean object or Mongoose document.
+ * Use variant "share" when someone emails the quote to another address from the app.
  */
 export const sendQuoteEmailToCustomer = async (
   quote: any,
   recipientEmail: string,
+  options?: SendQuoteEmailOptions,
 ): Promise<{ success: boolean; error?: string }> => {
   const quoteId = quote?._id?.toString?.() || quote?._id;
+  const variant: SendQuoteEmailVariant = options?.variant ?? "confirmation";
+  const isShareRecipient = variant === "share";
 
   try {
-    const portal = quote?.portalId
-      ? await Portal.findById(quote.portalId).lean()
-      : null;
-
     const recipientName =
       quote?.customer?.name || quote?.customer?.customerFullName || "Customer";
     const firstName =
       (quote?.customer as any)?.firstName?.trim?.() ||
       String(recipientName).split(" ")[0] ||
       "Customer";
+    const sharerName = buildSharerDisplayName(quote?.customer);
     const code = String(
       quote?.customer?.quoteConfirmationCode ||
         quote?.customer?.trackingCode ||
@@ -73,13 +93,13 @@ export const sendQuoteEmailToCustomer = async (
         quote?._id,
     );
     const encodedCode = encodeURIComponent(code);
-    const baseUrl =
-      process.env.BASE_URL || "https://autovista.mccollisters.com";
-    const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
-    let url = `${normalizedBaseUrl}/public/quote/${quote._id}?code=${encodedCode}`;
+    const normalizedBaseUrl = getPortalBaseUrl();
+    const emailForPrefill =
+      String(quote?.customer?.email || "").trim() || recipientEmail;
+    let bookUrl = `${normalizedBaseUrl}/public/quote/${quote._id}/book?code=${encodedCode}`;
     try {
-      const prefillToken = createQuoteEmailPrefillToken(recipientEmail);
-      url = `${url}&token=${encodeURIComponent(prefillToken)}`;
+      const prefillToken = createQuoteEmailPrefillToken(emailForPrefill);
+      bookUrl = `${bookUrl}&token=${encodeURIComponent(prefillToken)}`;
     } catch (error) {
       logger.warn(
         "Could not create quote email prefill token; linking without token",
@@ -90,18 +110,54 @@ export const sendQuoteEmailToCustomer = async (
       );
     }
 
+    const refIdDisplay = String(
+      quote?.refId ?? quote?.uniqueId ?? code,
+    );
+
     const pickupLocation =
       quote?.origin?.validated || quote?.origin?.userInput || "";
     const deliveryLocation =
       quote?.destination?.validated || quote?.destination?.userInput || "";
     const transportType = formatTransportTypeLabel(quote?.transportType);
-    const vehicles = formatVehiclesHtml(quote?.vehicles || []);
+    const transportNormalized = String(quote?.transportType || "")
+      .replace(/[_\s]+/g, "")
+      .toUpperCase();
+    const isWhiteGlove = transportNormalized === "WHITEGLOVE";
+
+    const vehiclesSummary =
+      formatVehiclesSummaryPlain(quote?.vehicles || []) || "—";
     const totals = quote?.totalPricing?.totals;
 
     const oneday = Math.ceil(getPricingTotal(totals, transportType, "one"));
     const threeday = Math.ceil(getPricingTotal(totals, transportType, "three"));
     const fiveday = Math.ceil(getPricingTotal(totals, transportType, "five"));
     const sevenday = Math.ceil(getPricingTotal(totals, transportType, "seven"));
+    const whiteGlovePrice = Math.ceil(
+      (totals as any)?.whiteGlove || 0,
+    );
+
+    const priceOrDash = (n: number) => (n > 0 ? `$${n}` : "—");
+    const priceOne = priceOrDash(oneday);
+    const priceThree = priceOrDash(threeday);
+    const priceFive = priceOrDash(fiveday);
+    const priceSeven = priceOrDash(sevenday);
+    const whiteGlovePriceDisplay = priceOrDash(whiteGlovePrice);
+
+    const pickupStart = parsePickupStartDateFromQuote(quote);
+    const hasPickupStart = pickupStart != null;
+
+    const pickupLabelOne = hasPickupStart
+      ? formatPickupWindowEmailLabel(pickupStart!, 1)
+      : "1-day pickup: Selected date + 1 day";
+    const pickupLabelThree = hasPickupStart
+      ? formatPickupWindowEmailLabel(pickupStart!, 3)
+      : "3-day pickup: Selected date + 3 days";
+    const pickupLabelFive = hasPickupStart
+      ? formatPickupWindowEmailLabel(pickupStart!, 5)
+      : "5-day pickup: Selected date + 5 days";
+    const pickupLabelSeven = hasPickupStart
+      ? formatPickupWindowEmailLabel(pickupStart!, 7)
+      : "7-day pickup: Selected date + 7 days";
 
     const templatePath = path.join(
       process.cwd(),
@@ -113,31 +169,40 @@ export const sendQuoteEmailToCustomer = async (
     const emailLogo = MC_LOGO;
     const html = template({
       firstName,
+      sharerName,
+      isShareRecipient,
       code,
-      url,
+      bookUrl,
+      refIdDisplay,
       pickupLocation,
       deliveryLocation,
       transportType,
-      vehicles,
-      oneday,
-      threeday,
-      fiveday,
-      sevenday,
-      companyName: portal?.companyName || "",
+      vehiclesSummary,
+      isWhiteGlove,
+      whiteGlovePriceDisplay,
+      priceOne,
+      priceThree,
+      priceFive,
+      priceSeven,
+      pickupLabelOne,
+      pickupLabelThree,
+      pickupLabelFive,
+      pickupLabelSeven,
       logo: emailLogo,
-      logo2: emailLogo,
     });
 
     const notificationManager = getNotificationManager();
-    const subject = `Your Requested Auto Transport Quote #${code}`;
+    const subject = isShareRecipient
+      ? "A McCollister's Auto Transport quote was shared with you"
+      : "Your McCollister's Auto Transport Quote";
 
     const result = await notificationManager.sendEmail({
       to: recipientEmail,
       subject,
       html,
-      from: "autologistics@mccollisters.com",
-      fromName: "McCollister's AutoLogistics",
-      replyTo: "autologistics@mccollisters.com",
+      from: QUOTE_EMAIL_FROM,
+      fromName: QUOTE_EMAIL_FROM_NAME,
+      replyTo: QUOTE_EMAIL_FROM,
       templateName: "Customer Quote",
     });
 

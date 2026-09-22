@@ -13,6 +13,8 @@ import { getOrderStatus } from "./controllers/getOrderStatus";
 import { getOrderStatusPrefill } from "./controllers/getOrderStatusPrefill";
 import { requestDriverLocation } from "./controllers/requestDriverLocation";
 import { createOrderCustomer } from "./controllers/createOrderCustomer";
+import { sendOrderShareEmail } from "./controllers/sendOrderShareEmail";
+import { sendOrderCustomerShareEmail } from "./controllers/sendOrderCustomerShareEmail";
 import { sendOrderToTms } from "./controllers/sendOrderToTms";
 
 const router = Router();
@@ -29,6 +31,8 @@ router.get("/status-prefill", getOrderStatusPrefill);
 router.post("/", createOrder);
 
 // Parameterized routes
+router.post("/:orderId/customer-share-email", sendOrderCustomerShareEmail);
+router.post("/:orderId/email", sendOrderShareEmail);
 router.get("/:orderId", getOrder);
 router.get("/:orderId/activities", getOrderActivities);
 router.post("/:orderId/tms/send", sendOrderToTms);

@@ -20,8 +20,10 @@ jobs:
       - name: Use staging env file if present
         run: |
           if [ -f ".env.staging" ]; then
-            echo "Using .env.staging for staging build/runtime"
+            echo "Using .env.staging for staging portal/email link URLs"
             cp .env.staging .env
+            echo "PUBLIC_APP_URL=$(grep '^PUBLIC_APP_URL=' .env.staging | cut -d= -f2-)"
+            echo "PORTAL_BASE_URL=$(grep '^PORTAL_BASE_URL=' .env.staging | cut -d= -f2-)"
           else
             echo "No .env.staging found; relying on environment variables"
           fi
@@ -200,6 +202,62 @@ jobs:
           fi
 
           echo "Environment is Ready. Proceeding with deployment..."
+
+      - name: Update staging portal URL environment variables
+        run: |
+          DEFAULT_STAGING_PORTAL_URL="https://dogqvekvr5n1p.cloudfront.net"
+
+          read_env_staging_var() {
+            local key="$1"
+            local fallback="$2"
+            local value
+            value=$(grep "^${key}=" .env.staging 2>/dev/null | cut -d= -f2- | tr -d '\r' || true)
+            if [ -n "$value" ]; then
+              echo "$value"
+            else
+              echo "$fallback"
+            fi
+          }
+
+          if [ -f ".env.staging" ]; then
+            PUBLIC_APP_URL=$(read_env_staging_var "PUBLIC_APP_URL" "$DEFAULT_STAGING_PORTAL_URL")
+            PORTAL_BASE_URL=$(read_env_staging_var "PORTAL_BASE_URL" "$PUBLIC_APP_URL")
+            BASE_URL=$(read_env_staging_var "BASE_URL" "$PUBLIC_APP_URL")
+            ORDER_STATUS_BASE_URL=$(read_env_staging_var "ORDER_STATUS_BASE_URL" "$PUBLIC_APP_URL")
+            ALLOWED_ORIGINS=$(read_env_staging_var "ALLOWED_ORIGINS" "$PUBLIC_APP_URL")
+          else
+            PUBLIC_APP_URL="$DEFAULT_STAGING_PORTAL_URL"
+            PORTAL_BASE_URL="$DEFAULT_STAGING_PORTAL_URL"
+            BASE_URL="$DEFAULT_STAGING_PORTAL_URL"
+            ORDER_STATUS_BASE_URL="$DEFAULT_STAGING_PORTAL_URL"
+            ALLOWED_ORIGINS="$DEFAULT_STAGING_PORTAL_URL"
+          fi
+
+          OPTIONS='[]'
+          for pair in \
+            "PUBLIC_APP_URL:$PUBLIC_APP_URL" \
+            "PORTAL_BASE_URL:$PORTAL_BASE_URL" \
+            "BASE_URL:$BASE_URL" \
+            "ORDER_STATUS_BASE_URL:$ORDER_STATUS_BASE_URL" \
+            "ALLOWED_ORIGINS:$ALLOWED_ORIGINS"; do
+            KEY="${pair%%:*}"
+            VAL="${pair#*:}"
+            OPTIONS=$(echo "$OPTIONS" | jq --arg key "$KEY" --arg val "$VAL" \
+              '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":$key,"Value":$val}]')
+          done
+
+          echo "Updating autovista-api-staging portal URL environment variables..."
+          echo "$OPTIONS" | jq '.'
+          echo "$OPTIONS" > /tmp/eb-staging-options.json
+          aws elasticbeanstalk update-environment \
+            --environment-name autovista-api-staging \
+            --option-settings file:///tmp/eb-staging-options.json \
+            --region us-east-1
+
+          echo "Waiting for environment variable update to complete..."
+          aws elasticbeanstalk wait environment-updated \
+            --environment-names autovista-api-staging \
+            --region us-east-1 || echo "Note: Environment update may still be in progress"
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21

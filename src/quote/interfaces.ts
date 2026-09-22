@@ -50,6 +50,8 @@ export interface IQuote extends Document {
   miles?: number;
   transportType?: TransportType;
   transitTime?: [number, number];
+  /** Optional. First day of requested pickup window (e.g. public embed quote form). */
+  pickupStartDate?: Date;
   vehicles: Array<IVehicle>;
   totalPricing: IPricingQuote;
   archivedAt?: Date;

@@ -762,7 +762,7 @@ describe("createOrder Controller", () => {
       Order.findByIdAndUpdate.mockResolvedValue({ ...mockOrder, tms: mockOrder.tms });
 
       const mockOrderInstance = {
-        save: jest.fn().mockResolvedValue(mockOrder),
+        save: jest.fn().mockResolvedValue(mockOrder as never),
       };
       Order.mockImplementation(() => mockOrderInstance as any);
 
@@ -830,11 +830,12 @@ describe("createOrder Controller", () => {
       );
     });
 
-    it("sends COD payment request when paymentType is COD and order has customer email", async () => {
+    it("sends COD payment request when paymentType is COD and order has customer email (regular / non–embed flow)", async () => {
       const mocks = await setupSuccessfulOrderCreation({
         portalId: "test-portal-id",
         paymentType: PaymentType.Cod,
         customerEmail: "customer@example.com",
+        isCustomerPortal: false,
       });
 
       expect(res.status).toHaveBeenCalledWith(201);
@@ -844,8 +845,21 @@ describe("createOrder Controller", () => {
           _id: "test-order-id",
           paymentType: PaymentType.Cod,
           customer: expect.objectContaining({ email: "customer@example.com" }),
-        })
+        }),
       );
+    });
+
+    it("does not send separate COD payment email for public customer-portal embed flow", async () => {
+      const mocks = await setupSuccessfulOrderCreation({
+        portalId: "test-portal-id",
+        paymentType: PaymentType.Cod,
+        customerEmail: "customer@example.com",
+        isCustomerPortal: true,
+      });
+
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(mocks.sendOrderCustomerPublicNew).toHaveBeenCalledTimes(1);
+      expect(mocks.sendCODPaymentRequest).not.toHaveBeenCalled();
     });
 
     it("sends white glove notification when transportType is WhiteGlove", async () => {

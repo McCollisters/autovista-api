@@ -14,9 +14,8 @@ import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper
 import { sendWhiteGloveNotification } from "../notifications/sendWhiteGloveNotification";
 import { sendOrderAgentEmail } from "../notifications/sendOrderAgent";
 import { sendMMIOrderNotification } from "../notifications/sendMMIOrderNotification";
-import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
-import { sendQuoteEmailToCustomer } from "@/quote/services/sendQuoteEmailToCustomer";
+import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { MMI_PORTALS } from "../../_global/constants/portalIds";
 import { resolveId } from "@/_global/utils/resolveId";
 import { normalizeTransportTypeToEnum } from "@/_global/utils/formatTransportTypeLabel";
@@ -1448,33 +1447,16 @@ export const createOrder = async (
       );
     }
 
-    // Send quote details email to customer (quote has required email from public form)
-    const quoteCustomerEmail = quote?.customer?.email?.trim?.() || (quote?.customer as any)?.email;
-    if (quoteCustomerEmail) {
-      try {
-        const quoteEmailResult = await sendQuoteEmailToCustomer(
-          quote,
-          quoteCustomerEmail,
-        );
-        if (quoteEmailResult.success) {
-          logger.info(
-            `Quote details email sent to customer for quote ${quoteId}`,
-          );
-        } else {
-          logger.warn(
-            `Failed to send quote details email for quote ${quoteId}: ${quoteEmailResult.error}`,
-          );
-        }
-      } catch (notificationError) {
-        logger.error(
-          "Failed to send quote details email to customer:",
-          notificationError,
-        );
-      }
-    }
+    // Quote confirmation email is sent once from createQuoteCustomer (public quote form).
+    // Do not resend here on book — that duplicated the customer quote email.
 
-    // Send COD payment request email if COD and customer email exists
-    if (newOrder.paymentType === PaymentType.Cod && newOrder.customer?.email) {
+    // Public embed (customer portal) confirmation email already includes payment;
+    // regular portal routes still send the legacy standalone COD payment-request email.
+    if (
+      !isCustomerPortal &&
+      newOrder.paymentType === PaymentType.Cod &&
+      newOrder.customer?.email
+    ) {
       try {
         await sendCODPaymentRequest(newOrder);
         logger.info(
@@ -1485,7 +1467,6 @@ export const createOrder = async (
           "Failed to send COD payment request email:",
           notificationError,
         );
-        // Don't fail the order creation for notification errors
       }
     }
 

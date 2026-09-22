@@ -497,9 +497,9 @@ async function processAcertusLoad(
       previousAcertusConnectUid,
     });
 
-    order.acertusLoadNumber = loadNumber;
-    if (connectUid !== null) {
-      order.acertusConnectUid = connectUid;
+    order.acertusLoadNumber = String(data.load.number);
+    if (connectUid !== null && connectUid !== undefined) {
+      order.acertusConnectUid = String(connectUid);
     }
 
     try {

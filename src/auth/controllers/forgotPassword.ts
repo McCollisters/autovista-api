@@ -11,6 +11,7 @@ import { logger } from "@/core/logger";
 import { Status } from "@/_global/enums";
 import { createToken } from "@/_global/utils/createToken";
 import { getNotificationManager } from "@/notification";
+import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 
 /**
  * POST /forgotpassword
@@ -63,7 +64,7 @@ export const forgotPassword = async (
 
     // Send password reset email
     const firstName = user.firstName || "User";
-    const resetUrl = `https://autovista.mccollisters.com/reset-password/${token}`;
+    const resetUrl = `${getPortalBaseUrl()}/reset-password/${token}`;
     const html = `
       <p>Hi ${firstName},</p>
       <p>Someone requested a new password for the AutoVista account registered to this email address.</p>

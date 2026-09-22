@@ -6,43 +6,175 @@
 
 import { readFile } from "fs/promises";
 import path from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
 import Handlebars from "handlebars";
+import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 import { logger } from "@/core/logger";
+import { PaymentType, TransportType } from "@/_global/enums";
 import { IOrder, Portal } from "@/_global/models";
 import { sendOrderNotification } from "@/notification/orderNotifications";
-import { getPickupDatesString } from "./utils/getPickupDatesString";
-import { getDeliveryDatesString } from "./utils/getDeliveryDatesString";
-import { formatVehiclesHTML } from "./utils/formatVehiclesHTML";
-import { DateTime } from "luxon";
-import { MMI_PORTALS } from "@/_global/constants/portalIds";
+import { formatVehiclesPlain } from "./utils/formatVehiclesPlain";
+import { formatOrderStatusDetailEmailDates } from "./utils/formatOrderStatusDetailEmailDates";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
-import {
-  formatTransportTypeLabelForOrder,
-  isOrderWhiteGlove,
-} from "@/_global/utils/formatTransportTypeLabel";
+import { resolveOrderCustomerEmailForTracking } from "../utils/resolveOrderCustomerEmailForTracking";
 import { createOrderStatusPrefillToken } from "@/_global/utils/orderStatusPrefillToken";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const CUSTOMER_ORDER_EMAIL_FROM = "autotransport@mccollisters.com";
+const CUSTOMER_ORDER_EMAIL_FROM_NAME = "McCollister's Auto Transport";
 
-/**
- * Sirva portal IDs
- */
-const SIRVA_PORTAL_IDS = [
-  "621e2882dee77a00351e5aac",
-  "65fb221d27f5b6f47701f8ea",
-  "66056b34982f1bf738687859",
-  "5e99f0b420e68d5f479d7317",
-];
+type LocationKind = "pickup" | "delivery";
+
+type LocationDetails = {
+  businessName: string;
+  contactName: string;
+  email: string;
+  phone: string;
+  mobilePhone: string;
+  alternativePhone: string;
+  addressLine1: string;
+  addressLine1Display: string;
+  addressLine2Display: string;
+  notes: string;
+};
+
+function recipientFirstNameFromName(name: string): string {
+  const t = String(name ?? "").trim();
+  if (!t) return "there";
+  const first = t.split(/\s+/)[0];
+  return first || "there";
+}
+
+/** Display name for "X shared this with you" (order customer / booker). */
+function buildSharerDisplayName(customer: IOrder["customer"]): string {
+  const c = customer as Record<string, unknown> | undefined;
+  const first = String(c?.firstName ?? "").trim();
+  const last = String(c?.lastName ?? "").trim();
+  const fromParts = [first, last].filter(Boolean).join(" ").trim();
+  if (fromParts) return fromParts;
+  const full = String(
+    c?.name || c?.customerFullName || "",
+  ).trim();
+  if (full) return full;
+  return "Someone";
+}
+
+function transportTypeDisplayLabel(orderTransportType?: string): string {
+  const t = String(orderTransportType || "").toLowerCase();
+  if (t === TransportType.WhiteGlove) return "White Glove";
+  if (t === TransportType.Enclosed) return "Enclosed";
+  return "Open";
+}
+
+function firstNonEmpty(...values: unknown[]): string {
+  for (const value of values) {
+    const trimmed = String(value ?? "").trim();
+    if (trimmed) return trimmed;
+  }
+  return "";
+}
+
+function formatCityStateZip(city: string, state: string, zip: string): string {
+  const cityState = [city, state].filter(Boolean).join(", ");
+  return [cityState, zip].filter(Boolean).join(" ").trim();
+}
+
+function buildLocationDetails(order: IOrder, kind: LocationKind): LocationDetails {
+  const orderData = order as unknown as {
+    pickup?: Record<string, unknown>;
+    delivery?: Record<string, unknown>;
+    origin?: {
+      contact?: Record<string, unknown>;
+      address?: Record<string, unknown>;
+      notes?: unknown;
+    };
+    destination?: {
+      contact?: Record<string, unknown>;
+      address?: Record<string, unknown>;
+      notes?: unknown;
+    };
+  };
+  const detail =
+    kind === "pickup" ? (orderData.pickup ?? {}) : (orderData.delivery ?? {});
+  const location =
+    kind === "pickup" ? (orderData.origin ?? {}) : (orderData.destination ?? {});
+  const contact = location.contact ?? {};
+  const address = location.address ?? {};
+
+  const businessName = firstNonEmpty(
+    kind === "pickup" ? detail.pickupBusinessName : detail.deliveryBusinessName,
+    contact.companyName,
+  );
+  const contactName = firstNonEmpty(
+    kind === "pickup" ? detail.pickupContactName : detail.deliveryContactName,
+    contact.name,
+  );
+  const email = firstNonEmpty(
+    kind === "pickup" ? detail.pickupEmail : detail.deliveryEmail,
+    contact.email,
+  );
+  const phone = firstNonEmpty(
+    kind === "pickup" ? detail.pickupPhone : detail.deliveryPhone,
+    contact.phone,
+  );
+  const mobilePhone = firstNonEmpty(
+    kind === "pickup" ? detail.pickupMobilePhone : detail.deliveryMobilePhone,
+    contact.phoneMobile,
+  );
+  const alternativePhone = firstNonEmpty(
+    kind === "pickup" ? detail.pickupAltPhone : detail.deliveryAltPhone,
+    contact.phoneAlt,
+  );
+  const addressLine1 = firstNonEmpty(
+    kind === "pickup" ? detail.pickupAddress : detail.deliveryAddress,
+    address.address,
+  );
+  const city = firstNonEmpty(
+    kind === "pickup" ? detail.pickupCity : detail.deliveryCity,
+    address.city,
+  );
+  const state = firstNonEmpty(
+    kind === "pickup" ? detail.pickupState : detail.deliveryState,
+    address.state,
+  );
+  const zip = firstNonEmpty(
+    kind === "pickup" ? detail.pickupZip : detail.deliveryZip,
+    address.zip,
+  );
+  const notes = firstNonEmpty(
+    kind === "pickup" ? detail.pickupNotes : detail.deliveryNotes,
+    location.notes,
+  );
+  const addressLine2Display = formatCityStateZip(city, state, zip);
+
+  return {
+    businessName,
+    contactName,
+    email,
+    phone,
+    mobilePhone,
+    alternativePhone,
+    addressLine1,
+    addressLine1Display: addressLine1 || "—",
+    addressLine2Display,
+    notes,
+  };
+}
+
+const COD_PAYMENT_HOSTED_URL =
+  "https://www.convergepay.com/hosted-payments?ssl_txn_auth_token=YtH5YU2ER7alJZ%2FD73aAegAAAZW6CTk1";
 
 /**
  * Send order customer email notification
  */
+export type SendOrderCustomerEmailVariant = "confirmation" | "share";
+
 export async function sendOrderCustomerPublicNew(
   order: IOrder,
-  overrides: { recipientEmail?: string; recipientName?: string } = {},
+  overrides: {
+    recipientEmail?: string;
+    recipientName?: string;
+    /** Use "share" when emailing a third party from Share via email (not the booker). */
+    variant?: SendOrderCustomerEmailVariant;
+  } = {},
 ): Promise<{ success: boolean; error?: string }> {
   if (!order) {
     logger.warn("Cannot send customer order email: Order is null");
@@ -57,35 +189,25 @@ export async function sendOrderCustomerPublicNew(
       return { success: false, error: "Portal not found" };
     }
 
-    // Get email template values
-    const { getEmailTemplate } = await import(
-      "@/email/services/getEmailTemplate"
-    );
-    const emailTemplate = await getEmailTemplate("Customer Order");
-
-    const senderEmail = emailTemplate.senderEmail;
-    const senderName = emailTemplate.senderName;
-
     let logo: string | undefined;
     let companyName = "";
 
-    const portalIdString = String(order.portalId);
-    const isSirva = SIRVA_PORTAL_IDS.includes(portalIdString);
-    const isMMI = MMI_PORTALS.includes(
-      portalIdString as (typeof MMI_PORTALS)[number],
+    // Always use the new public confirmation template for embedded/public order flow.
+    const templateFileName = "customer-order-new.hbs";
+    const distTemplatePath = path.join(
+      process.cwd(),
+      "dist/templates",
+      templateFileName,
     );
-
-    // Determine template path
-    const templatePath = isSirva
-      ? path.join(__dirname, "../../templates/customer-order-sirva.hbs")
-      : path.join(__dirname, "../../templates/customer-order-new.hbs");
+    const srcTemplatePath = path.join(
+      process.cwd(),
+      "src/templates",
+      templateFileName,
+    );
+    const isProduction = process.env.NODE_ENV === "production";
     const resolvedTemplatePath = await resolveTemplatePath(
-      templatePath,
-      path.join(
-        process.cwd(),
-        "src/templates",
-        isSirva ? "customer-order-sirva.hbs" : "customer-order-new.hbs",
-      ),
+      isProduction ? distTemplatePath : srcTemplatePath,
+      isProduction ? srcTemplatePath : distTemplatePath,
     );
 
     const mclogo =
@@ -109,82 +231,39 @@ export async function sendOrderCustomerPublicNew(
       return { success: false, error: "Recipient email is required" };
     }
 
+    const variant: SendOrderCustomerEmailVariant =
+      overrides.variant ?? "confirmation";
+    const isShareRecipient = variant === "share";
+
     const recipientName =
       overrides.recipientName || order.customer?.name || "Customer";
-    const subject =
-      emailTemplate.subject ||
-      `Your Vehicle Transport Confirmation - Order #${order.refId}`;
+    const recipientFirstName = recipientFirstNameFromName(recipientName);
+    const sharerName = buildSharerDisplayName(order.customer);
 
-    // Extract address information
-    const pickupAddress = order.origin?.address?.address || "";
-    const pickupCity = order.origin?.address?.city || "";
-    const pickupState = order.origin?.address?.state || "";
-    const pickupZip = order.origin?.address?.zip || "";
+    const subject = isShareRecipient
+      ? "A McCollister's Auto Transport order was shared with you"
+      : "Your McCollister's Auto Transport order is confirmed";
 
-    const deliveryAddress = order.destination?.address?.address || "";
-    const deliveryCity = order.destination?.address?.city || "";
-    const deliveryState = order.destination?.address?.state || "";
-    const deliveryZip = order.destination?.address?.zip || "";
-
-    const formatSingleDate = (date?: Date | string | null) => {
-      if (!date) return "TBD";
-      return DateTime.fromJSDate(new Date(date))
-        .setZone("America/New_York")
-        .toLocaleString(DateTime.DATE_MED);
-    };
-    const isWhiteGlove = isOrderWhiteGlove(order);
-    const isCOD = order.paymentType === "COD";
-    const pickupDates = getPickupDatesString(order);
-    const deliveryDates = getDeliveryDatesString(order);
-    const hasPickupRange = (() => {
-      const estimated = order.schedule?.pickupEstimated;
-      if (!Array.isArray(estimated) || estimated.length < 2) {
-        return false;
-      }
-      const first = estimated[0];
-      const last = estimated[estimated.length - 1];
-      if (!first || !last) {
-        return false;
-      }
-      const firstValue = DateTime.fromJSDate(new Date(first))
-        .setZone("America/New_York")
-        .toISODate();
-      const lastValue = DateTime.fromJSDate(new Date(last))
-        .setZone("America/New_York")
-        .toISODate();
-      return Boolean(firstValue && lastValue && firstValue !== lastValue);
-    })();
-    const pickupDatesLabel = isWhiteGlove
-      ? "Estimated Date:"
-      : hasPickupRange
-        ? "Pickup Within:"
-        : "Estimated Pickup:";
-    const deliveryDatesLabel = isWhiteGlove
-      ? "Estimated Date:"
-      : "Scheduled Dates:";
-    const pickupDatesValue = isWhiteGlove
-      ? formatSingleDate(
-          order.schedule?.pickupEstimated?.[0] ||
-            order.schedule?.pickupSelected ||
-            null,
-        )
-      : pickupDates;
-    const deliveryDatesValue = isWhiteGlove
-      ? formatSingleDate(order.schedule?.deliveryEstimated?.[0] || null)
-      : deliveryDates;
-    const totalPrice =
-      order.totalPricing?.totalWithCompanyTariffAndCommission ||
-      order.totalPricing?.totalPortal ||
-      0;
-    const totalPriceDisplay = Math.ceil(totalPrice);
-    const baseUrl =
-      process.env.ORDER_STATUS_BASE_URL ||
-      process.env.BASE_URL ||
-      "https://autovista.mccollisters.com";
-    const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
+    const isCOD = order.paymentType === PaymentType.Cod;
+    const {
+      pickupDetailLabel,
+      pickupDetailDisplay,
+      deliveryDetailLabel,
+      deliveryDetailDisplay,
+    } = formatOrderStatusDetailEmailDates(order);
+    const orderStatusOverride = process.env.ORDER_STATUS_BASE_URL?.trim();
+    const normalizedBaseUrl = orderStatusOverride
+      ? orderStatusOverride.replace(/\/$/, "")
+      : getPortalBaseUrl();
+    const customerEmailForStatusLink =
+      resolveOrderCustomerEmailForTracking(order) ||
+      String(order.customer?.email || "").trim();
+    const emailForStatusUrl = isShareRecipient
+      ? customerEmailForStatusLink || recipientEmail
+      : recipientEmail;
     let orderStatusUrl = `${normalizedBaseUrl}/public/order-status`;
     try {
-      const prefillToken = createOrderStatusPrefillToken(recipientEmail);
+      const prefillToken = createOrderStatusPrefillToken(emailForStatusUrl);
       orderStatusUrl = `${orderStatusUrl}?token=${encodeURIComponent(prefillToken)}`;
     } catch (error) {
       logger.warn(
@@ -195,91 +274,64 @@ export async function sendOrderCustomerPublicNew(
         },
       );
     }
-    const trackingHtml = isMMI
-      ? ""
-      : `<tr>
-            <td valign="top" style="width: 600px;padding-bottom: 15px;margin: 0 auto;">
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0;">
-                <strong>The below link will bring you to our customer portal where you can log in and follow the progress
-                of your transport:</strong><br />
-                <a href="${orderStatusUrl}">${orderStatusUrl}</a>
-              </p>
-            </td>
-          </tr>`;
-    const smallTextHtml = isMMI
-      ? `<tr>
-            <td valign="top" style="width: 600px; padding-bottom: 15px;margin: 0 auto;">
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">**Please
-                note that you must be available during the entire spread for the dates above. If you are unable to
-                release or accept your vehicle(s) during the entire spread, you may have a delegate assigned to
-                release or accept your vehicle(s) on your behalf. Please provide us with the name and contact
-                information for your assigned delegate ASAP.</p>
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">If you are not available and do not have anyone to act as your delegate, then we will need to go back to the account and ask for coverage of potential terminal storage and re-delivery fees due to no one being available during the required spreads. <u>Please be aware that denial by the account may result in required terminal fees to be paid by you directly out of pocket prior to your vehicle(s) being delivered as the assigned driver cannot hold your vehicle(s) on the truck.</u></p>
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; font-size: 12px; font-style: italic;">You
-                or your assigned delegate will be notified a day in advance of the actual pick up and delivery date
-                and provided an ESTIMATED window of arrival for the driver. This is only an estimate and subject to
-                change as you must be prepared for the driver to arrive from 7am until before dark on the day of
-                pick up or delivery. We try our best to try to provide accurate estimates but due to uncontrollable
-                circumstances such as traffic, weather, mechanical issue, prior scheduling delays experienced by
-                the driver, etc. they are subject to change.</p>
-            </td>
-          </tr>`
-      : `<tr>
-            <td valign="top" style="width: 600px; padding-bottom: 15px;margin: 0 auto;">
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">**Please
-                note that you must be available during the entire spread for the dates above. If you are unable to
-                release or accept your vehicle(s) during the entire spread, you may have a delegate assigned to
-                release or accept your vehicle(s) on your behalf. Please provide us with the name and contact
-                information for your assigned delegate ASAP.</p>
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding-bottom: 15px; font-size: 12px; font-style: italic;">If you are not available and do not have anyone to act as your delegate, then we will need to ask for coverage of potential terminal storage and re-delivery fees due to no one being available during the required spreads.</p>
-              <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; font-size: 12px; font-style: italic;">You
-                or your assigned delegate will be notified a day in advance of the actual pick up and delivery date
-                and provided an ESTIMATED window of arrival for the driver. This is only an estimate and subject to
-                change as you must be prepared for the driver to arrive from 7am until before dark on the day of
-                pick up or delivery. We try our best to try to provide accurate estimates but due to uncontrollable
-                circumstances such as traffic, weather, mechanical issue, prior scheduling delays experienced by
-                the driver, etc. they are subject to change.</p>
-            </td>
-          </tr>`;
+    const faqUrl = `${normalizedBaseUrl}/public/quote`;
 
-    const transportType = formatTransportTypeLabelForOrder(order);
+    const transportTypeDisplay = transportTypeDisplayLabel(order.transportType);
 
-    // Format vehicles HTML with pricing
-    const vehicles = formatVehiclesHTML(order.vehicles, false);
+    const vehiclesPlain = formatVehiclesPlain(order.vehicles);
+    const pickupDetails = buildLocationDetails(order, "pickup");
+    const deliveryDetails = buildLocationDetails(order, "delivery");
 
-    // Build terms URL
     const orderId = String(order._id);
-    const termsUrl = `${normalizedBaseUrl}/terms/${orderId}/${order.refId}`;
+    /** Read-only terms page; customers accept during public booking */
+    const termsUrl = `${normalizedBaseUrl}/public/terms`;
 
     // Load and compile template
     const templateSource = await readFile(resolvedTemplatePath, "utf-8");
+    if (
+      !templateSource.includes(
+        "Your auto transport order has been successfully booked.",
+      )
+    ) {
+      logger.error("Unexpected customer order email template loaded", {
+        orderId: order._id,
+        refId: order.refId,
+        resolvedTemplatePath,
+      });
+      return {
+        success: false,
+        error: "Customer order email template is outdated or misconfigured.",
+      };
+    }
     const template = Handlebars.compile(templateSource);
+
+    const showPaymentSection = isCOD && !isShareRecipient;
 
     // Prepare template data
     const html = template({
       logo: logo || mclogo,
       companyName,
       mclogo,
-      pickupDatesLabel,
-      pickupDatesValue,
-      pickupAddress,
-      pickupCity,
-      pickupState,
-      pickupZip,
-      deliveryDatesLabel,
-      deliveryDatesValue,
-      deliveryAddress,
-      deliveryCity,
-      deliveryState,
-      deliveryZip,
-      transportType,
-      vehicles,
-      totalPrice: totalPriceDisplay,
-      trackingHtml,
-      smallTextHtml,
+      pickupDetailLabel,
+      pickupDetailDisplay,
+      deliveryDetailLabel,
+      deliveryDetailDisplay,
+      pickupDetails,
+      deliveryDetails,
+      transportTypeDisplay,
+      vehiclesPlain,
       refId: order.refId,
       termsUrl,
+      orderStatusUrl,
+      faqUrl,
+      paymentUrl: COD_PAYMENT_HOSTED_URL,
+      showPaymentSection,
+      sectionNextNumber: showPaymentSection ? "6" : "5",
+      sectionNotesNumber: showPaymentSection ? "7" : "6",
       recipientName,
+      recipientFirstName,
+      isShareRecipient,
+      sharerName,
     });
 
     // Send email using order notification system
@@ -290,8 +342,9 @@ export async function sendOrderCustomerPublicNew(
         to: recipientEmail,
         subject,
         html,
-        from: senderEmail,
-        replyTo: senderEmail,
+        from: CUSTOMER_ORDER_EMAIL_FROM,
+        fromName: CUSTOMER_ORDER_EMAIL_FROM_NAME,
+        replyTo: CUSTOMER_ORDER_EMAIL_FROM,
       },
       recipientEmail,
     });
@@ -301,7 +354,8 @@ export async function sendOrderCustomerPublicNew(
         orderId: order._id,
         refId: order.refId,
         recipientEmail,
-        isSirva,
+        templatePath: resolvedTemplatePath,
+        variant,
       });
     } else {
       logger.error("Failed to send customer order email", {

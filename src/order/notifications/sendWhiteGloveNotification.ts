@@ -12,6 +12,7 @@ import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
 import { getNotificationManager } from "@/notification";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
+import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 
 interface SendWhiteGloveNotificationParams {
   order: IOrder;
@@ -53,9 +54,11 @@ export const sendWhiteGloveNotification = async (
     const template = Handlebars.compile(templateSource);
 
     // Prepare template data
+    const orderUrl = `${getPortalBaseUrl()}/order/${String(order._id)}`;
     const html = template({
       refId: order.refId,
       id: String(order._id),
+      orderUrl,
     });
 
     // Send email using notification manager

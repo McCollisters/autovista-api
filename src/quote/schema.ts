@@ -274,6 +274,8 @@ const quoteSchemaDefinition = {
     enum: Object.values(TransportType),
   },
   transitTime: [{ type: Number }, { type: Number }],
+  /** Optional: set when customer selects a pickup date on public quote flows. */
+  pickupStartDate: { type: Date, required: false },
   vehicles: [vehicleSchema],
   totalPricing: {
     base: { type: Number },

@@ -1,6 +1,7 @@
 import express from "express";
 import { Order, Portal } from "@/_global/models";
 import { logger } from "@/core/logger";
+import { resolveOrderCustomerEmailForTracking } from "../utils/resolveOrderCustomerEmailForTracking";
 
 /**
  * POST /api/v1/order/:orderId/status
@@ -58,9 +59,10 @@ export const getOrderStatus = async (
       });
     }
 
-    // Verify email matches customer email
-    const customerEmail = order.customer?.email?.toLowerCase();
-    if (!customerEmail || customerEmail !== email.toLowerCase()) {
+    // Verify email matches customer email (same resolution as portal order detail)
+    const customerEmail = resolveOrderCustomerEmailForTracking(order);
+    const requestEmail = String(email || "").trim().toLowerCase();
+    if (!customerEmail || customerEmail !== requestEmail) {
       return next({
         statusCode: 403,
         message:

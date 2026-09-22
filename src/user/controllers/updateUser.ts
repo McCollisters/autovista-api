@@ -3,6 +3,7 @@ import { User } from "@/_global/models";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { logger } from "@/core/logger";
 import { createToken } from "@/_global/utils/createToken";
+import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 import { getNotificationManager } from "@/notification";
 
 export const updateUser = async (
@@ -108,7 +109,7 @@ export const updateUser = async (
         const recipientEmail = updatedUser.email || originalEmail;
         const recipientFirstName =
           updatedUser.firstName || originalFirstName || "User";
-        const resetUrl = `https://autovista.mccollisters.com/reset-password/${token}`;
+        const resetUrl = `${getPortalBaseUrl()}/reset-password/${token}`;
         const html = `
           <p>Hi ${recipientFirstName},</p>
           <p>Your password has been updated by an administrator.</p>
