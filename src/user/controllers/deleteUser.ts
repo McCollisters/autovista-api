@@ -1,5 +1,6 @@
 import express from "express";
 import { User } from "@/_global/models";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 export const deleteUser = async (
   req: express.Request,
@@ -7,6 +8,10 @@ export const deleteUser = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const deletedUser = await User.findByIdAndDelete(req.params.quoteId);
 
     if (!deletedUser) {

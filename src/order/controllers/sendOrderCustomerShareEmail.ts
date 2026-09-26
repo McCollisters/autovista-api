@@ -3,6 +3,7 @@ import { Order, Portal, type IOrder } from "@/_global/models";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
 import { logger } from "@/core/logger";
 import { resolveOrderCustomerEmailForTracking } from "../utils/resolveOrderCustomerEmailForTracking";
+import { canSendCustomerOrderShare } from "../utils/customerShareEmailLimits";
 
 /**
  * POST /api/v1/order/:orderId/customer-share-email
@@ -69,6 +70,15 @@ export const sendOrderCustomerShareEmail = async (
         statusCode: 403,
         message:
           "You do not have permission to access this order. If you believe this is in error, please contact us for assistance.",
+      });
+    }
+
+    const orderKey = String(order._id);
+    if (!canSendCustomerOrderShare(orderKey)) {
+      return next({
+        statusCode: 429,
+        message:
+          "Share limit reached for this order. Please try again tomorrow.",
       });
     }
 

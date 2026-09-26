@@ -61,10 +61,13 @@ export const getUserFromToken = async (
       return null;
     }
 
-    // Check if token is expired
-    if (decoded.exp && Date.now() > decoded.exp * 1000) {
-      logger.warn("Token expired", { userId: decoded.userId });
-      return null;
+    // JWT exp is seconds since epoch. Legacy tokens used milliseconds — detect and honor both.
+    if (decoded.exp) {
+      const expMs = decoded.exp > 1e12 ? decoded.exp : decoded.exp * 1000;
+      if (Date.now() > expMs) {
+        logger.warn("Token expired", { userId: decoded.userId });
+        return null;
+      }
     }
 
     // Find user and populate portal data

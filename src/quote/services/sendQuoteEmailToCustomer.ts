@@ -6,6 +6,7 @@ import { logger } from "@/core/logger";
 import { getNotificationManager } from "@/notification";
 import { formatTransportTypeLabel } from "@/_global/utils/formatTransportTypeLabel";
 import { createQuoteEmailPrefillToken } from "@/_global/utils/orderStatusPrefillToken";
+import { resolveTemplatePath } from "@/order/notifications/utils/resolveTemplatePath";
 import {
   formatPickupWindowEmailLabel,
   parsePickupStartDateFromQuote,
@@ -92,14 +93,16 @@ export const sendQuoteEmailToCustomer = async (
         quote?.uniqueId ||
         quote?._id,
     );
-    const encodedCode = encodeURIComponent(code);
     const normalizedBaseUrl = getPortalBaseUrl();
     const emailForPrefill =
       String(quote?.customer?.email || "").trim() || recipientEmail;
-    let bookUrl = `${normalizedBaseUrl}/public/quote/${quote._id}/book?code=${encodedCode}`;
+    let bookUrl = `${normalizedBaseUrl}/public/quote/${quote._id}/book`;
     try {
-      const prefillToken = createQuoteEmailPrefillToken(emailForPrefill);
-      bookUrl = `${bookUrl}&token=${encodeURIComponent(prefillToken)}`;
+      const prefillToken = createQuoteEmailPrefillToken(emailForPrefill, {
+        code,
+        quoteId: String(quote._id),
+      });
+      bookUrl = `${bookUrl}?token=${encodeURIComponent(prefillToken)}`;
     } catch (error) {
       logger.warn(
         "Could not create quote email prefill token; linking without token",
@@ -159,9 +162,21 @@ export const sendQuoteEmailToCustomer = async (
       ? formatPickupWindowEmailLabel(pickupStart!, 7)
       : "7-day pickup: Selected date + 7 days";
 
-    const templatePath = path.join(
+    const templateFileName = "customer-quote.hbs";
+    const distTemplatePath = path.join(
       process.cwd(),
-      "src/templates/customer-quote.hbs",
+      "dist/templates",
+      templateFileName,
+    );
+    const srcTemplatePath = path.join(
+      process.cwd(),
+      "src/templates",
+      templateFileName,
+    );
+    const isProduction = process.env.NODE_ENV === "production";
+    const templatePath = await resolveTemplatePath(
+      isProduction ? distTemplatePath : srcTemplatePath,
+      isProduction ? srcTemplatePath : distTemplatePath,
     );
     const templateSource = await readFile(templatePath, "utf-8");
     const template = Handlebars.compile(templateSource);

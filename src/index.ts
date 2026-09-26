@@ -18,6 +18,8 @@ import {
   noCacheHeaders,
   securityErrorHandler,
 } from "@/core/middleware/security";
+import { demoModeMiddleware } from "@/core/middleware/demoMode";
+import { TRUST_PROXY_HOPS } from "@/core/middleware/publicRateLimit";
 
 // Import routes
 import portalRoutes from "@/portal/routes";
@@ -62,9 +64,8 @@ import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
 // Initialize Express app
 const app = express();
 
-// Trust proxy to get real client IP from CloudFront
-// CloudFront sets X-Forwarded-For header with the original client IP
-app.set("trust proxy", true);
+// See TRUST_PROXY_HOPS. A boolean true is spoofable and breaks these limiters.
+app.set("trust proxy", TRUST_PROXY_HOPS);
 
 // Initialize SQS client
 const sqs = new SQSClient({ region: config.aws.region });
@@ -135,6 +136,9 @@ const startServer = async () => {
     // Body parsing middleware
     app.use(express.json({ limit: "10mb" }));
     app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+    // Demo Mode (platform_admin + X-Demo-Mode) — before API routes
+    app.use("/api/v1", demoModeMiddleware);
 
     // Health check routes (before other routes)
     app.use("/", healthRoutes);

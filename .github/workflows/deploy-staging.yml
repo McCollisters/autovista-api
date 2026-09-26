@@ -225,12 +225,14 @@ jobs:
             BASE_URL=$(read_env_staging_var "BASE_URL" "$PUBLIC_APP_URL")
             ORDER_STATUS_BASE_URL=$(read_env_staging_var "ORDER_STATUS_BASE_URL" "$PUBLIC_APP_URL")
             ALLOWED_ORIGINS=$(read_env_staging_var "ALLOWED_ORIGINS" "$PUBLIC_APP_URL")
+            CONVERGE_HOSTED_PAYMENT_URL=$(read_env_staging_var "CONVERGE_HOSTED_PAYMENT_URL" "")
           else
             PUBLIC_APP_URL="$DEFAULT_STAGING_PORTAL_URL"
             PORTAL_BASE_URL="$DEFAULT_STAGING_PORTAL_URL"
             BASE_URL="$DEFAULT_STAGING_PORTAL_URL"
             ORDER_STATUS_BASE_URL="$DEFAULT_STAGING_PORTAL_URL"
             ALLOWED_ORIGINS="$DEFAULT_STAGING_PORTAL_URL"
+            CONVERGE_HOSTED_PAYMENT_URL=""
           fi
 
           OPTIONS='[]'
@@ -245,6 +247,11 @@ jobs:
             OPTIONS=$(echo "$OPTIONS" | jq --arg key "$KEY" --arg val "$VAL" \
               '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":$key,"Value":$val}]')
           done
+
+          if [ -n "$CONVERGE_HOSTED_PAYMENT_URL" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "$CONVERGE_HOSTED_PAYMENT_URL" \
+              '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"CONVERGE_HOSTED_PAYMENT_URL","Value":$val}]')
+          fi
 
           echo "Updating autovista-api-staging portal URL environment variables..."
           echo "$OPTIONS" | jq '.'

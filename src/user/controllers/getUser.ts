@@ -1,5 +1,7 @@
 import express from "express";
 import { User } from "@/_global/models";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { getDemoUserById } from "@/demo/fixtures";
 
 export const getUser = async (
   req: express.Request,
@@ -15,6 +17,17 @@ export const getUser = async (
         statusCode: 404,
         message: "Use GET /api/v1/user to get the current user",
       });
+    }
+
+    if ((req as any).demoMode) {
+      const demoUser = getDemoUserById(userId);
+      if (!demoUser) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
+      if (respondIfDemo(req, res, demoUser)) {
+        return;
+      }
     }
 
     const user = await User.findById(userId)

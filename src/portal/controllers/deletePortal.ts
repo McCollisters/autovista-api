@@ -1,5 +1,6 @@
 import express from "express";
 import { Portal } from "@/_global/models";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 export const deletePortal = async (
   req: express.Request,
@@ -7,6 +8,10 @@ export const deletePortal = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const deletedPortal = await Portal.findByIdAndDelete(req.params.portalId);
 
     if (!deletedPortal) {

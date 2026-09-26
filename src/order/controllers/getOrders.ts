@@ -5,6 +5,8 @@ import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { getPortalRoleSets, isPlatformRole } from "@/_global/utils/portalRoles";
 import { Status } from "@/_global/enums";
 import { Types } from "mongoose";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { getDemoOrdersList, getDemoCodOrders } from "@/demo/fixtures";
 
 /**
  * GET /api/v1/orders
@@ -16,6 +18,16 @@ export const getOrders = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if ((req as any).demoMode) {
+      const isCod = String(req.query.cod || "") === "true";
+      const payload = isCod
+        ? { orders: getDemoCodOrders(), orderCount: getDemoCodOrders().length }
+        : getDemoOrdersList();
+      if (respondIfDemo(req, res, payload)) {
+        return;
+      }
+    }
+
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 

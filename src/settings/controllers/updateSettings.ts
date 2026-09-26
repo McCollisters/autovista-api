@@ -3,6 +3,7 @@ import { Settings, ModifierSet } from "@/_global/models";
 import { ValueType } from "@/modifierSet/schema";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 /**
  * PUT /settings
@@ -14,6 +15,10 @@ export const updateSettings = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 

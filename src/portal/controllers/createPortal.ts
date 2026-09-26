@@ -1,6 +1,7 @@
 import express from "express";
 import { Portal, ModifierSet } from "@/_global/models";
 import { Status } from "../../_global/enums";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 export const createPortal = async (
   req: express.Request,
@@ -8,6 +9,10 @@ export const createPortal = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const { modifierSet, ...portalPayload } = req.body || {};
     const portal = { ...portalPayload, status: Status.Active };
     const createdPortal = await new Portal(portal).save();

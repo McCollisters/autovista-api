@@ -3,6 +3,8 @@ import { Order } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { getPortalRoleSets, isPlatformRole } from "@/_global/utils/portalRoles";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { getDemoAnalytics } from "@/demo/fixtures";
 
 /**
  * GET /orders/analytics
@@ -14,6 +16,10 @@ export const getOrdersAnalytics = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (respondIfDemo(req, res, getDemoAnalytics())) {
+      return;
+    }
+
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 

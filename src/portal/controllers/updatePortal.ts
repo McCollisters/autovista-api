@@ -1,5 +1,6 @@
 import express from "express";
 import { Portal, ModifierSet } from "@/_global/models";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 export const updatePortal = async (
   req: express.Request,
@@ -7,6 +8,10 @@ export const updatePortal = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const { modifierSet, ...portalPayload } = req.body || {};
 
     const updatedPortal = await Portal.findByIdAndUpdate(

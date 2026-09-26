@@ -1,6 +1,8 @@
 import express from "express";
 import { User } from "@/_global/models";
 import { Status } from "../../_global/enums";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { DEMO_USERS } from "@/demo/fixtures";
 
 export const getUsers = async (
   req: express.Request,
@@ -8,6 +10,10 @@ export const getUsers = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (respondIfDemo(req, res, DEMO_USERS)) {
+      return;
+    }
+
     const { portalId, role } = req.query;
     let filter: any = { status: { $ne: Status.Archived } };
 

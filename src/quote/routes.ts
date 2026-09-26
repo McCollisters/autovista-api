@@ -9,14 +9,18 @@ import { findQuoteCustomer } from "./controllers/findQuoteCustomer";
 import { createQuoteCustomer } from "./controllers/createQuoteCustomer";
 import { updateQuoteAlternative } from "./controllers/updateQuoteAlternative";
 import { sendQuoteCustomerEmail } from "./controllers/sendQuoteCustomerEmail";
+import {
+  publicLookupRateLimit,
+  shareEmailRateLimit,
+} from "@/core/middleware/publicRateLimit";
 
 const router = Router();
 
 // Specific routes first (before parameterized routes)
 router.post("/transport", updateTransportOptions);
-router.post("/customer/find", findQuoteCustomer);
+router.post("/customer/find", publicLookupRateLimit, findQuoteCustomer);
 router.post("/customer", createQuoteCustomer);
-router.post("/:quoteId/email", sendQuoteCustomerEmail);
+router.post("/:quoteId/email", shareEmailRateLimit, sendQuoteCustomerEmail);
 router.get("/public/:quoteId/app", getQuote);
 router.put("/", updateQuoteAlternative);
 

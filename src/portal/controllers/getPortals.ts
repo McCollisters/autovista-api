@@ -2,6 +2,8 @@ import express from "express";
 import { Portal, ModifierSet } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { DEMO_PORTALS } from "@/demo/fixtures";
 
 export const getPortals = async (
   req: express.Request,
@@ -9,6 +11,11 @@ export const getPortals = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    // Demo Mode is portal-admin POV: only the demo company portal.
+    if (respondIfDemo(req, res, DEMO_PORTALS)) {
+      return;
+    }
+
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 

@@ -18,6 +18,7 @@ import {
   formatLocationAddressForGeocode,
 } from "../services/applyLocationAddressUpdates";
 import { applyVehicleDetailsToUpdateDoc } from "../services/applyVehicleDetailsUpdates";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   const byEmail = new Map<string, any>();
@@ -70,6 +71,10 @@ export const updateOrder = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     logger.info("updateOrder request body", {
       orderId: req.params.orderId,
       user: (req as any).user?.email,

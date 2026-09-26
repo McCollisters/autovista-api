@@ -17,6 +17,7 @@ import { formatOrderStatusDetailEmailDates } from "./utils/formatOrderStatusDeta
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
 import { resolveOrderCustomerEmailForTracking } from "../utils/resolveOrderCustomerEmailForTracking";
 import { createOrderStatusPrefillToken } from "@/_global/utils/orderStatusPrefillToken";
+import { getCodPaymentHostedUrl } from "@/_global/utils/getCodPaymentHostedUrl";
 
 const CUSTOMER_ORDER_EMAIL_FROM = "autotransport@mccollisters.com";
 const CUSTOMER_ORDER_EMAIL_FROM_NAME = "McCollister's Auto Transport";
@@ -159,9 +160,6 @@ function buildLocationDetails(order: IOrder, kind: LocationKind): LocationDetail
   };
 }
 
-const COD_PAYMENT_HOSTED_URL =
-  "https://www.convergepay.com/hosted-payments?ssl_txn_auth_token=YtH5YU2ER7alJZ%2FD73aAegAAAZW6CTk1";
-
 /**
  * Send order customer email notification
  */
@@ -263,7 +261,9 @@ export async function sendOrderCustomerPublicNew(
       : recipientEmail;
     let orderStatusUrl = `${normalizedBaseUrl}/public/order-status`;
     try {
-      const prefillToken = createOrderStatusPrefillToken(emailForStatusUrl);
+      const prefillToken = createOrderStatusPrefillToken(emailForStatusUrl, {
+        orderId: String(order._id),
+      });
       orderStatusUrl = `${orderStatusUrl}?token=${encodeURIComponent(prefillToken)}`;
     } catch (error) {
       logger.warn(
@@ -306,6 +306,8 @@ export async function sendOrderCustomerPublicNew(
     const template = Handlebars.compile(templateSource);
 
     const showPaymentSection = isCOD && !isShareRecipient;
+    const paymentUrl = showPaymentSection ? getCodPaymentHostedUrl() : "";
+    const canShowPayment = showPaymentSection && Boolean(paymentUrl);
 
     // Prepare template data
     const html = template({
@@ -324,10 +326,10 @@ export async function sendOrderCustomerPublicNew(
       termsUrl,
       orderStatusUrl,
       faqUrl,
-      paymentUrl: COD_PAYMENT_HOSTED_URL,
-      showPaymentSection,
-      sectionNextNumber: showPaymentSection ? "6" : "5",
-      sectionNotesNumber: showPaymentSection ? "7" : "6",
+      paymentUrl,
+      showPaymentSection: canShowPayment,
+      sectionNextNumber: canShowPayment ? "6" : "5",
+      sectionNotesNumber: canShowPayment ? "7" : "6",
       recipientName,
       recipientFirstName,
       isShareRecipient,

@@ -4,6 +4,8 @@ import {
   createQuoteEmailPrefillToken,
   verifyOrderStatusPrefillToken,
   QUOTE_EMAIL_PREFILL_PURPOSE,
+  ORDER_STATUS_PREFILL_TTL_MS,
+  QUOTE_EMAIL_PREFILL_TTL_MS,
 } from "@/_global/utils/orderStatusPrefillToken";
 import crypto from "crypto";
 
@@ -38,22 +40,40 @@ describe("orderStatusPrefillToken", () => {
     expect(result).toEqual({ email: "customer@example.com" });
   });
 
-  it("creates quote prefill tokens that resolve the same way", () => {
-    const token = createQuoteEmailPrefillToken("Quote.User@Example.COM");
+  it("creates quote prefill tokens with encrypted code and quoteId", () => {
+    const token = createQuoteEmailPrefillToken("Quote.User@Example.COM", {
+      code: "ABC123",
+      quoteId: "65f1a2b3c4d5e6f7a8b9c0d1",
+    });
     expect(verifyOrderStatusPrefillToken(token)).toEqual({
       email: "quote.user@example.com",
+      code: "ABC123",
+      quoteId: "65f1a2b3c4d5e6f7a8b9c0d1",
     });
   });
 
-  it("does not expose the email in the token string", () => {
+  it("creates order-status tokens with bound orderId", () => {
+    const token = createOrderStatusPrefillToken("customer@example.com", {
+      orderId: "65f1a2b3c4d5e6f7a8b9c0d2",
+    });
+    expect(verifyOrderStatusPrefillToken(token)).toEqual({
+      email: "customer@example.com",
+      orderId: "65f1a2b3c4d5e6f7a8b9c0d2",
+    });
+  });
+
+  it("does not expose the email or code in the token string", () => {
     const email = "customer@example.com";
-    const token = createOrderStatusPrefillToken(email);
+    const code = "XYZ789";
+    const token = createQuoteEmailPrefillToken(email, { code });
 
     expect(token.toLowerCase()).not.toContain("customer");
     expect(token.toLowerCase()).not.toContain("example");
+    expect(token.toLowerCase()).not.toContain("xyz789");
     expect(Buffer.from(token, "base64url").toString("utf8")).not.toContain(
       email,
     );
+    expect(Buffer.from(token, "base64url").toString("utf8")).not.toContain(code);
   });
 
   it("rejects tokens encrypted with a different secret", () => {
@@ -97,5 +117,11 @@ describe("orderStatusPrefillToken", () => {
     expect(() => createOrderStatusPrefillToken("   ")).toThrow(
       "Email is required to create a prefill token",
     );
+  });
+
+  it("uses a shorter TTL for quote tokens than order-status tokens", () => {
+    expect(QUOTE_EMAIL_PREFILL_TTL_MS).toBeLessThan(ORDER_STATUS_PREFILL_TTL_MS);
+    expect(QUOTE_EMAIL_PREFILL_TTL_MS).toBe(14 * 24 * 60 * 60 * 1000);
+    expect(ORDER_STATUS_PREFILL_TTL_MS).toBe(90 * 24 * 60 * 60 * 1000);
   });
 });

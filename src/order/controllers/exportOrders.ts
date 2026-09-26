@@ -5,6 +5,7 @@ import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { getPortalRoleSets, isPlatformRole } from "@/_global/utils/portalRoles";
 import { format } from "date-fns";
 import { Types } from "mongoose";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 /**
  * POST /orders/export
@@ -16,6 +17,10 @@ export const exportOrders = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 

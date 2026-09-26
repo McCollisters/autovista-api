@@ -2,6 +2,8 @@ import express from "express";
 import { User } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { getDemoAuthorizedUser } from "@/demo/fixtures";
 
 export const getAuthorizedUser = async (
   req: express.Request,
@@ -10,6 +12,12 @@ export const getAuthorizedUser = async (
 ): Promise<void> => {
   try {
     logger.info("getAuthorizedUser called", { path: req.path, url: req.url });
+
+    // Demo Mode: return portal-admin persona for the demo company (POV).
+    if (respondIfDemo(req, res, getDemoAuthorizedUser())) {
+      return;
+    }
+
     // Try to get user from request (if middleware sets it) or from token
     const authHeader = req.headers.authorization;
     const user = (req as any).user ?? (await getUserFromToken(authHeader));

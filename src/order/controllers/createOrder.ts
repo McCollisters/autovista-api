@@ -19,6 +19,7 @@ import { sendCODPaymentRequest } from "../notifications/sendCODPaymentRequest";
 import { MMI_PORTALS } from "../../_global/constants/portalIds";
 import { resolveId } from "@/_global/utils/resolveId";
 import { normalizeTransportTypeToEnum } from "@/_global/utils/formatTransportTypeLabel";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 const mergeNotificationEmails = (existing: any[], agents: any[]) => {
   const byEmail = new Map<string, any>();
@@ -55,6 +56,10 @@ export const createOrder = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const { ...filteredData } = req.body;
 
     let {

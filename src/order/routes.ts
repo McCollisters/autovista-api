@@ -16,6 +16,10 @@ import { createOrderCustomer } from "./controllers/createOrderCustomer";
 import { sendOrderShareEmail } from "./controllers/sendOrderShareEmail";
 import { sendOrderCustomerShareEmail } from "./controllers/sendOrderCustomerShareEmail";
 import { sendOrderToTms } from "./controllers/sendOrderToTms";
+import {
+  publicLookupRateLimit,
+  shareEmailRateLimit,
+} from "@/core/middleware/publicRateLimit";
 
 const router = Router();
 
@@ -25,14 +29,18 @@ router.get("/analytics", getOrdersAnalytics);
 router.post("/reports/commission", getCommissionReports);
 router.post("/terms", acceptOrderTerms);
 router.post("/customer", createOrderCustomer);
-router.get("/status-prefill", getOrderStatusPrefill);
+router.get("/status-prefill", publicLookupRateLimit, getOrderStatusPrefill);
 
 // General routes
 router.post("/", createOrder);
 
 // Parameterized routes
-router.post("/:orderId/customer-share-email", sendOrderCustomerShareEmail);
-router.post("/:orderId/email", sendOrderShareEmail);
+router.post(
+  "/:orderId/customer-share-email",
+  shareEmailRateLimit,
+  sendOrderCustomerShareEmail,
+);
+router.post("/:orderId/email", shareEmailRateLimit, sendOrderShareEmail);
 router.get("/:orderId", getOrder);
 router.get("/:orderId/activities", getOrderActivities);
 router.post("/:orderId/tms/send", sendOrderToTms);

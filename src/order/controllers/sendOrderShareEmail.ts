@@ -2,11 +2,13 @@ import express from "express";
 import { Order } from "@/_global/models";
 import { sendOrderCustomerPublicNew } from "../notifications/sendOrderCustomerPublicNew";
 import { logger } from "@/core/logger";
+import { getUserFromToken } from "@/_global/utils/getUserFromToken";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 /**
  * POST /api/v1/order/:orderId/email
- * Sends the new customer order confirmation template to an arbitrary recipient
- * with share-variant subject and intro copy.
+ * Authenticated: sends the customer order confirmation template to an arbitrary
+ * recipient with share-variant subject and intro copy.
  */
 export const sendOrderShareEmail = async (
   req: express.Request,
@@ -14,6 +16,16 @@ export const sendOrderShareEmail = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
+    const authHeader = req.headers.authorization;
+    const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
+    if (!authUser) {
+      return next({ statusCode: 401, message: "Unauthorized" });
+    }
+
     const { orderId } = req.params;
     const recipientEmail = String(req.body?.email || "").trim();
 
@@ -26,7 +38,7 @@ export const sendOrderShareEmail = async (
       return next({ statusCode: 404, message: "Order not found." });
     }
 
-    const result = await sendOrderCustomerPublicNew(order, {
+    const result = await sendOrderCustomerPublicNew(order as any, {
       recipientEmail,
       variant: "share",
     });

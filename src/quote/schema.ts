@@ -7,6 +7,7 @@
 
 import mongoose, { Schema, Types } from "mongoose";
 import mongooseSequence from "mongoose-sequence";
+import crypto from "crypto";
 import {
   createSchema,
   createReferenceField,
@@ -24,19 +25,24 @@ import type { IQuote, IQuoteCustomer, IQuoteLocation } from "./interfaces";
 
 const AutoIncrement = (mongooseSequence as any)(mongoose);
 
+const CONFIRMATION_CODE_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+const randomCodeFromAlphabet = (length: number, alphabet: string): string => {
+  let code = "";
+  for (let i = 0; i < length; i += 1) {
+    code += alphabet[crypto.randomInt(0, alphabet.length)];
+  }
+  return code;
+};
+
 // Generate tracking code utility
 const generateTrackingCode = (): string => {
-  return Math.random().toString(36).substring(2, 7).toUpperCase();
+  return randomCodeFromAlphabet(5, CONFIRMATION_CODE_CHARS);
 };
 
 // Generate quote confirmation code (6 chars)
 const generateQuoteConfirmationCode = (): string => {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let code = "";
-  for (let i = 0; i < 6; i += 1) {
-    code += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return code;
+  return randomCodeFromAlphabet(6, CONFIRMATION_CODE_CHARS);
 };
 
 // Customer subdocument schema

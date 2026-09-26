@@ -10,6 +10,7 @@ import { IUser } from "@/user/schema";
 import { Types } from "mongoose";
 
 const JWT_SECRET = process.env.JWT_SECRET || process.env.JWT_SECRET_KEY || "";
+const TOKEN_TTL_SECONDS = 86400; // 24 hours
 
 if (!JWT_SECRET) {
   logger.warn(
@@ -28,23 +29,25 @@ export const createToken = (user: IUser): string => {
       throw new Error("JWT_SECRET is not configured");
     }
 
-    const timestamp = new Date().getTime();
-    const userId = user._id instanceof Types.ObjectId 
-      ? user._id.toString() 
-      : String(user._id);
+    const nowSec = Math.floor(Date.now() / 1000);
+    const userId =
+      user._id instanceof Types.ObjectId
+        ? user._id.toString()
+        : String(user._id);
     const payload = {
       userId,
       portalId: user.portalId?.toString(),
-      iat: timestamp,
+      iat: nowSec,
       role: user.role,
-      exp: timestamp + 86400000, // 24 hours
+      exp: nowSec + TOKEN_TTL_SECONDS,
     };
 
     return jwt.sign(payload, JWT_SECRET);
   } catch (error) {
-    const userId = user._id instanceof Types.ObjectId 
-      ? user._id.toString() 
-      : String(user._id);
+    const userId =
+      user._id instanceof Types.ObjectId
+        ? user._id.toString()
+        : String(user._id);
     logger.error("Error creating JWT token", {
       error: error instanceof Error ? error.message : error,
       userId,

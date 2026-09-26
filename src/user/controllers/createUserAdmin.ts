@@ -6,6 +6,7 @@ import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { resolveId } from "@/_global/utils/resolveId";
 import { sendNewUserWelcomeEmail } from "../services/sendNewUserWelcomeEmail";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 export const createUserAdmin = async (
   req: express.Request,
@@ -13,6 +14,10 @@ export const createUserAdmin = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 

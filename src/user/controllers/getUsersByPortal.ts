@@ -4,6 +4,8 @@ import { Status } from "../../_global/enums";
 import { logger } from "@/core/logger";
 import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { hasPortalAccess, isPlatformRole } from "@/_global/utils/portalRoles";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { DEMO_USERS, DEMO_PORTAL_ID } from "@/demo/fixtures";
 
 export const getUsersByPortal = async (
   req: express.Request,
@@ -12,6 +14,19 @@ export const getUsersByPortal = async (
 ): Promise<void> => {
   try {
     const { portalId } = req.params;
+
+    if ((req as any).demoMode) {
+      const users =
+        String(portalId) === DEMO_PORTAL_ID
+          ? DEMO_USERS
+          : DEMO_USERS.filter(
+              (u) => String((u.portalId as any)?._id || u.portalId) === String(portalId),
+            );
+      if (respondIfDemo(req, res, users)) {
+        return;
+      }
+    }
+
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 

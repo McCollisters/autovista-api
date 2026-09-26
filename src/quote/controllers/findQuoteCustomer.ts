@@ -1,13 +1,15 @@
 import express from "express";
-import { Quote } from "@/_global/models";
+import { Quote, Order } from "@/_global/models";
 import { logger } from "@/core/logger";
+import { customerLastNameMatches } from "@/_global/utils/customerLastName";
+import { Status } from "@/_global/enums";
 
 /**
  * POST /api/v1/quote/customer/find
  * Find quote by customer info
- * 
+ *
  * Body: { customerCode: string, customerLastName?: string, customerEmail?: string }
- * Finds quote by trackingCode (customerCode) and validates against lastName or email
+ * Finds quote by confirmation/tracking code and requires email or lastName validation.
  */
 export const findQuoteCustomer = async (
   req: express.Request,
@@ -28,6 +30,13 @@ export const findQuoteCustomer = async (
     customerLastName = customerLastName?.toLowerCase().trim() || null;
     customerEmail = customerEmail?.toLowerCase().trim() || null;
 
+    if (!customerLastName && !customerEmail) {
+      return next({
+        statusCode: 400,
+        message: "Email or last name is required.",
+      });
+    }
+
     // Find quote by confirmation code (customerCode)
     const quote = await Quote.findOne({
       $or: [
@@ -43,12 +52,11 @@ export const findQuoteCustomer = async (
       return;
     }
 
-    // Validate against lastName if provided
+    let authorized = false;
+
     if (customerLastName) {
-      const quoteLastName = quote.customer?.name?.toLowerCase();
-      if (quoteLastName && quoteLastName.includes(customerLastName)) {
-        res.status(200).json(quote);
-        return;
+      if (customerLastNameMatches(quote.customer, customerLastName)) {
+        authorized = true;
       } else {
         res.status(401).json({
           error:
@@ -58,12 +66,10 @@ export const findQuoteCustomer = async (
       }
     }
 
-    // Validate against email if provided
-    if (customerEmail) {
+    if (!authorized) {
       const quoteEmail = quote.customer?.email?.toLowerCase();
       if (quoteEmail === customerEmail) {
-        res.status(200).json(quote);
-        return;
+        authorized = true;
       } else {
         res.status(401).json({
           error:
@@ -73,8 +79,19 @@ export const findQuoteCustomer = async (
       }
     }
 
-    // If no validation provided, return quote anyway (public access)
-    res.status(200).json(quote);
+    const quoteObj = quote.toObject ? quote.toObject() : { ...quote };
+    const statusLower = String((quoteObj as any).status || "").toLowerCase();
+    if (statusLower === Status.Booked) {
+      const linkedOrder = await Order.findOne({ quoteId: (quoteObj as any)._id })
+        .select("_id")
+        .lean();
+      if (linkedOrder?._id) {
+        (quoteObj as any).bookedOrderId = String(linkedOrder._id);
+      }
+      (quoteObj as any).isBooked = true;
+    }
+
+    res.status(200).json(quoteObj);
   } catch (error) {
     logger.error("Error finding quote by customer", {
       error: error instanceof Error ? error.message : error,
@@ -83,4 +100,3 @@ export const findQuoteCustomer = async (
     next(error);
   }
 };
-

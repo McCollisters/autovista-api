@@ -1,5 +1,6 @@
 import express from "express";
 import { Order } from "@/_global/models";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 export const deleteOrder = async (
   req: express.Request,
@@ -7,6 +8,10 @@ export const deleteOrder = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const deletedOrder = await Order.findByIdAndDelete(req.params.orderId);
 
     if (!deletedOrder) {

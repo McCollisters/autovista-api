@@ -15,6 +15,7 @@ import { getNotificationManager } from "@/notification";
 import { sendOrderNotification } from "@/notification/orderNotifications";
 import { getPickupDatesString } from "./utils/getPickupDatesString";
 import { resolveTemplatePath } from "./utils/resolveTemplatePath";
+import { getCodPaymentHostedUrl } from "@/_global/utils/getCodPaymentHostedUrl";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -82,12 +83,14 @@ export async function sendCODPaymentRequest(
     const template = Handlebars.compile(templateSource);
 
     // Prepare template data
+    const paymentUrl = getCodPaymentHostedUrl();
     const html = template({
       pickupDates,
       vehiclesString,
       totalPrice: (order.totalPricing?.total || 0).toFixed(2),
       refId: order.refId,
       recipientName: overrides.recipientName || order.customer?.name || "Customer",
+      paymentUrl,
     });
 
     // Send email using order notification system to track it

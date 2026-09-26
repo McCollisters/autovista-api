@@ -8,6 +8,8 @@ import express from "express";
 import { Order, User } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { DateTime } from "luxon";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { getDemoCommissionReports } from "@/demo/fixtures";
 
 interface MonthlyResult {
   month: string;
@@ -135,6 +137,22 @@ export const getCommissionReports = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if ((req as any).demoMode) {
+      const demo = getDemoCommissionReports();
+      const monthlyResults = demo.map((row) => ({
+        month: "March",
+        ordersCount: row.orderCount,
+        commission: row.commission,
+        user: {
+          _id: row.userId,
+          name: `${row.firstName} ${row.lastName}`,
+        },
+      }));
+      if (respondIfDemo(req, res, monthlyResults)) {
+        return;
+      }
+    }
+
     const { year, userId } = req.body;
 
     if (!year) {

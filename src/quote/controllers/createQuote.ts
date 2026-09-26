@@ -9,6 +9,7 @@ import { validateLocation } from "../services/validateLocation";
 import { matchesExistingQuote } from "../services/matchesExistingQuote";
 import { getTransitTimeFromSettings } from "../services/getTransitTimeFromSettings";
 import { resolveId } from "@/_global/utils/resolveId";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 export const createQuote = async (
   req: express.Request,
@@ -16,6 +17,10 @@ export const createQuote = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const { customer, origin, destination, vehicles, commission } = req.body;
     const userId = resolveId(req.body?.user ?? req.body?.userId);
     const portalId = resolveId(req.body?.portal ?? req.body?.portalId);

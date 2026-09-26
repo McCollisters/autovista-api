@@ -5,6 +5,8 @@ import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { getPortalRoleSets, isPlatformRole } from "@/_global/utils/portalRoles";
 import { Types } from "mongoose";
 import { Status } from "@/_global/enums";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { getDemoQuotesList } from "@/demo/fixtures";
 
 /**
  * GET /api/v1/quotes
@@ -16,6 +18,10 @@ export const getQuotes = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (respondIfDemo(req, res, getDemoQuotesList())) {
+      return;
+    }
+
     const authHeader = req.headers.authorization;
     const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
 

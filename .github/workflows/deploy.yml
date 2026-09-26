@@ -271,6 +271,12 @@ jobs:
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.SD_PRICING_API_KEY }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"SD_PRICING_API_KEY","Value":$val}]')
           fi
 
+          if [ -n "${{ secrets.CONVERGE_HOSTED_PAYMENT_URL }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.CONVERGE_HOSTED_PAYMENT_URL }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"CONVERGE_HOSTED_PAYMENT_URL","Value":$val}]')
+          elif [ -n "${{ secrets.CONVERGE_TXN_AUTH_TOKEN }}" ]; then
+            OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.CONVERGE_TXN_AUTH_TOKEN }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"CONVERGE_TXN_AUTH_TOKEN","Value":$val}]')
+          fi
+
           if [ -n "${{ secrets.PAPERTRAIL_HOST }}" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "${{ secrets.PAPERTRAIL_HOST }}" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"PAPERTRAIL_HOST","Value":$val}]')
           fi

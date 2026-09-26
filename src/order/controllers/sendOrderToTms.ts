@@ -5,6 +5,8 @@ import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper
 import { sendOrderToSuper } from "../integrations/sendOrderToSuper";
 import { updateSuperWithCompleteOrder } from "../integrations/updateSuperWithCompleteOrder";
 import { updateSuperWithPartialOrder } from "../integrations/updateSuperWithPartialOrder";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
+import { Role } from "@/user/schema";
 
 const formatAddress = (address?: {
   address?: string;
@@ -40,6 +42,18 @@ export const sendOrderToTms = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
+    const authUser = (req as any).user;
+    if (!authUser || authUser.role !== Role.PlatformAdmin) {
+      return next({
+        statusCode: 403,
+        message: "Unauthorized. platform_admin access required.",
+      });
+    }
+
     const { orderId } = req.params;
     const order = await Order.findById(orderId);
 

@@ -1,6 +1,7 @@
 import express from "express";
 import { Quote } from "@/_global/models";
 import { Status } from "@/_global/enums";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 export const updateQuote = async (
   req: express.Request,
@@ -8,6 +9,10 @@ export const updateQuote = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     const payload = { ...req.body } as Record<string, any>;
     if (payload.status) {
       const statusValue = String(payload.status).trim().toLowerCase();

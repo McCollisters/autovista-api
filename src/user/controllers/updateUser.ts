@@ -5,6 +5,7 @@ import { logger } from "@/core/logger";
 import { createToken } from "@/_global/utils/createToken";
 import { getPortalBaseUrl } from "@/config/portalBaseUrl";
 import { getNotificationManager } from "@/notification";
+import { rejectDemoMutation } from "@/demo/respondWithDemo";
 
 export const updateUser = async (
   req: express.Request,
@@ -12,6 +13,10 @@ export const updateUser = async (
   next: express.NextFunction,
 ): Promise<void> => {
   try {
+    if (rejectDemoMutation(req, next)) {
+      return;
+    }
+
     // Debug: log incoming update payload
     console.log("updateUser request", {
       params: req.params,

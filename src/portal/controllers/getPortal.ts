@@ -1,5 +1,7 @@
 import express from "express";
 import { Portal, ModifierSet } from "@/_global/models";
+import { respondIfDemo } from "@/demo/respondWithDemo";
+import { getDemoPortalById } from "@/demo/fixtures";
 
 export const getPortal = async (
   req: express.Request,
@@ -8,6 +10,17 @@ export const getPortal = async (
 ): Promise<void> => {
   try {
     const { portalId } = req.params;
+
+    if ((req as any).demoMode) {
+      const demoPortal = getDemoPortalById(portalId);
+      if (!demoPortal) {
+        res.status(404).json({ message: "Portal not found" });
+        return;
+      }
+      if (respondIfDemo(req, res, demoPortal)) {
+        return;
+      }
+    }
 
     const portal = await Portal.findById(portalId).lean();
 

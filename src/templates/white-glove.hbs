@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>White Glove Order</title>
+    <title>White Glove Order Booked</title>
   </head>
 
   <body
@@ -16,33 +16,104 @@
       cellspacing="0"
       style="empty-cells: hide; margin: 0 auto; padding: 15px; width: 600px"
     >
-
       <tr>
         <td valign="top" style="width: 600px; margin: 0 auto;">
           <p
-            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px; "
-          >A white glove order is ready for input: Order ID #{{refId}}.
-          </p>
-          <p>To view the order, log into your administrator account and go to
-            <a href="{{orderUrl}}">{{orderUrl}}</a>.</p>
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px; font-size: 16px; font-weight: bold;"
+          >White Glove Order Booked</p>
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 20px;"
+          >A white glove auto transport order has been booked and is ready for review in the portal.</p>
         </td>
       </tr>
 
       <tr>
         <td
           valign="top"
-          style="width: 600px;padding-bottom: 15px;margin: 0 auto;"
+          style="width: 600px; margin: 0 auto; padding-bottom: 24px;"
         >
-          <p style="font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0;">McCollister's Auto Transport</p>
-          <img
-            src="https://mcc-portal-assets.s3.amazonaws.com/mccollisters-auto-logistics"
-            style="width: 200px; height: auto; margin: 0 0 12px 0;"
-          />
-          <p><a href="tel:8888190594">(888) 819-0594</a><br
-            />autologistics@mccollisters.com</p>
+          <table cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td style="border-radius: 15px; background-color: #000000;">
+                <a
+                  href="{{orderUrl}}"
+                  style="display: inline-block; padding: 14px 28px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em;"
+                >View Order in Portal</a>
+              </td>
+            </tr>
+          </table>
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 12px 0 0; font-size: 13px;"
+          ><a href="{{orderUrl}}" style="color: #0069ca;">{{orderUrl}}</a></p>
         </td>
       </tr>
 
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p
+            style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px; font-size: 15px;"
+          ><strong>Order Summary</strong></p>
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px;"><strong>Order #:</strong> {{refId}}{{#if reg}} / REG# {{reg}}{{/if}}</p>
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px;"><strong>Transport Type:</strong> {{transportType}}</p>
+          {{#if customerName}}
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px;"><strong>Customer:</strong> {{customerName}}</p>
+          {{/if}}
+          {{#if customerEmail}}
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px;"><strong>Customer Email:</strong> {{customerEmail}}</p>
+          {{/if}}
+          {{#if customerPhone}}
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px;"><strong>Customer Phone:</strong> {{customerPhone}}</p>
+          {{/if}}
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px;"><strong>Pickup Within:</strong> {{pickupDates}}</p>
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px;"><strong>Estimated Delivery:</strong> {{deliveryDates}}</p>
+          {{#if totalPriceDisplay}}
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 16px;"><strong>Order Total:</strong> ${{totalPriceDisplay}}</p>
+          {{/if}}
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px; font-size: 15px;"><strong>Pickup</strong></p>
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px;"><strong>Address:</strong><br />{{pickupAddress}}{{#if pickupCity}}<br />{{pickupCity}}, {{pickupState}} {{pickupZip}}{{/if}}</p>
+          {{#if pickupContactName}}
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 16px;"><strong>Contact:</strong><br />{{pickupContactName}}{{#if pickupPhone}}<br />{{pickupPhone}}{{/if}}{{#if pickupMobilePhone}}<br />{{pickupMobilePhone}}{{/if}}</p>
+          {{/if}}
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto;">
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px; font-size: 15px;"><strong>Delivery</strong></p>
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 8px;"><strong>Address:</strong><br />{{deliveryAddress}}{{#if deliveryCity}}<br />{{deliveryCity}}, {{deliveryState}} {{deliveryZip}}{{/if}}</p>
+          {{#if deliveryContactName}}
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5; margin: 0 0 16px;"><strong>Contact:</strong><br />{{deliveryContactName}}{{#if deliveryPhone}}<br />{{deliveryPhone}}{{/if}}{{#if deliveryMobilePhone}}<br />{{deliveryMobilePhone}}{{/if}}</p>
+          {{/if}}
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" style="width: 600px; margin: 0 auto; padding-bottom: 16px;">
+          <p style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px; font-size: 15px;"><strong>Vehicle(s)</strong></p>
+          <div style="box-sizing: border-box; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.5;">{{{vehicles}}}</div>
+        </td>
+      </tr>
+
+      <tr>
+        <td
+          valign="top"
+          style="width: 600px; padding-bottom: 15px; margin: 0 auto;"
+        >
+          <p style="font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0 0 12px 0;">McCollister's Auto Transport</p>
+          <img
+            src="https://autovista-assets.s3.us-west-1.amazonaws.com/MCC-Wordmark-RGB-Blue.png"
+            alt="McCollister's Auto Transport"
+            width="220"
+            style="display: block; width: 220px; max-width: 220px; height: auto; border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; margin: 0 0 12px 0;"
+          />
+          <p style="font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0;"><a href="tel:8888190594" style="color: #0069ca;">(888) 819-0594</a><br />autotransport@mccollisters.com</p>
+        </td>
+      </tr>
     </table>
   </body>
 
