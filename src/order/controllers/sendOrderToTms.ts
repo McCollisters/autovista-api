@@ -5,6 +5,7 @@ import { sendPartialOrderToSuper } from "../integrations/sendPartialOrderToSuper
 import { sendOrderToSuper } from "../integrations/sendOrderToSuper";
 import { updateSuperWithCompleteOrder } from "../integrations/updateSuperWithCompleteOrder";
 import { updateSuperWithPartialOrder } from "../integrations/updateSuperWithPartialOrder";
+import { getUserFromToken } from "@/_global/utils/getUserFromToken";
 import { rejectDemoMutation } from "@/demo/respondWithDemo";
 import { Role } from "@/user/schema";
 
@@ -46,8 +47,12 @@ export const sendOrderToTms = async (
       return;
     }
 
-    const authUser = (req as any).user;
-    if (!authUser || authUser.role !== Role.PlatformAdmin) {
+    const authHeader = req.headers.authorization;
+    const authUser = (req as any).user ?? (await getUserFromToken(authHeader));
+    if (!authUser) {
+      return next({ statusCode: 401, message: "Unauthorized" });
+    }
+    if (authUser.role !== Role.PlatformAdmin) {
       return next({
         statusCode: 403,
         message: "Unauthorized. platform_admin access required.",
