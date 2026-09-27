@@ -1,6 +1,7 @@
 import express from "express";
 import { Order } from "@/_global/models";
 import { saveSDUpdatesToDB } from "@/order/integrations/saveSDUpdatesToDB";
+import { orderPayloadWithCodPaymentUrl } from "@/_global/utils/getCodPaymentHostedUrl";
 import { respondIfDemo } from "@/demo/respondWithDemo";
 import { getDemoOrderById } from "@/demo/fixtures";
 
@@ -34,7 +35,7 @@ export const getOrder = async (
     order = await Order.findById(orderId)
       .populate("portalId", "companyName logo options displayMCLogo");
 
-    res.status(200).json(order);
+    res.status(200).json(orderPayloadWithCodPaymentUrl(order));
   } catch (error) {
     next(error);
   }

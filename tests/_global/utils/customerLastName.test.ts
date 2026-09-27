@@ -20,7 +20,7 @@ describe("customerLastName", () => {
     expect(resolveCustomerLastName({ name: "Jane Mary Doe" })).toBe("doe");
   });
 
-  it("requires an exact last-name match (not substring)", () => {
+  it("matches the surname and ignores a generational suffix", () => {
     expect(
       customerLastNameMatches({ name: "Jonathan Smith" }, "nathan"),
     ).toBe(false);
@@ -28,7 +28,13 @@ describe("customerLastName", () => {
       customerLastNameMatches({ name: "Jonathan Smith" }, "Smith"),
     ).toBe(true);
     expect(
-      customerLastNameMatches({ lastName: "Smith", name: "Jon Smith" }, "smith"),
+      customerLastNameMatches({ name: "Jane Smith Jr." }, "Smith"),
     ).toBe(true);
+    expect(
+      customerLastNameMatches({ lastName: "Smith Jr", name: "Jane Doe" }, "smith"),
+    ).toBe(true);
+    expect(
+      resolveCustomerLastName({ name: "Jane Smith Jr" }),
+    ).toBe("smith");
   });
 });

@@ -9,7 +9,9 @@ import { Status } from "@/_global/enums";
  * Find quote by customer info
  *
  * Body: { customerCode: string, customerLastName?: string, customerEmail?: string }
- * Finds quote by confirmation/tracking code and requires email or lastName validation.
+ * Finds a quote by confirmation/tracking code. A code alone is enough.
+ * When an email is sent, it has to match. Last name is checked only when
+ * no email was sent.
  */
 export const findQuoteCustomer = async (
   req: express.Request,
@@ -30,13 +32,6 @@ export const findQuoteCustomer = async (
     customerLastName = customerLastName?.toLowerCase().trim() || null;
     customerEmail = customerEmail?.toLowerCase().trim() || null;
 
-    if (!customerLastName && !customerEmail) {
-      return next({
-        statusCode: 400,
-        message: "Email or last name is required.",
-      });
-    }
-
     // Find quote by confirmation code (customerCode)
     const quote = await Quote.findOne({
       $or: [
@@ -52,31 +47,24 @@ export const findQuoteCustomer = async (
       return;
     }
 
-    let authorized = false;
-
-    if (customerLastName) {
-      if (customerLastNameMatches(quote.customer, customerLastName)) {
-        authorized = true;
-      } else {
-        res.status(401).json({
-          error:
-            "Sorry, this confirmation code does not match the last name we have on file.",
-        });
-        return;
-      }
-    }
-
-    if (!authorized) {
+    if (customerEmail) {
       const quoteEmail = quote.customer?.email?.toLowerCase();
-      if (quoteEmail === customerEmail) {
-        authorized = true;
-      } else {
+      if (quoteEmail !== customerEmail) {
         res.status(401).json({
           error:
             "Sorry, this confirmation code does not match the email we have on file.",
         });
         return;
       }
+    } else if (
+      customerLastName &&
+      !customerLastNameMatches(quote.customer, customerLastName)
+    ) {
+      res.status(401).json({
+        error:
+          "Sorry, this confirmation code does not match the last name we have on file.",
+      });
+      return;
     }
 
     const quoteObj = quote.toObject ? quote.toObject() : { ...quote };

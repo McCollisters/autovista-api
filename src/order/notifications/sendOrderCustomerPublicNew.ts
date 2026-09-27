@@ -288,21 +288,6 @@ export async function sendOrderCustomerPublicNew(
 
     // Load and compile template
     const templateSource = await readFile(resolvedTemplatePath, "utf-8");
-    if (
-      !templateSource.includes(
-        "Your auto transport order has been successfully booked.",
-      )
-    ) {
-      logger.error("Unexpected customer order email template loaded", {
-        orderId: order._id,
-        refId: order.refId,
-        resolvedTemplatePath,
-      });
-      return {
-        success: false,
-        error: "Customer order email template is outdated or misconfigured.",
-      };
-    }
     const template = Handlebars.compile(templateSource);
 
     const showPaymentSection = isCOD && !isShareRecipient;

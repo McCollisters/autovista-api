@@ -21,10 +21,16 @@ const standardHandler = (_req: any, res: any) => {
   });
 };
 
+/**
+ * Combined cap for quote share, order share, and customer share.
+ * These routes share one limiter, so this is the hourly total per IP.
+ */
+export const SHARE_EMAIL_RATE_LIMIT_MAX = 500;
+
 /** Quote/order share email (agent or customer). */
 export const shareEmailRateLimit = rateLimit({
   windowMs: 60 * 60 * 1000,
-  max: 10,
+  max: SHARE_EMAIL_RATE_LIMIT_MAX,
   standardHeaders: true,
   legacyHeaders: false,
   handler: standardHandler,

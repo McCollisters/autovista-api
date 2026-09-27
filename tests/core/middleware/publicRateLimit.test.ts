@@ -2,8 +2,10 @@ import { describe, it, expect, beforeEach, afterEach, jest } from "@jest/globals
 import express from "express";
 import request from "supertest";
 import {
+  SHARE_EMAIL_RATE_LIMIT_MAX,
   TRUST_PROXY_HOPS,
   publicLookupRateLimit,
+  shareEmailRateLimit,
 } from "@/core/middleware/publicRateLimit";
 
 /**
@@ -62,5 +64,26 @@ describe("publicLookupRateLimit", () => {
     expect(otherViewer.status).toBe(200);
     expect(otherViewer.body.ip).toBe("203.0.113.9");
     expect(errorSpy).not.toHaveBeenCalled();
+  });
+});
+
+describe("shareEmailRateLimit", () => {
+  it("allows well above the old 10-per-hour cap", async () => {
+    expect(SHARE_EMAIL_RATE_LIMIT_MAX).toBe(500);
+
+    const app = express();
+    app.set("trust proxy", TRUST_PROXY_HOPS);
+    app.post("/share", shareEmailRateLimit, (_req, res) => {
+      res.status(200).json({ ok: true });
+    });
+
+    const viewer = "203.0.113.20";
+    for (let i = 0; i < 25; i += 1) {
+      const response = await request(app)
+        .post("/share")
+        .set("X-Forwarded-For", forwardedFor(viewer));
+
+      expect(response.status).toBe(200);
+    }
   });
 });

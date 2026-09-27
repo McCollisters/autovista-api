@@ -2,6 +2,7 @@ import express from "express";
 import { Order, Portal } from "@/_global/models";
 import { logger } from "@/core/logger";
 import { resolveOrderCustomerEmailForTracking } from "../utils/resolveOrderCustomerEmailForTracking";
+import { orderPayloadWithCodPaymentUrl } from "@/_global/utils/getCodPaymentHostedUrl";
 
 /**
  * POST /api/v1/order/:orderId/status
@@ -70,7 +71,7 @@ export const getOrderStatus = async (
       });
     }
 
-    res.status(200).json(order);
+    res.status(200).json(orderPayloadWithCodPaymentUrl(order));
   } catch (error) {
     logger.error("Error getting order status", {
       error: error instanceof Error ? error.message : error,

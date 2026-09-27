@@ -7,6 +7,15 @@ import { readFile } from "fs/promises";
 import { sendOrderCustomerPublicNew } from "@/order/notifications/sendOrderCustomerPublicNew";
 import { sendOrderNotification } from "@/notification/orderNotifications";
 
+jest.mock("@/core/logger", () => ({
+  logger: {
+    info: jest.fn(),
+    warn: jest.fn(),
+    error: jest.fn(),
+    debug: jest.fn(),
+  },
+}));
+
 jest.mock("@/_global/models", () => ({
   Portal: {
     findById: jest.fn(),
@@ -24,6 +33,7 @@ jest.mock("fs/promises", () => ({
 describe("sendOrderCustomerPublicNew", () => {
   let lastTemplateData: Record<string, unknown> | undefined;
   let compileSpy: jest.SpiedFunction<typeof Handlebars.compile>;
+  const originalPaymentUrl = process.env.CONVERGE_HOSTED_PAYMENT_URL;
 
   const baseOrder = (): IOrder =>
     ({
@@ -108,6 +118,8 @@ describe("sendOrderCustomerPublicNew", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     lastTemplateData = undefined;
+    process.env.CONVERGE_HOSTED_PAYMENT_URL =
+      "https://payments.example.test/checkout";
 
     (Portal.findById as jest.MockedFunction<typeof Portal.findById>).mockResolvedValue(
       { companyName: "Test Co" } as never,
@@ -130,6 +142,11 @@ describe("sendOrderCustomerPublicNew", () => {
 
   afterEach(() => {
     compileSpy.mockRestore();
+    if (originalPaymentUrl === undefined) {
+      delete process.env.CONVERGE_HOSTED_PAYMENT_URL;
+    } else {
+      process.env.CONVERGE_HOSTED_PAYMENT_URL = originalPaymentUrl;
+    }
   });
 
   it("confirmation + COD: shows payment section and uses sections 6 / 7", async () => {
@@ -235,15 +252,14 @@ describe("sendOrderCustomerPublicNew", () => {
     );
   });
 
-  it("rejects outdated customer order templates", async () => {
+  it("sends the confirmation when the template wording changes", async () => {
     (readFile as jest.MockedFunction<typeof readFile>).mockResolvedValue(
       "<html>Welcome to McCollister's Auto Logistics!</html>" as never,
     );
 
     const result = await sendOrderCustomerPublicNew(baseOrder());
 
-    expect(result.success).toBe(false);
-    expect(result.error).toMatch(/outdated or misconfigured/i);
-    expect(sendOrderNotification).not.toHaveBeenCalled();
+    expect(result.success).toBe(true);
+    expect(sendOrderNotification).toHaveBeenCalled();
   });
 });

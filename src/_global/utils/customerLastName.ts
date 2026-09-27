@@ -10,7 +10,8 @@ export function normalizePersonNamePart(value: string): string {
 }
 
 /**
- * Prefer structured customer.lastName; otherwise use the last word of full name.
+ * Prefer structured customer.lastName; otherwise use the surname from the full name.
+ * A trailing suffix such as Jr or III is not treated as the surname.
  */
 export function resolveCustomerLastName(customer: {
   lastName?: string | null;
@@ -20,31 +21,65 @@ export function resolveCustomerLastName(customer: {
     return null;
   }
 
-  const structured = normalizePersonNamePart(String(customer.lastName || ""));
+  const structured = significantLastName(String(customer.lastName || ""));
   if (structured) {
     return structured;
   }
 
-  const fullName = normalizePersonNamePart(String(customer.name || ""));
-  if (!fullName) {
-    return null;
-  }
+  return significantLastName(String(customer.name || ""));
+}
 
-  const parts = fullName.split(" ").filter(Boolean);
-  if (parts.length === 0) {
-    return null;
+const NAME_SUFFIXES = new Set(["jr", "sr", "ii", "iii", "iv", "v"]);
+
+function nameWords(value: string): string[] {
+  return normalizePersonNamePart(value)
+    .replace(/\./g, "")
+    .split(" ")
+    .filter(Boolean);
+}
+
+/** Drop a trailing generational suffix so "Smith Jr" compares as "smith". */
+function withoutSuffixes(words: string[]): string[] {
+  const result = [...words];
+  while (
+    result.length > 1 &&
+    NAME_SUFFIXES.has(result[result.length - 1])
+  ) {
+    result.pop();
   }
-  return parts[parts.length - 1];
+  return result;
 }
 
 /**
- * Exact last-name match (case/whitespace insensitive).
+ * Last significant name word. "Jane Smith Jr." and "Smith" both become "smith".
+ */
+export function significantLastName(value: string): string | null {
+  const words = withoutSuffixes(nameWords(value));
+  if (words.length === 0) {
+    return null;
+  }
+  return words[words.length - 1];
+}
+
+/**
+ * Last-name match, case and whitespace insensitive.
+ * A generational suffix is ignored, and the comparison is the surname word,
+ * so "Smith" matches "Jane Smith Jr" without matching a substring like "nathan".
  */
 export function customerLastNameMatches(
   customer: { lastName?: string | null; name?: string | null } | null | undefined,
   providedLastName: string,
 ): boolean {
-  const expected = resolveCustomerLastName(customer);
-  const provided = normalizePersonNamePart(providedLastName);
-  return Boolean(expected && provided && expected === provided);
+  const provided = significantLastName(providedLastName);
+  if (!provided || !customer) {
+    return false;
+  }
+
+  const structured = significantLastName(String(customer.lastName || ""));
+  if (structured) {
+    return structured === provided;
+  }
+
+  const fromName = significantLastName(String(customer.name || ""));
+  return Boolean(fromName && fromName === provided);
 }

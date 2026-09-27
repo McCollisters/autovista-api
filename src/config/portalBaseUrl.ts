@@ -33,7 +33,7 @@ const pickStagingOriginFromAllowedOrigins = (): string | null => {
  * 2. NODE_ENV development or test → http://localhost:3000
  * 3. NODE_ENV staging → STAGING_PUBLIC_APP_URL, else first suitable ALLOWED_ORIGINS entry,
  *    else BASE_URL, else production portal.
- * 4. Otherwise → production portal.
+ * 4. Otherwise, including an unset NODE_ENV → production portal.
  */
 export const getPortalBaseUrl = (): string => {
   const explicit =
@@ -42,7 +42,7 @@ export const getPortalBaseUrl = (): string => {
     return stripTrailingSlash(explicit);
   }
 
-  const nodeEnv = process.env.NODE_ENV || "development";
+  const nodeEnv = process.env.NODE_ENV;
   if (nodeEnv === "development" || nodeEnv === "test") {
     return "http://localhost:3000";
   }
