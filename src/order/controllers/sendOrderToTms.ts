@@ -52,10 +52,13 @@ export const sendOrderToTms = async (
     if (!authUser) {
       return next({ statusCode: 401, message: "Unauthorized" });
     }
-    if (authUser.role !== Role.PlatformAdmin) {
+    if (
+      authUser.role !== Role.PlatformAdmin &&
+      authUser.role !== Role.PlatformUser
+    ) {
       return next({
         statusCode: 403,
-        message: "Unauthorized. platform_admin access required.",
+        message: "Unauthorized. McCollister's access required.",
       });
     }
 

@@ -91,15 +91,28 @@ describe("sendOrderToTms", () => {
     });
   });
 
-  it("rejects a non-admin even when the token is valid", async () => {
+  it("rejects a portal user even when the token is valid", async () => {
     mockGetUserFromToken.mockResolvedValue({ role: Role.PortalAdmin });
 
     await sendOrderToTms(req as Request, res as Response, next);
 
     expect(next).toHaveBeenCalledWith({
       statusCode: 403,
-      message: "Unauthorized. platform_admin access required.",
+      message: "Unauthorized. McCollister's access required.",
     });
     expect(mockFindById).not.toHaveBeenCalled();
+  });
+
+  it("allows a McCollister's user to send the order to TMS", async () => {
+    mockGetUserFromToken.mockResolvedValue({ role: Role.PlatformUser });
+    mockFindById.mockResolvedValue(null);
+
+    await sendOrderToTms(req as Request, res as Response, next);
+
+    expect(mockGetUserFromToken).toHaveBeenCalledWith("Bearer token");
+    expect(next).toHaveBeenCalledWith({
+      statusCode: 404,
+      message: "Order not found.",
+    });
   });
 });
