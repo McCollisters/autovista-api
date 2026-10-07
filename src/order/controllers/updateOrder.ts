@@ -19,35 +19,7 @@ import {
 } from "../services/applyLocationAddressUpdates";
 import { applyVehicleDetailsToUpdateDoc } from "../services/applyVehicleDetailsUpdates";
 import { rejectDemoMutation } from "@/demo/respondWithDemo";
-
-const mergeNotificationEmails = (existing: any[], agents: any[]) => {
-  const byEmail = new Map<string, any>();
-
-  existing.forEach((entry) => {
-    const email = String(entry?.email || "")
-      .trim()
-      .toLowerCase();
-    if (!email) return;
-    byEmail.set(email, { ...entry });
-  });
-
-  agents.forEach((agent) => {
-    const email = String(agent?.email || "")
-      .trim()
-      .toLowerCase();
-    if (!email) return;
-    const existingEntry = byEmail.get(email) || {};
-    byEmail.set(email, {
-      ...existingEntry,
-      email: existingEntry.email || agent.email,
-      name: agent.name || existingEntry.name,
-      pickup: Boolean(existingEntry.pickup || agent.pickup),
-      delivery: Boolean(existingEntry.delivery || agent.delivery),
-    });
-  });
-
-  return Array.from(byEmail.values());
-};
+import { mergeNotificationEmails } from "../utils/mergeNotificationEmails";
 
 const normalizeBoolean = (value: unknown) => {
   if (typeof value === "boolean") {
