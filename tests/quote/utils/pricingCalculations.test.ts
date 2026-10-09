@@ -234,11 +234,9 @@ describe("Pricing Calculation Utilities", () => {
       expect(total).toBe(1200);
     });
 
-    it("should calculate WhiteGlove total correctly", () => {
-      const baseWhiteGlove = 2000;
-
-      // WhiteGlove should not include modifiers, company tariff, or commission
-      const total = baseWhiteGlove;
+    it("prices WhiteGlove at $400 above the enclosed broker price", () => {
+      const enclosedBrokerPrice = 1600;
+      const total = enclosedBrokerPrice + 400;
       expect(total).toBe(2000);
     });
 

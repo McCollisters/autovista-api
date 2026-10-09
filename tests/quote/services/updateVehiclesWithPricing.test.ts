@@ -66,7 +66,7 @@ describe("updateVehiclesWithPricing", () => {
           toObject: jest.fn().mockReturnValue(mockModifierSet),
         };
         return Promise.resolve(globalModifierDoc);
-      } else if (query.portalId) {
+      } else if (query.portal || query.portalId) {
         // Return lean() chainable for portal modifiers
         return {
           lean: () => Promise.resolve(mockPortalModifierSet),
@@ -119,21 +119,26 @@ describe("updateVehiclesWithPricing", () => {
   });
 
   describe("Service Level Calculations", () => {
-    it("should calculate WhiteGlove pricing correctly", async () => {
+    it("prices WhiteGlove at $400 above the enclosed broker price", async () => {
       const vehicles = [createMockVehicle()];
+      const miles = 250;
 
       const result = await updateVehiclesWithPricing({
         portal: createMockPortal(),
         vehicles,
-        miles: 1000,
+        miles,
         origin: "New York, NY",
         destination: "Los Angeles, CA",
         commission: 50,
       });
 
-      const whiteGloveTotal = result[0].pricing?.totals.whiteGlove;
-      expect(typeof whiteGloveTotal).toBe("number");
-      expect(whiteGloveTotal).toBeGreaterThan(0);
+      const pricing = result[0].pricing!;
+      const oneDayServiceLevel = pricing.modifiers.serviceLevels[0].value;
+      const enclosedBrokerPrice =
+        pricing.totals.one.enclosed.total - oneDayServiceLevel;
+
+      expect(pricing.totals.whiteGlove).toBe(enclosedBrokerPrice + 400);
+      expect(pricing.totals.whiteGlove).not.toBe(miles * 2);
     });
 
     it("should calculate one-day service level pricing", async () => {
@@ -244,6 +249,7 @@ describe("updateVehiclesWithPricing", () => {
         createMockVehicle({
           model: "Other-pre 1975 classic",
           pricingClass: VehicleClass.Sedan,
+          isOversize: undefined,
         }),
       ];
 

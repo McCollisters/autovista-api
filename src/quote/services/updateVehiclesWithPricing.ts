@@ -12,6 +12,9 @@ import {
 } from "../../_global/utils/vehicleOversize";
 import { Types } from "mongoose";
 
+/** White glove is the enclosed broker price for the move, plus this amount. */
+const WHITE_GLOVE_ABOVE_ENCLOSED = 400;
+
 interface VehiclePriceParams {
   portal: IPortal;
   vehicle: Partial<IVehicle>;
@@ -112,23 +115,6 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
   }
   
   const base = Number.isFinite(Number(baseRaw)) ? Number(baseRaw) : 0;
-
-  const whiteGloveMultiplier = portalModifiers?.whiteGlove
-    ? portalModifiers.whiteGlove.multiplier
-    : globalModifiers.whiteGlove?.multiplier || 2;
-
-  let baseWhiteGlove = miles * whiteGloveMultiplier;
-
-  if (globalModifiers.whiteGlove?.minimum && baseWhiteGlove < globalModifiers.whiteGlove.minimum) {
-    baseWhiteGlove = globalModifiers.whiteGlove.minimum;
-  }
-
-  if (portal.isPremium && Array.isArray(portal.customRates) && portal.customRates.length > 0) {
-    const customWhiteGlove = getCustomBaseRate(miles, portal);
-    if (customWhiteGlove) {
-      baseWhiteGlove = customWhiteGlove;
-    }
-  }
 
   let calculatedCommission = normalizedCommission;
   let calculatedGlobalDiscount: number = 0;
@@ -461,9 +447,15 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     },
   ];
 
+  // Pickup-window markups are not part of the broker enclosed rate. One-day
+  // enclosed includes serviceLevels[0]; remove it so white glove stays one price.
+  const oneDayServiceLevel = globalModifiers.serviceLevels?.[0]?.value || 0;
+  const enclosedBrokerPrice =
+    serviceLevelData.oneEnclosed.baseWithModifiers - oneDayServiceLevel;
+
   // Build totals object with open/enclosed structure for all service levels
   const totals = {
-    whiteGlove: roundCurrency(baseWhiteGlove),
+    whiteGlove: roundCurrency(enclosedBrokerPrice + WHITE_GLOVE_ABOVE_ENCLOSED),
     one: {
       open: {
         total: roundCurrency(serviceLevelData.oneOpen.baseWithModifiers),
@@ -873,7 +865,7 @@ const getJKVehiclePrice = async ({
       ],
     },
     totals: {
-      whiteGlove: roundCurrency(openTotalSD), // Same as open for JK
+      whiteGlove: roundCurrency(enclosedTotalSD + WHITE_GLOVE_ABOVE_ENCLOSED),
       one: {
         open: {
           total: roundCurrency(openTotalSD),
