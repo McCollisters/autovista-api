@@ -770,7 +770,7 @@ describe("createOrder Controller", () => {
       sendMMIOrderNotification.mockResolvedValue({ success: true });
       sendOrderCustomerPublicNew.mockResolvedValue({ success: true });
       sendCODPaymentRequest.mockResolvedValue({ success: true });
-      sendWhiteGloveNotification.mockResolvedValue(undefined);
+      sendWhiteGloveNotification.mockResolvedValue({ success: true });
 
       await createOrder(req, res, next);
 
@@ -871,8 +871,10 @@ describe("createOrder Controller", () => {
 
       expect(res.status).toHaveBeenCalledWith(201);
       expect(mocks.sendWhiteGloveNotification).toHaveBeenCalledTimes(1);
+      expect(mocks.sendOrderAgentEmail).toHaveBeenCalled();
       expect(mocks.sendWhiteGloveNotification).toHaveBeenCalledWith({
         order: expect.objectContaining({ _id: "test-order-id", transportType: TransportType.WhiteGlove }),
+        recipientEmails: ["autoorders@mccollisters.com"],
       });
     });
   });

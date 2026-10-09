@@ -1361,16 +1361,27 @@ export const createOrder = async (
     // Send white glove notification with error handling
     if (transportType === TransportType.WhiteGlove) {
       try {
-        await sendWhiteGloveNotification({ order: newOrder });
-        logger.info(
-          `White glove notification sent for order ${(newOrder as any).refId}`,
-        );
+        const whiteGloveRecipients = ["autoorders@mccollisters.com"];
+        const whiteGloveResult = await sendWhiteGloveNotification({
+          order: newOrder,
+          recipientEmails: whiteGloveRecipients,
+        });
+        if (!whiteGloveResult.success) {
+          logger.error("Failed to send white glove notification", {
+            refId: (newOrder as any).refId,
+            recipientEmails: whiteGloveRecipients,
+            error: whiteGloveResult.error,
+          });
+        } else {
+          logger.info(
+            `White glove notification sent for order ${(newOrder as any).refId} to ${whiteGloveRecipients.join(", ")}`,
+          );
+        }
       } catch (notificationError) {
         logger.error(
           "Failed to send white glove notification:",
           notificationError,
         );
-        // Don't fail the order creation for notification errors
       }
     }
 

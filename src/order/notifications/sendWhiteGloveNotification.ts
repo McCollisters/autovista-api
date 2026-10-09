@@ -21,10 +21,11 @@ import { formatTransportTypeLabelForOrder } from "@/_global/utils/formatTranspor
 interface SendWhiteGloveNotificationParams {
   order: IOrder;
   recipientEmail?: string;
+  recipientEmails?: string[];
   recipientName?: string;
 }
 
-const DEFAULT_RECIPIENT = "autoorders@mccollisters.com";
+const WHITE_GLOVE_BOOKING_RECIPIENTS = ["autoorders@mccollisters.com"];
 const SENDER_EMAIL = "autotransport@mccollisters.com";
 const SENDER_NAME = "McCollister's Auto Transport";
 
@@ -35,14 +36,24 @@ export const sendWhiteGloveNotification = async (
   params: SendWhiteGloveNotificationParams,
 ): Promise<{ success: boolean; error?: string }> => {
   try {
-    const { order, recipientEmail: customRecipientEmail } = params;
+    const { order, recipientEmail: customRecipientEmail, recipientEmails } =
+      params;
 
-    const recipientEmail = customRecipientEmail || DEFAULT_RECIPIENT;
+    const recipients = (
+      customRecipientEmail
+        ? [customRecipientEmail]
+        : recipientEmails?.length
+          ? recipientEmails
+          : WHITE_GLOVE_BOOKING_RECIPIENTS
+    ).filter((email, index, list) => {
+      const key = email.trim().toLowerCase();
+      return key && list.findIndex((item) => item.trim().toLowerCase() === key) === index;
+    });
 
     logger.info("Sending white glove notification", {
       orderId: order._id,
       refId: order.refId,
-      recipientEmail,
+      recipients,
     });
 
     const subject = `White Glove Order Booked — #${order.refId}`;
@@ -128,33 +139,44 @@ export const sendWhiteGloveNotification = async (
     });
 
     const notificationManager = getNotificationManager();
-    const result = await notificationManager.sendEmail({
-      to: recipientEmail,
-      from: SENDER_EMAIL,
-      fromName: SENDER_NAME,
-      subject,
-      html,
-      replyTo: SENDER_EMAIL,
-      templateName: "White Glove Notification",
-    });
+    const failures: string[] = [];
 
-    if (result.success) {
-      logger.info("White glove notification sent successfully", {
-        orderId: order._id,
-        refId: order.refId,
-        recipientEmail,
+    for (const recipientEmail of recipients) {
+      const result = await notificationManager.sendEmail({
+        to: recipientEmail,
+        from: SENDER_EMAIL,
+        fromName: SENDER_NAME,
+        subject,
+        html,
+        replyTo: SENDER_EMAIL,
+        templateName: "White Glove Notification",
       });
+
+      if (result.success) {
+        logger.info("White glove notification sent successfully", {
+          orderId: order._id,
+          refId: order.refId,
+          recipientEmail,
+        });
+      } else {
+        const error = result.error || "Failed to send white glove notification";
+        failures.push(`${recipientEmail}: ${error}`);
+        logger.error("Failed to send white glove notification", {
+          orderId: order._id,
+          refId: order.refId,
+          recipientEmail,
+          error,
+        });
+      }
+    }
+
+    if (failures.length === 0) {
       return { success: true };
     }
 
-    logger.error("Failed to send white glove notification", {
-      orderId: order._id,
-      refId: order.refId,
-      error: result.error,
-    });
     return {
       success: false,
-      error: result.error || "Failed to send white glove notification",
+      error: failures.join("; "),
     };
   } catch (error) {
     logger.error("Error sending white glove notification:", error);
