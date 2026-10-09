@@ -684,20 +684,15 @@ function processExistingVehicle(
   orderCommission: number,
   orderCompanyTariff: number,
 ): OrderVehicle {
-  let updatedBaseQuote: number | null = null;
-
-  // If Super's pricing does not equal the database amt, update the base quote
-  if (savedVehicle.pricing.total !== sdVehicle.tariff) {
-    const superPricingDifference =
-      savedVehicle.pricing.total - sdVehicle.tariff;
-    updatedBaseQuote =
-      (savedVehicle.pricing.base || 0) - superPricingDifference;
-  }
-
   const price = savedVehicle.pricing;
   const commission = price.modifiers?.commission || orderCommission || 0;
   const cTariff = price.modifiers?.companyTariff || orderCompanyTariff || 0;
   const totalValue = sdVehicle.tariff;
+  // Super's tariff is the vehicle price. Commission and company tariff are
+  // added on top. Replacing only the old base by the price gap leaves a
+  // leftover (for example $60) that no longer matches the vehicle total.
+  const priceChanged = savedVehicle.pricing.total !== totalValue;
+  const base = priceChanged ? totalValue : price.base || 0;
   const normalizedModifiers = normalizeOrderModifiers(price.modifiers);
 
   return {
@@ -724,7 +719,7 @@ function processExistingVehicle(
         ? sdVehicle.is_inoperable
         : savedVehicle.isInoperable,
     pricing: {
-      base: updatedBaseQuote || price.base || 0,
+      base,
       modifiers: {
         ...normalizedModifiers,
         companyTariff: cTariff,

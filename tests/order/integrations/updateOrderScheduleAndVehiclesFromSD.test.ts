@@ -368,4 +368,80 @@ describe("updateOrderScheduleAndVehiclesFromSD", () => {
       "2026-07-03",
     );
   });
+
+  it("sets the vehicle price to Super's tariff instead of a leftover base", async () => {
+    const databaseOrder = {
+      refId: 310469,
+      portalId: "portal-id",
+      tmsPartialOrder: true,
+      transitTime: [2, 10],
+      schedule: {
+        pickupEstimated: [new Date("2026-10-08T12:00:00.000Z")],
+        pickupSelected: new Date("2026-10-08T12:00:00.000Z"),
+        deliveryEstimated: [new Date("2026-10-12T12:00:00.000Z")],
+      },
+      origin: { address: { address: "123 Main St", city: "Austin", state: "TX" } },
+      destination: {
+        address: { address: "456 Oak Ave", city: "Dallas", state: "TX" },
+      },
+      vehicles: [
+        {
+          make: "Chevrolet",
+          model: "TRAVERSE",
+          year: "2017",
+          isInoperable: false,
+          pricingClass: "suv",
+          pricing: {
+            base: 500,
+            total: 790,
+            totalWithCompanyTariffAndCommission: 790,
+            modifiers: {
+              states: 150,
+              oversize: 50,
+              commission: 0,
+              companyTariff: 0,
+            },
+          },
+        },
+      ],
+      totalPricing: {
+        base: 500,
+        total: 790,
+        totalWithCompanyTariffAndCommission: 790,
+        modifiers: { commission: 0, companyTariff: 0 },
+      },
+    };
+
+    const superDispatchOrder = {
+      guid: "sd-guid",
+      status: "new",
+      created_at: "2026-10-08T18:26:19.000Z",
+      changed_at: "2026-10-08T18:29:57.000Z",
+      transport_type: "open",
+      pickup: { scheduled_at: "2026-10-08", venue: {} },
+      delivery: { scheduled_at: "2026-10-12", venue: {} },
+      vehicles: [
+        {
+          make: "Chevrolet",
+          model: "TRAVERSE",
+          year: "2017",
+          type: "suv",
+          tariff: 350,
+        },
+      ],
+    };
+
+    const result = await updateOrderScheduleAndVehiclesFromSD(
+      superDispatchOrder as any,
+      databaseOrder as any,
+    );
+
+    expect(result?.vehicles?.[0]?.pricing?.base).toBe(350);
+    expect(result?.vehicles?.[0]?.pricing?.total).toBe(350);
+    expect(result?.vehicles?.[0]?.pricing?.totalWithCompanyTariffAndCommission).toBe(
+      350,
+    );
+    expect(result?.totalPricing?.total).toBe(350);
+    expect(result?.totalPricing?.totalWithCompanyTariffAndCommission).toBe(350);
+  });
 });
