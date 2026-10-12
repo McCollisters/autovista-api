@@ -58,7 +58,7 @@ const getDatabaseConfig = (): DatabaseConfig["options"] => {
 // EMERGENCY (2026-10-12): production is hardcoded to the known-good Atlas prod DB
 // so deploy-time GitHub secret overwrites cannot point the API at the wrong database.
 const PRODUCTION_MONGODB_URI =
-  "mongodb+srv://anna:K1lXzftA6NpMpwM6@autovista.nzynb.mongodb.net/prod";
+  "mongodb+srv://autovista:JbRiklNH55q67w7p@cluster0.w7vu8.mongodb.net/prod";
 
 const getMongoDbUri = (): string => {
   const nodeEnv = process.env.NODE_ENV || "development";
