@@ -54,17 +54,13 @@ const getDatabaseConfig = (): DatabaseConfig["options"] => {
   return baseConfig;
 };
 
-// Get MongoDB URI based on environment
-// EMERGENCY (2026-10-12): production is hardcoded to the known-good Atlas prod DB
-// so deploy-time GitHub secret overwrites cannot point the API at the wrong database.
-const PRODUCTION_MONGODB_URI =
-  "mongodb+srv://anna:K1lXzftA6NpMpwM6@autovista.nzynb.mongodb.net/prod";
-
+// Get MongoDB URI based on environment. Never hardcode credentials here.
 const getMongoDbUri = (): string => {
   const nodeEnv = process.env.NODE_ENV || "development";
 
   if (nodeEnv === "production") {
-    return PRODUCTION_MONGODB_URI;
+    return (process.env.MONGODB_PROD_URI ||
+      process.env.MONGODB_DEV_URI) as string;
   }
 
   // In staging, prefer MONGODB_STAGING_URI, fallback to MONGODB_DEV_URI
