@@ -2,7 +2,7 @@
  * Send Partial Order to Super Dispatch Integration
  *
  * This service sends a partial order to Super Dispatch TMS with minimal information.
- * Addresses are withheld until carrier approval.
+ * Addresses and VINs are withheld until carrier approval.
  */
 
 import { logger } from "@/core/logger";
@@ -45,7 +45,8 @@ interface VehicleData {
 
 /**
  * Send partial order to Super Dispatch
- * Sends order with minimal information - addresses are withheld until carrier approval
+ * Sends order with minimal information - addresses and VINs are withheld until
+ * carrier approval (full details released via updateSuperWithCompleteOrder).
  */
 export const sendPartialOrderToSuper = async (
   params: SendPartialOrderToSuperParams,
@@ -168,7 +169,6 @@ export const sendPartialOrderToSuper = async (
         transportTypeKey === "open" ? (totalOpen ?? 0) : (totalEnclosed ?? 0);
 
       const inoperable = Boolean((quote as any).isInoperable);
-      const vinValue = normalizeText(quote.vin);
 
       const parsedYear = quote.year ? parseInt(String(quote.year), 10) : NaN;
       return {
@@ -178,7 +178,8 @@ export const sendPartialOrderToSuper = async (
         is_inoperable: inoperable,
         type: mapPricingClassToSuperDispatchVehicleType(quote.pricingClass),
         year: Number.isFinite(parsedYear) ? parsedYear : null,
-        vin: vinValue || null,
+        // Withhold VIN until full details are released
+        vin: null,
       };
     });
 

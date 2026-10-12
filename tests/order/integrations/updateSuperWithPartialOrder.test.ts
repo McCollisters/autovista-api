@@ -2,14 +2,22 @@ import { describe, it, expect, beforeEach, jest } from "@jest/globals";
 import type { IOrder } from "@/_global/models";
 
 jest.mock("@/_global/integrations/authenticateSuperDispatch", () => ({
-  authenticateSuperDispatch: jest.fn().mockResolvedValue("fake-token"),
+  authenticateSuperDispatch: jest.fn(async () => "fake-token"),
+}));
+
+jest.mock("@/core/logger", () => ({
+  logger: {
+    error: jest.fn(),
+    info: jest.fn(),
+    warn: jest.fn(),
+  },
 }));
 
 import { updateSuperWithPartialOrder } from "@/order/integrations/updateSuperWithPartialOrder";
 
 describe("updateSuperWithPartialOrder", () => {
-  const baseOrder: Partial<IOrder> = {
-    refId: "12345",
+  const baseOrder = {
+    refId: 12345,
     tms: {
       guid: "sd-order-guid-abc",
       status: "new",
@@ -18,7 +26,7 @@ describe("updateSuperWithPartialOrder", () => {
     },
     origin: { notes: "Pickup: ring bell" },
     destination: { notes: "Delivery: call ahead" },
-  };
+  } as unknown as Partial<IOrder>;
 
   const existingSdOrder = {
     number: "12345",
@@ -88,5 +96,6 @@ describe("updateSuperWithPartialOrder", () => {
     const patchBody = JSON.parse(String(patchCalls[0][1]?.body || "{}"));
     expect(patchBody.pickup.notes).toBeUndefined();
     expect(patchBody.delivery.notes).toBeUndefined();
+    expect(patchBody.vehicles?.[0]?.vin).toBeNull();
   });
 });
