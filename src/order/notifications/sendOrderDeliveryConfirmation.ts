@@ -7,7 +7,10 @@
 
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
-import { sendOrderNotification } from "@/notification/orderNotifications";
+import {
+  recordSentNotificationRecipients,
+  sendOrderNotification,
+} from "@/notification/orderNotifications";
 import { join } from "path";
 import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
@@ -80,12 +83,17 @@ export async function sendOrderDeliveryConfirmation({
     }
 
     // Get email template values
-    const { getEmailTemplate } = await import("@/email/services/getEmailTemplate");
+    const { getEmailTemplate } = await import(
+      "@/email/services/getEmailTemplate"
+    );
     const emailTemplate = await getEmailTemplate("Delivery Confirmation");
-    
-    const senderEmail = emailTemplate.senderEmail || DEFAULT_EMAIL_CONFIG.senderEmail;
-    const senderName = emailTemplate.senderName || DEFAULT_EMAIL_CONFIG.senderName;
-    const emailIntro = emailTemplate.emailIntro || DEFAULT_EMAIL_CONFIG.emailIntro;
+
+    const senderEmail =
+      emailTemplate.senderEmail || DEFAULT_EMAIL_CONFIG.senderEmail;
+    const senderName =
+      emailTemplate.senderName || DEFAULT_EMAIL_CONFIG.senderName;
+    const emailIntro =
+      emailTemplate.emailIntro || DEFAULT_EMAIL_CONFIG.emailIntro;
 
     // Format order ID for subject
     const orderReg = order.reg ? `${order.reg} / ` : "";
@@ -200,6 +208,14 @@ export async function sendOrderDeliveryConfirmation({
     );
 
     const successCount = finalResults.filter((r) => r.success).length;
+
+    await recordSentNotificationRecipients(
+      String(order._id),
+      "agentsDeliveryConfirmation",
+      finalResults
+        .filter((result) => result.success)
+        .map((result) => result.recipient),
+    );
 
     logger.info("Order delivery confirmation emails sent", {
       orderId: order._id,

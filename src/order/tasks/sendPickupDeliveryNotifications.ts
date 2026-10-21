@@ -1,13 +1,13 @@
 import { logger } from "@/core/logger";
+import { NotificationStatus } from "@/_global/enums";
 import { Order, Portal } from "@/_global/models";
 import { sendOrderPickupConfirmation } from "@/order/notifications/sendOrderPickupConfirmation";
 import { sendOrderDeliveryConfirmation } from "@/order/notifications/sendOrderDeliveryConfirmation";
+import { resolveAgentNotificationRecipients } from "@/order/notifications/resolveAgentNotificationRecipients";
 import { MMI_PORTALS } from "@/_global/constants/portalIds";
 
 const SIRVA_PORTAL_ID = "5e99f0b420e68d5f479d7317";
 const DEFAULT_CUTOFF_DAYS = 60;
-
-type NotificationType = "pickup" | "delivery";
 
 const getCutoffDate = () => {
   const envDate = process.env.NOTIFICATION_CUTOFF_DATE;
@@ -58,86 +58,57 @@ const isSirvaOrder = (order: any) =>
   order?.companyName === "SIRVA WORLDWIDE RELO & MOVING";
 
 const getPortalEmailList = (portal: any) =>
-  (portal?.notificationEmails ||
-    portal?.emails ||
-    []) as Array<{
-    email?: string;
-    name?: string;
-    pickup?: boolean;
-    delivery?: boolean;
-    sirvanondomestic?: boolean;
-    sirvadomestic?: boolean;
-  }>;
+  portal?.notificationEmails || portal?.emails || [];
 
-const agentWantsNotification = (agent: any, type: NotificationType) => {
-  if (!agent) {
-    return false;
-  }
-  if (type === "pickup") {
-    return Boolean(
-      agent.pickup ??
-        agent.enablePickupNotifications ??
-        agent.emailPickUp ??
-        false,
-    );
-  }
-  return Boolean(
-    agent.delivery ??
-      agent.enableDeliveryNotifications ??
-      agent.emailDelivery ??
-      false,
+const notificationField = (type: "pickup" | "delivery") =>
+  type === "pickup" ? "agentsPickupConfirmation" : "agentsDeliveryConfirmation";
+
+const awaitingField = (type: "pickup" | "delivery") =>
+  type === "pickup"
+    ? "awaitingPickupConfirmation"
+    : "awaitingDeliveryConfirmation";
+
+/** One worker claims the send so other instances do not email the same list. */
+const claimAgentNotification = async (
+  orderId: string,
+  type: "pickup" | "delivery",
+) => {
+  const field = notificationField(type);
+  const awaiting = awaitingField(type);
+  const claimed = await Order.findOneAndUpdate(
+    {
+      _id: orderId,
+      [`notifications.${awaiting}`]: true,
+      $or: [
+        { [`notifications.${field}.sentAt`]: { $exists: false } },
+        { [`notifications.${field}.sentAt`]: null },
+      ],
+    },
+    {
+      $set: {
+        [`notifications.${awaiting}`]: false,
+        [`notifications.${field}.status`]: NotificationStatus.Pending,
+        [`notifications.${field}.sentAt`]: new Date(),
+      },
+    },
   );
+  return Boolean(claimed);
 };
 
-const filterPortalRecipients = (
-  portalEmails: ReturnType<typeof getPortalEmailList>,
-  type: NotificationType,
-  isSirva: boolean,
-  isSirvaNonDomestic: boolean,
+const releaseAgentNotification = async (
+  orderId: string,
+  type: "pickup" | "delivery",
 ) => {
-  return portalEmails.filter((entry) => {
-    if (type === "pickup" && !entry.pickup) {
-      return false;
-    }
-    if (type === "delivery" && !entry.delivery) {
-      return false;
-    }
-    if (!isSirva) {
-      return true;
-    }
-    if (isSirvaNonDomestic) {
-      return Boolean(entry.sirvanondomestic);
-    }
-    return Boolean(entry.sirvadomestic);
+  const field = notificationField(type);
+  const awaiting = awaitingField(type);
+  await Order.findByIdAndUpdate(orderId, {
+    $set: {
+      [`notifications.${awaiting}`]: true,
+      [`notifications.${field}.status`]: NotificationStatus.Failed,
+      [`notifications.${field}.sentAt`]: null,
+      [`notifications.${field}.failedAt`]: new Date(),
+    },
   });
-};
-
-const normalizeRecipients = (
-  entries: Array<{ email?: string; name?: string }>,
-) =>
-  entries
-    .map((entry) => ({
-      email: entry.email ? String(entry.email).trim() : "",
-      name: entry.name,
-    }))
-    .filter((entry) => Boolean(entry.email));
-
-/** Agents first so duplicate addresses keep the agent row (email casing, name). */
-const mergeRecipientsDedupe = (
-  agents: Array<{ email: string; name?: string }>,
-  portal: Array<{ email: string; name?: string }>,
-) => {
-  const seen = new Set<string>();
-  const out: Array<{ email: string; name?: string }> = [];
-  for (const entry of [...agents, ...portal]) {
-    const key = entry.email.toLowerCase();
-    if (seen.has(key)) {
-      continue;
-    }
-    seen.add(key);
-    out.push(entry);
-  }
-  return out;
 };
 
 const sendPickupNotificationsForOrder = async (
@@ -195,13 +166,6 @@ const sendPickupNotificationsForOrder = async (
     return;
   }
 
-  const agentRecipients = normalizeRecipients(
-    Array.isArray(order.agents)
-      ? order.agents
-          .filter((agent: any) => agentWantsNotification(agent, "pickup"))
-      : [],
-  );
-
   const portalIdString = String(order.portalId || portal?._id || "");
   const isMMI = MMI_PORTALS.includes(
     portalIdString as (typeof MMI_PORTALS)[number],
@@ -218,12 +182,14 @@ const sendPickupNotificationsForOrder = async (
     : getPortalEmailList(portal);
   const isSirva = isSirvaOrder(order);
   const isSirvaNonDomestic = Boolean(order?.sirvaNonDomestic);
-
-  const portalRecipients = normalizeRecipients(
-    filterPortalRecipients(portalEmails, "pickup", isSirva, isSirvaNonDomestic),
-  );
-
-  const recipients = mergeRecipientsDedupe(agentRecipients, portalRecipients);
+  const { agentRecipients, portalRecipients, recipients } =
+    resolveAgentNotificationRecipients({
+      agents: Array.isArray(order.agents) ? order.agents : [],
+      portalEmails,
+      type: "pickup",
+      isSirva,
+      isSirvaNonDomestic,
+    });
 
   logger.info("Pickup notification recipients", {
     orderId: order._id,
@@ -238,24 +204,39 @@ const sendPickupNotificationsForOrder = async (
     mergedRecipients: recipients.map((r) => r.email),
   });
 
-  if (recipients.length > 0) {
-    await sendOrderPickupConfirmation({
-      order,
-      recipients,
-    });
-  } else {
+  if (recipients.length === 0) {
     logger.info("No pickup notification recipients for order", {
       orderId: order._id,
       refId: order.refId,
     });
+    if (!preserveFlags) {
+      if (!order.notifications) {
+        order.notifications = {};
+      }
+      order.notifications.awaitingPickupConfirmation = false;
+      await order.save();
+    }
+    return;
   }
 
   if (!preserveFlags) {
-    if (!order.notifications) {
-      order.notifications = {};
+    const claimed = await claimAgentNotification(order._id, "pickup");
+    if (!claimed) {
+      logger.info("Pickup notification skipped - already claimed", {
+        orderId: order._id,
+        refId: order.refId,
+      });
+      return;
     }
-    order.notifications.awaitingPickupConfirmation = false;
-    await order.save();
+  }
+
+  const results = await sendOrderPickupConfirmation({
+    order,
+    recipients,
+  });
+
+  if (!preserveFlags && !results.some((result) => result.success)) {
+    await releaseAgentNotification(order._id, "pickup");
   }
 };
 
@@ -298,13 +279,6 @@ const sendDeliveryNotificationsForOrder = async (
     return;
   }
 
-  const agentRecipients = normalizeRecipients(
-    Array.isArray(order.agents)
-      ? order.agents
-          .filter((agent: any) => agentWantsNotification(agent, "delivery"))
-      : [],
-  );
-
   const portalIdString = String(order.portalId || portal?._id || "");
   const isMMI = MMI_PORTALS.includes(
     portalIdString as (typeof MMI_PORTALS)[number],
@@ -321,17 +295,14 @@ const sendDeliveryNotificationsForOrder = async (
     : getPortalEmailList(portal);
   const isSirva = isSirvaOrder(order);
   const isSirvaNonDomestic = Boolean(order?.sirvaNonDomestic);
-
-  const portalRecipients = normalizeRecipients(
-    filterPortalRecipients(
+  const { agentRecipients, portalRecipients, recipients } =
+    resolveAgentNotificationRecipients({
+      agents: Array.isArray(order.agents) ? order.agents : [],
       portalEmails,
-      "delivery",
+      type: "delivery",
       isSirva,
       isSirvaNonDomestic,
-    ),
-  );
-
-  const recipients = mergeRecipientsDedupe(agentRecipients, portalRecipients);
+    });
 
   logger.info("Delivery notification recipients", {
     orderId: order._id,
@@ -346,24 +317,39 @@ const sendDeliveryNotificationsForOrder = async (
     mergedRecipients: recipients.map((r) => r.email),
   });
 
-  if (recipients.length > 0) {
-    await sendOrderDeliveryConfirmation({
-      order,
-      recipients,
-    });
-  } else {
+  if (recipients.length === 0) {
     logger.info("No delivery notification recipients for order", {
       orderId: order._id,
       refId: order.refId,
     });
+    if (!preserveFlags) {
+      if (!order.notifications) {
+        order.notifications = {};
+      }
+      order.notifications.awaitingDeliveryConfirmation = false;
+      await order.save();
+    }
+    return;
   }
 
   if (!preserveFlags) {
-    if (!order.notifications) {
-      order.notifications = {};
+    const claimed = await claimAgentNotification(order._id, "delivery");
+    if (!claimed) {
+      logger.info("Delivery notification skipped - already claimed", {
+        orderId: order._id,
+        refId: order.refId,
+      });
+      return;
     }
-    order.notifications.awaitingDeliveryConfirmation = false;
-    await order.save();
+  }
+
+  const results = await sendOrderDeliveryConfirmation({
+    order,
+    recipients,
+  });
+
+  if (!preserveFlags && !results.some((result) => result.success)) {
+    await releaseAgentNotification(order._id, "delivery");
   }
 };
 
@@ -387,7 +373,9 @@ export const sendPickupDeliveryNotifications = async (
     $and: [
       {
         $or: [
-          { "notifications.agentsPickupConfirmation.sentAt": { $exists: false } },
+          {
+            "notifications.agentsPickupConfirmation.sentAt": { $exists: false },
+          },
           { "notifications.agentsPickupConfirmation.sentAt": null },
         ],
       },
@@ -424,7 +412,11 @@ export const sendPickupDeliveryNotifications = async (
     $and: [
       {
         $or: [
-          { "notifications.agentsDeliveryConfirmation.sentAt": { $exists: false } },
+          {
+            "notifications.agentsDeliveryConfirmation.sentAt": {
+              $exists: false,
+            },
+          },
           { "notifications.agentsDeliveryConfirmation.sentAt": null },
         ],
       },
