@@ -7,7 +7,10 @@
 
 import { logger } from "@/core/logger";
 import { IOrder } from "@/_global/models";
-import { sendOrderNotification } from "@/notification/orderNotifications";
+import {
+  recordSentNotificationRecipients,
+  sendOrderNotification,
+} from "@/notification/orderNotifications";
 import { join } from "path";
 import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
@@ -149,7 +152,9 @@ export async function sendOrderPickupConfirmation({
         return {
           recipient: recipient.email,
           success: result.success,
-          error: result.success ? undefined : "Failed to send pickup confirmation",
+          error: result.success
+            ? undefined
+            : "Failed to send pickup confirmation",
         };
       }),
     );
@@ -165,6 +170,14 @@ export async function sendOrderPickupConfirmation({
     );
 
     const successCount = finalResults.filter((r) => r.success).length;
+
+    await recordSentNotificationRecipients(
+      String(order._id),
+      "agentsPickupConfirmation",
+      finalResults
+        .filter((result) => result.success)
+        .map((result) => result.recipient),
+    );
 
     logger.info("Order pickup confirmation emails sent", {
       orderId: order._id,
@@ -189,4 +202,3 @@ export async function sendOrderPickupConfirmation({
     }));
   }
 }
-

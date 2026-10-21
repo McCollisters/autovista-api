@@ -7,6 +7,7 @@
 import { logger } from "@/core/logger";
 import { NotificationStatus } from "@/_global/enums";
 import { Order } from "@/_global/models";
+import { formatNotificationRecipientList } from "./formatNotificationRecipientList";
 import { getNotificationManager } from "./index";
 import { EmailOptions, SMSOptions, NotificationMetadata } from "./types";
 
@@ -151,6 +152,28 @@ export async function sendOrderNotification(
 
     return { success: false };
   }
+}
+
+/**
+ * Store every address a multi-recipient notification actually reached.
+ * Per-recipient sends each overwrite this field; call this after they finish.
+ */
+export async function recordSentNotificationRecipients(
+  orderId: string,
+  type: OrderNotificationType,
+  recipients: string[],
+): Promise<void> {
+  const recipientEmail = formatNotificationRecipientList(recipients);
+  if (!recipientEmail) {
+    return;
+  }
+
+  await Order.findByIdAndUpdate(orderId, {
+    $set: {
+      [`notifications.${type}.recipientEmail`]: recipientEmail,
+      [`notifications.${type}.status`]: NotificationStatus.Sent,
+    },
+  });
 }
 
 /**
