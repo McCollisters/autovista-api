@@ -248,9 +248,17 @@ jobs:
           ALLOWED_ORIGINS_VALUE="${{ secrets.ALLOWED_ORIGINS }}"
           if [ -z "$ALLOWED_ORIGINS_VALUE" ]; then
             ALLOWED_ORIGINS_VALUE="https://autovista.mccollisters.com"
-          elif [[ "$ALLOWED_ORIGINS_VALUE" != *"https://autovista.mccollisters.com"* ]]; then
-            ALLOWED_ORIGINS_VALUE="${ALLOWED_ORIGINS_VALUE},https://autovista.mccollisters.com"
           fi
+          # Staging portal hosts call this production API.
+          for origin in \
+            "https://autovista.mccollisters.com" \
+            "https://dogqvekvr5n1p.cloudfront.net" \
+            "https://dbx1t9p02mr2s.cloudfront.net"
+          do
+            if [[ "$ALLOWED_ORIGINS_VALUE" != *"$origin"* ]]; then
+              ALLOWED_ORIGINS_VALUE="${ALLOWED_ORIGINS_VALUE},${origin}"
+            fi
+          done
           if [ -n "$ALLOWED_ORIGINS_VALUE" ]; then
             OPTIONS=$(echo "$OPTIONS" | jq --arg val "$ALLOWED_ORIGINS_VALUE" '. += [{"Namespace":"aws:elasticbeanstalk:application:environment","OptionName":"ALLOWED_ORIGINS","Value":$val}]')
           fi
