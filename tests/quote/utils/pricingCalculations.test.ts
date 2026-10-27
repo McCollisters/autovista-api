@@ -234,10 +234,16 @@ describe("Pricing Calculation Utilities", () => {
       expect(total).toBe(1200);
     });
 
-    it("prices WhiteGlove at $400 above the enclosed broker price", () => {
-      const enclosedBrokerPrice = 1600;
-      const total = enclosedBrokerPrice + 400;
-      expect(total).toBe(2000);
+    it("keeps WhiteGlove at $2 per mile unless enclosed market price is higher", () => {
+      const priceWhiteGlove = (miles: number, enclosedMarketPrice: number) => {
+        const perMile = miles * 2;
+        return enclosedMarketPrice > perMile
+          ? enclosedMarketPrice + 400
+          : perMile;
+      };
+
+      expect(priceWhiteGlove(250, 1600)).toBe(2000);
+      expect(priceWhiteGlove(1000, 1600)).toBe(2000);
     });
 
     it("should round currency values correctly", () => {

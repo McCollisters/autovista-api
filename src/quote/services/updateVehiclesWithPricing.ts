@@ -12,8 +12,50 @@ import {
 } from "../../_global/utils/vehicleOversize";
 import { Types } from "mongoose";
 
-/** White glove is the enclosed broker price for the move, plus this amount. */
+/** Lowest white glove rate, in dollars per mile. */
+const WHITE_GLOVE_PER_MILE = 2;
+/** Added when the enclosed market price is above the per-mile white glove rate. */
 const WHITE_GLOVE_ABOVE_ENCLOSED = 400;
+
+/**
+ * White glove is at least $2 per mile, and at least the configured dollar minimum.
+ * When the enclosed market price is higher than that rate, white glove becomes
+ * the enclosed market price plus $400.
+ */
+const calculateWhiteGlovePrice = (
+  miles: number,
+  enclosedMarketPrice: number,
+  portalModifiers: { whiteGlove?: { multiplier?: number } } | null | undefined,
+  globalModifiers: {
+    whiteGlove?: { multiplier?: number; minimum?: number };
+  } | null | undefined,
+): number => {
+  const portalRate = portalModifiers?.whiteGlove;
+  const globalRate = globalModifiers?.whiteGlove;
+  const configuredMultiplier = Number(
+    portalRate ? portalRate.multiplier : globalRate?.multiplier,
+  );
+  const perMileRate = Math.max(
+    Number.isFinite(configuredMultiplier) && configuredMultiplier > 0
+      ? configuredMultiplier
+      : WHITE_GLOVE_PER_MILE,
+    WHITE_GLOVE_PER_MILE,
+  );
+
+  let price = miles * perMileRate;
+
+  const minimum = Number(globalRate?.minimum);
+  if (Number.isFinite(minimum) && minimum > 0 && price < minimum) {
+    price = minimum;
+  }
+
+  const enclosed = Number(enclosedMarketPrice);
+  if (Number.isFinite(enclosed) && enclosed > price) {
+    price = enclosed + WHITE_GLOVE_ABOVE_ENCLOSED;
+  }
+
+  return roundCurrency(price);
+};
 
 interface VehiclePriceParams {
   portal: IPortal;
@@ -447,7 +489,7 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
     },
   ];
 
-  // Pickup-window markups are not part of the broker enclosed rate. One-day
+  // Pickup-window markups are not part of the enclosed market rate. One-day
   // enclosed includes serviceLevels[0]; remove it so white glove stays one price.
   const oneDayServiceLevel = globalModifiers.serviceLevels?.[0]?.value || 0;
   const enclosedBrokerPrice =
@@ -455,7 +497,12 @@ const getVehiclePrice = async (params: VehiclePriceParams): Promise<any> => {
 
   // Build totals object with open/enclosed structure for all service levels
   const totals = {
-    whiteGlove: roundCurrency(enclosedBrokerPrice + WHITE_GLOVE_ABOVE_ENCLOSED),
+    whiteGlove: calculateWhiteGlovePrice(
+      miles,
+      enclosedBrokerPrice,
+      portalModifiers,
+      globalModifiers,
+    ),
     one: {
       open: {
         total: roundCurrency(serviceLevelData.oneOpen.baseWithModifiers),
@@ -865,7 +912,12 @@ const getJKVehiclePrice = async ({
       ],
     },
     totals: {
-      whiteGlove: roundCurrency(enclosedTotalSD + WHITE_GLOVE_ABOVE_ENCLOSED),
+      whiteGlove: calculateWhiteGlovePrice(
+        miles,
+        enclosedTotalSD,
+        portalModifiers,
+        globalModifiers,
+      ),
       one: {
         open: {
           total: roundCurrency(openTotalSD),

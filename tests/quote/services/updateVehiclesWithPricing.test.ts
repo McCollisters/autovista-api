@@ -119,7 +119,7 @@ describe("updateVehiclesWithPricing", () => {
   });
 
   describe("Service Level Calculations", () => {
-    it("prices WhiteGlove at $400 above the enclosed broker price", async () => {
+    it("prices WhiteGlove at $400 above enclosed when enclosed exceeds the per-mile rate", async () => {
       const vehicles = [createMockVehicle()];
       const miles = 250;
 
@@ -137,8 +137,56 @@ describe("updateVehiclesWithPricing", () => {
       const enclosedBrokerPrice =
         pricing.totals.one.enclosed.total - oneDayServiceLevel;
 
+      expect(enclosedBrokerPrice).toBeGreaterThan(miles * 2);
       expect(pricing.totals.whiteGlove).toBe(enclosedBrokerPrice + 400);
       expect(pricing.totals.whiteGlove).not.toBe(miles * 2);
+    });
+
+    it("keeps WhiteGlove at $2 per mile when that exceeds the enclosed market price", async () => {
+      const vehicles = [createMockVehicle()];
+      const miles = 1000;
+
+      const result = await updateVehiclesWithPricing({
+        portal: createMockPortal(),
+        vehicles,
+        miles,
+        origin: "New York, NY",
+        destination: "Los Angeles, CA",
+        commission: 50,
+      });
+
+      const pricing = result[0].pricing!;
+      const oneDayServiceLevel = pricing.modifiers.serviceLevels[0].value;
+      const enclosedBrokerPrice =
+        pricing.totals.one.enclosed.total - oneDayServiceLevel;
+
+      expect(miles * 2).toBeGreaterThan(enclosedBrokerPrice);
+      expect(pricing.totals.whiteGlove).toBe(miles * 2);
+    });
+
+    it("uses the configured WhiteGlove dollar minimum when per-mile and enclosed are lower", async () => {
+      mockModifierSet.whiteGlove.minimum = 5000;
+
+      const vehicles = [createMockVehicle()];
+      const miles = 100;
+
+      const result = await updateVehiclesWithPricing({
+        portal: createMockPortal(),
+        vehicles,
+        miles,
+        origin: "New York, NY",
+        destination: "Los Angeles, CA",
+        commission: 50,
+      });
+
+      const pricing = result[0].pricing!;
+      const oneDayServiceLevel = pricing.modifiers.serviceLevels[0].value;
+      const enclosedBrokerPrice =
+        pricing.totals.one.enclosed.total - oneDayServiceLevel;
+
+      expect(miles * 2).toBeLessThan(5000);
+      expect(enclosedBrokerPrice).toBeLessThan(5000);
+      expect(pricing.totals.whiteGlove).toBe(5000);
     });
 
     it("should calculate one-day service level pricing", async () => {
